@@ -15,18 +15,31 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-// import Hello from './components/Hello.vue';
 import App from './App.vue';
+
 import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 Vue.use(ElementUi);
 
+import 'normalize.css/normalize.css';
+
+import './styles/index.scss' // global css
+
 import router from './router/index.js';
+
+import Vuex from 'vuex';
+Vue.use(Vuex);
+
+import store from './store/index.js';
+
+Vue.config.productionTip = false;
+
+import './icons/index.js' // icon
+import './permission.js' // permission control
 
 const app = new Vue({
     el: '#app',
     router,
+    store,
     render:h=>h(App)
 });
