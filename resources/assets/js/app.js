@@ -19,7 +19,7 @@ import App from './App.vue';
 
 import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-Vue.use(ElementUi);
+// Vue.use(ElementUi);
 
 import 'normalize.css/normalize.css';
 
@@ -32,14 +32,30 @@ Vue.use(Vuex);
 
 import store from './store/index.js';
 
+import i18n from './lang/index.js';
+
 Vue.config.productionTip = false;
 
 import './icons/index.js' // icon
 import './permission.js' // permission control
 
+
+import * as filters from './filters/index.js' // global filters
+
+Vue.use(ElementUi, {
+    size: 'medium', // set element-ui default size
+    i18n: (key, value) => i18n.t(key, value)
+})
+
+// register global utility filters.
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+})
+
 const app = new Vue({
     el: '#app',
     router,
     store,
+    i18n,
     render:h=>h(App)
 });

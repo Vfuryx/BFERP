@@ -35,7 +35,7 @@ const constantRouterMap = [
         path: '/example',
         component: Layout,
         redirect: '/example/table',
-        meta: { title: 'Example', icon: 'example' },
+        meta: { title: '例子', icon: 'example' },
         children: [
             {
                 path: 'table',
@@ -60,7 +60,7 @@ const constantRouterMap = [
                 path: 'index',
                 name: 'Form',
                 component: resolve => void(require(['../views/form/index.vue'],resolve)),
-                meta: { title: 'Form', icon: 'form' }
+                meta: { title: '表单', icon: 'form' }
             }
         ]
     },

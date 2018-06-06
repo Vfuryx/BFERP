@@ -45,6 +45,15 @@
     }
   }
   .hideSidebar {
+    .logo{
+      .el-icon-menu{
+        display: block;
+        line-height: 50px;
+      }
+      .title{
+        display: none;
+      }
+    }
     .sidebar-container {
       width: 36px !important;
     }

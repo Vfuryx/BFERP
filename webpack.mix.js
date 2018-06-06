@@ -16,6 +16,7 @@ mix.js('resources/assets/js/app.js', 'public/js')
 
 
 
+/*
 mix.webpackConfig({
     resolve: {
         module: {
@@ -40,4 +41,4 @@ mix.webpackConfig({
             ]
         }
     }
-});
+});*/
