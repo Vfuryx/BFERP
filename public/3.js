@@ -1,18 +1,18 @@
 webpackJsonp([3],{
 
-/***/ 294:
+/***/ 386:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(312)
+  __webpack_require__(528)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(314)
+var __vue_script__ = __webpack_require__(530)
 /* template */
-var __vue_template__ = __webpack_require__(315)
+var __vue_template__ = __webpack_require__(531)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,17 +52,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 312:
+/***/ 528:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(313);
+var content = __webpack_require__(529);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("5dfc1aa3", content, false, {});
+var update = __webpack_require__(8)("5dfc1aa3", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -79,10 +79,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 313:
+/***/ 529:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -94,7 +94,7 @@ exports.push([module.i, "\n.dashboard-container[data-v-37b409a6] {\n  margin: 30
 
 /***/ }),
 
-/***/ 314:
+/***/ 530:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -119,7 +119,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 /***/ }),
 
-/***/ 315:
+/***/ 531:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

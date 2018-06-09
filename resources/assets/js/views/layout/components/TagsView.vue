@@ -1,6 +1,6 @@
 <template>
   <div class="tags-view-container">
-    <scroll-pane class='tags-view-wrapper' ref='scrollPane'>
+    <scroll-pane class='tags-view-wrapper' ref='ScrollPane'>
       <router-link ref='tag' class="tags-view-item" :class="isActive(tag)?'active':''" v-for="tag in Array.from(visitedViews)"
         :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
         {{generateTitle(tag.title)}}
@@ -36,7 +36,7 @@ export default {
   },
   watch: {
     $route() {
-      this.addViewTags()
+      this.addViewTags();
       this.moveToCurrentTag()
     },
     visible(value) {
@@ -62,18 +62,18 @@ export default {
       return route.path === this.$route.path
     },
     addViewTags() {
-      const route = this.generateRoute()
+      const route = this.generateRoute();
       if (!route) {
         return false
       }
       this.$store.dispatch('addVisitedViews', route)
     },
     moveToCurrentTag() {
-      const tags = this.$refs.tag
+      const tags = this.$refs.tag;
       this.$nextTick(() => {
         for (const tag of tags) {
           if (tag.to === this.$route.path) {
-            this.$refs.scrollPane.moveToTarget(tag.$el)
+            this.$refs.ScrollPane.moveToTarget(tag.$el);
             break
           }
         }
@@ -82,7 +82,7 @@ export default {
     closeSelectedTag(view) {
       this.$store.dispatch('delVisitedViews', view).then((views) => {
         if (this.isActive(view)) {
-          const latestView = views.slice(-1)[0]
+          const latestView = views.slice(-1)[0];
           if (latestView) {
             this.$router.push(latestView.path)
           } else {
@@ -92,19 +92,19 @@ export default {
       })
     },
     closeOthersTags() {
-      this.$router.push(this.selectedTag.path)
+      this.$router.push(this.selectedTag.path);
       this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
         this.moveToCurrentTag()
       })
     },
     closeAllTags() {
-      this.$store.dispatch('delAllViews')
+      this.$store.dispatch('delAllViews');
       this.$router.push('/')
     },
     openMenu(tag, e) {
-      this.visible = true
-      this.selectedTag = tag
-      this.left = e.clientX
+      this.visible = true;
+      this.selectedTag = tag;
+      this.left = e.clientX;
       this.top = e.clientY
     },
     closeMenu() {
@@ -120,7 +120,7 @@ export default {
     background: #fff;
     height: 34px;
     border-bottom: 1px solid #d8dce5;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+    /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/
     .tags-view-item {
       display: inline-block;
       position: relative;

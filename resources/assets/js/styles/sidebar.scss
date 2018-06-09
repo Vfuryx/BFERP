@@ -9,7 +9,7 @@
   .sidebar-container {
     transition: width 0.28s;
     width: 180px !important;
-    height: 100%;
+    //height: 100%;
     position: fixed;
     font-size: 0px;
     top: 0;
@@ -17,6 +17,7 @@
     left: 0;
     z-index: 1001;
     overflow: hidden;
+    //margin-bottom: 56px;
     //reset element-ui css
     .horizontal-collapse-transition {
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
@@ -46,9 +47,11 @@
   }
   .hideSidebar {
     .logo{
+      width: 37px;
       .el-icon-menu{
         display: block;
         line-height: 50px;
+        text-align: left;
       }
       .title{
         display: none;

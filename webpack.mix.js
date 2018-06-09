@@ -12,33 +12,11 @@ let mix = require('laravel-mix');
  */
 
 mix.js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .copyDirectory('resources/assets/js/img', 'public/img');
 
-
-
-/*
-mix.webpackConfig({
-    resolve: {
-        module: {
-            rules: [
-                {
-                    test: /\.svg$/,
-                    loader: 'svg-sprite-loader',
-                    include: [path.resolve(__dirname, 'resources/assets/js/icons')],
-                    options: {
-                        symbolId: 'icon-[name]'
-                    }
-                },
-                {
-                    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                    loader: 'url-loader',
-                    exclude: [path.resolve(__dirname, 'resources/assets/js/icons/svg')],
-                    options: {
-                        limit: 10000,
-                        name: ('images/[name].[hash:7].[ext]')
-                    }
-                }
-            ]
-        }
-    }
-});*/
+if (mix.inProduction()) {
+    mix.version()
+} else {
+    mix.disableNotifications()
+}

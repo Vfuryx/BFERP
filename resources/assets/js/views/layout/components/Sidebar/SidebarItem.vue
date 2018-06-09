@@ -1,5 +1,5 @@
 <template>
-    <div class="menu-wrapper">
+    <div class="menu-wrapper" id="ul" ref="oul">
         <template v-for="item in routes" v-if="!item.hidden&&item.children">
             <router-link v-if="hasOneShowingChildren(item.children) && !item.children[0].children&&!item.alwaysShow" :to="item.path+'/'+item.children[0].path"
                          :key="item.children[0].name">
@@ -35,6 +35,11 @@
     import { generateTitle } from '../../../../utils/i18n.js';
     export default {
         name: 'SidebarItem',
+        data(){
+            return {
+
+            }
+        },
         props: {
             routes: {
                 type: Array
@@ -54,7 +59,28 @@
                 }
                 return false
             },
-            generateTitle
+            generateTitle,
+           getClientHeight(state,wHeight){
+                wHeight=0;
+                if(document.body.clientHeight&&document.documentElement.clientHeight)
+                {
+                    wHeight = (document.body.clientHeight<document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+                }
+                else
+                {
+                    wHeight = (document.body.clientHeight>document.documentElement.clientHeight)?document.body.clientHeight:document.documentElement.clientHeight;
+                }
+             return wHeight;
+            }
+        },
+        mounted(){
+            let hh = this.getClientHeight();
+            this.$refs.oul.style.height = (hh-70) + 'px';
+            const that = this;
+            window.onresize =function(){
+                let hh = that.getClientHeight();
+                that.$refs.oul.style.height = hh + 'px';
+            }
         }
     }
 </script>

@@ -28,6 +28,7 @@ import './styles/index.scss' // global css
 import router from './router/index.js';
 
 import Vuex from 'vuex';
+// import { mapState } from 'vuex';
 Vue.use(Vuex);
 
 import store from './store/index.js';
@@ -39,8 +40,9 @@ Vue.config.productionTip = false;
 import './icons/index.js' // icon
 import './permission.js' // permission control
 
-
+import './iconfont/iconfont.css' //引入iconfont字体
 import * as filters from './filters/index.js' // global filters
+
 
 Vue.use(ElementUi, {
     size: 'medium', // set element-ui default size

@@ -1,24 +1,24 @@
 webpackJsonp([2],{
 
-/***/ 297:
+/***/ 385:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(321)
+  __webpack_require__(522)
 }
-var normalizeComponent = __webpack_require__(4)
+var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = __webpack_require__(323)
+var __vue_script__ = __webpack_require__(524)
 /* template */
-var __vue_template__ = __webpack_require__(324)
+var __vue_template__ = __webpack_require__(527)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-af37b332"
+var __vue_scopeId__ = "data-v-bd33ef4a"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -29,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\form\\index.vue"
+Component.options.__file = "resources\\assets\\js\\views\\404.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-af37b332", Component.options)
+    hotAPI.createRecord("data-v-bd33ef4a", Component.options)
   } else {
-    hotAPI.reload("data-v-af37b332", Component.options)
+    hotAPI.reload("data-v-bd33ef4a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 321:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(322);
+var content = __webpack_require__(523);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("92ef4b14", content, false, {});
+var update = __webpack_require__(8)("7fe720e5", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-af37b332\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-af37b332\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bd33ef4a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./404.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-bd33ef4a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./404.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -79,26 +79,30 @@ if(false) {
 
 /***/ }),
 
-/***/ 322:
+/***/ 523:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(2)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.line[data-v-af37b332]{\r\n  text-align: center;\n}\r\n", ""]);
+exports.push([module.i, "\n.wscn-http404[data-v-bd33ef4a] {\n  position: relative;\n  width: 1200px;\n  margin: 20px auto 60px;\n  padding: 0 100px;\n  overflow: hidden;\n}\n.wscn-http404 .pic-404[data-v-bd33ef4a] {\n    position: relative;\n    float: left;\n    width: 600px;\n    padding: 150px 0;\n    overflow: hidden;\n}\n.wscn-http404 .pic-404__parent[data-v-bd33ef4a] {\n      width: 100%;\n}\n.wscn-http404 .pic-404__child[data-v-bd33ef4a] {\n      position: absolute;\n}\n.wscn-http404 .pic-404__child.left[data-v-bd33ef4a] {\n        width: 80px;\n        top: 17px;\n        left: 220px;\n        opacity: 0;\n        -webkit-animation-name: cloudLeft-data-v-bd33ef4a;\n                animation-name: cloudLeft-data-v-bd33ef4a;\n        -webkit-animation-duration: 2s;\n                animation-duration: 2s;\n        -webkit-animation-timing-function: linear;\n                animation-timing-function: linear;\n        -webkit-animation-fill-mode: forwards;\n                animation-fill-mode: forwards;\n        -webkit-animation-delay: 1s;\n                animation-delay: 1s;\n}\n.wscn-http404 .pic-404__child.mid[data-v-bd33ef4a] {\n        width: 46px;\n        top: 10px;\n        left: 420px;\n        opacity: 0;\n        -webkit-animation-name: cloudMid-data-v-bd33ef4a;\n                animation-name: cloudMid-data-v-bd33ef4a;\n        -webkit-animation-duration: 2s;\n                animation-duration: 2s;\n        -webkit-animation-timing-function: linear;\n                animation-timing-function: linear;\n        -webkit-animation-fill-mode: forwards;\n                animation-fill-mode: forwards;\n        -webkit-animation-delay: 1.2s;\n                animation-delay: 1.2s;\n}\n.wscn-http404 .pic-404__child.right[data-v-bd33ef4a] {\n        width: 62px;\n        top: 100px;\n        left: 500px;\n        opacity: 0;\n        -webkit-animation-name: cloudRight-data-v-bd33ef4a;\n                animation-name: cloudRight-data-v-bd33ef4a;\n        -webkit-animation-duration: 2s;\n                animation-duration: 2s;\n        -webkit-animation-timing-function: linear;\n                animation-timing-function: linear;\n        -webkit-animation-fill-mode: forwards;\n                animation-fill-mode: forwards;\n        -webkit-animation-delay: 1s;\n                animation-delay: 1s;\n}\n@-webkit-keyframes cloudLeft-data-v-bd33ef4a {\n0% {\n    top: 17px;\n    left: 220px;\n    opacity: 0;\n}\n20% {\n    top: 33px;\n    left: 188px;\n    opacity: 1;\n}\n80% {\n    top: 81px;\n    left: 92px;\n    opacity: 1;\n}\n100% {\n    top: 97px;\n    left: 60px;\n    opacity: 0;\n}\n}\n@keyframes cloudLeft-data-v-bd33ef4a {\n0% {\n    top: 17px;\n    left: 220px;\n    opacity: 0;\n}\n20% {\n    top: 33px;\n    left: 188px;\n    opacity: 1;\n}\n80% {\n    top: 81px;\n    left: 92px;\n    opacity: 1;\n}\n100% {\n    top: 97px;\n    left: 60px;\n    opacity: 0;\n}\n}\n@-webkit-keyframes cloudMid-data-v-bd33ef4a {\n0% {\n    top: 10px;\n    left: 420px;\n    opacity: 0;\n}\n20% {\n    top: 40px;\n    left: 360px;\n    opacity: 1;\n}\n70% {\n    top: 130px;\n    left: 180px;\n    opacity: 1;\n}\n100% {\n    top: 160px;\n    left: 120px;\n    opacity: 0;\n}\n}\n@keyframes cloudMid-data-v-bd33ef4a {\n0% {\n    top: 10px;\n    left: 420px;\n    opacity: 0;\n}\n20% {\n    top: 40px;\n    left: 360px;\n    opacity: 1;\n}\n70% {\n    top: 130px;\n    left: 180px;\n    opacity: 1;\n}\n100% {\n    top: 160px;\n    left: 120px;\n    opacity: 0;\n}\n}\n@-webkit-keyframes cloudRight-data-v-bd33ef4a {\n0% {\n    top: 100px;\n    left: 500px;\n    opacity: 0;\n}\n20% {\n    top: 120px;\n    left: 460px;\n    opacity: 1;\n}\n80% {\n    top: 180px;\n    left: 340px;\n    opacity: 1;\n}\n100% {\n    top: 200px;\n    left: 300px;\n    opacity: 0;\n}\n}\n@keyframes cloudRight-data-v-bd33ef4a {\n0% {\n    top: 100px;\n    left: 500px;\n    opacity: 0;\n}\n20% {\n    top: 120px;\n    left: 460px;\n    opacity: 1;\n}\n80% {\n    top: 180px;\n    left: 340px;\n    opacity: 1;\n}\n100% {\n    top: 200px;\n    left: 300px;\n    opacity: 0;\n}\n}\n.wscn-http404 .bullshit[data-v-bd33ef4a] {\n    position: relative;\n    float: left;\n    width: 300px;\n    padding: 150px 0;\n    overflow: hidden;\n}\n.wscn-http404 .bullshit__oops[data-v-bd33ef4a] {\n      font-size: 32px;\n      font-weight: bold;\n      line-height: 40px;\n      color: #1482f0;\n      opacity: 0;\n      margin-bottom: 20px;\n      -webkit-animation-name: slideUp-data-v-bd33ef4a;\n              animation-name: slideUp-data-v-bd33ef4a;\n      -webkit-animation-duration: 0.5s;\n              animation-duration: 0.5s;\n      -webkit-animation-fill-mode: forwards;\n              animation-fill-mode: forwards;\n}\n.wscn-http404 .bullshit__headline[data-v-bd33ef4a] {\n      font-size: 20px;\n      line-height: 24px;\n      color: #1482f0;\n      opacity: 0;\n      margin-bottom: 10px;\n      -webkit-animation-name: slideUp-data-v-bd33ef4a;\n              animation-name: slideUp-data-v-bd33ef4a;\n      -webkit-animation-duration: 0.5s;\n              animation-duration: 0.5s;\n      -webkit-animation-delay: 0.1s;\n              animation-delay: 0.1s;\n      -webkit-animation-fill-mode: forwards;\n              animation-fill-mode: forwards;\n}\n.wscn-http404 .bullshit__info[data-v-bd33ef4a] {\n      font-size: 13px;\n      line-height: 21px;\n      color: grey;\n      opacity: 0;\n      margin-bottom: 30px;\n      -webkit-animation-name: slideUp-data-v-bd33ef4a;\n              animation-name: slideUp-data-v-bd33ef4a;\n      -webkit-animation-duration: 0.5s;\n              animation-duration: 0.5s;\n      -webkit-animation-delay: 0.2s;\n              animation-delay: 0.2s;\n      -webkit-animation-fill-mode: forwards;\n              animation-fill-mode: forwards;\n}\n.wscn-http404 .bullshit__return-home[data-v-bd33ef4a] {\n      display: block;\n      float: left;\n      width: 110px;\n      height: 36px;\n      background: #1482f0;\n      border-radius: 100px;\n      text-align: center;\n      color: #ffffff;\n      opacity: 0;\n      font-size: 14px;\n      line-height: 36px;\n      cursor: pointer;\n      -webkit-animation-name: slideUp-data-v-bd33ef4a;\n              animation-name: slideUp-data-v-bd33ef4a;\n      -webkit-animation-duration: 0.5s;\n              animation-duration: 0.5s;\n      -webkit-animation-delay: 0.3s;\n              animation-delay: 0.3s;\n      -webkit-animation-fill-mode: forwards;\n              animation-fill-mode: forwards;\n}\n@-webkit-keyframes slideUp-data-v-bd33ef4a {\n0% {\n    -webkit-transform: translateY(60px);\n            transform: translateY(60px);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateY(0);\n            transform: translateY(0);\n    opacity: 1;\n}\n}\n@keyframes slideUp-data-v-bd33ef4a {\n0% {\n    -webkit-transform: translateY(60px);\n            transform: translateY(60px);\n    opacity: 0;\n}\n100% {\n    -webkit-transform: translateY(0);\n            transform: translateY(0);\n    opacity: 1;\n}\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 323:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__img_404_images_404_png__ = __webpack_require__(525);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__img_404_images_404_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__img_404_images_404_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__img_404_images_404_cloud_png__ = __webpack_require__(526);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__img_404_images_404_cloud_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__img_404_images_404_cloud_png__);
 //
 //
 //
@@ -119,68 +123,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      form: {
-        name: '',
-        region: '',
-        date1: '',
-        date2: '',
-        delivery: false,
-        type: [],
-        resource: '',
-        desc: ''
-      }
+      img_404: __WEBPACK_IMPORTED_MODULE_0__img_404_images_404_png___default.a,
+      img_404_cloud: __WEBPACK_IMPORTED_MODULE_1__img_404_images_404_cloud_png___default.a
     };
   },
 
-  methods: {
-    onSubmit: function onSubmit() {
-      this.$message('submit!');
-    },
-    onCancel: function onCancel() {
-      this.$message({
-        message: 'cancel!',
-        type: 'warning'
-      });
+  computed: {
+    message: function message() {
+      return '特朗普说这个页面你不能进......';
     }
   }
 });
 
 /***/ }),
 
-/***/ 324:
+/***/ 525:
+/***/ (function(module, exports) {
+
+module.exports = "/images/404.png?6faed4267b68e7543e34907416c39b7c";
+
+/***/ }),
+
+/***/ 526:
+/***/ (function(module, exports) {
+
+module.exports = "/images/404_cloud.png?d76f30a0b60225f9b8819619ca6ccfab";
+
+/***/ }),
+
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -189,237 +167,80 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "app-container" },
+    { staticStyle: { background: "#f0f2f5", "margin-top": "-20px" } },
     [
-      _c(
-        "el-form",
-        { ref: "form", attrs: { model: _vm.form, "label-width": "120px" } },
-        [
-          _c(
-            "el-form-item",
-            { attrs: { label: "Activity name" } },
-            [
-              _c("el-input", {
-                model: {
-                  value: _vm.form.name,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "name", $$v)
-                  },
-                  expression: "form.name"
-                }
-              })
-            ],
-            1
-          ),
+      _c("div", { staticClass: "wscn-http404" }, [
+        _c("div", { staticClass: "pic-404" }, [
+          _c("img", {
+            staticClass: "pic-404__parent",
+            attrs: { src: _vm.img_404, alt: "404" }
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "pic-404__child left",
+            attrs: { src: _vm.img_404_cloud, alt: "404" }
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "pic-404__child mid",
+            attrs: { src: _vm.img_404_cloud, alt: "404" }
+          }),
+          _vm._v(" "),
+          _c("img", {
+            staticClass: "pic-404__child right",
+            attrs: { src: _vm.img_404_cloud, alt: "404" }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "bullshit" }, [
+          _c("div", { staticClass: "bullshit__oops" }, [_vm._v("OOPS!")]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "bullshit__headline" }, [
+            _vm._v(_vm._s(_vm.message))
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "bullshit__info" }, [
+            _vm._v(
+              "请检查您输入的网址是否正确，请点击以下按钮返回主页或者发送错误报告"
+            )
+          ]),
           _vm._v(" "),
           _c(
-            "el-form-item",
-            { attrs: { label: "Activity zone" } },
-            [
-              _c(
-                "el-select",
-                {
-                  attrs: { placeholder: "please select your zone" },
-                  model: {
-                    value: _vm.form.region,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "region", $$v)
-                    },
-                    expression: "form.region"
-                  }
-                },
-                [
-                  _c("el-option", {
-                    attrs: { label: "Zone one", value: "shanghai" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-option", {
-                    attrs: { label: "Zone two", value: "beijing" }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Activity time" } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 11 } },
-                [
-                  _c("el-date-picker", {
-                    staticStyle: { width: "100%" },
-                    attrs: { type: "date", placeholder: "Pick a date" },
-                    model: {
-                      value: _vm.form.date1,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "date1", $$v)
-                      },
-                      expression: "form.date1"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("el-col", { staticClass: "line", attrs: { span: 2 } }, [
-                _vm._v("-")
-              ]),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 11 } },
-                [
-                  _c("el-time-picker", {
-                    staticStyle: { width: "100%" },
-                    attrs: { type: "fixed-time", placeholder: "Pick a time" },
-                    model: {
-                      value: _vm.form.date2,
-                      callback: function($$v) {
-                        _vm.$set(_vm.form, "date2", $$v)
-                      },
-                      expression: "form.date2"
-                    }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Instant delivery" } },
-            [
-              _c("el-switch", {
-                model: {
-                  value: _vm.form.delivery,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "delivery", $$v)
-                  },
-                  expression: "form.delivery"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Activity type" } },
-            [
-              _c(
-                "el-checkbox-group",
-                {
-                  model: {
-                    value: _vm.form.type,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "type", $$v)
-                    },
-                    expression: "form.type"
-                  }
-                },
-                [
-                  _c("el-checkbox", {
-                    attrs: { label: "Online activities", name: "type" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-checkbox", {
-                    attrs: { label: "Promotion activities", name: "type" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-checkbox", {
-                    attrs: { label: "Offline activities", name: "type" }
-                  }),
-                  _vm._v(" "),
-                  _c("el-checkbox", {
-                    attrs: { label: "Simple brand exposure", name: "type" }
-                  })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Resources" } },
-            [
-              _c(
-                "el-radio-group",
-                {
-                  model: {
-                    value: _vm.form.resource,
-                    callback: function($$v) {
-                      _vm.$set(_vm.form, "resource", $$v)
-                    },
-                    expression: "form.resource"
-                  }
-                },
-                [
-                  _c("el-radio", { attrs: { label: "Sponsor" } }),
-                  _vm._v(" "),
-                  _c("el-radio", { attrs: { label: "Venue" } })
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Activity form" } },
-            [
-              _c("el-input", {
-                attrs: { type: "textarea" },
-                model: {
-                  value: _vm.form.desc,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "desc", $$v)
-                  },
-                  expression: "form.desc"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            [
-              _c(
-                "el-button",
-                { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
-                [_vm._v("Create")]
-              ),
-              _vm._v(" "),
-              _c("el-button", { on: { click: _vm.onCancel } }, [
-                _vm._v("Cancel")
-              ])
-            ],
-            1
+            "a",
+            { staticClass: "bullshit__return-home", attrs: { href: "/" } },
+            [_vm._v("返回首页")]
           )
-        ],
-        1
-      )
-    ],
-    1
+        ])
+      ])
+    ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "bullshit__info" }, [
+      _vm._v("版权所有"),
+      _c(
+        "a",
+        {
+          staticClass: "link-type",
+          attrs: { href: "https://wallstreetcn.com", target: "_blank" }
+        },
+        [_vm._v("华尔街见闻")]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-af37b332", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-bd33ef4a", module.exports)
   }
 }
 

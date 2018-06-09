@@ -6,12 +6,13 @@
         <div class="main-container">
             <navbar></navbar>
             <tags-view></tags-view>
+            <Opt></Opt>
             <app-main></app-main>
         </div>
     </div>
 </template>
 <script>
-    import { Navbar, Sidebar, AppMain, TagsView, Logo } from './components/index.js';
+    import { Navbar, Sidebar, AppMain, TagsView, Logo, Opt } from './components/index.js';
     import ResizeMixin from './minxi/ResizeHandler.js';
     export default {
         name: 'layout',
@@ -20,7 +21,8 @@
             Sidebar,
             AppMain,
             TagsView,
-            Logo
+            Logo,
+            Opt
         },
         mixins: [ResizeMixin],
         computed: {

@@ -4,9 +4,10 @@ const app = {
   state: {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),
-      withoutAnimation: false
+      withoutAnimation: false,
     },
-    device: 'desktop'
+    device: 'desktop',
+    wH:'200'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
