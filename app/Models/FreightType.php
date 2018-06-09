@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FeeType extends Model
+class FreightType extends Model
 {
-    protected $table = 'fee_types';
-
+    protected $table = 'freight_types';
 }
