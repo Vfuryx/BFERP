@@ -15,14 +15,22 @@ use Illuminate\Http\Request;
 
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function($api) {
-    $api->get('version', function() {
-        return response('this is version v1');
-    });
-});
+$api->version('v1',['namespace' => 'App\Http\Controllers\Api','middleware' => ['serializer:array', 'bindings']], function($api) {
+    $api->group([
+        'middleware' => 'api.throttle',
+        'limit' => config('api.rate_limits.access.limit'),
+        'expires' => config('api.rate_limits.access.expires'),
+    ], function($api) {
+        $api->get('markcolors', 'MarkColorsController@index')
+            ->name('api.markcolors.index');
 
-$api->version('v2', function($api) {
-    $api->get('version', function() {
-        return response('this is version v2');
+        $api->get('markcolors/{markcolor}', 'MarkColorsController@show')
+            ->name('api.markcolors.show');
+
+        $api->post('markcolors', 'MarkColorsController@store')
+            ->name('api.markcolors.store');
+
+        $api->patch('markcolors/{markcolor}', 'MarkColorsController@update')
+            ->name('api.topics.update');
     });
 });
