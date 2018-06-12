@@ -26,24 +26,36 @@ class MarkColorRequest extends FormRequest
         switch($this->method()) {
             case 'POST':
                 return [
-                    'code' => 'required|string',
-                    'name' => 'required|string',
+                    'markcode' => 'required|string',
+                    'markname' => 'required|string',
+                    'color'=>'required|string',
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'code' => 'required|string',
-                    'name' => 'required|string',
+                    'markcode' => 'required|string',
+                    'markname' => 'required|string',
+                    'color'=>'required|string',
                 ];
                 break;
         }
     }
 
+    public function messages()
+    {
+        return [
+            'markcode.required' => '标记代码必填',
+            'markname.required' => '标记名称必填',
+            'color.required'=>'颜色必填',
+        ];
+    }
+
     public function attributes()
     {
         return [
-            'code.required' => '标记颜色代码必填',
-            'name.required' => '标记颜色名称必填',
+            'markcode' => '标记代码',
+            'markname' => '标记名称',
+            'color' => '颜色',
         ];
     }
 }
