@@ -43,8 +43,6 @@ class MarkColorsController extends Controller
 
         return $this->response->item($markcolor, new MarkColorTransformer())
             ->setStatusCode(201);
-
-
     }
 
     /**
