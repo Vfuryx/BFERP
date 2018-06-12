@@ -4,7 +4,7 @@ const app = {
   state: {
     sidebar: {
       opened: !+Cookies.get('sidebarStatus'),
-      withoutAnimation: false,
+      withoutAnimation: true
     },
     device: 'desktop',
     wH:'200'
@@ -17,11 +17,11 @@ const app = {
         Cookies.set('sidebarStatus', 0)
       }
       state.sidebar.opened = !state.sidebar.opened
-      state.sidebar.withoutAnimation = false
+      state.sidebar.withoutAnimation = true
     },
     CLOSE_SIDEBAR: (state, withoutAnimation) => {
       Cookies.set('sidebarStatus', 1)
-      state.sidebar.opened = false
+      state.sidebar.opened = true
       state.sidebar.withoutAnimation = withoutAnimation
     },
     TOGGLE_DEVICE: (state, device) => {

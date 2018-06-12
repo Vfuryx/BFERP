@@ -5,6 +5,8 @@ Vue.use(VueRouter);
 
 /* Layout */
 import Layout from '../views/layout/Layout.vue';
+// import Opt from '../components/opt.vue';
+// import Hello from '../components/Hello.vue';
 
 const constantRouterMap = [
     {

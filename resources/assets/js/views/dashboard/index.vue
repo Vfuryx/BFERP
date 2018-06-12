@@ -10,12 +10,20 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'dashboard',
+    data(){
+      return {
+          newOpt: []
+      }
+    },
   computed: {
     ...mapGetters([
       'name',
       'roles'
     ])
-  }
+  },
+    mounted(){
+      this.$store.state.opt.opts = this.newOpt;
+    }
 }
 </script>
 

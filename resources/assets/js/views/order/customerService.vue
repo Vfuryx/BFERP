@@ -4,32 +4,100 @@
     </div>
 </template>
 <script>
-    import { mapGetters } from 'vuex'
     export default{
         data(){
             return {
-                opts:[
+                newOpt:[
                     {
-                        cnt:'before',
-                        icon:'el-icon-arrow-left'
+                        cnt:'增加',
+                        icon:'bf-add'
+                    },
+                    {
+                        cnt:'修改',
+                        icon:'bf-change'
+                    },
+                    {
+                        cnt:'删除',
+                        icon:'bf-del'
+                    },
+                    {
+                        cnt:'锁定',
+                        icon:'bf-lock'
+                    },
+                    {
+                        cnt:'解锁',
+                        icon:'bf-delock'
+                    },
+                    {
+                        cnt:'审核',
+                        icon:'bf-audit'
+                    },
+                    {
+                        cnt:'退审',
+                        icon:'bf-auditfaild'
+                    },
+                    {
+                        cnt:'导出',
+                        icon:'bf-out'
+                    },
+                    {
+                        cnt:'合并',
+                        icon:'bf-merge'
+                    },
+                    {
+                        cnt:'拆分',
+                        icon:'bf-node'
+                    },
+                    {
+                        cnt:'转刷单',
+                        icon:'bf-transa'
+                    },
+                    {
+                        cnt:'上一条',
+                        icon:'bf-beforeItem'
+                    },
+                    {
+                        cnt:'下一条',
+                        icon:'bf-nextItem'
+                    },
+                    {
+                        cnt:'转补款',
+                        icon:'bf-transferAcc'
+                    },
+                    {
+                        cnt:'订单关联',
+                        icon:'bf-asso'
+                    },
+                    {
+                        cnt:'取消关联',
+                        icon:'bf-cancelAsso'
+                    },
+                    {
+                        cnt:'通知发货',
+                        icon:'bf-deliNotice'
+                    },
+                    {
+                        cnt:'打印',
+                        icon:'bf-printer'
+                    },
+                    {
+                        cnt:'转送款',
+                        icon:'bf-giveMoney'
+                    },
+                    {
+                        cnt:'刷新',
+                        icon:'bf-refresh'
                     }
                 ]
             }
         },
-        /*computed:{
-            ...mapGetters([
-                'opts'
-            ])
-        },*/
+        computed:{
+
+        },
         methods:{
-            function(){
-               // $store.commit()
-               //  this.$store.
-            }
         },
         mounted(){
-            // store.commit(GET_OPT);
-            // console.log(this.$store);
+            this.$store.state.opt.opts = this.newOpt;
         }
     }
 </script>

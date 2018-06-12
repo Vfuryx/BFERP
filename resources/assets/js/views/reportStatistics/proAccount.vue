@@ -3,3 +3,28 @@
         <h2>产品核算报表</h2>
     </div>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+                newOpt: [
+                    {
+                        cnt: '导入',
+                        icon: 'bf-in'
+                    },
+                    {
+                        cnt: '导出',
+                        icon: 'bf-out'
+                    },
+                    {
+                        cnt: '刷新',
+                        icon: 'bf-refresh'
+                    }
+                ]
+            }
+        },
+        mounted() {
+            this.$store.state.opt.opts = this.newOpt;
+        }
+    }
+</script>

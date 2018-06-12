@@ -28,11 +28,12 @@
     }
 
    .logo {
+       /*transition: width 0.15s;*/
        margin: 0;
        padding: 0;
        display: inline-block;
        height: 50px;
-       width: 181px;
+       width: 201px;
        position: fixed;
        left: 0;
        top: 0;

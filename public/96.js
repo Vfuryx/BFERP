@@ -1,14 +1,14 @@
 webpackJsonp([96],{
 
-/***/ 449:
+/***/ 478:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(761)
 /* template */
-var __vue_template__ = __webpack_require__(594)
+var __vue_template__ = __webpack_require__(671)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\printerConf.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\shopGatheringMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-438c287c", Component.options)
+    hotAPI.createRecord("data-v-1e41fd2e", Component.options)
   } else {
-    hotAPI.reload("data-v-438c287c", Component.options)
+    hotAPI.reload("data-v-1e41fd2e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 594:
+/***/ 671:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -62,7 +62,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("打印机配置")])])
+    return _c("div", [_c("h2", [_vm._v("门店收款管理")])])
   }
 ]
 render._withStripped = true
@@ -70,9 +70,45 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-438c287c", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-1e41fd2e", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 761:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            newOpt: [{
+                cnt: '新增',
+                icon: 'bf-add'
+            }, {
+                cnt: '修改',
+                icon: 'bf-change'
+            }, {
+                cnt: '删除',
+                icon: 'bf-del'
+            }, {
+                cnt: '刷新',
+                icon: 'bf-refresh'
+            }]
+        };
+    },
+    mounted: function mounted() {
+        this.$store.state.opt.opts = this.newOpt;
+    }
+});
 
 /***/ })
 

@@ -57,7 +57,7 @@
     .navbar {
         height: 50px;
         line-height: 50px;
-        border-radius: 0px !important;
+        border-radius: 0 !important;
         position: relative;
 
         .hamburger-container {

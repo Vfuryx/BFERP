@@ -21,7 +21,6 @@ const opt = {
                 icon: 'el-icon-upload'
             }
         ]
-        // opts:'23'
     },
     mutations:{
         GET_OPT:(state,opt)=>{

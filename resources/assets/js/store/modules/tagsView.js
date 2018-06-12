@@ -1,7 +1,19 @@
 const tagsView = {
   state: {
-    visitedViews: [],
-    cachedViews: []
+    visitedViews: [
+        /*{
+          name: '首页',
+          path: '/',
+          title: '首页'
+        }*/
+    ],
+    cachedViews: [
+        /*{
+          name: '首页',
+          path: '/',
+          title: '首页'
+        }*/
+    ]
   },
   mutations: {
     ADD_VISITED_VIEWS: (state, view) => {

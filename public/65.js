@@ -1,14 +1,14 @@
 webpackJsonp([65],{
 
-/***/ 412:
+/***/ 491:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(6)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(775)
 /* template */
-var __vue_template__ = __webpack_require__(557)
+var __vue_template__ = __webpack_require__(685)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\purchase\\cancelPurchase.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\performanceStat.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5737f279", Component.options)
+    hotAPI.createRecord("data-v-95acd6a8", Component.options)
   } else {
-    hotAPI.reload("data-v-5737f279", Component.options)
+    hotAPI.reload("data-v-95acd6a8", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 557:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -62,7 +62,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("取消采购")])])
+    return _c("div", [_c("h2", [_vm._v("业绩统计报表")])])
   }
 ]
 render._withStripped = true
@@ -70,9 +70,39 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-5737f279", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-95acd6a8", module.exports)
   }
 }
+
+/***/ }),
+
+/***/ 775:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            newOpt: [{
+                cnt: '导出',
+                icon: 'bf-out'
+            }, {
+                cnt: '刷新',
+                icon: 'bf-refresh'
+            }]
+        };
+    },
+    mounted: function mounted() {
+        this.$store.state.opt.opts = this.newOpt;
+    }
+});
 
 /***/ })
 

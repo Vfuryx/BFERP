@@ -3,3 +3,28 @@
         <h2>产品映射</h2>
     </div>
 </template>
+<script>
+    export default {
+        data() {
+            return {
+                newOpt: [
+                    {
+                        cnt: '新增',
+                        icon: 'bf-add'
+                    },
+                    {
+                        cnt: '删除',
+                        icon: 'bf-del'
+                    },
+                    {
+                        cnt: '刷新',
+                        icon: 'bf-refresh'
+                    }
+                ]
+            }
+        },
+        mounted() {
+            this.$store.state.opt.opts = this.newOpt;
+        }
+    }
+</script>

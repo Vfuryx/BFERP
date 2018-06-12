@@ -1,8 +1,8 @@
 <template>
+    <!-- :show-timeout="200"-->
         <el-scrollbar wrapClass="scrollbar-wrapper" :style="mTop">
             <el-menu
                     mode="vertical"
-                    :show-timeout="200"
                     :default-active="$route.path"
                     :collapse="isCollapse"
                     background-color="#304156"
