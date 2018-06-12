@@ -11,8 +11,8 @@ class MarkColorTransformer extends TransformerAbstract
     {
         return [
             'id' => $markcolor->id,
-            'code' => $markcolor->code,
-            'name' => $markcolor->name,
+            'markcode' => $markcolor->markcode,
+            'markname' => $markcolor->markname,
             'color' => $markcolor->color,
             'description' => $markcolor->description,
             'status' => $markcolor->status,

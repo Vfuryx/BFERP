@@ -31,8 +31,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.markcolors.store');
 
         $api->patch('markcolors/{markcolor}', 'MarkColorsController@update')
-            ->name('api.topics.update');
-
+            ->name('api.markcolors.update');
+            
         $api->get('acctypes', 'AccountingTypesController@index')
             ->name('api.acctypes.index');
         $api->get('acctypes/{acctype}', 'AccountingTypesController@show')

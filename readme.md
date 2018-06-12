@@ -1,19 +1,31 @@
 # ERP
 
-### 配置说明
+### 运行环境
+* Nginx 1.8+
+* PHP 7.0+
+* Mysql 5.7+
+* Redis 3.0+
+
+### 开发环境部署/安装
  
- -
+ 本项目代码使用 PHP 框架 Laravel 5.5 开发，本地开发环境使用 Laravel Homestead。
+ 
+ 下文将在假定读者已经安装好了 Homestead 的情况下进行说明。如果您还未安装 Homestead，可以参照 Homestead 安装与设置 进行安装配置。
+ 
+
 * 克隆项目到本地
 * 运行开发环境搭建参考：https://laravel-china.org/docs/laravel-development-environment/5.5
 * 复制根目录下 `.env.example` 文件重命名为 `.env`
-* 项目根目录执行命令 `composer update`安装laravel扩展,
+* 项目根目录执行命令 `composer update`安装laravel扩展包依赖,
   `viacreative/sudo-su`需要单独安装：`composer require viacreative/sudo-su`
 * 项目根目录执行命令 `npm install` (windows 及 虚拟机用户请使用`npm install --no-bin-links`)安装前端扩展;
   具体前端工作流参照：http://note.youdao.com/noteshare?id=b1a0bd5e5858a82796ab02285d38e12f
-  
+* 生成密钥 `php artisan key:generate`
+
+
 ###  composer 扩展包说明
  
- ----
+ --
 * `dingo/api`: API 开发包,
 * `gregwar/captcha`: api开发验证码,
 *  `liyu/dingo-serializer-switch`: 单一资源输出去掉data包裹,
@@ -70,7 +82,7 @@
 
 ### API说明
  
----- 
+--
 1 
 
 
@@ -78,4 +90,4 @@
 
 ### 前端开发说明 
  
- ----
+ --
