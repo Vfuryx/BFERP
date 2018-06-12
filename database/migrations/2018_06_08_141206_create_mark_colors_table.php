@@ -15,10 +15,10 @@ class CreateMarkColorsTable extends Migration
     {
         Schema::create('mark_colors', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('code')->default('')->comment('标记颜色代码');
-            $table->string('name')->default('')->comment('标记颜色名称');
+            $table->string('markcode')->default('')->comment('标记代码');
+            $table->string('markname')->default('')->comment('标记名称');
             $table->string('color')->default('')->comment('颜色');
-            $table->string('desc')->default('')->comment('描述');
+            $table->string('description')->default('')->comment('描述');
             $table->tinyInteger('status')->default(0)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
