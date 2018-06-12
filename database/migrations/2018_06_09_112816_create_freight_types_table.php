@@ -16,7 +16,7 @@ class CreateFreightTypesTable extends Migration
         Schema::create('freight_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('运费名称');
-            $table->tinyInteger('default')->default(0)->comment('是否默认');
+            $table->tinyInteger('is_default')->default(0)->comment('是否默认');
             $table->timestamps();
         });
     }

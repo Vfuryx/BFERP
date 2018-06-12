@@ -12,7 +12,7 @@ class AccountingTypeTransformer extends TransformerAbstract
         return [
             'id' => $acctype->id,
             'name' => $acctype->name,
-            'sttaus' => $acctype->status,
+            'status' => $acctype->status,
             'created_at' => $acctype->created_at
                                     ->toDateTimeString(),
             'updated_at' => $acctype->updated_at
