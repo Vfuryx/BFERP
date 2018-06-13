@@ -72,7 +72,7 @@
 ---
 * 生成接口文档命令：
 
-`php artisan api:docs --name 验证码 --use-version v1 --output-file docs/apidocs/验证码接口.md`
+`php artisan api:docs --name API文档 --output-file docs/apidocs/apidoc.md`
 
 编写规则：https://laravel-china.org/docs/dingo-api/2.0.0/API-Blueprint-Documentation/1454
 
