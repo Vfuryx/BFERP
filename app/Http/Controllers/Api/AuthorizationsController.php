@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\Api\AuthorizationRequest;
 
 /**
-* 登录资源标识
+* 登录资源
 * @Resource("Authorizations",uri="/api")
 */
 class AuthorizationsController extends Controller
