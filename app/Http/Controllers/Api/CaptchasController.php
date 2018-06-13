@@ -7,14 +7,14 @@ use Gregwar\Captcha\CaptchaBuilder;
 
 /**
 * 验证码资源标识
-* @Resource("Captchas",uri="/api/captchas")
+* @Resource("Captchas",uri="/api")
 */
 class CaptchasController extends Controller
 {
     /**
      * 获取验证码 
      *  
-     * @Post("/api/captchas") 
+     * @Post("/captchas") 
      * @Versions({"v1"})
      * @Transaction({
      *      @Request({"noparam":"无参数"}),

@@ -7,14 +7,14 @@ use App\Http\Requests\Api\AuthorizationRequest;
 
 /**
 * 登录资源标识
-* @Resource("Authorizations",uri="/api/authorizations")
+* @Resource("Authorizations",uri="/api")
 */
 class AuthorizationsController extends Controller
 {
     /**
      * 用户登录 
      *  
-     * @Post("/api/authorizations") 
+     * @Post("/authorizations") 
      * @Versions({"v1"})
      * @Transaction({
      *      @Request({"username":"用户名","password":"密码","captcha_key":"验证码键值","captcha_code":"验证码"}),
