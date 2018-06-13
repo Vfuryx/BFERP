@@ -28,6 +28,7 @@
 | 扩展包 | 描述 | 场景 | 
 | - | :-: | -: |
 | dingo/api | api开发包 |  | 
+| tymon/jwt-auth | jwt认证 | 用户登录授权策略 |
 | barryvdh/laravel-debugbar | 页面调试工具栏 (对 phpdebugbar 的封装) | 开发环境中的 DEBUG |
 | viacreative/sudo-su | 用户切换 | 开发环境中快速切换登录账号 |
 | gregwar/captcha | 验证码 | api开发验证码 |
