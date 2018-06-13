@@ -54,6 +54,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
+        'grouptitle'=>'用户中心',
     ],function($api){
         // 用户注册
         $api->post('users', 'UsersController@store')

@@ -31,7 +31,7 @@
 | tymon/jwt-auth | jwt认证 | 用户登录授权策略 |
 | barryvdh/laravel-debugbar | 页面调试工具栏 (对 phpdebugbar 的封装) | 开发环境中的 DEBUG |
 | viacreative/sudo-su | 用户切换 | 开发环境中快速切换登录账号 |
-| gregwar/captcha | 验证码 | api开发验证码 |
+| gregwar/captcha | 图片验证码 | api开发专用图片验证码 |
 *  `liyu/dingo-serializer-switch`: 单一资源输出去掉data包裹,
    在路由中添加 `'middleware' => ['serializer:array', 'bindings']`中间件：
    api输出结构：
@@ -70,9 +70,11 @@
 ### API说明
  
 ---
+* 生成接口文档命令：
 
+`php artisan api:docs --name 验证码 --use-version v1 --output-file docs/apidocs/验证码接口.md`
 
- 
+编写规则：https://laravel-china.org/docs/dingo-api/2.0.0/API-Blueprint-Documentation/1454
 
 ### 前端开发说明 
  
