@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccountingTypeRequest extends FormRequest
+class StorageTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,14 +26,12 @@ class AccountingTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32',
-                    'status' => 'required|boolean'
+                    'name' => 'required|string|between:5,32'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
-                    'status' => 'boolean'
+                    'name' => 'string|between:5,32'
                 ];
                 break;
         }
@@ -42,19 +40,16 @@ class AccountingTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.required' => '状态必填',
-            'status.boolean' => '状态必须尔类型',
-            'name.required' => '记账类型名称必填',
-            'name.between' => '记账类型名称长度[5-32]',
-            'name.string' => '记账类型名称必须string类型'   
+            'name.required' => '入库类型名称必填',
+            'name.between' => '入库类型名称长度[5-32]',
+            'name.string' => '入库类型名称必须string类型'   
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '记账类型名称',
-            'status' => '记账类型状态代',
+            'name' => '入库类型名称'
         ];
     }
 

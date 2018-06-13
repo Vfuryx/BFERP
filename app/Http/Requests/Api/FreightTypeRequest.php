@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AccountingTypeRequest extends FormRequest
+class FreightTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,13 +27,13 @@ class AccountingTypeRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => 'required|string|between:5,32',
-                    'status' => 'required|boolean'
+                    'is_default' => 'required|boolean'
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string|between:5,32',
-                    'status' => 'boolean'
+                    'is_default' => 'boolean'
                 ];
                 break;
         }
@@ -42,20 +42,19 @@ class AccountingTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.required' => '状态必填',
-            'status.boolean' => '状态必须尔类型',
-            'name.required' => '记账类型名称必填',
-            'name.between' => '记账类型名称长度[5-32]',
-            'name.string' => '记账类型名称必须string类型'   
+            'name.required' => '运费名称必填',
+            'name.string' => '运费名称必须string类型',
+            'name.between' => '运费名称长度[5-32]',
+            'is_default.required' => '是否默认必填',
+            'is_default.boolean' => '是否默认必须尔类型',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '记账类型名称',
-            'status' => '记账类型状态代',
+            'name' => '运费名称',
+            'is_default' => '是否默认'
         ];
     }
-
 }
