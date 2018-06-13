@@ -2,20 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
-
 class MarkColorRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -36,6 +24,7 @@ class MarkColorRequest extends FormRequest
                     'markcode' => 'string',
                     'markname' => 'string',
                     'color'=>'string',
+                    'id'=>'exists:mark_colors'
                 ];
                 break;
         }
@@ -48,6 +37,7 @@ class MarkColorRequest extends FormRequest
             'markcode.unique' => '标记代码不能重复',
             'markname.required' => '标记名称必填',
             'color.required'=>'颜色必填',
+            'id.exists'=>'需要更改的数据id在数据库中未找到',
         ];
     }
 

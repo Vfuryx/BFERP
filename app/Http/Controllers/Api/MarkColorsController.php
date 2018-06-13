@@ -17,7 +17,7 @@ class MarkColorsController extends Controller
     public function index()
     {
 //        return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
-        
+
         //分页响应
         $markcolors=MarkColor::paginate(2);
         return $this->response->paginator($markcolors, new MarkColorTransformer());
@@ -91,8 +91,9 @@ class MarkColorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MarkColor $markcolor)
     {
-        //
+        $markcolor->delete();
+        return $this->response->item($markcolor, new MarkColorTransformer());
     }
 }

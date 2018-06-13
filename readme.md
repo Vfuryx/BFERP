@@ -10,7 +10,7 @@
  
  本项目代码使用 PHP 框架 Laravel 5.5 开发，本地开发环境使用 Laravel Homestead。
  
- 下文将在假定读者已经安装好了 Homestead 的情况下进行说明。如果您还未安装 Homestead，可以参照 Homestead 安装与设置 进行安装配置。
+ 下文将在假定已经安装好了 Homestead 的情况下进行说明。如果您还未安装 Homestead，可以参照 Homestead 安装与设置 进行安装配置。
  
 
 * 克隆项目到本地
@@ -30,18 +30,17 @@
 | dingo/api | api开发包 |  | 
 | barryvdh/laravel-debugbar | 页面调试工具栏 (对 phpdebugbar 的封装) | 开发环境中的 DEBUG |
 | viacreative/sudo-su | 用户切换 | 开发环境中快速切换登录账号 |
-
-* `gregwar/captcha`: api开发验证码,
+| gregwar/captcha | 验证码 | api开发验证码 |
 *  `liyu/dingo-serializer-switch`: 单一资源输出去掉data包裹,
    在路由中添加 `'middleware' => ['serializer:array', 'bindings']`中间件：
    api输出结构：
 ```
 {
     "id": 1,
-    "code": "#555555",
-    "name": "取消订单",
-    "color": "灰色",
-    "desc": "描述",
+    "markcode": "CANCELORDER",
+    "markname": "取消订单",
+    "color": "#555555",
+    "description": "描述",
     "status": 0,
     "created_at": "2018-06-11 15:04:17",
     "updated_at": "2018-06-11 15:04:17"
@@ -53,10 +52,10 @@
     "data": [
         {
             "id": 1,
-            "code": "#555555",
-            "name": "取消订单",
-            "color": "灰色",
-            "desc": "描述",
+            "markcode": "CANCELORDER",
+            "markname": "取消订单",
+            "color": "#555555",
+            "description": "描述",
             "status": 0,
             "created_at": "2018-06-11 15:04:17",
             "updated_at": "2018-06-11 15:04:17"
@@ -70,7 +69,6 @@
 ### API说明
  
 ---
-1 
 
 
  

@@ -2,20 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class AccountingTypeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -32,8 +21,8 @@ class AccountingTypeRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'required|between:5,32',
-                    'status' => 'required|boolean'
+                    'name' => 'between:5,32',
+                    'status' => 'boolean'
                 ];
                 break;
         }
