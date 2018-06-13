@@ -36,8 +36,16 @@
                 ]
             }
         },
-        mounted() {
-            this.$store.state.opt.opts = this.newOpt;
-        }
+      mounted(){
+        this.$store.state.opt.opts = this.newOpt;
+        this.$store.commit('change',this.newOpt);
+        const that = this;
+        $(window).resize(() => {
+          return (() => {
+            that.$store.state.opt.opts = that.newOpt;
+            that.$store.commit('change',that.newOpt);
+          })()
+        })
+      }
     }
 </script>

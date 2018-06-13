@@ -1,11 +1,21 @@
 <template>
-    <div class="opt">
-           <span v-for="item in opts" class="list">
+    <div class="opt clearfix">
+        <div v-for="item in opts" class="list" @click="item.ent">
                <el-tooltip :content="item.cnt" placement="top" effect="dark">
-                   <!--<el-button type="primary" :icon="item.icon"></el-button>-->
-                   <i class="iconfont optIcon" :class="item.icon"></i>
+                   <i class="iconfont optIcon" :class="item.icon">
+                       <span>{{item.cnt}}</span>
+                   </i>
                </el-tooltip>
-           </span>
+
+           </div>
+        <i class="iconfont bf-down dwn-more" v-show="this.$store.state.opt.show" @click="changeShow"></i>
+        <div class="hide-list" v-show="this.$store.state.opt.ok">
+            <div v-for="item in this.$store.state.opt.lastOpt">
+                <i class="iconfont optIcon" :class="item.icon">
+                    <span>{{item.cnt}}</span>
+                </i>
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -22,7 +32,9 @@
             ])
         },
         methods:{
-
+          changeShow(){
+            this.$store.commit('toggle_ok');
+          }
         },
         mounted(){
 

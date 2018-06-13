@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel-Vue</title>
+    {{--<link href="{{ mix('css/app.css') }}">--}}
 </head>
 <body>
 <div id="app">

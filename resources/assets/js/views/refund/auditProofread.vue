@@ -31,8 +31,8 @@
                 ]
             }
         },
-        mounted() {
-            this.$store.state.opt.opts = this.newOpt;
-        }
+      mounted() {
+        this.$store.state.opt.opts = this.newOpt;
+      }
     }
 </script>

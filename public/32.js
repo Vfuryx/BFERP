@@ -1,14 +1,14 @@
 webpackJsonp([32],{
 
-/***/ 402:
+/***/ 501:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(554)
+var __vue_script__ = __webpack_require__(760)
 /* template */
-var __vue_template__ = __webpack_require__(555)
+var __vue_template__ = __webpack_require__(761)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\order\\redPackageDelivery.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\proAccount.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-27f1bf78", Component.options)
+    hotAPI.createRecord("data-v-95306430", Component.options)
   } else {
-    hotAPI.reload("data-v-27f1bf78", Component.options)
+    hotAPI.reload("data-v-95306430", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 554:
+/***/ 760:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60,28 +60,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            newOpt: [{
-                cnt: '新增',
-                icon: 'bf-add'
-            }, {
-                cnt: '修改',
-                icon: 'bf-change'
-            }, {
-                cnt: '刷新',
-                icon: 'bf-refresh'
-            }]
-        };
-    },
-    mounted: function mounted() {
-        this.$store.state.opt.opts = this.newOpt;
-    }
+  data: function data() {
+    return {
+      newOpt: [{
+        cnt: '导入',
+        icon: 'bf-in'
+      }, {
+        cnt: '导出',
+        icon: 'bf-out'
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh'
+      }]
+    };
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
+    });
+  }
 });
 
 /***/ }),
 
-/***/ 555:
+/***/ 761:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -95,7 +103,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("红包商品配送")])])
+    return _c("div", [_c("h2", [_vm._v("产品核算报表")])])
   }
 ]
 render._withStripped = true
@@ -103,7 +111,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-27f1bf78", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-95306430", module.exports)
   }
 }
 

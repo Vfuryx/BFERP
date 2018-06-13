@@ -1,19 +1,19 @@
 webpackJsonp([1],{
 
-/***/ 393:
+/***/ 387:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(525)
-  __webpack_require__(527)
+  __webpack_require__(519)
+  __webpack_require__(521)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(529)
+var __vue_script__ = __webpack_require__(523)
 /* template */
-var __vue_template__ = __webpack_require__(531)
+var __vue_template__ = __webpack_require__(525)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53,13 +53,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 525:
+/***/ 519:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(526);
+var content = __webpack_require__(520);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -80,10 +80,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 526:
+/***/ 520:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -95,13 +95,13 @@ exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input 
 
 /***/ }),
 
-/***/ 527:
+/***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(528);
+var content = __webpack_require__(522);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -122,10 +122,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 528:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(6)(false);
 // imports
 
 
@@ -137,12 +137,12 @@ exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixe
 
 /***/ }),
 
-/***/ 529:
+/***/ 523:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate_js__ = __webpack_require__(530);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate_js__ = __webpack_require__(524);
 //
 //
 //
@@ -225,14 +225,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs.loginForm.validate(function (valid) {
         if (valid) {
-          _this.loading = true;
-          _this.$store.dispatch('Login', _this.loginForm).then(function () {
-            _this.loading = false;
-            //  跳转到根路径
-            _this.$router.push({ path: '/' });
-          }).catch(function () {
-            _this.loading = false;
-          });
+          _this.$router.push({ path: '/' });
+          // this.loading = true;
+          /* this.$store.dispatch('Login', this.loginForm).then(() => {
+             this.loading = false
+             //  跳转到根路径
+             this.$router.push({ path: '/' })
+           }).catch(() => {
+             this.loading = false
+           })*/
         } else {
           console.log('error submit!!');
           return false;
@@ -244,7 +245,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 530:
+/***/ 524:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -289,7 +290,7 @@ function validatAlphabets(str) {
 
 /***/ }),
 
-/***/ 531:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

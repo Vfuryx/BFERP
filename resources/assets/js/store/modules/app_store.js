@@ -19,10 +19,10 @@ const app = {
       state.sidebar.opened = !state.sidebar.opened
       state.sidebar.withoutAnimation = true
     },
-    CLOSE_SIDEBAR: (state, withoutAnimation) => {
+    CLOSE_SIDEBAR: (state) => {
       Cookies.set('sidebarStatus', 1)
-      state.sidebar.opened = true
-      state.sidebar.withoutAnimation = withoutAnimation
+      state.sidebar.opened = false
+      state.sidebar.withoutAnimation = true
     },
     TOGGLE_DEVICE: (state, device) => {
       state.device = device
