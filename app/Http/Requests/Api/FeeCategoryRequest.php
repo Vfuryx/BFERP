@@ -2,19 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class FeeCategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -31,7 +22,8 @@ class FeeCategoryRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32'
+                    'name' => 'string|between:5,32',
+                    'id' => 'exists:fee_categories'
                 ];
                 break;
         }
@@ -42,7 +34,8 @@ class FeeCategoryRequest extends FormRequest
         return [
             'name.required' => '费用类别名称必填',
             'name.between' => '费用类别名称长度[5-32]位',
-            'name.string' => '费用类别名称必须string类型'   
+            'name.string' => '费用类别名称必须string类型',
+            'id.exists' => '需要更改的数据id在数据库中未找到'
         ];
     }
 

@@ -2,19 +2,9 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class StorageTypeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
 
     /**
      * Get the validation rules that apply to the request.
@@ -31,7 +21,8 @@ class StorageTypeRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32'
+                    'name' => 'string|between:5,32',
+                    'id'=>'exists:storage_types'
                 ];
                 break;
         }
@@ -42,7 +33,8 @@ class StorageTypeRequest extends FormRequest
         return [
             'name.required' => '入库类型名称必填',
             'name.between' => '入库类型名称长度[5-32]',
-            'name.string' => '入库类型名称必须string类型'   
+            'name.string' => '入库类型名称必须string类型',
+            'id.exists'=>'需要更改的数据id在数据库中未找到'  
         ];
     }
 

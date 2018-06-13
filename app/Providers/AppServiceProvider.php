@@ -28,11 +28,15 @@ class AppServiceProvider extends ServiceProvider
         }
 
         \API::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-            abort(404);
+            abort(404,$exception->getMessage());
         });
 
         \API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
             abort(403, $exception->getMessage());
+        });
+
+        \API::error(function (\Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException $exception) {
+            abort(405,'方法不允许');
         });
     }
 }

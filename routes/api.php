@@ -21,18 +21,19 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
+        //标记颜色
         $api->get('markcolors', 'MarkColorsController@index')
             ->name('api.markcolors.index');
-
         $api->get('markcolors/{markcolor}', 'MarkColorsController@show')
             ->name('api.markcolors.show');
-
         $api->post('markcolors', 'MarkColorsController@store')
             ->name('api.markcolors.store');
-
         $api->patch('markcolors/{markcolor}', 'MarkColorsController@update')
             ->name('api.markcolors.update');
-            
+        $api->delete('markcolors/{markcolor}', 'MarkColorsController@destroy')
+            ->name('api.markcolors.destroy');
+
+        //记账类型
         $api->get('acctypes', 'AccountingTypesController@index')
             ->name('api.acctypes.index');
         $api->get('acctypes/{acctype}', 'AccountingTypesController@show')

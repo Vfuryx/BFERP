@@ -16,7 +16,11 @@ class MarkColorsController extends Controller
      */
     public function index()
     {
-        return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
+//        return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
+
+        //分页响应
+        $markcolors=MarkColor::paginate(2);
+        return $this->response->paginator($markcolors, new MarkColorTransformer());
     }
 
     /**
@@ -42,7 +46,7 @@ class MarkColorsController extends Controller
         $markcolor->save();
 
         return $this->response->item($markcolor, new MarkColorTransformer())
-            ->setStatusCode(201);
+            ->setStatusCode(201)->addMeta('status_code','201');
     }
 
     /**
@@ -53,7 +57,7 @@ class MarkColorsController extends Controller
      */
     public function show($id)
     {
-        $markcolor=MarkColor::find($id);
+        $markcolor=MarkColor::findOrFail($id);
         return $this->response->item($markcolor, new MarkColorTransformer());
     }
 
@@ -78,7 +82,7 @@ class MarkColorsController extends Controller
     public function update(MarkColorRequest $request,MarkColor $markcolor)
     {
         $markcolor->update($request->all());
-        return $this->response->item($markcolor, new MarkColorTransformer());
+        return $this->response->item($markcolor, new MarkColorTransformer())->setStatusCode(201);
     }
 
     /**
@@ -87,8 +91,9 @@ class MarkColorsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(MarkColor $markcolor)
     {
-        //
+        $markcolor->delete();
+        return $this->response->item($markcolor, new MarkColorTransformer());
     }
 }

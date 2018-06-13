@@ -2,19 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class FeeTypeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -28,7 +19,7 @@ class FeeTypeRequest extends FormRequest
                 return [
                     'name' => 'required|string|between:5,32',
                     'fee_category_id' => 'required|integer',
-                    'code' => 'required|string|max:255',
+                    'code' => 'required|string|max:255|unique:fee_types',
                     'is_default' => 'required|boolean',
                     'status' => 'required|boolean',
                     'remark' => 'string|nullable|max:255'
@@ -38,10 +29,11 @@ class FeeTypeRequest extends FormRequest
                 return [
                     'name' => 'string|between:5,32',
                     'fee_category_id' => 'integer',
-                    'code' => 'string|max:255',
+                    'code' => 'string|max:255|unique:fee_types',
                     'is_default' => 'boolean',
                     'status' => 'boolean',
-                    'remark' => 'string|nullable|max:255'
+                    'remark' => 'string|nullable|max:255',
+                    'id'=>'exists:fee_types'
                 ];
                 break;
         }
@@ -59,13 +51,15 @@ class FeeTypeRequest extends FormRequest
             'code.required' => '费用代码必填',
             'code.string' => '费用代码必须string类型',
             'code.max' => '费用代码最大长度为255',
+            'code.unique' => '费用代码不能重复',
             'is_default.required' => '是否默认必填',
-            'is_default.boolean' => '是否默认必须尔类型',
+            'is_default.boolean' => '是否默认必须布尔类型',
             'status.required' => '状态必填',
-            'status.boolean' => '状态必须尔类型',
+            'status.boolean' => '状态必须布尔类型',
             'remark.string' => '费用类别备注必填',
             'remark.nullable' => '费用类别备注可为null',
             'remark.max' => '费用类别备注最大长度为255',
+            'id.exists'=>'需要更改的数据id在数据库中未找到',
         ];
     }
 

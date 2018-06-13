@@ -2,19 +2,10 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Foundation\Http\FormRequest;
 
 class FreightTypeRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -33,7 +24,8 @@ class FreightTypeRequest extends FormRequest
             case 'PATCH':
                 return [
                     'name' => 'string|between:5,32',
-                    'is_default' => 'boolean'
+                    'is_default' => 'boolean',
+                    'id'=>'exists:freight_types'
                 ];
                 break;
         }
@@ -46,7 +38,8 @@ class FreightTypeRequest extends FormRequest
             'name.string' => '运费名称必须string类型',
             'name.between' => '运费名称长度[5-32]',
             'is_default.required' => '是否默认必填',
-            'is_default.boolean' => '是否默认必须尔类型',
+            'is_default.boolean' => '是否默认必须布尔类型',
+            'id.exists'=>'需要更改的数据id在数据库中未找到'
         ];
     }
 
