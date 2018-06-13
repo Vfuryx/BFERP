@@ -10,16 +10,16 @@ class UsersController extends Controller
 {
     public function store(Request $request)
     {
-        // $verifyData = \Cache::get($request->verification_key);
+        $captchaData = \Cache::get($request->captcha_key);
 
-        // if (!$verifyData) {
-        //     return $this->response->error('验证码已失效', 422);
-        // }
+        if (!$captchaData) {
+            return $this->response->error('验证码已失效', 422);
+        }
 
-        // if (!hash_equals($verifyData['code'], $request->verification_code)) {
-        //     // 返回401
-        //     return $this->response->errorUnauthorized('验证码错误');
-        // }
+        if (!hash_equals($captchaData['code'], $request->captcha_code)) {
+            // 返回401
+            return $this->response->errorUnauthorized('验证码错误');
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -28,7 +28,7 @@ class UsersController extends Controller
         ]);
 
         // 清除验证码缓存
-        // \Cache::forget($request->verification_key);
+        \Cache::forget($request->captcha_key);
         return $this->response->item($user, new UserTransformer())
             ->setStatusCode(201);
         return $this->response->created();

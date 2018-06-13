@@ -16,6 +16,10 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => ['serializer:array', 'bindings']], function ($api) {
+    // 图片验证码
+    $api->post('captchas', 'CaptchasController@store')
+        ->name('api.captchas.store');
+    //页面请求
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.access.limit'),

@@ -10,6 +10,17 @@ class AuthorizationsController extends Controller
     //用户登录
     public function store(AuthorizationRequest $request)
     {
+        $captchaData = \Cache::get($request->captcha_key);
+        if (!$captchaData) {
+            return $this->response->error('验证码已失效', 422);
+        }
+        if (!hash_equals($captchaData['code'], $request->captcha_code)) {
+            // 返回401
+            return $this->response->errorUnauthorized('验证码错误');
+        }
+        // 清除验证码缓存
+        \Cache::forget($request->captcha_key);
+        
         $username = $request->username;
         filter_var($username, FILTER_VALIDATE_EMAIL) ?
             $credentials['email'] = $username :
