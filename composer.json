@@ -13,6 +13,7 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "liyu/dingo-serializer-switch": "^0.3.0",
+        "tymon/jwt-auth": "1.0.0-rc.2",
         "viacreative/sudo-su": "^1.1"
     },
     "require-dev": {
