@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\FeeTypeRequest;
+use App\Transformers\FeeTypeTransformer;
+use App\Models\FeeType;
 use Illuminate\Http\Request;
 
-class DistributionMethodsController extends Controller
+
+class FeeTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +17,7 @@ class DistributionMethodsController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(FeeType::all(),new FeeTypeTransformer());
     }
 
     /**
@@ -32,9 +36,13 @@ class DistributionMethodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeeTypeRequest $request)
     {
-        //
+        $feetype=new FeeType();
+        $feetype->fill($request->all());
+        $feetype->save();
+        return $this->response->item($feetype, new FeeTypeTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +53,8 @@ class DistributionMethodsController extends Controller
      */
     public function show($id)
     {
-        //
+        $feetype = FeeType::findOrFail($id);
+        return $this->response->item($feetype, new FeeTypeTransformer());
     }
 
     /**
@@ -66,9 +75,11 @@ class DistributionMethodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeeTypeRequest $request,FeeType $feetype)
     {
-        //
+        // dd($request->all(),$feetype->all());
+        $feetype->update($request->all());
+        return $this->response->item($feetype, new FeeTypeTransformer());
     }
 
     /**
@@ -77,8 +88,9 @@ class DistributionMethodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FeeType $feetype)
     {
-        //
+        $feetype->delete();
+        return $this->response->item($feetype, new FeeTypeTransformer());
     }
 }

@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\Api\AccountingTypeRequest;
 use Illuminate\Http\Request;
+use App\Models\AccountingType as AccType;
+use App\Transformers\AccountingTypeTransformer;
 
-class FeeTypesController extends Controller
+
+class AccountingTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +17,7 @@ class FeeTypesController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(AccType::all(),new AccountingTypeTransformer());
     }
 
     /**
@@ -32,9 +36,13 @@ class FeeTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AccountingTypeRequest $request)
     {
-        //
+        $acctype=new AccType();
+        $acctype->fill($request->all());
+        $acctype->save();
+        return $this->response->item($acctype, new AccountingTypeTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +53,8 @@ class FeeTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $acctype = AccType::findOrFail($id);
+        return $this->response->item($acctype, new AccountingTypeTransformer());
     }
 
     /**
@@ -66,9 +75,10 @@ class FeeTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AccountingTypeRequest $request,AccType $acctype)
     {
-        //
+        $acctype->update($request->all());
+        return $this->response->item($acctype, new AccountingTypeTransformer());
     }
 
     /**
@@ -77,8 +87,9 @@ class FeeTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(AccType $acctype)
     {
-        //
+        $acctype->delete();
+        return $this->response->item($acctype, new AccountingTypeTransformer());
     }
 }

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Models\FreightType;
+use App\Http\Requests\Api\FreightTypeRequest;
+use App\Transformers\FreightTypeTransformer;
 
-class AccountingTypesController extends Controller
+class FreightTypesController extends Controller
 {
-    /**
+     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return $this->response->collection(FreightType::all(),new FreightTypeTransformer());
     }
 
     /**
@@ -32,9 +34,13 @@ class AccountingTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FreightTypeRequest $request)
     {
-        //
+        $freighttype=new FreightType();
+        $freighttype->fill($request->all());
+        $freighttype->save();
+        return $this->response->item($freighttype, new FreightTypeTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,8 @@ class AccountingTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $freighttype = FreightType::findOrFail($id);
+        return $this->response->item($freighttype, new FreightTypeTransformer());
     }
 
     /**
@@ -66,9 +73,10 @@ class AccountingTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FreightTypeRequest $request,FreightType $freighttype)
     {
-        //
+        $freighttype->update($request->all());
+        return $this->response->item($freighttype, new FreightTypeTransformer());
     }
 
     /**
@@ -77,8 +85,9 @@ class AccountingTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FreightType $freighttype)
     {
-        //
+        $freighttype->delete();
+        return $this->response->item($freighttype, new FreightTypeTransformer());
     }
 }
