@@ -19,7 +19,7 @@ class CreateGoodsCategoriesTable extends Migration
             $table->string('name')->default('')->comment('商品类别名称');
             $table->string('description')->default('')->comment('描述');
             $table->string('remark')->default('')->comment('备注');
-            $table->tinyInteger('status')->default(0)->comment('状态：0=停用，1=启用');
+            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

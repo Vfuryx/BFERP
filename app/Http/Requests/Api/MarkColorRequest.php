@@ -15,19 +15,19 @@ class MarkColorRequest extends FormRequest
             case 'POST':
                 return [
                     'markcode' => 'required|string|max:255|unique:mark_colors',
-                    'markname' => 'required|string|between:5,32',
+                    'markname' => 'required|string',
                     'color' => 'required|string|max:255',
                     'description' => 'string|nullable|max:255',
-                    'status' => 'required|boolean',
+                    'status' => 'integer',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'markcode' => 'string|max:255|unique:mark_colors',
-                    'markname' => 'string|between:5,32',
+                    'markname' => 'string',
                     'color' => 'string|max:255',
                     'description' => 'string|nullable|max:255',
-                    'status' => 'boolean',
+                    'status' => 'integer',
                     'id'=>'exists:mark_colors'
                 ];
                 break;
@@ -43,15 +43,13 @@ class MarkColorRequest extends FormRequest
             'markcode.unique' => '标记代码不能重复',
             'markname.required' => '标记名称必填',
             'markname.string' => '标记名称必须string类型',
-            'markname.between' => '标记名称长度[5-32]',
             'color.required' => '颜色必填',
             'color.string' => '颜色必须string类型',
             'color.max' => '颜色最大长度为255',
             'description.string' => '标记描述必须string类型',
             'description.nullable' => '标记描述可为null',
             'description.max' => '标记描述最大长度为255',
-            'status.required' => '状态必填',
-            'status.boolean' => '状态必须布尔类型',
+            'status.integer' => '状态必须int类型',
             'id.exists'=>'需要更改的数据id在数据库中未找到'
         ];
     }

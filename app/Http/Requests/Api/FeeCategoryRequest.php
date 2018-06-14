@@ -17,12 +17,12 @@ class FeeCategoryRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32'
+                    'name' => 'required|string'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
+                    'name' => 'string',
                     'id' => 'exists:fee_categories'
                 ];
                 break;
@@ -33,7 +33,6 @@ class FeeCategoryRequest extends FormRequest
     {
         return [
             'name.required' => '费用类别名称必填',
-            'name.between' => '费用类别名称长度[5-32]位',
             'name.string' => '费用类别名称必须string类型',
             'id.exists' => '需要更改的数据id在数据库中未找到'
         ];
