@@ -16,18 +16,18 @@ class GoodsCategoryRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32',
+                    'name' => 'required|string',
                     'code' => 'required|string|max:255|unique:goods_categories',
-                    'status' => 'required|boolean',
+                    'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
+                    'name' => 'string',
                     'code' => 'string|max:255|unique:goods_categories',
-                    'status' => 'boolean',
+                    'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',
                     'id'=>'exists:goods_categories'
@@ -40,14 +40,12 @@ class GoodsCategoryRequest extends FormRequest
     {
         return [
             'name.required' => '商品类别名称必填',
-            'name.between' => '商品类别名称长度[5-32]',
             'name.string' => '商品类别名称必须string类型',
             'code.required' => '商品类别代码必填',
             'code.string' => '商品类别代码必须string类型',
             'code.max' => '商品类别代码最大长度为255',
             'code.unique' => '商品类别代码不能重复',
-            'status.required' => '状态必填',
-            'status.boolean' => '状态必须布尔类型',
+            'status.integer' => '状态必须int类型',
             'remark.max' => '商品类别备注最大长度为255',
             'remark.nullable' => '商品类别备注可为null',
             'remark.string' => '商品类别备注必须string类型',

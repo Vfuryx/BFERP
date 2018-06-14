@@ -16,12 +16,12 @@ class StorageTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32'
+                    'name' => 'required|string'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
+                    'name' => 'string',
                     'id'=>'exists:storage_types'
                 ];
                 break;
@@ -32,7 +32,6 @@ class StorageTypeRequest extends FormRequest
     {
         return [
             'name.required' => '入库类型名称必填',
-            'name.between' => '入库类型名称长度[5-32]',
             'name.string' => '入库类型名称必须string类型',
             'id.exists'=>'需要更改的数据id在数据库中未找到'  
         ];

@@ -7,9 +7,9 @@ use App\Models\MarkColor;
 use App\Transformers\MarkColorTransformer;
 
 /**
-* 标记颜色资源
-* @Resource("MarkColors",uri="/api")
-*/
+ * 标记颜色资源
+ * @Resource("MarkColors",uri="/api")
+ */
 class MarkColorsController extends Controller
 {
     /**
@@ -18,50 +18,50 @@ class MarkColorsController extends Controller
      * @Get("/markcolors") 
      * @Versions({"v1"})
      * @Response(200, body={
-* "data": {
-*         {
-*             "id": 1,
-*             "markcode": "CANCELORDER",
-*             "markname": "取消订单",
-*             "color": "#555555",
-*             "description": "描述",
-*             "status": 0,
-*             "created_at": "2018-06-11 15:04:17",
-*             "updated_at": "2018-06-11 15:04:17"
-*         },
-*         {
-*             "id": 2,
-*             "markcode": "TESTMARK",
-*             "markname": "测试挖",
-*             "color": "#888888",
-*             "description": "我不是描述",
-*             "status": 0,
-*             "created_at": "2018-06-12 09:52:16",
-*             "updated_at": "2018-06-12 09:52:16"
-*         }
-*     },
-*     "meta": {
-*         "pagination": {
-*             "total": 5,
-*             "count": 2,
-*             "per_page": 2,
-*             "current_page": 1,
-*             "total_pages": 3,
-*             "links": {
-*                 "previous": null,
-*                 "next": "{{host}}/api/markcolors?page=2"
-*             }
-*         }
-*     }
+     * "data": {
+     *         {
+     *             "id": 1,
+     *             "markcode": "CANCELORDER",
+     *             "markname": "取消订单",
+     *             "color": "#555555",
+     *             "description": "描述",
+     *             "status": 0,
+     *             "created_at": "2018-06-11 15:04:17",
+     *             "updated_at": "2018-06-11 15:04:17"
+     *         },
+     *         {
+     *             "id": 2,
+     *             "markcode": "TESTMARK",
+     *             "markname": "测试挖",
+     *             "color": "#888888",
+     *             "description": "我不是描述",
+     *             "status": 0,
+     *             "created_at": "2018-06-12 09:52:16",
+     *             "updated_at": "2018-06-12 09:52:16"
+     *         }
+     *     },
+     *     "meta": {
+     *         "pagination": {
+     *             "total": 5,
+     *             "count": 2,
+     *             "per_page": 2,
+     *             "current_page": 1,
+     *             "total_pages": 3,
+     *             "links": {
+     *                 "previous": null,
+     *                 "next": "{{host}}/api/markcolors?page=2"
+     *             }
+     *         }
+     *     }
      * })
-     */ 
+     */
     public function index()
     {
         //不分页返回
         //return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
 
         //分页响应返回
-        $markcolors=MarkColor::paginate(2);
+        $markcolors = MarkColor::paginate(2);
         return $this->response->paginator($markcolors, new MarkColorTransformer());
     }
 
@@ -102,15 +102,17 @@ class MarkColorsController extends Controller
      *          }
      *      })
      * })
-     */ 
+     */
     public function store(MarkColorRequest $request)
     {
-        $markcolor=new MarkColor();
+        $markcolor = new MarkColor();
         $markcolor->fill($request->all());
         $markcolor->save();
 
-        return $this->response->item($markcolor, new MarkColorTransformer())
-            ->setStatusCode(201)->addMeta('status_code','201');
+        return $this->response
+                    ->item($markcolor, new MarkColorTransformer())
+                    ->setStatusCode(201)
+                    ->addMeta('status_code', '201');
     }
 
     /**
@@ -134,10 +136,10 @@ class MarkColorsController extends Controller
      *          "updated_at": "2018-06-13 19:03:59"
      *      })
      * })
-     */ 
+     */
     public function show($id)
     {
-        $markcolor=MarkColor::findOrFail($id);
+        $markcolor = MarkColor::findOrFail($id);
         return $this->response->item($markcolor, new MarkColorTransformer());
     }
 
@@ -173,10 +175,12 @@ class MarkColorsController extends Controller
      *      })
      * })
      */
-    public function update(MarkColorRequest $request,MarkColor $markcolor)
+    public function update(MarkColorRequest $request, MarkColor $markcolor)
     {
         $markcolor->update($request->all());
-        return $this->response->item($markcolor, new MarkColorTransformer())->setStatusCode(201);
+        return $this->response
+                    ->item($markcolor, new MarkColorTransformer())
+                    ->setStatusCode(201);
     }
 
     /**
@@ -195,7 +199,7 @@ class MarkColorsController extends Controller
      *          "status_code": 204
      *      })
      * })
-     */ 
+     */
     public function destroy(MarkColor $markcolor)
     {
         $markcolor->delete();

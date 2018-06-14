@@ -17,14 +17,14 @@ class FreightTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32',
-                    'is_default' => 'required|boolean'
+                    'name' => 'required|string',
+                    'is_default' => 'integer'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
-                    'is_default' => 'boolean',
+                    'name' => 'string',
+                    'is_default' => 'integer',
                     'id'=>'exists:freight_types'
                 ];
                 break;
@@ -36,9 +36,7 @@ class FreightTypeRequest extends FormRequest
         return [
             'name.required' => '运费名称必填',
             'name.string' => '运费名称必须string类型',
-            'name.between' => '运费名称长度[5-32]',
-            'is_default.required' => '是否默认必填',
-            'is_default.boolean' => '是否默认必须布尔类型',
+            'is_default.boolean' => '是否默认必须int类型',
             'id.exists'=>'需要更改的数据id在数据库中未找到'
         ];
     }
