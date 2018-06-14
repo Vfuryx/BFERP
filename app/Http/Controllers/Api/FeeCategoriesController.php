@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Api\FeeCategoryRequest;
+use App\Transformers\FeeCategoryTransformer;
+use App\Models\FeeCategory;
 
-class GoodsCategoriesController extends Controller
+class FeeCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class GoodsCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(FeeCategory::all(), new FeeCategoryTransformer());
     }
 
     /**
@@ -32,9 +34,13 @@ class GoodsCategoriesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(FeeCategoryRequest $request)
     {
-        //
+        $feecate = new FeeCategory();
+        $feecate->fill($request->all());
+        $feecate->save();
+        return $this->response->item($feecate, new FeeCategoryTransformer())
+            ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,8 @@ class GoodsCategoriesController extends Controller
      */
     public function show($id)
     {
-        //
+        $feecate = FeeCategory::findOrFail($id);
+        return $this->response->item($feecate, new FeeCategoryTransformer());
     }
 
     /**
@@ -66,9 +73,10 @@ class GoodsCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(FeeCategoryRequest $request, FeeCategory $feecate)
     {
-        //
+        $feecate->update($request->all());
+        return $this->response->item($feecate, new FeeCategoryTransformer());
     }
 
     /**
@@ -77,8 +85,9 @@ class GoodsCategoriesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(FeeCategory $feecate)
     {
-        //
+        $feecate->delete();
+        return $this->response->item($feecate, new FeeCategoryTransformer());
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Models\GoodsCategory;
+use App\Http\Requests\Api\GoodsCategoryRequest;
+use App\Transformers\GoodsCategoryTransformer;
 
-class StorageTypesController extends Controller
+class GoodsCategoriesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class StorageTypesController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(GoodsCategory::all(),new GoodsCategoryTransformer());
     }
 
     /**
@@ -32,9 +34,13 @@ class StorageTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GoodsCategoryRequest $request)
     {
-        //
+        $goodscate=new GoodsCategory();
+        $goodscate->fill($request->all());
+        $goodscate->save();
+        return $this->response->item($goodscate, new GoodsCategoryTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,8 @@ class StorageTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $goodscate = GoodsCategory::findOrFail($id);
+        return $this->response->item($goodscate, new GoodsCategoryTransformer());
     }
 
     /**
@@ -66,9 +73,10 @@ class StorageTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GoodsCategoryRequest $request,GoodsCategory $goodscate)
     {
-        //
+        $goodscate->update($request->all());
+        return $this->response->item($goodscate, new GoodsCategoryTransformer());
     }
 
     /**
@@ -77,8 +85,9 @@ class StorageTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(GoodsCategory $goodscate)
     {
-        //
+        $goodscate->delete();
+        return $this->response->item($goodscate, new GoodsCategoryTransformer());
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Models\StorageType;
+use App\Http\Requests\Api\StorageTypeRequest;
+use App\Transformers\StorageTypeTransformer;
 
-class FreightTypesController extends Controller
+class StorageTypesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class FreightTypesController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(StorageType::all(),new StorageTypeTransformer());
     }
 
     /**
@@ -32,9 +34,13 @@ class FreightTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorageTypeRequest $request)
     {
-        //
+        $storagetype=new StorageType();
+        $storagetype->fill($request->all());
+        $storagetype->save();
+        return $this->response->item($storagetype, new StorageTypeTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,8 @@ class FreightTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $storagetype = StorageType::findOrFail($id);
+        return $this->response->item($storagetype, new StorageTypeTransformer());
     }
 
     /**
@@ -66,9 +73,10 @@ class FreightTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StorageTypeRequest $request,StorageType $storagetype)
     {
-        //
+        $storagetype->update($request->all());
+        return $this->response->item($storagetype, new StorageTypeTransformer());
     }
 
     /**
@@ -77,8 +85,9 @@ class FreightTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(StorageType $storagetype)
     {
-        //
+        $storagetype->delete();
+        return $this->response->item($storagetype, new StorageTypeTransformer());
     }
 }

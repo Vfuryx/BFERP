@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\MarkColorRequest;
 use App\Models\MarkColor;
-use Illuminate\Http\Request;
 use App\Transformers\MarkColorTransformer;
 
 /**

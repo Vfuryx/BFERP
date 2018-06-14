@@ -33,7 +33,7 @@ class FeeTypeRequest extends FormRequest
                     'is_default' => 'boolean',
                     'status' => 'boolean',
                     'remark' => 'string|nullable|max:255',
-                    'id'=>'exists:fee_types'
+                    'id' => 'exists:fee_types'
                 ];
                 break;
         }
@@ -59,7 +59,7 @@ class FeeTypeRequest extends FormRequest
             'remark.string' => '费用类别备注必填',
             'remark.nullable' => '费用类别备注可为null',
             'remark.max' => '费用类别备注最大长度为255',
-            'id.exists'=>'需要更改的数据id在数据库中未找到',
+            'id.exists' => '需要更改的数据id在数据库中未找到',
         ];
     }
 

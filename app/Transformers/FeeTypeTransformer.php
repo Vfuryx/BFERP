@@ -20,7 +20,7 @@ class FeeTypeTransformer extends TransformerAbstract
             'created_at' => $feetype->created_at
                                     ->toDateTimeString(),
             'updated_at' => $feetype->updated_at
-                                    ->toDateTimeString(),
+                                    ->toDateTimeString()
         ];
     }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
+use App\Models\DistributionMethod;
+use App\Http\Requests\Api\DistributionMethodRequest;
+use App\Transformers\DistributionMethodTransformer;
 
-class FeeTypesController extends Controller
+class DistributionMethodsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +15,7 @@ class FeeTypesController extends Controller
      */
     public function index()
     {
-        //
+        return $this->response->collection(DistributionMethod::all(),new DistributionMethodTransformer());
     }
 
     /**
@@ -23,7 +25,7 @@ class FeeTypesController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -32,9 +34,13 @@ class FeeTypesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DistributionMethodRequest $request)
     {
-        //
+        $dismet=new DistributionMethod();
+        $dismet->fill($request->all());
+        $dismet->save();
+        return $this->response->item($dismet, new DistributionMethodTransformer())
+        ->setStatusCode(201);
     }
 
     /**
@@ -45,7 +51,8 @@ class FeeTypesController extends Controller
      */
     public function show($id)
     {
-        //
+        $dismet = DistributionMethod::findOrFail($id);
+        return $this->response->item($dismet, new DistributionMethodTransformer());
     }
 
     /**
@@ -66,9 +73,10 @@ class FeeTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DistributionMethodRequest $request,DistributionMethod $distmet)
     {
-        //
+        $distmet->update($request->all());
+        return $this->response->item($distmet, new DistributionMethodTransformer());
     }
 
     /**
@@ -77,8 +85,9 @@ class FeeTypesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DistributionMethod $distmet)
     {
-        //
+        $distmet->delete();
+        return $this->response->item($distmet, new DistributionMethodTransformer());
     }
 }
