@@ -51,13 +51,48 @@ class AuthorizationsController extends Controller
 
         return $this->respondWithToken($token)->setStatusCode(201);
     }
-
+    /**
+     * 获取授权用户信息 
+     *  
+     * @Post("/me") 
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request(headers={"Authorization":"bearer+空格+token值"}),
+     *      @Response(200, body={"id":2,"username":"admin","email":"admin@admin.com","created_at":"2018-06-13 11:31:16","updated_at":"2018-06-13 11:31:16"}),
+     *      @Response(401, body={"message":"Token not provided","status_code":401}),
+     * })
+     */ 
+    public function me()
+    {
+        return response()->json(auth()->user());
+    }
+    /**
+     * 刷新token 
+     *  
+     * @Put("/authorizations/current") 
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request(headers={"Authorization":"bearer+空格+token值"}),
+     *      @Response(201, body={"access_token":"(token值)","token_type":"Bearer","expires_in":"3600(过期时间)"}),
+     *      @Response(500, body={"message":"The token has been blacklisted","status_code":500}),
+     * })
+     */ 
     public function update()
     {
         $token = \Auth::guard('api')->refresh();
         return $this->respondWithToken($token);
     }
 
+    /**
+     * 退出登录 成功则返回状态码204
+     *  
+     * @Put("/authorizations/current") 
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Request(headers={"Authorization":"bearer+空格+token值"}),
+     *      @Response(500, body={"message": "Token has expired","status_code": 500}),
+     * })
+     */ 
     public function destroy()
     {
         \Auth::guard('api')->logout();

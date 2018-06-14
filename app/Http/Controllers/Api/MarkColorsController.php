@@ -189,17 +189,17 @@ class MarkColorsController extends Controller
      *          "message": "No query results for model ",
      *          "status_code": 404,
      *      }),
-     *      @Response(200, body={
+     *      @Response(204, body={
      *          "message": "删除成功",
      *          "code": 1,
-     *          "status_code": 200
+     *          "status_code": 204
      *      })
      * })
      */ 
     public function destroy(MarkColor $markcolor)
     {
         $markcolor->delete();
-        return $this->errorResponse(200,'删除成功',1);
+        return $this->errorResponse(204,'删除成功',1);
         // return $this->response->item($markcolor, new MarkColorTransformer());
     }
 }

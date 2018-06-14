@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Requests\Api;
-
+use Log;
 class MarkColorRequest extends FormRequest
 {
     /**
@@ -11,6 +11,7 @@ class MarkColorRequest extends FormRequest
      */
     public function rules()
     {
+        Log::info($this);
         switch ($this->method()) {
             case 'POST':
                 return [
@@ -18,7 +19,7 @@ class MarkColorRequest extends FormRequest
                     'markname' => 'required|string|between:5,32',
                     'color' => 'required|string|max:255',
                     'description' => 'string|nullable|max:255',
-                    'status' => 'required|boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -50,7 +51,6 @@ class MarkColorRequest extends FormRequest
             'description.string' => '标记描述必须string类型',
             'description.nullable' => '标记描述可为null',
             'description.max' => '标记描述最大长度为255',
-            'status.required' => '状态必填',
             'status.boolean' => '状态必须布尔类型',
             'id.exists'=>'需要更改的数据id在数据库中未找到'
         ];

@@ -8,13 +8,6 @@ FORMAT: 1A
 ## 获取验证码 [POST /api/captchas]
 
 
-+ Request (application/json)
-    + Body
-
-            {
-                "noparam": "无参数"
-            }
-
 + Response 201 (application/json)
     + Body
 
@@ -186,13 +179,13 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
             {
                 "message": "删除成功",
                 "code": 1,
-                "status_code": 200
+                "status_code": 204
             }
 
 # Authorizations [/api]
@@ -253,4 +246,72 @@ FORMAT: 1A
                     "password": "密码最低为6位"
                 },
                 "status_code": 422
+            }
+
+## 获取授权用户信息 [POST /api/me]
+
+
++ Request (application/json)
+    + Headers
+
+            Authorization: bearer+空格+token值
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 2,
+                "username": "admin",
+                "email": "admin@admin.com",
+                "created_at": "2018-06-13 11:31:16",
+                "updated_at": "2018-06-13 11:31:16"
+            }
+
++ Response 401 (application/json)
+    + Body
+
+            {
+                "message": "Token not provided",
+                "status_code": 401
+            }
+
+## 刷新token [PUT /api/authorizations/current]
+
+
++ Request (application/json)
+    + Headers
+
+            Authorization: bearer+空格+token值
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "access_token": "(token值)",
+                "token_type": "Bearer",
+                "expires_in": "3600(过期时间)"
+            }
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "The token has been blacklisted",
+                "status_code": 500
+            }
+
+## 退出登录 成功则返回状态码204 [PUT /api/authorizations/current]
+
+
++ Request (application/json)
+    + Headers
+
+            Authorization: bearer+空格+token值
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "Token has expired",
+                "status_code": 500
             }

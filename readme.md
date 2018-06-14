@@ -21,6 +21,7 @@
 * 项目根目录执行命令 `npm install` (windows 及 虚拟机用户请使用`npm install --no-bin-links`)安装前端扩展;
   具体前端工作流参照：http://note.youdao.com/noteshare?id=b1a0bd5e5858a82796ab02285d38e12f
 * 生成密钥 `php artisan key:generate`
+* 生成 JWT 密钥 `php artisan jwt:secret`
 
 
 ###  composer 扩展包说明
@@ -70,6 +71,7 @@
 ### API说明
  
 ---
+* 调用说明：除了登录、注册以外，其他所有调用都必须在header中附带Authorization头 `Authorization:bearer eyJ0eXA...`
 * 生成接口文档命令：
 
 `php artisan api:docs --name API文档 --output-file docs/apidocs/apidoc.md`
