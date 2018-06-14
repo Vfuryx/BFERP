@@ -1,14 +1,14 @@
 webpackJsonp([89],{
 
-/***/ 443:
+/***/ 445:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(642)
+var __vue_script__ = __webpack_require__(646)
 /* template */
-var __vue_template__ = __webpack_require__(643)
+var __vue_template__ = __webpack_require__(647)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\shopMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\supplierMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7ed42261", Component.options)
+    hotAPI.createRecord("data-v-82f1fe6a", Component.options)
   } else {
-    hotAPI.reload("data-v-7ed42261", Component.options)
+    hotAPI.reload("data-v-82f1fe6a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 642:
+/***/ 646:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -72,8 +72,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cnt: '删除',
         icon: 'bf-del'
       }, {
-        cnt: '上传',
-        icon: 'bf-upload'
+        cnt: '导入',
+        icon: 'bf-in'
+      }, {
+        cnt: '导出',
+        icon: 'bf-out'
+      }, {
+        cnt: '合并',
+        icon: 'bf-merge'
       }, {
         cnt: '刷新',
         icon: 'bf-refresh'
@@ -95,7 +101,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 643:
+/***/ 647:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -109,7 +115,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("店铺管理")])])
+    return _c("div", [_c("h2", [_vm._v("供应商管理")])])
   }
 ]
 render._withStripped = true
@@ -117,7 +123,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7ed42261", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-82f1fe6a", module.exports)
   }
 }
 

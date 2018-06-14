@@ -1,14 +1,14 @@
 webpackJsonp([62],{
 
-/***/ 413:
+/***/ 416:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(582)
+var __vue_script__ = __webpack_require__(588)
 /* template */
-var __vue_template__ = __webpack_require__(583)
+var __vue_template__ = __webpack_require__(589)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\purchase\\purchaseOrder.vue"
+Component.options.__file = "resources\\assets\\js\\views\\purchase\\purchaseReturns.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-50a9f65f", Component.options)
+    hotAPI.createRecord("data-v-543edb94", Component.options)
   } else {
-    hotAPI.reload("data-v-50a9f65f", Component.options)
+    hotAPI.reload("data-v-543edb94", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 582:
+/***/ 588:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -75,23 +75,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cnt: '提交',
         icon: 'bf-submit'
       }, {
+        cnt: '驳回',
+        icon: 'bf-reject'
+      }, {
         cnt: '审核',
         icon: 'bf-audit'
       }, {
-        cnt: '退审',
-        icon: 'bf-auditfaild'
-      }, {
-        cnt: '导入',
-        icon: 'bf-in'
-      }, {
         cnt: '导出',
         icon: 'bf-out'
-      }, {
-        cnt: '订单采购',
-        icon: 'bf-purchase'
-      }, {
-        cnt: '生产排单',
-        icon: 'bf-machie'
       }, {
         cnt: '打印',
         icon: 'bf-printer'
@@ -116,7 +107,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 583:
+/***/ 589:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -130,7 +121,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("采购单管理")])])
+    return _c("div", [_c("h2", [_vm._v("采购退货管理")])])
   }
 ]
 render._withStripped = true
@@ -138,7 +129,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-50a9f65f", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-543edb94", module.exports)
   }
 }
 

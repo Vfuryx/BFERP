@@ -14,6 +14,7 @@
 <script>
     import { Navbar, Sidebar, AppMain, TagsView, Logo, Opt} from './components/index.js';
     import ResizeMixin from './minxi/ResizeHandler.js';
+
     export default {
         name: 'layout',
         components: {

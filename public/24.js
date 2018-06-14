@@ -1,6 +1,6 @@
 webpackJsonp([24],{
 
-/***/ 489:
+/***/ 488:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\stockInStat.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\stockStat.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-66ae7457", Component.options)
+    hotAPI.createRecord("data-v-5e6decdc", Component.options)
   } else {
-    hotAPI.reload("data-v-66ae7457", Component.options)
+    hotAPI.reload("data-v-5e6decdc", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -100,7 +100,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("入库统计报表")])])
+    return _c("div", [_c("h2", [_vm._v("库存统计报表")])])
   }
 ]
 render._withStripped = true
@@ -108,7 +108,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-66ae7457", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-5e6decdc", module.exports)
   }
 }
 

@@ -1,14 +1,14 @@
 webpackJsonp([38],{
 
-/***/ 486:
+/***/ 503:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(730)
+var __vue_script__ = __webpack_require__(766)
 /* template */
-var __vue_template__ = __webpack_require__(731)
+var __vue_template__ = __webpack_require__(767)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\invoicingStat.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\newSortDtl.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-10f161b4", Component.options)
+    hotAPI.createRecord("data-v-c1895c74", Component.options)
   } else {
-    hotAPI.reload("data-v-10f161b4", Component.options)
+    hotAPI.reload("data-v-c1895c74", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 730:
+/***/ 766:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -86,7 +86,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 731:
+/***/ 767:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -100,7 +100,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("进销存统计报表")])])
+    return _c("div", [_c("h2", [_vm._v("新分拣明细报表")])])
   }
 ]
 render._withStripped = true
@@ -108,7 +108,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-10f161b4", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-c1895c74", module.exports)
   }
 }
 

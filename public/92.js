@@ -1,14 +1,14 @@
 webpackJsonp([92],{
 
-/***/ 462:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(680)
+var __vue_script__ = __webpack_require__(690)
 /* template */
-var __vue_template__ = __webpack_require__(681)
+var __vue_template__ = __webpack_require__(691)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\quantumUser.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\relateLogistics.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48da122c", Component.options)
+    hotAPI.createRecord("data-v-5d07afc4", Component.options)
   } else {
-    hotAPI.reload("data-v-48da122c", Component.options)
+    hotAPI.reload("data-v-5d07afc4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 680:
+/***/ 690:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -92,7 +92,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 681:
+/***/ 691:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -106,7 +106,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("量子用户")])])
+    return _c("div", [_c("h2", [_vm._v("关联物流")])])
   }
 ]
 render._withStripped = true
@@ -114,7 +114,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-48da122c", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-5d07afc4", module.exports)
   }
 }
 

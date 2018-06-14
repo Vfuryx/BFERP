@@ -1,14 +1,14 @@
 webpackJsonp([79],{
 
-/***/ 407:
+/***/ 409:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(570)
+var __vue_script__ = __webpack_require__(574)
 /* template */
-var __vue_template__ = __webpack_require__(571)
+var __vue_template__ = __webpack_require__(575)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\financial\\financialAccount.vue"
+Component.options.__file = "resources\\assets\\js\\views\\financial\\financialBill.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48619284", Component.options)
+    hotAPI.createRecord("data-v-461ec740", Component.options)
   } else {
-    hotAPI.reload("data-v-48619284", Component.options)
+    hotAPI.reload("data-v-461ec740", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,13 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 570:
+/***/ 574:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -74,14 +72,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cnt: '删除',
         icon: 'bf-del'
       }, {
-        cnt: '提交',
-        icon: 'bf-submit'
+        cnt: '审核',
+        icon: 'bf-audit'
       }, {
         cnt: '退审',
         icon: 'bf-auditfaild'
       }, {
         cnt: '导入',
         icon: 'bf-in'
+      }, {
+        cnt: '导入',
+        icon: 'bf-out'
       }, {
         cnt: '刷新',
         icon: 'bf-refresh'
@@ -103,7 +104,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 571:
+/***/ 575:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -117,7 +118,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("\n        财务记账\n    ")])])
+    return _c("div", [_c("h2", [_vm._v("财务开票")])])
   }
 ]
 render._withStripped = true
@@ -125,7 +126,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-48619284", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-461ec740", module.exports)
   }
 }
 

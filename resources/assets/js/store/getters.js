@@ -11,6 +11,6 @@ const getters = {
   opts: state => state.opt.opts,
   show: state => state.opt.show,
   ok: state => state.opt.ok
-}
+};
 
 export default getters
