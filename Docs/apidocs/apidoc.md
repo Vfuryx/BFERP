@@ -182,15 +182,7 @@ FORMAT: 1A
 + Response 204 (application/json)
     + Body
 
-<<<<<<< HEAD
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 204
-            }
-=======
             []
->>>>>>> ed346b44d1606ec5a0afdb713a8dc9344a6e340b
 
 # AccountingTypes [/api]
 记账类型资源
@@ -1320,7 +1312,7 @@ FORMAT: 1A
                 "status_code": 422
             }
 
-## 获取授权用户信息 [POST /api/me]
+## 获取登录用户信息 [POST /api/me]
 
 
 + Request (application/json)
