@@ -186,14 +186,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # AccountingTypes [/api]
 记账类型资源
@@ -339,14 +335,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # feetypes [/api]
 费用类型资源
@@ -520,14 +512,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # DistributionMethods [/api]
 配送方式资源
@@ -666,14 +654,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # FeeCategories [/api]
 费用类别资源
@@ -812,14 +796,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # FreightTypes [/api]
 运费类型资源
@@ -965,14 +945,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # GoodsCategories [/api]
 商品类别资源
@@ -1136,14 +1112,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # StorageTypes [/api]
 入库类型资源
@@ -1282,14 +1254,10 @@ FORMAT: 1A
                 "status_code": 404
             }
 
-+ Response 200 (application/json)
++ Response 204 (application/json)
     + Body
 
-            {
-                "message": "删除成功",
-                "code": 1,
-                "status_code": 200
-            }
+            []
 
 # Authorizations [/api]
 登录资源
