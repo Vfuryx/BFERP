@@ -52,7 +52,7 @@ class AuthorizationsController extends Controller
         return $this->respondWithToken($token)->setStatusCode(201);
     }
     /**
-     * 获取授权用户信息 
+     * 获取登录用户信息 
      *  
      * @Post("/me") 
      * @Versions({"v1"})

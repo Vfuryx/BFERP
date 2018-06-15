@@ -21,7 +21,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-        'middleware' => ['api.throttle','jwt.auth'],
+        'middleware' => ['api.throttle','token.canrefresh'],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
@@ -137,7 +137,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         // 登录
         $api->post('authorizations', 'AuthorizationsController@store')
             ->name('api.authorizations.store');
-        $api->post('me', 'AuthorizationsController@me')->middleware('jwt.auth');
+        $api->post('me', 'AuthorizationsController@me')->middleware('token.canrefresh');
         // 刷新token
         $api->put('authorizations/current', 'AuthorizationsController@update')
             ->name('api.authorizations.update');
