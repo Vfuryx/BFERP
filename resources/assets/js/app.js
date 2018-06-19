@@ -31,6 +31,18 @@ Vue.use(ElementUi, {
     i18n: (key, value) => i18n.t(key, value)
 })
 
+import axios from 'axios'
+import request from './utils/http.js'
+
+Vue.prototype.$request = request;
+
+/*//定义全局变量
+Vue.prototype.$post=http.post;
+Vue.prototype.$get=http.get;
+Vue.prototype.$patch=http.patch;
+Vue.prototype.$put=http.put;
+Vue.prototype.$del=http.delete;*/
+
 const app = new Vue({
     el: '#app',
     router,
