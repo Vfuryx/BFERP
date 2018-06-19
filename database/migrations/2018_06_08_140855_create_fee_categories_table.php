@@ -16,6 +16,7 @@ class CreateFeeCategoriesTable extends Migration
         Schema::create('fee_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('费用类别名称');
+            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

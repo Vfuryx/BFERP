@@ -6,5 +6,5 @@ class DistributionMethod extends Model
 {
     protected $table = 'distribution_methods';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','status'];
 }

@@ -6,5 +6,5 @@ class StorageType extends Model
 {
     protected $table = 'storage_types';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'status'];
 }

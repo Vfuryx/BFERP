@@ -6,6 +6,6 @@ class FreightType extends Model
 {
     protected $table = 'freight_types';
 
-    protected $fillable = ['name', 'is_default'];
+    protected $fillable = ['name', 'is_default', 'status'];
 
 }

@@ -12,6 +12,7 @@ class FreightTypeTransformer extends TransformerAbstract
         return [
             'id' => $freighttype->id,
             'name' => $freighttype->name,
+            'status' => $freighttype->status,
             'is_default' => $freighttype->is_default,
             'created_at' => $freighttype->created_at
                                         ->toDateTimeString(),

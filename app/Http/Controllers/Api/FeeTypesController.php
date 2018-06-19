@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\FeeTypeRequest;
 use App\Transformers\FeeTypeTransformer;
 use App\Models\FeeType;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 费用类型资源
@@ -209,4 +209,98 @@ class FeeTypesController extends Controller
         $feetype->delete();
         return $this->noContent();
     }
+
+    /**
+     * 删除一组费用类型 
+     *  
+     * @Delete("/feetypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(FeeTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FeeType::destroy($ids)){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'删除错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组费用类型状态 
+     *  
+     * @PUT("/feetypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(FeeTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FeeType::whereIn('id',$ids)->update(['status'=>$status])){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'更改错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
 }

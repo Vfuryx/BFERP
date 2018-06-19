@@ -18,14 +18,27 @@ class FreightTypeRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'is_default' => 'integer'
+                    'is_default' => 'integer',
+                    'status' => 'integer'
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
                     'is_default' => 'integer',
-                    'id'=>'exists:freight_types'
+                    'id' => 'exists:freight_types',
+                    'status' => 'integer'
+                ];
+                break;
+            case 'DELETE':
+                return [
+                    'ids' => 'required|string',
+                ];
+                break;
+            case 'PUT':
+                return [
+                    'ids' => 'required|string',
+                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -34,10 +47,14 @@ class FreightTypeRequest extends FormRequest
     public function messages()
     {
         return [
+            'status.integer' => '状态必须int类型',
+            'status.required' => '状态必填',
             'name.required' => '运费名称必填',
             'name.string' => '运费名称必须string类型',
             'is_default.boolean' => '是否默认必须int类型',
-            'id.exists'=>'需要更改的数据id在数据库中未找到'
+            'id.exists' => '需要更改的数据id在数据库中未找到',
+            'ids.required' => 'id组必填',
+            'ids.string' => 'id组必须string类型'
         ];
     }
 
@@ -45,7 +62,8 @@ class FreightTypeRequest extends FormRequest
     {
         return [
             'name' => '运费名称',
-            'is_default' => '是否默认'
+            'is_default' => '是否默认',
+            'status' => '记账类型状态'
         ];
     }
 }

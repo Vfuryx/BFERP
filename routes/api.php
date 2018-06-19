@@ -36,6 +36,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.markcolors.update');
         $api->delete('markcolors/{markcolor}', 'MarkColorsController@destroy')
             ->name('api.markcolors.destroy');
+        $api->delete('markcolors', 'MarkColorsController@destroybyids')
+            ->name('api.markcolors.destroybyids');
+        $api->put('markcolors', 'MarkColorsController@editStatusByIds')
+            ->name('api.markcolors.editstatusbyids');
 
         //记账类型
         $api->get('acctypes', 'AccountingTypesController@index')
@@ -48,6 +52,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.acctypes.update');
         $api->delete('acctypes/{acctype}', 'AccountingTypesController@destroy')
             ->name('api.acctypes.destroy');
+        $api->delete('acctypes', 'AccountingTypesController@destroybyids')
+            ->name('api.acctypes.destroybyids');
+        $api->put('acctypes', 'AccountingTypesController@editStatusByIds')
+            ->name('api.acctypes.editstatusbyids');
+
             
         //费用类型
         $api->get('feetypes', 'FeeTypesController@index')
@@ -60,6 +69,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.feetypes.update');
         $api->delete('feetypes/{feetype}', 'FeeTypesController@destroy')
             ->name('api.feetypes.destroy');
+        $api->delete('feetypes', 'FeeTypesController@destroybyids')
+            ->name('api.feetypes.destroybyids');
+        $api->put('feetypes', 'FeeTypesController@editStatusByIds')
+            ->name('api.feetypes.editstatusbyids');
 
         //运输方式
         $api->get('distmets', 'DistributionMethodsController@index')
@@ -72,6 +85,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.distmets.update');
         $api->delete('distmets/{distmet}', 'DistributionMethodsController@destroy')
             ->name('api.distmets.destroy');
+        $api->delete('distmets', 'DistributionMethodsController@destroybyids')
+            ->name('api.distmets.destroybyids');
+        $api->put('distmets', 'DistributionMethodsController@editStatusByIds')
+            ->name('api.distmets.editstatusbyids');
 
         //费用类别
         $api->get('feecates', 'FeeCategoriesController@index')
@@ -84,6 +101,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.feecates.update');
         $api->delete('feecates/{feecate}', 'FeeCategoriesController@destroy')
             ->name('api.feecates.destroy');
+        $api->delete('feecates', 'FeeCategoriesController@destroybyids')
+            ->name('api.feecates.destroybyids');
+        $api->put('feecates', 'FeeCategoriesController@editStatusByIds')
+            ->name('api.feecates.editstatusbyids');
 
         //运费类型
         $api->get('freighttypes', 'FreightTypesController@index')
@@ -96,6 +117,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.freighttypes.update');
         $api->delete('freighttypes/{freighttype}', 'FreightTypesController@destroy')
             ->name('api.freighttypes.destroy');
+        $api->delete('freighttypes', 'FreightTypesController@destroybyids')
+            ->name('api.freighttypes.destroybyids');
+        $api->put('freighttypes', 'FreightTypesController@editStatusByIds')
+            ->name('api.freighttypes.editstatusbyids');
 
         //商品类别
         $api->get('goodscates', 'GoodsCategoriesController@index')
@@ -108,6 +133,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.goodscates.update');
         $api->delete('goodscates/{goodscate}', 'GoodsCategoriesController@destroy')
             ->name('api.goodscates.destroy');
+        $api->delete('goodscates', 'GoodsCategoriesController@destroybyids')
+            ->name('api.goodscates.destroybyids');
+        $api->put('goodscates', 'GoodsCategoriesController@editStatusByIds')
+            ->name('api.goodscates.editstatusbyids');
+    
 
         //存储类型
         $api->get('storagetypes', 'StorageTypesController@index')
@@ -120,17 +150,21 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.storagetypes.update');
         $api->delete('storagetypes/{storagetype}', 'StorageTypesController@destroy')
             ->name('api.storagetypes.destroy');
+        $api->delete('storagetypes', 'StorageTypesController@destroybyids')
+            ->name('api.storagetypes.destroybyids');
+        $api->put('storagetypes', 'StorageTypesController@editStatusByIds')
+            ->name('api.storagetypes.editstatusbyids');
 
 
 
     });
-    
+
     $api->group([
         'middleware' => 'api.throttle',
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
-        'grouptitle'=>'用户中心',
-    ],function($api){
+        'grouptitle' => '用户中心',
+    ], function ($api) {
         // 用户注册
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');

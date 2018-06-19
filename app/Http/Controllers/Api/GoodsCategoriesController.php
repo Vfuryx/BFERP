@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\GoodsCategory;
 use App\Http\Requests\Api\GoodsCategoryRequest;
 use App\Transformers\GoodsCategoryTransformer;
@@ -197,5 +198,98 @@ class GoodsCategoriesController extends Controller
     {
         $goodscate->delete();
         return $this->noContent();
+    }
+    
+    /**
+     * 删除一组商品类别 
+     *  
+     * @Delete("/goodscates") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="商品类别id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(GoodsCategoryRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== GoodsCategory::destroy($ids)){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'删除错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组商品类别状态 
+     *  
+     * @PUT("/goodscates") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="商品类别id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(GoodsCategoryRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== GoodsCategory::whereIn('id',$ids)->update(['status'=>$status])){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'更改错误',500);
+        }
+
+        return $this->errorResponse(204);
     }
 }

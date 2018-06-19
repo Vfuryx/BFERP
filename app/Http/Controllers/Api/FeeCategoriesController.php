@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\FeeCategoryRequest;
 use App\Transformers\FeeCategoryTransformer;
 use App\Models\FeeCategory;
@@ -22,12 +23,14 @@ class FeeCategoriesController extends Controller
      *         {
      *             "id": 1,
      *             "name": "费用类别1",
+     *             "status": 1,
      *             "created_at": "2018-06-14 15:01:51",
      *             "updated_at": "2018-06-14 15:01:51"
      *         },
      *         {
      *             "id": 2,
      *             "name": "费用类别2",
+     *             "status": 1,
      *             "created_at": "2018-06-14 15:02:07",
      *             "updated_at": "2018-06-14 15:02:07"        
      *         }
@@ -63,6 +66,7 @@ class FeeCategoriesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="费用类别名称", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -77,6 +81,7 @@ class FeeCategoriesController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "费用类别1",
+     *          "status": 1,
      *          "created_at": "2018-06-14 15:02:10",
      *          "updated_at": "2018-06-14 15:02:10",
      *          "meta": {
@@ -109,6 +114,7 @@ class FeeCategoriesController extends Controller
      *      @Response(200, body={
      *              "id": 1,
      *              "name": "费用类别1",
+     *              "status": 1,
      *              "created_at": "2018-06-14 15:01:51",
      *              "updated_at": "2018-06-14 15:01:51"
      *      })
@@ -142,6 +148,7 @@ class FeeCategoriesController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "费用类别10",
+     *          "status": 1,
      *          "created_at": "2018-06-14 15:01:51",
      *          "updated_at": "2018-06-14 15:07:56"
      *      })
@@ -172,5 +179,99 @@ class FeeCategoriesController extends Controller
     {
         $feecate->delete();
         return $this->noContent();
+    }
+
+    
+    /**
+     * 删除一组费用类别 
+     *  
+     * @Delete("/feecates") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="费用类别id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(FeeCategoryRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FeeCategory::destroy($ids)){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'删除错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组费用类别状态 
+     *  
+     * @PUT("/feecates") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="费用类别id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(FeeCategoryRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FeeCategory::whereIn('id',$ids)->update(['status'=>$status])){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'更改错误',500);
+        }
+
+        return $this->errorResponse(204);
     }
 }

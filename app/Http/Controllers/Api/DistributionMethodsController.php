@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\DistributionMethod;
 use App\Http\Requests\Api\DistributionMethodRequest;
 use App\Transformers\DistributionMethodTransformer;
+use Illuminate\Support\Facades\DB;
+
 
 /**
  * 配送方式资源
@@ -22,12 +24,14 @@ class DistributionMethodsController extends Controller
      *         {
      *              "id": 1,
      *              "name": "配送方式1",
+     *              "status": "1",
      *              "created_at": "2018-06-14 14:39:45",
      *              "updated_at": "2018-06-14 14:39:45"
      *         },
      *         {
      *             "id": 2,
      *             "name": "配送方式2",
+     *             "status": "1",
      *             "created_at": "2018-06-14 14:42:23",
      *             "updated_at": "2018-06-14 14:42:23"
      *         }
@@ -64,6 +68,7 @@ class DistributionMethodsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="配送方式名", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -78,6 +83,7 @@ class DistributionMethodsController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "配送方式1",
+     *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:39:45",
      *          "meta": {
@@ -110,6 +116,7 @@ class DistributionMethodsController extends Controller
      *      @Response(200, body={
      *          "id": 1,
      *          "name": "配送方式1",
+     *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:45:14"
      *      })
@@ -143,6 +150,7 @@ class DistributionMethodsController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "配送方式10",
+     *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:40:45",
      *      })
@@ -176,4 +184,99 @@ class DistributionMethodsController extends Controller
 
         // return $this->response->item($distmet, new DistributionMethodTransformer());
     }
+
+    /**
+     * 删除一组配送方式 
+     *  
+     * @Delete("/distmets") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="配送方式id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(DistributionMethodRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if (count($ids) !== DistributionMethod::destroy($ids)) {
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500, '删除错误', 500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组配送方式状态 
+     *  
+     * @PUT("/distmets") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="配送方式id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(DistributionMethodRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if (count($ids) !== DistributionMethod::whereIn('id', $ids)->update(['status' => $status])) {
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500, '更改错误', 500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+
 }

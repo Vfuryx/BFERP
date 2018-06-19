@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\FreightType;
 use App\Http\Requests\Api\FreightTypeRequest;
 use App\Transformers\FreightTypeTransformer;
@@ -23,6 +24,7 @@ class FreightTypesController extends Controller
      *             "id": 2,
      *             "name": "运费类型名1",
      *             "is_default": 1,
+     *             "status": 1,
      *             "created_at": "2018-06-14 15:59:10",
      *             "updated_at": "2018-06-14 15:59:10"
      *         },
@@ -30,6 +32,7 @@ class FreightTypesController extends Controller
      *             "id": 3,
      *             "name": "运费类型名2",
      *             "is_default": 1,
+     *             "status": 1,
      *             "created_at": "2018-06-14 15:59:12",
      *             "updated_at": "2018-06-14 15:59:12"        
      *         }
@@ -67,6 +70,7 @@ class FreightTypesController extends Controller
      * @Parameters({
      *      @Parameter("name", description="运费类型名称", required=true),
      *      @Parameter("is_default", description="是否默认", required=false,default=0),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -82,6 +86,7 @@ class FreightTypesController extends Controller
      *          "id": 3,
      *          "name": "运费类型名1",
      *          "is_default": "1",
+     *          "status": "1",
      *          "created_at": "2018-06-14 15:59:12",
      *          "updated_at": "2018-06-14 15:59:12",
      *          "meta": {
@@ -115,6 +120,7 @@ class FreightTypesController extends Controller
      *          "id": 2,
      *          "name": "运费类型名1",
      *          "is_default": 1,
+     *          "status": 1,
      *          "created_at": "2018-06-14 15:59:10",
      *          "updated_at": "2018-06-14 15:59:10"
      *      })
@@ -149,6 +155,7 @@ class FreightTypesController extends Controller
      *          "id": 2,
      *          "name": "运费类型名1",
      *          "is_default": "1",
+     *          "status": "1",
      *          "created_at": "2018-06-14 15:59:10",
      *          "updated_at": "2018-06-14 15:59:10"
      *      })
@@ -179,5 +186,98 @@ class FreightTypesController extends Controller
     {
         $freighttype->delete();
         return $this->noContent();
+    }
+    
+    /**
+     * 删除一组运费类型 
+     *  
+     * @Delete("/freighttypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="运费类型id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(FreightTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FreightType::destroy($ids)){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'删除错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组运费类型状态 
+     *  
+     * @PUT("/freighttypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="运费类型id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(FreightTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== FreightType::whereIn('id',$ids)->update(['status'=>$status])){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'更改错误',500);
+        }
+
+        return $this->errorResponse(204);
     }
 }

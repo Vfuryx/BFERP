@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\AccountingTypeRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\AccountingType as AccType;
 use App\Transformers\AccountingTypeTransformer;
+use App\Http\Requests\Api\AccountingTypeRequest;
 
 /**
  * 记账类型资源
@@ -180,5 +181,98 @@ class AccountingTypesController extends Controller
     {
         $acctype->delete();
         return $this->noContent();
+    }
+
+    /**
+     * 删除一组记账类型 
+     *  
+     * @Delete("/acctypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(AccountingTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== AccType::destroy($ids)){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'删除错误',500);
+        }
+
+        return $this->errorResponse(204);
+    }
+
+    /**
+     * 更改一组记账类型状态 
+     *  
+     * @PUT("/acctypes") 
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(AccountingTypeRequest $request)
+    {
+        $ids = explode(',', $request->input('ids'));
+        $status = $request->input('status');
+        DB::beginTransaction();
+
+        try {
+            if(count($ids) !== AccType::whereIn('id',$ids)->update(['status'=>$status])){
+                $this->errorResponse(500);
+            }
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            return $this->errorResponse(500,'更改错误',500);
+        }
+
+        return $this->errorResponse(204);
     }
 }

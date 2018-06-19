@@ -184,6 +184,76 @@ FORMAT: 1A
 
             []
 
+## 删除一组标记颜色 [DELETE /api/markcolors]
+
+
++ Parameters
+    + ids: (string, required) - 标记颜色id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组标记颜色状态 [PUT /api/markcolors]
+
+
++ Parameters
+    + ids: (string, required) - 标记颜色id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # AccountingTypes [/api]
 记账类型资源
 
@@ -326,6 +396,76 @@ FORMAT: 1A
             {
                 "message": "No query results for model ",
                 "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组记账类型 [DELETE /api/acctypes]
+
+
++ Parameters
+    + ids: (string, required) - 记账类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组记账类型状态 [PUT /api/acctypes]
+
+
++ Parameters
+    + ids: (string, required) - 记账类型id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
             }
 
 + Response 204 (application/json)
@@ -510,6 +650,76 @@ FORMAT: 1A
 
             []
 
+## 删除一组费用类型 [DELETE /api/feetypes]
+
+
++ Parameters
+    + ids: (string, required) - 费用类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组费用类型状态 [PUT /api/feetypes]
+
+
++ Parameters
+    + ids: (string, required) - 费用类型id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # DistributionMethods [/api]
 配送方式资源
 
@@ -524,12 +734,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "配送方式1",
+                        "status": "1",
                         "created_at": "2018-06-14 14:39:45",
                         "updated_at": "2018-06-14 14:39:45"
                     },
                     {
                         "id": 2,
                         "name": "配送方式2",
+                        "status": "1",
                         "created_at": "2018-06-14 14:42:23",
                         "updated_at": "2018-06-14 14:42:23"
                     }
@@ -554,6 +766,8 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 配送方式名
+    + status: (string, optional) - 状态(0:停用，1:启用)
+        + Default: 1
 
 + Response 422 (application/json)
     + Body
@@ -574,6 +788,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式1",
+                "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:39:45",
                 "meta": {
@@ -598,6 +813,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式1",
+                "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:45:14"
             }
@@ -632,6 +848,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式10",
+                "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:40:45"
             }
@@ -645,6 +862,76 @@ FORMAT: 1A
             {
                 "message": "No query results for model ",
                 "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组配送方式 [DELETE /api/distmets]
+
+
++ Parameters
+    + ids: (string, required) - 配送方式id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组配送方式状态 [PUT /api/distmets]
+
+
++ Parameters
+    + ids: (string, required) - 配送方式id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
             }
 
 + Response 204 (application/json)
@@ -666,12 +953,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "费用类别1",
+                        "status": 1,
                         "created_at": "2018-06-14 15:01:51",
                         "updated_at": "2018-06-14 15:01:51"
                     },
                     {
                         "id": 2,
                         "name": "费用类别2",
+                        "status": 1,
                         "created_at": "2018-06-14 15:02:07",
                         "updated_at": "2018-06-14 15:02:07"
                     }
@@ -696,6 +985,8 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 费用类别名称
+    + status: (string, optional) - 状态(0:停用，1:启用)
+        + Default: 1
 
 + Response 422 (application/json)
     + Body
@@ -716,6 +1007,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别1",
+                "status": 1,
                 "created_at": "2018-06-14 15:02:10",
                 "updated_at": "2018-06-14 15:02:10",
                 "meta": {
@@ -740,6 +1032,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别1",
+                "status": 1,
                 "created_at": "2018-06-14 15:01:51",
                 "updated_at": "2018-06-14 15:01:51"
             }
@@ -774,6 +1067,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别10",
+                "status": 1,
                 "created_at": "2018-06-14 15:01:51",
                 "updated_at": "2018-06-14 15:07:56"
             }
@@ -787,6 +1081,76 @@ FORMAT: 1A
             {
                 "message": "No query results for model ",
                 "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组费用类别 [DELETE /api/feecates]
+
+
++ Parameters
+    + ids: (string, required) - 费用类别id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组费用类别状态 [PUT /api/feecates]
+
+
++ Parameters
+    + ids: (string, required) - 费用类别id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
             }
 
 + Response 204 (application/json)
@@ -809,6 +1173,7 @@ FORMAT: 1A
                         "id": 2,
                         "name": "运费类型名1",
                         "is_default": 1,
+                        "status": 1,
                         "created_at": "2018-06-14 15:59:10",
                         "updated_at": "2018-06-14 15:59:10"
                     },
@@ -816,6 +1181,7 @@ FORMAT: 1A
                         "id": 3,
                         "name": "运费类型名2",
                         "is_default": 1,
+                        "status": 1,
                         "created_at": "2018-06-14 15:59:12",
                         "updated_at": "2018-06-14 15:59:12"
                     }
@@ -842,6 +1208,8 @@ FORMAT: 1A
     + name: (string, required) - 运费类型名称
     + is_default: (string, optional) - 是否默认
         + Default: 0
+    + status: (string, optional) - 状态(0:停用，1:启用)
+        + Default: 1
 
 + Response 422 (application/json)
     + Body
@@ -863,6 +1231,7 @@ FORMAT: 1A
                 "id": 3,
                 "name": "运费类型名1",
                 "is_default": "1",
+                "status": "1",
                 "created_at": "2018-06-14 15:59:12",
                 "updated_at": "2018-06-14 15:59:12",
                 "meta": {
@@ -888,6 +1257,7 @@ FORMAT: 1A
                 "id": 2,
                 "name": "运费类型名1",
                 "is_default": 1,
+                "status": 1,
                 "created_at": "2018-06-14 15:59:10",
                 "updated_at": "2018-06-14 15:59:10"
             }
@@ -923,6 +1293,7 @@ FORMAT: 1A
                 "id": 2,
                 "name": "运费类型名1",
                 "is_default": "1",
+                "status": "1",
                 "created_at": "2018-06-14 15:59:10",
                 "updated_at": "2018-06-14 15:59:10"
             }
@@ -936,6 +1307,76 @@ FORMAT: 1A
             {
                 "message": "No query results for model ",
                 "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组运费类型 [DELETE /api/freighttypes]
+
+
++ Parameters
+    + ids: (string, required) - 运费类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组运费类型状态 [PUT /api/freighttypes]
+
+
++ Parameters
+    + ids: (string, required) - 运费类型id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
             }
 
 + Response 204 (application/json)
@@ -1110,6 +1551,76 @@ FORMAT: 1A
 
             []
 
+## 删除一组商品类别 [DELETE /api/goodscates]
+
+
++ Parameters
+    + ids: (string, required) - 商品类别id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组商品类别状态 [PUT /api/goodscates]
+
+
++ Parameters
+    + ids: (string, required) - 商品类别id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # StorageTypes [/api]
 入库类型资源
 
@@ -1124,12 +1635,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "入库类型1",
+                        "status": 1,
                         "created_at": "2018-06-14 16:55:32",
                         "updated_at": "2018-06-14 16:55:32"
                     },
                     {
                         "id": 2,
                         "name": "入库类型2",
+                        "status": 1,
                         "created_at": "2018-06-14 16:55:36",
                         "updated_at": "2018-06-14 16:55:36"
                     }
@@ -1154,6 +1667,8 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 入库类型名称
+    + status: (string, optional) - 状态(0:停用，1:启用)
+        + Default: 1
 
 + Response 422 (application/json)
     + Body
@@ -1174,6 +1689,7 @@ FORMAT: 1A
             {
                 "id": 3,
                 "name": "入库类型3",
+                "status": "1",
                 "created_at": "2018-06-14 16:55:40",
                 "updated_at": "2018-06-14 16:55:40",
                 "meta": {
@@ -1198,6 +1714,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "入库类型1",
+                "status": 1,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:55:32"
             }
@@ -1232,6 +1749,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "入库类型10",
+                "status": "1",
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:58:55"
             }
@@ -1245,6 +1763,76 @@ FORMAT: 1A
             {
                 "message": "No query results for model ",
                 "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组入库类型 [DELETE /api/storagetypes]
+
+
++ Parameters
+    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组入库类型状态 [PUT /api/storagetypes]
+
+
++ Parameters
+    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
+    + status: (string, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
             }
 
 + Response 204 (application/json)

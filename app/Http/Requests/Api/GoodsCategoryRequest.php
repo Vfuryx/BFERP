@@ -30,7 +30,18 @@ class GoodsCategoryRequest extends FormRequest
                     'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',
-                    'id'=>'exists:goods_categories'
+                    'id' => 'exists:goods_categories'
+                ];
+                break;
+            case 'DELETE':
+                return [
+                    'ids' => 'required|string',
+                ];
+                break;
+            case 'PUT':
+                return [
+                    'ids' => 'required|string',
+                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -46,13 +57,16 @@ class GoodsCategoryRequest extends FormRequest
             'code.max' => '商品类别代码最大长度为255',
             'code.unique' => '商品类别代码不能重复',
             'status.integer' => '状态必须int类型',
+            'status.required' => '状态必填',
             'remark.max' => '商品类别备注最大长度为255',
             'remark.nullable' => '商品类别备注可为null',
             'remark.string' => '商品类别备注必须string类型',
             'description.max' => '商品类别描述最大长度为255',
             'description.nullable' => '商品类别描述可为null',
             'description.string' => '商品类别描述必须string类型',
-            'id.exists'=>'需要更改的数据id在数据库中未找到'
+            'id.exists' => '需要更改的数据id在数据库中未找到',
+            'ids.required' => 'id组必填',
+            'ids.string' => 'id组必须string类型'
         ];
     }
 

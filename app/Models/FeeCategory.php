@@ -6,6 +6,6 @@ class FeeCategory extends Model
 {
     protected $table = 'fee_categories';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'status'];
 
 }
