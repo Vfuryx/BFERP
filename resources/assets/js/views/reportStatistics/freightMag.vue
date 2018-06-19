@@ -10,17 +10,19 @@
         newOpt: [
           {
             cnt: '导出',
-            icon: 'bf-out'
+            icon: 'bf-out',
+            ent: this.test
           },
           {
             cnt: '下载',
-            icon: 'bf-dwn'
+            icon: 'bf-dwn',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
+            icon: 'bf-refresh',
+            ent: this.test
           }
-
         ]
       }
     },

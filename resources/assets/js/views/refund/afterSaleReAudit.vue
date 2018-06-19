@@ -10,37 +10,50 @@
         newOpt: [
           {
             cnt: '修改',
-            icon: 'bf-change'
+            icon: 'bf-change',
+            ent: this.test
           },
           {
             cnt: '删除',
-            icon: 'bf-del'
+            icon: 'bf-del',
+            ent: this.test
           },
           {
             cnt: '锁定',
-            icon: 'bf-lock'
+            icon: 'bf-lock',
+            ent: this.test
           },
           {
             cnt: '解锁',
-            icon: 'bf-delock'
+            icon: 'bf-delock',
+            ent: this.test
           },
           {
             cnt: '驳回',
-            icon: 'bf-reject'
+            icon: 'bf-reject',
+            ent: this.test
           },
           {
             cnt: '审核',
-            icon: 'bf-audit'
+            icon: 'bf-audit',
+            ent: this.test
           },
           {
             cnt: '退审',
-            icon: 'bf-auditfaild'
+            icon: 'bf-auditfaild',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
+            icon: 'bf-refresh',
+            ent: this.test
           }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

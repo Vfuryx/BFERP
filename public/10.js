@@ -64,24 +64,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '删除',
-        icon: 'bf-del'
+        icon: 'bf-del',
+        ent: this.test
       }, {
         cnt: '导出',
-        icon: 'bf-out'
+        icon: 'bf-out',
+        ent: this.test
       }, {
         cnt: '一键恢复',
-        icon: 'bf-recovery'
+        icon: 'bf-recovery',
+        ent: this.test
       }, {
         cnt: '还原',
-        icon: 'bf-reduce'
+        icon: 'bf-reduce',
+        ent: this.test
       }, {
         cnt: '写入',
-        icon: 'bf-write'
+        icon: 'bf-write',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;

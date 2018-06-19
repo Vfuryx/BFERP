@@ -10,21 +10,30 @@
         newOpt: [
           {
             cnt: '删除',
-            icon: 'bf-del'
+            icon: 'bf-del',
+            ent: this.test
           },
           {
             cnt: '审核',
-            icon: 'bf-audit'
+            icon: 'bf-audit',
+            ent: this.test
           },
           {
             cnt: '退审',
-            icon: 'bf-auditfaild'
+            icon: 'bf-auditfaild',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
+            icon: 'bf-refresh',
+            ent: this.test
           }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

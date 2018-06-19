@@ -45,7 +45,16 @@
             handleClickOutside() {
                 this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
             }
-        }
+        },
+      mounted(){
+        let navH = $('.navbar').height();
+        let tagH = $('.tags-view-container').height();
+        let optH = $('.opt').height();
+        let mtH = parseInt($('.app-main').css('marginTop'));
+        let mbH = parseInt($('.app-main').css('marginBottom'));
+        let finalH = $(window).height()-navH-tagH-optH-mtH-mbH;
+        $('.app-main').css({minHeight:finalH+'px'});
+      }
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped></style>

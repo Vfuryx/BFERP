@@ -10,41 +10,55 @@
         newOpt: [
           {
             cnt: '新增',
-            icon: 'bf-add'
+            icon: 'bf-add',
+            ent: this.test
           },
           {
             cnt: '修改',
-            icon: 'bf-change'
+            icon: 'bf-change',
+            ent: this.test
           },
           {
             cnt: '删除',
-            icon: 'bf-del'
+            icon: 'bf-del',
+            ent: this.test
           },
           {
             cnt: '导入',
-            icon: 'bf-in'
+            icon: 'bf-in',
+            ent: this.test
           },
           {
             cnt: '导出',
-            icon: 'bf-out'
+            icon: 'bf-out',
+            ent: this.test
           },
           {
             cnt: '合并',
-            icon: 'bf-merge'
+            icon: 'bf-merge',
+            ent: this.test
           },
           {
             cnt: '上一条',
-            icon: 'bf-beforeItem'
+            icon: 'bf-beforeItem',
+            ent: this.test
           },
           {
             cnt: '下一条',
-            icon: 'bf-nextItem'
+            icon: 'bf-nextItem',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
+            icon: 'bf-refresh',
+            ent: this.test
           }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

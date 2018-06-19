@@ -10,9 +10,15 @@
         newOpt: [
           {
             cnt: '下载',
-            icon: 'bf-dwn'
+            icon: 'bf-dwn',
+            ent: this.test
           }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

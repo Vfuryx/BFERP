@@ -1,19 +1,20 @@
 <template>
-    <div class="opt clearfix">
-        <div v-for="item in opts" class="list" @click="item.ent">
-               <el-tooltip :content="item.cnt" placement="top" effect="dark">
-                   <i class="iconfont optIcon" :class="item.icon">
-                       <span>{{item.cnt}}</span>
-                   </i>
-               </el-tooltip>
-
-           </div>
-        <i class="iconfont bf-down dwn-more" v-show="this.$store.state.opt.show" @click="changeShow"></i>
-        <div class="hide-list" v-show="this.$store.state.opt.ok">
-            <div v-for="item in this.$store.state.opt.lastOpt">
-                <i class="iconfont optIcon" :class="item.icon">
-                    <span>{{item.cnt}}</span>
-                </i>
+    <div class="optOuter">
+        <div class="opt clearfix">
+            <div v-for="(item,index) in opts" class="list" @click="addActive(index)" :class="{active:index==current}">
+                <el-tooltip :content="item.cnt" placement="top" effect="dark">
+                    <i class="iconfont optIcon" :class="item.icon" @click="item.ent">
+                        <span>{{item.cnt}}</span>
+                    </i>
+                </el-tooltip>
+            </div>
+            <i class="iconfont bf-down dwn-more" v-show="this.$store.state.opt.show" @click="changeShow"></i>
+            <div class="hide-list" v-show="this.$store.state.opt.ok">
+                <div v-for="item in this.$store.state.opt.lastOpt" @click="item.ent">
+                    <i class="iconfont optIcon" :class="item.icon">
+                        <span>{{item.cnt}}</span>
+                    </i>
+                </div>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@
     export default{
         data(){
             return {
-
+              current:''
             }
         },
         computed:{
@@ -34,6 +35,10 @@
         methods:{
           changeShow(){
             this.$store.commit('toggle_ok');
+          },
+
+          addActive(index){
+            this.current = index;
           }
         },
         mounted(){

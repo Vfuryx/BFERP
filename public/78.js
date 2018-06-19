@@ -60,40 +60,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            newOpt: [{
-                cnt: '驳回',
-                icon: 'bf-reject'
-            }, {
-                cnt: '审核',
-                icon: 'bf-audit'
-            }, {
-                cnt: '退审',
-                icon: 'bf-auditfaild'
-            }, {
-                cnt: '上一条',
-                icon: 'bf-beforeItem'
-            }, {
-                cnt: '下一条',
-                icon: 'bf-nextItem'
-            }, {
-                cnt: '刷新',
-                icon: 'bf-refresh'
-            }]
-        };
-    },
-    mounted: function mounted() {
-        this.$store.state.opt.opts = this.newOpt;
-        this.$store.commit('change', this.newOpt);
-        var that = this;
-        $(window).resize(function () {
-            return function () {
-                that.$store.state.opt.opts = that.newOpt;
-                that.$store.commit('change', that.newOpt);
-            }();
-        });
+  data: function data() {
+    return {
+      newOpt: [{
+        cnt: '驳回',
+        icon: 'bf-reject',
+        ent: this.test
+      }, {
+        cnt: '审核',
+        icon: 'bf-audit',
+        ent: this.test
+      }, {
+        cnt: '退审',
+        icon: 'bf-auditfaild',
+        ent: this.test
+      }, {
+        cnt: '上一条',
+        icon: 'bf-beforeItem',
+        ent: this.test
+      }, {
+        cnt: '下一条',
+        icon: 'bf-nextItem',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.test
+      }]
+    };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
     }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
+    });
+  }
 });
 
 /***/ }),

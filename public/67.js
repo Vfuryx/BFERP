@@ -64,42 +64,60 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '修改',
-        icon: 'bf-change'
+        icon: 'bf-change',
+        ent: this.test
       }, {
         cnt: '退审',
-        icon: 'bf-auditfaild'
+        icon: 'bf-auditfaild',
+        ent: this.test
       }, {
         cnt: '返回客审',
-        icon: 'bf-examination'
+        icon: 'bf-examination',
+        ent: this.test
       }, {
         cnt: '导出',
-        icon: 'bf-out'
+        icon: 'bf-out',
+        ent: this.test
       }, {
         cnt: '物流单',
-        icon: 'bf-logCode'
+        icon: 'bf-logCode',
+        ent: this.test
       }, {
         cnt: '发货单',
-        icon: 'bf-bill'
+        icon: 'bf-bill',
+        ent: this.test
       }, {
         cnt: '上一条',
-        icon: 'bf-beforeItem'
+        icon: 'bf-beforeItem',
+        ent: this.test
       }, {
         cnt: '下一条',
-        icon: 'bf-nextItem'
+        icon: 'bf-nextItem',
+        ent: this.test
       }, {
         cnt: '捡货单',
-        icon: 'bf-secSort'
+        icon: 'bf-secSort',
+        ent: this.test
       }, {
         cnt: '打印',
-        icon: 'bf-printer'
+        icon: 'bf-printer',
+        ent: this.test
       }, {
         cnt: '电子面单',
-        icon: 'bf-salesinvoice'
+        icon: 'bf-salesinvoice',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;

@@ -4,7 +4,8 @@ const opt = {
       {
         cnt: '编辑',
         icon: 'el-icon-edit',
-        ent:''
+        ent:'',
+        ref: 'icon'
       }
     ],
     show: false,

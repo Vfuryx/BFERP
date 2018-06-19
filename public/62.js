@@ -64,33 +64,48 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '新增',
-        icon: 'bf-add'
+        icon: 'bf-add',
+        ent: this.test
       }, {
         cnt: '修改',
-        icon: 'bf-change'
+        icon: 'bf-change',
+        ent: this.test
       }, {
         cnt: '删除',
-        icon: 'bf-del'
+        icon: 'bf-del',
+        ent: this.test
       }, {
         cnt: '提交',
-        icon: 'bf-submit'
+        icon: 'bf-submit',
+        ent: this.test
       }, {
         cnt: '驳回',
-        icon: 'bf-reject'
+        icon: 'bf-reject',
+        ent: this.test
       }, {
         cnt: '审核',
-        icon: 'bf-audit'
+        icon: 'bf-audit',
+        ent: this.test
       }, {
         cnt: '导出',
-        icon: 'bf-out'
+        icon: 'bf-out',
+        ent: this.test
       }, {
         cnt: '打印',
-        icon: 'bf-printer'
+        icon: 'bf-printer',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;

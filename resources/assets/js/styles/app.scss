@@ -19,9 +19,10 @@ label {
 html {
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
-#app{
+#app,.app-wrapper,.main-container{
   height: 100%;
 }
 

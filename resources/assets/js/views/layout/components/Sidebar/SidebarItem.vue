@@ -74,13 +74,15 @@
             }
         },
         mounted(){
-            let hh = this.getClientHeight();
-            this.$refs.oul.style.height = (hh-70) + 'px';
-            const that = this;
-            window.onresize =function(){
-                let hh = that.getClientHeight();
-                that.$refs.oul.style.height = hh + 'px';
-            }
+            let wH = $('window').height();
+            let logoH = $('.logo').height();
+            $('.sidebar-container').css({height:wH-logoH+'px'});
+
+            $(window).resize(()=>{
+              let wH = $('window').height();
+              let logoH = $('.logo').height();
+              $('.sidebar-container').css({height:wH-logoH+'px'});
+            });
         }
     }
 </script>

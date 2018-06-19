@@ -87,7 +87,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.mask[data-v-553ae4d4] {\n  width: 100%;\n  height: 100%;\n  position: fixed;\n  top: 0;\n  background-color: #cccccc;\n  z-index: 100;\n}\n.mask h2[data-v-553ae4d4] {\n    color: #444;\n}\n.mask .inner[data-v-553ae4d4] {\n    background-color: #fff;\n    text-align: center;\n    border-radius: 10px;\n    width: 600px;\n    height: 500px;\n    position: absolute;\n    left: 50%;\n    top: 50%;\n    margin-top: -250px;\n}\n.mask .inner .el-input.el-input--medium[data-v-553ae4d4], .mask .inner .el-textarea[data-v-553ae4d4], .mask .inner .el-select[data-v-553ae4d4] {\n      width: 92%;\n      margin-left: -35px !important;\n}\n.mask .inner .close[data-v-553ae4d4] {\n      cursor: pointer;\n      position: absolute;\n      right: 20px;\n      top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.el-table_1_column_7 .cell i[data-v-553ae4d4] {\n  margin-right: 5px;\n  cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -180,35 +180,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -216,10 +187,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
-        ent: this.addNew
-      }, {
-        cnt: '修改',
-        icon: 'bf-change',
         ent: this.addNew
       }, {
         cnt: '删除',
@@ -232,27 +199,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }],
       colors: [],
       multipleTable: [],
+      multipleSelection: [],
+      checkboxInit: false,
       showMask: false,
-      value: '',
-      code: '',
-      mColor: '',
-      textarea: '',
-
+      visible2: false,
+      dele: '',
+      cancelDel: '',
+      newId: '',
       options: [{ value: '0', label: 0 }, { value: 1, label: 1 }],
-
       ruleForm: {
-        code: '2',
-        name: '2',
-        color: 'yellow',
-        status: '2',
-        desc: '2'
+        code: '',
+        name: '',
+        color: '',
+        status: '',
+        desc: ''
       },
       rules: {
         code: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
         name: [{ required: true, message: '请输入标记名称', trigger: 'blur' }],
-        /*color: [
-          { required: true, message: '请输入标记名称', trigger: 'blur' },
-        ],*/
         status: [{ required: true, message: '请选择状态', trigger: 'change' }],
         desc: [{ required: true, message: '请填写描述', trigger: 'blur' }]
       }
@@ -273,23 +237,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       $('.inner').css({ marginLeft: -leftW + 'px' });
       this.showMask = true;
       $('.el-form-item__error').css({ left: 50 + 'px' });
-      /* this.$http.post(
-         'http://bferp.test/api/markcolors',
-         {
-           markcode: this.ruleForm.code,
-           markname: this.ruleForm.name,
-           color: this.ruleForm.color,
-           description: this.ruleForm.desc,
-           status: this.ruleForm.status
-         },
-         {emulateJSON: true}
-       )
-         .then((res) => {
-           alert('success');
-         })
-         .catch((err) => {
-           console.log(err);
-         });*/
     },
     submitForm: function submitForm(formName) {
       var _this = this;
@@ -303,11 +250,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             color: _this.ruleForm.color,
             description: _this.ruleForm.desc,
             status: _this.ruleForm.status
-          }, { emulateJSON: false }).then(function (res) {
-            console.log(res);
-            alert('添加成功');
+          }, { emulateJSON: true }).then(function (res) {
+            _this.$message({
+              message: '添加成功',
+              type: 'success'
+            });
+            _this.showMask = false;
+            _this.get();
           }).catch(function (err) {
-            console.log(err);
+            if (err.body.status_code === 422) {
+              var arr = err.body.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this.$message.error({
+                message: str
+              });
+            }
           });
         } else {
           console.log('error submit!!');
@@ -319,8 +280,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs[formName].resetFields();
     },
     closeMask: function closeMask() {
-      $('.close').parents('.mask').hide();
-    }
+      this.showMask = false;
+    },
+    edit: function edit(a) {
+      console.log(a);
+    },
+    confirmD: function confirmD(id) {
+      var _this2 = this;
+
+      this.$http.delete('http://bferp.test/api/markcolors/' + id).then(function (res) {
+        _this2.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this2.visible2 = false;
+        _this2.get();
+      }).catch(function (err) {
+        _this2.visible2 = false;
+        if (err.body.status_code === 404) {
+          _this2.$message.error({
+            message: '没有查询到相关数据'
+          });
+        }
+      });
+    },
+    cancelD: function cancelD() {
+      this.visible2 = false;
+      this.$message({
+        message: '取消删除',
+        type: 'info'
+      });
+    },
+    del: function del(b, e) {
+      this.visible2 = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.newId = b;
+    },
+    toggleChecked: function toggleChecked() {
+      this.checkboxInit = !this.checkboxInit;
+    },
+    selsChange: function selsChange(sels) {
+      this.sels = sels;
+    },
+    handleCurrentChange: function handleCurrentChange(row, event, column) {}
   },
   create: function create() {},
   mounted: function mounted() {
@@ -333,7 +335,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         that.$store.commit('change', that.newOpt);
       }();
     });
-
     this.get();
   }
 });
@@ -354,16 +355,21 @@ var render = function() {
         "el-table",
         {
           ref: "multipleTable",
-          attrs: {
-            data: _vm.colors,
-            border: "",
-            fit: "",
-            "highlight-current-row": ""
+          attrs: { data: _vm.colors, fit: "", "highlight-current-row": "" },
+          on: {
+            "row-click": _vm.handleCurrentChange,
+            "selection-change": _vm.selsChange
           }
         },
         [
           _c("el-table-column", {
-            attrs: { type: "selection", width: "95", align: "center" }
+            attrs: {
+              type: "selection",
+              width: "95",
+              align: "center",
+              checked: _vm.checkboxInit
+            },
+            on: { change: _vm.toggleChecked }
           }),
           _vm._v(" "),
           _c("el-table-column", {
@@ -437,16 +443,53 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: {
-              align: "center",
-              label: "状态：0=停用，1=启用",
-              width: "200"
-            },
+            attrs: { align: "center", label: "状态", width: "200" },
             scopedSlots: _vm._u([
               {
                 key: "default",
                 fn: function(scope) {
-                  return [_c("span", [_vm._v(_vm._s(scope.row.status))])]
+                  return [
+                    _c("span", [
+                      _vm._v(_vm._s(scope.row.status === 0 ? "停用" : "启用"))
+                    ])
+                  ]
+                }
+              }
+            ])
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "操作", width: "180", align: "center" },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _c("i", {
+                      staticClass: "el-icon-edit",
+                      on: {
+                        click: function($event) {
+                          _vm.edit(scope.row.id)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "el-icon-delete",
+                      on: {
+                        click: function($event) {
+                          _vm.del(scope.row.id, $event)
+                        }
+                      },
+                      model: {
+                        value: _vm.newId,
+                        callback: function($$v) {
+                          _vm.newId = $$v
+                        },
+                        expression: "newId"
+                      }
+                    })
+                  ]
                 }
               }
             ])
@@ -456,177 +499,213 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "div",
+        "el-popover",
         {
-          directives: [
-            {
-              name: "show",
-              rawName: "v-show",
-              value: _vm.showMask,
-              expression: "showMask"
-            }
-          ],
-          staticClass: "mask"
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.visible2,
+            callback: function($$v) {
+              _vm.visible2 = $$v
+            },
+            expression: "visible2"
+          }
         },
         [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "inner" },
+            { staticStyle: { "text-align": "right", margin: "0" } },
             [
-              _c("h2", [_vm._v("新增颜色标记")]),
-              _vm._v(" "),
-              _c("i", {
-                staticClass: "iconfont bf-close close",
-                on: { click: _vm.closeMask }
-              }),
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
               _vm._v(" "),
               _c(
-                "el-form",
+                "el-button",
                 {
-                  ref: "ruleForm",
-                  staticClass: "demo-ruleForm",
-                  attrs: {
-                    model: _vm.ruleForm,
-                    rules: _vm.rules,
-                    "label-width": "100px"
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD(_vm.newId)
+                    }
                   }
                 },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "标记代码", prop: "code" } },
-                    [
-                      _c("el-input", {
-                        model: {
-                          value: _vm.ruleForm.code,
-                          callback: function($$v) {
-                            _vm.$set(_vm.ruleForm, "code", $$v)
-                          },
-                          expression: "ruleForm.code"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "标记名称", prop: "name" } },
-                    [
-                      _c("el-input", {
-                        model: {
-                          value: _vm.ruleForm.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.ruleForm, "name", $$v)
-                          },
-                          expression: "ruleForm.name"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "颜色" } },
-                    [
-                      _c("el-color-picker", {
-                        model: {
-                          value: _vm.ruleForm.color,
-                          callback: function($$v) {
-                            _vm.$set(_vm.ruleForm, "color", $$v)
-                          },
-                          expression: "ruleForm.color"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "状态", prop: "state" } },
-                    [
-                      _c(
-                        "el-select",
-                        {
-                          attrs: { placeholder: "请选择状态" },
-                          model: {
-                            value: _vm.ruleForm.status,
-                            callback: function($$v) {
-                              _vm.$set(_vm.ruleForm, "status", $$v)
-                            },
-                            expression: "ruleForm.status"
-                          }
-                        },
-                        [
-                          _c("el-option", {
-                            attrs: { label: "0", value: "0" }
-                          }),
-                          _vm._v(" "),
-                          _c("el-option", { attrs: { label: "1", value: "1" } })
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "描述", prop: "desc" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "textarea" },
-                        model: {
-                          value: _vm.ruleForm.desc,
-                          callback: function($$v) {
-                            _vm.$set(_vm.ruleForm, "desc", $$v)
-                          },
-                          expression: "ruleForm.desc"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-form-item",
-                    [
-                      _c(
-                        "el-button",
-                        {
-                          attrs: { type: "primary" },
-                          on: {
-                            click: function($event) {
-                              _vm.submitForm("ruleForm")
-                            }
-                          }
-                        },
-                        [_vm._v("添加")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "el-button",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.resetForm("ruleForm")
-                            }
-                          }
-                        },
-                        [_vm._v("重置")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
+                [_vm._v("确定")]
               )
             ],
             1
           )
         ]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "新增颜色标记", visible: _vm.showMask },
+          on: {
+            "update:visible": function($event) {
+              _vm.showMask = $event
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "ruleForm",
+              staticClass: "demo-ruleForm",
+              attrs: {
+                model: _vm.ruleForm,
+                rules: _vm.rules,
+                "label-width": "100px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "标记代码", prop: "code" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "" },
+                    model: {
+                      value: _vm.ruleForm.code,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "code", $$v)
+                      },
+                      expression: "ruleForm.code"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "标记名称", prop: "name" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "name", $$v)
+                      },
+                      expression: "ruleForm.name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "颜色" } },
+                [
+                  _c("el-color-picker", {
+                    model: {
+                      value: _vm.ruleForm.color,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "color", $$v)
+                      },
+                      expression: "ruleForm.color"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态", prop: "state" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm.status,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "status", $$v)
+                        },
+                        expression: "ruleForm.status"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "0", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "1", value: "1" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "描述", prop: "desc" } },
+                [
+                  _c("el-input", {
+                    attrs: { type: "textarea", placehode: "请输入描述" },
+                    model: {
+                      value: _vm.ruleForm.desc,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "desc", $$v)
+                      },
+                      expression: "ruleForm.desc"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitForm("ruleForm")
+                    }
+                  }
+                },
+                [_vm._v("添加")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.resetForm("ruleForm")
+                    }
+                  }
+                },
+                [_vm._v("重置")]
+              )
+            ],
+            1
+          )
+        ],
+        1
       )
     ],
     1

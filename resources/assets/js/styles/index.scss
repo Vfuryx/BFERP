@@ -1,4 +1,5 @@
 #app {
+  overflow: hidden;
 
   //logo部分
   .logo {
@@ -44,9 +45,15 @@
     //transition: margin-left 0.2s;
     margin-left: 240px;
     background-color: #f0f1f5;
+    //padding-bottom: 24px;
+
+    .optOuter{
+      margin: 8px 24px;
+      background-color: #fff;
+    }
 
     .opt {
-      margin: 24px 24px 0 12px;
+      margin: 16px 24px 0 0;
       height: 60px;
       overflow: hidden;
 
@@ -54,24 +61,47 @@
         margin-right: 10px;
         float: left;
         text-align: center;
-        padding-top: 7px;
+        padding-top: 13px;
         box-sizing: border-box;
-        width: 75px;
+        width: 85px;
 
-        &:visited,&:hover,&:active{
-          opacity: 0.7;
+        &.active{
+
+          i{
+            background-color: #4a99fa;
+
+            &:before{
+              color: #fff;
+            }
+
+            span{
+              color: #fff;
+            }
+          }
         }
 
         i{
           display: flex;
-          flex-direction: column;
+          justify-content: center;
+
+          &:hover{
+            background-color: #4a99fa;
+
+            &:before{
+              color: #fff;
+            }
+
+            span{
+              color: #fff;
+            }
+          }
         }
 
         span{
-          line-height: 0.8;
           font-size: 12px;
-          color: #fff;
-          margin-top: 5px;
+          color: #666;
+          text-align: left;
+          margin-left: 5px;
         }
 
         &:hover{
@@ -82,19 +112,21 @@
       }
 
       .optIcon {
-        background-color: #4a99fa;
+        background-color: #fff;
         border-radius: 5px;
-        padding: 7px 10px;
+        line-height: 35px;
         box-sizing: border-box;
-        color: #fff;
+        color: #666;
         font-size: 20px;
+        text-align: center;
         cursor: pointer;
+        border: 1px solid #e4e4e4;
       }
 
       &>.dwn-more{
         position: fixed;
-        right: 16px;
-        top: 160px;
+        right: 3px;
+        top: 150px;
         cursor: pointer;
       }
 
@@ -102,34 +134,44 @@
         position: fixed;
         right: 10px;
         top: 210px;
-        width: 75px;
+        width: 85px;
         z-index: 500;
         text-align: center;
 
+        span{
+          margin-left: 5px;
+        }
+
         &>div{
-          &:visited,&:hover,&:active{
-            opacity: 0.7;
+          &>i:hover{
+            background-color: #4a99fa;
+
+            &:before{
+              color: #fff;
+            }
+
+            span{
+              color: #fff;
+            }
           }
         }
 
         i{
           display: flex;
-          flex-direction: column;
-          margin-top: 5px;
+          justify-content: center;
+          margin-top: 10px;
         }
 
         span{
-          line-height: 0.8;
           font-size: 12px;
-          color: #fff;
-          margin-top: 5px;
+          color: #666;
         }
 
       }
     }
 
     .app-main{
-      margin: 24px 24px 0;
+      margin: 8px 24px 50px;
       padding: 20px;
       box-sizing: border-box;
       background-color: #fff;

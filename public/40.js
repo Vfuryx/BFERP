@@ -64,15 +64,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '修改',
-        icon: 'bf-change'
+        icon: 'bf-change',
+        ent: this.test
       }, {
         cnt: '导出',
-        icon: 'bf-out'
+        icon: 'bf-out',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;

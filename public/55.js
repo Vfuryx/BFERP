@@ -60,29 +60,40 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            newOpt: [{
-                cnt: '锁定',
-                icon: 'bf-lock'
-            }, {
-                cnt: '解锁',
-                icon: 'bf-delock'
-            }, {
-                cnt: '审核',
-                icon: 'bf-audit'
-            }, {
-                cnt: '退审',
-                icon: 'bf-auditfaild'
-            }, {
-                cnt: '刷新',
-                icon: 'bf-refresh'
-            }]
-        };
-    },
-    mounted: function mounted() {
-        this.$store.state.opt.opts = this.newOpt;
+  data: function data() {
+    return {
+      newOpt: [{
+        cnt: '锁定',
+        icon: 'bf-lock',
+        ent: this.test
+      }, {
+        cnt: '解锁',
+        icon: 'bf-delock',
+        ent: this.test
+      }, {
+        cnt: '审核',
+        icon: 'bf-audit',
+        ent: this.test
+      }, {
+        cnt: '退审',
+        icon: 'bf-auditfaild',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.test
+      }]
+    };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
     }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+  }
 });
 
 /***/ }),

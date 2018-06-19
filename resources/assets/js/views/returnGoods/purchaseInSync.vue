@@ -10,25 +10,35 @@
         newOpt: [
           {
             cnt: '新增',
-            icon: 'bf-add'
+            icon: 'bf-add',
+            ent: this.test
           },
           {
             cnt: '修改',
-            icon: 'bf-change'
+            icon: 'bf-change',
+            ent: this.test
           },
           {
             cnt: '提交',
-            icon: 'bf-submit'
+            icon: 'bf-submit',
+            ent: this.test
           },
           {
             cnt: '同步',
-            icon: 'bf-sync'
+            icon: 'bf-sync',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
+            icon: 'bf-refresh',
+            ent: this.test
           }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

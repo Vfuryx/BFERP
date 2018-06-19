@@ -64,15 +64,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '角色权限',
-        icon: 'bf-jurisdiction'
+        icon: 'bf-jurisdiction',
+        ent: this.test
       }, {
         cnt: '角色用户',
-        icon: 'bf-juruser'
+        icon: 'bf-juruser',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;

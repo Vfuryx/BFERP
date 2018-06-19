@@ -10,50 +10,65 @@
         newOpt: [
           {
             cnt: '删除',
-            icon: 'bf-del'
+            icon: 'bf-del',
+            ent: this.test
           },
           {
             cnt: '退审',
-            icon: 'bf-audit'
+            icon: 'bf-audit',
+            ent: this.test
           },
           {
             cnt: '导入',
-            icon: 'bf-in'
+            icon: 'bf-in',
+            ent: this.test
           },
           {
             cnt: '导出',
-            icon: 'bf-out'
+            icon: 'bf-out',
+            ent: this.test
           },
           {
             cnt: '同步',
-            icon: 'bf-sync'
+            icon: 'bf-sync',
+            ent: this.test
           },
           {
             cnt: '上一条',
-            icon: 'bf-beforeItem'
+            icon: 'bf-beforeItem',
+            ent: this.test
           },
           {
             cnt: '下一条',
-            icon: 'bf-nextItem'
+            icon: 'bf-nextItem',
+            ent: this.test
           },
           {
             cnt: '门店收款',
-            icon: 'bf-receManagement'
+            icon: 'bf-receManagement',
+            ent: this.test
           },
           {
             cnt: '还原',
-            icon: 'bf-reduce'
+            icon: 'bf-reduce',
+            ent: this.test
           },
           {
             cnt: '转赠品',
-            icon: 'bf-gift'
+            icon: 'bf-gift',
+            ent: this.test
           },
           {
             cnt: '刷新',
-            icon: 'bf-refresh'
-          },
-
+            icon: 'bf-refresh',
+            ent: this.test
+          }
         ]
+      }
+    },
+    methods:{
+      test(){
+        console.log(1);
       }
     },
     mounted() {

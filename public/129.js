@@ -64,24 +64,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       newOpt: [{
         cnt: '导出',
-        icon: 'bf-out'
+        icon: 'bf-out',
+        ent: this.test
       }, {
         cnt: '发短信',
-        icon: 'bf-smlMessage'
+        icon: 'bf-smlMessage',
+        ent: this.test
       }, {
         cnt: '同步',
-        icon: 'bf-sync'
+        icon: 'bf-sync',
+        ent: this.test
       }, {
         cnt: '发邮件',
-        icon: 'bf-email'
+        icon: 'bf-email',
+        ent: this.test
       }, {
         cnt: '短信充值',
-        icon: 'bf-recharge'
+        icon: 'bf-recharge',
+        ent: this.test
       }, {
         cnt: '刷新',
-        icon: 'bf-refresh'
+        icon: 'bf-refresh',
+        ent: this.test
       }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;
