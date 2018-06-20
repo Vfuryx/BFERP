@@ -1,19 +1,19 @@
 webpackJsonp([1],{
 
-/***/ 387:
+/***/ 393:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(519)
-  __webpack_require__(521)
+  __webpack_require__(525)
+  __webpack_require__(527)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(523)
+var __vue_script__ = __webpack_require__(529)
 /* template */
-var __vue_template__ = __webpack_require__(525)
+var __vue_template__ = __webpack_require__(530)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53,13 +53,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 519:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(520);
+var content = __webpack_require__(526);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -80,7 +80,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 520:
+/***/ 526:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -95,13 +95,13 @@ exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input 
 
 /***/ }),
 
-/***/ 521:
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(522);
+var content = __webpack_require__(528);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -122,7 +122,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 522:
+/***/ 528:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -137,11 +137,13 @@ exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixe
 
 /***/ }),
 
-/***/ 523:
+/***/ 529:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -250,49 +252,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          })
        },*/
     getyzCode: function getyzCode() {
-      /*this.$request.post('/captchas',
-      function(res){
-        this.src= res.body.captcha_image_content;
-        this.loginForm.key = res.body.captcha_key;
-      });*/
-      this.$http.post('http://bferp.test/api/captchas', { emulateJSON: true }).then(function (res) {
-        this.src = res.body.captcha_image_content;
-        this.loginForm.key = res.body.captcha_key;
-      }, function (err) {
-        // console.log(err);
+      var _this = this;
+
+      this.$post('/captchas').then(function (res) {
+        _this.src = res.captcha_image_content;
+        _this.loginForm.key = res.captcha_key;
       });
     },
     submitForm: function submitForm(formName) {
-      var _this = this;
+      var _this2 = this;
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          var url = 'http://bferp.test/api/authorizations';
-          _this.$http.post(url, {
-            username: _this.loginForm.username,
-            password: _this.loginForm.password,
-            captcha_key: _this.loginForm.key,
-            captcha_code: _this.loginForm.code
-          }, { emulateJSON: true }).then(function (res) {
-            console.log(res);
-            _this.$message({
+          var data = {
+            username: _this2.loginForm.username,
+            password: _this2.loginForm.password,
+            captcha_key: _this2.loginForm.key,
+            captcha_code: _this2.loginForm.code
+          };
+          _this2.$post('/authorizations', data).then(function (res) {
+            _this2.$message({
               message: '登录成功',
               type: 'success'
             });
-            _this.$router.push({ path: '/' });
-          }).catch(function (err) {
+            _this2.$router.push({ path: '/' });
+          }, function (err) {
             console.log(err);
-            if (err.body.status_code !== 201) {
-              var arr = err.body.errors;
-              var arr1 = [];
-              for (var i in arr) {
-                arr1.push(arr[i]);
-              }
-              var str = arr1.join(',');
-              _this.$message.error({
-                message: str
-              });
-            }
+            _this2.$message.error({
+              message: err.message
+            });
           });
         } else {
           console.log('error submit!!');
@@ -303,18 +291,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getyzCode();
-    /*this.$request.post('http://bferp.test/api/captchas',
-      function(res){
-        console.log(res);
-        this.src= res.body.captcha_image_content;
-        this.loginForm.key = res.body.captcha_key;
-      });*/
   }
 });
 
 /***/ }),
 
-/***/ 525:
+/***/ 530:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -356,7 +338,7 @@ var render = function() {
                   name: "username",
                   type: "text",
                   autoComplete: "on",
-                  placeholder: "username"
+                  placeholder: "请输入用户名"
                 },
                 model: {
                   value: _vm.loginForm.username,
@@ -385,7 +367,7 @@ var render = function() {
                 attrs: {
                   name: "password",
                   type: _vm.pwdType,
-                  placeholder: "password"
+                  placeholder: "请输入密码"
                 },
                 model: {
                   value: _vm.loginForm.password,
@@ -415,7 +397,11 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("el-input", {
-                attrs: { name: "yzCode", type: "text", placeholder: "code" },
+                attrs: {
+                  name: "yzCode",
+                  type: "text",
+                  placeholder: "请输入验证码"
+                },
                 model: {
                   value: _vm.loginForm.code,
                   callback: function($$v) {
@@ -448,7 +434,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("\n        登录\n      ")]
+                [_vm._v("\n                登录\n            ")]
               )
             ],
             1

@@ -26,22 +26,22 @@ import './icons/index.js'
 
 import './iconfont/iconfont.css'
 
+import qs from 'qs'
+Vue.prototype.$qs = qs
+
 Vue.use(ElementUi, {
     size: 'medium',
     i18n: (key, value) => i18n.t(key, value)
 })
 
-import axios from 'axios'
-import request from './utils/http.js'
+import {post,fetch,patch,put,del} from './utils/http.js'
 
-Vue.prototype.$request = request;
-
-/*//定义全局变量
-Vue.prototype.$post=http.post;
-Vue.prototype.$get=http.get;
-Vue.prototype.$patch=http.patch;
-Vue.prototype.$put=http.put;
-Vue.prototype.$del=http.delete;*/
+//定义全局变量
+Vue.prototype.$post=post
+Vue.prototype.$fetch=fetch
+Vue.prototype.$patch=patch
+Vue.prototype.$put=put
+Vue.prototype.$del=del
 
 const app = new Vue({
     el: '#app',
@@ -50,14 +50,4 @@ const app = new Vue({
     i18n,
     render:h=>h(App)
 });
-
-/*
-// Vue.config.productionTip = false;
-// import './permission.js' // permission control
-// import * as filters from './filters/index.js' // global filters
-// register global utility filters.
-/*Object.keys(filters).forEach(key => {
-    Vue.filter(key, filters[key])
-})
-*/
 

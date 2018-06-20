@@ -1,143 +1,143 @@
 import axios from 'axios'
 
-let baseUrl = 'http://bferp.test/api';
-/*
-if (process.env.NODE_ENV === 'development') {
-  baseUrl = 'http://...'
-} else if (process.env.NODE_ENV === 'production') {
-  baseUrl = 'http://...'
-}
-http.defaults.baseURL = baseUrl;
+axios.defaults.timeout = 5000;
+axios.defaults.baseURL ='http://bferp.test/api';
+axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8';
 
+/*//http request 拦截器
+axios.interceptors.request.use(
+  config => {
+    // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
+    config.data = JSON.stringify(config.data);
+    config.headers = {
+      'Content-Type':'application/x-www-form-urlencoded'
+    }
+    // if(token){
+    //   config.params = {'token':token}
+    // }
+    return config;
+  },
+  error => {
+    return Promise.reject(err);
+  }
+);
 
-// http.defaults.timeout = 2500
-http.defaults.headers.post['Content-Type'] = 'application/json'
-// cache-control: "max-age=0, private, must-revalidate"
-// http.defaults.headers.post['Cache-control'] = 'max-age=5'
-
-// Add a request interceptor 解决ie下url带中文参数乱码问题
-http.interceptors.request.use(function (config) {
-  // Do something before request is sent
-  if(config.method == 'get'){
-    config.url  = encodeURI(config.url);
+/!*axios.interceptors.request.use( (config) => {
+  if (config.method=="post"){
+    config.data = qs.stringify(config.data);
+    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
   }
   return config;
-}, function (error) {
-  // Do something with request error
+},  (error) => {
   return Promise.reject(error);
-});
+});*!/
 
-// Add a response interceptor
-http.interceptors.response.use(function (response) {
-  // Do something with response data
-  return response;
-}, function (error) {
-  // Do something with response error
-  if(error.response){
-    if(error.response.status === 400 ){
-      window.app.$message.error('数据错误！');
+//http response 拦截器
+axios.interceptors.response.use(
+  response => {
+    if(response.data.errCode ==2){
+      router.push({
+        path:"/login",
+        querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转
+      })
     }
-    else if(error.response.status === 401 ){
-      // define window.app=vm in main.js
-      window.app.$router.push({name: 'Login'});
-    }
-    else if(error.response.status === 403 ){
-      window.app.$message.error('您没有操作权限哦！');
-    }
-    else if(error.response.status === 404 ){
-      window.app.$message.error('对象不存在！');
-    }
-    else if(error.response.status === 500 ){
-      window.app.$message.error('服务器发生了一些错误哦！');
-    }
+    return response;
+  },
+  error => {
+    return Promise.reject(error)
   }
-  return Promise.reject(error);
-});
+)*/
 
-// 创建axios实例
-const service = axios.create({
-  // headers: {'content-type': 'application/x-www-form-urlencoded'},
-  baseURL: 'https://easy-mock.com/mock/5950a2419adc231f356a6636/vue-admin', // api的base_url
-  timeout: 15000 // 请求超时时间
-})
+/**
+ * 封装get方法
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
 
-//有的请求需要用户认证，视情况而定
-const getConfig = function (auth) {
-  let config = {}
-  if(auth){
-    config.headers={
-      "Authorization": auth
-    }
-  }
-  return config;
-}
-*/
-
-var http = {
-  get:function (url,data={},success,fail) {
-    return axios.get(baseUrl+url)
-      .then(function (res) {
-        success(res);
-      })
-      .catch(function (error) {
-        if(fail){
-          fail(error);
-        }
-        console.log(error);
-      })
-  },
-
-  post:function (url,data={},success,fail) {
-    return axios.post(url,data)
-      .then(function (res) {
-        success(res);
-      })
-      .catch(function (error) {
-        if(fail){
-          fail(error);
-        }
-        console.log(error);
-      })
-  },
-
-  put:function (url,data={},success,fail) {
-    return axios.put(baseUrl+url,data)
-      .then(function (res) {
-        success(res);
-      })
-      .catch(function (error) {
-        if(fail){
-          fail(error);
-        }
-        console.log(error);
-      })
-  },
-
-  delete:function(url,data={},success,fail){
-    return axios.delete(baseUrl+url,data)
-      .then(function(res){
-      success(res);
+export function fetch(url,params={}){
+  return new Promise((resolve,reject) => {
+    axios.get(url,{
+      params:params
     })
-      .catch(function(error){
-        if(fail){
-          fail(error)
-        }
-        console.log(error);
+      .then(response => {
+        resolve(response.data);
       })
-  },
+      .catch(err => {
+        reject(err)
+      })
+  })
+}
 
-  patch: function(url,data={},success,fail){
-    return axios.patch(baseUrl+url,data)
-      .then(function(res){
-        success(res);
-      })
-      .catch(function(error){
-        if(fail){
-          fail(error)
-        }
-        console.log(error);
-      })
-  }
-};
+/**
+ * 封装post请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
 
-export default http
+export function post(url,data ={}){
+  return new Promise((resolve,reject) => {
+    axios.post(url,this.$qs.stringify(data))
+      .then(response => {
+        resolve(response.data);
+      },err => {
+        reject(err)
+      })
+  })
+}
+
+/**
+ * 封装patch请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function patch(url,data = {}){
+  return new Promise((resolve,reject) => {
+    axios.patch(url,data)
+      .then(response => {
+        resolve(response.data);
+      },err => {
+        reject(err)
+      })
+  })
+}
+
+/**
+ * 封装put请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function put(url,data = {}){
+  return new Promise((resolve,reject) => {
+    axios.put(url,data)
+      .then(response => {
+        resolve(response.data);
+      },err => {
+        reject(err)
+      })
+  })
+}
+
+/**
+ * 封装delete请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+export function del(url,data = {}){
+  return new Promise((resolve,reject) => {
+    axios.delete(url,data)
+      .then(response => {
+        resolve(response.data);
+      },err => {
+        reject(err)
+      })
+  })
+}
+
