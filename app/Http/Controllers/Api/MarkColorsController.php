@@ -62,7 +62,7 @@ class MarkColorsController extends Controller
         //return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
 
         //分页响应返回
-        $markcolors = MarkColor::paginate(2);
+        $markcolors = MarkColor::paginate(15);
         return $this->response->paginator($markcolors, new MarkColorTransformer());
     }
 
