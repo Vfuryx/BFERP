@@ -39,8 +39,7 @@
 </template>
 
 <script>
-  // import { isvalidUsername } from '../../utils/validate.js';
-
+  import router from '../../router/index.js'
   export default {
     name: 'login',
     data() {
@@ -121,25 +120,29 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            var data =  {
+            let msg =  {
               username: this.loginForm.username,
               password: this.loginForm.password,
               captcha_key: this.loginForm.key,
               captcha_code: this.loginForm.code
             };
-            this.$post('/authorizations',data)
-              .then(res => {
-                this.$message({
-                  message: '登录成功',
-                  type: 'success'
-                });
-                this.$router.push({path: '/'})
-              }, err => {
-                console.log(err);
-                this.$message.error({
-                  message: err.message
-                });
+            this.$store.dispatch('Login',msg).then(() => {
+              this.$message({
+                message: '登录成功',
+                type: 'success'
+              });
+              router.push({
+                path:"/",
+                querry:{redirect:router.currentRoute.fullPath}
               })
+            }).catch(err => {
+              if (err.response) {
+                let arr = err.response.data.message;
+                this.$message.error({
+                  message: arr
+                });
+              }
+            })
           } else {
             console.log('error submit!!');
             return false;
@@ -149,7 +152,6 @@
     },
     mounted() {
       this.getyzCode();
-
     }
   }
 

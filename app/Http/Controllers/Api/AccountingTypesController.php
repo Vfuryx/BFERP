@@ -55,7 +55,7 @@ class AccountingTypesController extends Controller
         // return $this->response->collection(AccType::all(), new AccountingTypeTransformer());
 
         //分页响应返回
-        $acctype = AccType::paginate(2);
+        $acctype = AccType::paginate(10);
         return $this->response->paginator($acctype, new AccountingTypeTransformer());
 
     }

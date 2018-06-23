@@ -2,6 +2,10 @@
   <div class="dashboard-container">
     <div class="dashboard-text">name:{{name}}</div>
     <div class="dashboard-text">roles:<span v-for='role in roles' :key='role'>{{role}}</span></div>
+    <div>
+      {{this.$store.state.user.token}}
+      {{this.$store.state.app.appMainHeight}}
+    </div>
   </div>
 </template>
 

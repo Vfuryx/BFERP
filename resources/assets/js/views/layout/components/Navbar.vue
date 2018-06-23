@@ -20,8 +20,7 @@
         },
         computed: {
             ...mapGetters([
-                'sidebar',
-                'avatar'
+                'sidebar'
             ])
         },
         methods: {
@@ -29,9 +28,7 @@
                 this.$store.dispatch('ToggleSideBar')
             },
             logout(){
-                this.$store.dispatch('LogOut').then(()=>{
-                    location.reload()
-                })
+              this.$store.dispatch('Logout')
             }
         }
     }

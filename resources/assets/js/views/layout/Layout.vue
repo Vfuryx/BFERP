@@ -7,7 +7,7 @@
             <navbar></navbar>
             <tags-view></tags-view>
             <Opt></Opt>
-            <app-main></app-main>
+            <app-main ref="appMain"></app-main>
         </div>
     </div>
 </template>
@@ -44,16 +44,23 @@
         methods: {
             handleClickOutside() {
                 this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
-            }
+            },
+          setMinHeight(){
+            let navH = $('.navbar').height();
+            let tagH = $('.tags-view-container').height();
+            let optH = $('.opt').height();
+            let mtH = parseInt($('.app-main').css('marginTop'));
+            let mbH = parseInt($('.app-main').css('marginBottom'));
+            let finalH = $(window).height()-navH-tagH-optH-mtH-mbH ;
+            $('.app-main').css({height:finalH+'px'});
+          }
         },
       mounted(){
-        let navH = $('.navbar').height();
-        let tagH = $('.tags-view-container').height();
-        let optH = $('.opt').height();
-        let mtH = parseInt($('.app-main').css('marginTop'));
-        let mbH = parseInt($('.app-main').css('marginBottom'));
-        let finalH = $(window).height()-navH-tagH-optH-mtH-mbH;
-        $('.app-main').css({minHeight:finalH+'px'});
+          this.setMinHeight();
+          let that = this;
+          $(window).resize(()=>{
+            that.setMinHeight();
+          })
       }
     }
 </script>

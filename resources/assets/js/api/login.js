@@ -1,27 +1,24 @@
-import request from '../utils/request.js'
+import axios from 'axios'
+import qs from 'qs'
 
-export function login(username, password) {
-  return request({
-    url: '/user/login',
+export function login(data) {
+  return axios({
+    url: '/authorizations',
     method: 'post',
-    data: {
-      username,
-      password
-    }
+    data: qs.stringify(data)
   })
 }
 
-export function getInfo(token) {
-  return request({
-    url: '/user/info',
-    method: 'get',
-    params: { token }
+export function getInfo() {
+  return axios({
+    url: '/me',
+    method: 'post'
   })
 }
 
 export function logout() {
-  return request({
-    url: '/user/logout',
-    method: 'post'
+  return axios({
+    url: '/authorizations/current',
+    method: 'put'
   })
 }

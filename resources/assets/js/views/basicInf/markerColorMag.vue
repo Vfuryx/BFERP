@@ -1,42 +1,101 @@
 <template>
-    <div>
-        <el-table :data="colors" fit highlight-current-row ref="multipleTable" @row-click="handleCurrentChange"  @selection-change="selsChange">
+    <div ref="table">
+        <el-table :data="colors" fit highlight-current-row ref="multipleTable" @row-click="handleCurrent"
+                  @selection-change="handleSelectionChange"
+                   max-height="550" type="index">
             <el-table-column
                     type="selection"
                     width="95" align="center" :checked="checkboxInit" @change="toggleChecked">
             </el-table-column>
             <el-table-column label="标记代码" align="center">
                 <template slot-scope="scope">
-                    {{scope.row.markcode}}
+                    <span v-if="showIndex=='index'+scope.$index">
+                        <el-input size="small" v-model="scope.row.markcode" placeholder="输入标记" @change="handleEdit(scope.$index,scope.row)"></el-input>
+                    </span>
+                    <span v-else>
+                        {{scope.row.markcode}}
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column label="标记名称" width="180" align="center">
                 <template slot-scope="scope">
-                    <span>{{scope.row.markname}}</span>
+                    <span v-if="showIndex=='index'+scope.$index">
+                        <el-input size="small" v-model="scope.row.markname" placeholder="输入名称" @change="handleEdit(scope.$index,scope.row)"></el-input>
+                    </span>
+                    <span v-else>{{scope.row.markname}}</span>
                 </template>
             </el-table-column>
             <el-table-column label="颜色" width="180" align="center">
                 <template slot-scope="scope">
-                    <el-color-picker v-model="scope.row.color"></el-color-picker>
+                    <span  v-if="showIndex=='index'+scope.$index">
+                        <el-color-picker v-model="scope.row.color" @change="handleEdit(scope.$index,scope.row)"></el-color-picker>
+                    </span>
+                    <span v-else>
+                        {{scope.row.color}}
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column label="描述" width="180" align="center">
                 <template slot-scope="scope">
-                    {{scope.row.description}}
+                    <span v-if="showIndex=='index'+scope.$index">
+                        <el-input   type="textarea" size="small" v-model="scope.row.description" placeholder="输入描述" @change="handleEdit(scope.$index,scope.row)"></el-input>
+                    </span>
+                    <span v-else>
+                        {{scope.row.description}}
+                    </span>
                 </template>
             </el-table-column>
             <el-table-column align="center" label="状态" width="200">
                 <template slot-scope="scope">
-                    <span>{{scope.row.status===0?'停用':'启用'}}</span>
+                    <span v-if="showIndex=='index'+scope.$index">
+                         <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit(scope.$index,scope.row)">
+    <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
+  </el-select>
+                    </span>
+                    <span v-else>
+                         <i class='circle' :class="{'active':scope.row.status==0?false:true}"></i>
+                        {{scope.row.status==0?'停用':'启用'}}
+                    </span>
                 </template>
             </el-table-column>
-            <el-table-column label="操作" width="180" align="center">
+            <el-table-column label="操作" width="220" align="center">
                 <template slot-scope="scope">
-                    <i class="el-icon-edit" @click="edit(scope.row.id)"></i>
-                    <i class="el-icon-delete" @click="del(scope.row.id,$event)" v-model="newId"></i>
+                    <span v-if="showIndex=='index'+scope.$index">
+                          <el-button
+                                  size="mini"
+                                  @click="editSave(scope.$index,scope.row)">保存
+                    </el-button>
+                        <el-button
+                                size="mini"
+                                @click="editCancle()">取消
+                    </el-button>
+                    </span>
+                   <span v-else>
+                        <el-button
+                                size="mini"
+                                @click="edit(scope.$index,scope.row.id,scope.row)">编辑
+                    </el-button>
+                   </span>
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="del(scope.row.id,$event)" v-model="newId">删除
+                    </el-button>
                 </template>
             </el-table-column>
         </el-table>
+
+        <!--分页-->
+        <!--@size-change="handleSizeChange"-->
+        <div ref="pagination">
+            <el-pagination
+                    @current-change="handleCurrentChange"
+                    :current-page="pagination.current_page"
+                    :page-size="pagination.per_page"
+                    layout="total, sizes, prev, pager, next, jumper"
+                    :total="pagination.total">
+            </el-pagination>
+        </div>
 
         <!--删除提示-->
         <el-popover
@@ -80,6 +139,9 @@
     </div>
 </template>
 <script>
+  import axios from 'axios'
+
+
   export default {
     data() {
       return {
@@ -92,22 +154,22 @@
           {
             cnt: '删除',
             icon: 'bf-del',
-            ent: this.addNew
+            ent: this.delMore
           },
           {
             cnt: '刷新',
             icon: 'bf-refresh',
-            ent: this.addNew
+            ent: this.refresh
           }
         ],
         colors: [],
         multipleTable: [],
-        multipleSelection:[],
+        multipleSelection: [],
         checkboxInit: false,
         showMask: false,
         visible2: false,
         dele: '',
-        cancelDel:'',
+        cancelDel: '',
         newId: '',
         options: [{value: '0', label: 0}, {value: 1, label: 1}],
         ruleForm: {
@@ -130,15 +192,46 @@
           desc: [
             {required: true, message: '请填写描述', trigger: 'blur'}
           ]
-        }
+        },
+        pagination: {
+          current_page: 0,
+          total: 0,
+          per_page: 0
+        },
+        delArr: [],
+        showIndex: '',
+        status:[
+          {
+          value: '0',
+          label: '0-停用'
+          },
+          {
+            value: '1',
+            label: '1-启用'
+          }
+        ],
+        inputChange: false
       }
     },
+    /*computed:{
+      setTableHeight: function() {
+        let tabH = $(window).height() - this.$refs.table.offsetTop - ($(this.$refs.pagination).height()+20);
+        return tabH;
+      }
+    },*/
     methods: {
+      //请求数据
       get: function () {
-        this.$http.get('http://bferp.test/api/markcolors').then(function (res) {
-          this.colors = res.body.data;
-        }, function (err) {
-          console.log(err);
+        this.$fetch('/markcolors').then((res) => {
+          this.colors = res.data;
+          let pg = res.meta.pagination;
+          this.pagination.current_page = pg.current_page;
+          this.pagination.total = pg.total;
+          this.pagination.per_page = pg.per_page;
+        }, (err) => {
+          this.$message.error({
+            message: err.message
+          });
         });
       },
       addNew() {
@@ -148,33 +241,29 @@
         this.showMask = true;
         $('.el-form-item__error').css({left: 50 + 'px'});
       },
+      //添加
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            const url = 'http://bferp.test/api/markcolors';
-            this.$http.post(
-              url,
-              {
-                markcode: this.ruleForm.code,
-                markname: this.ruleForm.name,
-                color: this.ruleForm.color,
-                description: this.ruleForm.desc,
-                status: this.ruleForm.status
-              },
-              {emulateJSON: true}
-            )
-              .then((res) => {
+            var data = {
+              markcode: this.ruleForm.code,
+              markname: this.ruleForm.name,
+              color: this.ruleForm.color,
+              description: this.ruleForm.desc,
+              status: this.ruleForm.status
+            };
+            this.$post('/markcolors', data)
+              .then(() => {
                 this.$message({
                   message: '添加成功',
-                  type:'success'
+                  type: 'success'
                 });
                 this.showMask = false;
                 this.get();
-              })
-              .catch((err) => {
-                if (err.body.status_code === 422) {
-                  let arr=err.body.errors;
-                  let arr1=[];
+              }, (err) => {
+                if (err.response) {
+                  let arr = err.response.data.errors;
+                  let arr1 = [];
                   for (let i in arr) {
                     arr1.push(arr[i]);
                   }
@@ -183,7 +272,7 @@
                     message: str
                   });
                 }
-              });
+              })
           } else {
             console.log('error submit!!');
             return false;
@@ -196,74 +285,213 @@
       closeMask() {
         this.showMask = false;
       },
-      edit(a){
-        console.log(a);
+      //选中当前行
+      handleCurrent(row, event, column) {
+
       },
-      confirmD(id){
-        this.$http.delete('http://bferp.test/api/markcolors/'+id)
-          .then((res)=>{
+      //点击删除按钮
+      del(id, e) {
+        this.visible2 = true;
+        $('.el-popper').css({left: e.x - 100 + 'px', top: e.y - 125 + 'px'});
+        this.newId = id;
+      },
+      //执行删除
+      confirmD(id) {
+        this.$del('/markcolors/' + id)
+          .then(() => {
             this.$message({
               message: '删除成功',
-              type:'success'
+              type: 'success'
             });
             this.visible2 = false;
             this.get();
-          })
-          .catch((err)=>{
+          }, err => {
             this.visible2 = false;
-            if(err.body.status_code === 404){
+            if (err.body.status_code === 404) {
               this.$message.error({
                 message: '没有查询到相关数据'
               });
             }
           })
       },
-      cancelD(){
+      cancelD() {
         this.visible2 = false;
         this.$message({
           message: '取消删除',
-          type:'info'
+          type: 'info'
         });
       },
-      del(b,e){
-        this.visible2 = true;
-        $('.el-popper').css({left:e.x-100+'px',top: e.y-125+'px'});
-        this.newId= b;
-      },
-      toggleChecked(){
+      toggleChecked() {
         this.checkboxInit = !this.checkboxInit;
       },
-      selsChange(sels) {
-        this.sels = sels
+      handleSelectionChange(val) {
+        this.multipleSelection = val;
+        let del = [];
+        this.multipleSelection.forEach(selectedItem => {
+          del.push(selectedItem.id);
+        });
+        this.delArr = del.join(',');
+        console.log(this.delArr);
       },
-      handleCurrentChange(row, event, column) {
-
+      //每页显示条数
+      /*handleSizeChange(val) {
+        // console.log(`每页 ${val} 条`);
+      },*/
+      //分页请求
+      handleCurrentChange(val) {
+        // console.log(`当前页: ${val}`);
+        this.$fetch('/markcolors?page=' + val).then((res) => {
+          this.colors = res.data;
+          let pg = res.meta.pagination;
+          this.pagination.current_page = pg.current_page;
+        }, (err) => {
+          this.$message.error({
+            message: err.message
+          });
+        });
+      },
+      //批量删除
+      delMore() {
+        if (this.delArr.length === 0) {
+          this.$message({
+            message: '没有选中数据',
+            type: 'warning'
+          });
+        } else {
+          this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            axios.delete("/markcolors", {data: this.$qs.stringify({ids: this.delArr})})
+              .then(res => {
+                this.$message({
+                  message: '删除成功',
+                  type: 'success'
+                });
+                this.get();
+              })
+              .catch(err => {
+                this.$message.error({
+                  message: '删除失败'
+                });
+              })
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消删除'
+            });
+          });
+        }
+      },
+      //刷新
+      refresh() {
+        location.reload();
+      },
+      //设置opt宽度
+      setOptWidth() {
+        this.$store.state.opt.opts = this.newOpt;
+        this.$store.commit('change', this.newOpt);
+      },
+      //编辑
+      edit(index) {
+        this.showIndex = 'index'+index;
+      },
+      handleEdit(){
+        this.inputChange = true;
+      },
+      //保存修改
+      editSave(index,row){
+        let newInfo = {
+          id: row.id,
+          markcode: row.markcode,
+          markname: row.markname,
+          color: row.color,
+          description: row.description,
+          status: row.status
+        };
+        if(this.inputChange){
+          this.$patch('/markcolors/'+row.id,newInfo)
+            .then(res=>{
+              console.log(res);
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              });
+              this.showIndex ='';
+              this.inputChange = false;
+            },err=>{
+              if(err.response){
+                let arr = err.response.data.errors;
+                let arr1 = [];
+                for (let i in arr) {
+                  arr1.push(arr[i]);
+                }
+                let str = arr1.join(',');
+                this.$message.error({
+                  message: str
+                })
+              }
+            })
+        }else{
+          this.$message({
+            message: '数据未改动',
+            type: 'info'
+          });
+        }
+      },
+      //取消修改
+      editCancle(){
+        this.$message({
+          message: '取消修改',
+          type: 'info'
+        });
+        this.showIndex ='';
       }
     },
-    create() {
-
-    },
     mounted() {
-      this.$store.state.opt.opts = this.newOpt;
+      /*
+     this.$store.state.opt.opts = this.newOpt;
       this.$store.commit('change', this.newOpt);
       const that = this;
-      $(window).resize(() => {
+      $(window).resize(
+        () => {
         return (() => {
           that.$store.state.opt.opts = that.newOpt;
           that.$store.commit('change', that.newOpt);
-        })()
+        })()}
+        );
+        */
+      this.setOptWidth();
+      let that = this;
+      $(window).resize(() => {
+        that.setOptWidth();
       });
       this.get();
+      this.edit();
     }
   }
 </script>
 <style lang="scss" scoped>
-    .el-table_1_column_7{
-        .cell{
-            i{
+    .el-table_1_column_7 {
+        .cell {
+            i {
                 margin-right: 5px;
                 cursor: pointer;
             }
         }
+    }
+
+    .circle{
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        display: table-caption;
+        background-color: red;
+    }
+
+    .active{
+        background-color: green;
     }
 </style>

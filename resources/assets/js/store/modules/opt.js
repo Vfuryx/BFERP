@@ -18,7 +18,7 @@ const opt = {
     },
     change: (state, opts) => {
       //div宽度
-      const leaveW = $(window).width() - $('.logo').width() - parseInt($('.opt').css('marginLeft')) - parseInt($('.opt').css('marginRight'));
+      const leaveW = $(window).width() - $('.logo').width() - parseInt($('.opt').css('marginLeft')) - parseInt($('.opt').css('marginRight')) - parseInt($('.opt').css('paddingLeft')) - 10;
       //每个opt宽度
       const eachW = $('.list').width() + parseInt($('.list').css('marginRight'));
       //显示个数
@@ -35,7 +35,7 @@ const opt = {
     },
     toggle_ok: (state) => {
       state.ok = !state.ok;
-    }
+    },
   },
   actions: {
     getOpt: (commit) => {

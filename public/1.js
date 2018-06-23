@@ -1,19 +1,19 @@
 webpackJsonp([1],{
 
-/***/ 393:
+/***/ 392:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(525)
-  __webpack_require__(527)
+  __webpack_require__(524)
+  __webpack_require__(526)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(529)
+var __vue_script__ = __webpack_require__(528)
 /* template */
-var __vue_template__ = __webpack_require__(530)
+var __vue_template__ = __webpack_require__(529)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53,13 +53,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 525:
+/***/ 524:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(526);
+var content = __webpack_require__(525);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -80,7 +80,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 526:
+/***/ 525:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -95,13 +95,13 @@ exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input 
 
 /***/ }),
 
-/***/ 527:
+/***/ 526:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(528);
+var content = __webpack_require__(527);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -122,7 +122,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 528:
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -137,11 +137,12 @@ exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixe
 
 /***/ }),
 
-/***/ 529:
+/***/ 528:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(54);
 //
 //
 //
@@ -183,7 +184,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-// import { isvalidUsername } from '../../utils/validate.js';
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
@@ -264,23 +264,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          var data = {
+          var msg = {
             username: _this2.loginForm.username,
             password: _this2.loginForm.password,
             captcha_key: _this2.loginForm.key,
             captcha_code: _this2.loginForm.code
           };
-          _this2.$post('/authorizations', data).then(function (res) {
+          _this2.$store.dispatch('Login', msg).then(function () {
             _this2.$message({
               message: '登录成功',
               type: 'success'
             });
-            _this2.$router.push({ path: '/' });
-          }, function (err) {
-            console.log(err);
-            _this2.$message.error({
-              message: err.message
+            __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].push({
+              path: "/",
+              querry: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
             });
+          }).catch(function (err) {
+            if (err.response) {
+              var arr = err.response.data.message;
+              _this2.$message.error({
+                message: arr
+              });
+            }
           });
         } else {
           console.log('error submit!!');
@@ -296,7 +301,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 530:
+/***/ 529:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

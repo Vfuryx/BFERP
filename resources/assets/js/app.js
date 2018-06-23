@@ -36,6 +36,23 @@ Vue.use(ElementUi, {
 
 import {post,fetch,patch,put,del} from './utils/http.js'
 
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) {
+    if (store.state.user.token) {
+      next();
+    }
+    else {
+      next({
+        path: '/login',
+        query: {redirect: to.fullPath}
+      })
+    }
+  }
+  else {
+    next();
+  }
+});
+
 //定义全局变量
 Vue.prototype.$post=post
 Vue.prototype.$fetch=fetch

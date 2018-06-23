@@ -20,10 +20,8 @@
     "normalize.css": "^8.0.0",
     "nprogress": "^0.2.0",
     "qs": "^6.5.2",
-    "querystring": "^0.2.0",
     "svg-sprite-loader": "^3.8.0",
     "vue": "^2.5.7",
-    "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
