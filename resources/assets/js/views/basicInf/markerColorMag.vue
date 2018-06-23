@@ -1,65 +1,72 @@
 <template>
-    <div ref="table">
-        <el-table :data="colors" fit highlight-current-row ref="multipleTable" @row-click="handleCurrent"
-                  @selection-change="handleSelectionChange"
-                   max-height="550" type="index">
-            <el-table-column
-                    type="selection"
-                    width="95" align="center" :checked="checkboxInit" @change="toggleChecked">
-            </el-table-column>
-            <el-table-column label="标记代码" align="center">
-                <template slot-scope="scope">
+    <div>
+        <div ref="table" >
+            <el-table :data="colors" fit highlight-current-row ref="multipleTable" @row-click="handleCurrent"
+                      @selection-change="handleSelectionChange"
+                      max-height="550" type="index"
+                      element-loading-text="拼命加载中"
+                      v-loading="loading"
+                      element-loading-spinner="el-icon-loading"
+                      element-loading-background="rgba(0, 0, 0, 0.8)"
+            >
+                <el-table-column
+                        type="selection"
+                        width="95" align="center" :checked="checkboxInit" @change="toggleChecked">
+                </el-table-column>
+                <el-table-column label="标记代码" align="center">
+                    <template slot-scope="scope">
                     <span v-if="showIndex=='index'+scope.$index">
                         <el-input size="small" v-model="scope.row.markcode" placeholder="输入标记" @change="handleEdit(scope.$index,scope.row)"></el-input>
                     </span>
-                    <span v-else>
+                        <span v-else>
                         {{scope.row.markcode}}
                     </span>
-                </template>
-            </el-table-column>
-            <el-table-column label="标记名称" width="180" align="center">
-                <template slot-scope="scope">
+                    </template>
+                </el-table-column>
+                <el-table-column label="标记名称" width="180" align="center">
+                    <template slot-scope="scope">
                     <span v-if="showIndex=='index'+scope.$index">
                         <el-input size="small" v-model="scope.row.markname" placeholder="输入名称" @change="handleEdit(scope.$index,scope.row)"></el-input>
                     </span>
-                    <span v-else>{{scope.row.markname}}</span>
-                </template>
-            </el-table-column>
-            <el-table-column label="颜色" width="180" align="center">
-                <template slot-scope="scope">
+                        <span v-else>{{scope.row.markname}}</span>
+                    </template>
+                </el-table-column>
+                <el-table-column label="颜色" width="180" align="center">
+                    <template slot-scope="scope">
                     <span  v-if="showIndex=='index'+scope.$index">
-                        <el-color-picker v-model="scope.row.color" @change="handleEdit(scope.$index,scope.row)"></el-color-picker>
+                        <el-color-picker v-model="scope.row.color" @change="handleEdit(scope.$index,scope.row)" size="mini"></el-color-picker>
                     </span>
-                    <span v-else>
+                        <span v-else>
+                        <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
                         {{scope.row.color}}
                     </span>
-                </template>
-            </el-table-column>
-            <el-table-column label="描述" width="180" align="center">
-                <template slot-scope="scope">
+                    </template>
+                </el-table-column>
+                <el-table-column label="描述" width="180" align="center">
+                    <template slot-scope="scope">
                     <span v-if="showIndex=='index'+scope.$index">
                         <el-input   type="textarea" size="small" v-model="scope.row.description" placeholder="输入描述" @change="handleEdit(scope.$index,scope.row)"></el-input>
                     </span>
-                    <span v-else>
+                        <span v-else>
                         {{scope.row.description}}
                     </span>
-                </template>
-            </el-table-column>
-            <el-table-column align="center" label="状态" width="200">
-                <template slot-scope="scope">
+                    </template>
+                </el-table-column>
+                <el-table-column align="center" label="状态" width="200">
+                    <template slot-scope="scope">
                     <span v-if="showIndex=='index'+scope.$index">
                          <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit(scope.$index,scope.row)">
     <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
   </el-select>
                     </span>
-                    <span v-else>
-                         <i class='circle' :class="{'active':scope.row.status==0?false:true}"></i>
+                        <span v-else>
+                         <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
                         {{scope.row.status==0?'停用':'启用'}}
                     </span>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作" width="220" align="center">
-                <template slot-scope="scope">
+                    </template>
+                </el-table-column>
+                <el-table-column label="操作" width="220" align="center">
+                    <template slot-scope="scope">
                     <span v-if="showIndex=='index'+scope.$index">
                           <el-button
                                   size="mini"
@@ -70,31 +77,31 @@
                                 @click="editCancle()">取消
                     </el-button>
                     </span>
-                   <span v-else>
+                        <span v-else>
                         <el-button
                                 size="mini"
                                 @click="edit(scope.$index,scope.row.id,scope.row)">编辑
                     </el-button>
                    </span>
-                    <el-button
-                            size="mini"
-                            type="danger"
-                            @click="del(scope.row.id,$event)" v-model="newId">删除
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+                        <el-button
+                                size="mini"
+                                type="danger"
+                                @click="del(scope.row.id,$event)" v-model="newId">删除
+                        </el-button>
+                    </template>
+                </el-table-column>
+            </el-table>
 
-        <!--分页-->
-        <!--@size-change="handleSizeChange"-->
-        <div ref="pagination">
-            <el-pagination
-                    @current-change="handleCurrentChange"
-                    :current-page="pagination.current_page"
-                    :page-size="pagination.per_page"
-                    layout="total, sizes, prev, pager, next, jumper"
-                    :total="pagination.total">
-            </el-pagination>
+            <!--分页-->
+            <div ref="pagination">
+                <el-pagination
+                        @current-change="handleCurrentChange"
+                        :current-page="pagination.current_page"
+                        :page-size="pagination.per_page"
+                        layout="total, sizes, prev, pager, next, jumper"
+                        :total="pagination.total">
+                </el-pagination>
+            </div>
         </div>
 
         <!--删除提示-->
@@ -123,8 +130,8 @@
                 </el-form-item>
                 <el-form-item label="状态" prop="state">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                        <el-option label="0" value="0"></el-option>
-                        <el-option label="1" value="1"></el-option>
+                        <el-option label="停用" value="0"></el-option>
+                        <el-option label="启用" value="1"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="描述" prop="desc">
@@ -140,7 +147,6 @@
 </template>
 <script>
   import axios from 'axios'
-
 
   export default {
     data() {
@@ -188,13 +194,10 @@
           ],
           status: [
             {required: true, message: '请选择状态', trigger: 'change'}
-          ],
-          desc: [
-            {required: true, message: '请填写描述', trigger: 'blur'}
           ]
         },
         pagination: {
-          current_page: 0,
+          current_page: 1,
           total: 0,
           per_page: 0
         },
@@ -210,7 +213,8 @@
             label: '1-启用'
           }
         ],
-        inputChange: false
+        inputChange: false,
+        loading: true
       }
     },
     /*computed:{
@@ -221,9 +225,10 @@
     },*/
     methods: {
       //请求数据
-      get: function () {
+      get() {
         this.$fetch('/markcolors').then((res) => {
           this.colors = res.data;
+          this.loading = false;
           let pg = res.meta.pagination;
           this.pagination.current_page = pg.current_page;
           this.pagination.total = pg.total;
@@ -286,9 +291,7 @@
         this.showMask = false;
       },
       //选中当前行
-      handleCurrent(row, event, column) {
-
-      },
+      handleCurrent(row, event, column) {},
       //点击删除按钮
       del(id, e) {
         this.visible2 = true;
@@ -331,7 +334,6 @@
           del.push(selectedItem.id);
         });
         this.delArr = del.join(',');
-        console.log(this.delArr);
       },
       //每页显示条数
       /*handleSizeChange(val) {
@@ -386,7 +388,11 @@
       },
       //刷新
       refresh() {
-        location.reload();
+        this.loading = true;
+        this.get();
+        setTimeout(()=> {
+          this.loading = false;
+        }, 2000)
       },
       //设置opt宽度
       setOptWidth() {
@@ -413,7 +419,6 @@
         if(this.inputChange){
           this.$patch('/markcolors/'+row.id,newInfo)
             .then(res=>{
-              console.log(res);
               this.$message({
                 message: '修改成功',
                 type: 'success'
@@ -482,16 +487,4 @@
         }
     }
 
-    .circle{
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        display: table-caption;
-        background-color: red;
-    }
-
-    .active{
-        background-color: green;
-    }
 </style>

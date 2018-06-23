@@ -504,3 +504,23 @@
   margin: 10px -10px;
 }
 
+.el-table .tableColor{
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+//状态
+.showStatus{
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: table-caption;
+  background-color: red;
+}
+
+.statusActive{
+  background-color: green;
+}
+

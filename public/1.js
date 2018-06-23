@@ -142,7 +142,7 @@ exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixe
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(54);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(57);
 //
 //
 //
@@ -188,21 +188,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
   data: function data() {
-    /* const validateUsername = (rule, value, callback) => {
-       //  用户名输入有误
-       if (!isvalidUsername(value)) {
-         callback(new Error('请输入正确的用户名'))
-       } else {
-         callback()
-       }
-     }
-     const validatePass = (rule, value, callback) => {
-       if (value.length < 5) {
-         callback(new Error('密码不能小于5位'))
-       } else {
-         callback()
-       }
-     }*/
     return {
       loginForm: {
         username: '',
@@ -264,13 +249,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$refs[formName].validate(function (valid) {
         if (valid) {
-          var msg = {
+          var data = {
             username: _this2.loginForm.username,
             password: _this2.loginForm.password,
             captcha_key: _this2.loginForm.key,
             captcha_code: _this2.loginForm.code
           };
-          _this2.$store.dispatch('Login', msg).then(function () {
+          _this2.$store.dispatch('Login', data).then(function (res) {
             _this2.$message({
               message: '登录成功',
               type: 'success'
@@ -279,12 +264,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               path: "/",
               querry: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
             });
-          }).catch(function (err) {
-            if (err.response) {
-              var arr = err.response.data.message;
+          }).catch(function (error) {
+            if (error.response) {
+              var arr = error.response.data.message;
               _this2.$message.error({
                 message: arr
               });
+              _this2.getyzCode();
+              _this2.loginForm.code = '';
+              /* console.log(error.response.status);
+               if(this.$store.state.user.token){
+                 console.log(this.$store.state.user.token);
+                 console.log(error.response.status);
+                 switch (error.response.status) {
+                   case 401:
+                     return this.$store.dispatch('Logout')
+                     break
+                   case 400:
+                     return this.$message.error(error.response.data.errors)
+                     break
+                 }
+               }else{
+                 let arr = error.response.data.message;
+                 this.$message.error({
+                   message: arr
+                 });
+                 this.getyzCode();
+                 this.loginForm.code = '';
+               }*/
             }
           });
         } else {

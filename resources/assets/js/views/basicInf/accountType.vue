@@ -6,6 +6,10 @@
                     :data="accountType" fit highlight-current-row
                    type="index"
                     @selection-change="handleSelectionChange"
+                    element-loading-text="拼命加载中"
+                    v-loading="loading"
+                    element-loading-spinner="el-icon-loading"
+                    element-loading-background="rgba(0, 0, 0, 0.8)"
             >
                 <el-table-column
                         type="selection"
@@ -36,7 +40,7 @@
                             </el-select>
                         </span>
                         <span v-else>
-                            <i class='circle' :class="{'active':scope.row.status==0?false:true}"></i>
+                            <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
                             {{scope.row.status==0?'停用':'启用'}}
                         </span>
                     </template>
@@ -63,15 +67,15 @@
             </el-table>
 
             <!--添加面板-->
-            <el-dialog title="新增颜色标记" :visible.sync="showMask">
+            <el-dialog title="新增记账类型" :visible.sync="showMask">
                 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                     <el-form-item label="类型" prop="name">
                         <el-input v-model="ruleForm.name" placehold=""></el-input>
                     </el-form-item>
-                    <el-form-item label="状态" prop="state">
+                    <el-form-item label="状态" prop="status">
                         <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                            <el-option label="0" value="0"></el-option>
-                            <el-option label="1" value="1"></el-option>
+                            <el-option label="停用" value="0"></el-option>
+                            <el-option label="启用" value="1"></el-option>
                         </el-select>
                     </el-form-item>
                 </el-form>
@@ -162,7 +166,8 @@
             value: '1',
             label: '1-启用'
           }
-        ]
+        ],
+        loading: true
       }
     },
     methods:{
@@ -176,6 +181,7 @@
         this.$fetch('/acctypes')
           .then(res=>{
             this.accountType = res.data;
+            this.loading = false;
             let pg = res.meta.pagination;
             this.pagination.current_page = pg.current_page;
             this.pagination.total = pg.total;
@@ -259,7 +265,11 @@
       },
       //刷新
       refresh(){
-        location.reload();
+        this.loading = true;
+        this.getAccountType();
+        setTimeout(()=> {
+          this.loading = false;
+        }, 2000)
       },
       //点击删除
       delClick(row,e){
@@ -414,17 +424,4 @@
     }
   }
 </script>
-<style lang="scss" scoped>
-    .circle{
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        display: -webkit-inline-box;
-        background-color: red;
-    }
-
-    .active{
-        background-color: green;
-    }
-</style>
+<style lang="scss" scoped></style>
