@@ -251,7 +251,7 @@ class GoodsCategoriesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="商品类别id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

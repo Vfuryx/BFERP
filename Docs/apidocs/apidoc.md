@@ -222,7 +222,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 标记颜色id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -441,7 +441,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 记账类型id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -688,7 +688,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 费用类型id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -907,7 +907,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 配送方式id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1126,7 +1126,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 费用类别id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1352,7 +1352,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 运费类型id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1589,7 +1589,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 商品类别id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1808,7 +1808,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
-    + status: (string, required) - 状态(0:停用，1:启用)
+    + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
