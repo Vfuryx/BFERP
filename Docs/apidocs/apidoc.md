@@ -72,7 +72,7 @@ FORMAT: 1A
     + markname: (string, required) - 标记名称
     + color: (string, required) - 颜色
     + description: (string, optional) - 描述
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -300,7 +300,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 记账类型名称
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -526,13 +526,13 @@ FORMAT: 1A
 
 
 + Parameters
-    + fee_category_id: (string, required) - 费用类别id
+    + fee_category_id: (integer, required) - 费用类别id
     + name: (string, required) - 费用名称
     + code: (string, required) - 费用代码
     + remark: (string, optional) - 费用类别备注
-    + is_default: (string, optional) - 是否默认
+    + is_default: (integer, optional) - 是否默认
         + Default: 0
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -766,7 +766,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 配送方式名
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -985,7 +985,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 费用类别名称
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1206,9 +1206,9 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 运费类型名称
-    + is_default: (string, optional) - 是否默认
+    + is_default: (integer, optional) - 是否默认
         + Default: 0
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1439,7 +1439,7 @@ FORMAT: 1A
     + name: (string, required) - 商品类别名称
     + description: (string, optional) - 描述
     + remark: (string, optional) - 备注
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1667,7 +1667,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 入库类型名称
-    + status: (string, optional) - 状态(0:停用，1:启用)
+    + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)

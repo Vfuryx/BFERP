@@ -68,7 +68,7 @@ class AccountingTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="记账类型名称", required=true),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={

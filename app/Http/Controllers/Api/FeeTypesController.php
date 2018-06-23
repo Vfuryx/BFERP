@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
  */
 class FeeTypesController extends Controller
 {
-   /**
+    /**
      * 获取所有费用类型 
      *  
      * @Get("/feetypes") 
@@ -73,12 +73,12 @@ class FeeTypesController extends Controller
      * @Post("/feetypes") 
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("fee_category_id", description="费用类别id", required=true),
+     *      @Parameter("fee_category_id",type="integer", description="费用类别id", required=true),
      *      @Parameter("name", description="费用名称", required=true),
      *      @Parameter("code", description="费用代码", required=true),
      *      @Parameter("remark", description="费用类别备注", required=false),
-     *      @Parameter("is_default", description="是否默认", required=false,default=0),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_default",type="integer", description="是否默认", required=false,default=0),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -115,9 +115,9 @@ class FeeTypesController extends Controller
         $feetype->fill($request->all());
         $feetype->save();
         return $this->response
-                    ->item($feetype, new FeeTypeTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+            ->item($feetype, new FeeTypeTransformer())
+            ->setStatusCode(201)
+            ->addMeta('status_code', '201');
     }
 
     /**
@@ -181,17 +181,17 @@ class FeeTypesController extends Controller
      *      })
      * })
      */
-    public function update(FeeTypeRequest $request,FeeType $feetype)
+    public function update(FeeTypeRequest $request, FeeType $feetype)
     {
         // dd($request->all(),$feetype->all());
         $feetype->update($request->all());
         return $this->response
-                    ->item($feetype, new FeeTypeTransformer()) 
-                    ->setStatusCode(201);
+            ->item($feetype, new FeeTypeTransformer())
+            ->setStatusCode(201);
 
     }
 
-     /**
+    /**
      * 删除费用类型 
      *  
      * @Delete("/feetypes/:id") 
@@ -242,13 +242,13 @@ class FeeTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FeeType::destroy($ids)){
+            if (count($ids) !== FeeType::destroy($ids)) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
+            return $this->errorResponse(500, '删除错误', 500);
         }
 
         return $this->errorResponse(204);
@@ -291,13 +291,13 @@ class FeeTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FeeType::whereIn('id',$ids)->update(['status'=>$status])){
+            if (count($ids) !== FeeType::whereIn('id', $ids)->update(['status' => $status])) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
+            return $this->errorResponse(500, '更改错误', 500);
         }
 
         return $this->errorResponse(204);

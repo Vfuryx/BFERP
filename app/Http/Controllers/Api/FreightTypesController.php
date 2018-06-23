@@ -69,8 +69,8 @@ class FreightTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="运费类型名称", required=true),
-     *      @Parameter("is_default", description="是否默认", required=false,default=0),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_default",type="integer", description="是否默认", required=false,default=0),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -101,9 +101,9 @@ class FreightTypesController extends Controller
         $freighttype->fill($request->all());
         $freighttype->save();
         return $this->response
-                    ->item($freighttype, new FreightTypeTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+            ->item($freighttype, new FreightTypeTransformer())
+            ->setStatusCode(201)
+            ->addMeta('status_code', '201');
     }
 
     /**
@@ -165,8 +165,8 @@ class FreightTypesController extends Controller
     {
         $freighttype->update($request->all());
         return $this->response
-                    ->item($freighttype, new FreightTypeTransformer())
-                    ->setStatusCode(201);
+            ->item($freighttype, new FreightTypeTransformer())
+            ->setStatusCode(201);
     }
 
     /**
@@ -187,7 +187,7 @@ class FreightTypesController extends Controller
         $freighttype->delete();
         return $this->noContent();
     }
-    
+
     /**
      * 删除一组运费类型 
      *  
@@ -220,13 +220,13 @@ class FreightTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FreightType::destroy($ids)){
+            if (count($ids) !== FreightType::destroy($ids)) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
+            return $this->errorResponse(500, '删除错误', 500);
         }
 
         return $this->errorResponse(204);
@@ -269,13 +269,13 @@ class FreightTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FreightType::whereIn('id',$ids)->update(['status'=>$status])){
+            if (count($ids) !== FreightType::whereIn('id', $ids)->update(['status' => $status])) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
+            return $this->errorResponse(500, '更改错误', 500);
         }
 
         return $this->errorResponse(204);

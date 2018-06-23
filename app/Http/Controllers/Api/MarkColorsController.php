@@ -77,7 +77,7 @@ class MarkColorsController extends Controller
      *      @Parameter("markname", description="标记名称", required=true),
      *      @Parameter("color", description="颜色", required=true),
      *      @Parameter("description", description="描述", required=false),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={

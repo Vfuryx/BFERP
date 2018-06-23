@@ -75,7 +75,7 @@ class GoodsCategoriesController extends Controller
      *      @Parameter("name", description="商品类别名称", required=true),
      *      @Parameter("description", description="描述", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
