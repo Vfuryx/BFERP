@@ -281,7 +281,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         code: '',
         name: '',
         color: '',
-        status: '',
+        status: '1',
         desc: ''
       },
       rules: {
@@ -620,7 +620,6 @@ var render = function() {
                 data: _vm.colors,
                 fit: "",
                 "highlight-current-row": "",
-                "max-height": "550",
                 type: "index",
                 "element-loading-text": "拼命加载中",
                 "element-loading-spinner": "el-icon-loading",

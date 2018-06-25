@@ -92,14 +92,14 @@
               captcha_key: this.loginForm.key,
               captcha_code: this.loginForm.code
             };
-            this.$store.dispatch('Login',data).then(res => {
+            this.$store.dispatch('Login',data).then(() => {
               this.$message({
                 message: '登录成功',
                 type: 'success'
               });
               router.push({
                 path:"/",
-                querry:{redirect:router.currentRoute.fullPath}
+                query:{redirect:router.currentRoute.fullPath}
               })
             }).catch(error => {
               if (error.response) {

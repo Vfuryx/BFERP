@@ -236,14 +236,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             captcha_key: _this2.loginForm.key,
             captcha_code: _this2.loginForm.code
           };
-          _this2.$store.dispatch('Login', data).then(function (res) {
+          _this2.$store.dispatch('Login', data).then(function () {
             _this2.$message({
               message: '登录成功',
               type: 'success'
             });
             __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].push({
               path: "/",
-              querry: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
+              query: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
             });
           }).catch(function (error) {
             if (error.response) {

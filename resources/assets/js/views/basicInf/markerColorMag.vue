@@ -3,7 +3,7 @@
         <div ref="table" >
             <el-table :data="colors" fit highlight-current-row ref="multipleTable" @row-click="handleCurrent"
                       @selection-change="handleSelectionChange"
-                      max-height="550" type="index"
+                      type="index"
                       element-loading-text="拼命加载中"
                       v-loading="loading"
                       element-loading-spinner="el-icon-loading"
@@ -182,7 +182,7 @@
           code: '',
           name: '',
           color: '',
-          status: '',
+          status: '1',
           desc: ''
         },
         rules: {

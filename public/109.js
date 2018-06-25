@@ -232,6 +232,100 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -292,7 +386,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         value: '1',
         label: '1-启用'
       }],
-      feeCage: []
+      feeCage: [],
+      activeName: 'type',
+      expenseCage: [],
+      showCage: false,
+      ruleForm2: {
+        name: ''
+      },
+      rules2: {
+        name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
+      },
+      showDel2: false
     };
   },
 
@@ -306,6 +410,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.$fetch('/feetypes').then(function (res) {
+        console.log(res);
         _this.expenseType = res.data;
         _this.loading = false;
         var pg = res.meta.pagination;
@@ -394,7 +499,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var newData = {
         id: row.id,
-        fee_category_id: row.fee_category_id,
+        fee_category_id: row.fee_category.id,
         name: row.name,
         code: row.code,
         is_default: row.is_default,
@@ -403,12 +508,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       };
       if (this.inputChange) {
         this.$patch('/feetypes/' + row.id, newData).then(function () {
-          _this3.$message({
-            message: '修改成功',
-            type: 'success'
-          });
-          _this3.changeIndex = '';
-          _this3.inputChange = false;
+          _this3.loading = true;
+          _this3.getExpenseType();
+          setTimeout(function () {
+            _this3.loading = false;
+            _this3.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+            _this3.changeIndex = '';
+            _this3.inputChange = false;
+          }, 2000);
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -465,6 +575,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     cancelD: function cancelD() {
       this.showDel = false;
+      this.showDel2 = false;
       this.$message({
         message: '取消删除',
         type: 'info'
@@ -543,7 +654,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.$fetch('/feecates').then(function (res) {
         _this8.feeCage = res.data;
-        console.log(_this8.feeCage);
       }, function (err) {
         if (err.response) {
           var arr = err.response.data.errors;
@@ -557,6 +667,180 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           });
         }
       });
+    },
+    handleClick: function handleClick() {
+      if ($('#tab-type').hasClass('is-active')) {
+        this.newOpt[0].ent = this.addExpenseCage;
+        this.newOpt[1].ent = this.delMoreCage;
+        this.newOpt[2].ent = this.refreshCage;
+        $('#page').hide();
+      } else {
+        this.newOpt[0].ent = this.addExpense;
+        this.newOpt[1].ent = this.delMore;
+        this.newOpt[2].ent = this.refresh;
+        $('#page').show();
+      }
+    },
+
+    //  新增
+    addExpenseCage: function addExpenseCage() {
+      this.showCage = true;
+    },
+    submitForm2: function submitForm2(formName) {
+      var _this9 = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          var data = {
+            name: _this9.ruleForm2.name
+          };
+          _this9.$post('/feecates', data).then(function () {
+            _this9.$message({
+              message: '添加成功',
+              type: 'success'
+            });
+            _this9.showCage = false;
+            _this9.getExpenseCage();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this9.$message.error({
+                message: str
+              });
+            }
+          });
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
+    //  删除
+    delMoreCage: function delMoreCage() {
+      var _this10 = this;
+
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
+        });
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this10.$del("/feecates", { ids: _this10.delArr }).then(function () {
+            _this10.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this10.getExpenseCage();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this10.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this10.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+    refreshCage: function refreshCage() {
+      var _this11 = this;
+
+      this.loading = true;
+      this.getExpenseCage();
+      setTimeout(function () {
+        _this11.loading = false;
+      }, 2000);
+    },
+    delClick2: function delClick2(row, e) {
+      this.showDel2 = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    confirmD2: function confirmD2(id) {
+      var _this12 = this;
+
+      this.$del('/feecates/' + id).then(function () {
+        _this12.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this12.showDel2 = false;
+        _this12.getExpenseCage();
+      }, function (err) {
+        if (err.response) {
+          _this12.showDel2 = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this12.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    editSave2: function editSave2(index, row) {
+      var _this13 = this;
+
+      var newData = {
+        id: row.id,
+        name: row.name
+      };
+      if (this.inputChange) {
+        this.$patch('/feecates/' + row.id, newData).then(function () {
+          _this13.loading = true;
+          _this13.getExpenseCage();
+          setTimeout(function () {
+            _this13.loading = false;
+            _this13.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+            _this13.changeIndex = '';
+            _this13.inputChange = false;
+          }, 2000);
+        }, function (err) {
+          if (err.response) {
+            var arr = err.response.data.errors;
+            var arr1 = [];
+            for (var i in arr) {
+              arr1.push(arr[i]);
+            }
+            var str = arr1.join(',');
+            _this13.$message.error({
+              message: str
+            });
+          }
+        });
+      } else {
+        this.$message({
+          message: '数据未改动',
+          type: 'info'
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -583,367 +867,662 @@ var render = function() {
     "div",
     [
       _c(
-        "el-table",
+        "el-tabs",
         {
-          directives: [
-            {
-              name: "loading",
-              rawName: "v-loading",
-              value: _vm.loading,
-              expression: "loading"
-            }
-          ],
-          attrs: {
-            data: _vm.expenseType,
-            fit: "",
-            "highlight-current-row": "",
-            type: "index",
-            "element-loading-text": "拼命加载中",
-            "element-loading-spinner": "el-icon-loading",
-            "element-loading-background": "rgba(0, 0, 0, 0.6)"
-          },
-          on: { "selection-change": _vm.handleSelectionChange }
+          on: { "tab-click": _vm.handleClick },
+          model: {
+            value: _vm.activeName,
+            callback: function($$v) {
+              _vm.activeName = $$v
+            },
+            expression: "activeName"
+          }
         },
         [
-          _c("el-table-column", {
-            attrs: {
-              type: "selection",
-              width: "95",
-              align: "center",
-              checked: _vm.checkboxInit
-            },
-            on: { change: _vm.toggleChecked }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "类型", align: "center", width: "180" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c("el-input", {
-                              attrs: { size: "small", placeholder: "输入类型" },
-                              on: { change: _vm.handleEdit },
-                              model: {
-                                value: scope.row.fee_category_id,
-                                callback: function($$v) {
-                                  _vm.$set(scope.row, "fee_category_id", $$v)
-                                },
-                                expression: "scope.row.fee_category_id"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.fee_category_id) +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "名称", align: "center", width: "200" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c("el-input", {
-                              attrs: { size: "small", placeholder: "输入名称" },
-                              on: { change: _vm.handleEdit },
-                              model: {
-                                value: scope.row.name,
-                                callback: function($$v) {
-                                  _vm.$set(scope.row, "name", $$v)
-                                },
-                                expression: "scope.row.name"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.name) +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "代码", align: "center", width: "200" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c("el-input", {
-                              attrs: { size: "small", placeholder: "输入代码" },
-                              on: { change: _vm.handleEdit },
-                              model: {
-                                value: scope.row.code,
-                                callback: function($$v) {
-                                  _vm.$set(scope.row, "code", $$v)
-                                },
-                                expression: "scope.row.code"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.code) +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "默认", align: "center", width: "180" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c(
-                              "el-select",
-                              {
-                                attrs: { placeholder: "状态" },
-                                on: { change: _vm.handleEdit },
-                                model: {
-                                  value: scope.row.is_default,
-                                  callback: function($$v) {
-                                    _vm.$set(scope.row, "is_default", $$v)
-                                  },
-                                  expression: "scope.row.is_default"
-                                }
-                              },
-                              _vm._l(_vm.defau, function(item) {
-                                return _c("el-option", {
-                                  key: item.value,
-                                  attrs: {
-                                    label: item.label,
-                                    value: item.value
-                                  }
-                                })
-                              })
-                            )
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.is_default == 0 ? "否" : "是") +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "状态", align: "center", width: "200" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c(
-                              "el-select",
-                              {
-                                attrs: { placeholder: "状态" },
-                                on: { change: _vm.handleEdit },
-                                model: {
-                                  value: scope.row.status,
-                                  callback: function($$v) {
-                                    _vm.$set(scope.row, "status", $$v)
-                                  },
-                                  expression: "scope.row.status"
-                                }
-                              },
-                              _vm._l(_vm.status, function(item) {
-                                return _c("el-option", {
-                                  key: item.value,
-                                  attrs: {
-                                    label: item.label,
-                                    value: item.value
-                                  }
-                                })
-                              })
-                            )
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _c("i", {
-                            staticClass: "showStatus",
-                            class: {
-                              statusActive: scope.row.status == 0 ? false : true
-                            }
-                          }),
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.status == 0 ? "停用" : "启用") +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "备注", align: "center" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c("el-input", {
-                              attrs: { size: "small", placeholder: "输入备注" },
-                              on: { change: _vm.handleEdit },
-                              model: {
-                                value: scope.row.remark,
-                                callback: function($$v) {
-                                  _vm.$set(scope.row, "remark", $$v)
-                                },
-                                expression: "scope.row.remark"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : _c("span", [
-                          _vm._v(
-                            "\n                            " +
-                              _vm._s(scope.row.remark) +
-                              "\n                        "
-                          )
-                        ])
-                  ]
-                }
-              }
-            ])
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "操作", width: "220", align: "center" },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    _vm.changeIndex == "index" + scope.$index
-                      ? _c(
-                          "span",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                attrs: { size: "mini" },
-                                on: {
-                                  click: function($event) {
-                                    _vm.editSave(scope.$index, scope.row)
-                                  }
-                                }
-                              },
-                              [_vm._v("保存")]
-                            ),
+          _c(
+            "el-tab-pane",
+            { attrs: { label: "费用类型管理", name: "type" } },
+            [
+              _c(
+                "el-table",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading",
+                      value: _vm.loading,
+                      expression: "loading"
+                    }
+                  ],
+                  attrs: {
+                    data: _vm.expenseType,
+                    fit: "",
+                    "highlight-current-row": "",
+                    type: "index",
+                    "element-loading-text": "拼命加载中",
+                    "element-loading-spinner": "el-icon-loading",
+                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
+                  },
+                  on: { "selection-change": _vm.handleSelectionChange }
+                },
+                [
+                  _c("el-table-column", {
+                    attrs: {
+                      type: "selection",
+                      width: "95",
+                      align: "center",
+                      checked: _vm.checkboxInit
+                    },
+                    on: { change: _vm.toggleChecked }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "类型", align: "center", width: "180" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: {
+                                          size: "small",
+                                          placeholder: "请选择类型"
+                                        },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.fee_category.id,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              scope.row.fee_category,
+                                              "id",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "scope.row.fee_category.id"
+                                        }
+                                      },
+                                      _vm._l(_vm.feeCage, function(item) {
+                                        return _c("el-option", {
+                                          attrs: {
+                                            label: item.name,
+                                            value: item.id
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.fee_category.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "名称", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入名称"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.name,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "name", $$v)
+                                        },
+                                        expression: "scope.row.name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "代码", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入代码"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.code,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "code", $$v)
+                                        },
+                                        expression: "scope.row.code"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.code) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "默认", align: "center", width: "180" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "状态" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.is_default,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              scope.row,
+                                              "is_default",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "scope.row.is_default"
+                                        }
+                                      },
+                                      _vm._l(_vm.defau, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.is_default == 0 ? "否" : "是"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "状态", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "状态" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.status,
+                                          callback: function($$v) {
+                                            _vm.$set(scope.row, "status", $$v)
+                                          },
+                                          expression: "scope.row.status"
+                                        }
+                                      },
+                                      _vm._l(_vm.status, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _c("i", {
+                                    staticClass: "showStatus",
+                                    class: {
+                                      statusActive:
+                                        scope.row.status == 0 ? false : true
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.status == 0 ? "停用" : "启用"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "备注", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入备注"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.remark,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "remark", $$v)
+                                        },
+                                        expression: "scope.row.remark"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.remark) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "操作", width: "220", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editSave(
+                                              scope.$index,
+                                              scope.row
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("保存")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: { click: _vm.editCancel }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "取消\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editType(
+                                              scope.row,
+                                              scope.$index
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("编辑")]
+                                    )
+                                  ],
+                                  1
+                                ),
                             _vm._v(" "),
                             _c(
                               "el-button",
                               {
-                                attrs: { size: "mini" },
-                                on: { click: _vm.editCancel }
-                              },
-                              [_vm._v("取消\n                            ")]
-                            )
-                          ],
-                          1
-                        )
-                      : _c(
-                          "span",
-                          [
-                            _c(
-                              "el-button",
-                              {
-                                attrs: { size: "mini" },
+                                attrs: { size: "mini", type: "danger" },
                                 on: {
                                   click: function($event) {
-                                    _vm.editType(scope.row, scope.$index)
+                                    _vm.delClick(scope.row, $event)
                                   }
                                 }
                               },
-                              [_vm._v("编辑")]
+                              [_vm._v("删除\n                            ")]
                             )
-                          ],
-                          1
-                        ),
-                    _vm._v(" "),
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { size: "mini", type: "danger" },
-                        on: {
-                          click: function($event) {
-                            _vm.delClick(scope.row, $event)
-                          }
+                          ]
                         }
-                      },
-                      [_vm._v("删除\n                    ")]
-                    )
-                  ]
-                }
-              }
-            ])
-          })
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-tab-pane",
+            { attrs: { label: "费用类别管理", name: "cage" } },
+            [
+              _c(
+                "el-table",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading",
+                      value: _vm.loading,
+                      expression: "loading"
+                    }
+                  ],
+                  attrs: {
+                    data: _vm.feeCage,
+                    fit: "",
+                    "highlight-current-row": "",
+                    type: "index",
+                    "element-loading-text": "拼命加载中",
+                    "element-loading-spinner": "el-icon-loading",
+                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
+                  },
+                  on: { "selection-change": _vm.handleSelectionChange }
+                },
+                [
+                  _c("el-table-column", {
+                    attrs: {
+                      type: "selection",
+                      width: "95",
+                      align: "center",
+                      checked: _vm.checkboxInit
+                    },
+                    on: { change: _vm.toggleChecked }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "名称", align: "center", width: "260" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入名称"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.name,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "name", $$v)
+                                        },
+                                        expression: "scope.row.name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "状态", align: "center", width: "260" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "状态" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.status,
+                                          callback: function($$v) {
+                                            _vm.$set(scope.row, "status", $$v)
+                                          },
+                                          expression: "scope.row.status"
+                                        }
+                                      },
+                                      _vm._l(_vm.status, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _c("i", {
+                                    staticClass: "showStatus",
+                                    class: {
+                                      statusActive:
+                                        scope.row.status == 0 ? false : true
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.status == 0 ? "停用" : "启用"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "操作", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editSave2(
+                                              scope.$index,
+                                              scope.row
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("保存")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: { click: _vm.editCancel }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "取消\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editType(
+                                              scope.row,
+                                              scope.$index
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("编辑")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.delClick2(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除\n                            ")]
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
       ),
@@ -989,7 +1568,7 @@ var render = function() {
                     },
                     _vm._l(_vm.feeCage, function(item) {
                       return _c("el-option", {
-                        attrs: { label: item.name, value: item.name }
+                        attrs: { label: item.name, value: item.id }
                       })
                     })
                   )
@@ -1150,8 +1729,91 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
+        "el-dialog",
+        {
+          attrs: { title: "新增费用类别", visible: _vm.showCage },
+          on: {
+            "update:visible": function($event) {
+              _vm.showCage = $event
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "ruleForm2",
+              staticClass: "demo-ruleForm",
+              attrs: {
+                model: _vm.ruleForm2,
+                rules: _vm.rules2,
+                "label-width": "100px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "费用名称\n", prop: "name" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm2.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm2, "name", $$v)
+                      },
+                      expression: "ruleForm2.name"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitForm2("ruleForm2")
+                    }
+                  }
+                },
+                [_vm._v("添加")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.resetForm("ruleForm2")
+                    }
+                  }
+                },
+                [_vm._v("重置")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
         "div",
-        { ref: "pagination" },
+        { ref: "pagination", attrs: { id: "page" } },
         [
           _c("el-pagination", {
             attrs: {
@@ -1202,6 +1864,53 @@ var render = function() {
                   on: {
                     click: function($event) {
                       _vm.confirmD(_vm.delId)
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-popover",
+        {
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.showDel2,
+            callback: function($$v) {
+              _vm.showDel2 = $$v
+            },
+            expression: "showDel2"
+          }
+        },
+        [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticStyle: { "text-align": "right", margin: "0" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD2(_vm.delId)
                     }
                   }
                 },

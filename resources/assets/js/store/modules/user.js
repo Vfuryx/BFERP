@@ -1,7 +1,7 @@
 import { login, getInfo, logout } from '../../api/login.js';
 import { getToken, setToken, removeToken } from '../../utils/auth.js';
 import axios from 'axios'
-import router from "../../router";
+import router from '../../router/index.js'
 
 const user = {
   state: {
@@ -14,16 +14,16 @@ const user = {
       state.token = token
     },
     REFRESH_TOKEN:(state,token)=>{
+      setToken(state.token);
       state.token = token.substring(token.indexOf(' ')+1);
       axios.defaults.headers.common['Authorization'] = state.token;
-      setToken(state.token);
     },
     PROFILE:(state,data)=>{
       state.name = data.name;
     },
-    /*LOGOUT: (state)=>{
+    LOGOUT: (state)=>{
       state.token = null;
-    }*/
+    }
   },
 
   actions: {
@@ -40,29 +40,28 @@ const user = {
         })
       })
     },
+
+
     // 退出
     Logout({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
           removeToken();
-          // commit('LOGOUT');
-          router.replace({
-            path: '/login',
-            query: {redirect: router.currentRoute.fullPath}
-          })
+          commit('LOGOUT');
           resolve()
         }).catch((err) => {
           reject(err)
         })
       })
     },
-  /*//  删除cookie
-    DelToken({ commit }){
+
+  //  删除cookie
+    DelToken(){
       return new Promise(()=>{
-        removeToken();
-        // commit('LOGOUT');
+        removeToken()
       })
-    },*/
+    },
+
   //  将刷新的token保存到本地
     refreshToken({commit},token){
       return new Promise(()=>{
@@ -70,6 +69,6 @@ const user = {
       })
     }
   }
-};
+}
 
 export default user

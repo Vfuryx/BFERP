@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../router/index.js'
 import store from '../store/index.js'
 import {Message} from 'element-ui'
-import { removeToken } from '../utils/auth.js';
+import { setToken,removeToken } from '../utils/auth.js';
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='http://bferp.test/api';
@@ -39,8 +39,9 @@ axios.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // store.dispatch('DelToken')
           removeToken();
+          store.dispatch('DelToken')
+          // store.commit('LOGOUT')
           router.replace({
             path: '/login',
             query: {redirect: router.currentRoute.fullPath}

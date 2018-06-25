@@ -101178,7 +101178,7 @@ var tagsView = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_auth_js__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__router_index_js__ = __webpack_require__(38);
 
 
 
@@ -101195,16 +101195,16 @@ var user = {
       state.token = token;
     },
     REFRESH_TOKEN: function REFRESH_TOKEN(state, token) {
+      Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* setToken */])(state.token);
       state.token = token.substring(token.indexOf(' ') + 1);
       __WEBPACK_IMPORTED_MODULE_2_axios___default.a.defaults.headers.common['Authorization'] = state.token;
-      Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* setToken */])(state.token);
     },
     PROFILE: function PROFILE(state, data) {
       state.name = data.name;
-    }
-    /*LOGOUT: (state)=>{
+    },
+    LOGOUT: function LOGOUT(state) {
       state.token = null;
-    }*/
+    }
   },
 
   actions: {
@@ -101224,6 +101224,7 @@ var user = {
       });
     },
 
+
     // 退出
     Logout: function Logout(_ref2) {
       var commit = _ref2.commit;
@@ -101231,11 +101232,7 @@ var user = {
       return new Promise(function (resolve, reject) {
         Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["b" /* logout */])().then(function () {
           Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["b" /* removeToken */])();
-          // commit('LOGOUT');
-          __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].replace({
-            path: '/login',
-            query: { redirect: __WEBPACK_IMPORTED_MODULE_3__router__["a" /* default */].currentRoute.fullPath }
-          });
+          commit('LOGOUT');
           resolve();
         }).catch(function (err) {
           reject(err);
@@ -101243,13 +101240,15 @@ var user = {
       });
     },
 
-    /*//  删除cookie
-      DelToken({ commit }){
-        return new Promise(()=>{
-          removeToken();
-          // commit('LOGOUT');
-        })
-      },*/
+
+    //  删除cookie
+    DelToken: function DelToken() {
+      return new Promise(function () {
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["b" /* removeToken */])();
+      });
+    },
+
+
     //  将刷新的token保存到本地
     refreshToken: function refreshToken(_ref3, token) {
       var commit = _ref3.commit;
@@ -111797,8 +111796,9 @@ __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.response.use(function
   if (error.response) {
     switch (error.response.status) {
       case 401:
-        // store.dispatch('DelToken')
         Object(__WEBPACK_IMPORTED_MODULE_4__utils_auth_js__["b" /* removeToken */])();
+        __WEBPACK_IMPORTED_MODULE_2__store_index_js__["a" /* default */].dispatch('DelToken');
+        // store.commit('LOGOUT')
         __WEBPACK_IMPORTED_MODULE_1__router_index_js__["a" /* default */].replace({
           path: '/login',
           query: { redirect: __WEBPACK_IMPORTED_MODULE_1__router_index_js__["a" /* default */].currentRoute.fullPath }
