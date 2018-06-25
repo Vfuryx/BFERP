@@ -11,7 +11,7 @@ class FeeTypeTransformer extends TransformerAbstract
     {
         return [
             'id' => $feetype->id,
-            'fee_category_name' => $feetype->feeCategory->name,
+            'fee_category' => $feetype->feeCategory,
             'name' => $feetype->name,
             'code' => $feetype->code,
             'is_default' => $feetype->is_default,

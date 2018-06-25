@@ -486,7 +486,13 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "fee_category_name": "费用类别1",
+                        "fee_category": {
+                            "id": 1,
+                            "name": "费用类别1",
+                            "status": 1,
+                            "created_at": "2018-06-25 10:45:30",
+                            "updated_at": "2018-06-25 10:45:30"
+                        },
                         "name": "费用类型1",
                         "code": "费用类型代码1",
                         "is_default": 1,
@@ -497,7 +503,13 @@ FORMAT: 1A
                     },
                     {
                         "id": 2,
-                        "fee_category_name": "费用类别2",
+                        "fee_category": {
+                            "id": 2,
+                            "name": "费用类别2",
+                            "status": 1,
+                            "created_at": "2018-06-25 10:45:32",
+                            "updated_at": "2018-06-25 10:45:32"
+                        },
                         "name": "费用类型2",
                         "code": "费用类型代码2",
                         "is_default": 1,
