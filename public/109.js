@@ -1,14 +1,14 @@
 webpackJsonp([109],{
 
-/***/ 451:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(652)
+var __vue_script__ = __webpack_require__(655)
 /* template */
-var __vue_template__ = __webpack_require__(653)
+var __vue_template__ = __webpack_require__(656)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,11 +48,13 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 652:
+/***/ 655:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -289,7 +291,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         value: '1',
         label: '1-启用'
-      }]
+      }],
+      feeCage: []
     };
   },
 
@@ -532,6 +535,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           });
         });
       }
+    },
+
+    //  获取费用类别
+    getExpenseCage: function getExpenseCage() {
+      var _this8 = this;
+
+      this.$fetch('/feecates').then(function (res) {
+        _this8.feeCage = res.data;
+        console.log(_this8.feeCage);
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this8.$message.error({
+            message: str
+          });
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -541,12 +566,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       that.changeOptWidth();
     });
     this.getExpenseType();
+    this.getExpenseCage();
   }
 });
 
 /***/ }),
 
-/***/ 653:
+/***/ 656:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -574,7 +600,7 @@ var render = function() {
             type: "index",
             "element-loading-text": "拼命加载中",
             "element-loading-spinner": "el-icon-loading",
-            "element-loading-background": "rgba(0, 0, 0, 0.8)"
+            "element-loading-background": "rgba(0, 0, 0, 0.6)"
           },
           on: { "selection-change": _vm.handleSelectionChange }
         },
@@ -947,18 +973,26 @@ var render = function() {
             [
               _c(
                 "el-form-item",
-                { attrs: { label: "费用类别id", prop: "type" } },
+                { attrs: { label: "费用类别", prop: "type" } },
                 [
-                  _c("el-input", {
-                    attrs: { placehold: "" },
-                    model: {
-                      value: _vm.ruleForm.type,
-                      callback: function($$v) {
-                        _vm.$set(_vm.ruleForm, "type", $$v)
-                      },
-                      expression: "ruleForm.type"
-                    }
-                  })
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm.type,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "type", $$v)
+                        },
+                        expression: "ruleForm.type"
+                      }
+                    },
+                    _vm._l(_vm.feeCage, function(item) {
+                      return _c("el-option", {
+                        attrs: { label: item.name, value: item.name }
+                      })
+                    })
+                  )
                 ],
                 1
               ),
@@ -1031,7 +1065,7 @@ var render = function() {
                 { attrs: { label: "类别备注\n", prop: "mark" } },
                 [
                   _c("el-input", {
-                    attrs: { placehold: "请输入标记名称" },
+                    attrs: { type: "textarea", placehold: "请输入标记名称" },
                     model: {
                       value: _vm.ruleForm.mark,
                       callback: function($$v) {

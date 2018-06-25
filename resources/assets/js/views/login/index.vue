@@ -23,13 +23,12 @@
         <span class="svg-container">
           <i class="iconfont bf-yzm"></i>
         </span>
-                <el-input name="yzCode" type="text" v-model="loginForm.code" placeholder="请输入验证码"></el-input>
-                <span class="show-pwd yzc" @click="this.getyzCode">
+                <el-input name="yzCode" type="text" v-model="loginForm.code" placeholder="请输入验证码" id="yzCode"></el-input>
+                <span class="show-pwd yzc" @click="this.getCode">
            <img :src="src" alt="">
         </span>
             </el-form-item>
             <el-form-item>
-                <!--@click.native.prevent="handleLogin "-->
                 <el-button type="primary" style="width:100%;" :loading="loading" @click="submitForm('loginForm')">
                     登录
                 </el-button>
@@ -75,31 +74,13 @@
           this.pwdType = 'password'
         }
       },
-      //  登录跳转
-      /*   handleLogin() {
-           this.$refs.loginForm.validate(valid => {
-             if (valid) {
-               this.$router.push({ path: '/' });
-               // this.loading = true;
-              /!* this.$store.dispatch('Login', this.loginForm).then(() => {
-                 this.loading = false
-                 //  跳转到根路径
-                 this.$router.push({ path: '/' })
-               }).catch(() => {
-                 this.loading = false
-               })*!/
-             }
-             else {
-               console.log('error submit!!');
-               return false
-             }
-           })
-         },*/
-      getyzCode: function () {
+      getCode: function () {
         this.$post('/captchas')
           .then((res) => {
             this.src = res.captcha_image_content;
             this.loginForm.key = res.captcha_key;
+            this.loginForm.code = '';
+            $('#yzCode').focus();
           })
       },
       submitForm(formName) {
@@ -126,28 +107,8 @@
                 this.$message.error({
                   message: arr
                 });
-                this.getyzCode();
+                this.getCode();
                 this.loginForm.code = '';
-               /* console.log(error.response.status);
-                if(this.$store.state.user.token){
-                  console.log(this.$store.state.user.token);
-                  console.log(error.response.status);
-                  switch (error.response.status) {
-                    case 401:
-                      return this.$store.dispatch('Logout')
-                      break
-                    case 400:
-                      return this.$message.error(error.response.data.errors)
-                      break
-                  }
-                }else{
-                  let arr = error.response.data.message;
-                  this.$message.error({
-                    message: arr
-                  });
-                  this.getyzCode();
-                  this.loginForm.code = '';
-                }*/
               }
             })
           } else {
@@ -158,7 +119,7 @@
       },
     },
     mounted() {
-      this.getyzCode();
+      this.getCode();
     }
   }
 

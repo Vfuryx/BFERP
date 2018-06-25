@@ -1,19 +1,19 @@
 webpackJsonp([1],{
 
-/***/ 392:
+/***/ 395:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(524)
-  __webpack_require__(526)
+  __webpack_require__(527)
+  __webpack_require__(529)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(528)
+var __vue_script__ = __webpack_require__(531)
 /* template */
-var __vue_template__ = __webpack_require__(529)
+var __vue_template__ = __webpack_require__(532)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53,17 +53,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 524:
+/***/ 527:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(525);
+var content = __webpack_require__(528);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("cb2e752a", content, false, {});
+var update = __webpack_require__(9)("cb2e752a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -80,7 +80,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 525:
+/***/ 528:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -95,17 +95,17 @@ exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input 
 
 /***/ }),
 
-/***/ 526:
+/***/ 529:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(527);
+var content = __webpack_require__(530);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6ee0f457", content, false, {});
+var update = __webpack_require__(9)("6ee0f457", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -122,7 +122,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 527:
+/***/ 530:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -137,13 +137,12 @@ exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixe
 
 /***/ }),
 
-/***/ 528:
+/***/ 531:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(57);
-//
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(38);
 //
 //
 //
@@ -216,32 +215,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
 
-    //  登录跳转
-    /*   handleLogin() {
-         this.$refs.loginForm.validate(valid => {
-           if (valid) {
-             this.$router.push({ path: '/' });
-             // this.loading = true;
-            /!* this.$store.dispatch('Login', this.loginForm).then(() => {
-               this.loading = false
-               //  跳转到根路径
-               this.$router.push({ path: '/' })
-             }).catch(() => {
-               this.loading = false
-             })*!/
-           }
-           else {
-             console.log('error submit!!');
-             return false
-           }
-         })
-       },*/
-    getyzCode: function getyzCode() {
+    getCode: function getCode() {
       var _this = this;
 
       this.$post('/captchas').then(function (res) {
         _this.src = res.captcha_image_content;
         _this.loginForm.key = res.captcha_key;
+        _this.loginForm.code = '';
+        $('#yzCode').focus();
       });
     },
     submitForm: function submitForm(formName) {
@@ -270,28 +251,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               _this2.$message.error({
                 message: arr
               });
-              _this2.getyzCode();
+              _this2.getCode();
               _this2.loginForm.code = '';
-              /* console.log(error.response.status);
-               if(this.$store.state.user.token){
-                 console.log(this.$store.state.user.token);
-                 console.log(error.response.status);
-                 switch (error.response.status) {
-                   case 401:
-                     return this.$store.dispatch('Logout')
-                     break
-                   case 400:
-                     return this.$message.error(error.response.data.errors)
-                     break
-                 }
-               }else{
-                 let arr = error.response.data.message;
-                 this.$message.error({
-                   message: arr
-                 });
-                 this.getyzCode();
-                 this.loginForm.code = '';
-               }*/
             }
           });
         } else {
@@ -302,13 +263,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   mounted: function mounted() {
-    this.getyzCode();
+    this.getCode();
   }
 });
 
 /***/ }),
 
-/***/ 529:
+/***/ 532:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -412,7 +373,8 @@ var render = function() {
                 attrs: {
                   name: "yzCode",
                   type: "text",
-                  placeholder: "请输入验证码"
+                  placeholder: "请输入验证码",
+                  id: "yzCode"
                 },
                 model: {
                   value: _vm.loginForm.code,
@@ -425,7 +387,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "span",
-                { staticClass: "show-pwd yzc", on: { click: this.getyzCode } },
+                { staticClass: "show-pwd yzc", on: { click: this.getCode } },
                 [_c("img", { attrs: { src: _vm.src, alt: "" } })]
               )
             ],

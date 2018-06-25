@@ -8,7 +8,7 @@
                 element-loading-text="拼命加载中"
                 v-loading="loading"
                 element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0.8)"
+                element-loading-background="rgba(0, 0, 0, 0.6)"
         >
             <el-table-column
                     type="selection"
@@ -116,8 +116,10 @@
         <!--添加-->
         <el-dialog title="新增费用类型" :visible.sync="showAdd">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="费用类别id" prop="type">
-                    <el-input v-model="ruleForm.type" placehold=""></el-input>
+                <el-form-item label="费用类别" prop="type">
+                    <el-select v-model="ruleForm.type" placeholder="请选择状态">
+                        <el-option v-for="item in feeCage" :label="item.name" :value="item.name"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="费用名称
 " prop="name">
@@ -136,7 +138,7 @@
                 </el-form-item>
                 <el-form-item label="类别备注
 " prop="mark">
-                    <el-input v-model="ruleForm.mark" placehold="请输入标记名称"></el-input>
+                    <el-input type="textarea" v-model="ruleForm.mark" placehold="请输入标记名称"></el-input>
                 </el-form-item>
                 <el-form-item label="状态" prop="status">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
@@ -252,7 +254,8 @@
             value: '1',
             label: '1-启用'
           }
-        ]
+        ],
+        feeCage:[]
       }
     },
     methods:{
@@ -486,6 +489,26 @@
           });
         }
       },
+    //  获取费用类别
+      getExpenseCage(){
+        this.$fetch('/feecates')
+          .then(res=>{
+            this.feeCage = res.data;
+            console.log(this.feeCage);
+          },err=>{
+            if (err.response) {
+              let arr = err.response.data.errors;
+              let arr1 = [];
+              for (let i in arr) {
+                arr1.push(arr[i]);
+              }
+              let str = arr1.join(',');
+              this.$message.error({
+                message: str
+              });
+            }
+          })
+      },
     },
     mounted() {
       this.changeOptWidth();
@@ -494,6 +517,7 @@
         that.changeOptWidth();
       })
       this.getExpenseType();
+      this.getExpenseCage();
     }
   }
 </script>

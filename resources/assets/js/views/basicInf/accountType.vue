@@ -9,7 +9,7 @@
                     element-loading-text="拼命加载中"
                     v-loading="loading"
                     element-loading-spinner="el-icon-loading"
-                    element-loading-background="rgba(0, 0, 0, 0.8)"
+                    element-loading-background="rgba(0, 0, 0, 0.6)"
             >
                 <el-table-column
                         type="selection"
@@ -420,7 +420,6 @@
         that.changeOptWidth();
       })
       this.getAccountType();
-      this.handleCurrentChange(1);
     }
   }
 </script>

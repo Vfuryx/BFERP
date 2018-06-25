@@ -1,7 +1,7 @@
 import { login, getInfo, logout } from '../../api/login.js';
 import { getToken, setToken, removeToken } from '../../utils/auth.js';
 import axios from 'axios'
-import router from '../../router/index.js'
+import router from "../../router";
 
 const user = {
   state: {
@@ -21,9 +21,9 @@ const user = {
     PROFILE:(state,data)=>{
       state.name = data.name;
     },
-    LOGOUT: (state)=>{
+    /*LOGOUT: (state)=>{
       state.token = null;
-    }
+    }*/
   },
 
   actions: {
@@ -40,71 +40,29 @@ const user = {
         })
       })
     },
-
- /*   // 获取用户信息
-    GetInfo({ commit, state }) {
-      return new Promise((resolve, reject) => {
-        getInfo().then(res => {
-          const data = res.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
-          } else {
-            reject('getInfo: roles must be a non-null array !')
-          }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
-      })
-    },*/
-    //登录成功后使用token拉取用户信息
-   /* Profile({ commit }){
-      return new Promise((resolve,reject)=>{
-        getInfo().then(res=>{
-          if(res.status == 200){
-            commit('PROFILE',res.data)
-            resolve()
-          }else{
-            reject()
-          }
-        })
-      })
-    },*/
-
     // 退出
     Logout({ commit }) {
       return new Promise((resolve, reject) => {
         logout().then(() => {
           removeToken();
-          router.push({
-            path: '/login'
-          });
-          commit('LOGOUT');
+          // commit('LOGOUT');
+          router.replace({
+            path: '/login',
+            query: {redirect: router.currentRoute.fullPath}
+          })
           resolve()
         }).catch((err) => {
           reject(err)
         })
       })
     },
-
-    // 前端 登出
-   /* FedLogOut({ commit }) {
-      return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
-        resolve()
+  /*//  删除cookie
+    DelToken({ commit }){
+      return new Promise(()=>{
+        removeToken();
+        // commit('LOGOUT');
       })
     },*/
-
-  //  删除cookie
-    DelToken(){
-      return new Promise(()=>{
-        removeToken()
-      })
-    },
-
   //  将刷新的token保存到本地
     refreshToken({commit},token){
       return new Promise(()=>{
@@ -112,6 +70,6 @@ const user = {
       })
     }
   }
-}
+};
 
 export default user

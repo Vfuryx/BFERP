@@ -1,18 +1,18 @@
 webpackJsonp([5],{
 
-/***/ 465:
+/***/ 468:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(682)
+  __webpack_require__(685)
 }
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(684)
+var __vue_script__ = __webpack_require__(687)
 /* template */
-var __vue_template__ = __webpack_require__(685)
+var __vue_template__ = __webpack_require__(688)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -52,17 +52,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 682:
+/***/ 685:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(683);
+var content = __webpack_require__(686);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("38194b9e", content, false, {});
+var update = __webpack_require__(9)("38194b9e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -79,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 683:
+/***/ 686:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(6)(false);
@@ -94,7 +94,7 @@ exports.push([module.i, "", ""]);
 
 /***/ }),
 
-/***/ 684:
+/***/ 687:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -532,13 +532,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       that.changeOptWidth();
     });
     this.getAccountType();
-    this.handleCurrentChange(1);
   }
 });
 
 /***/ }),
 
-/***/ 685:
+/***/ 688:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -567,7 +566,7 @@ var render = function() {
               type: "index",
               "element-loading-text": "拼命加载中",
               "element-loading-spinner": "el-icon-loading",
-              "element-loading-background": "rgba(0, 0, 0, 0.8)"
+              "element-loading-background": "rgba(0, 0, 0, 0.6)"
             },
             on: { "selection-change": _vm.handleSelectionChange }
           },

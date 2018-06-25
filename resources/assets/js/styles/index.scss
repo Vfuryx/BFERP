@@ -508,6 +508,7 @@
   display: inline-block;
   width: 10px;
   height: 10px;
+
 }
 
 //状态
@@ -516,11 +517,16 @@
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  display: table-caption;
   background-color: red;
+  display: -webkit-inline-box;
 }
 
 .statusActive{
   background-color: green;
+}
+
+//下拉框
+.el-select{
+  width: 100%;
 }
 
