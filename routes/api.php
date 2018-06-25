@@ -21,7 +21,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-        // 'middleware' => ['api.throttle','token.canrefresh'],
+        'middleware' => ['api.throttle','token.canrefresh'],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
