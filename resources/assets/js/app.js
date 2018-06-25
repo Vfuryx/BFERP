@@ -16,7 +16,7 @@ import './styles/app.scss'
 import router from './router/index.js'
 
 import Vuex from 'vuex'
-Vue.use(Vuex)
+import egrid from 'egrid'
 
 import store from './store/index.js'
 
@@ -29,12 +29,15 @@ import './iconfont/iconfont.css'
 import qs from 'qs'
 Vue.prototype.$qs = qs
 
+Vue.use(Vuex,egrid)
 Vue.use(ElementUi, {
     size: 'medium',
     i18n: (key, value) => i18n.t(key, value)
 })
 
 import {post,fetch,patch,put,del} from './utils/http.js'
+
+
 
 router.beforeEach((to, from, next) => {
   if (to.meta.requireAuth) {

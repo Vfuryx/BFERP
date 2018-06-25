@@ -1,6 +1,8 @@
 import axios from 'axios'
-// import router from '../router/index.js'
+import router from '../router/index.js'
 import store from '../store/index.js'
+import {removeToken} from "./auth.js";
+import {Message} from 'element-ui'
 
 axios.defaults.timeout = 5000;
 axios.defaults.baseURL ='http://bferp.test/api';
@@ -26,85 +28,62 @@ axios.interceptors.request.use(
     }
     return config
   },
-  err => {
-    this.$message.error({
-      message: '加载超时'
-    });
-    return Promise.reject(err)
+  error => {
+    if(error.response){
+      this.$message.error({
+        message: '加载超时'
+      });
+      return Promise.reject(error)
+    }
   }
 );
 
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
-    var token = response.headers.authorization;
+    let token = response.headers.authorization;
     if(token){
       store.dispatch('refreshToken',token)
     }
     return response
   },
   error => {
-    if(error.response){
-      switch (error.response.status){
+    // return Promise.reject(err)
+    if (error.response) {
+      switch (error.response.status) {
         case 401:
-          return store.dispatch('Logout')
-          break
-        case 500:
-          return store.dispatch('Logout')
-          break
-        case 400:
-          // return this.$message.error(error.response.data.errors)
-          return this.$message.error(error.response.data.message)
-          break
+          removeToken();
+          router.replace({
+            path: '/login',
+            query: {redirect: router.currentRoute.fullPath}
+          })
       }
     }
-    return Promise.reject(error);
+    return Promise.reject(error)   // 返回接口返回的错误信息
+    // return Promise.reject(error.response.data)   // 返回接口返回的错误信息
   });
 
-/*//http request 拦截器
-axios.interceptors.request.use(
-  config => {
-    // const token = getCookie('名称');注意使用的时候需要引入cookie方法，推荐js-cookie
-    config.data = JSON.stringify(config.data);
-    config.headers = {
-      'Content-Type':'application/x-www-form-urlencoded'
-    }
-    // if(token){
-    //   config.params = {'token':token}
-    // }
-    return config;
-  },
-  error => {
-    return Promise.reject(err);
-  }
-);
-
-/!*axios.interceptors.request.use( (config) => {
-  if (config.method=="post"){
-    config.data = qs.stringify(config.data);
-    config.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-  }
-  return config;
-},  (error) => {
-  return Promise.reject(error);
-});*!/
-
-//http response 拦截器
-axios.interceptors.response.use(
+/*this.$message.error({
+            message: '登录已过期，请重新登录'
+          });*/
+/*axios.interceptors.response.use(
   response => {
-    if(response.data.errCode ==2){
-      router.push({
-        path:"/login",
-        querry:{redirect:router.currentRoute.fullPath}//从哪个页面跳转
-      })
-    }
     return response;
   },
   error => {
-    return Promise.reject(error)
-  }
-)*/
-
+    if (error.response) {
+      switch (error.response.status) {
+        case 401:
+          // 返回 401 清除token信息并跳转到登录页面
+          store.commit(types.LOGOUT);
+          router.replace({
+            path: 'login',
+            query: {redirect: router.currentRoute.fullPath}
+          })
+      }
+    }
+    return Promise.reject(error.response.data)   // 返回接口返回的错误信息
+  });*/
 /**
  * 封装get方法
  * @param url

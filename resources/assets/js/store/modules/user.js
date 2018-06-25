@@ -33,10 +33,10 @@ const user = {
         login(data).then(res => {
           let msg = res.data;
           setToken(msg.access_token);
-          commit('SET_TOKEN', msg.access_token)
+          commit('SET_TOKEN', msg.access_token);
           resolve(res)
-        }).catch(error => {
-          reject(error)
+        }).catch((err) => {
+          reject(err)
         })
       })
     },
@@ -83,7 +83,7 @@ const user = {
           });
           commit('LOGOUT');
           resolve()
-        }).catch(err => {
+        }).catch((err) => {
           reject(err)
         })
       })

@@ -1,14 +1,14 @@
 webpackJsonp([44],{
 
-/***/ 488:
+/***/ 511:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(5)
 /* script */
-var __vue_script__ = __webpack_require__(730)
+var __vue_script__ = __webpack_require__(778)
 /* template */
-var __vue_template__ = __webpack_require__(731)
+var __vue_template__ = __webpack_require__(779)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\financeStat.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\freightMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7bd7c256", Component.options)
+    hotAPI.createRecord("data-v-3c8bc238", Component.options)
   } else {
-    hotAPI.reload("data-v-7bd7c256", Component.options)
+    hotAPI.reload("data-v-3c8bc238", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 730:
+/***/ 778:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67,17 +67,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-out',
         ent: this.test
       }, {
+        cnt: '下载',
+        icon: 'bf-dwn',
+        ent: this.test
+      }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.test
       }]
     };
-  },
-
-  methods: {
-    test: function test() {
-      console.log(1);
-    }
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;
@@ -94,7 +92,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 731:
+/***/ 779:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108,7 +106,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("财务统计报表")])])
+    return _c("div", [_c("h2", [_vm._v("运费管理报表")])])
   }
 ]
 render._withStripped = true
@@ -116,7 +114,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7bd7c256", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-3c8bc238", module.exports)
   }
 }
 

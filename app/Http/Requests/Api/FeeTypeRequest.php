@@ -29,7 +29,7 @@ class FeeTypeRequest extends FormRequest
                 return [
                     'name' => 'string',
                     'fee_category_id' => 'integer',
-                    'code' => 'string|max:255|unique:fee_types',
+                    'code' => 'string|max:255|unique:fee_types,id',
                     'is_default' => 'integer',
                     'status' => 'integer',
                     'remark' => 'string|nullable|max:255',

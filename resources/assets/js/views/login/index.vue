@@ -43,21 +43,6 @@
   export default {
     name: 'login',
     data() {
-      /* const validateUsername = (rule, value, callback) => {
-         //  用户名输入有误
-         if (!isvalidUsername(value)) {
-           callback(new Error('请输入正确的用户名'))
-         } else {
-           callback()
-         }
-       }
-       const validatePass = (rule, value, callback) => {
-         if (value.length < 5) {
-           callback(new Error('密码不能小于5位'))
-         } else {
-           callback()
-         }
-       }*/
       return {
         loginForm: {
           username: '',
@@ -120,13 +105,13 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            let msg =  {
+            let data =  {
               username: this.loginForm.username,
               password: this.loginForm.password,
               captcha_key: this.loginForm.key,
               captcha_code: this.loginForm.code
             };
-            this.$store.dispatch('Login',msg).then(() => {
+            this.$store.dispatch('Login',data).then(res => {
               this.$message({
                 message: '登录成功',
                 type: 'success'
@@ -135,12 +120,34 @@
                 path:"/",
                 querry:{redirect:router.currentRoute.fullPath}
               })
-            }).catch(err => {
-              if (err.response) {
-                let arr = err.response.data.message;
+            }).catch(error => {
+              if (error.response) {
+                let arr = error.response.data.message;
                 this.$message.error({
                   message: arr
                 });
+                this.getyzCode();
+                this.loginForm.code = '';
+               /* console.log(error.response.status);
+                if(this.$store.state.user.token){
+                  console.log(this.$store.state.user.token);
+                  console.log(error.response.status);
+                  switch (error.response.status) {
+                    case 401:
+                      return this.$store.dispatch('Logout')
+                      break
+                    case 400:
+                      return this.$message.error(error.response.data.errors)
+                      break
+                  }
+                }else{
+                  let arr = error.response.data.message;
+                  this.$message.error({
+                    message: arr
+                  });
+                  this.getyzCode();
+                  this.loginForm.code = '';
+                }*/
               }
             })
           } else {

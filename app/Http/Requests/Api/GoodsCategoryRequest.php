@@ -26,7 +26,7 @@ class GoodsCategoryRequest extends FormRequest
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'code' => 'string|max:255|unique:goods_categories',
+                    'code' => 'string|max:255|unique:goods_categories,id',
                     'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',

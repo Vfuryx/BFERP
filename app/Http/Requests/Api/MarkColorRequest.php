@@ -24,7 +24,7 @@ class MarkColorRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'markcode' => 'string|max:255|unique:mark_colors',
+                    'markcode' => 'string|max:255|unique:mark_colors,id',
                     'markname' => 'string',
                     'color' => 'string|max:255',
                     'description' => 'string|nullable|max:255',
