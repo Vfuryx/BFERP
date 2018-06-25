@@ -7,8 +7,13 @@ class FeeType extends Model
     protected $table = 'fee_types';
 
     protected $fillable = [
-        'fee_category_id','name','code','is_default',
-        'status','remark'
+        'fee_category_id', 'name', 'code', 'is_default',
+        'status', 'remark'
     ];
+
+    public function feeCategory()
+    {
+        return $this->belongsTo(FeeCategory::class);
+    }
 
 }

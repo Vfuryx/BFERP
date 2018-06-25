@@ -22,7 +22,7 @@ class FeeTypesController extends Controller
      * "data": {
      *         {
      *             "id": 1,
-     *             "fee_category_id": 1,
+     *             "fee_category_name": "费用类别1",
      *             "name": "费用类型1",
      *             "code": "费用类型代码1",
      *             "is_default": 1,
@@ -33,7 +33,7 @@ class FeeTypesController extends Controller
      *         },
      *         {
      *             "id": 2,
-     *             "fee_category_id": 1,
+     *             "fee_category_name": "费用类别2",
      *             "name": "费用类型2",
      *             "code": "费用类型代码2",
      *             "is_default": 1,
@@ -47,13 +47,10 @@ class FeeTypesController extends Controller
      *         "pagination": {
      *             "total": 2,
      *             "count": 2,
-     *             "per_page": 2,
+     *             "per_page": 13,
      *             "current_page": 1,
      *             "total_pages": 1,
-     *             "links": {
-     *                 "previous": null,
-     *                 "next": "{{host}}/api/feetypes?page=2"
-     *             }
+     *             "links": null
      *         }
      *     }
      * })
@@ -63,7 +60,7 @@ class FeeTypesController extends Controller
         // return $this->response->collection(FeeType::all(),new FeeTypeTransformer());
         
         //分页响应返回
-        $feetypes = FeeType::paginate(2);
+        $feetypes = FeeType::paginate(13);
         return $this->response->paginator($feetypes, new FeeTypeTransformer());
     }
 

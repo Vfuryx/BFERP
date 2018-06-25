@@ -14,55 +14,43 @@ use App\Models\FeeCategory;
 class FeeCategoriesController extends Controller
 {
     /**
-     * 获取所有费用类别 
-     *  
-     * @Get("/feecates") 
+     * 获取所有费用类别
+     *
+     * @Get("/feecates")
      * @Versions({"v1"})
      * @Response(200, body={
      * "data": {
-     *         {
-     *             "id": 1,
-     *             "name": "费用类别1",
-     *             "status": 1,
-     *             "created_at": "2018-06-14 15:01:51",
-     *             "updated_at": "2018-06-14 15:01:51"
-     *         },
-     *         {
-     *             "id": 2,
-     *             "name": "费用类别2",
-     *             "status": 1,
-     *             "created_at": "2018-06-14 15:02:07",
-     *             "updated_at": "2018-06-14 15:02:07"        
-     *         }
-     *     },
-     *     "meta": {
-     *         "pagination": {
-     *             "total": 3,
-     *             "count": 2,
-     *             "per_page": 2,
-     *             "current_page": 1,
-     *             "total_pages": 3,
-     *             "links": {
-     *                 "previous": null,
-     *                 "next": "{{host}}/api/feecates?page=2"
-     *             }
-     *         }
-     *     }
+     *      {
+     *          "id": 1,
+     *          "name": "费用类别1",
+     *          "status": 1,
+     *          "created_at": "2018-06-25 10:45:30",
+     *          "updated_at": "2018-06-25 10:45:30"
+     *      },
+     *      {
+     *          "id": 2,
+     *          "name": "费用类别2",
+     *          "status": 1,
+     *          "created_at": "2018-06-25 10:45:32",
+     *          "updated_at": "2018-06-25 10:45:32"
+     *      }
+     *   }
      * })
      */
     public function index()
     {
-        //return $this->response->collection(FeeCategory::all(), new FeeCategoryTransformer());
+        return $this->response->collection(FeeCategory::all(), new FeeCategoryTransformer());
 
         //分页响应返回
-        $feecates = FeeCategory::paginate(2);
-        return $this->response->paginator($feecates, new FeeCategoryTransformer());
+        // $feecates = FeeCategory::paginate(2);
+        // return $this->response->paginator($feecates, new FeeCategoryTransformer());
     }
 
-   /**
-     * 新增费用类别 
-     *  
-     * @Post("/feecates") 
+
+    /**
+     * 新增费用类别
+     *
+     * @Post("/feecates")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="费用类别名称", required=true),
@@ -96,15 +84,15 @@ class FeeCategoriesController extends Controller
         $feecate->fill($request->all());
         $feecate->save();
         return $this->response
-                    ->item($feecate, new FeeCategoryTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+            ->item($feecate, new FeeCategoryTransformer())
+            ->setStatusCode(201)
+            ->addMeta('status_code', '201');
     }
 
     /**
-     * 显示单条费用类别 
-     *  
-     * @Post("/feecates/:id") 
+     * 显示单条费用类别
+     *
+     * @Post("/feecates/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -127,9 +115,9 @@ class FeeCategoriesController extends Controller
     }
 
     /**
-     * 修改费用类别 
-     *  
-     * @Patch("/feecates/:id") 
+     * 修改费用类别
+     *
+     * @Patch("/feecates/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -158,14 +146,14 @@ class FeeCategoriesController extends Controller
     {
         $feecate->update($request->all());
         return $this->response
-                    ->item($feecate, new FeeCategoryTransformer())
-                    ->setStatusCode(201);
+            ->item($feecate, new FeeCategoryTransformer())
+            ->setStatusCode(201);
     }
 
     /**
-     * 删除费用类别 
-     *  
-     * @Delete("/feecates/:id") 
+     * 删除费用类别
+     *
+     * @Delete("/feecates/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -181,11 +169,11 @@ class FeeCategoriesController extends Controller
         return $this->noContent();
     }
 
-    
+
     /**
-     * 删除一组费用类别 
-     *  
-     * @Delete("/feecates") 
+     * 删除一组费用类别
+     *
+     * @Delete("/feecates")
      * @Versions({"v1"})
      * @Parameters({
      * @Parameter("ids", description="费用类别id组 格式: 1,2,3,4 ", required=true)
@@ -214,22 +202,22 @@ class FeeCategoriesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FeeCategory::destroy($ids)){
+            if (count($ids) !== FeeCategory::destroy($ids)) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
+            return $this->errorResponse(500, '删除错误', 500);
         }
 
         return $this->errorResponse(204);
     }
 
     /**
-     * 更改一组费用类别状态 
-     *  
-     * @PUT("/feecates") 
+     * 更改一组费用类别状态
+     *
+     * @PUT("/feecates")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="费用类别id组 格式: 1,2,3,4 ", required=true),
@@ -263,13 +251,13 @@ class FeeCategoriesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== FeeCategory::whereIn('id',$ids)->update(['status'=>$status])){
+            if (count($ids) !== FeeCategory::whereIn('id', $ids)->update(['status' => $status])) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
+            return $this->errorResponse(500, '更改错误', 500);
         }
 
         return $this->errorResponse(204);

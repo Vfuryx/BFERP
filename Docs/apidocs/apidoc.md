@@ -486,7 +486,7 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "fee_category_id": 1,
+                        "fee_category_name": "费用类别1",
                         "name": "费用类型1",
                         "code": "费用类型代码1",
                         "is_default": 1,
@@ -497,7 +497,7 @@ FORMAT: 1A
                     },
                     {
                         "id": 2,
-                        "fee_category_id": 1,
+                        "fee_category_name": "费用类别2",
                         "name": "费用类型2",
                         "code": "费用类型代码2",
                         "is_default": 1,
@@ -511,13 +511,10 @@ FORMAT: 1A
                     "pagination": {
                         "total": 2,
                         "count": 2,
-                        "per_page": 2,
+                        "per_page": 13,
                         "current_page": 1,
                         "total_pages": 1,
-                        "links": {
-                            "previous": null,
-                            "next": "{{host}}/api/feetypes?page=2"
-                        }
+                        "links": null
                     }
                 }
             }
@@ -954,30 +951,17 @@ FORMAT: 1A
                         "id": 1,
                         "name": "费用类别1",
                         "status": 1,
-                        "created_at": "2018-06-14 15:01:51",
-                        "updated_at": "2018-06-14 15:01:51"
+                        "created_at": "2018-06-25 10:45:30",
+                        "updated_at": "2018-06-25 10:45:30"
                     },
                     {
                         "id": 2,
                         "name": "费用类别2",
                         "status": 1,
-                        "created_at": "2018-06-14 15:02:07",
-                        "updated_at": "2018-06-14 15:02:07"
+                        "created_at": "2018-06-25 10:45:32",
+                        "updated_at": "2018-06-25 10:45:32"
                     }
-                ],
-                "meta": {
-                    "pagination": {
-                        "total": 3,
-                        "count": 2,
-                        "per_page": 2,
-                        "current_page": 1,
-                        "total_pages": 3,
-                        "links": {
-                            "previous": null,
-                            "next": "{{host}}/api/feecates?page=2"
-                        }
-                    }
-                }
+                ]
             }
 
 ## 新增费用类别 [POST /api/feecates]
