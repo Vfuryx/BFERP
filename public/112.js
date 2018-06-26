@@ -184,8 +184,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loading: true,
       showAdd: false,
       ruleForm: {
-        name: ''
-        // status: 1
+        name: '',
+        status: 1
       },
       rules: {
         name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
@@ -247,8 +247,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs[formName].validate(function (valid) {
         if (valid) {
           var data = {
-            name: _this2.ruleForm.name
-            // status: this.ruleForm.status
+            name: _this2.ruleForm.name,
+            status: _this2.ruleForm.status
           };
           _this2.$post('/distmets', data).then(function () {
             _this2.$message({
@@ -257,6 +257,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
             _this2.showAdd = false;
             _this2.getDistType();
+            _this2.resetForm('ruleForm');
           }, function (err) {
             if (err.response) {
               var arr = err.response.data.errors;
@@ -301,7 +302,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var newData = {
         id: row.id,
-        name: row.name
+        name: row.name,
+        status: row.status
       };
       if (this.inputChange) {
         this.$patch('/distmets/' + row.id, newData).then(function () {
@@ -700,6 +702,33 @@ var render = function() {
                       expression: "ruleForm.name"
                     }
                   })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm.status,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "status", $$v)
+                        },
+                        expression: "ruleForm.status"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "停用", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "启用", value: "1" } })
+                    ],
+                    1
+                  )
                 ],
                 1
               )

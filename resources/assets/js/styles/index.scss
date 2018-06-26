@@ -3,7 +3,6 @@
 
   //logo部分
   .logo {
-    /*transition: width 0.15s;*/
     margin: 0;
     padding: 0;
     display: inline-block;
@@ -15,21 +14,21 @@
     line-height: 50px;
     background-color: #304156;
 
-    &.el-menu{
+    &.el-menu {
       border-right: none;
 
-      img{
+      img {
         width: 35px;
       }
     }
 
-    span{
+    span {
       font-weight: bold;
       font-size: 16px;
       color: rgb(191, 203, 217);
     }
 
-    .el-menu-item{
+    .el-menu-item {
       padding: 0;
     }
 
@@ -42,11 +41,10 @@
   // 主体区域
   .main-container {
     min-height: 800px;
-    //transition: margin-left 0.2s;
     margin-left: 240px;
     background-color: #f0f1f5;
 
-    .optOuter{
+    .optOuter {
       margin: 8px 24px;
       background-color: #fff;
     }
@@ -66,47 +64,47 @@
         box-sizing: border-box;
         width: 85px;
 
-        &.active{
+        &.active {
 
-          i{
+          i {
             background-color: #4a99fa;
 
-            &:before{
+            &:before {
               color: #fff;
             }
 
-            span{
+            span {
               color: #fff;
             }
           }
         }
 
-        i{
+        i {
           display: flex;
           justify-content: center;
 
-          &:hover{
+          &:hover {
             background-color: #4a99fa;
 
-            &:before{
+            &:before {
               color: #fff;
             }
 
-            span{
+            span {
               color: #fff;
             }
           }
         }
 
-        span{
+        span {
           font-size: 12px;
           color: #666;
           text-align: left;
           margin-left: 5px;
         }
 
-        &:hover{
-          &>p{
+        &:hover {
+          & > p {
             color: #4a99fa;
           }
         }
@@ -124,14 +122,14 @@
         border: 1px solid #e4e4e4;
       }
 
-      &>.dwn-more{
+      & > .dwn-more {
         position: fixed;
         right: 3px;
         top: 150px;
         cursor: pointer;
       }
 
-      .hide-list{
+      .hide-list {
         position: fixed;
         right: 10px;
         top: 210px;
@@ -139,31 +137,31 @@
         z-index: 500;
         text-align: center;
 
-        span{
+        span {
           margin-left: 5px;
         }
 
-        &>div{
-          &>i:hover{
+        & > div {
+          & > i:hover {
             background-color: #4a99fa;
 
-            &:before{
+            &:before {
               color: #fff;
             }
 
-            span{
+            span {
               color: #fff;
             }
           }
         }
 
-        i{
+        i {
           display: flex;
           justify-content: center;
           margin-top: 10px;
         }
 
-        span{
+        span {
           font-size: 12px;
           color: #666;
         }
@@ -171,7 +169,7 @@
       }
     }
 
-    .app-main{
+    .app-main {
       margin: 8px 24px 50px;
       padding: 20px;
       box-sizing: border-box;
@@ -192,7 +190,7 @@
         padding: 0 10px 0 24px;
       }
 
-      .app-breadcrumb.el-breadcrumb[data-v-766392a0]{
+      .app-breadcrumb.el-breadcrumb[data-v-766392a0] {
         line-height: 64px;
       }
       /* .screenfull {
@@ -200,37 +198,50 @@
            right: 90px;
            top: 16px;
            color: red;
-       }
-       .avatar-container {
-           height: 50px;
-           display: inline-block;
-           position: absolute;
-           right: 35px;
-           .avatar-wrapper {
-               cursor: pointer;
-               margin-top: 5px;
-               position: relative;
-               .user-avatar {
-                   width: 40px;
-                   height: 40px;
-                   border-radius: 10px;
-               }
-               .el-icon-caret-bottom {
-                   position: absolute;
-                   right: -20px;
-                   top: 25px;
-                   font-size: 12px;
-               }
-           }
        }*/
+      .avatar-container {
+        height: 64px;
+        display: inline-block;
+        position: absolute;
+        right: 16px;
+        padding: 12px;
+        box-sizing: border-box;
+        .avatar-wrapper {
+          cursor: pointer;
+          position: relative;
+          .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+          }
 
-      .right{
-        position:absolute;
+          span{
+            display: inline-block;
+            height: 40px;
+            vertical-align: middle;
+            line-height: 1;
+            margin-left: 6px;
+          }
+         /* .el-icon-caret-bottom {
+            position: absolute;
+            right: -20px;
+            top: 25px;
+            font-size: 12px;
+          }*/
+        }
+
+        &:hover{
+          background: #e6f7ff;
+        }
+      }
+
+      .right {
+        position: absolute;
         right: 5px;
         top: 0;
 
-        i,span{
-          font-size:25px;
+        i, span {
+          font-size: 25px;
           cursor: pointer;
           margin-right: 10px;
         }
@@ -242,7 +253,7 @@
         background: #fff;
         height: 48px;
         border-bottom: 1px solid #d8dce5;
-        box-shadow: 0 1px 4px rgba(0,21,41,.08);
+        box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
         /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/
 
         .tags-view-item {
@@ -281,7 +292,7 @@
         }
       }
 
-      .contextmenu {
+      .context-menu {
         margin: 0;
         background: #fff;
         z-index: 100;
@@ -335,7 +346,6 @@
   // 侧边栏
   .sidebar-container {
     background-color: $subMenuBg !important;
-    //transition: width 0.2s;
     width: 240px !important;
     position: fixed;
     font-size: 0;
@@ -346,19 +356,18 @@
     overflow: hidden;
 
     //reset element-ui css
-    /*.horizontal-collapse-transition {
-      transition: none;
-      //transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
-    }*/
-
     .scrollbar-wrapper {
       height: calc(100% + 15px);
       .el-scrollbar__view {
         height: 100%;
       }
 
-      .el-submenu__title{
-        transition: none!important;
+      .el-submenu__title {
+        transition: none !important;
+
+        i{
+          transition: none !important;
+        }
       }
     }
 
@@ -389,8 +398,8 @@
       line-height: 60px;
       text-align: center;
 
-      .el-menu-item{
-        padding-left: 0!important;
+      .el-menu-item {
+        padding-left: 0 !important;
       }
 
       .title {
@@ -417,7 +426,18 @@
       }
     }
 
-    .el-submenu {
+    .menu-wrapper{
+      .el-submenu{
+        .el-submenu__title{
+          text-align: center;
+          padding: 0;
+          span,i.el-submenu__icon-arrow{
+            display: none;
+          }
+        }
+      }
+    }
+    /*.el-submenu {
       overflow: hidden;
       & > .el-submenu__title {
         padding-left: 10px !important;
@@ -446,8 +466,8 @@
         }
       }
     }
-
-    .el-menu,.v-enter,.v-enter-active,.el-opacity-transition{
+*/
+    .el-menu, .v-enter, .v-enter-active, .el-opacity-transition {
       transition: none;
     }
   }
@@ -475,13 +495,11 @@
     }
 
     .sidebar-container {
-      //transition: transform 0.2s;
       width: 240px !important;
     }
 
     &.hideSidebar {
       .sidebar-container {
-        //transition-duration: 0.2s;
         transform: translate3d(-240px, 0, 0);
       }
     }
@@ -490,7 +508,7 @@
   //不添加动画
   .withoutAnimation {
     .main-container,
-    .sidebar-container,.el-menu,.el-menu--collapse,.v-leave-active,.horizontal-collapse-transition,.v-leave-to {
+    .sidebar-container, .el-menu, .el-menu--collapse, .v-leave-active, .horizontal-collapse-transition, .v-leave-to {
       transition: none;
     }
   }
@@ -504,7 +522,7 @@
   margin: 10px -10px;
 }
 
-.el-table .tableColor{
+.el-table .tableColor {
   display: inline-block;
   width: 10px;
   height: 10px;
@@ -512,7 +530,7 @@
 }
 
 //状态
-.showStatus{
+.showStatus {
   content: '';
   width: 8px;
   height: 8px;
@@ -521,12 +539,12 @@
   display: -webkit-inline-box;
 }
 
-.statusActive{
+.statusActive {
   background-color: green;
 }
 
 //下拉框
-.el-select{
+.el-select {
   width: 100%;
 }
 

@@ -241,6 +241,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               message: '登录成功',
               type: 'success'
             });
+            _this2.$store.dispatch('Profile');
             __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].push({
               path: "/",
               query: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }

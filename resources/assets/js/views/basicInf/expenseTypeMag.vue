@@ -24,7 +24,7 @@
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
                  <el-select size="small" v-model="scope.row.fee_category.id" placeholder="请选择类型" @change="handleEdit">
-                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id"></el-option>
+                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id" :key="item.id"></el-option>
                     </el-select>
                         </span>
                             <span v-else>
@@ -65,7 +65,7 @@
                         <template slot-scope="scope">
                     <span v-if="changeIndex=='index'+scope.$index">
                     <el-select v-model="scope.row.is_default" placeholder="状态" @change="handleEdit">
-                        <el-option v-for="item in defau" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                        <el-option v-for="item in defArr" :key="item.value" :label="item.label" :value="item.value"></el-option>
                     </el-select>
                     </span>
                             <span v-else>
@@ -186,7 +186,7 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="费用类别" prop="type">
                     <el-select v-model="ruleForm.type" placeholder="请选择状态">
-                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id"></el-option>
+                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id" :key="item.id"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="费用名称
@@ -211,7 +211,7 @@
                 <el-form-item label="状态" prop="status">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
                         <el-option label="停用" value="0"></el-option>
-                        <el-option label="启用" value="1" selected></el-option>
+                        <el-option label="启用" value="1"></el-option>
                     </el-select>
                 </el-form-item>
             </el-form>
@@ -227,6 +227,12 @@
                 <el-form-item label="费用名称
 " prop="name">
                     <el-input v-model="ruleForm2.name" placehold="请输入标记名称"></el-input>
+                </el-form-item>
+                <el-form-item label="状态">
+                    <el-select v-model="ruleForm2.status" placeholder="请选择状态">
+                        <el-option label="停用" value="0"></el-option>
+                        <el-option label="启用" value="1"></el-option>
+                    </el-select>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -329,7 +335,7 @@
         showDel: false,
         delId:'',
         delArr:[],
-        defau:[
+        defArr:[
           {
             value: '0',
             label: '0-否'
@@ -354,7 +360,8 @@
         expenseCage:[],
         showCage: false,
         ruleForm2: {
-          name: ''
+          name: '',
+          status:'1'
         },
         rules2:{
           name: [
@@ -373,7 +380,6 @@
       getExpenseType(){
         this.$fetch('/feetypes')
           .then(res=>{
-            console.log(res);
             this.expenseType = res.data;
             this.loading = false;
             let pg = res.meta.pagination;
@@ -403,7 +409,6 @@
             var data = {
               fee_category_id: this.ruleForm.type,
               name: this.ruleForm.name,
-              color: this.ruleForm.color,
               code: this.ruleForm.code,
               remark: this.ruleForm.mark,
               is_default: this.ruleForm.default,
@@ -416,6 +421,7 @@
                   type: 'success'
                 });
                 this.showAdd = false;
+                this.resetForm('ruleForm');
                 this.getExpenseType();
               }, (err) => {
                 if (err.response) {
@@ -637,12 +643,14 @@
       //  新增
       addExpenseCage(){
         this.showCage = true;
+        this.ruleForm2.name='';
       },
       submitForm2(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
             var data = {
-              name: this.ruleForm2.name
+              name: this.ruleForm2.name,
+              status: this.ruleForm2.status
             };
             this.$post('/feecates', data)
               .then(() => {
@@ -751,14 +759,22 @@
       editSave2(index,row){
         let newData = {
           id: row.id,
-          name: row.name
+          name: row.name,
+          status: row.status
         };
         if(this.inputChange){
           this.$patch('/feecates/'+row.id,newData)
             .then(()=>{
               this.loading = true;
               this.getExpenseCage();
-              setTimeout(()=>{
+              this.loading = false;
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              });
+              this.changeIndex ='';
+              this.inputChange = false;
+             /* setTimeout(()=>{
                 this.loading = false;
                 this.$message({
                   message: '修改成功',
@@ -766,7 +782,7 @@
                 });
                 this.changeIndex ='';
                 this.inputChange = false;
-              },2000)
+              },2000)*/
             },err=>{
               if(err.response){
                 let arr = err.response.data.errors;

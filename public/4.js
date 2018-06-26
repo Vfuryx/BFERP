@@ -287,7 +287,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       rules: {
         code: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
         name: [{ required: true, message: '请输入标记名称', trigger: 'blur' }],
-        status: [{ required: true, message: '请选择状态', trigger: 'change' }]
+        color: [{ required: true, message: '请选择颜色', trigger: 'change' }]
       },
       pagination: {
         current_page: 1,
@@ -332,13 +332,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       });
     },
-    addNew: function addNew() {
-      $('.mask').css({ left: $('.logo').width() - 1 + 'px' });
-      var leftW = $('.logo').width() * 0.5 + $('.inner').width() * 0.5;
-      $('.inner').css({ marginLeft: -leftW + 'px' });
-      this.showMask = true;
-      $('.el-form-item__error').css({ left: 50 + 'px' });
-    },
 
     //添加
     submitForm: function submitForm(formName) {
@@ -381,6 +374,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     resetForm: function resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+    addNew: function addNew() {
+      this.showMask = true;
+      this.ruleForm.code = '';
+      this.ruleForm.name = '';
+      this.ruleForm.color = '';
+      this.ruleForm.desc = '';
     },
     closeMask: function closeMask() {
       this.showMask = false;
@@ -978,7 +978,7 @@ var render = function() {
                 attrs: {
                   "current-page": _vm.pagination.current_page,
                   "page-size": _vm.pagination.per_page,
-                  layout: "total, sizes, prev, pager, next, jumper",
+                  layout: "total, prev, pager, next, jumper",
                   total: _vm.pagination.total
                 },
                 on: { "current-change": _vm.handleCurrentChange }
@@ -1098,7 +1098,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
-                { attrs: { label: "颜色" } },
+                { attrs: { label: "颜色", prop: "color" } },
                 [
                   _c("el-color-picker", {
                     model: {
@@ -1115,7 +1115,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
-                { attrs: { label: "状态", prop: "state" } },
+                { attrs: { label: "状态" } },
                 [
                   _c(
                     "el-select",

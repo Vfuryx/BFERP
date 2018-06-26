@@ -53363,23 +53363,7 @@ module.exports = function escape(url) {
 
 
 /***/ }),
-/* 87 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = generateTitle;
-// translate router.meta.title, be used in breadcrumb sidebar tagsview
-function generateTitle(title) {
-  var hasKey = this.$te('route.' + title);
-  // const translatedTitle = this.$t('route.' + title) // $t :this method from vue-i18n, inject in @/lang/index.js
-
-  /*if (hasKey) {
-    return translatedTitle
-  }*/
-  return title;
-}
-
-/***/ }),
+/* 87 */,
 /* 88 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -53916,13 +53900,17 @@ module.exports = {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getToken;
-/* harmony export (immutable) */ __webpack_exports__["c"] = setToken;
-/* harmony export (immutable) */ __webpack_exports__["b"] = removeToken;
+/* harmony export (immutable) */ __webpack_exports__["e"] = setToken;
+/* harmony export (immutable) */ __webpack_exports__["c"] = removeToken;
+/* harmony export (immutable) */ __webpack_exports__["b"] = getUser;
+/* harmony export (immutable) */ __webpack_exports__["f"] = setUser;
+/* harmony export (immutable) */ __webpack_exports__["d"] = removeUser;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie__ = __webpack_require__(62);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_js_cookie___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_js_cookie__);
 
 
 var TokenKey = 'Admin-Token';
+var User = 'Admin-User';
 
 function getToken() {
   return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get(TokenKey);
@@ -53934,6 +53922,18 @@ function setToken(token) {
 
 function removeToken() {
   return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.remove(TokenKey);
+}
+
+function getUser() {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.get(User);
+}
+
+function setUser(user) {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.set(User, user);
+}
+
+function removeUser() {
+  return __WEBPACK_IMPORTED_MODULE_0_js_cookie___default.a.remove(User);
 }
 
 /***/ }),
@@ -95915,7 +95915,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    /*transition: width 0.15s;*/\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list.active i {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }\r\n       .avatar-container {\r\n           height: 50px;\r\n           display: inline-block;\r\n           position: absolute;\r\n           right: 35px;\r\n           .avatar-wrapper {\r\n               cursor: pointer;\r\n               margin-top: 5px;\r\n               position: relative;\r\n               .user-avatar {\r\n                   width: 40px;\r\n                   height: 40px;\r\n                   border-radius: 10px;\r\n               }\r\n               .el-icon-caret-bottom {\r\n                   position: absolute;\r\n                   right: -20px;\r\n                   top: 25px;\r\n                   font-size: 12px;\r\n               }\r\n           }\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .contextmenu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .contextmenu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .contextmenu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden;\n    /*.horizontal-collapse-transition {\r\n      transition: none;\r\n      //transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;\r\n    }*/ }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar .logo {\n    width: 80px;\n    line-height: 60px;\n    text-align: center; }\n    #app .hideSidebar .logo .el-menu-item {\n      padding-left: 0 !important; }\n    #app .hideSidebar .logo .title {\n      display: none; }\n  #app .hideSidebar .sidebar-container {\n    width: 80px !important;\n    box-sizing: border-box;\n    background-color: #061b2c !important; }\n  #app .hideSidebar .main-container {\n    margin-left: 80px; }\n  #app .hideSidebar .submenu-title-noDropdown {\n    padding-left: 10px !important;\n    position: relative; }\n    #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n      padding: 0 10px !important; }\n  #app .hideSidebar .el-submenu {\n    overflow: hidden; }\n    #app .hideSidebar .el-submenu > .el-submenu__title {\n      padding-left: 10px !important;\n      transition: none; }\n      #app .hideSidebar .el-submenu > .el-submenu__title .el-submenu__icon-arrow {\n        display: none; }\n  #app .hideSidebar .el-menu--collapse .el-submenu > .el-submenu__title {\n    transition: none;\n    padding: 0;\n    text-align: center; }\n    #app .hideSidebar .el-menu--collapse .el-submenu > .el-submenu__title > span {\n      height: 0;\n      width: 0;\n      overflow: hidden;\n      visibility: hidden;\n      display: inline-block; }\n  #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n    transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background-color: red;\n  display: -webkit-inline-box; }\n\n.statusActive {\n  background-color: green; }\n\n.el-select {\n  width: 100%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n/*\r\n.app-main{\r\n  min-height: 100%\r\n}\r\n*/\n.app-container {\n  padding: 20px; }\n", ""]);
+exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list.active i {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .avatar-container {\n        height: 64px;\n        display: inline-block;\n        position: absolute;\n        right: 16px;\n        padding: 12px;\n        box-sizing: border-box; }\n        #app .main-container .navbar .avatar-container .avatar-wrapper {\n          cursor: pointer;\n          position: relative;\n          /* .el-icon-caret-bottom {\r\n            position: absolute;\r\n            right: -20px;\r\n            top: 25px;\r\n            font-size: 12px;\r\n          }*/ }\n          #app .main-container .navbar .avatar-container .avatar-wrapper .user-avatar {\n            width: 40px;\n            height: 40px;\n            border-radius: 10px; }\n          #app .main-container .navbar .avatar-container .avatar-wrapper span {\n            display: inline-block;\n            height: 40px;\n            vertical-align: middle;\n            line-height: 1;\n            margin-left: 6px; }\n        #app .main-container .navbar .avatar-container:hover {\n          background: #e6f7ff; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .context-menu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .context-menu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .context-menu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden; }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n        #app .sidebar-container .scrollbar-wrapper .el-submenu__title i {\n          transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar {\n    /*.el-submenu {\r\n      overflow: hidden;\r\n      & > .el-submenu__title {\r\n        padding-left: 10px !important;\r\n        transition: none;\r\n\r\n        .el-submenu__icon-arrow {\r\n          display: none;\r\n        }\r\n      }\r\n    }\r\n\r\n    .el-menu--collapse {\r\n      .el-submenu {\r\n        & > .el-submenu__title {\r\n          transition: none;\r\n          padding: 0;\r\n          text-align: center;\r\n          & > span {\r\n            height: 0;\r\n            width: 0;\r\n            overflow: hidden;\r\n            visibility: hidden;\r\n            display: inline-block;\r\n            //background-color: $subMenuBg !important;\r\n          }\r\n        }\r\n      }\r\n    }\r\n*/ }\n    #app .hideSidebar .logo {\n      width: 80px;\n      line-height: 60px;\n      text-align: center; }\n      #app .hideSidebar .logo .el-menu-item {\n        padding-left: 0 !important; }\n      #app .hideSidebar .logo .title {\n        display: none; }\n    #app .hideSidebar .sidebar-container {\n      width: 80px !important;\n      box-sizing: border-box;\n      background-color: #061b2c !important; }\n    #app .hideSidebar .main-container {\n      margin-left: 80px; }\n    #app .hideSidebar .submenu-title-noDropdown {\n      padding-left: 10px !important;\n      position: relative; }\n      #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n        padding: 0 10px !important; }\n    #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title {\n      text-align: center;\n      padding: 0; }\n      #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title span, #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title i.el-submenu__icon-arrow {\n        display: none; }\n    #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n      transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background-color: red;\n  display: -webkit-inline-box; }\n\n.statusActive {\n  background-color: green; }\n\n.el-select {\n  width: 100%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n.app-main {\n  overflow-y: auto; }\n\n.app-container {\n  padding: 20px; }\n", ""]);
 
 // exports
 
@@ -98712,7 +98712,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mixins: [__WEBPACK_IMPORTED_MODULE_1__minxi_ResizeHandler_js__["a" /* default */]],
     computed: {
         sidebar: function sidebar() {
-            return this.$store.state.app.sidebar;
+            // return this.$store.state.app.sidebar
+            return this.$store.getters.sidebar;
         },
         device: function device() {
             return this.$store.state.app.device;
@@ -98892,6 +98893,17 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -98910,7 +98922,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         logout: function logout() {
             this.$store.dispatch('Logout');
         }
-    }
+    },
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -99312,16 +99325,45 @@ var render = function() {
       _c("breadcrumb"),
       _vm._v(" "),
       _c(
-        "div",
-        { staticClass: "right" },
+        "el-dropdown",
+        {
+          staticClass: "avatar-container right-menu-item",
+          attrs: { trigger: "hover" }
+        },
         [
-          _c("router-link", { attrs: { to: "/", title: "回到首页" } }, [
-            _c("i", { staticClass: "iconfont bf-home" })
+          _c("div", { staticClass: "avatar-wrapper" }, [
+            _c("img", {
+              staticClass: "user-avatar",
+              attrs: { src: "/img/avatar.png" }
+            }),
+            _vm._v(" "),
+            _c("span", [_vm._v(_vm._s(this.$store.getters.name))])
           ]),
           _vm._v(" "),
-          _c("span", { attrs: { title: "退出" }, on: { click: _vm.logout } }, [
-            _c("i", { staticClass: "iconfont bf-logout" })
-          ])
+          _c(
+            "el-dropdown-menu",
+            { attrs: { slot: "dropdown" }, slot: "dropdown" },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: "/" } },
+                [_c("el-dropdown-item", [_vm._v("回到首页")])],
+                1
+              ),
+              _vm._v(" "),
+              _c("el-dropdown-item", [
+                _c(
+                  "span",
+                  {
+                    staticStyle: { display: "block" },
+                    on: { click: _vm.logout }
+                  },
+                  [_vm._v("退出登录")]
+                )
+              ])
+            ],
+            1
+          )
         ],
         1
       )
@@ -99425,7 +99467,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -99441,7 +99483,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__SidebarItem_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__SidebarItem_vue__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-//
 //
 //
 //
@@ -99533,7 +99574,9 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_i18n_js__ = __webpack_require__(87);
+//
+//
+//
 //
 //
 //
@@ -99568,55 +99611,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
+// import { generateTitle } from '../../../../utils/i18n.js';
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'SidebarItem',
-    data: function data() {
-        return {};
-    },
+  name: 'SidebarItem',
+  data: function data() {
+    return {};
+  },
 
-    props: {
-        routes: {
-            type: Array
-        },
-        isNest: {
-            type: Boolean,
-            default: false
-        }
+  props: {
+    routes: {
+      type: Array
     },
-    methods: {
-        hasOneShowingChildren: function hasOneShowingChildren(children) {
-            var showingChildren = children.filter(function (item) {
-                return !item.hidden;
-            });
-            if (showingChildren.length === 1) {
-                return true;
-            }
-            return false;
-        },
-
-        generateTitle: __WEBPACK_IMPORTED_MODULE_0__utils_i18n_js__["a" /* generateTitle */],
-        getClientHeight: function getClientHeight(state, wHeight) {
-            wHeight = 0;
-            if (document.body.clientHeight && document.documentElement.clientHeight) {
-                wHeight = document.body.clientHeight < document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
-            } else {
-                wHeight = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
-            }
-            return wHeight;
-        }
-    },
-    mounted: function mounted() {
-        var wH = $('window').height();
-        var logoH = $('.logo').height();
-        $('.sidebar-container').css({ height: wH - logoH + 'px' });
-
-        $(window).resize(function () {
-            var wH = $('window').height();
-            var logoH = $('.logo').height();
-            $('.sidebar-container').css({ height: wH - logoH + 'px' });
-        });
+    isNest: {
+      type: Boolean,
+      default: false
     }
+  },
+  methods: {
+    hasOneShowingChildren: function hasOneShowingChildren(children) {
+      var showingChildren = children.filter(function (item) {
+        return !item.hidden;
+      });
+      if (showingChildren.length === 1) {
+        return true;
+      }
+      return false;
+    },
+    getClientHeight: function getClientHeight(state, wHeight) {
+      wHeight = 0;
+      if (document.body.clientHeight && document.documentElement.clientHeight) {
+        wHeight = document.body.clientHeight < document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
+      } else {
+        wHeight = document.body.clientHeight > document.documentElement.clientHeight ? document.body.clientHeight : document.documentElement.clientHeight;
+      }
+      return wHeight;
+    },
+    setSideH: function setSideH() {
+      var wH = $('window').height();
+      var logoH = $('.logo').height();
+      $('.sidebar-container').css({ height: wH - logoH + 'px' });
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    this.setSideH();
+    $(window).resize(function () {
+      _this.setSideH();
+    });
+  }
 });
 
 /***/ }),
@@ -99665,15 +99708,7 @@ var render = function() {
                             ? _c(
                                 "span",
                                 { attrs: { slot: "title" }, slot: "title" },
-                                [
-                                  _vm._v(
-                                    _vm._s(
-                                      _vm.generateTitle(
-                                        item.children[0].meta.title
-                                      )
-                                    )
-                                  )
-                                ]
+                                [_vm._v(_vm._s(item.children[0].meta.title))]
                               )
                             : _vm._e()
                         ],
@@ -99703,11 +99738,7 @@ var render = function() {
                             ? _c(
                                 "span",
                                 { attrs: { slot: "title" }, slot: "title" },
-                                [
-                                  _vm._v(
-                                    _vm._s(_vm.generateTitle(item.meta.title))
-                                  )
-                                ]
+                                [_vm._v(_vm._s(item.meta.title))]
                               )
                             : _vm._e()
                         ],
@@ -99757,11 +99788,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    _vm._s(
-                                                      _vm.generateTitle(
-                                                        child.meta.title
-                                                      )
-                                                    )
+                                                    _vm._s(child.meta.title)
                                                   )
                                                 ]
                                               )
@@ -99935,7 +99962,6 @@ exports.push([module.i, "", ""]);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ScrollPane_index_vue__ = __webpack_require__(231);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_ScrollPane_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_ScrollPane_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_i18n_js__ = __webpack_require__(87);
 //
 //
 //
@@ -99953,7 +99979,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
 
 
 
@@ -99991,7 +100018,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
-    generateTitle: __WEBPACK_IMPORTED_MODULE_1__utils_i18n_js__["a" /* generateTitle */],
     generateRoute: function generateRoute() {
       if (this.$route.name) {
         return this.$route;
@@ -100297,7 +100323,7 @@ var render = function() {
       _c(
         "scroll-pane",
         { ref: "ScrollPane", staticClass: "tags-view-wrapper" },
-        _vm._l(Array.from(_vm.visitedViews), function(tag) {
+        _vm._l(_vm.visitedViews, function(tag) {
           return _c(
             "router-link",
             {
@@ -100315,9 +100341,7 @@ var render = function() {
               }
             },
             [
-              _vm._v(
-                "\n      " + _vm._s(_vm.generateTitle(tag.title)) + "\n      "
-              ),
+              _vm._v("\n      " + _vm._s(tag.title) + "\n      "),
               _c("span", {
                 staticClass: "el-icon-close",
                 on: {
@@ -100344,7 +100368,7 @@ var render = function() {
               expression: "visible"
             }
           ],
-          staticClass: "contextmenu",
+          staticClass: "context-menu",
           style: { left: _vm.left + "px", top: _vm.top + "px" }
         },
         [
@@ -100357,16 +100381,14 @@ var render = function() {
                 }
               }
             },
-            [_vm._v(_vm._s(_vm.$t("tagsView.close")))]
+            [_vm._v("关闭当前")]
           ),
           _vm._v(" "),
           _c("li", { on: { click: _vm.closeOthersTags } }, [
-            _vm._v(_vm._s(_vm.$t("tagsView.closeOthers")))
+            _vm._v("关闭其他")
           ]),
           _vm._v(" "),
-          _c("li", { on: { click: _vm.closeAllTags } }, [
-            _vm._v(_vm._s(_vm.$t("tagsView.closeAll")))
-          ])
+          _c("li", { on: { click: _vm.closeAllTags } }, [_vm._v("关闭所有")])
         ]
       )
     ],
@@ -100971,20 +100993,16 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var tagsView = {
   state: {
-    visitedViews: [
-      /*{
-        name: '首页',
-        path: '/',
-        title: '首页'
-      }*/
-    ],
-    cachedViews: [
-      /*{
-        name: '首页',
-        path: '/',
-        title: '首页'
-      }*/
-    ]
+    visitedViews: [{
+      name: '首页',
+      path: '/dashboard',
+      title: '首页'
+    }],
+    cachedViews: [{
+      name: '首页',
+      path: '/dashboard',
+      title: '首页'
+    }]
   },
   mutations: {
     ADD_VISITED_VIEWS: function ADD_VISITED_VIEWS(state, view) {
@@ -101127,8 +101145,16 @@ var tagsView = {
       }
     },
     DEL_ALL_VIEWS: function DEL_ALL_VIEWS(state) {
-      state.visitedViews = [];
-      state.cachedViews = [];
+      state.visitedViews = [{
+        name: '首页',
+        path: '/dashboard',
+        title: '首页'
+      }];
+      state.cachedViews = [{
+        name: '首页',
+        path: '/dashboard',
+        title: '首页'
+      }];
     }
   },
   actions: {
@@ -101187,7 +101213,7 @@ var tagsView = {
 var user = {
   state: {
     token: Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["a" /* getToken */])(),
-    name: ''
+    name: Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["b" /* getUser */])()
   },
 
   mutations: {
@@ -101195,15 +101221,16 @@ var user = {
       state.token = token;
     },
     REFRESH_TOKEN: function REFRESH_TOKEN(state, token) {
-      Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* setToken */])(state.token);
+      Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["e" /* setToken */])(state.token);
       state.token = token.substring(token.indexOf(' ') + 1);
       __WEBPACK_IMPORTED_MODULE_2_axios___default.a.defaults.headers.common['Authorization'] = state.token;
     },
     PROFILE: function PROFILE(state, data) {
-      state.name = data.name;
+      state.name = data.username;
     },
     LOGOUT: function LOGOUT(state) {
       state.token = null;
+      state.name = null;
     }
   },
 
@@ -101213,9 +101240,9 @@ var user = {
       var commit = _ref.commit;
 
       return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["a" /* login */])(data).then(function (res) {
+        Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["b" /* login */])(data).then(function (res) {
           var msg = res.data;
-          Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* setToken */])(msg.access_token);
+          Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["e" /* setToken */])(msg.access_token);
           commit('SET_TOKEN', msg.access_token);
           resolve(res);
         }).catch(function (err) {
@@ -101225,14 +101252,37 @@ var user = {
     },
 
 
-    // 退出
-    Logout: function Logout(_ref2) {
+    //登录成功后拉取用户信息
+    Profile: function Profile(_ref2) {
       var commit = _ref2.commit;
 
       return new Promise(function (resolve, reject) {
-        Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["b" /* logout */])().then(function () {
-          Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["b" /* removeToken */])();
+        Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["a" /* getInfo */])().then(function (res) {
+          if (res.status == 200) {
+            Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["f" /* setUser */])(res.data.username);
+            commit('PROFILE', res.data);
+            resolve();
+          } else {
+            reject();
+          }
+        });
+      });
+    },
+
+
+    // 退出
+    Logout: function Logout(_ref3) {
+      var commit = _ref3.commit;
+
+      return new Promise(function (resolve, reject) {
+        Object(__WEBPACK_IMPORTED_MODULE_0__api_login_js__["c" /* logout */])().then(function () {
+          Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* removeToken */])();
+          Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["d" /* removeUser */])();
           commit('LOGOUT');
+          __WEBPACK_IMPORTED_MODULE_3__router_index_js__["a" /* default */].push({
+            path: "/login",
+            query: { redirect: __WEBPACK_IMPORTED_MODULE_3__router_index_js__["a" /* default */].currentRoute.fullPath }
+          });
           resolve();
         }).catch(function (err) {
           reject(err);
@@ -101244,14 +101294,14 @@ var user = {
     //  删除cookie
     DelToken: function DelToken() {
       return new Promise(function () {
-        Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["b" /* removeToken */])();
+        Object(__WEBPACK_IMPORTED_MODULE_1__utils_auth_js__["c" /* removeToken */])();
       });
     },
 
 
     //  将刷新的token保存到本地
-    refreshToken: function refreshToken(_ref3, token) {
-      var commit = _ref3.commit;
+    refreshToken: function refreshToken(_ref4, token) {
+      var commit = _ref4.commit;
 
       return new Promise(function () {
         commit('REFRESH_TOKEN', token);
@@ -101267,9 +101317,9 @@ var user = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = login;
-/* unused harmony export getInfo */
-/* harmony export (immutable) */ __webpack_exports__["b"] = logout;
+/* harmony export (immutable) */ __webpack_exports__["b"] = login;
+/* harmony export (immutable) */ __webpack_exports__["a"] = getInfo;
+/* harmony export (immutable) */ __webpack_exports__["c"] = logout;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_qs__ = __webpack_require__(93);
@@ -111796,7 +111846,7 @@ __WEBPACK_IMPORTED_MODULE_0_axios___default.a.interceptors.response.use(function
   if (error.response) {
     switch (error.response.status) {
       case 401:
-        Object(__WEBPACK_IMPORTED_MODULE_4__utils_auth_js__["b" /* removeToken */])();
+        Object(__WEBPACK_IMPORTED_MODULE_4__utils_auth_js__["c" /* removeToken */])();
         __WEBPACK_IMPORTED_MODULE_2__store_index_js__["a" /* default */].dispatch('DelToken');
         // store.commit('LOGOUT')
         __WEBPACK_IMPORTED_MODULE_1__router_index_js__["a" /* default */].replace({

@@ -67,12 +67,12 @@
 " prop="name">
                     <el-input v-model="ruleForm.name" placehold="请输入标记名称"></el-input>
                 </el-form-item>
-               <!-- <el-form-item label="状态" prop="status">
+                <el-form-item label="状态">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
                         <el-option label="停用" value="0"></el-option>
                         <el-option label="启用" value="1"></el-option>
                     </el-select>
-                </el-form-item>-->
+                </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
                 <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
@@ -134,7 +134,7 @@
         showAdd: false,
         ruleForm: {
           name: '',
-          // status: 1
+          status: 1
         },
         rules:{
           name: [
@@ -197,8 +197,8 @@
         this.$refs[formName].validate((valid) => {
           if (valid) {
             var data = {
-              name: this.ruleForm.name
-              // status: this.ruleForm.status
+              name: this.ruleForm.name,
+              status: this.ruleForm.status
             };
             this.$post('/distmets', data)
               .then(() => {
@@ -208,6 +208,7 @@
                 });
                 this.showAdd = false;
                 this.getDistType();
+                this.resetForm('ruleForm');
               }, (err) => {
                 if (err.response) {
                   let arr = err.response.data.errors;
@@ -250,7 +251,8 @@
       editSave(index,row){
         let newData = {
           id: row.id,
-          name: row.name
+          name: row.name,
+          status: row.status
         };
         if(this.inputChange){
           this.$patch('/distmets/'+row.id,newData)

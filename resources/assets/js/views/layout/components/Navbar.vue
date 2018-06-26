@@ -2,10 +2,21 @@
     <el-menu class="navbar" mode="horizontal">
         <hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></hamburger>
         <breadcrumb></breadcrumb>
-        <div class="right">
-            <router-link to="/" title="回到首页"><i class="iconfont bf-home"></i></router-link>
-            <span @click="logout" title="退出"><i class="iconfont bf-logout"></i></span>
-        </div>
+            <el-dropdown class="avatar-container right-menu-item" trigger="hover">
+                <div class="avatar-wrapper">
+                    <img class="user-avatar" src="/img/avatar.png">
+                    <span>{{this.$store.getters.name}}</span>
+                </div>
+                <el-dropdown-menu slot="dropdown">
+                    <router-link to="/">
+                        <el-dropdown-item>回到首页</el-dropdown-item>
+                    </router-link>
+                    <!--<el-dropdown-item divided>-->
+                    <el-dropdown-item>
+                        <span @click="logout" style="display:block;">退出登录</span>
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
     </el-menu>
 </template>
 <script>
@@ -30,7 +41,8 @@
             logout(){
               this.$store.dispatch('Logout')
             }
-        }
+        },
+      mounted(){}
     }
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped></style>

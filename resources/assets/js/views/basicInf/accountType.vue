@@ -22,7 +22,7 @@
                         width="220">
                     <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
-                            <el-input size="small" v-model="scope.row.name" placeholder="输入类型" @change="handleEdit(scope.$index,scope.row)"></el-input>
+                            <el-input size="small" v-model="scope.row.name" placeholder="输入类型" @change="handleEdit()"></el-input>
                         </span>
                         <span v-else>
                             {{scope.row.name}}
@@ -35,7 +35,7 @@
                         width="220">
                     <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
-                            <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit(scope.$index,scope.row)">
+                            <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit()">
                                 <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
                             </el-select>
                         </span>
@@ -72,7 +72,7 @@
                     <el-form-item label="类型" prop="name">
                         <el-input v-model="ruleForm.name" placehold=""></el-input>
                     </el-form-item>
-                    <el-form-item label="状态" prop="status">
+                    <el-form-item label="状态">
                         <el-select v-model="ruleForm.status" placeholder="请选择状态">
                             <el-option label="停用" value="0"></el-option>
                             <el-option label="启用" value="1"></el-option>
@@ -135,14 +135,11 @@
         showMask: false,
         ruleForm: {
           name:'',
-          status: ''
+          status: '1'
         },
         rules: {
           name: [
             {required: true, message: '请输入类型名', trigger: 'blur'},
-          ],
-          status: [
-            {required: true, message: '请选择状态', trigger: 'change'}
           ]
         },
         pagination: {
@@ -200,10 +197,6 @@
             }
           })
       },
-      //新增
-      addType(){
-        this.showMask = true;
-      },
       //添加
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -242,6 +235,11 @@
       //格式化输入
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      //新增
+      addType(){
+        this.showMask = true;
+        this.ruleForm.name='';
       },
       //分页请求
       handleCurrentChange(val) {

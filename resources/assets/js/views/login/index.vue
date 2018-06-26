@@ -97,6 +97,7 @@
                 message: '登录成功',
                 type: 'success'
               });
+              this.$store.dispatch('Profile');
               router.push({
                 path:"/",
                 query:{redirect:router.currentRoute.fullPath}

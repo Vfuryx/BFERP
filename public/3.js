@@ -113,6 +113,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -156,15 +168,7 @@ var render = function() {
       2
     ),
     _vm._v(" "),
-    _c("div", [
-      _vm._v(
-        "\n    " +
-          _vm._s(this.$store.state.user.token) +
-          "\n    " +
-          _vm._s(this.$store.state.app.appMainHeight) +
-          "\n  "
-      )
-    ])
+    _c("div", [void 0], 2)
   ])
 }
 var staticRenderFns = []

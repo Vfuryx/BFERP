@@ -98,7 +98,7 @@
                         @current-change="handleCurrentChange"
                         :current-page="pagination.current_page"
                         :page-size="pagination.per_page"
-                        layout="total, sizes, prev, pager, next, jumper"
+                        layout="total, prev, pager, next, jumper"
                         :total="pagination.total">
                 </el-pagination>
             </div>
@@ -125,10 +125,10 @@
                 <el-form-item label="标记名称" prop="name">
                     <el-input v-model="ruleForm.name" placehold="请输入标记名称"></el-input>
                 </el-form-item>
-                <el-form-item label="颜色">
+                <el-form-item label="颜色" prop="color">
                     <el-color-picker v-model="ruleForm.color"></el-color-picker>
                 </el-form-item>
-                <el-form-item label="状态" prop="state">
+                <el-form-item label="状态">
                     <el-select v-model="ruleForm.status" placeholder="请选择状态">
                         <el-option label="停用" value="0"></el-option>
                         <el-option label="启用" value="1"></el-option>
@@ -192,8 +192,8 @@
           name: [
             {required: true, message: '请输入标记名称', trigger: 'blur'},
           ],
-          status: [
-            {required: true, message: '请选择状态', trigger: 'change'}
+          color: [
+            {required: true, message: '请选择颜色', trigger: 'change'}
           ]
         },
         pagination: {
@@ -239,13 +239,6 @@
           });
         });
       },
-      addNew() {
-        $('.mask').css({left: $('.logo').width() - 1 + 'px'});
-        let leftW = $('.logo').width() * 0.5 + $('.inner').width() * 0.5;
-        $('.inner').css({marginLeft: -leftW + 'px'});
-        this.showMask = true;
-        $('.el-form-item__error').css({left: 50 + 'px'});
-      },
       //添加
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
@@ -286,6 +279,13 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
+      },
+      addNew() {
+        this.showMask = true;
+        this.ruleForm.code = '';
+        this.ruleForm.name = '';
+        this.ruleForm.color = '';
+        this.ruleForm.desc = '';
       },
       closeMask() {
         this.showMask = false;

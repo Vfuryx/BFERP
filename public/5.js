@@ -232,11 +232,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showMask: false,
       ruleForm: {
         name: '',
-        status: ''
+        status: '1'
       },
       rules: {
-        name: [{ required: true, message: '请输入类型名', trigger: 'blur' }],
-        status: [{ required: true, message: '请选择状态', trigger: 'change' }]
+        name: [{ required: true, message: '请输入类型名', trigger: 'blur' }]
       },
       pagination: {
         current_page: 1,
@@ -294,11 +293,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
 
-    //新增
-    addType: function addType() {
-      this.showMask = true;
-    },
-
     //添加
     submitForm: function submitForm(formName) {
       var _this2 = this;
@@ -339,6 +333,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //格式化输入
     resetForm: function resetForm(formName) {
       this.$refs[formName].resetFields();
+    },
+
+    //新增
+    addType: function addType() {
+      this.showMask = true;
+      this.ruleForm.name = '';
     },
 
     //分页请求
@@ -599,7 +599,7 @@ var render = function() {
                                 },
                                 on: {
                                   change: function($event) {
-                                    _vm.handleEdit(scope.$index, scope.row)
+                                    _vm.handleEdit()
                                   }
                                 },
                                 model: {
@@ -643,7 +643,7 @@ var render = function() {
                                   attrs: { placeholder: "状态" },
                                   on: {
                                     change: function($event) {
-                                      _vm.handleEdit(scope.$index, scope.row)
+                                      _vm.handleEdit()
                                     }
                                   },
                                   model: {
@@ -811,7 +811,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "el-form-item",
-                  { attrs: { label: "状态", prop: "status" } },
+                  { attrs: { label: "状态" } },
                   [
                     _c(
                       "el-select",

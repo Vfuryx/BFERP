@@ -326,6 +326,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -372,7 +378,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       showDel: false,
       delId: '',
       delArr: [],
-      defau: [{
+      defArr: [{
         value: '0',
         label: '0-否'
       }, {
@@ -391,7 +397,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       expenseCage: [],
       showCage: false,
       ruleForm2: {
-        name: ''
+        name: '',
+        status: '1'
       },
       rules2: {
         name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
@@ -410,7 +417,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.$fetch('/feetypes').then(function (res) {
-        console.log(res);
         _this.expenseType = res.data;
         _this.loading = false;
         var pg = res.meta.pagination;
@@ -442,7 +448,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           var data = {
             fee_category_id: _this2.ruleForm.type,
             name: _this2.ruleForm.name,
-            color: _this2.ruleForm.color,
             code: _this2.ruleForm.code,
             remark: _this2.ruleForm.mark,
             is_default: _this2.ruleForm.default,
@@ -454,6 +459,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               type: 'success'
             });
             _this2.showAdd = false;
+            _this2.resetForm('ruleForm');
             _this2.getExpenseType();
           }, function (err) {
             if (err.response) {
@@ -685,6 +691,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     //  新增
     addExpenseCage: function addExpenseCage() {
       this.showCage = true;
+      this.ruleForm2.name = '';
     },
     submitForm2: function submitForm2(formName) {
       var _this9 = this;
@@ -692,7 +699,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$refs[formName].validate(function (valid) {
         if (valid) {
           var data = {
-            name: _this9.ruleForm2.name
+            name: _this9.ruleForm2.name,
+            status: _this9.ruleForm2.status
           };
           _this9.$post('/feecates', data).then(function () {
             _this9.$message({
@@ -807,21 +815,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       var newData = {
         id: row.id,
-        name: row.name
+        name: row.name,
+        status: row.status
       };
       if (this.inputChange) {
         this.$patch('/feecates/' + row.id, newData).then(function () {
           _this13.loading = true;
           _this13.getExpenseCage();
-          setTimeout(function () {
-            _this13.loading = false;
-            _this13.$message({
-              message: '修改成功',
-              type: 'success'
-            });
-            _this13.changeIndex = '';
-            _this13.inputChange = false;
-          }, 2000);
+          _this13.loading = false;
+          _this13.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this13.changeIndex = '';
+          _this13.inputChange = false;
+          /* setTimeout(()=>{
+             this.loading = false;
+             this.$message({
+               message: '修改成功',
+               type: 'success'
+             });
+             this.changeIndex ='';
+             this.inputChange = false;
+           },2000)*/
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -950,6 +966,7 @@ var render = function() {
                                       },
                                       _vm._l(_vm.feeCage, function(item) {
                                         return _c("el-option", {
+                                          key: item.id,
                                           attrs: {
                                             label: item.name,
                                             value: item.id
@@ -1083,7 +1100,7 @@ var render = function() {
                                           expression: "scope.row.is_default"
                                         }
                                       },
-                                      _vm._l(_vm.defau, function(item) {
+                                      _vm._l(_vm.defArr, function(item) {
                                         return _c("el-option", {
                                           key: item.value,
                                           attrs: {
@@ -1568,6 +1585,7 @@ var render = function() {
                     },
                     _vm._l(_vm.feeCage, function(item) {
                       return _c("el-option", {
+                        key: item.id,
                         attrs: { label: item.name, value: item.id }
                       })
                     })
@@ -1676,9 +1694,7 @@ var render = function() {
                     [
                       _c("el-option", { attrs: { label: "停用", value: "0" } }),
                       _vm._v(" "),
-                      _c("el-option", {
-                        attrs: { label: "启用", value: "1", selected: "" }
-                      })
+                      _c("el-option", { attrs: { label: "启用", value: "1" } })
                     ],
                     1
                   )
@@ -1765,6 +1781,33 @@ var render = function() {
                       expression: "ruleForm2.name"
                     }
                   })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm2.status,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm2, "status", $$v)
+                        },
+                        expression: "ruleForm2.status"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "停用", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "启用", value: "1" } })
+                    ],
+                    1
+                  )
                 ],
                 1
               )

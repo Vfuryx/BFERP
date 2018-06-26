@@ -28,7 +28,8 @@
         mixins: [ResizeMixin],
         computed: {
             sidebar() {
-                return this.$store.state.app.sidebar
+                // return this.$store.state.app.sidebar
+                return this.$store.getters.sidebar
             },
             device() {
                 return this.$store.state.app.device
