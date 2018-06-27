@@ -15,6 +15,11 @@ class FeeCategoryRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'status' => 'integer'
+                ];
+                break;
             case 'POST':
                 return [
                     'name' => 'required|string',

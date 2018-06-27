@@ -16,8 +16,11 @@ class FreightTypesController extends Controller
     /**
      * 获取所有运费类型 
      *  
-     * @Get("/freighttypes") 
+     * @Get("/freighttypes{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -40,24 +43,27 @@ class FreightTypesController extends Controller
      *     "meta": {
      *         "pagination": {
      *             "total": 5,
-     *             "count": 2,
-     *             "per_page": 2,
+     *             "count": 5,
+     *             "per_page": 10,
      *             "current_page": 1,
-     *             "total_pages": 3,
+     *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/freighttypes?page=2"
+     *                 "next": "{{host}}/api/freighttypes?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index()
+    public function index(FreightTypeRequest $request)
     {
         // return $this->response->collection(FreightType::all(),new FreightTypeTransformer());
         
         //分页响应返回
-        $freighttypes = FreightType::paginate(2);
+        $freighttypes = FreightType::whereIn(
+            'status',
+            (array)$request->get('status',[1,0]))
+            ->paginate(10);
         return $this->response->paginator($freighttypes, new FreightTypeTransformer());
 
     }
@@ -101,9 +107,9 @@ class FreightTypesController extends Controller
         $freighttype->fill($request->all());
         $freighttype->save();
         return $this->response
-            ->item($freighttype, new FreightTypeTransformer())
-            ->setStatusCode(201)
-            ->addMeta('status_code', '201');
+                     ->item($freighttype, new FreightTypeTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
@@ -165,8 +171,8 @@ class FreightTypesController extends Controller
     {
         $freighttype->update($request->all());
         return $this->response
-            ->item($freighttype, new FreightTypeTransformer())
-            ->setStatusCode(201);
+                     ->item($freighttype, new FreightTypeTransformer())
+                     ->setStatusCode(201);
     }
 
     /**

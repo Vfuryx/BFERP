@@ -16,8 +16,11 @@ class MarkColorsController extends Controller
     /**
      * 获取所有标记颜色 
      *  
-     * @Get("/markcolors") 
+     * @Get("/markcolors{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -44,25 +47,28 @@ class MarkColorsController extends Controller
      *     "meta": {
      *         "pagination": {
      *             "total": 5,
-     *             "count": 2,
-     *             "per_page": 2,
+     *             "count": 5,
+     *             "per_page": 10,
      *             "current_page": 1,
-     *             "total_pages": 3,
+     *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/markcolors?page=2"
+     *                 "next": "{{host}}/api/markcolors?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index()
+    public function index(MarkColorRequest $request)
     {
         //不分页返回
         //return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
 
         //分页响应返回
-        $markcolors = MarkColor::paginate();
+        $markcolors = MarkColor::whereIn(
+            'status',
+            (array)$request->get('status', [1, 0]))
+            ->paginate(10);
         return $this->response->paginator($markcolors, new MarkColorTransformer());
     }
 
@@ -111,9 +117,9 @@ class MarkColorsController extends Controller
         $markcolor->save();
 
         return $this->response
-                    ->item($markcolor, new MarkColorTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+                     ->item($markcolor, new MarkColorTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
@@ -180,8 +186,8 @@ class MarkColorsController extends Controller
     {
         $markcolor->update($request->all());
         return $this->response
-                    ->item($markcolor, new MarkColorTransformer())
-                    ->setStatusCode(201);
+                     ->item($markcolor, new MarkColorTransformer())
+                     ->setStatusCode(201);
     }
 
     /**
@@ -204,7 +210,7 @@ class MarkColorsController extends Controller
         // return $this->response->item($markcolor, new MarkColorTransformer());
     }
 
-    
+
     /**
      * 删除一组标记颜色 
      *  
@@ -237,13 +243,13 @@ class MarkColorsController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== MarkColor::destroy($ids)){
+            if (count($ids) !== MarkColor::destroy($ids)) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
+            return $this->errorResponse(500, '删除错误', 500);
         }
 
         return $this->errorResponse(204);
@@ -286,13 +292,13 @@ class MarkColorsController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== MarkColor::whereIn('id',$ids)->update(['status'=>$status])){
+            if (count($ids) !== MarkColor::whereIn('id', $ids)->update(['status' => $status])) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
+            return $this->errorResponse(500, '更改错误', 500);
         }
 
         return $this->errorResponse(204);

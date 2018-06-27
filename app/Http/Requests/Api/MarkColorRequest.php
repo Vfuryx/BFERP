@@ -13,6 +13,11 @@ class MarkColorRequest extends FormRequest
     {
         Log::info($this);
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'status' => 'integer'
+                ];
+                break;
             case 'POST':
                 return [
                     'markcode' => 'required|string|max:255|unique:mark_colors',

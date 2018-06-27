@@ -14,10 +14,13 @@ use Illuminate\Support\Facades\DB;
 class FeeTypesController extends Controller
 {
     /**
-     * 获取所有费用类型 
-     *  
-     * @Get("/feetypes") 
+     * 获取所有费用类型
+     *
+     * @Get("/feetypes{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -67,19 +70,22 @@ class FeeTypesController extends Controller
      *     }
      * })
      */
-    public function index()
+    public function index(FeeTypeRequest $request)
     {
         // return $this->response->collection(FeeType::all(),new FeeTypeTransformer());
-        
+
         //分页响应返回
-        $feetypes = FeeType::paginate(13);
+        $feetypes = FeeType::whereIn(
+            'status',
+            (array)$request->get('status', [1, 0]))
+            ->paginate(13);
         return $this->response->paginator($feetypes, new FeeTypeTransformer());
     }
 
     /**
-     * 新增费用类型 
-     *  
-     * @Post("/feetypes") 
+     * 新增费用类型
+     *
+     * @Post("/feetypes")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("fee_category_id",type="integer", description="费用类别id", required=true),
@@ -130,9 +136,9 @@ class FeeTypesController extends Controller
     }
 
     /**
-     * 显示单条费用类型 
-     *  
-     * @Post("/feetypes/:id") 
+     * 显示单条费用类型
+     *
+     * @Post("/feetypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -159,9 +165,9 @@ class FeeTypesController extends Controller
     }
 
     /**
-     * 修改费用类型 
-     *  
-     * @Patch("/feetypes/:id") 
+     * 修改费用类型
+     *
+     * @Patch("/feetypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -201,9 +207,9 @@ class FeeTypesController extends Controller
     }
 
     /**
-     * 删除费用类型 
-     *  
-     * @Delete("/feetypes/:id") 
+     * 删除费用类型
+     *
+     * @Delete("/feetypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -220,9 +226,9 @@ class FeeTypesController extends Controller
     }
 
     /**
-     * 删除一组费用类型 
-     *  
-     * @Delete("/feetypes") 
+     * 删除一组费用类型
+     *
+     * @Delete("/feetypes")
      * @Versions({"v1"})
      * @Parameters({
      * @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true)
@@ -264,9 +270,9 @@ class FeeTypesController extends Controller
     }
 
     /**
-     * 更改一组费用类型状态 
-     *  
-     * @PUT("/feetypes") 
+     * 更改一组费用类型状态
+     *
+     * @PUT("/feetypes")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true),

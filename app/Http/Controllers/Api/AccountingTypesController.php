@@ -14,10 +14,13 @@ use App\Http\Requests\Api\AccountingTypeRequest;
 class AccountingTypesController extends Controller
 {
     /**
-     * 获取所有记账类型 
-     *  
-     * @Get("/acctypes") 
+     * 获取所有记账类型
+     *
+     * @Get("/acctypes{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      *       "data": {
      *           {
@@ -38,24 +41,27 @@ class AccountingTypesController extends Controller
      *       "meta": {
      *           "pagination": {
      *               "total": 3,
-     *               "count": 2,
-     *               "per_page": 2,
+     *               "count": 3,
+     *               "per_page": 10,
      *               "current_page": 1,
-     *               "total_pages": 2,
+     *               "total_pages": 1,
      *               "links": {
      *                   "previous": null,
-     *                   "next": "http://127.0.0.1:8000/api/acctypes?page=2"
+     *                   "next": "http://127.0.0.1:8000/api/acctypes?page=1"
      *               }
      *           }
      *       }
      * })
      */
-    public function index()
+    public function index(AccountingTypeRequest $request)
     {
         // return $this->response->collection(AccType::all(), new AccountingTypeTransformer());
 
         //分页响应返回
-        $acctype = AccType::paginate(10);
+        $acctype = AccType::whereIn(
+            'status',
+            (array)$request->get('status', [1, 0]))
+            ->paginate(10);
         return $this->response->paginator($acctype, new AccountingTypeTransformer());
 
     }
@@ -63,8 +69,8 @@ class AccountingTypesController extends Controller
 
     /**
      * 新增记账类型
-     *  
-     * @Post("/acctypes") 
+     *
+     * @Post("/acctypes")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="记账类型名称", required=true),
@@ -98,15 +104,15 @@ class AccountingTypesController extends Controller
         $acctype->fill($request->all());
         $acctype->save();
         return $this->response
-                    ->item($acctype, new AccountingTypeTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+                     ->item($acctype, new AccountingTypeTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
-     * 显示单条记账类型 
-     *  
-     * @Post("/acctypes/:id") 
+     * 显示单条记账类型
+     *
+     * @Post("/acctypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -130,8 +136,8 @@ class AccountingTypesController extends Controller
 
     /**
      * 修改记账类型
-     *  
-     * @Patch("/acctypes/:id") 
+     *
+     * @Patch("/acctypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -160,14 +166,14 @@ class AccountingTypesController extends Controller
     {
         $acctype->update($request->all());
         return $this->response
-                    ->item($acctype, new AccountingTypeTransformer())
-                    ->setStatusCode(201);
+                     ->item($acctype, new AccountingTypeTransformer())
+                     ->setStatusCode(201);
     }
 
     /**
-     * 删除记账类型 
-     *  
-     * @Delete("/acctypes/:id") 
+     * 删除记账类型
+     *
+     * @Delete("/acctypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -184,9 +190,9 @@ class AccountingTypesController extends Controller
     }
 
     /**
-     * 删除一组记账类型 
-     *  
-     * @Delete("/acctypes") 
+     * 删除一组记账类型
+     *
+     * @Delete("/acctypes")
      * @Versions({"v1"})
      * @Parameters({
      * @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true)
@@ -215,22 +221,22 @@ class AccountingTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== AccType::destroy($ids)){
+            if (count($ids) !== AccType::destroy($ids)) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
+            return $this->errorResponse(500, '删除错误', 500);
         }
 
         return $this->errorResponse(204);
     }
 
     /**
-     * 更改一组记账类型状态 
-     *  
-     * @PUT("/acctypes") 
+     * 更改一组记账类型状态
+     *
+     * @PUT("/acctypes")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true),
@@ -264,13 +270,13 @@ class AccountingTypesController extends Controller
         DB::beginTransaction();
 
         try {
-            if(count($ids) !== AccType::whereIn('id',$ids)->update(['status'=>$status])){
+            if (count($ids) !== AccType::whereIn('id', $ids)->update(['status' => $status])) {
                 $this->errorResponse(500);
             }
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
+            return $this->errorResponse(500, '更改错误', 500);
         }
 
         return $this->errorResponse(204);

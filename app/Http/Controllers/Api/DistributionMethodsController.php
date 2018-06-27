@@ -17,8 +17,11 @@ class DistributionMethodsController extends Controller
     /**
      * 获取所有配送方式 
      *  
-     * @Get("/distmets") 
+     * @Get("/distmets{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -40,23 +43,26 @@ class DistributionMethodsController extends Controller
      *         "pagination": {
      *             "total": 3,
      *             "count": 2,
-     *             "per_page": 2,
+     *             "per_page": 10,
      *             "current_page": 1,
-     *             "total_pages": 3,
+     *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/distmets?page=2"
+     *                 "next": "{{host}}/api/distmets?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index()
+    public function index(DistributionMethodRequest $request)
     {
         // return $this->response->collection(DistributionMethod::all(),new DistributionMethodTransformer());
 
         //分页响应返回
-        $distmets = DistributionMethod::paginate(2);
+        $distmets = DistributionMethod::whereIn(
+            'status',
+            (array)$request->get('status', [1, 0]))
+            ->paginate(10);
         return $this->response->paginator($distmets, new DistributionMethodTransformer());
     }
 
@@ -98,9 +104,9 @@ class DistributionMethodsController extends Controller
         $dismet->fill($request->all());
         $dismet->save();
         return $this->response
-                    ->item($dismet, new DistributionMethodTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+                     ->item($dismet, new DistributionMethodTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
@@ -160,8 +166,8 @@ class DistributionMethodsController extends Controller
     {
         $distmet->update($request->all());
         return $this->response
-                    ->item($distmet, new DistributionMethodTransformer())
-                    ->setStatusCode(201);
+                     ->item($distmet, new DistributionMethodTransformer())
+                     ->setStatusCode(201);
     }
 
     /**

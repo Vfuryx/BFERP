@@ -20,8 +20,12 @@ FORMAT: 1A
 # MarkColors [/api]
 标记颜色资源
 
-## 获取所有标记颜色 [GET /api/markcolors]
+## 获取所有标记颜色 [GET /api/markcolors{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -52,13 +56,13 @@ FORMAT: 1A
                 "meta": {
                     "pagination": {
                         "total": 5,
-                        "count": 2,
-                        "per_page": 2,
+                        "count": 5,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 3,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/markcolors?page=2"
+                            "next": "{{host}}/api/markcolors?page=1"
                         }
                     }
                 }
@@ -257,8 +261,12 @@ FORMAT: 1A
 # AccountingTypes [/api]
 记账类型资源
 
-## 获取所有记账类型 [GET /api/acctypes]
+## 获取所有记账类型 [GET /api/acctypes{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -283,13 +291,13 @@ FORMAT: 1A
                 "meta": {
                     "pagination": {
                         "total": 3,
-                        "count": 2,
-                        "per_page": 2,
+                        "count": 3,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 2,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "http://127.0.0.1:8000/api/acctypes?page=2"
+                            "next": "http://127.0.0.1:8000/api/acctypes?page=1"
                         }
                     }
                 }
@@ -476,8 +484,12 @@ FORMAT: 1A
 # feetypes [/api]
 费用类型资源
 
-## 获取所有费用类型 [GET /api/feetypes]
+## 获取所有费用类型 [GET /api/feetypes{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -732,8 +744,12 @@ FORMAT: 1A
 # DistributionMethods [/api]
 配送方式资源
 
-## 获取所有配送方式 [GET /api/distmets]
+## 获取所有配送方式 [GET /api/distmets{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -759,12 +775,12 @@ FORMAT: 1A
                     "pagination": {
                         "total": 3,
                         "count": 2,
-                        "per_page": 2,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 3,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/distmets?page=2"
+                            "next": "{{host}}/api/distmets?page=1"
                         }
                     }
                 }
@@ -951,8 +967,12 @@ FORMAT: 1A
 # FeeCategories [/api]
 费用类别资源
 
-## 获取所有费用类别 [GET /api/feecates]
+## 获取所有费用类别 [GET /api/feecates{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -1157,8 +1177,12 @@ FORMAT: 1A
 # FreightTypes [/api]
 运费类型资源
 
-## 获取所有运费类型 [GET /api/freighttypes]
+## 获取所有运费类型 [GET /api/freighttypes{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -1185,13 +1209,13 @@ FORMAT: 1A
                 "meta": {
                     "pagination": {
                         "total": 5,
-                        "count": 2,
-                        "per_page": 2,
+                        "count": 5,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 3,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/freighttypes?page=2"
+                            "next": "{{host}}/api/freighttypes?page=1"
                         }
                     }
                 }
@@ -1383,8 +1407,12 @@ FORMAT: 1A
 # GoodsCategories [/api]
 商品类别资源
 
-## 获取所有商品类别 [GET /api/goodscates]
+## 获取所有商品类别 [GET /api/goodscates{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -1415,13 +1443,13 @@ FORMAT: 1A
                 "meta": {
                     "pagination": {
                         "total": 5,
-                        "count": 2,
-                        "per_page": 2,
+                        "count": 5,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 3,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/goodscates?page=2"
+                            "next": "{{host}}/api/goodscates?page=1"
                         }
                     }
                 }
@@ -1620,8 +1648,12 @@ FORMAT: 1A
 # StorageTypes [/api]
 入库类型资源
 
-## 获取所有入库类型 [GET /api/storagetypes]
+## 获取所有入库类型 [GET /api/storagetypes{?status}]
 
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -1646,13 +1678,13 @@ FORMAT: 1A
                 "meta": {
                     "pagination": {
                         "total": 5,
-                        "count": 2,
-                        "per_page": 2,
+                        "count": 5,
+                        "per_page": 10,
                         "current_page": 1,
-                        "total_pages": 3,
+                        "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/storagetypes?page=2"
+                            "next": "{{host}}/api/storagetypes?page=1"
                         }
                     }
                 }

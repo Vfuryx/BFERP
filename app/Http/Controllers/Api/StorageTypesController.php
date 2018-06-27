@@ -17,8 +17,11 @@ class StorageTypesController extends Controller
    /**
      * 获取所有入库类型 
      *  
-     * @Get("/storagetypes") 
+     * @Get("/storagetypes{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -40,24 +43,27 @@ class StorageTypesController extends Controller
      *     "meta": {
      *         "pagination": {
      *             "total": 5,
-     *             "count": 2,
-     *             "per_page": 2,
+     *             "count": 5,
+     *             "per_page": 10,
      *             "current_page": 1,
-     *             "total_pages": 3,
+     *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/storagetypes?page=2"
+     *                 "next": "{{host}}/api/storagetypes?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index()
+    public function index(StorageTypeRequest $request)
     {
         // return $this->response->collection(StorageType::all(),new StorageTypeTransformer());
         
         //分页响应返回
-        $storagetypes = StorageType::paginate(2);
+        $storagetypes = StorageType::whereIn(
+            'status',
+            (array)$request->get('status',[1,0]))
+            ->paginate(10);
         return $this->response->paginator($storagetypes, new StorageTypeTransformer());
     }
 
@@ -100,9 +106,9 @@ class StorageTypesController extends Controller
         $storagetype->save();
 
         return $this->response
-                    ->item($storagetype, new StorageTypeTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+                     ->item($storagetype, new StorageTypeTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
@@ -163,8 +169,8 @@ class StorageTypesController extends Controller
     {
         $storagetype->update($request->all());
         return $this->response
-                    ->item($storagetype, new StorageTypeTransformer())
-                    ->setStatusCode(201);
+                     ->item($storagetype, new StorageTypeTransformer())
+                     ->setStatusCode(201);
     }
 
     /**

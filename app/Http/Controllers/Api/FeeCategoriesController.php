@@ -16,8 +16,11 @@ class FeeCategoriesController extends Controller
     /**
      * 获取所有费用类别
      *
-     * @Get("/feecates")
+     * @Get("/feecates{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *      {
@@ -37,9 +40,15 @@ class FeeCategoriesController extends Controller
      *   }
      * })
      */
-    public function index()
+    public function index(FeeCategoryRequest $request)
     {
-        return $this->response->collection(FeeCategory::all(), new FeeCategoryTransformer());
+        return $this->response->collection(
+            FeeCategory::whereIn(
+                'status',
+                (array)$request->get('status', [1, 0])
+            )->get(),
+            new FeeCategoryTransformer()
+        );
 
         //分页响应返回
         // $feecates = FeeCategory::paginate(2);
@@ -84,9 +93,9 @@ class FeeCategoriesController extends Controller
         $feecate->fill($request->all());
         $feecate->save();
         return $this->response
-            ->item($feecate, new FeeCategoryTransformer())
-            ->setStatusCode(201)
-            ->addMeta('status_code', '201');
+                     ->item($feecate, new FeeCategoryTransformer())
+                     ->setStatusCode(201)
+                     ->addMeta('status_code', '201');
     }
 
     /**
@@ -146,8 +155,8 @@ class FeeCategoriesController extends Controller
     {
         $feecate->update($request->all());
         return $this->response
-            ->item($feecate, new FeeCategoryTransformer())
-            ->setStatusCode(201);
+                     ->item($feecate, new FeeCategoryTransformer())
+                     ->setStatusCode(201);
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use Illuminate\Validation\Rule;
 
 class FeeTypeRequest extends FormRequest
 {
@@ -15,10 +16,20 @@ class FeeTypeRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'status' => 'integer'
+                ];
+                break;
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'fee_category_id' => 'required|integer|exists:fee_categories,id',
+                    'fee_category_id' => [
+                        'required','integer',
+                        Rule::exists('fee_categories','id')->where(function ($query) {
+                            $query->where('status',1);
+                        }),
+                    ],
                     'code' => 'required|string|max:255|unique:fee_types',
                     'is_default' => 'integer',
                     'status' => 'integer',
@@ -58,7 +69,7 @@ class FeeTypeRequest extends FormRequest
             'name.string' => '费用名称必须string类型',
             'fee_category_id.required' => '费用类别id必填',
             'fee_category_id.integer' => '费用类别id必须int类型',
-            'fee_category_id.exists' => '需要添加的id在数据库中未找到',
+            'fee_category_id.exists' => '需要添加的id在数据库中未找到或未启用',
             'code.required' => '费用代码必填',
             'code.string' => '费用代码必须string类型',
             'code.max' => '费用代码最大长度为255',

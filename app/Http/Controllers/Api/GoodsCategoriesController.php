@@ -16,8 +16,11 @@ class GoodsCategoriesController extends Controller
     /**
      * 获取所有商品类别 
      *  
-     * @Get("/goodscates") 
+     * @Get("/goodscates{?status}")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     * })
      * @Response(200, body={
      * "data": {
      *         {
@@ -44,24 +47,27 @@ class GoodsCategoriesController extends Controller
      *     "meta": {
      *         "pagination": {
      *             "total": 5,
-     *             "count": 2,
-     *             "per_page": 2,
+     *             "count": 5,
+     *             "per_page": 10,
      *             "current_page": 1,
-     *             "total_pages": 3,
+     *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/goodscates?page=2"
+     *                 "next": "{{host}}/api/goodscates?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index()
+    public function index(GoodsCategoryRequest $request)
     {
         // return $this->response->collection(GoodsCategory::all(),new GoodsCategoryTransformer());
 
          //分页响应返回
-         $goodscates = GoodsCategory::paginate(2);
+         $goodscates = GoodsCategory::whereIn(
+             'status',
+             (array)$request->get('status',[1,0]))
+             ->paginate(10);
          return $this->response->paginator($goodscates, new GoodsCategoryTransformer()); 
     }
 
@@ -177,8 +183,8 @@ class GoodsCategoriesController extends Controller
     {
         $goodscate->update($request->all());
         return $this->response
-                    ->item($goodscate, new GoodsCategoryTransformer())
-                    ->setStatusCode(201);
+                     ->item($goodscate, new GoodsCategoryTransformer())
+                     ->setStatusCode(201);
     }
 
     /**
