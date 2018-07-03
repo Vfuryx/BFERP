@@ -76,7 +76,7 @@ import MsgBox from './components/MessageBox.vue'
 Vue.component('MessageBox',MsgBox);
 
 //组件table
-import MyTable from './components/MyTable.vue'
+import MyTable from './components/myTable.vue'
 Vue.component('MyTable',MyTable);
 
 //组件addMask

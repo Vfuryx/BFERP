@@ -54004,8 +54004,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_delMask_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_delMask_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_MessageBox_vue__ = __webpack_require__(408);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_MessageBox_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_MessageBox_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_MyTable_vue__ = __webpack_require__(413);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_MyTable_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_MyTable_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_myTable_vue__ = __webpack_require__(839);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_myTable_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_18__components_myTable_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_addMask_vue__ = __webpack_require__(418);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__components_addMask_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_19__components_addMask_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_20__components_pagination_vue__ = __webpack_require__(423);
@@ -54087,7 +54087,7 @@ Vue.component('MessageBox', __WEBPACK_IMPORTED_MODULE_17__components_MessageBox_
 
 //组件table
 
-Vue.component('MyTable', __WEBPACK_IMPORTED_MODULE_18__components_MyTable_vue___default.a);
+Vue.component('MyTable', __WEBPACK_IMPORTED_MODULE_18__components_myTable_vue___default.a);
 
 //组件addMask
 
@@ -114146,695 +114146,11 @@ if (false) {
 }
 
 /***/ }),
-/* 413 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(414)
-}
-var normalizeComponent = __webpack_require__(3)
-/* script */
-var __vue_script__ = __webpack_require__(416)
-/* template */
-var __vue_template__ = __webpack_require__(417)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = injectStyle
-/* scopeId */
-var __vue_scopeId__ = "data-v-154bc14a"
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\MyTable.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-154bc14a", Component.options)
-  } else {
-    hotAPI.reload("data-v-154bc14a", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 414 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(415);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(7)("2f82a1a4", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-154bc14a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./MyTable.vue", function() {
-     var newContent = require("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-154bc14a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./MyTable.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 415 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.el-table_1_column_7 .cell i[data-v-154bc14a] {\n  margin-right: 5px;\n  cursor: pointer;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 416 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['tableKey', 'url'],
-  data: function data() {
-    return {
-      checkboxInit: false,
-      newId: '',
-      //批量删除
-      delArr: []
-    };
-  },
-
-  computed: {
-    loading: {
-      get: function get() {
-        return this.$store.getters.loading;
-      }
-    },
-    //当前id
-    currentIndex: {
-      get: function get() {
-        return this.$store.getters.currentIndex;
-      },
-      set: function set() {}
-    },
-    tableData: {
-      get: function get() {
-        return this.$store.state.table.newData.data;
-      },
-      set: function set() {}
-    }
-  },
-  methods: {
-    //切换选中
-    toggleChecked: function toggleChecked() {
-      this.checkboxInit = !this.checkboxInit;
-    },
-
-    //删除
-    del: function del(row, e) {
-      this.$store.dispatch('setShow', true);
-      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
-      this.newId = "/" + row.id;
-    },
-
-    //批量删除
-    handleSelectionChange: function handleSelectionChange(val) {
-      this.multipleSelection = val;
-      var del = [];
-      this.multipleSelection.forEach(function (selectedItem) {
-        del.push(selectedItem.id);
-      });
-      this.delArr = del.join(',');
-    },
-    delMore: function delMore() {
-      var _this = this;
-
-      this.$store.dispatch('setUrl', this.url);
-      this.$store.dispatch('setDelArr', this.delArr);
-      this.$store.dispatch('delMore').then(function () {
-        _this.getData();
-      });
-    },
-
-    //刷新
-    refresh: function refresh() {
-      var _this2 = this;
-
-      this.$store.dispatch('setLoad', true);
-      this.getData();
-      setTimeout(function () {
-        _this2.$store.dispatch('setLoad', false);
-      }, 2000);
-    },
-
-    //编辑
-    edit: function edit(index) {
-      this.$store.dispatch('setIndex', index);
-    },
-    handleEdit: function handleEdit() {
-      this.$store.dispatch('setInput');
-    },
-
-    //保存修改
-    editSave: function editSave(row) {
-      this.$emit('edit', row);
-    },
-
-    //取消修改
-    editCancle: function editCancle() {
-      this.$message({
-        message: '取消修改',
-        type: 'info'
-      });
-      this.$store.dispatch('setVoid');
-    },
-    getData: function getData() {
-      this.$store.dispatch('setUrl', this.url);
-      this.$store.dispatch('getData');
-    }
-  },
-  mounted: function mounted() {
-    this.getData();
-    this.$nextTick(function () {
-      this.$on('delMore', this.delMore);
-      this.$on('refresh', this.refresh);
-    });
-  }
-});
-
-/***/ }),
-/* 417 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c(
-        "div",
-        { ref: "table" },
-        [
-          _c(
-            "el-table",
-            {
-              directives: [
-                {
-                  name: "loading",
-                  rawName: "v-loading",
-                  value: _vm.loading,
-                  expression: "loading"
-                }
-              ],
-              attrs: {
-                data: _vm.tableData,
-                fit: "",
-                "highlight-current-row": "",
-                type: "index",
-                "element-loading-text": "拼命加载中",
-                "element-loading-spinner": "el-icon-loading",
-                "element-loading-background": "rgba(0, 0, 0, 0.6)"
-              },
-              on: { "selection-change": _vm.handleSelectionChange }
-            },
-            [
-              _c("el-table-column", {
-                attrs: {
-                  type: "selection",
-                  width: "95",
-                  align: "center",
-                  checked: _vm.checkboxInit
-                },
-                on: { change: _vm.toggleChecked }
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.tableKey, function(item, index) {
-                return _c("el-table-column", {
-                  key: index,
-                  attrs: {
-                    label: item.label,
-                    align: "center",
-                    width: "item.width"
-                  },
-                  scopedSlots: _vm._u([
-                    {
-                      key: "default",
-                      fn: function(scope) {
-                        return [
-                          _vm.currentIndex == "index" + scope.$index
-                            ? _c("span", [
-                                item.type == "color"
-                                  ? _c(
-                                      "span",
-                                      [
-                                        _c("el-color-picker", {
-                                          attrs: { size: "mini" },
-                                          on: { change: _vm.handleEdit },
-                                          model: {
-                                            value: scope.row[item.prop],
-                                            callback: function($$v) {
-                                              _vm.$set(
-                                                scope.row,
-                                                item.prop,
-                                                $$v
-                                              )
-                                            },
-                                            expression: "scope.row[item.prop]"
-                                          }
-                                        })
-                                      ],
-                                      1
-                                    )
-                                  : item.type == "select_stu"
-                                    ? _c(
-                                        "span",
-                                        [
-                                          _c(
-                                            "el-select",
-                                            {
-                                              attrs: {
-                                                placeholder: item.holder
-                                              },
-                                              on: { change: _vm.handleEdit },
-                                              model: {
-                                                value: scope.row[item.prop],
-                                                callback: function($$v) {
-                                                  _vm.$set(
-                                                    scope.row,
-                                                    item.prop,
-                                                    $$v
-                                                  )
-                                                },
-                                                expression:
-                                                  "scope.row[item.prop]"
-                                              }
-                                            },
-                                            [
-                                              _c("el-option", {
-                                                attrs: {
-                                                  label: "0-停用",
-                                                  value: "0"
-                                                }
-                                              }),
-                                              _vm._v(" "),
-                                              _c("el-option", {
-                                                attrs: {
-                                                  label: "1-启用",
-                                                  value: "1"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        ],
-                                        1
-                                      )
-                                    : item.type == "select_def"
-                                      ? _c(
-                                          "span",
-                                          [
-                                            _c(
-                                              "el-select",
-                                              {
-                                                attrs: {
-                                                  placeholder: item.holder
-                                                },
-                                                on: { change: _vm.handleEdit },
-                                                model: {
-                                                  value: scope.row[item.prop],
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      scope.row,
-                                                      item.prop,
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "scope.row[item.prop]"
-                                                }
-                                              },
-                                              [
-                                                _c("el-option", {
-                                                  attrs: {
-                                                    label: "0-否",
-                                                    value: "0"
-                                                  }
-                                                }),
-                                                _vm._v(" "),
-                                                _c("el-option", {
-                                                  attrs: {
-                                                    label: "1-是",
-                                                    value: "1"
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        )
-                                      : item.type == "textarea"
-                                        ? _c(
-                                            "span",
-                                            [
-                                              _c("el-input", {
-                                                attrs: {
-                                                  type: "textarea",
-                                                  size: "small",
-                                                  placeholder: item.holder
-                                                },
-                                                on: { change: _vm.handleEdit },
-                                                model: {
-                                                  value: scope.row[item.prop],
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      scope.row,
-                                                      item.prop,
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "scope.row[item.prop]"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                                        : _c(
-                                            "span",
-                                            [
-                                              _c("el-input", {
-                                                attrs: {
-                                                  size: "small",
-                                                  placeholder: item.holder
-                                                },
-                                                on: { change: _vm.handleEdit },
-                                                model: {
-                                                  value: scope.row[item.prop],
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      scope.row,
-                                                      item.prop,
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "scope.row[item.prop]"
-                                                }
-                                              })
-                                            ],
-                                            1
-                                          )
-                              ])
-                            : _c("span", [
-                                item.type == "color"
-                                  ? _c("span", [
-                                      _c("span", {
-                                        staticClass: "tableColor",
-                                        style: {
-                                          backgroundColor: scope.row.color
-                                        }
-                                      }),
-                                      _vm._v(
-                                        "\n                     " +
-                                          _vm._s(scope.row[item.prop]) +
-                                          "\n                        "
-                                      )
-                                    ])
-                                  : item.type == "select_stu"
-                                    ? _c("span", [
-                                        _c("i", {
-                                          staticClass: "showStatus",
-                                          class: {
-                                            statusActive:
-                                              scope.row.status == 0
-                                                ? false
-                                                : true
-                                          }
-                                        }),
-                                        _vm._v(
-                                          "\n                             " +
-                                            _vm._s(
-                                              scope.row[item.prop] == 0
-                                                ? "停用"
-                                                : "启用"
-                                            ) +
-                                            "\n                        "
-                                        )
-                                      ])
-                                    : item.type == "select_def"
-                                      ? _c("span", [
-                                          _vm._v(
-                                            "\n                             " +
-                                              _vm._s(
-                                                scope.row[item.prop] == 0
-                                                  ? "否"
-                                                  : "是"
-                                              ) +
-                                              "\n                        "
-                                          )
-                                        ])
-                                      : _c("span", [
-                                          _vm._v(
-                                            "\n                             " +
-                                              _vm._s(scope.row[item.prop]) +
-                                              "\n                        "
-                                          )
-                                        ])
-                              ])
-                        ]
-                      }
-                    }
-                  ])
-                })
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { label: "操作", align: "center", width: "220" },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _vm.currentIndex == "index" + scope.$index
-                          ? _c(
-                              "span",
-                              [
-                                _c(
-                                  "el-button",
-                                  {
-                                    attrs: { size: "mini" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.editSave(scope.row)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("保存\n                 ")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "el-button",
-                                  {
-                                    attrs: { size: "mini" },
-                                    on: { click: _vm.editCancle }
-                                  },
-                                  [_vm._v("取消\n                 ")]
-                                )
-                              ],
-                              1
-                            )
-                          : _c(
-                              "span",
-                              [
-                                _c(
-                                  "el-button",
-                                  {
-                                    attrs: { size: "mini" },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.edit(scope.$index)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("编辑\n                 ")]
-                                )
-                              ],
-                              1
-                            ),
-                        _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini", type: "danger" },
-                            on: {
-                              click: function($event) {
-                                _vm.del(scope.row, $event)
-                              }
-                            }
-                          },
-                          [_vm._v("删除\n                    ")]
-                        )
-                      ]
-                    }
-                  }
-                ])
-              })
-            ],
-            2
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("del-mask", { attrs: { "del-id": _vm.newId, "del-url": _vm.url } }),
-      _vm._v(" "),
-      _c("message-box"),
-      _vm._v(" "),
-      _c("Pagination", { attrs: { "page-url": _vm.url } })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-154bc14a", module.exports)
-  }
-}
-
-/***/ }),
+/* 413 */,
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
 /* 418 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -115381,6 +114697,1107 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */,
+/* 466 */,
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */,
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */,
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */,
+/* 556 */,
+/* 557 */,
+/* 558 */,
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */,
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */,
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */,
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */,
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */,
+/* 606 */,
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */,
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */,
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */,
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */,
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */,
+/* 627 */,
+/* 628 */,
+/* 629 */,
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */,
+/* 637 */,
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */,
+/* 645 */,
+/* 646 */,
+/* 647 */,
+/* 648 */,
+/* 649 */,
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */,
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */,
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */,
+/* 676 */,
+/* 677 */,
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */,
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */,
+/* 700 */,
+/* 701 */,
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */,
+/* 708 */,
+/* 709 */,
+/* 710 */,
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */,
+/* 716 */,
+/* 717 */,
+/* 718 */,
+/* 719 */,
+/* 720 */,
+/* 721 */,
+/* 722 */,
+/* 723 */,
+/* 724 */,
+/* 725 */,
+/* 726 */,
+/* 727 */,
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */,
+/* 732 */,
+/* 733 */,
+/* 734 */,
+/* 735 */,
+/* 736 */,
+/* 737 */,
+/* 738 */,
+/* 739 */,
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */,
+/* 744 */,
+/* 745 */,
+/* 746 */,
+/* 747 */,
+/* 748 */,
+/* 749 */,
+/* 750 */,
+/* 751 */,
+/* 752 */,
+/* 753 */,
+/* 754 */,
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */,
+/* 759 */,
+/* 760 */,
+/* 761 */,
+/* 762 */,
+/* 763 */,
+/* 764 */,
+/* 765 */,
+/* 766 */,
+/* 767 */,
+/* 768 */,
+/* 769 */,
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */,
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */,
+/* 784 */,
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */,
+/* 799 */,
+/* 800 */,
+/* 801 */,
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */,
+/* 809 */,
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */,
+/* 814 */,
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */,
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(840)
+}
+var normalizeComponent = __webpack_require__(3)
+/* script */
+var __vue_script__ = __webpack_require__(842)
+/* template */
+var __vue_template__ = __webpack_require__(843)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-dc1f110a"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\myTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-dc1f110a", Component.options)
+  } else {
+    hotAPI.reload("data-v-dc1f110a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 840 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(841);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("179400dc", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc1f110a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./myTable.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc1f110a\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./myTable.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 841 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.el-table_1_column_7 .cell i[data-v-dc1f110a] {\n  margin-right: 5px;\n  cursor: pointer;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 842 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['tableKey', 'url'],
+  data: function data() {
+    return {
+      checkboxInit: false,
+      newId: '',
+      //批量删除
+      delArr: []
+    };
+  },
+
+  computed: {
+    loading: {
+      get: function get() {
+        return this.$store.getters.loading;
+      }
+    },
+    //当前id
+    currentIndex: {
+      get: function get() {
+        return this.$store.getters.currentIndex;
+      },
+      set: function set() {}
+    },
+    tableData: {
+      get: function get() {
+        return this.$store.state.table.newData.data;
+      },
+      set: function set() {}
+    }
+  },
+  methods: {
+    //切换选中
+    toggleChecked: function toggleChecked() {
+      this.checkboxInit = !this.checkboxInit;
+    },
+
+    //删除
+    del: function del(row, e) {
+      this.$store.dispatch('setShow', true);
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.newId = "/" + row.id;
+    },
+
+    //批量删除
+    handleSelectionChange: function handleSelectionChange(val) {
+      this.multipleSelection = val;
+      var del = [];
+      this.multipleSelection.forEach(function (selectedItem) {
+        del.push(selectedItem.id);
+      });
+      this.delArr = del.join(',');
+    },
+    delMore: function delMore() {
+      var _this = this;
+
+      this.$store.dispatch('setUrl', this.url);
+      this.$store.dispatch('setDelArr', this.delArr);
+      this.$store.dispatch('delMore').then(function () {
+        _this.getData();
+      });
+    },
+
+    //刷新
+    refresh: function refresh() {
+      var _this2 = this;
+
+      this.$store.dispatch('setLoad', true);
+      this.getData();
+      setTimeout(function () {
+        _this2.$store.dispatch('setLoad', false);
+      }, 2000);
+    },
+
+    //编辑
+    edit: function edit(index) {
+      this.$store.dispatch('setIndex', index);
+    },
+    handleEdit: function handleEdit() {
+      this.$store.dispatch('setInput');
+    },
+
+    //保存修改
+    editSave: function editSave(row) {
+      this.$emit('edit', row);
+    },
+
+    //取消修改
+    editCancle: function editCancle() {
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+      this.$store.dispatch('setVoid');
+    },
+    getData: function getData() {
+      this.$store.dispatch('setUrl', this.url);
+      this.$store.dispatch('getData');
+    }
+  },
+  mounted: function mounted() {
+    this.getData();
+    this.$nextTick(function () {
+      this.$on('delMore', this.delMore);
+      this.$on('refresh', this.refresh);
+    });
+  }
+});
+
+/***/ }),
+/* 843 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { ref: "table" },
+        [
+          _c(
+            "el-table",
+            {
+              directives: [
+                {
+                  name: "loading",
+                  rawName: "v-loading",
+                  value: _vm.loading,
+                  expression: "loading"
+                }
+              ],
+              attrs: {
+                data: _vm.tableData,
+                fit: "",
+                "highlight-current-row": "",
+                type: "index",
+                "element-loading-text": "拼命加载中",
+                "element-loading-spinner": "el-icon-loading",
+                "element-loading-background": "rgba(0, 0, 0, 0.6)"
+              },
+              on: { "selection-change": _vm.handleSelectionChange }
+            },
+            [
+              _c("el-table-column", {
+                attrs: {
+                  type: "selection",
+                  width: "95",
+                  align: "center",
+                  checked: _vm.checkboxInit
+                },
+                on: { change: _vm.toggleChecked }
+              }),
+              _vm._v(" "),
+              _vm._l(_vm.tableKey, function(item, index) {
+                return _c("el-table-column", {
+                  key: index,
+                  attrs: {
+                    label: item.label,
+                    align: "center",
+                    width: "item.width"
+                  },
+                  scopedSlots: _vm._u([
+                    {
+                      key: "default",
+                      fn: function(scope) {
+                        return [
+                          _vm.currentIndex == "index" + scope.$index
+                            ? _c("span", [
+                                item.type == "color"
+                                  ? _c(
+                                      "span",
+                                      [
+                                        _c("el-color-picker", {
+                                          attrs: { size: "mini" },
+                                          on: { change: _vm.handleEdit },
+                                          model: {
+                                            value: scope.row[item.prop],
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                scope.row,
+                                                item.prop,
+                                                $$v
+                                              )
+                                            },
+                                            expression: "scope.row[item.prop]"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : item.type == "select_stu"
+                                    ? _c(
+                                        "span",
+                                        [
+                                          _c(
+                                            "el-select",
+                                            {
+                                              attrs: {
+                                                placeholder: item.holder
+                                              },
+                                              on: { change: _vm.handleEdit },
+                                              model: {
+                                                value: scope.row[item.prop],
+                                                callback: function($$v) {
+                                                  _vm.$set(
+                                                    scope.row,
+                                                    item.prop,
+                                                    $$v
+                                                  )
+                                                },
+                                                expression:
+                                                  "scope.row[item.prop]"
+                                              }
+                                            },
+                                            [
+                                              _c("el-option", {
+                                                attrs: {
+                                                  label: "0-停用",
+                                                  value: "0"
+                                                }
+                                              }),
+                                              _vm._v(" "),
+                                              _c("el-option", {
+                                                attrs: {
+                                                  label: "1-启用",
+                                                  value: "1"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    : item.type == "select_def"
+                                      ? _c(
+                                          "span",
+                                          [
+                                            _c(
+                                              "el-select",
+                                              {
+                                                attrs: {
+                                                  placeholder: item.holder
+                                                },
+                                                on: { change: _vm.handleEdit },
+                                                model: {
+                                                  value: scope.row[item.prop],
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      scope.row,
+                                                      item.prop,
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "scope.row[item.prop]"
+                                                }
+                                              },
+                                              [
+                                                _c("el-option", {
+                                                  attrs: {
+                                                    label: "0-否",
+                                                    value: "0"
+                                                  }
+                                                }),
+                                                _vm._v(" "),
+                                                _c("el-option", {
+                                                  attrs: {
+                                                    label: "1-是",
+                                                    value: "1"
+                                                  }
+                                                })
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      : item.type == "textarea"
+                                        ? _c(
+                                            "span",
+                                            [
+                                              _c("el-input", {
+                                                attrs: {
+                                                  type: "textarea",
+                                                  size: "small",
+                                                  placeholder: item.holder
+                                                },
+                                                on: { change: _vm.handleEdit },
+                                                model: {
+                                                  value: scope.row[item.prop],
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      scope.row,
+                                                      item.prop,
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "scope.row[item.prop]"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        : _c(
+                                            "span",
+                                            [
+                                              _c("el-input", {
+                                                attrs: {
+                                                  size: "small",
+                                                  placeholder: item.holder
+                                                },
+                                                on: { change: _vm.handleEdit },
+                                                model: {
+                                                  value: scope.row[item.prop],
+                                                  callback: function($$v) {
+                                                    _vm.$set(
+                                                      scope.row,
+                                                      item.prop,
+                                                      $$v
+                                                    )
+                                                  },
+                                                  expression:
+                                                    "scope.row[item.prop]"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                              ])
+                            : _c("span", [
+                                item.type == "color"
+                                  ? _c("span", [
+                                      _c("span", {
+                                        staticClass: "tableColor",
+                                        style: {
+                                          backgroundColor: scope.row.color
+                                        }
+                                      }),
+                                      _vm._v(
+                                        "\n                     " +
+                                          _vm._s(scope.row[item.prop]) +
+                                          "\n                        "
+                                      )
+                                    ])
+                                  : item.type == "select_stu"
+                                    ? _c("span", [
+                                        _c("i", {
+                                          staticClass: "showStatus",
+                                          class: {
+                                            statusActive:
+                                              scope.row.status == 0
+                                                ? false
+                                                : true
+                                          }
+                                        }),
+                                        _vm._v(
+                                          "\n                             " +
+                                            _vm._s(
+                                              scope.row[item.prop] == 0
+                                                ? "停用"
+                                                : "启用"
+                                            ) +
+                                            "\n                        "
+                                        )
+                                      ])
+                                    : item.type == "select_def"
+                                      ? _c("span", [
+                                          _vm._v(
+                                            "\n                             " +
+                                              _vm._s(
+                                                scope.row[item.prop] == 0
+                                                  ? "否"
+                                                  : "是"
+                                              ) +
+                                              "\n                        "
+                                          )
+                                        ])
+                                      : _c("span", [
+                                          _vm._v(
+                                            "\n                             " +
+                                              _vm._s(scope.row[item.prop]) +
+                                              "\n                        "
+                                          )
+                                        ])
+                              ])
+                        ]
+                      }
+                    }
+                  ])
+                })
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { label: "操作", align: "center", width: "220" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(scope) {
+                      return [
+                        _vm.currentIndex == "index" + scope.$index
+                          ? _c(
+                              "span",
+                              [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { size: "mini" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.editSave(scope.row)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("保存\n                 ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { size: "mini" },
+                                    on: { click: _vm.editCancle }
+                                  },
+                                  [_vm._v("取消\n                 ")]
+                                )
+                              ],
+                              1
+                            )
+                          : _c(
+                              "span",
+                              [
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { size: "mini" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.edit(scope.$index)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("编辑\n                 ")]
+                                )
+                              ],
+                              1
+                            ),
+                        _vm._v(" "),
+                        _c(
+                          "el-button",
+                          {
+                            attrs: { size: "mini", type: "danger" },
+                            on: {
+                              click: function($event) {
+                                _vm.del(scope.row, $event)
+                              }
+                            }
+                          },
+                          [_vm._v("删除\n                    ")]
+                        )
+                      ]
+                    }
+                  }
+                ])
+              })
+            ],
+            2
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("del-mask", { attrs: { "del-id": _vm.newId, "del-url": _vm.url } }),
+      _vm._v(" "),
+      _c("message-box"),
+      _vm._v(" "),
+      _c("Pagination", { attrs: { "page-url": _vm.url } })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-dc1f110a", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);
