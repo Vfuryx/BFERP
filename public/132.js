@@ -1,14 +1,14 @@
 webpackJsonp([132],{
 
-/***/ 526:
+/***/ 559:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(5)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = __webpack_require__(805)
+var __vue_script__ = __webpack_require__(836)
 /* template */
-var __vue_template__ = __webpack_require__(806)
+var __vue_template__ = __webpack_require__(837)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\Hello.vue"
+Component.options.__file = "resources\\assets\\js\\components\\index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-a0937a2a", Component.options)
+    hotAPI.createRecord("data-v-7e6399ea", Component.options)
   } else {
-    hotAPI.reload("data-v-a0937a2a", Component.options)
+    hotAPI.reload("data-v-7e6399ea", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,14 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 805:
+/***/ 836:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(20);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 //
 //
 //
@@ -64,30 +61,134 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            visible: false,
-            msg: 'hello组件的消息'
-        };
-    },
+  data: function data() {
+    return {
+      //操作
+      newOpt: [{
+        cnt: '新增',
+        icon: 'bf-add',
+        ent: this.addNew
+      }, {
+        cnt: '删除',
+        icon: 'bf-del',
+        ent: this.doDelMore
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.refresh
+      }],
+      //表格
+      tableKey: [{
+        label: '标记代码',
+        width: '',
+        prop: "markcode",
+        holder: '代码'
+      }, {
+        label: '标记名称',
+        width: '180',
+        prop: "markname",
+        holder: '名称'
+      }, {
+        label: '颜色',
+        width: '180',
+        prop: "color",
+        holder: '颜色',
+        type: 'color'
+      }, {
+        label: '描述',
+        width: '180',
+        prop: "description",
+        holder: '描述'
+      }, {
+        label: '状态',
+        width: '200',
+        prop: "status",
+        holder: '状态',
+        type: 'select'
+      }],
+      url: '/markcolors',
+      //新增
+      showAdd: false,
+      title: '新增',
+      ruleForm: {
+        markcode: '',
+        markname: '',
+        color: '',
+        status: '1',
+        description: ''
+      },
+      rules: {
+        markcode: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
+        markname: [{ required: true, message: '请输入标记名称', trigger: 'blur' }],
+        color: [{ required: true, message: '请选择颜色', trigger: 'blur' }]
+      },
+      addArr: [{
+        label: '标记代码',
+        prop: 'markcode',
+        holder: '请输入标记代码',
+        type: 'text'
+      }, {
+        label: '标记名称',
+        prop: 'markname',
+        holder: '请输入标记名称',
+        type: 'text'
+      }, {
+        label: '标记颜色',
+        prop: 'color',
+        type: 'pickColor'
+      }, {
+        label: '状态',
+        prop: 'status',
+        holder: '请选择状态',
+        type: 'select'
+      }, {
+        label: '描述',
+        prop: 'description',
+        holder: '请输入描述',
+        type: 'textarea'
+      }]
+    };
+  },
 
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['optCnt', 'optIcon'])),
-    mounted: function mounted() {
-        // console.log(this.wH);
+  methods: {
+    //新增
+    addNew: function addNew() {
+      this.$store.dispatch('setShowAdd', true);
+    },
+    edit: function edit(row) {
+      var obj = {
+        id: row.id,
+        markcode: row.markcode,
+        markname: row.markname,
+        color: row.color,
+        description: row.description,
+        status: row.status
+      };
+      this.$store.dispatch('setRow', row);
+      this.$store.dispatch('setUrl', this.url + "/");
+      this.$store.dispatch('doEdit', obj);
+    },
+    doDelMore: function doDelMore() {
+      this.$refs.table.$emit('delMore');
+    },
+    refresh: function refresh() {
+      this.$refs.table.$emit('refresh');
     }
+  },
+  mounted: function mounted() {
+    this.$store.dispatch('setOpt', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      that.$store.dispatch('setOpt', that.newOpt);
+    });
+  }
 });
 
 /***/ }),
 
-/***/ 806:
+/***/ 837:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -97,32 +198,22 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", [_vm._v("Hello组件")]),
+      _c("my-table", {
+        ref: "table",
+        attrs: { "table-key": _vm.tableKey, url: _vm.url },
+        on: { edit: _vm.edit }
+      }),
       _vm._v(" "),
-      _c(
-        "el-button",
-        {
-          on: {
-            click: function($event) {
-              _vm.visible = true
-            }
-          }
-        },
-        [_vm._v("按钮")]
-      ),
-      _vm._v(" "),
-      _c(
-        "el-dialog",
-        {
-          attrs: { visible: _vm.visible },
-          on: {
-            "update:visible": function($event) {
-              _vm.visible = $event
-            }
-          }
-        },
-        [_c("p", [_vm._v("欢迎使用 Element")])]
-      )
+      _c("add-mask", {
+        attrs: {
+          showMask: _vm.showAdd,
+          title: _vm.title,
+          "rule-form": _vm.ruleForm,
+          rules: _vm.rules,
+          "add-arr": _vm.addArr,
+          url: _vm.url
+        }
+      })
     ],
     1
   )
@@ -133,7 +224,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-a0937a2a", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7e6399ea", module.exports)
   }
 }
 

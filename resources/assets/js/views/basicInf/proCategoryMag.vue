@@ -1,6 +1,7 @@
+<!--
 <template>
     <div>
-        <!--数据-->
+        &lt;!&ndash;数据&ndash;&gt;
         <el-table
                 :data="goodsType" fit highlight-current-row
                 type="index"
@@ -22,9 +23,9 @@
                 <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
                             <el-input size="small" v-model="scope.row.name" placeholder="商品类别" @change="handleEdit"></el-input>
-                            <!-- <el-select size="small" v-model="scope.row.fee_category.id" placeholder="请选择类型" @change="handleEdit">
+                            &lt;!&ndash; <el-select size="small" v-model="scope.row.fee_category.id" placeholder="请选择类型" @change="handleEdit">
                                     <el-option v-for="item in feeCage" :label="item.name" :value="item.id"></el-option>
-                                </el-select>-->
+                                </el-select>&ndash;&gt;
                         </span>
                     <span v-else>
                             {{scope.row.name}}
@@ -101,14 +102,14 @@
             </el-table-column>
         </el-table>
 
-        <!--添加-->
+        &lt;!&ndash;添加&ndash;&gt;
         <el-dialog title="新增商品类别" :visible.sync="showAdd">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="类别代码" prop="code">
                     <el-input v-model="ruleForm.code" placehold="请输入代码"></el-input>
-                   <!-- <el-select v-model="ruleForm.code" placeholder="请选择状态">
+                   &lt;!&ndash; <el-select v-model="ruleForm.code" placeholder="请选择状态">
                         <el-option v-for="item in feeCage" :label="item.name" :value="item.id"></el-option>
-                    </el-select>-->
+                    </el-select>&ndash;&gt;
                 </el-form-item>
                 <el-form-item label="类别名称
 " prop="name">
@@ -135,7 +136,7 @@
             </div>
         </el-dialog>
 
-        <!--分页-->
+        &lt;!&ndash;分页&ndash;&gt;
         <div ref="pagination" id="page">
             <el-pagination
                     @current-change="handleCurrentChange"
@@ -146,7 +147,7 @@
             </el-pagination>
         </div>
 
-        <!--删除提示-->
+        &lt;!&ndash;删除提示&ndash;&gt;
         <el-popover
                 placement="top"
                 width="160"
@@ -474,4 +475,160 @@
       this.getGoodsType();
     }
   }
+</script>-->
+<template>
+    <div>
+        <my-table :table-key="goodsType" @edit="edit" ref="table" :url="url"></my-table>
+
+        <!--新增-->
+        <add-mask :showMask="showAdd" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"  :url="url"></add-mask>
+    </div>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        //操作
+        newOpt: [
+          {
+            cnt: '新增',
+            icon: 'bf-add',
+            ent: this.addNew
+          },
+          {
+            cnt: '删除',
+            icon: 'bf-del',
+            ent: this.doDelMore
+          },
+          {
+            cnt: '刷新',
+            icon: 'bf-refresh',
+            ent: this.refresh
+          }
+        ],
+        //表格
+        goodsType:[
+          {
+            label: '商品类别',
+            width: '180',
+            prop: "name",
+            holder:'请输入商品类别',
+            type: 'text'
+          },
+          {
+            label: '类别代码',
+            width: '180',
+            prop: "code",
+            holder: '请输入类别代码',
+            type: 'text'
+          },
+          {
+            label: '状态',
+            width: '200',
+            prop: "status",
+            holder: '请选择状态',
+            type: 'select_stu'
+          },
+          {
+            label: '商品描述',
+            width: '200',
+            prop: "description",
+            holder: '请输入描述',
+            type: 'textarea'
+          },
+          {
+            label: '商品备注',
+            width: '200',
+            prop: "remark",
+            holder: '请输入备注',
+            type: 'textarea'
+          },
+        ],
+        url:'/goodscates',
+        //新增
+        showAdd: false,
+        title: '新增商品类别',
+        ruleForm: {
+          code: '',
+          name: '',
+          description: '',
+          remark:'',
+          status:'1'
+        },
+        rules: {
+          code: [
+            {required: true, message: '请输入标记代码', trigger: 'blur'},
+          ],
+          name: [
+            {required: true, message: '请输入标记名称', trigger: 'blur'},
+          ]
+        },
+        addArr:[
+          {
+            label:'类别代码',
+            prop:'code',
+            holder:'请输入代码',
+            type: 'text'
+          },
+          {
+            label:'类别名称',
+            prop:'name',
+            holder:'请输入名称',
+            type: 'text'
+          },
+          {
+            label:'商品描述',
+            prop:'description',
+            type: 'textarea',
+          },
+          {
+            label:'商品备注',
+            prop:'remark',
+            type: 'textarea',
+          },
+          {
+            label:'状态',
+            prop:'status',
+            holder:'请选择状态',
+            type: 'select_stu'
+          }
+        ]
+      }
+    },
+    methods:{
+      //新增
+      addNew(){
+        this.$store.dispatch('setShowAdd',true);
+      },
+
+      edit(row){
+        let obj = {
+          id: row.id,
+          code: row.code,
+          name: row.name,
+          status: row.status,
+          remark: row.remark,
+          description: row.description
+        };
+        this.$store.dispatch('setRow',row);
+        this.$store.dispatch('setUrl',this.url+"/");
+        this.$store.dispatch('doEdit',obj);
+      },
+
+      doDelMore(){
+        this.$refs.table.$emit('delMore')
+      },
+      refresh(){
+        this.$refs.table.$emit('refresh')
+      },
+    },
+    mounted(){
+      this.$store.dispatch('setOpt',this.newOpt);
+      let that = this;
+      $(window).resize(() => {
+        that.$store.dispatch('setOpt',that.newOpt);
+      });
+    }
+  }
 </script>
+

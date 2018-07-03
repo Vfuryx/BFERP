@@ -20,30 +20,27 @@
     </div>
 </template>
 <script>
-    import { mapGetters } from 'vuex'
-    export default{
-        data(){
-            return {
-              current:''
-            }
-        },
-        computed:{
-            ...mapGetters([
-                'opts'
-            ])
-        },
-        methods:{
-          changeShow(){
-            this.$store.commit('toggle_ok');
-          },
-
-          addActive(index){
-            this.current = index;
-          }
-        },
-        mounted(){
-
+  import { mapGetters } from 'vuex'
+  export default{
+    data(){
+        return {
+          current:''
         }
+    },
+    computed:{
+        ...mapGetters([
+            'opts'
+        ])
+    },
+    methods:{
+      changeShow(){
+        this.$store.dispatch('toggle_show');
+      },
 
+      addActive(index){
+        this.current = index;
+      }
+    },
+    mounted(){}
     }
 </script>

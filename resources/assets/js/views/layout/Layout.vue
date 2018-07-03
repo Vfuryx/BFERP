@@ -16,37 +16,36 @@
     import ResizeMixin from './minxi/ResizeHandler.js';
 
     export default {
-        name: 'layout',
-        components: {
-            Navbar,
-            Sidebar,
-            AppMain,
-            TagsView,
-            Logo,
-            Opt
+      name: 'layout',
+      components: {
+        Navbar,
+        Sidebar,
+        AppMain,
+        TagsView,
+        Logo,
+        Opt
+      },
+      mixins: [ResizeMixin],
+      computed: {
+        sidebar() {
+            return this.$store.getters.sidebar
         },
-        mixins: [ResizeMixin],
-        computed: {
-            sidebar() {
-                // return this.$store.state.app.sidebar
-                return this.$store.getters.sidebar
-            },
-            device() {
-                return this.$store.state.app.device
-            },
-            classObj() {
+        device() {
+            return this.$store.state.app.device
+        },
+        classObj() {
                 return {
                     hideSidebar: !this.sidebar.opened,
                     withoutAnimation: this.sidebar.withoutAnimation,
                     mobile: this.device === 'mobile'
                 }
             }
-        },
-        methods: {
-            handleClickOutside() {
+      },
+      methods: {
+        handleClickOutside() {
                 this.$store.dispatch('CloseSideBar', { withoutAnimation: false })
             },
-          setMinHeight(){
+        setMinHeight(){
             let navH = $('.navbar').height();
             let tagH = $('.tags-view-container').height();
             let optH = $('.opt').height();
@@ -54,12 +53,12 @@
             let mbH = parseInt($('.app-main').css('marginBottom'));
             let finalH = $(window).height()-navH-tagH-optH-mtH-mbH ;
             $('.app-main').css({height:finalH+'px'});
-          }
-        },
+          },
+      },
       mounted(){
-          this.setMinHeight();
-          let that = this;
-          $(window).resize(()=>{
+        this.setMinHeight();
+        let that = this;
+        $(window).resize(()=>{
             that.setMinHeight();
           })
       }

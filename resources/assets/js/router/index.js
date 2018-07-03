@@ -958,10 +958,22 @@ const constantRouterMap = [
         path: 'index',
         name: 'Hello',
         component: resolve => void(require(['../components/Hello.vue'], resolve)),
-        meta: {title: 'Hello', icon: 'hello',requireAuth: true}
+        meta: {title: 'Hello', icon: '',requireAuth: true}
       }
     ]
 
+  },
+  {
+    path: '/example',
+    component: Layout,
+    children: [
+      {
+        path: 'example',
+        name: 'Example',
+        component: resolve => void(require(['../components/index.vue'], resolve)),
+        meta: {title: 'example', icon: '',requireAuth: true}
+      }
+    ]
   },
   /* /* {
        path: '/form',

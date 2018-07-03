@@ -13,6 +13,10 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
+    DEL_TOKEN: (state) => {
+      state.token = null;
+      state.name = null;
+    },
     REFRESH_TOKEN: (state, token) => {
       setToken(state.token);
       state.token = token.substring(token.indexOf(' ') + 1);
@@ -76,16 +80,20 @@ const user = {
     },
 
     //  删除cookie
-    DelToken() {
-      return new Promise(() => {
-        removeToken()
+    DelToken({commit}) {
+      return new Promise(resolve => {
+        commit('DEL_TOKEN');
+        removeToken();
+        removeUser();
+        resolve()
       })
     },
 
     //  将刷新的token保存到本地
     refreshToken({commit}, token) {
-      return new Promise(() => {
-        commit('REFRESH_TOKEN', token)
+      return new Promise(resolve => {
+        commit('REFRESH_TOKEN', token);
+        resolve()
       })
     }
   }

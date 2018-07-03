@@ -18,7 +18,7 @@
                             :checked="checkboxInit" @change="toggleChecked">
                     </el-table-column>
                     <el-table-column
-                            label="类型"
+                            label="类别"
                             align="center"
                             width="180">
                         <template slot-scope="scope">
@@ -33,7 +33,7 @@
                         </template>
                     </el-table-column>
                     <el-table-column
-                            label="名称"
+                            label="类型名称"
                             align="center"
                             width="200">
                         <template slot-scope="scope">
@@ -64,7 +64,7 @@
                             width="180">
                         <template slot-scope="scope">
                     <span v-if="changeIndex=='index'+scope.$index">
-                    <el-select v-model="scope.row.is_default" placeholder="状态" @change="handleEdit">
+                    <el-select v-model="scope.row.is_default" placeholder="是否默认" @change="handleEdit">
                         <el-option v-for="item in defArr" :key="item.value" :label="item.label" :value="item.value"></el-option>
                     </el-select>
                     </span>
@@ -180,8 +180,7 @@
             </el-tab-pane>
         </el-tabs>
 
-
-        <!--添加-->
+        <!--添加费用类型-->
         <el-dialog title="新增费用类型" :visible.sync="showAdd">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="费用类别" prop="type">
@@ -372,11 +371,6 @@
       }
     },
     methods:{
-      //修改opt宽度
-      changeOptWidth(){
-        this.$store.state.opt.opts = this.newOpt;
-        this.$store.commit('change', this.newOpt);
-      },
       getExpenseType(){
         this.$fetch('/feetypes')
           .then(res=>{
@@ -805,10 +799,10 @@
       },
     },
     mounted() {
-      this.changeOptWidth();
+      this.$store.dispatch('setOpt',this.newOpt);
       const that = this;
       $(window).resize(() => {
-        that.changeOptWidth();
+        that.$store.dispatch('setOpt',that.newOpt);
       })
       this.getExpenseType();
       this.getExpenseCage();

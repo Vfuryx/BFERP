@@ -63,6 +63,30 @@ Vue.prototype.$patch=patch
 Vue.prototype.$put=put
 Vue.prototype.$del=del
 
+//组件messageBox
+import MessageBox from './api/messageBox.js'
+Vue.use(MessageBox);
+
+//组件delMask
+import DelMask from './components/delMask.vue'
+Vue.component('DelMask',DelMask);
+
+//组件messageBox
+import MsgBox from './components/MessageBox.vue'
+Vue.component('MessageBox',MsgBox);
+
+//组件table
+import MyTable from './components/MyTable.vue'
+Vue.component('MyTable',MyTable);
+
+//组件addMask
+import AddMask from './components/addMask.vue'
+Vue.component('AddMask',AddMask);
+
+//组件addMask
+import Pagination from './components/pagination.vue'
+Vue.component('Pagination',Pagination);
+
 const app = new Vue({
     el: '#app',
     router,

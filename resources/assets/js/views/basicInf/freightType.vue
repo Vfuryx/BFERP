@@ -1,6 +1,7 @@
+<!--
 <template>
     <div>
-        <!--数据-->
+        &lt;!&ndash;数据&ndash;&gt;
         <el-table
                 :data="freightType" fit highlight-current-row
                 type="index"
@@ -81,7 +82,7 @@
             </el-table-column>
         </el-table>
 
-        <!--添加-->
+        &lt;!&ndash;添加&ndash;&gt;
         <el-dialog title="新增运费类型" :visible.sync="showAdd">
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="运费类型
@@ -108,7 +109,7 @@
             </div>
         </el-dialog>
 
-        <!--分页-->
+        &lt;!&ndash;分页&ndash;&gt;
         <div ref="pagination" id="page">
             <el-pagination
                     @current-change="handleCurrentChange"
@@ -119,7 +120,7 @@
             </el-pagination>
         </div>
 
-        <!--删除提示-->
+        &lt;!&ndash;删除提示&ndash;&gt;
         <el-popover
                 placement="top"
                 width="160"
@@ -448,4 +449,129 @@
       this.getFreightType();
     }
   }
+</script>-->
+<template>
+    <div>
+        <my-table :table-key="tableKey" @edit="edit" ref="table" :url="url"></my-table>
+
+        <!--新增-->
+        <add-mask :showMask="showAdd" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"  :url="url"></add-mask>
+    </div>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        //操作
+        newOpt: [
+          {
+            cnt: '新增',
+            icon: 'bf-add',
+            ent: this.addNew
+          },
+          {
+            cnt: '删除',
+            icon: 'bf-del',
+            ent: this.doDelMore
+          },
+          {
+            cnt: '刷新',
+            icon: 'bf-refresh',
+            ent: this.refresh
+          }
+        ],
+        //表格
+        tableKey:[
+          {
+            label: '名称',
+            width: '250',
+            prop: "name",
+            holder:'输入名称',
+            type: 'text'
+          },
+          {
+            label: '默认',
+            width: '250',
+            prop: "is_default",
+            holder: '默认值',
+            type: 'select_def'
+          },
+          {
+            label: '状态',
+            width: '250',
+            prop: "status",
+            holder: '状态',
+            type: 'select_stu'
+          }
+        ],
+        url:'/freighttypes',
+        //新增
+        showAdd: false,
+        title: '新增',
+        ruleForm: {
+          name: '',
+          is_default: '0',
+          status: '1'
+        },
+        rules: {
+          name: [
+            {required: true, message: '请输入运费类型', trigger: 'blur'},
+          ]
+        },
+        addArr:[
+          {
+            label:'运费类型',
+            prop:'name',
+            holder:'请输入运费类型',
+            type: 'text'
+          },
+          {
+            label:'是否默认',
+            prop:'is_default',
+            holder:'请选择是或否',
+            type: 'select_def'
+          },
+          {
+            label:'状态',
+            prop:'status',
+            holder:'请选择状态',
+            type: 'select_stu'
+          }
+        ]
+      }
+    },
+    methods:{
+      //新增
+      addNew(){
+        this.$store.dispatch('setShowAdd',true);
+      },
+
+      edit(row){
+        let obj = {
+          id: row.id,
+          name: row.name,
+          is_default: row.is_default,
+          status: row.status
+        };
+        this.$store.dispatch('setRow',row);
+        this.$store.dispatch('setUrl',this.url+"/");
+        this.$store.dispatch('doEdit',obj);
+      },
+
+      doDelMore(){
+        this.$refs.table.$emit('delMore')
+      },
+      refresh(){
+        this.$refs.table.$emit('refresh')
+      },
+    },
+    mounted(){
+      this.$store.dispatch('setOpt',this.newOpt);
+      let that = this;
+      $(window).resize(() => {
+        that.$store.dispatch('setOpt',that.newOpt);
+      });
+    }
+  }
 </script>
+

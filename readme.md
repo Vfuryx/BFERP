@@ -80,4 +80,32 @@
 
 ### 前端开发说明 
  
- ---
+ --- 
+ 路由方面，根据router中的路由配置文件index.js，组件不需要注册，在index.js中添加路由即可动态生成父级及子级路由。
+ ```
+  {
+     name: 'CRMCustomer',
+     path: '/CRMCustomer',
+     component: Layout,
+     redirect: '/CRMCustomer/customerManagement',
+     meta: {title: 'CRM客户管理', icon: 'cus',requireAuth: true},
+     children: [
+       {
+         path: 'customerMag',
+         name: 'CustomerMag',
+         component: resolve => void(require(['../views/CRMCustomer/customerMag.vue'], resolve)),
+         meta: {title: '客户管理', icon: 'cusMag',requireAuth: true}
+       },
+       {
+         path: 'SMSTemplate',
+         name: 'SMSTemplate',
+         component: resolve => void(require(['../views/CRMCustomer/SMSTemplate.vue'], resolve)),
+         meta: {title: '短信模板', icon: 'ordMsg',requireAuth: true}
+       }
+     ]
+   }
+ ```
+ * 注：children中至少有两个子路由才会展示子级，否则按一个父级路由处理；
+ 
+ 
+ 

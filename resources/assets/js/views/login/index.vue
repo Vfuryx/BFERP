@@ -104,9 +104,9 @@
               })
             }).catch(error => {
               if (error.response) {
-                let arr = error.response.data.message;
+                let msg = error.response.data.message;
                 this.$message.error({
-                  message: arr
+                  message: msg
                 });
                 this.getCode();
                 this.loginForm.code = '';

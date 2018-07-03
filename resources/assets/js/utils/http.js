@@ -29,6 +29,7 @@ axios.interceptors.request.use(
 // http response 拦截器
 axios.interceptors.response.use(
   response => {
+    // console.log(response);
     let token = response.headers.authorization;
     if(token){
       store.dispatch('refreshToken',token)
@@ -36,19 +37,44 @@ axios.interceptors.response.use(
     return response
   },
   error => {
-    if (error.response) {
-      switch (error.response.status) {
+   /* if (error.response) {
+      //只要报错就清空token
+      switch (error.response.data.status_code) {
         case 401:
-          removeToken();
-          store.dispatch('DelToken')
-          // store.commit('LOGOUT')
+          console.log(error.response);
+          // removeToken();
+          //可以监控到所有的401错误
+          // console.log(error.response);
+          //清空cookie和token
+          store.dispatch('DelToken');
+          Message.error({
+            message: '身份验证已过期，请重新登录'
+          });
           router.replace({
             path: '/login',
             query: {redirect: router.currentRoute.fullPath}
-          })
+          });
+      }
+      // store.dispatch('DelToken');
+    }else{
+      return Promise.reject(error)
+    }*/
+    console.log(error.response);
+    if(error.response){
+      if(error.response.data.message == "The token has been blacklisted"){
+        store.dispatch('DelToken');
+        router.replace({
+          path: '/login',
+          query: {redirect: router.currentRoute.fullPath}
+        });
+        Message.error({
+          message: '身份验证已过期，请重新登录'
+        });
+        return
+      }else{
+        return Promise.reject(error)
       }
     }
-    return Promise.reject(error)
   });
 
 /**

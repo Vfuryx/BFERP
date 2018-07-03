@@ -1,14 +1,14 @@
 webpackJsonp([258],{
 
-/***/ 513:
+/***/ 553:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(3)
 /* script */
-var __vue_script__ = null
+var __vue_script__ = __webpack_require__(829)
 /* template */
-var __vue_template__ = __webpack_require__(659)
+var __vue_template__ = __webpack_require__(830)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\afterSaleCompensation\\cmptnReview.vue"
+Component.options.__file = "resources\\assets\\js\\views\\afterSaleMag\\afterSReview.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d2abdfc", Component.options)
+    hotAPI.createRecord("data-v-696acc44", Component.options)
   } else {
-    hotAPI.reload("data-v-6d2abdfc", Component.options)
+    hotAPI.reload("data-v-696acc44", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,69 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 659:
+/***/ 829:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      newOpt: [{
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.test
+      }, {
+        cnt: '驳回',
+        icon: 'bf-reject',
+        ent: this.test
+      }, {
+        cnt: '审核',
+        icon: 'bf-audit',
+        ent: this.test
+      }, {
+        cnt: '退审',
+        icon: 'bf-auditfaild',
+        ent: this.test
+      }, {
+        cnt: '结算',
+        icon: 'bf-finSettle',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.test
+      }]
+    };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
+    });
+  }
+});
+
+/***/ }),
+
+/***/ 830:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -62,7 +124,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("赔偿审核")])])
+    return _c("div", [_c("h2", [_vm._v("售后审核")])])
   }
 ]
 render._withStripped = true
@@ -70,7 +132,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-6d2abdfc", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-696acc44", module.exports)
   }
 }
 
