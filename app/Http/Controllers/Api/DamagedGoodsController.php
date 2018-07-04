@@ -77,8 +77,8 @@ class DamagedGoodsController extends Controller
      *      @Parameter("order_no", description="订单号", required=true),
      *      @Parameter("good_sn", description="商品编码", required=true),
      *      @Parameter("standard_code", description="规格编码", required=true),
-     *      @Parameter("quantity",type="integer", description="损坏数量", required=ture),
-     *      @Parameter("money",type="numeric" description="损坏金额", required=true),
+     *      @Parameter("quantity",type="integer", description="损坏数量", required=true),
+     *      @Parameter("money",type="numeric", description="损坏金额", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })

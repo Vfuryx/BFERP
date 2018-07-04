@@ -122,9 +122,9 @@ class CityInfosController extends Controller
      *      @Parameter("district", description="区", required=true),
      *      @Parameter("address", description="提货地址", required=true),
      *      @Parameter("phone", description="提货电话", required=true),
-     *      @Parameter("price",type="numeric" description="物流费用", required=true),
-     *      @Parameter("weight_univalent",type="numeric" description="重量单价", required=true),
-     *      @Parameter("expected_days",type="integer", description="城市到达天数", required=ture),
+     *      @Parameter("price",type="numeric", description="物流费用", required=true),
+     *      @Parameter("weight_univalent",type="numeric", description="重量单价", required=true),
+     *      @Parameter("expected_days",type="integer", description="城市到达天数", required=true),
      *      @Parameter("route",type="integer", description="中转或直达：0=中转，1=直达", required=false, default=1),
      *      @Parameter("is_free_shipping",type="integer", description="是否包邮", required=false, default=0),
      *      @Parameter("remark", description="费用类别备注", required=false),
@@ -137,12 +137,18 @@ class CityInfosController extends Controller
      *              "logistics_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
      *              },
+<<<<<<< HEAD
      *              "code": {
      *                  "费用代码不能重复"
      *              },
      *              "price": {
      *                  "物流费用必须是数字"
      *              }
+=======
+     *              "logistics_id": {
+     *                  "物流id必填"
+     *              },
+>>>>>>> test2
      *           },
      *          "status_code": 422,
      *      }),
@@ -325,8 +331,12 @@ class CityInfosController extends Controller
      * @Delete("/cityinfos")
      * @Versions({"v1"})
      * @Parameters({
+<<<<<<< HEAD
      * @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true)
      * })
+=======
+     * @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true)})
+>>>>>>> test2
      * @Transaction({
      *      @Response(500, body={
      *          "message": "删除错误",

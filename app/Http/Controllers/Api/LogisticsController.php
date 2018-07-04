@@ -29,7 +29,7 @@ class LogisticsController extends Controller
      * @Response(200, body={
      * "data": {
      *      {
-     *          id": 1,
+     *          "id": 1,
      *          "code": "物流代码",
      *          "name": "物流名称",
      *          "report": {
@@ -177,7 +177,7 @@ class LogisticsController extends Controller
      *          "status_code": 404,
      *      }),
      *      @Response(200, body={
-     *          id": 1,
+     *          "id": 1,
      *          "code": "物流代码",
      *          "name": "物流名称",
      *          "report": {

@@ -120,6 +120,7 @@ class LogisticsAreasController extends Controller
      *          "status": 1,
      *          "created_at": "2018-07-03 16:29:28",
      *          "updated_at": "2018-07-03 16:29:28"
+     *      })
      * })
      */
     public function show($id)
