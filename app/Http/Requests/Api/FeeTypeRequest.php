@@ -23,7 +23,7 @@ class FeeTypeRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'name' => 'required|string',
+                    'name' => 'required|string|max:255',
                     'fee_category_id' => [
                         'required','integer',
                         Rule::exists('fee_categories','id')->where(function ($query) {
@@ -39,8 +39,16 @@ class FeeTypeRequest extends FormRequest
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'fee_category_id' => 'integer',
-                    'code' => 'string|max:255|unique:fee_types,id',
+                    'fee_category_id' => [
+                        'integer',
+                        Rule::exists('fee_categories','id')->where(function ($query) {
+                            $query->where('status',1);
+                        }),
+                    ],
+                    'code' => [
+                        'string','max:255',
+                        Rule::unique('fee_types')->ignore($this->feetype->id),
+                    ],
                     'is_default' => 'integer',
                     'status' => 'integer',
                     'remark' => 'string|nullable|max:255',
@@ -66,20 +74,25 @@ class FeeTypeRequest extends FormRequest
     {
         return [
             'name.required' => '费用名称必填',
+            'name.max' => '费用名称最大长度为255',
             'name.string' => '费用名称必须string类型',
+            
             'fee_category_id.required' => '费用类别id必填',
             'fee_category_id.integer' => '费用类别id必须int类型',
             'fee_category_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            
             'code.required' => '费用代码必填',
             'code.string' => '费用代码必须string类型',
             'code.max' => '费用代码最大长度为255',
             'code.unique' => '费用代码不能重复',
+
             'is_default.integer' => '是否默认必须int类型',
-            'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
             'remark.string' => '费用类别备注必须string类型',
             'remark.nullable' => '费用类别备注可为null',
             'remark.max' => '费用类别备注最大长度为255',
+
+            'status.required' => '状态必填',
+            'status.integer' => '状态必须int类型',
             'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型'

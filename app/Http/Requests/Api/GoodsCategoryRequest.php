@@ -31,7 +31,10 @@ class GoodsCategoryRequest extends FormRequest
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'code' => 'string|max:255|unique:goods_categories,id',
+                    'code' => [
+                        'string','max:255',
+                        Rule::unique('goods_categories')->ignore($this->goodscate->id),
+                    ],
                     'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',

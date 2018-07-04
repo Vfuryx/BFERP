@@ -8,4 +8,8 @@ class FreightType extends Model
 
     protected $fillable = ['name', 'is_default', 'status'];
 
+    public function logistics()
+    {
+        return $this->hasMany(Logistics::class);
+    }
 }

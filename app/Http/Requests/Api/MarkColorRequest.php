@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Requests\Api;
+
 use Log;
+
 class MarkColorRequest extends FormRequest
 {
     /**
@@ -29,7 +31,10 @@ class MarkColorRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'markcode' => 'string|max:255|unique:mark_colors,id',
+                    'markcode' => [
+                        'string', 'max:255',
+                        Rule::unique('mark_colors')->ignore($this->markcolor->id),
+                    ],
                     'markname' => 'string',
                     'color' => 'string|max:255',
                     'description' => 'string|nullable|max:255',

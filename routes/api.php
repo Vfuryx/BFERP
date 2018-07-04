@@ -154,6 +154,166 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.storagetypes.destroybyids');
         $api->put('storagetypes', 'StorageTypesController@editStatusByIds')
             ->name('api.storagetypes.editstatusbyids');
+            
+        //城市信息
+        $api->get('cityinfos', 'CityInfosController@index')
+            ->name('api.cityinfos.index');
+        $api->get('cityinfos/{cityinfo}', 'CityInfosController@show')
+            ->name('api.cityinfos.show');
+        $api->post('cityinfos', 'CityInfosController@store')
+            ->name('api.cityinfos.store');
+        $api->patch('cityinfos/{cityinfo}', 'CityInfosController@update')
+            ->name('api.cityinfos.update');
+        $api->delete('cityinfos/{cityinfo}', 'CityInfosController@destroy')
+            ->name('api.cityinfos.destroy');
+        $api->delete('cityinfos', 'CityInfosController@destroybyids')
+            ->name('api.cityinfos.destroybyids');
+        $api->put('cityinfos', 'CityInfosController@editStatusByIds')
+            ->name('api.cityinfos.editstatusbyids');            
+            
+        //损坏商品
+        $api->get('damagedgoods', 'DamagedGoodsController@index')
+            ->name('api.damagedgoods.index');
+        $api->get('damagedgoods/{damagedgoods}', 'DamagedGoodsController@show')
+            ->name('api.damagedgoods.show');
+        $api->post('damagedgoods', 'DamagedGoodsController@store')
+            ->name('api.damagedgoods.store');
+        $api->patch('damagedgoods/{damagedgoods}', 'DamagedGoodsController@update')
+            ->name('api.damagedgoods.update');
+        $api->delete('damagedgoods/{damagedgoods}', 'DamagedGoodsController@destroy')
+            ->name('api.damagedgoods.destroy');
+        $api->delete('damagedgoods', 'DamagedGoodsController@destroybyids')
+            ->name('api.damagedgoods.destroybyids');
+        $api->put('damagedgoods', 'DamagedGoodsController@editStatusByIds')
+            ->name('api.damagedgoods.editstatusbyids');            
+        
+        //物流区域资源
+        $api->get('logisticsareas', 'LogisticsAreasController@index')
+            ->name('api.logisticsareas.index');
+        $api->get('logisticsareas/{logisticsarea}', 'LogisticsAreasController@show')
+            ->name('api.logisticsareas.show');
+        $api->post('logisticsareas', 'LogisticsAreasController@store')
+            ->name('api.logisticsareas.store');
+        $api->patch('logisticsareas/{logisticsarea}', 'LogisticsAreasController@update')
+            ->name('api.logisticsareas.update');
+        $api->delete('logisticsareas/{logisticsarea}', 'LogisticsAreasController@destroy')
+            ->name('api.logisticsareas.destroy');
+        $api->delete('logisticsareas', 'LogisticsAreasController@destroybyids')
+            ->name('api.logisticsareas.destroybyids');
+        $api->put('logisticsareas', 'LogisticsAreasController@editStatusByIds')
+            ->name('api.logisticsareas.editstatusbyids');  
+
+        //物流资源
+        $api->get('logistics', 'LogisticsController@index')
+            ->name('api.logistics.index');
+        $api->get('logistics/{logistics}', 'LogisticsController@show')
+            ->name('api.logistics.show');
+        $api->post('logistics', 'LogisticsController@store')
+            ->name('api.logistics.store');
+        $api->patch('logistics/{logistics}', 'LogisticsController@update')
+            ->name('api.logistics.update');
+        $api->delete('logistics/{logistics}', 'LogisticsController@destroy')
+            ->name('api.logistics.destroy');
+        $api->delete('logistics', 'LogisticsController@destroybyids')
+            ->name('api.logistics.destroybyids');
+        $api->put('logistics', 'LogisticsController@editStatusByIds')
+            ->name('api.logistics.editstatusbyids');
+
+        //物流资源
+        $api->get('warehouses', 'WarehousesController@index')
+            ->name('api.warehouses.index');
+        $api->get('warehouses/{warehouse}', 'WarehousesController@show')
+            ->name('api.warehouses.show');
+        $api->post('warehouses', 'WarehousesController@store')
+            ->name('api.warehouses.store');
+        $api->patch('warehouses/{warehouse}', 'WarehousesController@update')
+            ->name('api.warehouses.update');
+        $api->delete('warehouses/{warehouse}', 'WarehousesController@destroy')
+            ->name('api.warehouses.destroy');
+        $api->delete('warehouses', 'WarehousesController@destroybyids')
+            ->name('api.warehouses.destroybyids');
+        $api->put('warehouses', 'WarehousesController@editStatusByIds')
+            ->name('api.warehouses.editstatusbyids');
+
+        //供应商资源
+        $api->get('suppliers', 'SuppliersController@index')
+            ->name('api.suppliers.index');
+        $api->get('suppliers/{supplier}', 'SuppliersController@show')
+            ->name('api.suppliers.show');
+        $api->post('suppliers', 'SuppliersController@store')
+            ->name('api.suppliers.store');
+        $api->patch('suppliers/{supplier}', 'SuppliersController@update')
+            ->name('api.suppliers.update');
+        $api->delete('suppliers/{supplier}', 'SuppliersController@destroy')
+            ->name('api.suppliers.destroy');
+        $api->delete('suppliers', 'SuppliersController@destroybyids')
+            ->name('api.suppliers.destroybyids');
+        $api->put('suppliers', 'SuppliersController@editStatusByIds')
+            ->name('api.suppliers.editstatusbyids');
+            
+        //供应商资源
+        $api->get('shops', 'ShopsController@index')
+            ->name('api.shops.index');
+        $api->get('shops/{shop}', 'ShopsController@show')
+            ->name('api.shops.show');
+        $api->post('shops', 'ShopsController@store')
+            ->name('api.shops.store');
+        $api->patch('shops/{shop}', 'ShopsController@update')
+            ->name('api.shops.update');
+        $api->delete('shops/{shop}', 'ShopsController@destroy')
+            ->name('api.shops.destroy');
+        $api->delete('shops', 'ShopsController@destroybyids')
+            ->name('api.shops.destroybyids');
+        $api->put('shops', 'ShopsController@editStatusByIds')
+            ->name('api.shops.editstatusbyids');
+            
+        //系列资源
+        $api->get('series', 'SeriesController@index')
+            ->name('api.series.index');
+        $api->get('series/{series}', 'SeriesController@show')
+            ->name('api.series.show');
+        $api->post('series', 'SeriesController@store')
+            ->name('api.series.store');
+        $api->patch('series/{series}', 'SeriesController@update')
+            ->name('api.series.update');
+        $api->delete('series/{series}', 'SeriesController@destroy')
+            ->name('api.series.destroy');
+        $api->delete('series', 'SeriesController@destroybyids')
+            ->name('api.series.destroybyids');
+        $api->put('series', 'SeriesController@editStatusByIds')
+            ->name('api.series.editstatusbyids'); 
+                       
+        //打印报表资源
+        $api->get('printreports', 'PrintReportsController@index')
+            ->name('api.printreports.index');
+        $api->get('printreports/{printreport}', 'PrintReportsController@show')
+            ->name('api.printreports.show');
+        $api->post('printreports', 'PrintReportsController@store')
+            ->name('api.printreports.store');
+        $api->patch('printreports/{printreport}', 'PrintReportsController@update')
+            ->name('api.printreports.update');
+        $api->delete('printreports/{printreport}', 'PrintReportsController@destroy')
+            ->name('api.printreports.destroy');
+        $api->delete('printreports', 'PrintReportsController@destroybyids')
+            ->name('api.printreports.destroybyids');
+        $api->put('printreports', 'PrintReportsController@editStatusByIds')
+            ->name('api.printreports.editstatusbyids');  
+
+        //平台资源
+        $api->get('platforms', 'PlatformsController@index')
+            ->name('api.platforms.index');
+        $api->get('platforms/{platform}', 'PlatformsController@show')
+            ->name('api.platforms.show');
+        $api->post('platforms', 'PlatformsController@store')
+            ->name('api.platforms.store');
+        $api->patch('platforms/{platform}', 'PlatformsController@update')
+            ->name('api.platforms.update');
+        $api->delete('platforms/{platform}', 'PlatformsController@destroy')
+            ->name('api.platforms.destroy');
+        $api->delete('platforms', 'PlatformsController@destroybyids')
+            ->name('api.platforms.destroybyids');
+        $api->put('platforms', 'PlatformsController@editStatusByIds')
+            ->name('api.platforms.editstatusbyids');
 
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class AccountingTypeRequest extends FormRequest
+class PlatformRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -27,7 +27,7 @@ class AccountingTypeRequest extends FormRequest
                 return [
                     'name' => 'string',
                     'status' => 'integer',
-                    'id' => 'exists:accounting_types'
+                    'id' => 'exists:platforms'
                 ];
                 break;
             case 'DELETE':
@@ -49,8 +49,8 @@ class AccountingTypeRequest extends FormRequest
         return [
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填',
-            'name.required' => '记账类型名称必填',
-            'name.string' => '记账类型名称必须string类型',
+            'name.required' => '平台类型名称必填',
+            'name.string' => '平台类型名称必须string类型',
             'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型'
@@ -60,8 +60,8 @@ class AccountingTypeRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '记账类型名称',
-            'status' => '记账类型状态'
+            'name' => '平台类型名称',
+            'status' => '状态'
         ];
     }
 

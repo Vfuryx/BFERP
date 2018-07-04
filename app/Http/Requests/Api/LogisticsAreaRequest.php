@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class AccountingTypeRequest extends FormRequest
+class LogisticsAreaRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -19,15 +19,20 @@ class AccountingTypeRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'name' => 'required|string',
+                    'code' => 'required|string|max:255|unique:logistics_areas',
+                    'name' => 'required|string|max:255',
                     'status' => 'integer'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string',
+                    'code' => [
+                        'string','max:255',
+                        Rule::unique('logistics_areas')->ignore($this->logisticsarea->id),
+                    ],
+                    'name' => 'string|max:255',
                     'status' => 'integer',
-                    'id' => 'exists:accounting_types'
+                    'id' => 'exists:logistics_areas'
                 ];
                 break;
             case 'DELETE':
@@ -47,21 +52,30 @@ class AccountingTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.integer' => '状态必须int类型',
-            'status.required' => '状态必填',
-            'name.required' => '记账类型名称必填',
-            'name.string' => '记账类型名称必须string类型',
+
+            'code.required' => '区域代码必填',
+            'code.string' => '区域代码必须string类型',
+            'code.max' => '区域代码最大长度为255',
+            'code.unique' => '区域代码不能重复',
+
+            'name.required' => '区域名称必填',
+            'name.string' => '区域名称必须string类型',
+            'name.max' => '区域名称最大长度为255',
+
             'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型'
+            'ids.string' => 'id组必须string类型',
+            'status.integer' => '状态必须int类型',
+            'status.required' => '状态必填'
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '记账类型名称',
-            'status' => '记账类型状态'
+            'code' => '区域代码',
+            'name' => '区域名称',
+            'status' => '状态'
         ];
     }
 
