@@ -3712,6 +3712,7 @@ FORMAT: 1A
     + title: (string, required) - 店铺标题
     + session_key: (string, required) - SessionKey
     + warehouse_id: (integer, required) - 默认仓库
+    + shop_account: (string, required) - 店铺账号
     + shop_passwd: (string, required) - 店铺密码
     + rebate: (string, required) - 返点（%）
     + principal: (string, required) - 店铺负责人

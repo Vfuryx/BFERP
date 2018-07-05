@@ -95,6 +95,7 @@ class ShopsController extends Controller
      *      @Parameter("title", description="店铺标题", required=true),
      *      @Parameter("session_key", description="SessionKey", required=true),
      *      @Parameter("warehouse_id",type="integer", description="默认仓库", required=true),
+     *      @Parameter("shop_account", description="店铺账号", required=true),
      *      @Parameter("shop_passwd", description="店铺密码", required=true),
      *      @Parameter("rebate", description="返点（%）", required=true),
      *      @Parameter("principal", description="店铺负责人", required=true),
