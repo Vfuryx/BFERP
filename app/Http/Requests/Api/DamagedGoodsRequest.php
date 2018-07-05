@@ -60,23 +60,28 @@ class DamagedGoodsRequest extends FormRequest
             'order_no.string' => '订单号必须string类型',
             'order_no.required' => '订单号必填',
             'order_no.max' => '订单号最大长度为255',
+
             'good_sn.string' => '商品编码必须string类型',
             'good_sn.max' => '商品编码最大长度为255',
             'good_sn.required' => '商品编码必填',
+
             'standard_code.string' => '规格编码必须string类型',
             'standard_code.max' => '规格编码最大长度为255',
             'standard_code.required' => '规格编码必填',
+
             'quantity.integer' => '损坏数量必须int类型',
             'quantity.required' => '损坏数量必填',
+
             'money.numeric' => '损坏金额必须数字',
             'money.required' => '损坏金额必填',
+
             'remark.string' => '备注必须string类型',
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
 
-            'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型',
+
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填'
         ];

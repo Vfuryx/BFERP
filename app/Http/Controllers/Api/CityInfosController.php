@@ -127,7 +127,7 @@ class CityInfosController extends Controller
      *      @Parameter("expected_days",type="integer", description="城市到达天数", required=true),
      *      @Parameter("route",type="integer", description="中转或直达：0=中转，1=直达", required=false, default=1),
      *      @Parameter("is_free_shipping",type="integer", description="是否包邮", required=false, default=0),
-     *      @Parameter("remark", description="费用类别备注", required=false),
+     *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
@@ -137,18 +137,9 @@ class CityInfosController extends Controller
      *              "logistics_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
      *              },
-<<<<<<< HEAD
-     *              "code": {
-     *                  "费用代码不能重复"
-     *              },
-     *              "price": {
-     *                  "物流费用必须是数字"
-     *              }
-=======
      *              "logistics_id": {
      *                  "物流id必填"
      *              },
->>>>>>> test2
      *           },
      *          "status_code": 422,
      *      }),
@@ -256,11 +247,11 @@ class CityInfosController extends Controller
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "code": {
-     *                  "费用代码不能重复"
-     *               },
      *              "logistics_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
+     *               },
+     *              "province": {
+     *                  "省必须string类型"
      *               },
      *              "price": {
      *                  "物流费用必须是数字"
@@ -331,12 +322,7 @@ class CityInfosController extends Controller
      * @Delete("/cityinfos")
      * @Versions({"v1"})
      * @Parameters({
-<<<<<<< HEAD
-     * @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true)
-     * })
-=======
      * @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true)})
->>>>>>> test2
      * @Transaction({
      *      @Response(500, body={
      *          "message": "删除错误",

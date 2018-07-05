@@ -7,7 +7,7 @@ class Shop extends Model
     protected $table = 'shops';
 
     protected $fillable = [
-        'name', 'session_key', 'warehouse_id', 'shop_account',
+        'nick', 'title', 'session_key', 'warehouse_id', 'shop_account',
         'shop_passwd', 'rebate', 'principal', 'principal_mobile',
         'province', 'city', 'district', 'address', 'gross_profit_rate',
         'platform_id', 'is_waybill', 'status',

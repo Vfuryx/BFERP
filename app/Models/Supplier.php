@@ -11,7 +11,7 @@ class Supplier extends Model
     protected $fillable = [
         'name', 'company', 'code', 'province',
         'city', 'district', 'address', 'zipcode',
-        'contacts', 'phone', 'mobile', 'fax',
+        'contacts', 'phone', 'mobile', 'fax', 'email',
         'remark', 'is_scan', 'status', 'auto_valuation',
     ];
 

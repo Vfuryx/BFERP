@@ -42,12 +42,13 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
+     *          "email": "邮箱",
      *          "remark": "备注",
      *          "is_scan": 1,
      *          "status": 1,
      *          "auto_valuation": 1,
-     *          "created_at": "2018-07-04 11:11:39",
-     *          "updated_at": "2018-07-04 11:11:39"
+     *          "created_at": "2018-07-05 10:55:27",
+     *          "updated_at": "2018-07-05 10:55:27"
      *      }
      *     },
      *     "meta": {
@@ -84,6 +85,7 @@ class SuppliersController extends Controller
      *      @Parameter("phone", description="电话", required=true),
      *      @Parameter("mobile", description="手机", required=true),
      *      @Parameter("fax", description="传真", required=true),
+     *      @Parameter("email", description="邮箱", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("is_scan",type="integer", description="是否启用扫描", required=false, default=1),
      *      @Parameter("auto_valuation",type="integer", description="是否采购自动计价", required=false, default=1),
@@ -122,12 +124,13 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
+     *          "email": "邮箱",
      *          "remark": "备注",
      *          "is_scan": "1",
      *          "status": "1",
      *          "auto_valuation": "1",
-     *          "created_at": "2018-07-04 11:11:39",
-     *          "updated_at": "2018-07-04 11:11:39",
+     *          "created_at": "2018-07-05 10:55:27",
+     *          "updated_at": "2018-07-05 10:55:27",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -204,24 +207,25 @@ class SuppliersController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "供应商名称4",
-     *          "company": "供应商公司4",
-     *          "code": "公司代码4",
-     *          "province": "省4",
-     *          "city": "市4",
-     *          "district": "区4",
-     *          "address": "地址4",
-     *          "zipcode": "邮编4",
-     *          "contacts": "联系人4",
-     *          "phone": "电话4",
-     *          "mobile": "手机4",
-     *          "fax": "传真4",
-     *          "remark": "备注4",
-     *          "is_scan": "1",
-     *          "status": "1",
-     *          "auto_valuation": "1",
-     *          "created_at": "2018-07-04 11:11:39",
-     *          "updated_at": "2018-07-04 11:22:29"
+     *          "name": "供应商名称",
+     *          "company": "供应商公司",
+     *          "code": "公司代码",
+     *          "province": "省",
+     *          "city": "市",
+     *          "district": "区",
+     *          "address": "地址",
+     *          "zipcode": "邮编",
+     *          "contacts": "联系人",
+     *          "phone": "电话",
+     *          "mobile": "手机",
+     *          "fax": "传真",
+     *          "email": "邮箱",
+     *          "remark": "备注",
+     *          "is_scan": 1,
+     *          "status": 1,
+     *          "auto_valuation": 1,
+     *          "created_at": "2018-07-05 10:55:27",
+     *          "updated_at": "2018-07-05 10:55:27"
      *      })
      * })
      */

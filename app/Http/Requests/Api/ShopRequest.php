@@ -21,7 +21,8 @@ class ShopRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'name' => 'required|string|max:255',
+                    'nick' => 'required|string|max:255',
+                    'title' => 'required|string|max:255',
                     'session_key' => 'required|string|max:255',
                     'warehouse_id' => [
                         'required','integer',
@@ -51,7 +52,8 @@ class ShopRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|max:255',
+                    'nick' => 'string|max:255',
+                    'title' => 'string|max:255',
                     'session_key' => 'string|max:255',
                     'warehouse_id' => [
                         'integer',
@@ -96,9 +98,13 @@ class ShopRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '店铺名称必填',
-            'name.max' => '店铺名称最大长度为255',
-            'name.string' => '店铺名称必须string类型',
+            'nick.required' => '卖家昵称必填',
+            'nick.max' => '卖家昵称最大长度为255',
+            'nick.string' => '卖家昵称必须string类型',
+
+            'title.required' => '店铺标题必填',
+            'title.max' => '店铺标题最大长度为255',
+            'title.string' => '店铺标题必须string类型',
 
             'session_key.required' => 'SessionKey必填',
             'session_key.max' => 'SessionKey最大长度为255',
@@ -164,7 +170,8 @@ class ShopRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '店铺名称',
+            'nick' => '卖家昵称',
+            'title' => '店铺标题',
             'session_key' => 'SessionKey',
             'warehouse_id' => '默认仓库',
             'shop_account' => '店铺账号',

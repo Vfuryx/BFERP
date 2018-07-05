@@ -1977,7 +1977,7 @@ FORMAT: 1A
         + Default: 1
     + is_free_shipping: (integer, optional) - 是否包邮
         + Default: 0
-    + remark: (string, optional) - 费用类别备注
+    + remark: (string, optional) - 备注
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
@@ -2097,11 +2097,11 @@ FORMAT: 1A
             {
                 "message": "422 Unprocessable Entity",
                 "errors": {
-                    "code": [
-                        "费用代码不能重复"
-                    ],
                     "logistics_id": [
                         "需要添加的id在数据库中未找到或未启用"
+                    ],
+                    "province": [
+                        "省必须string类型"
                     ],
                     "price": [
                         "物流费用必须是数字"
@@ -2546,7 +2546,7 @@ FORMAT: 1A
                 "message": "422 Unprocessable Entity",
                 "errors": {
                     "code": [
-                        "区域代码必填"
+                        "区域代码不能重复"
                     ],
                     "name": [
                         "区域名称必填"
@@ -2612,6 +2612,9 @@ FORMAT: 1A
                 "errors": {
                     "status": [
                         "状态必须int类型"
+                    ],
+                    "code": [
+                        "区域代码不能重复"
                     ]
                 },
                 "status_code": 422
@@ -3098,7 +3101,6 @@ FORMAT: 1A
                         "address": "仓库地（地址）1",
                         "is_default": 1,
                         "status": 1,
-                        "auto_valuation": null,
                         "created_at": "2018-07-04 10:06:35",
                         "updated_at": "2018-07-04 10:06:35"
                     },
@@ -3111,7 +3113,6 @@ FORMAT: 1A
                         "address": "仓库地（地址）2",
                         "is_default": 0,
                         "status": 1,
-                        "auto_valuation": null,
                         "created_at": "2018-07-04 10:15:49",
                         "updated_at": "2018-07-04 10:20:04"
                     }
@@ -3170,7 +3171,6 @@ FORMAT: 1A
                 "address": "仓库地（地址）1",
                 "is_default": "1",
                 "status": "1",
-                "auto_valuation": null,
                 "created_at": "2018-07-04 10:06:35",
                 "updated_at": "2018-07-04 10:06:35",
                 "meta": {
@@ -3201,7 +3201,6 @@ FORMAT: 1A
                 "address": "仓库地（地址）2",
                 "is_default": 0,
                 "status": 1,
-                "auto_valuation": null,
                 "created_at": "2018-07-04 10:15:49",
                 "updated_at": "2018-07-04 10:20:04"
             }
@@ -3245,7 +3244,6 @@ FORMAT: 1A
                 "address": "仓库地（地址）2",
                 "is_default": "0",
                 "status": "1",
-                "auto_valuation": null,
                 "created_at": "2018-07-04 10:15:49",
                 "updated_at": "2018-07-04 10:20:04"
             }
@@ -3365,12 +3363,13 @@ FORMAT: 1A
                         "phone": "电话",
                         "mobile": "手机",
                         "fax": "传真",
+                        "email": "邮箱",
                         "remark": "备注",
                         "is_scan": 1,
                         "status": 1,
                         "auto_valuation": 1,
-                        "created_at": "2018-07-04 11:11:39",
-                        "updated_at": "2018-07-04 11:11:39"
+                        "created_at": "2018-07-05 10:55:27",
+                        "updated_at": "2018-07-05 10:55:27"
                     }
                 ],
                 "meta": {
@@ -3400,6 +3399,7 @@ FORMAT: 1A
     + phone: (string, required) - 电话
     + mobile: (string, required) - 手机
     + fax: (string, required) - 传真
+    + email: (string, required) - 邮箱
     + remark: (string, optional) - 备注
     + is_scan: (integer, optional) - 是否启用扫描
         + Default: 1
@@ -3447,12 +3447,13 @@ FORMAT: 1A
                 "phone": "电话",
                 "mobile": "手机",
                 "fax": "传真",
+                "email": "邮箱",
                 "remark": "备注",
                 "is_scan": "1",
                 "status": "1",
                 "auto_valuation": "1",
-                "created_at": "2018-07-04 11:11:39",
-                "updated_at": "2018-07-04 11:11:39",
+                "created_at": "2018-07-05 10:55:27",
+                "updated_at": "2018-07-05 10:55:27",
                 "meta": {
                     "status_code": "201"
                 }
@@ -3529,24 +3530,25 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "供应商名称4",
-                "company": "供应商公司4",
-                "code": "公司代码4",
-                "province": "省4",
-                "city": "市4",
-                "district": "区4",
-                "address": "地址4",
-                "zipcode": "邮编4",
-                "contacts": "联系人4",
-                "phone": "电话4",
-                "mobile": "手机4",
-                "fax": "传真4",
-                "remark": "备注4",
-                "is_scan": "1",
-                "status": "1",
-                "auto_valuation": "1",
-                "created_at": "2018-07-04 11:11:39",
-                "updated_at": "2018-07-04 11:22:29"
+                "name": "供应商名称",
+                "company": "供应商公司",
+                "code": "公司代码",
+                "province": "省",
+                "city": "市",
+                "district": "区",
+                "address": "地址",
+                "zipcode": "邮编",
+                "contacts": "联系人",
+                "phone": "电话",
+                "mobile": "手机",
+                "fax": "传真",
+                "email": "邮箱",
+                "remark": "备注",
+                "is_scan": 1,
+                "status": 1,
+                "auto_valuation": 1,
+                "created_at": "2018-07-05 10:55:27",
+                "updated_at": "2018-07-05 10:55:27"
             }
 
 ## 删除供应商 [DELETE /api/suppliers/:id]
@@ -3652,41 +3654,42 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "name": "店铺名称",
+                        "nick": "卖家昵称",
+                        "title": "店铺标题",
                         "session_key": "SessionKey",
                         "warehouse": {
-                            "id": 4,
-                            "name": "仓库名称4",
-                            "province": "仓库地（省）4",
-                            "city": "仓库地（市）4",
-                            "district": "仓库地（区）4",
-                            "address": "仓库地（地址）4",
-                            "is_default": 0,
+                            "id": 1,
+                            "name": "仓库名称1",
+                            "province": "仓库地（省）1",
+                            "city": "仓库地（市）1",
+                            "district": "仓库地（区）1",
+                            "address": "仓库地（地址）1",
+                            "is_default": 1,
                             "status": 1,
-                            "created_at": "2018-07-04 10:26:13",
-                            "updated_at": "2018-07-04 10:48:23"
+                            "created_at": "2018-07-05 10:49:24",
+                            "updated_at": "2018-07-05 10:49:24"
                         },
-                        "shop_account": "店铺账号",
-                        "shop_passwd": "店铺密码",
+                        "shop_account": "店铺账号1",
+                        "shop_passwd": "店铺密码1",
                         "rebate": "10.00",
-                        "principal": "店铺负责人",
-                        "principal_mobile": "负责人电话",
-                        "province": "发货地（省）",
-                        "city": "发货地（市）",
+                        "principal": "店铺负责人1",
+                        "principal_mobile": "负责人电话1",
+                        "province": "发货地（省）1",
+                        "city": "发货地（市）1",
                         "district": "发货地（区）",
                         "address": "发货地（地址）",
                         "gross_profit_rate": "10.00",
                         "platform": {
                             "id": 1,
-                            "name": "平台名称1",
+                            "name": "平台类型名称1",
                             "status": 1,
-                            "created_at": "2018-07-04 12:54:52",
-                            "updated_at": "2018-07-04 12:54:55"
+                            "created_at": "2018-07-05 10:49:30",
+                            "updated_at": "2018-07-05 10:49:30"
                         },
-                        "is_waybill": 1,
+                        "is_waybill": 2,
                         "status": 1,
-                        "created_at": "2018-07-04 12:56:57",
-                        "updated_at": "2018-07-04 12:56:57"
+                        "created_at": "2018-07-05 10:49:44",
+                        "updated_at": "2018-07-05 10:49:44"
                     }
                 ],
                 "meta": {
@@ -3705,7 +3708,8 @@ FORMAT: 1A
 
 
 + Parameters
-    + name: (string, required) - 店铺名称
+    + nick: (string, required) - 卖家昵称
+    + title: (string, required) - 店铺标题
     + session_key: (string, required) - SessionKey
     + warehouse_id: (integer, required) - 默认仓库
     + shop_passwd: (string, required) - 店铺密码
@@ -3744,19 +3748,20 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "店铺名称",
+                "nick": "卖家昵称",
+                "title": "店铺标题",
                 "session_key": "SessionKey",
                 "warehouse": {
-                    "id": 4,
-                    "name": "仓库名称4",
-                    "province": "仓库地（省）4",
-                    "city": "仓库地（市）4",
-                    "district": "仓库地（区）4",
-                    "address": "仓库地（地址）4",
-                    "is_default": 0,
+                    "id": 1,
+                    "name": "仓库名称1",
+                    "province": "仓库地（省）1",
+                    "city": "仓库地（市）1",
+                    "district": "仓库地（区）1",
+                    "address": "仓库地（地址）1",
+                    "is_default": 1,
                     "status": 1,
-                    "created_at": "2018-07-04 10:26:13",
-                    "updated_at": "2018-07-04 10:48:23"
+                    "created_at": "2018-07-05 10:49:24",
+                    "updated_at": "2018-07-05 10:49:24"
                 },
                 "shop_account": "店铺账号",
                 "shop_passwd": "店铺密码",
@@ -3770,15 +3775,15 @@ FORMAT: 1A
                 "gross_profit_rate": "10.00",
                 "platform": {
                     "id": 1,
-                    "name": "平台名称1",
+                    "name": "平台类型名称1",
                     "status": 1,
-                    "created_at": "2018-07-04 12:54:52",
-                    "updated_at": "2018-07-04 12:54:55"
+                    "created_at": "2018-07-05 10:49:30",
+                    "updated_at": "2018-07-05 10:49:30"
                 },
-                "is_waybill": "1",
+                "is_waybill": "2",
                 "status": "1",
-                "created_at": "2018-07-04 12:56:57",
-                "updated_at": "2018-07-04 12:56:57",
+                "created_at": "2018-07-05 10:49:44",
+                "updated_at": "2018-07-05 10:49:44",
                 "meta": {
                     "status_code": "201"
                 }
@@ -3869,19 +3874,20 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "店铺名称10",
+                "nick": "卖家昵称",
+                "title": "店铺标题",
                 "session_key": "SessionKey",
                 "warehouse": {
-                    "id": 4,
-                    "name": "仓库名称4",
-                    "province": "仓库地（省）4",
-                    "city": "仓库地（市）4",
-                    "district": "仓库地（区）4",
-                    "address": "仓库地（地址）4",
-                    "is_default": 0,
+                    "id": 1,
+                    "name": "仓库名称1",
+                    "province": "仓库地（省）1",
+                    "city": "仓库地（市）1",
+                    "district": "仓库地（区）1",
+                    "address": "仓库地（地址）1",
+                    "is_default": 1,
                     "status": 1,
-                    "created_at": "2018-07-04 10:26:13",
-                    "updated_at": "2018-07-04 10:48:23"
+                    "created_at": "2018-07-05 10:49:24",
+                    "updated_at": "2018-07-05 10:49:24"
                 },
                 "shop_account": "店铺账号10",
                 "shop_passwd": "店铺密码10",
@@ -3895,15 +3901,15 @@ FORMAT: 1A
                 "gross_profit_rate": "10.00",
                 "platform": {
                     "id": 1,
-                    "name": "平台名称1",
+                    "name": "平台类型名称1",
                     "status": 1,
-                    "created_at": "2018-07-04 12:54:52",
-                    "updated_at": "2018-07-04 12:54:55"
+                    "created_at": "2018-07-05 10:49:30",
+                    "updated_at": "2018-07-05 10:49:30"
                 },
-                "is_waybill": "2",
-                "status": "1",
-                "created_at": "2018-07-04 12:56:57",
-                "updated_at": "2018-07-04 13:36:04"
+                "is_waybill": 2,
+                "status": 1,
+                "created_at": "2018-07-05 10:49:44",
+                "updated_at": "2018-07-05 10:49:44"
             }
 
 ## 删除店铺 [DELETE /api/shops/:id]

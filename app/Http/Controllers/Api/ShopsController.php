@@ -30,41 +30,42 @@ class ShopsController extends Controller
      * "data": {
      *      {
      *          "id": 1,
-     *          "name": "店铺名称",
+     *          "nick": "卖家昵称",
+     *          "title": "店铺标题",
      *          "session_key": "SessionKey",
      *          "warehouse": {
-     *              "id": 4,
-     *              "name": "仓库名称4",
-     *              "province": "仓库地（省）4",
-     *              "city": "仓库地（市）4",
-     *              "district": "仓库地（区）4",
-     *              "address": "仓库地（地址）4",
-     *              "is_default": 0,
+     *              "id": 1,
+     *              "name": "仓库名称1",
+     *              "province": "仓库地（省）1",
+     *              "city": "仓库地（市）1",
+     *              "district": "仓库地（区）1",
+     *              "address": "仓库地（地址）1",
+     *              "is_default": 1,
      *              "status": 1,
-     *              "created_at": "2018-07-04 10:26:13",
-     *              "updated_at": "2018-07-04 10:48:23"
+     *              "created_at": "2018-07-05 10:49:24",
+     *              "updated_at": "2018-07-05 10:49:24"
      *          },
-     *          "shop_account": "店铺账号",
-     *          "shop_passwd": "店铺密码",
+     *          "shop_account": "店铺账号1",
+     *          "shop_passwd": "店铺密码1",
      *          "rebate": "10.00",
-     *          "principal": "店铺负责人",
-     *          "principal_mobile": "负责人电话",
-     *          "province": "发货地（省）",
-     *          "city": "发货地（市）",
+     *          "principal": "店铺负责人1",
+     *          "principal_mobile": "负责人电话1",
+     *          "province": "发货地（省）1",
+     *          "city": "发货地（市）1",
      *          "district": "发货地（区）",
      *          "address": "发货地（地址）",
      *          "gross_profit_rate": "10.00",
      *          "platform": {
      *              "id": 1,
-     *              "name": "平台名称1",
+     *              "name": "平台类型名称1",
      *              "status": 1,
-     *              "created_at": "2018-07-04 12:54:52",
-     *              "updated_at": "2018-07-04 12:54:55"
+     *              "created_at": "2018-07-05 10:49:30",
+     *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": 1,
+     *          "is_waybill": 2,
      *          "status": 1,
-     *          "created_at": "2018-07-04 12:56:57",
-     *          "updated_at": "2018-07-04 12:56:57"
+     *          "created_at": "2018-07-05 10:49:44",
+     *          "updated_at": "2018-07-05 10:49:44"
      *      }
      *     },
      *     "meta": {
@@ -90,7 +91,8 @@ class ShopsController extends Controller
      * @Post("/shops")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("name", description="店铺名称", required=true),
+     *      @Parameter("nick", description="卖家昵称", required=true),
+     *      @Parameter("title", description="店铺标题", required=true),
      *      @Parameter("session_key", description="SessionKey", required=true),
      *      @Parameter("warehouse_id",type="integer", description="默认仓库", required=true),
      *      @Parameter("shop_passwd", description="店铺密码", required=true),
@@ -121,19 +123,20 @@ class ShopsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "店铺名称",
+     *          "nick": "卖家昵称",
+     *          "title": "店铺标题",
      *          "session_key": "SessionKey",
      *          "warehouse": {
-     *              "id": 4,
-     *              "name": "仓库名称4",
-     *              "province": "仓库地（省）4",
-     *              "city": "仓库地（市）4",
-     *              "district": "仓库地（区）4",
-     *              "address": "仓库地（地址）4",
-     *              "is_default": 0,
+     *              "id": 1,
+     *              "name": "仓库名称1",
+     *              "province": "仓库地（省）1",
+     *              "city": "仓库地（市）1",
+     *              "district": "仓库地（区）1",
+     *              "address": "仓库地（地址）1",
+     *              "is_default": 1,
      *              "status": 1,
-     *              "created_at": "2018-07-04 10:26:13",
-     *              "updated_at": "2018-07-04 10:48:23"
+     *              "created_at": "2018-07-05 10:49:24",
+     *              "updated_at": "2018-07-05 10:49:24"
      *          },
      *          "shop_account": "店铺账号",
      *          "shop_passwd": "店铺密码",
@@ -147,15 +150,15 @@ class ShopsController extends Controller
      *          "gross_profit_rate": "10.00",
      *          "platform": {
      *              "id": 1,
-     *              "name": "平台名称1",
+     *              "name": "平台类型名称1",
      *              "status": 1,
-     *              "created_at": "2018-07-04 12:54:52",
-     *              "updated_at": "2018-07-04 12:54:55"
+     *              "created_at": "2018-07-05 10:49:30",
+     *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": "1",
+     *          "is_waybill": "2",
      *          "status": "1",
-     *          "created_at": "2018-07-04 12:56:57",
-     *          "updated_at": "2018-07-04 12:56:57",
+     *          "created_at": "2018-07-05 10:49:44",
+     *          "updated_at": "2018-07-05 10:49:44",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -246,19 +249,20 @@ class ShopsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "店铺名称10",
+     *          "nick": "卖家昵称",
+     *          "title": "店铺标题",
      *          "session_key": "SessionKey",
      *          "warehouse": {
-     *              "id": 4,
-     *              "name": "仓库名称4",
-     *              "province": "仓库地（省）4",
-     *              "city": "仓库地（市）4",
-     *              "district": "仓库地（区）4",
-     *              "address": "仓库地（地址）4",
-     *              "is_default": 0,
+     *              "id": 1,
+     *              "name": "仓库名称1",
+     *              "province": "仓库地（省）1",
+     *              "city": "仓库地（市）1",
+     *              "district": "仓库地（区）1",
+     *              "address": "仓库地（地址）1",
+     *              "is_default": 1,
      *              "status": 1,
-     *              "created_at": "2018-07-04 10:26:13",
-     *              "updated_at": "2018-07-04 10:48:23"
+     *              "created_at": "2018-07-05 10:49:24",
+     *              "updated_at": "2018-07-05 10:49:24"
      *          },
      *          "shop_account": "店铺账号10",
      *          "shop_passwd": "店铺密码10",
@@ -272,15 +276,15 @@ class ShopsController extends Controller
      *          "gross_profit_rate": "10.00",
      *          "platform": {
      *              "id": 1,
-     *              "name": "平台名称1",
+     *              "name": "平台类型名称1",
      *              "status": 1,
-     *              "created_at": "2018-07-04 12:54:52",
-     *              "updated_at": "2018-07-04 12:54:55"
+     *              "created_at": "2018-07-05 10:49:30",
+     *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": "2",
-     *          "status": "1",
-     *          "created_at": "2018-07-04 12:56:57",
-     *          "updated_at": "2018-07-04 13:36:04"
+     *          "is_waybill": 2,
+     *          "status": 1,
+     *          "created_at": "2018-07-05 10:49:44",
+     *          "updated_at": "2018-07-05 10:49:44"
      *      })
      * })
      */

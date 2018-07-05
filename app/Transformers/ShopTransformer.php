@@ -11,7 +11,8 @@ class ShopTransformer extends TransformerAbstract
     {
         return [
             'id' => $shop->id,
-            'name' => $shop->name,
+            'nick' => $shop->nick,
+            'title' => $shop->title,
             'session_key' => $shop->session_key,
             'warehouse' => $shop->warehouse,
             'shop_account' => $shop->shop_account,

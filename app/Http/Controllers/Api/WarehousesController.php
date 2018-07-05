@@ -37,7 +37,6 @@ class WarehousesController extends Controller
      *          "address": "仓库地（地址）1",
      *          "is_default": 1,
      *          "status": 1,
-     *          "auto_valuation": null,
      *          "created_at": "2018-07-04 10:06:35",
      *          "updated_at": "2018-07-04 10:06:35"
      *      },
@@ -50,7 +49,6 @@ class WarehousesController extends Controller
      *          "address": "仓库地（地址）2",
      *          "is_default": 0,
      *          "status": 1,
-     *          "auto_valuation": null,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      }
@@ -108,7 +106,6 @@ class WarehousesController extends Controller
      *          "address": "仓库地（地址）1",
      *          "is_default": "1",
      *          "status": "1",
-     *          "auto_valuation": null,
      *          "created_at": "2018-07-04 10:06:35",
      *          "updated_at": "2018-07-04 10:06:35",
      *          "meta": {
@@ -119,6 +116,11 @@ class WarehousesController extends Controller
      */
     public function store(WarehouseRequest $request)
     {
+        //是否要重置默认
+        if($request->input('is_default') === '1'){
+            $this->tableResetDefault(self::MODEL);
+        }
+        
         return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
@@ -141,7 +143,6 @@ class WarehousesController extends Controller
      *          "address": "仓库地（地址）2",
      *          "is_default": 0,
      *          "status": 1,
-     *          "auto_valuation": null,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      })
@@ -183,7 +184,6 @@ class WarehousesController extends Controller
      *          "address": "仓库地（地址）2",
      *          "is_default": "0",
      *          "status": "1",
-     *          "auto_valuation": null,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      })

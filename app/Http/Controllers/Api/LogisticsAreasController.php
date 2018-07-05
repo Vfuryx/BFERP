@@ -79,6 +79,9 @@ class LogisticsAreasController extends Controller
      *              "code": {
      *                  "区域代码必填"
      *              },
+     *              "code": {
+     *                  "区域代码不能重复"
+     *              },
      *              "name": {
      *                  "区域名称必填"
      *              },
@@ -144,6 +147,9 @@ class LogisticsAreasController extends Controller
      *              "status": {
      *                  "状态必须int类型"
      *               },
+     *              "code": {
+     *                  "区域代码不能重复"
+     *              },
      *           },
      *          "status_code": 422
      *      }),

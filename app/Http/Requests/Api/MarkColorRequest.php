@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Log;
+use Illuminate\Validation\Rule;
 
 class MarkColorRequest extends FormRequest
 {

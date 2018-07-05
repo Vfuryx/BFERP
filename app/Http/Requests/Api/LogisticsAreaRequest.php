@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
+use Illuminate\Validation\Rule;
+
 class LogisticsAreaRequest extends FormRequest
 {
     /**
@@ -65,6 +67,7 @@ class LogisticsAreaRequest extends FormRequest
             'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型',
+
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填'
         ];

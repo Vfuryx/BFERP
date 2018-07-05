@@ -15,7 +15,8 @@ class CreateShopsTable extends Migration
     {
         Schema::create('shops', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name')->default('')->comment('店铺名称');
+            $table->string('nick')->default('')->comment('卖家昵称');
+            $table->string('title')->default('')->comment('店铺标题');
             $table->string('session_key')->default('')->comment('SessionKey');
             $table->unsignedInteger('warehouse_id')->comment('默认仓库');
             $table->string('shop_account')->default('')->comment('店铺账号');

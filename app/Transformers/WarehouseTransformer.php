@@ -18,7 +18,6 @@ class WarehouseTransformer extends TransformerAbstract
             'address' => $warehouse->address,
             'is_default' => $warehouse->is_default,
             'status' => $warehouse->status,
-            'auto_valuation' => $warehouse->auto_valuation,
             'created_at' => $warehouse->created_at
                                     ->toDateTimeString(),
             'updated_at' => $warehouse->updated_at

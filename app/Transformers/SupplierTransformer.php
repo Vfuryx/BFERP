@@ -23,6 +23,7 @@ class SupplierTransformer extends TransformerAbstract
             'phone' => $supplier->phone,
             'mobile' => $supplier->mobile,
             'fax' => $supplier->fax,
+            'email' => $supplier->email,
             'remark' => $supplier->remark,
             'is_scan' => $supplier->is_scan,
             'status' => $supplier->status,

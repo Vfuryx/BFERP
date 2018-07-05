@@ -27,6 +27,7 @@ class CreateSuppliersTable extends Migration
             $table->string('phone')->default('')->comment('电话');
             $table->string('mobile')->default('')->comment('手机');
             $table->string('fax')->default('')->comment('传真');
+            $table->string('email')->default('')->comment('邮箱');
             $table->string('remark')->default('')->comment('备注');
             $table->tinyInteger('is_scan')->default(1)->comment('是否启用扫描');
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
