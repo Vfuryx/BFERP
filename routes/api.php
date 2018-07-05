@@ -314,6 +314,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.platforms.destroybyids');
         $api->put('platforms', 'PlatformsController@editStatusByIds')
             ->name('api.platforms.editstatusbyids');
+            
+        //平台资源
+        $api->get('departments', 'DepartmentsController@index')
+            ->name('api.departments.index');
+        $api->get('departments/{department}', 'DepartmentsController@show')
+            ->name('api.departments.show');
+        $api->post('departments', 'DepartmentsController@store')
+            ->name('api.departments.store');
+        $api->patch('departments/{department}', 'DepartmentsController@update')
+            ->name('api.departments.update');
+        $api->delete('departments/{department}', 'DepartmentsController@destroy')
+            ->name('api.departments.destroy');
+        $api->delete('departments', 'DepartmentsController@destroybyids')
+            ->name('api.departments.destroybyids');
+        $api->put('departments', 'DepartmentsController@editStatusByIds')
+            ->name('api.departments.editstatusbyids');
 
 
 

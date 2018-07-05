@@ -78,10 +78,10 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_groups');
-        Schema::dropIfExists('roles');
-        Schema::dropIfExists('role_user');
-        Schema::dropIfExists('permissions');
         Schema::dropIfExists('permission_role');
+        Schema::dropIfExists('permissions');
+        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('roles');
+        Schema::dropIfExists('role_groups');
     }
 }

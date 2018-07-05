@@ -33,7 +33,7 @@ class SupplierRequest extends FormRequest
                     'phone' => 'required|string|max:255',
                     'mobile' => 'required|string|max:255',
                     'fax' => 'required|string|max:255',
-                    'email' => 'required|string|max:255',
+                    'email' => 'required|email|max:255',
                     'remark' => 'string|nullable|max:255',
                     'is_scan' => 'integer',
                     'auto_valuation' => 'integer',
@@ -57,7 +57,7 @@ class SupplierRequest extends FormRequest
                     'phone' => 'string|max:255',
                     'mobile' => 'string|max:255',
                     'fax' => 'string|max:255',
-                    'email' => 'string|max:255',
+                    'email' => 'email|max:255',
                     'remark' => 'string|nullable|max:255',
                     'is_scan' => 'integer',
                     'auto_valuation' => 'integer',
@@ -133,7 +133,7 @@ class SupplierRequest extends FormRequest
 
             'email.required' => '邮箱必填',
             'email.max' => '邮箱最大长度为255',
-            'email.string' => '邮箱必须string类型',
+            'email.email' => '不是符合邮箱格式',
 
             'remark.string' => '供应商备注必须string类型',
             'remark.nullable' => '供应商备注可为null',
