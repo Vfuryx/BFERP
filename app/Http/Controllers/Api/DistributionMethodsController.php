@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\DistributionMethod;
 use App\Http\Requests\Api\DistributionMethodRequest;
 use App\Transformers\DistributionMethodTransformer;
-use Illuminate\Support\Facades\DB;
-
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 配送方式资源
@@ -14,6 +13,11 @@ use Illuminate\Support\Facades\DB;
  */
 class DistributionMethodsController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = DistributionMethodTransformer::class;
+    protected const MODEL = DistributionMethod::class;
+
     /**
      * 获取所有配送方式 
      *  
@@ -26,7 +30,7 @@ class DistributionMethodsController extends Controller
      * "data": {
      *         {
      *              "id": 1,
-     *              "name": "配送方式1",
+     *              "name": "配送方式",
      *              "status": "1",
      *              "created_at": "2018-06-14 14:39:45",
      *              "updated_at": "2018-06-14 14:39:45"
@@ -56,14 +60,7 @@ class DistributionMethodsController extends Controller
      */
     public function index(DistributionMethodRequest $request)
     {
-        // return $this->response->collection(DistributionMethod::all(),new DistributionMethodTransformer());
-
-        //分页响应返回
-        $distmets = DistributionMethod::whereIn(
-            'status',
-            (array)$request->get('status', [1, 0]))
-            ->paginate(10);
-        return $this->response->paginator($distmets, new DistributionMethodTransformer());
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
 
@@ -88,7 +85,7 @@ class DistributionMethodsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "配送方式1",
+     *          "name": "配送方式",
      *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:39:45",
@@ -100,13 +97,7 @@ class DistributionMethodsController extends Controller
      */
     public function store(DistributionMethodRequest $request)
     {
-        $dismet = new DistributionMethod();
-        $dismet->fill($request->all());
-        $dismet->save();
-        return $this->response
-                     ->item($dismet, new DistributionMethodTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -121,7 +112,7 @@ class DistributionMethodsController extends Controller
      *      }),
      *      @Response(200, body={
      *          "id": 1,
-     *          "name": "配送方式1",
+     *          "name": "配送方式",
      *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:45:14"
@@ -130,8 +121,7 @@ class DistributionMethodsController extends Controller
      */
     public function show($id)
     {
-        $dismet = DistributionMethod::findOrFail($id);
-        return $this->response->item($dismet, new DistributionMethodTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -155,7 +145,7 @@ class DistributionMethodsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "配送方式10",
+     *          "name": "配送方式1",
      *          "status": "1",
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:40:45",
@@ -164,10 +154,7 @@ class DistributionMethodsController extends Controller
      */
     public function update(DistributionMethodRequest $request, DistributionMethod $distmet)
     {
-        $distmet->update($request->all());
-        return $this->response
-                     ->item($distmet, new DistributionMethodTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $distmet, self::TRANSFORMER);
     }
 
     /**
@@ -185,10 +172,7 @@ class DistributionMethodsController extends Controller
      */
     public function destroy(DistributionMethod $distmet)
     {
-        $distmet->delete();
-        return $this->noContent();
-
-        // return $this->response->item($distmet, new DistributionMethodTransformer());
+        return $this->traitDestroy($distmet);
     }
 
     /**
@@ -219,20 +203,7 @@ class DistributionMethodsController extends Controller
      */
     public function destroybyIds(DistributionMethodRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== DistributionMethod::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -267,21 +238,7 @@ class DistributionMethodsController extends Controller
      */
     public function editStatusByIds(DistributionMethodRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== DistributionMethod::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 
 

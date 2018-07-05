@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\FreightType;
 use App\Http\Requests\Api\FreightTypeRequest;
 use App\Transformers\FreightTypeTransformer;
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 运费类型资源
@@ -13,6 +13,11 @@ use App\Transformers\FreightTypeTransformer;
  */
 class FreightTypesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = FreightTypeTransformer::class;
+    protected const MODEL = FreightType::class;
+
     /**
      * 获取所有运费类型 
      *  
@@ -57,15 +62,7 @@ class FreightTypesController extends Controller
      */
     public function index(FreightTypeRequest $request)
     {
-        // return $this->response->collection(FreightType::all(),new FreightTypeTransformer());
-        
-        //分页响应返回
-        $freighttypes = FreightType::whereIn(
-            'status',
-            (array)$request->get('status',[1,0]))
-            ->paginate(10);
-        return $this->response->paginator($freighttypes, new FreightTypeTransformer());
-
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
     /**
@@ -103,13 +100,12 @@ class FreightTypesController extends Controller
      */
     public function store(FreightTypeRequest $request)
     {
-        $freighttype = new FreightType();
-        $freighttype->fill($request->all());
-        $freighttype->save();
-        return $this->response
-                     ->item($freighttype, new FreightTypeTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+        //是否要重置默认
+        if ($request->input('is_default') === '1') {
+            $this->tableResetDefault(self::MODEL);
+        }
+
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -134,8 +130,7 @@ class FreightTypesController extends Controller
      */
     public function show($id)
     {
-        $freighttype = FreightType::findOrFail($id);
-        return $this->response->item($freighttype, new FreightTypeTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -169,10 +164,12 @@ class FreightTypesController extends Controller
      */
     public function update(FreightTypeRequest $request, FreightType $freighttype)
     {
-        $freighttype->update($request->all());
-        return $this->response
-                     ->item($freighttype, new FreightTypeTransformer())
-                     ->setStatusCode(201);
+        //是否要重置默认
+        if($request->input('is_default') === '1'){
+            $this->tableResetDefault(self::MODEL);
+        }
+
+        return $this->traitUpdate($request, $freighttype, self::TRANSFORMER);
     }
 
     /**
@@ -190,8 +187,7 @@ class FreightTypesController extends Controller
      */
     public function destroy(FreightType $freighttype)
     {
-        $freighttype->delete();
-        return $this->noContent();
+        return $this->traitDestroy($freighttype);
     }
 
     /**
@@ -222,20 +218,7 @@ class FreightTypesController extends Controller
      */
     public function destroybyIds(FreightTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FreightType::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -270,20 +253,6 @@ class FreightTypesController extends Controller
      */
     public function editStatusByIds(FreightTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FreightType::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

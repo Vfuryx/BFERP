@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\AccountingType as AccType;
 use App\Transformers\AccountingTypeTransformer;
 use App\Http\Requests\Api\AccountingTypeRequest;
+use App\Http\Controllers\Traits\CURDTrait;
+
 
 /**
  * 记账类型资源
@@ -13,6 +14,11 @@ use App\Http\Requests\Api\AccountingTypeRequest;
  */
 class AccountingTypesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = AccountingTypeTransformer::class;
+    protected const MODEL = AccType::class;
+
     /**
      * 获取所有记账类型
      *
@@ -40,8 +46,8 @@ class AccountingTypesController extends Controller
      *       },
      *       "meta": {
      *           "pagination": {
-     *               "total": 3,
-     *               "count": 3,
+     *               "total": 2,
+     *               "count": 2,
      *               "per_page": 10,
      *               "current_page": 1,
      *               "total_pages": 1,
@@ -55,15 +61,7 @@ class AccountingTypesController extends Controller
      */
     public function index(AccountingTypeRequest $request)
     {
-        // return $this->response->collection(AccType::all(), new AccountingTypeTransformer());
-
-        //分页响应返回
-        $acctype = AccType::whereIn(
-            'status',
-            (array)$request->get('status', [1, 0]))
-            ->paginate(10);
-        return $this->response->paginator($acctype, new AccountingTypeTransformer());
-
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
 
@@ -100,13 +98,7 @@ class AccountingTypesController extends Controller
      */
     public function store(AccountingTypeRequest $request)
     {
-        $acctype = new AccType();
-        $acctype->fill($request->all());
-        $acctype->save();
-        return $this->response
-                     ->item($acctype, new AccountingTypeTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -130,8 +122,7 @@ class AccountingTypesController extends Controller
      */
     public function show($id)
     {
-        $acctype = AccType::findOrFail($id);
-        return $this->response->item($acctype, new AccountingTypeTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -164,10 +155,7 @@ class AccountingTypesController extends Controller
      */
     public function update(AccountingTypeRequest $request, AccType $acctype)
     {
-        $acctype->update($request->all());
-        return $this->response
-                     ->item($acctype, new AccountingTypeTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $acctype, self::TRANSFORMER);
     }
 
     /**
@@ -185,8 +173,7 @@ class AccountingTypesController extends Controller
      */
     public function destroy(AccType $acctype)
     {
-        $acctype->delete();
-        return $this->noContent();
+        return $this->traitDestroy($acctype);
     }
 
     /**
@@ -217,20 +204,7 @@ class AccountingTypesController extends Controller
      */
     public function destroybyIds(AccountingTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== AccType::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -265,20 +239,6 @@ class AccountingTypesController extends Controller
      */
     public function editStatusByIds(AccountingTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== AccType::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

@@ -290,8 +290,8 @@ FORMAT: 1A
                 ],
                 "meta": {
                     "pagination": {
-                        "total": 3,
-                        "count": 3,
+                        "total": 2,
+                        "count": 2,
                         "per_page": 10,
                         "current_page": 1,
                         "total_pages": 1,
@@ -500,16 +500,16 @@ FORMAT: 1A
                         "id": 1,
                         "fee_category": {
                             "id": 1,
-                            "name": "费用类别1",
+                            "name": "费用类别",
                             "status": 1,
                             "created_at": "2018-06-25 10:45:30",
                             "updated_at": "2018-06-25 10:45:30"
                         },
-                        "name": "费用类型1",
-                        "code": "费用类型代码1",
+                        "name": "费用类型",
+                        "code": "费用类型代码",
                         "is_default": 1,
                         "status": 1,
-                        "remark": "费用类型代码1备注",
+                        "remark": "费用类型代码备注",
                         "created_at": "2018-06-14 15:28:13",
                         "updated_at": "2018-06-14 15:28:13"
                     },
@@ -576,13 +576,13 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 2,
+                "id": 1,
                 "fee_category_id": "1",
-                "name": "费用类型2",
-                "code": "费用类型代码2",
+                "name": "费用类型",
+                "code": "费用类型代码",
                 "is_default": "1",
                 "status": "1",
-                "remark": "费用类型代码2备注",
+                "remark": "费用类型代码备注",
                 "created_at": "2018-06-14 15:31:33",
                 "updated_at": "2018-06-14 15:31:33",
                 "meta": {
@@ -607,11 +607,11 @@ FORMAT: 1A
             {
                 "id": 1,
                 "fee_category_id": 1,
-                "name": "费用类型1",
-                "code": "费用类型代码1",
+                "name": "费用类型",
+                "code": "费用类型代码",
                 "is_default": 1,
                 "status": 1,
-                "remark": "费用类型代码1备注",
+                "remark": "费用类型代码备注",
                 "created_at": "2018-06-14 15:28:13",
                 "updated_at": "2018-06-14 15:28:13"
             }
@@ -647,7 +647,7 @@ FORMAT: 1A
                 "id": 1,
                 "fee_category_id": "1",
                 "name": "费用类型1",
-                "code": "费用类型代码10",
+                "code": "费用类型代码1",
                 "is_default": "1",
                 "status": "1",
                 "remark": "费用类型代码1备注",
@@ -758,7 +758,7 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "name": "配送方式1",
+                        "name": "配送方式",
                         "status": "1",
                         "created_at": "2018-06-14 14:39:45",
                         "updated_at": "2018-06-14 14:39:45"
@@ -812,7 +812,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "配送方式1",
+                "name": "配送方式",
                 "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:39:45",
@@ -837,7 +837,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "配送方式1",
+                "name": "配送方式",
                 "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:45:14"
@@ -872,7 +872,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "配送方式10",
+                "name": "配送方式1",
                 "status": "1",
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:40:45"
@@ -1662,7 +1662,7 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "name": "入库类型1",
+                        "name": "入库类型",
                         "status": 1,
                         "created_at": "2018-06-14 16:55:32",
                         "updated_at": "2018-06-14 16:55:32"
@@ -1677,8 +1677,8 @@ FORMAT: 1A
                 ],
                 "meta": {
                     "pagination": {
-                        "total": 5,
-                        "count": 5,
+                        "total": 2,
+                        "count": 2,
                         "per_page": 10,
                         "current_page": 1,
                         "total_pages": 1,
@@ -1715,8 +1715,8 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 3,
-                "name": "入库类型3",
+                "id": 1,
+                "name": "入库类型",
                 "status": "1",
                 "created_at": "2018-06-14 16:55:40",
                 "updated_at": "2018-06-14 16:55:40",
@@ -1741,7 +1741,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "name": "入库类型1",
+                "name": "入库类型",
                 "status": 1,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:55:32"

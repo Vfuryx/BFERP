@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\FeeTypeRequest;
 use App\Transformers\FeeTypeTransformer;
 use App\Models\FeeType;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 费用类型资源
@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\DB;
  */
 class FeeTypesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = FeeTypeTransformer::class;
+    protected const MODEL = FeeType::class;
+
     /**
      * 获取所有费用类型
      *
@@ -27,16 +32,16 @@ class FeeTypesController extends Controller
      *             "id": 1,
      *             "fee_category": {
      *                  "id": 1,
-     *                  "name": "费用类别1",
+     *                  "name": "费用类别",
      *                  "status": 1,
      *                  "created_at": "2018-06-25 10:45:30",
      *                  "updated_at": "2018-06-25 10:45:30"
      *              },
-     *             "name": "费用类型1",
-     *             "code": "费用类型代码1",
+     *             "name": "费用类型",
+     *             "code": "费用类型代码",
      *             "is_default": 1,
      *             "status": 1,
-     *             "remark": "费用类型代码1备注",
+     *             "remark": "费用类型代码备注",
      *             "created_at": "2018-06-14 15:28:13",
      *             "updated_at": "2018-06-14 15:28:13"
      *         },
@@ -72,14 +77,7 @@ class FeeTypesController extends Controller
      */
     public function index(FeeTypeRequest $request)
     {
-        // return $this->response->collection(FeeType::all(),new FeeTypeTransformer());
-
-        //分页响应返回
-        $feetypes = FeeType::whereIn(
-            'status',
-            (array)$request->get('status', [1, 0]))
-            ->paginate(13);
-        return $this->response->paginator($feetypes, new FeeTypeTransformer());
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
     /**
@@ -109,13 +107,13 @@ class FeeTypesController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 2,
+     *          "id": 1,
      *          "fee_category_id": "1",
-     *          "name": "费用类型2",
-     *          "code": "费用类型代码2",
+     *          "name": "费用类型",
+     *          "code": "费用类型代码",
      *          "is_default": "1",
      *          "status": "1",
-     *          "remark": "费用类型代码2备注",
+     *          "remark": "费用类型代码备注",
      *          "created_at": "2018-06-14 15:31:33",
      *          "updated_at": "2018-06-14 15:31:33",
      *          "meta": {
@@ -126,13 +124,12 @@ class FeeTypesController extends Controller
      */
     public function store(FeeTypeRequest $request)
     {
-        $feetype = new FeeType();
-        $feetype->fill($request->all());
-        $feetype->save();
-        return $this->response
-            ->item($feetype, new FeeTypeTransformer())
-            ->setStatusCode(201)
-            ->addMeta('status_code', '201');
+        //是否要重置默认
+        if($request->input('is_default') === '1'){
+            $this->tableResetDefault(self::MODEL);
+        }
+        
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -148,11 +145,11 @@ class FeeTypesController extends Controller
      *      @Response(200, body={
      *          "id": 1,
      *          "fee_category_id": 1,
-     *          "name": "费用类型1",
-     *          "code": "费用类型代码1",
+     *          "name": "费用类型",
+     *          "code": "费用类型代码",
      *          "is_default": 1,
      *          "status": 1,
-     *          "remark": "费用类型代码1备注",
+     *          "remark": "费用类型代码备注",
      *          "created_at": "2018-06-14 15:28:13",
      *          "updated_at": "2018-06-14 15:28:13"
      *      })
@@ -160,8 +157,7 @@ class FeeTypesController extends Controller
      */
     public function show($id)
     {
-        $feetype = FeeType::findOrFail($id);
-        return $this->response->item($feetype, new FeeTypeTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -187,7 +183,7 @@ class FeeTypesController extends Controller
      *          "id": 1,
      *          "fee_category_id": "1",
      *          "name": "费用类型1",
-     *          "code": "费用类型代码10",
+     *          "code": "费用类型代码1",
      *          "is_default": "1",
      *          "status": "1",
      *          "remark": "费用类型代码1备注",
@@ -198,12 +194,12 @@ class FeeTypesController extends Controller
      */
     public function update(FeeTypeRequest $request, FeeType $feetype)
     {
-        // dd($request->all(),$feetype->all());
-        $feetype->update($request->all());
-        return $this->response
-            ->item($feetype, new FeeTypeTransformer())
-            ->setStatusCode(201);
+        //是否要重置默认
+        if($request->input('is_default') === '1'){
+            $this->tableResetDefault(self::MODEL);
+        }
 
+        return $this->traitUpdate($request, $warehouse, self::TRANSFORMER);
     }
 
     /**
@@ -221,8 +217,7 @@ class FeeTypesController extends Controller
      */
     public function destroy(FeeType $feetype)
     {
-        $feetype->delete();
-        return $this->noContent();
+        return $this->traitDestroy($feetype);
     }
 
     /**
@@ -253,20 +248,7 @@ class FeeTypesController extends Controller
      */
     public function destroybyIds(FeeTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FeeType::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -301,21 +283,7 @@ class FeeTypesController extends Controller
      */
     public function editStatusByIds(FeeTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FeeType::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 
 }

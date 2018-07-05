@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
-use App\Http\Requests\Api\MarkColorRequest;
 use App\Models\MarkColor;
+use App\Http\Requests\Api\MarkColorRequest;
 use App\Transformers\MarkColorTransformer;
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 标记颜色资源
@@ -13,6 +13,11 @@ use App\Transformers\MarkColorTransformer;
  */
 class MarkColorsController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = MarkColorTransformer::class;
+    protected const MODEL = MarkColor::class;
+
     /**
      * 获取所有标记颜色 
      *  
@@ -61,15 +66,7 @@ class MarkColorsController extends Controller
      */
     public function index(MarkColorRequest $request)
     {
-        //不分页返回
-        //return $this->response->collection(MarkColor::all(), new MarkColorTransformer());
-
-        //分页响应返回
-        $markcolors = MarkColor::whereIn(
-            'status',
-            (array)$request->get('status', [1, 0]))
-            ->paginate(10);
-        return $this->response->paginator($markcolors, new MarkColorTransformer());
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
 
@@ -111,15 +108,8 @@ class MarkColorsController extends Controller
      * })
      */
     public function store(MarkColorRequest $request)
-    {
-        $markcolor = new MarkColor();
-        $markcolor->fill($request->all());
-        $markcolor->save();
-
-        return $this->response
-                     ->item($markcolor, new MarkColorTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+    {  
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -146,8 +136,7 @@ class MarkColorsController extends Controller
      */
     public function show($id)
     {
-        $markcolor = MarkColor::findOrFail($id);
-        return $this->response->item($markcolor, new MarkColorTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
 
@@ -184,10 +173,7 @@ class MarkColorsController extends Controller
      */
     public function update(MarkColorRequest $request, MarkColor $markcolor)
     {
-        $markcolor->update($request->all());
-        return $this->response
-                     ->item($markcolor, new MarkColorTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $markcolor, self::TRANSFORMER);
     }
 
     /**
@@ -205,9 +191,7 @@ class MarkColorsController extends Controller
      */
     public function destroy(MarkColor $markcolor)
     {
-        $markcolor->delete();
-        return $this->noContent();
-        // return $this->response->item($markcolor, new MarkColorTransformer());
+        return $this->traitDestroy($markcolor);
     }
 
 
@@ -239,20 +223,7 @@ class MarkColorsController extends Controller
      */
     public function destroybyIds(MarkColorRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== MarkColor::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -287,20 +258,6 @@ class MarkColorsController extends Controller
      */
     public function editStatusByIds(MarkColorRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== MarkColor::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

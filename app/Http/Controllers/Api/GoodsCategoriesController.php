@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\GoodsCategory;
 use App\Http\Requests\Api\GoodsCategoryRequest;
 use App\Transformers\GoodsCategoryTransformer;
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 商品类别资源
@@ -13,6 +13,11 @@ use App\Transformers\GoodsCategoryTransformer;
  */
 class GoodsCategoriesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = GoodsCategoryTransformer::class;
+    protected const MODEL = GoodsCategory::class;
+
     /**
      * 获取所有商品类别 
      *  
@@ -61,14 +66,7 @@ class GoodsCategoriesController extends Controller
      */
     public function index(GoodsCategoryRequest $request)
     {
-        // return $this->response->collection(GoodsCategory::all(),new GoodsCategoryTransformer());
-
-         //分页响应返回
-         $goodscates = GoodsCategory::whereIn(
-             'status',
-             (array)$request->get('status',[1,0]))
-             ->paginate(10);
-         return $this->response->paginator($goodscates, new GoodsCategoryTransformer()); 
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
    /**
@@ -110,13 +108,7 @@ class GoodsCategoriesController extends Controller
      */
     public function store(GoodsCategoryRequest $request)
     {
-        $goodscate=new GoodsCategory();
-        $goodscate->fill($request->all());
-        $goodscate->save();
-        return $this->response
-                    ->item($goodscate, new GoodsCategoryTransformer())
-                    ->setStatusCode(201)
-                    ->addMeta('status_code', '201');
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -142,9 +134,8 @@ class GoodsCategoriesController extends Controller
      * })
      */
     public function show($id)
-    {
-        $goodscate = GoodsCategory::findOrFail($id);
-        return $this->response->item($goodscate, new GoodsCategoryTransformer());
+    {       
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
 
@@ -181,10 +172,7 @@ class GoodsCategoriesController extends Controller
      */
     public function update(GoodsCategoryRequest $request,GoodsCategory $goodscate)
     {
-        $goodscate->update($request->all());
-        return $this->response
-                     ->item($goodscate, new GoodsCategoryTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $goodscate, self::TRANSFORMER);
     }
 
     /**
@@ -202,8 +190,7 @@ class GoodsCategoriesController extends Controller
      */
     public function destroy(GoodsCategory $goodscate)
     {
-        $goodscate->delete();
-        return $this->noContent();
+        return $this->traitDestroy($goodscate);
     }
     
     /**
@@ -234,20 +221,7 @@ class GoodsCategoriesController extends Controller
      */
     public function destroybyIds(GoodsCategoryRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if(count($ids) !== GoodsCategory::destroy($ids)){
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -282,20 +256,6 @@ class GoodsCategoriesController extends Controller
      */
     public function editStatusByIds(GoodsCategoryRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if(count($ids) !== GoodsCategory::whereIn('id',$ids)->update(['status'=>$status])){
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

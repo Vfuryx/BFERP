@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\StorageType;
 use App\Http\Requests\Api\StorageTypeRequest;
 use App\Transformers\StorageTypeTransformer;
-
+use App\Http\Controllers\Traits\CURDTrait;
 
 /**
  * 入库类型资源
@@ -14,6 +13,11 @@ use App\Transformers\StorageTypeTransformer;
  */
 class StorageTypesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = StorageTypeTransformer::class;
+    protected const MODEL = StorageType::class;
+    
    /**
      * 获取所有入库类型 
      *  
@@ -26,7 +30,7 @@ class StorageTypesController extends Controller
      * "data": {
      *         {
      *             "id": 1,
-     *             "name": "入库类型1",
+     *             "name": "入库类型",
      *             "status": 1,
      *             "created_at": "2018-06-14 16:55:32",
      *             "updated_at": "2018-06-14 16:55:32"
@@ -42,8 +46,8 @@ class StorageTypesController extends Controller
      *     },
      *     "meta": {
      *         "pagination": {
-     *             "total": 5,
-     *             "count": 5,
+     *             "total": 2,
+     *             "count": 2,
      *             "per_page": 10,
      *             "current_page": 1,
      *             "total_pages": 1,
@@ -57,14 +61,7 @@ class StorageTypesController extends Controller
      */
     public function index(StorageTypeRequest $request)
     {
-        // return $this->response->collection(StorageType::all(),new StorageTypeTransformer());
-        
-        //分页响应返回
-        $storagetypes = StorageType::whereIn(
-            'status',
-            (array)$request->get('status',[1,0]))
-            ->paginate(10);
-        return $this->response->paginator($storagetypes, new StorageTypeTransformer());
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
 
@@ -88,8 +85,8 @@ class StorageTypesController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 3,
-     *          "name": "入库类型3",
+     *          "id": 1,
+     *          "name": "入库类型",
      *          "status": "1",
      *          "created_at": "2018-06-14 16:55:40",
      *          "updated_at": "2018-06-14 16:55:40",
@@ -101,14 +98,7 @@ class StorageTypesController extends Controller
      */
     public function store(StorageTypeRequest $request)
     {
-        $storagetype=new StorageType();
-        $storagetype->fill($request->all());
-        $storagetype->save();
-
-        return $this->response
-                     ->item($storagetype, new StorageTypeTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -123,7 +113,7 @@ class StorageTypesController extends Controller
      *      }),
      *      @Response(200, body={
      *          "id": 1,
-     *          "name": "入库类型1",
+     *          "name": "入库类型",
      *          "status": 1,
      *          "created_at": "2018-06-14 16:55:32",
      *          "updated_at": "2018-06-14 16:55:32"
@@ -132,8 +122,7 @@ class StorageTypesController extends Controller
      */
     public function show($id)
     {
-        $storagetype = StorageType::findOrFail($id);
-        return $this->response->item($storagetype, new StorageTypeTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
 
@@ -167,10 +156,7 @@ class StorageTypesController extends Controller
      */
     public function update(StorageTypeRequest $request,StorageType $storagetype)
     {
-        $storagetype->update($request->all());
-        return $this->response
-                     ->item($storagetype, new StorageTypeTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $storagetype, self::TRANSFORMER);
     }
 
     /**
@@ -188,8 +174,7 @@ class StorageTypesController extends Controller
      */
     public function destroy(StorageType $storagetype)
     {
-        $storagetype->delete();
-        return $this->noContent();
+        return $this->traitDestroy($storagetype);
     }
     
     /**
@@ -220,20 +205,7 @@ class StorageTypesController extends Controller
      */
     public function destroybyIds(StorageTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if(count($ids) !== StorageType::destroy($ids)){
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500,'删除错误',500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -268,20 +240,6 @@ class StorageTypesController extends Controller
      */
     public function editStatusByIds(StorageTypeRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if(count($ids) !== StorageType::whereIn('id',$ids)->update(['status'=>$status])){
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500,'更改错误',500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

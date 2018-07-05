@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\FeeCategoryRequest;
 use App\Transformers\FeeCategoryTransformer;
 use App\Models\FeeCategory;
+use App\Http\Controllers\Traits\CURDTrait;
+
 
 /**
  * 费用类别资源
@@ -13,6 +14,11 @@ use App\Models\FeeCategory;
  */
 class FeeCategoriesController extends Controller
 {
+    use CURDTrait;
+
+    protected const TRANSFORMER = FeeCategoryTransformer::class;
+    protected const MODEL = FeeCategory::class;
+
     /**
      * 获取所有费用类别
      *
@@ -42,17 +48,7 @@ class FeeCategoriesController extends Controller
      */
     public function index(FeeCategoryRequest $request)
     {
-        return $this->response->collection(
-            FeeCategory::whereIn(
-                'status',
-                (array)$request->get('status', [1, 0])
-            )->get(),
-            new FeeCategoryTransformer()
-        );
-
-        //分页响应返回
-        // $feecates = FeeCategory::paginate(2);
-        // return $this->response->paginator($feecates, new FeeCategoryTransformer());
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 0);
     }
 
 
@@ -89,13 +85,7 @@ class FeeCategoriesController extends Controller
      */
     public function store(FeeCategoryRequest $request)
     {
-        $feecate = new FeeCategory();
-        $feecate->fill($request->all());
-        $feecate->save();
-        return $this->response
-                     ->item($feecate, new FeeCategoryTransformer())
-                     ->setStatusCode(201)
-                     ->addMeta('status_code', '201');
+        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -119,8 +109,7 @@ class FeeCategoriesController extends Controller
      */
     public function show($id)
     {
-        $feecate = FeeCategory::findOrFail($id);
-        return $this->response->item($feecate, new FeeCategoryTransformer());
+        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -153,10 +142,7 @@ class FeeCategoriesController extends Controller
      */
     public function update(FeeCategoryRequest $request, FeeCategory $feecate)
     {
-        $feecate->update($request->all());
-        return $this->response
-                     ->item($feecate, new FeeCategoryTransformer())
-                     ->setStatusCode(201);
+        return $this->traitUpdate($request, $feecate, self::TRANSFORMER);
     }
 
     /**
@@ -174,8 +160,7 @@ class FeeCategoriesController extends Controller
      */
     public function destroy(FeeCategory $feecate)
     {
-        $feecate->delete();
-        return $this->noContent();
+        return $this->traitDestroy($feecate);
     }
 
 
@@ -207,20 +192,7 @@ class FeeCategoriesController extends Controller
      */
     public function destroybyIds(FeeCategoryRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FeeCategory::destroy($ids)) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitDestroybyIds($request, self::MODEL);
     }
 
     /**
@@ -255,20 +227,6 @@ class FeeCategoriesController extends Controller
      */
     public function editStatusByIds(FeeCategoryRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-        $status = $request->input('status');
-        DB::beginTransaction();
-
-        try {
-            if (count($ids) !== FeeCategory::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
-            }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
-
-        return $this->errorResponse(204);
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }
