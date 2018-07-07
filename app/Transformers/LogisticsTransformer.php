@@ -14,7 +14,7 @@ class LogisticsTransformer extends TransformerAbstract
             'code' => $logistics->code,
             'name' => $logistics->name,
             'report' => $logistics->printReport,
-            'logistics_area' => $logistics->logisticsArea,
+//            'logistics_area' => $logistics->logisticsArea,//暂时不开启
             'expected_days' => $logistics->expected_days,
             'phone' => $logistics->phone,
             'address' => $logistics->address,

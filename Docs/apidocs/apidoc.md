@@ -2746,14 +2746,6 @@ FORMAT: 1A
                             "created_at": "2018-07-03 17:50:46",
                             "updated_at": "2018-07-03 17:50:49"
                         },
-                        "logistics_area": {
-                            "id": 3,
-                            "code": "区域代码1",
-                            "name": "区域名称1",
-                            "status": 1,
-                            "created_at": "2018-07-03 17:49:38",
-                            "updated_at": "2018-07-03 17:49:38"
-                        },
                         "expected_days": 10,
                         "phone": "物流电话",
                         "address": "物流地址",
@@ -2790,7 +2782,6 @@ FORMAT: 1A
     + code: (string, required) - 物流代码
     + name: (string, required) - 物流名称
     + report_id: (integer, required) - 报表格式id
-    + logistics_area_id: (integer, required) - 物流区域id
     + expected_days: (integer, required) - 预计天数
     + phone: (string, required) - 物流电话
     + address: (string, required) - 物流地址
@@ -2809,9 +2800,6 @@ FORMAT: 1A
                         "需要添加的id在数据库中未找到或未启用"
                     ],
                     "logistics_area_id": [
-                        "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "freight_type_id": [
                         "需要添加的id在数据库中未找到或未启用"
                     ],
                     "expected_days": [
@@ -2836,14 +2824,6 @@ FORMAT: 1A
                     "status": 1,
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
-                },
-                "logistics_area": {
-                    "id": 3,
-                    "code": "区域代码1",
-                    "name": "区域名称1",
-                    "status": 1,
-                    "created_at": "2018-07-03 17:49:38",
-                    "updated_at": "2018-07-03 17:49:38"
                 },
                 "expected_days": "10",
                 "phone": "物流电话",
@@ -2892,14 +2872,6 @@ FORMAT: 1A
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
                 },
-                "logistics_area": {
-                    "id": 3,
-                    "code": "区域代码1",
-                    "name": "区域名称1",
-                    "status": 1,
-                    "created_at": "2018-07-03 17:49:38",
-                    "updated_at": "2018-07-03 17:49:38"
-                },
                 "expected_days": 10,
                 "phone": "物流电话",
                 "address": "物流地址",
@@ -2937,9 +2909,6 @@ FORMAT: 1A
                     "report_id": [
                         "需要添加的id在数据库中未找到或未启用"
                     ],
-                    "logistics_area_id": [
-                        "需要添加的id在数据库中未找到或未启用"
-                    ],
                     "freight_type_id": [
                         "需要添加的id在数据库中未找到或未启用"
                     ],
@@ -2965,14 +2934,6 @@ FORMAT: 1A
                     "status": 1,
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
-                },
-                "logistics_area": {
-                    "id": 3,
-                    "code": "区域代码1",
-                    "name": "区域名称1",
-                    "status": 1,
-                    "created_at": "2018-07-03 17:49:38",
-                    "updated_at": "2018-07-03 17:49:38"
                 },
                 "expected_days": "10",
                 "phone": "物流电话1",
@@ -4786,6 +4747,268 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 平台类型id组 格式: 1,2,3,4 
+    + status: (integer, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# departments [/api]
+部门资源
+
+## 获取所有部门 [GET /api/departments{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "dept_no": "部门代码",
+                        "name": "部门名称",
+                        "p_dept": 0,
+                        "remark": "备注",
+                        "is_verify": 1,
+                        "status": 1,
+                        "created_at": "2018-07-05 17:37:17",
+                        "updated_at": "2018-07-05 17:37:17"
+                    },
+                    {
+                        "id": 2,
+                        "dept_no": "部门代码1",
+                        "name": "部门名称",
+                        "p_dept": 1,
+                        "remark": "备注",
+                        "is_verify": 1,
+                        "status": 1,
+                        "created_at": "2018-07-05 17:39:24",
+                        "updated_at": "2018-07-05 17:39:24"
+                    },
+                    {
+                        "id": 3,
+                        "dept_no": "部门代码3",
+                        "name": "部门名称3",
+                        "p_dept": 0,
+                        "remark": "备注",
+                        "is_verify": 1,
+                        "status": 1,
+                        "created_at": "2018-07-05 17:42:06",
+                        "updated_at": "2018-07-05 17:42:06"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 新增部门 [POST /api/departments]
+
+
++ Parameters
+    + dept_no: (string, required) - 部门代码
+    + name: (string, required) - 部门名称
+    + p_dept: (integer, required) - 所属主部门
+    + remark: (string, optional) - 备注
+    + is_verify: (integer, optional) - 是否已经验证
+        + Default: 0
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "dept_no": [
+                        "部门代码不能重复"
+                    ],
+                    "p_dept": [
+                        "需要添加的id在数据库中未找到或未启用或未验证"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "dept_no": "部门代码",
+                "name": "部门名称",
+                "p_dept": "0",
+                "remark": "备注",
+                "is_verify": "1",
+                "status": "1",
+                "created_at": "2018-07-05 17:42:06",
+                "updated_at": "2018-07-05 17:42:06",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条部门 [POST /api/departments/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "dept_no": "部门代码",
+                "name": "部门名称",
+                "p_dept": 0,
+                "remark": "备注",
+                "is_verify": 1,
+                "status": 1,
+                "created_at": "2018-07-05 17:37:17",
+                "updated_at": "2018-07-05 17:37:17"
+            }
+
+## 修改部门 [PATCH /api/departments/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "dept_no": [
+                        "部门代码不能重复"
+                    ],
+                    "p_dept": [
+                        "需要添加的id在数据库中未找到或未启用或未验证"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "dept_no": "部门代码",
+                "name": "部门名称",
+                "p_dept": 0,
+                "remark": "备注",
+                "is_verify": 1,
+                "status": 1,
+                "created_at": "2018-07-05 17:37:17",
+                "updated_at": "2018-07-05 17:37:17"
+            }
+
+## 删除部门 [DELETE /api/departments/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组部门 [DELETE /api/departments]
+
+
++ Parameters
+    + ids: (string, required) - 部门id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组部门状态 [PUT /api/departments]
+
+
++ Parameters
+    + ids: (string, required) - 部门id组 格式: 1,2,3,4 
     + status: (integer, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)

@@ -9,4 +9,10 @@ class GoodsCategory extends Model
     protected $fillable = [
         'code', 'name', 'description', 'remark', 'status'
     ];
+
+    public function goods()
+    {
+        return $this->hasMany(Goods::class);
+    }
+
 }

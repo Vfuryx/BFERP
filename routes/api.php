@@ -331,8 +331,71 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('departments', 'DepartmentsController@editStatusByIds')
             ->name('api.departments.editstatusbyids');
 
+        // //产品资源
+        // $api->get('products', 'ProductsController@index')
+        //     ->name('api.products.index');
+        // $api->get('products/{product}', 'ProductsController@show')
+        //     ->name('api.products.show');
+        // $api->post('products', 'ProductsController@store')
+        //     ->name('api.products.store');
+        // $api->patch('products/{product}', 'ProductsController@update')
+        //     ->name('api.products.update');
+        // $api->delete('products/{product}', 'ProductsController@destroy')
+        //     ->name('api.products.destroy');
+        // $api->delete('products', 'ProductsController@destroybyids')
+        //     ->name('api.products.destroybyids');
+        // $api->put('products', 'ProductsController@editStatusByIds')
+        //     ->name('api.products.editstatusbyids');
 
+        // //商品资源
+        // $api->get('goods', 'GoodsController@index')
+        //     ->name('api.goods.index');
+        // $api->get('goods/{goods}', 'GoodsController@show')
+        //     ->name('api.goods.show');
+        // $api->post('goods', 'GoodsController@store')
+        //     ->name('api.goods.store');
+        // $api->patch('goods/{goods}', 'GoodsController@update')
+        //     ->name('api.goods.update');
+        // $api->delete('goods/{goods}', 'GoodsController@destroy')
+        //     ->name('api.goods.destroy');
+        // $api->delete('goods', 'GoodsController@destroybyids')
+        //     ->name('api.goods.destroybyids');
+        // $api->put('goods', 'GoodsController@editStatusByIds')
+        //     ->name('api.goods.editstatusbyids');
 
+        // //产品规格资源
+        // $api->get('productspecs', 'ProductSpecsController@index')
+        //     ->name('api.productspecs.index');
+        // $api->get('productspecs/{productspec}', 'ProductSpecsController@show')
+        //     ->name('api.productspecs.show');
+        // $api->post('productspecs', 'ProductSpecsController@store')
+        //     ->name('api.productspecs.store');
+        // $api->patch('productspecs/{productspec}', 'ProductSpecsController@update')
+        //     ->name('api.productspecs.update');
+        // $api->delete('productspecs/{productspec}', 'ProductSpecsController@destroy')
+        //     ->name('api.productspecs.destroy');
+        // $api->delete('productspecs', 'ProductSpecsController@destroybyids')
+        //     ->name('api.goproductspecsods.destroybyids');
+        // $api->put('productspecs', 'ProductSpecsController@editStatusByIds')
+        //     ->name('api.productspecs.editstatusbyids');
+
+        // //组合资源
+        // $api->get('combinations', 'CombinationsController@index')
+        //     ->name('api.combinations.index');
+        // $api->get('combinations/{combination}', 'CombinationsController@show')
+        //     ->name('api.combinations.show');
+        // $api->post('combinations', 'CombinationsController@store')
+        //     ->name('api.combinations.store');
+        // $api->patch('combinations/{combination}', 'CombinationsController@update')
+        //     ->name('api.combinations.update');
+        // $api->delete('combinations/{combination}', 'CombinationsController@destroy')
+        //     ->name('api.combinations.destroy');
+        // $api->delete('combinations', 'CombinationsController@destroybyids')
+        //     ->name('api.combinations.destroybyids');
+        // $api->put('combinations', 'CombinationsController@editStatusByIds')
+        //     ->name('api.combinations.editstatusbyids');
+
+    
     });
 
     $api->group([

@@ -116,7 +116,7 @@ class DamagedGoodsController extends Controller
      */
     public function store(DamagedGoodsRequest $request)
     {
-        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

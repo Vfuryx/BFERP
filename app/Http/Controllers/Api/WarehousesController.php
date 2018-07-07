@@ -121,7 +121,7 @@ class WarehousesController extends Controller
             $this->tableResetDefault(self::MODEL);
         }
         
-        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

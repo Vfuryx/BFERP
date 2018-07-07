@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class ProductSpec extends Model
+{
+    use SoftDeletes;
+
+    protected $table = 'product_specs';
+
+    /**
+     * 需要被转换成日期的属性。
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
+
+    protected $fillable = [
+        'goods_id', 'spec_code', 'jd_specs_code', 'vips_specs_code',
+        'tb_price', 'cost', 'price', 'highest_price', 'lowest_price',
+        'warehouse_cost', 'assembly_price', 'discount', 'commission',
+        'is_combination', 'package_quantity', 'package_costs',
+        'wooden_frame_costs', 'purchase_freight', 'inventory_warning',
+        'purchase_days_warning', 'available_warning', 'distribution_method_id',
+        'bar_code', 'img_url', 'spec', 'color', 'materials', 'function',
+        'special', 'other', 'length', 'width', 'height', 'volume', 'weight',
+        'remark', 'finished_pro', 'is_stop_pro', 'status'
+    ];
+
+    public function goods()
+    {
+        return $this->belongsTo(Goods::class);
+    }
+
+    public function combination(){
+        return $this->hasMany(Combination::class);
+    }
+
+    public function distributionMethod()
+    {
+        return $this->belongsTo(DistributionMethod::class);
+    }
+
+
+
+}

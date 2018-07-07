@@ -81,7 +81,6 @@ class CityInfoRequest extends FormRequest
     public function messages()
     {
         return [
-
             'logistics_id.required' => '物流id必填',
             'logistics_id.integer' => '物流id必须int类型',
             'logistics_id.exists' => '需要添加的id在数据库中未找到或未启用',

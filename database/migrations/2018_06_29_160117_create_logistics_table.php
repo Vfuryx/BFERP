@@ -18,7 +18,7 @@ class CreateLogisticsTable extends Migration
             $table->string('code')->default('')->comment('物流代码');
             $table->string('name')->default('')->comment('物流名称');
             $table->unsignedInteger('report_id')->comment('报表格式id');
-            $table->unsignedInteger('logistics_area_id')->comment('物流区域id');
+//            $table->unsignedInteger('logistics_area_id')->default(0)->comment('物流区域id');
             $table->tinyInteger('expected_days')->default(0)->comment('预计天数');
             $table->string('phone')->default('')->comment('物流电话');
             $table->string('address')->default('')->comment('物流地址');

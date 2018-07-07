@@ -29,12 +29,12 @@ class LogisticsRequest extends FormRequest
                             $query->where('status',1);
                         }),
                     ],
-                    'logistics_area_id' =>  [
-                        'required','integer',
-                        Rule::exists('logistics_areas','id')->where(function ($query) {
-                            $query->where('status',1);
-                        }),
-                    ],
+//                    'logistics_area_id' =>  [
+//                        'integer',
+//                        Rule::exists('logistics_areas','id')->where(function ($query) {
+//                            $query->where('status',1);
+//                        }),
+//                    ],
                     'expected_days' => 'required|integer',
                     'phone' => 'required|string|max:255',
                     'address' => 'required|string|max:255',
@@ -61,12 +61,12 @@ class LogisticsRequest extends FormRequest
                             $query->where('status',1);
                         }),
                     ],
-                    'logistics_area_id' =>  [
-                        'integer',
-                        Rule::exists('logistics_areas','id')->where(function ($query) {
-                            $query->where('status',1);
-                        }),
-                    ],
+//                    'logistics_area_id' =>  [
+//                        'sometimes', 'integer',
+//                        Rule::exists('logistics_areas','id')->where(function ($query) {
+//                            $query->where('status',1);
+//                        }),
+//                    ],
                     'expected_days' => 'integer',
                     'phone' => 'string|max:255',
                     'address' => 'string|max:255',
@@ -147,7 +147,7 @@ class LogisticsRequest extends FormRequest
             'code' => '物流代码',
             'name' => '物流名称',
             'report_id' => '报表格式id',
-            'logistics_area_id' => '物流区域id',
+//            'logistics_area_id' => '物流区域id',
             'expected_days' => '预计天数',
             'phone' => '物流电话',
             'address' => '物流地址',

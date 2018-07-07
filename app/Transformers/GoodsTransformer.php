@@ -1,0 +1,34 @@
+<?php
+
+namespace App\Transformers;
+
+use App\Models\Goods;
+use League\Fractal\TransformerAbstract;
+
+class GoodsTransformer extends TransformerAbstract
+{
+    public function transform(Goods $goods)
+    {
+        return [
+            'id' => $goods->id,
+            'goods_sn' => $goods->goods_sn,
+            'jd_sn' => $goods->jd_sn,
+            'vips_sn' => $goods->vips_sn,
+            'factory_model' => $goods->factory_model,
+            'short_name' => $goods->short_name,
+            'nick' => $goods->nick,
+            'supplier' => $goods->supplier,
+            'category' => $goods->goodsCategory,
+            'remark' => $goods->remark,
+            'title' => $goods->title,
+            'img' => $goods->img,
+            'url' => $goods->url,
+            'status' => $goods->status,
+            'nis_stop_proick' => $goods->is_stop_pro,
+            'created_at' => $goods->created_at
+                                    ->toDateTimeString(),
+            'updated_at' => $goods->updated_at
+                                    ->toDateTimeString()
+        ];
+    }
+}

@@ -36,15 +36,15 @@ trait CURDTrait
     /**
      * 插入数据库
      *
-     * @param [type] $request       请求
+     * @param [type] $date          数据
      * @param [type] $model         模型
      * @param [type] $transformer   转换器
      * @return array
      */
-    public function traitStore($request, $model, $transformer){
+    public function traitStore($date, $model, $transformer){
 
         $ref = new $model();
-        $ref->fill($request->all());
+        $ref->fill($date);
         $ref->save();
         return $this->response
             ->item($ref, $transformer)

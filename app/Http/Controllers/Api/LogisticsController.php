@@ -41,14 +41,6 @@ class LogisticsController extends Controller
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
      *          },
-     *          "logistics_area": {
-     *              "id": 3,
-     *              "code": "区域代码1",
-     *              "name": "区域名称1",
-     *              "status": 1,
-     *              "created_at": "2018-07-03 17:49:38",
-     *              "updated_at": "2018-07-03 17:49:38"
-     *          },
      *          "expected_days": 10,
      *          "phone": "物流电话",
      *          "address": "物流地址",
@@ -92,7 +84,6 @@ class LogisticsController extends Controller
      *      @Parameter("code", description="物流代码", required=true),
      *      @Parameter("name", description="物流名称", required=true),
      *      @Parameter("report_id",type="integer", description="报表格式id", required=true),
-     *      @Parameter("logistics_area_id",type="integer", description="物流区域id", required=true),
      *      @Parameter("expected_days",type="integer", description="预计天数", required=true),
      *      @Parameter("phone", description="物流电话", required=true),
      *      @Parameter("address", description="物流地址", required=true),
@@ -108,9 +99,6 @@ class LogisticsController extends Controller
      *                  "需要添加的id在数据库中未找到或未启用"
      *              },
      *              "logistics_area_id": {
-     *                  "需要添加的id在数据库中未找到或未启用"
-     *              },
-     *              "freight_type_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
      *              },
      *              "expected_days": {
@@ -131,14 +119,6 @@ class LogisticsController extends Controller
      *              "status": 1,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
-     *          },
-     *          "logistics_area": {
-     *              "id": 3,
-     *              "code": "区域代码1",
-     *              "name": "区域名称1",
-     *              "status": 1,
-     *              "created_at": "2018-07-03 17:49:38",
-     *              "updated_at": "2018-07-03 17:49:38"
      *          },
      *          "expected_days": "10",
      *          "phone": "物流电话",
@@ -163,7 +143,7 @@ class LogisticsController extends Controller
      */
     public function store(LogisticsRequest $request)
     {
-        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
     }
 
     /**
@@ -188,14 +168,6 @@ class LogisticsController extends Controller
      *              "status": 1,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
-     *          },
-     *          "logistics_area": {
-     *              "id": 3,
-     *              "code": "区域代码1",
-     *              "name": "区域名称1",
-     *              "status": 1,
-     *              "created_at": "2018-07-03 17:49:38",
-     *              "updated_at": "2018-07-03 17:49:38"
      *          },
      *          "expected_days": 10,
      *          "phone": "物流电话",
@@ -236,9 +208,6 @@ class LogisticsController extends Controller
      *              "report_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
      *               },
-     *              "logistics_area_id": {
-     *                  "需要添加的id在数据库中未找到或未启用"
-     *               },
      *              "freight_type_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
      *               },
@@ -260,14 +229,6 @@ class LogisticsController extends Controller
      *              "status": 1,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
-     *          },
-     *          "logistics_area": {
-     *              "id": 3,
-     *              "code": "区域代码1",
-     *              "name": "区域名称1",
-     *              "status": 1,
-     *              "created_at": "2018-07-03 17:49:38",
-     *              "updated_at": "2018-07-03 17:49:38"
      *          },
      *          "expected_days": "10",
      *          "phone": "物流电话1",

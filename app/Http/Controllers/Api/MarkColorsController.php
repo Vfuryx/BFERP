@@ -109,7 +109,7 @@ class MarkColorsController extends Controller
      */
     public function store(MarkColorRequest $request)
     {  
-        return $this->traitStore($request, self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
     }
 
     /**
