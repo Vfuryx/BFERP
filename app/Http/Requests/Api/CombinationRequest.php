@@ -28,12 +28,12 @@ class CombinationRequest extends FormRequest
                         }),
                     ],
                     'com_pro_specs_id' => [
-                        'required','integer',
+                        'sometimes','required','integer',
                         Rule::exists('product_specs','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'count' => 'required|integer',
+                    'count' => 'sometimes|required|integer',
                     'status' => 'integer'
                 ];
                 break;
@@ -52,7 +52,8 @@ class CombinationRequest extends FormRequest
                         }),
                     ],
                     'count' => 'integer',
-                    'status' => 'integer'
+                    'status' => 'integer',
+
                 ];
                 break;
             case 'DELETE':
@@ -81,6 +82,7 @@ class CombinationRequest extends FormRequest
             'com_pro_specs_id.integer' => '组合产品规格id必须int类型',
             'com_pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'count.required' => '组合件数必填',
             'count.integer' => '组合件数必须int类型',
 
             'id.exists' => '需要更改的数据id在数据库中未找到',

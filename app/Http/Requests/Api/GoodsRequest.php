@@ -44,7 +44,8 @@ class GoodsRequest extends FormRequest
                     'img' => 'required|string|max:255',
                     'url' => 'required|url|max:255',
                     'status' => 'integer',
-                    'is_stop_pro' => 'integer'
+                    'is_stop_pro' => 'integer',
+                    'productspecs' => 'sometimes|required|json'
                 ];
                 break;
             case 'PATCH':
@@ -72,7 +73,8 @@ class GoodsRequest extends FormRequest
                     'img' => 'string|max:255',
                     'url' => 'url|max:255',
                     'status' => 'integer',
-                    'is_stop_pro' => 'integer'
+                    'is_stop_pro' => 'integer',
+                    'productspecs' => 'sometimes|json'
                 ];
                 break;
             case 'DELETE':
@@ -147,7 +149,9 @@ class GoodsRequest extends FormRequest
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型',
             'status.integer' => '状态必须int类型',
-            'status.required' => '状态必填'
+            'status.required' => '状态必填',
+
+            'productspecs.json' => '产品规格必须是json格式',
         ];
     }
 
@@ -167,7 +171,8 @@ class GoodsRequest extends FormRequest
             'img' => '商品图片',
             'url' => '商品网址',
             'status' => '状态：0=停用，1=启用',
-            'is_stop_pro' => '是否停产 默认 0 = 不停产  1 = 停产'
+            'is_stop_pro' => '是否停产 默认 0 = 不停产  1 = 停产',
+            'productspecs' => '产品规格json格式'
         ];
     }
 }

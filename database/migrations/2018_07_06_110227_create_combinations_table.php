@@ -20,7 +20,6 @@ class CreateCombinationsTable extends Migration
             $table->integer('count')->default(0)->comment('组合件数');
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

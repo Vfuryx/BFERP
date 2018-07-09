@@ -269,7 +269,7 @@ class CombinationsController extends Controller
      *          "count": 1,
      *          "status": 1,
      *          "created_at": "2018-07-06 16:59:20",
-     *          "updated_at": "2018-07-06 16:59:20"
+     *          "updated_at": "2018-07-06 16:59:20",
      *          "meta": {
      *              "status_code": "201"
      *          }

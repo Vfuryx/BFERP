@@ -3,20 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Goods extends Model
 {
-    use SoftDeletes;
-
     protected $table = 'goods';
-
-    /**
-     * 需要被转换成日期的属性。
-     *
-     * @var array
-     */
-    protected $dates = ['deleted_at'];
 
     protected $fillable = [
         'goods_sn', 'jd_sn', 'vips_sn', 'factory_model', 'short_name',
@@ -26,7 +16,7 @@ class Goods extends Model
 
     public function productSpecs()
     {
-        return $this->hasMany(ProductSpec::calss);
+        return $this->hasMany(ProductSpec::class,'goods_id');
     }
 
     public function supplier()

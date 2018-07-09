@@ -95,7 +95,7 @@ class ProductSpecsController extends Controller
      *              "is_stop_pro": 0,
      *              "status": 1,
      *              "created_at": "2018-07-07 10:41:02",
-     *              "updated_at": "2018-07-07 10:51:12"
+     *              "updated_at": "2018-07-07 10:51:12",
      *           }
      *       },
      *       "meta": {
@@ -269,7 +269,7 @@ class ProductSpecsController extends Controller
      *          "is_stop_pro": 0,
      *          "status": 1,
      *          "created_at": "2018-07-07 10:41:02",
-     *          "updated_at": "2018-07-07 10:51:12"
+     *          "updated_at": "2018-07-07 10:51:12",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -461,6 +461,7 @@ class ProductSpecsController extends Controller
      */
     public function destroy(ProductSpec $productspec)
     {
+
         return $this->traitDestroy($productspec);
     }
 

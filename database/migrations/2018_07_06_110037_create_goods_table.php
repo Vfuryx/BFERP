@@ -31,7 +31,6 @@ class CreateGoodsTable extends Migration
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->tinyInteger('is_stop_pro')->default(0)->comment('是否停产 默认 0 = 不停产  1 = 停产');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
