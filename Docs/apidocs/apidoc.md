@@ -109,7 +109,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条标记颜色 [POST /api/markcolors/:id]
+## 显示单条标记颜色 [GET /api/markcolors/:id]
 
 
 + Response 404 (application/json)
@@ -338,7 +338,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条记账类型 [POST /api/acctypes/:id]
+## 显示单条记账类型 [GET /api/acctypes/:id]
 
 
 + Response 404 (application/json)
@@ -590,7 +590,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条费用类型 [POST /api/feetypes/:id]
+## 显示单条费用类型 [GET /api/feetypes/:id]
 
 
 + Response 404 (application/json)
@@ -821,7 +821,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条配送方式 [POST /api/distmets/:id]
+## 显示单条配送方式 [GET /api/distmets/:id]
 
 
 + Response 404 (application/json)
@@ -1031,7 +1031,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条费用类别 [POST /api/feecates/:id]
+## 显示单条费用类别 [GET /api/feecates/:id]
 
 
 + Response 404 (application/json)
@@ -1259,7 +1259,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条运费类型 [POST /api/freighttypes/:id]
+## 显示单条运费类型 [GET /api/freighttypes/:id]
 
 
 + Response 404 (application/json)
@@ -1496,7 +1496,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条商品类别 [POST /api/goodscates/:id]
+## 显示单条商品类别 [GET /api/goodscates/:id]
 
 
 + Response 404 (application/json)
@@ -1725,7 +1725,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条入库类型 [POST /api/storagetypes/:id]
+## 显示单条入库类型 [GET /api/storagetypes/:id]
 
 
 + Response 404 (application/json)
@@ -2033,7 +2033,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条城市信息 [POST /api/cityinfos/:id]
+## 显示单条城市信息 [GET /api/cityinfos/:id]
 
 
 + Response 404 (application/json)
@@ -2332,7 +2332,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条损坏商品 [POST /api/damagedgoods/:id]
+## 显示单条损坏商品 [GET /api/damagedgoods/:id]
 
 
 + Response 404 (application/json)
@@ -2570,7 +2570,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条物流区域 [POST /api/logisticsareas/:id]
+## 显示单条物流区域 [GET /api/logisticsareas/:id]
 
 
 + Response 404 (application/json)
@@ -2845,7 +2845,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条物流 [POST /api/logistics/:id]
+## 显示单条物流 [GET /api/logistics/:id]
 
 
 + Response 404 (application/json)
@@ -3139,7 +3139,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条仓库 [POST /api/warehouses/:id]
+## 显示单条仓库 [GET /api/warehouses/:id]
 
 
 + Response 404 (application/json)
@@ -3420,7 +3420,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条供应商 [POST /api/suppliers/:id]
+## 显示单条供应商 [GET /api/suppliers/:id]
 
 
 + Response 404 (application/json)
@@ -3751,7 +3751,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条店铺 [POST /api/shops/:id]
+## 显示单条店铺 [GET /api/shops/:id]
 
 
 + Response 404 (application/json)
@@ -4116,7 +4116,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条系列 [POST /api/series/:id]
+## 显示单条系列 [GET /api/series/:id]
 
 
 + Response 404 (application/json)
@@ -4407,7 +4407,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条打印报表 [POST /api/printreports/:id]
+## 显示单条打印报表 [GET /api/printreports/:id]
 
 
 + Response 404 (application/json)
@@ -4633,7 +4633,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条平台类型 [POST /api/platforms/:id]
+## 显示单条平台类型 [GET /api/platforms/:id]
 
 
 + Response 404 (application/json)
@@ -4887,7 +4887,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条部门 [POST /api/departments/:id]
+## 显示单条部门 [GET /api/departments/:id]
 
 
 + Response 404 (application/json)
@@ -5747,7 +5747,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条商品 [POST /api/goods/:id]
+## 显示单条商品 [GET /api/goods/:id]
 
 
 + Response 404 (application/json)
@@ -6578,7 +6578,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条产品规格 [POST /api/productspecs/:id]
+## 显示单条产品规格 [GET /api/productspecs/:id]
 
 
 + Response 404 (application/json)
@@ -7090,7 +7090,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条组合 [POST /api/combinations/:id]
+## 显示单条组合 [GET /api/combinations/:id]
 
 
 + Response 404 (application/json)

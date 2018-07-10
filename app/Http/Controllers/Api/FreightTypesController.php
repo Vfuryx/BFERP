@@ -111,7 +111,7 @@ class FreightTypesController extends Controller
     /**
      * 显示单条运费类型 
      *  
-     * @Post("/freighttypes/:id") 
+     * @Get("/freighttypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

@@ -91,7 +91,7 @@ class FeeCategoriesController extends Controller
     /**
      * 显示单条费用类别
      *
-     * @Post("/feecates/:id")
+     * @Get("/feecates/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

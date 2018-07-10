@@ -115,7 +115,7 @@ class MarkColorsController extends Controller
     /**
      * 显示单条标记颜色 
      *  
-     * @Post("/markcolors/:id") 
+     * @Get("/markcolors/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

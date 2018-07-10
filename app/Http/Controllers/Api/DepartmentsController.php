@@ -130,7 +130,7 @@ class DepartmentsController extends Controller
     /**
      * 显示单条部门
      *
-     * @Post("/departments/:id")
+     * @Get("/departments/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

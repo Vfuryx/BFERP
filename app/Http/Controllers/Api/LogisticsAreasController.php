@@ -109,7 +109,7 @@ class LogisticsAreasController extends Controller
     /**
      * 显示单条物流区域
      *
-     * @Post("/logisticsareas/:id")
+     * @Get("/logisticsareas/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

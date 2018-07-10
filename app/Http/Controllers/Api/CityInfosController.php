@@ -188,7 +188,7 @@ class CityInfosController extends Controller
     /**
      * 显示单条城市信息
      *
-     * @Post("/cityinfos/:id")
+     * @Get("/cityinfos/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

@@ -284,7 +284,7 @@ class ProductSpecsController extends Controller
     /**
      * 显示单条产品规格
      *
-     * @Post("/productspecs/:id")
+     * @Get("/productspecs/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

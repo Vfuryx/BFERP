@@ -145,7 +145,7 @@ class SuppliersController extends Controller
     /**
      * 显示单条供应商
      *
-     * @Post("/suppliers/:id")
+     * @Get("/suppliers/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

@@ -103,7 +103,7 @@ class DistributionMethodsController extends Controller
     /**
      * 显示单条配送方式 
      *  
-     * @Post("/distmets/:id") 
+     * @Get("/distmets/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

@@ -285,7 +285,7 @@ class CombinationsController extends Controller
     /**
      * 显示单条组合
      *
-     * @Post("/combinations/:id")
+     * @Get("/combinations/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

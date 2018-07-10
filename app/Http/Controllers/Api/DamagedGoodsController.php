@@ -122,7 +122,7 @@ class DamagedGoodsController extends Controller
     /**
      * 显示单条损坏商品
      *
-     * @Post("/damagedgoods/:id")
+     * @Get("/damagedgoods/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

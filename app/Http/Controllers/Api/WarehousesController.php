@@ -127,7 +127,7 @@ class WarehousesController extends Controller
     /**
      * 显示单条仓库
      *
-     * @Post("/warehouses/:id")
+     * @Get("/warehouses/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

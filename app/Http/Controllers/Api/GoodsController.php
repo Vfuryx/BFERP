@@ -769,7 +769,7 @@ class GoodsController extends Controller
     /**
      * 显示单条商品
      *
-     * @Post("/goods/:id")
+     * @Get("/goods/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

@@ -149,7 +149,7 @@ class LogisticsController extends Controller
     /**
      * 显示单条物流
      *
-     * @Post("/logistics/:id")
+     * @Get("/logistics/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

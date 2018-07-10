@@ -116,7 +116,7 @@ class PrintReportsController extends Controller
     /**
      * 显示单条打印报表
      *
-     * @Post("/printreports/:id")
+     * @Get("/printreports/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

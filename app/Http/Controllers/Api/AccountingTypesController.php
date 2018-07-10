@@ -104,7 +104,7 @@ class AccountingTypesController extends Controller
     /**
      * 显示单条记账类型
      *
-     * @Post("/acctypes/:id")
+     * @Get("/acctypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

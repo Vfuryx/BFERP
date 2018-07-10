@@ -178,7 +178,7 @@ class SeriesController extends Controller
     /**
      * 显示单条系列
      *
-     * @Post("/series/:id")
+     * @Get("/series/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

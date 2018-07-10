@@ -95,7 +95,7 @@ class PlatformsController extends Controller
     /**
      * 显示单条平台类型
      *
-     * @Post("/platforms/:id")
+     * @Get("/platforms/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

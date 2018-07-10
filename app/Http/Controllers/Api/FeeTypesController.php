@@ -135,7 +135,7 @@ class FeeTypesController extends Controller
     /**
      * 显示单条费用类型
      *
-     * @Post("/feetypes/:id")
+     * @Get("/feetypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

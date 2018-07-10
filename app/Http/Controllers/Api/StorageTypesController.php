@@ -104,7 +104,7 @@ class StorageTypesController extends Controller
     /**
      * 显示单条入库类型 
      *  
-     * @Post("/storagetypes/:id") 
+     * @Get("/storagetypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

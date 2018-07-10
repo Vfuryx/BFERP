@@ -174,7 +174,7 @@ class ShopsController extends Controller
     /**
      * 显示单条店铺
      *
-     * @Post("/shops/:id")
+     * @Get("/shops/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={

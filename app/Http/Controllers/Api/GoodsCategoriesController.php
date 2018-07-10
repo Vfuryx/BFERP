@@ -114,7 +114,7 @@ class GoodsCategoriesController extends Controller
     /**
      * 显示单条商品类别 
      *  
-     * @Post("/goodscates/:id") 
+     * @Get("/goodscates/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
