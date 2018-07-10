@@ -4,33 +4,36 @@
             <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="100px" :class="{'half-form':halfForm}">
                 <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
                     <span v-if="item.type=='text'">
-                       <el-input v-model="ruleForm[item.prop]" :placehold="item.holder"></el-input>
+                       <el-input v-model="ruleForm[item.prop]" :placehold="item.holder" :disabled="item.beAble"></el-input>
+                    </span>
+                    <span v-if="item.type=='tel'">
+                       <el-input type="tel" v-model="ruleForm[item.prop]" :placehold="item.holder" :disabled="item.beAble"></el-input>
+                    </span>
+                    <span v-if="item.type=='number'">
+                       <el-input type="number" v-model="ruleForm[item.prop]" :placehold="item.holder" :disabled="item.beAble"></el-input>
                     </span>
                     <span v-else-if="item.type=='pickColor'">
                        <el-color-picker v-model="ruleForm[item.prop]"></el-color-picker>
                     </span>
                     <span v-else-if="item.type=='select_stu'">
-                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder">
+                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder" :disabled="item.beAble">
                         <el-option label="停用" value="0"></el-option>
                         <el-option label="启用" value="1"></el-option>
                     </el-select>
                     </span>
                     <span v-else-if="item.type=='select_def'">
-                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder">
+                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder" :disabled="item.beAble">
                         <el-option label="否" value="0"></el-option>
                         <el-option label="是" value="1"></el-option>
                     </el-select>
                     </span>
                     <span v-else-if="item.type=='select'">
-                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder">
+                        <el-select  v-model="ruleForm[item.prop]" :placeholder="item.holder" :disabled="item.beAble">
                         <el-option v-for="list in selects" :key="list.id" :label="list.name" :value="list.id"></el-option>
                     </el-select>
                     </span>
                     <span v-else-if="item.type=='textarea'">
                          <el-input type="textarea" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
-                    </span>
-                    <span v-else-if="item.type=='tel'">
-                         <el-input type="tel" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
                     </span>
                     <span v-else-if="item.type=='new_casca'">
                          <el-cascader
@@ -80,7 +83,6 @@
           },
         ],
         showAdd: false
-
       }
     },
     watch:{
@@ -107,7 +109,8 @@
         this.$emit('CB-dialog',false)
       }
     },
-    mounted(){}
+    mounted(){
+    }
   }
 </script>
 <style>

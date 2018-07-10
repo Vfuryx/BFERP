@@ -6,9 +6,9 @@ webpackJsonp([109],{
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(748)
+var __vue_script__ = __webpack_require__(746)
 /* template */
-var __vue_template__ = __webpack_require__(749)
+var __vue_template__ = __webpack_require__(747)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 748:
+/***/ 746:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -201,449 +201,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      //操作
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
@@ -651,14 +212,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         cnt: '删除',
         icon: 'bf-del',
-        ent: this.doDelMore
+        ent: this.delMore
       }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.refresh
       }],
-      //表格
-      tableKey: [[{
+      getsInfo: [],
+      tableHead: [{
         label: '名称',
         width: '250',
         prop: "name",
@@ -677,19 +238,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         holder: '状态',
         type: 'select_stu',
         doSort: true
-      }]],
-      url: ['/freighttypes'],
-      //新增
-      title: ['新增运费类型'],
-      ruleForm: [{
+      }],
+      loading: true,
+      currentIndex: '',
+      url: '/freighttypes',
+      showMaskArr: false,
+      title: '新增运费类型',
+      ruleForm: {
         name: '',
         is_default: '0',
         status: '1'
-      }],
-      rules: [{
+      },
+      rules: {
         name: [{ required: true, message: '请输入运费类型', trigger: 'blur' }]
-      }],
-      addArr: [[{
+      },
+      addArr: [{
         label: '运费类型',
         prop: 'name',
         holder: '请输入运费类型',
@@ -704,35 +267,233 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: 'status',
         holder: '请选择状态',
         type: 'select_stu'
-      }]]
+      }],
+      refArr: ['ruleForm'],
+      showDel: false,
+      delId: '',
+      inputChange: false,
+      multipleSelection: [],
+      delArr: [],
+      pagination: {
+        current_page: 1,
+        per_page: 0,
+        page_total: 0
+      }
     };
   },
 
   methods: {
-    //新增
+    test: function test() {},
     addNew: function addNew() {
-      this.$store.dispatch('setShowAdd', true);
+      this.ruleForm.name = '';
+      this.showMaskArr = true;
     },
-    edit: function edit(row) {
+    CB_dialog: function CB_dialog(val) {
+      this.showMaskArr = val;
+    },
+    submitForm: function submitForm() {
+      var _this = this;
+
+      this.$post(this.url, this.ruleForm).then(function () {
+        _this.$message({
+          message: '添加成功',
+          type: 'success'
+        });
+        _this.showMaskArr = false;
+        _this.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+
+    /*处理批量删除*/
+    handleSelectionChange: function handleSelectionChange(val) {
+      this.multipleSelection = val;
+      var del = [];
+      this.multipleSelection.forEach(function (selectedItem) {
+        del.push(selectedItem.id);
+      });
+      this.delArr = del.join(',');
+    },
+    delMore: function delMore() {
+      var _this2 = this;
+
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
+        });
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this2.$del(_this2.url, { ids: _this2.delArr }).then(function () {
+            _this2.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this2.refresh();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this2.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this2.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+
+    /*修改保存*/
+    edit: function edit(index) {
+      this.currentIndex = 'index' + index;
+    },
+    editCancel: function editCancel() {
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+      this.currentIndex = '';
+    },
+    editSave: function editSave(row) {
+      var _this3 = this;
+
       var obj = {
         id: row.id,
         name: row.name,
         is_default: row.is_default,
         status: row.status
       };
-      this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url[0] + "/");
-      this.$store.dispatch('doEdit', obj);
+      if (this.inputChange) {
+        this.$patch(this.url + '/' + row.id, obj).then(function () {
+          _this3.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this3.getInfo(_this3.url);
+          _this3.currentIndex = '';
+          _this3.inputChange = false;
+        }, function (err) {
+          if (err.response) {
+            var arr = err.response.data.errors;
+            var arr1 = [];
+            for (var i in arr) {
+              arr1.push(arr[i]);
+            }
+            var str = arr1.join(',');
+            _this3.$message.error({
+              message: str
+            });
+          }
+        });
+      } else {
+        this.$message({
+          message: '数据未改动',
+          type: 'info'
+        });
+      }
     },
-    doDelMore: function doDelMore() {
-      this.$refs.tabs.$emit('delMore');
+    handleEdit: function handleEdit() {
+      this.inputChange = true;
+    },
+    getInfo: function getInfo(url) {
+      var _this4 = this;
+
+      this.showPage = true;
+      this.$fetch(url).then(function (res) {
+        _this4.getsInfo = res.data;
+        _this4.$store.dispatch('setFreights', res.data);
+        _this4.loading = false;
+        var pg = res.meta.pagination;
+        _this4.$store.dispatch('currentPage', pg.current_page);
+        _this4.$store.commit('PER_PAGE', pg.per_page);
+        _this4.$store.commit('PAGE_TOTAL', pg.total);
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this4.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    del: function del(row, e) {
+      this.showDel = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    cancelD: function cancelD() {
+      this.showDel = false;
+      this.$message({
+        message: '取消删除',
+        type: 'info'
+      });
+    },
+    confirmD: function confirmD(id) {
+      var _this5 = this;
+
+      this.$del(this.url + '/' + id).then(function () {
+        _this5.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this5.showDel = false;
+        _this5.refresh();
+      }, function (err) {
+        if (err.response) {
+          _this5.showDel = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this5.$message.error({
+            message: str
+          });
+        }
+      });
     },
     refresh: function refresh() {
-      this.$store.dispatch('refresh');
+      var _this6 = this;
+
+      this.loading = true;
+      this.getInfo(this.url);
+      setTimeout(function () {
+        _this6.loading = false;
+      }, 2000);
     }
   },
   mounted: function mounted() {
-    this.$store.dispatch('setTabs', false);
+    this.getInfo(this.url);
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -743,7 +504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 749:
+/***/ 747:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -753,18 +514,84 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("v-tabs", {
-        ref: "tabs",
+      _c("light-table", {
         attrs: {
-          "table-key": _vm.tableKey,
-          url: _vm.url,
+          listData: _vm.getsInfo,
+          tableHead: _vm.tableHead,
+          loading: _vm.loading,
+          currentIndex: _vm.currentIndex
+        },
+        on: {
+          handleSelect: _vm.handleSelectionChange,
+          editSave: _vm.editSave,
+          handleEdit: _vm.handleEdit,
+          del: _vm.del,
+          edit: _vm.edit,
+          editCancel: _vm.editCancel
+        }
+      }),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.showMaskArr,
           title: _vm.title,
           "rule-form": _vm.ruleForm,
           rules: _vm.rules,
-          "add-arr": _vm.addArr
+          "add-arr": _vm.addArr,
+          url: _vm.url,
+          "new-ref": _vm.refArr[0]
         },
-        on: { edit: _vm.edit }
-      })
+        on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c(
+        "el-popover",
+        {
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.showDel,
+            callback: function($$v) {
+              _vm.showDel = $$v
+            },
+            expression: "showDel"
+          }
+        },
+        [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticStyle: { "text-align": "right", margin: "0" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD(_vm.delId)
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("Pagination", { attrs: { "page-url": _vm.url } })
     ],
     1
   )

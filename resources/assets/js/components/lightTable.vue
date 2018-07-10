@@ -149,38 +149,43 @@
                     :checked="checkboxInit" @change="toggleChecked">
             </el-table-column>
 
-            <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
+            <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" width="item.width"
+                             :key="index" :sortable="item.doSort" :prop="item.prop">
                 <template slot-scope="scope">
-                        <span v-if="currentIndex =='index'+scope.$index">
-                            <span v-if="item.type=='color'">
+                    <span v-if="currentIndex =='index'+scope.$index">
+                        <span v-if="item.type=='color'">
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit"
                                                   size="mini"></el-color-picker>
                             </span>
-                            <span v-else-if="item.type == 'select_stu'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder"
-                                            @change="handleEdit">
+                        <span v-else-if="item.type=='tel'">
+                               <el-input size="small" type="tel" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                        </span>
+                         <span v-else-if="item.type=='number'">
+                               <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                        </span>
+                        <span v-else-if="item.type == 'select_stu'">
+                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble">
                                      <el-option label="0-停用" value="0"></el-option>
                                      <el-option label="1-启用" value="1"></el-option>
                                  </el-select>
                             </span>
-                            <span v-else-if="item.type == 'select_def'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder"
-                                            @change="handleEdit">
+                        <span v-else-if="item.type == 'select_def'">
+                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble">
                                      <el-option label="0-否" value="0"></el-option>
                                      <el-option label="1-是" value="1"></el-option>
                                  </el-select>
                             </span>
-                             <span v-else-if="item.type == 'textarea'">
-                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
-                                            :placeholder="item.holder" @change="handleEdit"></el-input>
-                            </span>
-                             <span v-else-if="item.type == 'select'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit">
-                                     <el-option v-for="list in selects" :key="list.id" :label="list.name" value="list.id"></el-option>
-                                 </el-select>
-                            </span>
-                            <span v-else>
-                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                        <span v-else-if="item.type == 'textarea'">
+                              <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
+                                        :placeholder="item.holder" @change="handleEdit"></el-input>
+                        </span>
+                        <span v-else-if="item.type == 'select'">
+                             <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble" v-for="(each,index) in selects" :key="index">
+                                 <el-option v-for="list in each" :key="list.id" :label="list.name" value="list.id"></el-option>
+                             </el-select>
+                        </span>
+                        <span v-else>
+                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
                      </span>
                     <span v-else>
@@ -223,15 +228,15 @@
 </template>
 <script>
   export default {
-    props: ['loading','tableHead','listData','currentIndex','selects'],
+    props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects'],
     data() {
       return {
         checkboxInit: false,
         tabData: this.listData
       }
     },
-    watch:{
-      listData:function(newValue){
+    watch: {
+      listData: function (newValue) {
         this.tabData = newValue;
       }
     },
@@ -240,36 +245,38 @@
         get: function () {
           return this.$store.state.LightTable.newArr
         },
-        set: function () {}
+        set: function () {
+        }
       }
     },
-    methods:{
-      toggleChecked(){
+    methods: {
+      toggleChecked() {
         this.checkboxInit = !this.checkboxInit;
       },
       //批量删除
       handleSelectionChange(val) {
-        this.$emit('handleSelect',val);
+        this.$emit('handleSelect', val);
       },
-      edit(index){
-        this.$emit('edit',index);
+      edit(index) {
+        this.$emit('edit', index);
       },
-      editCancel(){
+      editCancel() {
         this.$emit('editCancel');
       },
       del(row, e) {
-        this.$emit('del',row,e);
+        this.$emit('del', row, e);
       },
-      editSave(row){
-        this.$emit('editSave',row);
+      editSave(row) {
+        this.$emit('editSave', row);
       },
-      handleEdit(){
+      handleEdit() {
         this.$emit('handleEdit');
       },
-      dbClick(row){
-        this.$emit('dbClick',row);
+      dbClick(row) {
+        this.$emit('dbClick', row);
       }
     },
-    mounted(){}
+    mounted() {
+    }
   }
 </script>

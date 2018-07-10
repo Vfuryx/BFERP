@@ -65,11 +65,9 @@
         <ul>
             <li v-for="(error,index) in errorResults" :key="index">第{{error.rowIdx + 1}}行，错误：{{error.column}},{{error.value}},{{error.errorInfo}}</li>
         </ul>
-        <!--</p>-->
-        <!--</p>-->
-        <!--</p>-->
     </el-dialog>
-
+        <h2>{{this.$store.state.SonData.reports}}</h2>
+        <h2>{{this.$store.state.SonData.freights}}</h2>
     </div>
 </template>
 <script>

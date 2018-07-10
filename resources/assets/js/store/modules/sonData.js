@@ -4,6 +4,9 @@ const sonData = {
     platforms:[],
     series:[],
     suppliers:[],
+    reports:[],
+    freights:[],
+
   },
   mutations:{
     SET_WAREHOUSE: (state, val) => {
@@ -17,6 +20,12 @@ const sonData = {
     },
     SET_SUPPLIERS: (state, val) => {
       state.suppliers = val;
+    },
+    SET_REPORTS: (state, val) => {
+      state.reports = val;
+    },
+    SET_FREIGHTS: (state, val) => {
+      state.freights = val;
     },
 
   },
@@ -32,6 +41,12 @@ const sonData = {
     },
     setSuppliers({commit},val) {
       commit('SET_SUPPLIERS',val);
+    },
+    setReports({commit},val) {
+      commit('SET_REPORTS',val);
+    },
+    setFreights({commit},val) {
+      commit('SET_FREIGHTS',val);
     },
 
 
