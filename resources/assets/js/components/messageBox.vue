@@ -25,7 +25,7 @@
                 <button type="button" class="el-button el-button--default el-button--small" v-show="isShowCancelBtn" @click="cancel">
                     <span>{{ cancelBtnText }}</span>
                 </button>
-                <button type="button" class="el-button el-button--default el-button--small el-button--primary" v-show="isShowConfimBtn" @click="confirm">
+                <button type="button" class="el-button el-button--default el-button--small el-button--primary" v-show="isShowConfirmBtn" @click="confirm">
                     <span>{{ confirmBtnText }}</span>
                 </button>
             </div>
@@ -50,7 +50,7 @@
         type: Boolean,
         default: true
       },
-      isShowConfimBtn: {
+      isShowConfirmBtn: {
         type: Boolean,
         default: true
       },

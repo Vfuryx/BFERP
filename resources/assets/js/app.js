@@ -63,29 +63,51 @@ Vue.prototype.$patch=patch
 Vue.prototype.$put=put
 Vue.prototype.$del=del
 
-//组件messageBox
+//
 import MessageBox from './api/messageBox.js'
 Vue.use(MessageBox);
 
-//组件delMask
+//单条删除
 import DelMask from './components/delMask.vue'
 Vue.component('DelMask',DelMask);
 
-//组件messageBox
+//批量删除
 import MsgBox from './components/MessageBox.vue'
 Vue.component('MessageBox',MsgBox);
 
-//组件table
+/*
+* table组件
+* 不完整版，未整合添加面板
+* 待整合删除*/
 import MyTable from './components/myTable.vue'
 Vue.component('MyTable',MyTable);
 
-//组件addMask
+/*可以区分tabs卡的table完整组件*/
+import VTabs from './components/vTabs.vue'
+Vue.component('VTabs',VTabs);
+
+//完全调用的添加面板
 import AddMask from './components/addMask.vue'
 Vue.component('AddMask',AddMask);
 
-//组件addMask
+//分页
 import Pagination from './components/pagination.vue'
 Vue.component('Pagination',Pagination);
+
+//完全调用的添加面板
+import LightTable from './components/lightTable.vue'
+Vue.component('LightTable',LightTable);
+
+/*
+* 从VTabs分裂出的table组件
+* 待整合删除
+* */
+import VTable from './components/vTable.vue'
+Vue.component('VTable',VTable);
+
+//组件可自定义添加事件的添加面板
+import AddNew from './components/addNew.vue'
+Vue.component('AddNew',AddNew);
 
 const app = new Vue({
     el: '#app',

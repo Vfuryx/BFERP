@@ -1,14 +1,14 @@
 webpackJsonp([247],{
 
-/***/ 496:
+/***/ 519:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(711)
+var __vue_script__ = __webpack_require__(748)
 /* template */
-var __vue_template__ = __webpack_require__(712)
+var __vue_template__ = __webpack_require__(749)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\distributeMthMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\freightType.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-adecdc02", Component.options)
+    hotAPI.createRecord("data-v-298d19fe", Component.options)
   } else {
-    hotAPI.reload("data-v-adecdc02", Component.options)
+    hotAPI.reload("data-v-298d19fe", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,163 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 711:
+/***/ 748:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -506,41 +658,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       //表格
-      tableKey: [{
-        label: '配送方式',
-        width: '280',
+      tableKey: [[{
+        label: '名称',
+        width: '250',
         prop: "name",
-        holder: '配送方式',
+        holder: '输入名称',
         type: 'text'
       }, {
+        label: '默认',
+        width: '250',
+        prop: "is_default",
+        holder: '默认值',
+        type: 'select_def'
+      }, {
         label: '状态',
-        width: '280',
+        width: '250',
         prop: "status",
         holder: '状态',
-        type: 'select_stu'
-      }],
-      url: '/distmets',
+        type: 'select_stu',
+        doSort: true
+      }]],
+      url: ['/freighttypes'],
       //新增
-      showAdd: false,
-      title: '新增配送方式',
-      ruleForm: {
+      title: ['新增运费类型'],
+      ruleForm: [{
         name: '',
+        is_default: '0',
         status: '1'
-      },
-      rules: {
-        name: [{ required: true, message: '请输入配送方式', trigger: 'blur' }]
-      },
-      addArr: [{
-        label: '配送方式',
+      }],
+      rules: [{
+        name: [{ required: true, message: '请输入运费类型', trigger: 'blur' }]
+      }],
+      addArr: [[{
+        label: '运费类型',
         prop: 'name',
-        holder: '请输入配送方式',
+        holder: '请输入运费类型',
         type: 'text'
+      }, {
+        label: '是否默认',
+        prop: 'is_default',
+        holder: '请选择是或否',
+        type: 'select_def'
       }, {
         label: '状态',
         prop: 'status',
         holder: '请选择状态',
         type: 'select_stu'
-      }]
+      }]]
     };
   },
 
@@ -553,20 +717,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var obj = {
         id: row.id,
         name: row.name,
+        is_default: row.is_default,
         status: row.status
       };
       this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url + "/");
+      this.$store.dispatch('setUrl', this.url[0] + "/");
       this.$store.dispatch('doEdit', obj);
     },
     doDelMore: function doDelMore() {
-      this.$refs.table.$emit('delMore');
+      this.$refs.tabs.$emit('delMore');
     },
     refresh: function refresh() {
-      this.$refs.table.$emit('refresh');
+      this.$store.dispatch('refresh');
     }
   },
   mounted: function mounted() {
+    this.$store.dispatch('setTabs', false);
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -577,7 +743,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 712:
+/***/ 749:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -587,21 +753,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("my-table", {
-        ref: "table",
-        attrs: { "table-key": _vm.tableKey, url: _vm.url },
-        on: { edit: _vm.edit }
-      }),
-      _vm._v(" "),
-      _c("add-mask", {
+      _c("v-tabs", {
+        ref: "tabs",
         attrs: {
-          showMask: _vm.showAdd,
+          "table-key": _vm.tableKey,
+          url: _vm.url,
           title: _vm.title,
           "rule-form": _vm.ruleForm,
           rules: _vm.rules,
-          "add-arr": _vm.addArr,
-          url: _vm.url
-        }
+          "add-arr": _vm.addArr
+        },
+        on: { edit: _vm.edit }
       })
     ],
     1
@@ -613,7 +775,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-adecdc02", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-298d19fe", module.exports)
   }
 }
 

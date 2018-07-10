@@ -1,14 +1,14 @@
 webpackJsonp([170],{
 
-/***/ 539:
+/***/ 537:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(801)
+var __vue_script__ = __webpack_require__(784)
 /* template */
-var __vue_template__ = __webpack_require__(802)
+var __vue_template__ = __webpack_require__(785)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\performCommission.vue"
+Component.options.__file = "resources\\assets\\js\\views\\reportStatistics\\saleStat3.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5c08bd34", Component.options)
+    hotAPI.createRecord("data-v-15dca460", Component.options)
   } else {
-    hotAPI.reload("data-v-5c08bd34", Component.options)
+    hotAPI.reload("data-v-15dca460", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 801:
+/***/ 784:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,10 +63,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '导出',
-        icon: 'bf-out',
-        ent: this.test
-      }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.test
@@ -94,7 +90,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 802:
+/***/ 785:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108,7 +104,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("业绩提成报表")])])
+    return _c("div", [_c("h2", [_vm._v("销售统计报表3.0")])])
   }
 ]
 render._withStripped = true
@@ -116,7 +112,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-5c08bd34", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-15dca460", module.exports)
   }
 }
 

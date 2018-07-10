@@ -1,14 +1,14 @@
 webpackJsonp([260],{
 
-/***/ 556:
+/***/ 513:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(835)
+var __vue_script__ = __webpack_require__(736)
 /* template */
-var __vue_template__ = __webpack_require__(836)
+var __vue_template__ = __webpack_require__(737)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\afterSaleCompensation\\cmptnReview.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\ReviewConfMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-6d2abdfc", Component.options)
+    hotAPI.createRecord("data-v-05aa3edb", Component.options)
   } else {
-    hotAPI.reload("data-v-6d2abdfc", Component.options)
+    hotAPI.reload("data-v-05aa3edb", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 835:
+/***/ 736:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65,30 +65,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newOpt: [{
         cnt: '修改',
         icon: 'bf-change',
-        ent: this.test
-      }, {
-        cnt: '驳回',
-        icon: 'bf-reject',
-        ent: this.test
-      }, {
-        cnt: '审核',
-        icon: 'bf-audit',
-        ent: this.test
-      }, {
-        cnt: '退审',
-        icon: 'bf-auditfaild',
-        ent: this.test
-      }, {
-        cnt: '导出',
-        icon: 'bf-out',
-        ent: this.test
-      }, {
-        cnt: '打印',
-        icon: 'bf-printer',
-        ent: this.test
-      }, {
-        cnt: '作废',
-        icon: 'bf-void',
         ent: this.test
       }, {
         cnt: '刷新',
@@ -118,7 +94,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 836:
+/***/ 737:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -132,7 +108,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("赔偿审核")])])
+    return _c("div", [_c("h2", [_vm._v("复检配置管理")])])
   }
 ]
 render._withStripped = true
@@ -140,7 +116,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-6d2abdfc", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-05aa3edb", module.exports)
   }
 }
 

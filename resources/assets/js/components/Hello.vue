@@ -1,136 +1,239 @@
 <template>
     <div>
-        <!--数据-->
-        <el-table
-                :data="freightType" fit highlight-current-row
-                type="index"
-                @selection-change="handleSelectionChange"
-                element-loading-text="拼命加载中"
-                v-loading="loading"
-                element-loading-spinner="el-icon-loading"
-                element-loading-background="rgba(0, 0, 0, 0.6)"
-        >
-            <el-table-column
-                    type="selection"
-                    width="95" align="center"
-                    :checked="checkboxInit" @change="toggleChecked">
-            </el-table-column>
-            <el-table-column
-                    label="名称"
-                    align="center"
-                    width="250">
-                <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
-                            <el-input size="small" v-model="scope.row.name" placeholder="输入名称"
-                                      @change="handleEdit"></el-input>
-                        </span>
-                    <span v-else>
-                            {{scope.row.name}}
-                        </span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                    label="默认"
-                    align="center"
-                    width="250">
-                <template slot-scope="scope">
-                    <span v-if="changeIndex=='index'+scope.$index">
-                    <el-select v-model="scope.row.is_default" placeholder="状态" @change="handleEdit">
-                      <el-option
-                              v-for="item in defArr"
-                              :key="item.value"
-                              :label="item.label"
-                              :value="item.value">
-    </el-option>
-                    </el-select>
-                    </span>
-                    <span v-else>
-                            {{scope.row.is_default==0?'否':'是'}}
-                        </span>
-                </template>
-            </el-table-column>
-            <el-table-column
-                    label="状态"
-                    align="center"
-                    width="250">
-                <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
-                            <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit">
-                                <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                            </el-select>
-                        </span>
-                    <span v-else>
-                            <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
-                            {{scope.row.status==0?'停用':'启用'}}
-                        </span>
-                </template>
-            </el-table-column>
-            <el-table-column label="操作" align="center">
-                <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
-                            <el-button size="mini" @click="editSave(scope.$index,scope.row)">保存</el-button>
-                            <el-button size="mini" @click="editCancel">取消
-                            </el-button>
-                        </span>
-                    <span v-else>
-                           <el-button size="mini" @click="editType(scope.row,scope.$index)">编辑</el-button>
-                        </span>
-                    <el-button size="mini" type="danger" @click="delClick(scope.row,$event)">删除
-                    </el-button>
-                </template>
-            </el-table-column>
-        </el-table>
+        <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="订单列表" name="order_list">
+                <div>
+                    <div class="search_box" ref="searchValue">
+                        <div class="box">
+                            <span><label>会员名称</label><el-input v-model="searchBox.vip_name" clearable></el-input></span>
+                            <span><label>订单编号</label><el-input v-model="searchBox.order_num"
+                                                               clearable></el-input></span>
+                            <span><label>收货人</label><el-input v-model="searchBox.order_man" clearable></el-input></span>
+                            <span v-if="filterBox"><label>收货手机</label><el-input v-model="searchBox.order_phone"
+                                                                                clearable></el-input></span>
+                            <span v-else>
+                                <el-button type="primary" @click="check">筛选</el-button>
+                                <el-button @click="resets">重置</el-button>
+                                <span @click="toggleShow">
+                                    <el-button type="text">展开</el-button>
+                                    <i class="el-icon-arrow-down" style="color:#409EFF"></i>
+                                </span>
+                            </span>
+                        </div>
+                        <div class="box" v-show="filterBox">
+                            <span><label>收货地址</label><el-input v-model="searchBox.order_address"
+                                                               clearable></el-input></span>
+                            <span>
+                                <label>所属店铺</label>
+                                <el-select v-model="searchBox.order_shop" clearable placeholder="请选择">
+                                    <el-option
+                                            v-for="item in searchBox.orderShops"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </span>
+                            <span><label>包含商品</label><el-input v-model="searchBox.order_goods"
+                                                               clearable></el-input></span>
+                            <span><label>业务员</label><el-input v-model="searchBox.order_staff"
+                                                              clearable></el-input></span>
+                        </div>
+                        <div class="box" v-show="filterBox">
+                            <span><label>卖家备注</label><el-input v-model="searchBox.order_mark"
+                                                               clearable></el-input></span>
+                            <span>
+                                <label>物流公司</label>
+                                <el-select v-model="searchBox.order_company" clearable placeholder="请选择">
+                                    <el-option
+                                            v-for="item in searchBox.orderCompany"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </span>
+                            <span>
+                                <label>淘宝旗帜</label>
+                                <el-select v-model="searchBox.order_flag" clearable placeholder="请选择">
+                                    <el-option
+                                            v-for="item in searchBox.ordertbFlag"
+                                            :key="item.value"
+                                            :label="item.label"
+                                            :value="item.value">
+                                    </el-option>
+                                </el-select>
+                            </span>
+                            <span>
+                                <label>锁定状态</label>
+                                 <el-select v-model="searchBox.order_lock" clearable placeholder="请选择">
+                                     <el-option
+                                             v-for="item in searchBox.orderLock"
+                                             :key="item.value"
+                                             :label="item.label"
+                                             :value="item.value">
+                                     </el-option>
+                                 </el-select>
+                            </span>
+                        </div>
+                        <div class="box" v-show="filterBox">
+                            <span>
+                                <label>承诺日期</label>
+                                 <el-date-picker
+                                         v-model="searchBox.order_promiseDate"
+                                         type="daterange"
+                                         range-separator="至"
+                                         start-placeholder="开始日期"
+                                         end-placeholder="结束日期">
+                                 </el-date-picker>
+                            </span>
+                            <span>
+                                <label>业务日期</label>
+                                <el-date-picker
+                                        v-model="searchBox.order_workDate"
+                                        type="daterange"
+                                        range-separator="至"
+                                        start-placeholder="开始日期"
+                                        end-placeholder="结束日期">
+                                 </el-date-picker>
+                            </span>
+                            <span>
+                                <label>客审日期</label>
+                                 <el-date-picker
+                                         v-model="searchBox.order_customerInves"
+                                         type="daterange"
+                                         range-separator="至"
+                                         start-placeholder="开始日期"
+                                         end-placeholder="结束日期">
+                                 </el-date-picker>
+                            </span>
+                            <span class="transMoney">
+                                <label>交易金额</label>
+                                <el-input type="number" v-model="searchBox.order_transMStart" clearable></el-input>
+                                至<el-input type="number" v-model="searchBox.order_transMEnd" clearable></el-input>
+                            </span>
+                        </div>
+                        <div class="opt" v-if="filterBox" style="text-align: right">
+                            <el-button type="primary" @click="check">筛选</el-button>
+                            <el-button @click="resets">重置</el-button>
+                            <span @click="toggleShow" style="display: inline">
+                                <el-button type="text">收起</el-button>
+                                <i class="el-icon-arrow-up" style="color:#409EFF"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <el-tabs v-model="activeName2" type="card" @tab-click="handleClick">
+                        <!--<el-tab-pane label="未处理" name="first">
+                            <el-table
+                                    ref="multipleTable"
+                                    :data="tableData3"
+                                    tooltip-effect="dark"
+                                    style="width: 100%"
+                                    @selection-change="handleSelectionChange">
+                                <el-table-column
+                                        type="selection"
+                                        width="55">
+                                </el-table-column>
+                                <el-table-column
+                                        label="日期"
+                                        width="120">
+                                    <template slot-scope="scope">{{ scope.row.date }}</template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="name"
+                                        label="姓名"
+                                        width="120">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="address"
+                                        label="地址"
+                                        show-overflow-tooltip>
+                                </el-table-column>
+                            </el-table>
+                        </el-tab-pane>-->
+                        <el-tab-pane label="未处理" name="first">
+                            <el-table
+                                    ref="multipleTable"
+                                    :data="list"
+                                    tooltip-effect="dark"
+                                    style="width: 100%"
+                                    @selection-change="handleSelectionChange">
+                                <el-table-column
+                                        type="selection"
+                                        width="55">
+                                </el-table-column>
 
-        <!--添加-->
-        <el-dialog title="新增运费类型" :visible.sync="showAdd">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-                <el-form-item label="运费类型
-" prop="name">
-                    <el-input v-model="ruleForm.name" placehold="请输入标记名称"></el-input>
-                </el-form-item>
-                <el-form-item label="是否默认
-" prop="default">
-                    <el-select v-model="ruleForm.default" placeholder="请选择是或否">
-                        <el-option label="0-否" value="0"></el-option>
-                        <el-option label="1-是" value="1"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="状态">
-                    <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                        <el-option label="停用" value="0"></el-option>
-                        <el-option label="启用" value="1" selected></el-option>
-                    </el-select>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </div>
-        </el-dialog>
-
-        <!--分页-->
-        <div ref="pagination" id="page">
-            <el-pagination
-                    @current-change="handleCurrentChange"
-                    :current-page="pagination.current_page"
-                    :page-size="pagination.per_page"
-                    layout="total, prev, pager, next, jumper"
-                    :total="pagination.total">
-            </el-pagination>
-        </div>
-
-        <!--删除提示-->
-        <el-popover
-                placement="top"
-                width="160"
-                v-model="showDel" slot="tip">
-            <p>确定删除该条数据？</p>
-            <div style="text-align: right; margin: 0">
-                <el-button size="mini" type="text" @click="cancelD">取消</el-button>
-                <el-button type="primary" size="mini" @click="confirmD(delId)">确定</el-button>
-            </div>
-        </el-popover>
-
+                                <el-table-column v-for="item in table"
+                                                 :key="item.id"
+                                                 :label="item.label"
+                                                 width="120">
+                                    <template slot-scope="scope">{{ scope.row[item.prop] }}</template>
+                                </el-table-column>
+                            </el-table>
+                        </el-tab-pane>
+                        <el-tab-pane label="已处理" name="second">
+                            <el-table
+                                    ref="multipleTable"
+                                    :data="tableData3"
+                                    tooltip-effect="dark"
+                                    style="width: 100%"
+                                    @selection-change="handleSelectionChange">
+                                <el-table-column
+                                        type="selection"
+                                        width="55">
+                                </el-table-column>
+                                <el-table-column
+                                        label="日期"
+                                        width="120">
+                                    <template slot-scope="scope">{{ scope.row.date }}</template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="name"
+                                        label="姓名"
+                                        width="120">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="address"
+                                        label="地址"
+                                        show-overflow-tooltip>
+                                </el-table-column>
+                            </el-table>
+                        </el-tab-pane>
+                        <el-tab-pane label="等通知发货" name="third">
+                            <el-table
+                                    ref="multipleTable"
+                                    :data="tableData3"
+                                    tooltip-effect="dark"
+                                    style="width: 100%"
+                                    @selection-change="handleSelectionChange">
+                                <el-table-column
+                                        type="selection"
+                                        width="55">
+                                </el-table-column>
+                                <el-table-column
+                                        label="日期"
+                                        width="120">
+                                    <template slot-scope="scope">{{ scope.row.date }}</template>
+                                </el-table-column>
+                                <el-table-column
+                                        prop="name"
+                                        label="姓名"
+                                        width="120">
+                                </el-table-column>
+                                <el-table-column
+                                        prop="address"
+                                        label="地址"
+                                        show-overflow-tooltip>
+                                </el-table-column>
+                            </el-table>
+                        </el-tab-pane>
+                    </el-tabs>
+                </div>
+            </el-tab-pane>
+            <el-tab-pane label="订单明细" name="order_detail">
+                订单明细
+            </el-tab-pane>
+        </el-tabs>
     </div>
 </template>
 <script>
@@ -139,313 +242,328 @@
       return {
         newOpt: [
           {
-            cnt: '新增',
+            cnt: '增加',
             icon: 'bf-add',
-            ent: this.addExpense
+            ent: this.test,
+            ref: 'add'
+          },
+          {
+            cnt: '修改',
+            icon: 'bf-change',
+            ent: this.test
           },
           {
             cnt: '删除',
             icon: 'bf-del',
-            ent: this.delMore
+            ent: this.test
+          },
+          {
+            cnt: '锁定',
+            icon: 'bf-lock',
+            ent: this.test
+          },
+          {
+            cnt: '解锁',
+            icon: 'bf-delock',
+            ent: this.test
+          },
+          {
+            cnt: '审核',
+            icon: 'bf-audit',
+            ent: this.test
+          },
+          {
+            cnt: '退审',
+            icon: 'bf-auditfaild',
+            ent: this.test
+          },
+          {
+            cnt: '导出',
+            icon: 'bf-out',
+            ent: this.test
+          },
+          {
+            cnt: '合并',
+            icon: 'bf-merge',
+            ent: this.test
+          },
+          {
+            cnt: '拆分',
+            icon: 'bf-node',
+            ent: this.test
+          },
+          {
+            cnt: '转刷单',
+            icon: 'bf-transa',
+            ent: this.test
+          },
+          {
+            cnt: '上一条',
+            icon: 'bf-beforeItem',
+            ent: this.test
+          },
+          {
+            cnt: '下一条',
+            icon: 'bf-nextItem',
+            ent: this.test
+          },
+          {
+            cnt: '转补款',
+            icon: 'bf-transferAcc',
+            ent: this.test
+          },
+          {
+            cnt: '订单关联',
+            icon: 'bf-asso',
+            ent: this.test
+          },
+          {
+            cnt: '取消关联',
+            icon: 'bf-cancelAsso',
+            ent: this.test
+          },
+          {
+            cnt: '通知发货',
+            icon: 'bf-deliNotice',
+            ent: this.test
+          },
+          {
+            cnt: '打印',
+            icon: 'bf-printer',
+            ent: this.test
+          },
+          {
+            cnt: '转送款',
+            icon: 'bf-giveMoney',
+            ent: this.test
           },
           {
             cnt: '刷新',
             icon: 'bf-refresh',
-            ent: this.refresh
+            ent: this.test
           }
         ],
-        freightType: [],
-        checkboxInit: false,
-        inputChange: false,
-        changeIndex: '',
-        multipleSelection: [],
-        loading: true,
-        showAdd: false,
-        ruleForm: {
-          name: '',
-          default: '0',
-          status: '1'
+        filterBox: false,
+        searchBox: {
+          vip_name: '',
+          order_num: '',
+          order_man: '',
+          order_phone: '',
+          order_money: '',
+          order_address: '',
+          order_goods: '',
+          order_staff: '',
+          order_promiseDate: '',
+          order_workDate: '',
+          order_transMStart: '',
+          order_transMEnd: '',
+          orderCompany: [
+            {label: 'ceshi', value: 0}
+          ],
+          order_customerInves: '',
+          order_mark: '',
+          order_flag: '',
+          ordertbFlag: [
+            {label: 'ceshi', value: 0}
+          ],
+          order_lock: '',
+          orderLock: [
+            {label: 'ceshi', value: 0}
+          ],
+          order_company: '',
+          order_shop: '',
+          orderShops: [
+            {label: 'ceshi', value: 0}
+          ],
         },
-        rules: {
-          name: [
-            {required: true, message: '请输入标记代码', trigger: 'blur'},
-          ]
-        },
-        pagination: {
-          current_page: 1,
-          total: 0,
-          per_page: 0
-        },
-        showDel: false,
-        delId: '',
-        delArr: [],
-        defArr: [
+        activeName: 'order_list',
+        activeName2: 'first',
+        table: [{label: '日期', prop: 'date'}, {label: '姓名', prop: 'name'}, {label: '地址', prop: 'address'}],
+        tableData3: [
           {
-            value: '0',
-            label: '0-否'
+            date: '2016-05-03',
+            name: 'zhangsan',
+            address: '上海市普陀区金沙江路 1518 弄'
           },
           {
-            value: '1',
-            label: '1-是'
-          }
-        ],
-        status: [
-          {
-            value: '0',
-            label: '0-停用'
+            date: '2016-05-03',
+            name: 'zhang san',
+            address: 'geg市普陀区金沙江路 1518 弄'
           },
           {
-            value: '1',
-            label: '1-启用'
-          }
-        ],
+            date: '2016-05-02',
+            name: '李四',
+            address: '北京市普陀区金沙江路 1518 弄'
+          },
+          {
+            date: '2016-05-02',
+            name: '张武',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }],
+        multipleSelection: []
       }
     },
-    methods: {
-      //修改opt宽度
-      changeOptWidth() {
-        this.$store.state.opt.opts = this.newOpt;
-        this.$store.commit('change', this.newOpt);
-      },
-      getFreightType() {
-        this.$fetch('/freighttypes')
-          .then(res => {
-            this.freightType = res.data;
-            this.loading = false;
-            let pg = res.meta.pagination;
-            this.pagination.current_page = pg.current_page;
-            this.pagination.total = pg.total;
-            this.pagination.per_page = pg.per_page;
-          }, err => {
-            if (err.response) {
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
-            }
-          })
-      },
-      addExpense() {
-        this.showAdd = true;
-      },
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            var data = {
-              name: this.ruleForm.name,
-              is_default: this.ruleForm.default,
-              status: this.ruleForm.status
-            };
-            this.$post('/freighttypes', data)
-              .then(() => {
-                this.$message({
-                  message: '添加成功',
-                  type: 'success'
-                });
-                this.showAdd = false;
-                this.getFreightType();
-                this.resetForm('ruleForm');
-              }, (err) => {
-                if (err.response) {
-                  let arr = err.response.data.errors;
-                  let arr1 = [];
-                  for (let i in arr) {
-                    arr1.push(arr[i]);
-                  }
-                  let str = arr1.join(',');
-                  this.$message.error({
-                    message: str
-                  });
-                }
-              })
-          } else {
-            console.log('error submit!!');
-            return false;
+    computed: {
+      list: function () {
+        let _search = this.searchBox.vip_name;
+        // let _num = this.searchBox.order_num;
+        let arr = [];
+        for (let i = 0; i < this.tableData3.length; i++) {
+          if (this.tableData3[i].name.search(_search) != -1) {
+            arr.push(this.tableData3[i]);
           }
-        });
+        }
+        return arr;
       },
-      resetForm(formName) {
-        this.$refs[formName].resetFields();
+    },
+    filters: {},
+    methods: {
+      toggleShow() {
+        this.filterBox = !this.filterBox;
       },
-      toggleChecked() {
-        this.checkboxInit = !this.checkboxInit;
+      test() {
+        console.log(1);
+      },
+      handleClick(tab, event) {
+        console.log(tab, event);
+      },
+      toggleSelection(rows) {
+        if (rows) {
+          rows.forEach(row => {
+            this.$refs.multipleTable.toggleRowSelection(row);
+          });
+        } else {
+          this.$refs.multipleTable.clearSelection();
+        }
       },
       handleSelectionChange(val) {
         this.multipleSelection = val;
-        let del = [];
-        this.multipleSelection.forEach(selectedItem => {
-          del.push(selectedItem.id);
-        });
-        this.delArr = del.join(',');
       },
-      handleEdit() {
-        this.inputChange = true;
+      resets() {
+        this.searchBox = {};
       },
-      editType(row, index) {
-        this.changeIndex = `index${index}`;
-      },
-      editSave(index, row) {
-        let newData = {
-          id: row.id,
-          name: row.name,
-          is_default: row.is_default,
-          status: row.status
-        };
-        if (this.inputChange) {
-          this.$patch('/freighttypes/' + row.id, newData)
-            .then(() => {
-              this.loading = true;
-              this.getFreightType();
-              this.loading = false;
-              this.$message({
-                message: '修改成功',
-                type: 'success'
-              });
-              this.changeIndex = '';
-              this.inputChange = false;
-              /*  setTimeout(() => {
-                  this.loading = false;
-                  this.$message({
-                    message: '修改成功',
-                    type: 'success'
-                  });
-                  this.changeIndex = '';
-                  this.inputChange = false;
-                }, 2000)*/
-            }, err => {
-              if (err.response) {
-                let arr = err.response.data.errors;
-                let arr1 = [];
-                for (let i in arr) {
-                  arr1.push(arr[i]);
-                }
-                let str = arr1.join(',');
-                this.$message.error({
-                  message: str
-                })
-              }
-            })
-        } else {
-          this.$message({
-            message: '数据未改动',
-            type: 'info'
-          });
+      check() {
+        let arr=[];
+        //得到需要进行验证的元素组成的数组
+       /* for (let i in this.searchBox) {
+          if (this.searchBox[i].length > 1) {
+            let o = {};
+            o[i] = this.searchBox[i];
+            arr.push(o)
+          }
+        }*/
+
+       /* const getValue = obj =>
+          Object.keys(obj)
+            .map(key => obj[key])
+            .join(',');*/
+
+        /* for (let i in this.searchBox) {
+          if (this.searchBox[i].length > 1) {
+            let o = {};
+            o[i] = this.searchBox[i];
+            arr.push(o)
+          }
         }
-      },
-      delClick(row, e) {
-        this.showDel = true;
-        $('.el-popper').css({left: e.x - 100 + 'px', top: e.y - 125 + 'px'});
-        this.delId = row.id;
-      },
-      editCancel() {
-        this.$message({
-          message: '取消修改',
-          type: 'info'
-        });
-        this.changeIndex = '';
-      },
-      refresh() {
-        this.loading = true;
-        this.getFreightType();
-        setTimeout(() => {
-          this.loading = false;
-        }, 2000);
-      },
-      handleCurrentChange(val) {
-        this.$fetch('/freighttypes?page=' + val).then((res) => {
-          this.freightType = res.data;
-          let pg = res.meta.pagination;
-          this.pagination.current_page = pg.current_page;
-        }, (err) => {
-          this.$message.error({
-            message: err.message
-          });
-        });
-      },
-      cancelD() {
-        this.showDel = false;
-        this.$message({
-          message: '取消删除',
-          type: 'info'
-        });
-      },
-      confirmD(id) {
-        this.$del('/freighttypes/' + id)
-          .then(() => {
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            });
-            this.showDel = false;
-            this.getFreightType();
-          }, err => {
-            if (err.response) {
-              this.showDel = false;
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
+*/
+
+       /* function isEmpty(obj) {
+          return (Object.keys(obj).length === 0 && obj.constructor === Object);
+        }
+
+        function deleteEmptyString(test, recurse) {
+
+          for (var i in test) {
+            if (test[i] === '' ) {
+              delete test[i];
+            } else if (recurse && typeof test[i] === 'object') {
+              deleteEmptyString(test[i], recurse);
             }
-          })
-      },
-      delMore() {
-        if (this.delArr.length === 0) {
-          this.$message({
-            message: '没有选中数据',
-            type: 'warning'
-          });
-        } else {
-          this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-          }).then(() => {
-            this.$del("/freighttypes", {ids: this.delArr})
-              .then(() => {
-                this.$message({
-                  message: '删除成功',
-                  type: 'success'
-                });
-                this.getFreightType();
-              }, err => {
-                if (err.response) {
-                  let arr = err.response.data.errors;
-                  let arr1 = [];
-                  for (let i in arr) {
-                    arr1.push(arr[i]);
-                  }
-                  let str = arr1.join(',');
-                  this.$message.error({
-                    message: str
-                  });
-                }
-              })
-          }).catch(() => {
-            this.$message({
-              type: 'info',
-              message: '已取消删除'
-            });
-          });
+          }
+
         }
-      },
+
+        function deleteEmptyObject(test, recurse) {
+
+          for (var i in test) {
+            if (isEmpty(test[i]) ) {
+              delete test[i];
+            } else if (recurse && typeof test[i] === 'object') {
+              deleteEmptyObject(test[i], recurse);
+            }
+          }
+        }
+      */
+
+
+        // console.log(getValue(this.tableData3));
+        console.log(this.searchBox);
+        // console.log(Object.keys(this.searchBox));
+        // console.log(getValue(this.searchBox));
+
+        // console.log(arr[0].vip_name);
+        /*let arr1 = [];
+        for (let i = 0; i < arr.length; i++) {
+          if (this.tableData3[i].arr[i].search(_search) != -1) {
+            arr1.push(this.tableData3[i]);
+          }
+        }
+        return arr1;*/
+      }
     },
     mounted() {
-      this.changeOptWidth();
+      this.$store.state.opt.opts = this.newOpt;
+      this.$store.commit('change', this.newOpt);
       const that = this;
       $(window).resize(() => {
-        that.changeOptWidth();
+        return (() => {
+          that.$store.state.opt.opts = that.newOpt;
+          that.$store.commit('change', that.newOpt);
+        })()
       })
-      this.getFreightType();
     }
   }
 </script>
+<style lang="scss" scoped>
+    .search_btn {
+        margin-bottom: 15px;
+    }
+
+    .box {
+        display: flex;
+        width: 100%;
+        margin-bottom: 10px;
+        align-items: center;
+
+        span {
+            flex: 1;
+            margin-left: 5px;
+
+            label {
+                font-size: 14px;
+                color: rgba(0, 0, 0, .85);
+                font-weight: 500;
+                width: 56px;
+                display: inline-block;
+                text-align: right;
+            }
+
+            &.transMoney {
+                .el-input {
+                    width: 31%;
+                }
+            }
+
+            .el-select, .el-date-editor {
+                margin-left: 3px;
+                width: 72%;
+            }
+
+            .el-input {
+                margin-left: 6px;
+                width: 73%;
+            }
+
+        }
+    }
+</style>

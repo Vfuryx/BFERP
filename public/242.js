@@ -1,14 +1,14 @@
 webpackJsonp([242],{
 
-/***/ 503:
+/***/ 505:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(727)
+var __vue_script__ = __webpack_require__(720)
 /* template */
-var __vue_template__ = __webpack_require__(728)
+var __vue_template__ = __webpack_require__(721)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\freightType.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\markerColorMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-298d19fe", Component.options)
+    hotAPI.createRecord("data-v-553ae4d4", Component.options)
   } else {
-    hotAPI.reload("data-v-298d19fe", Component.options)
+    hotAPI.reload("data-v-553ae4d4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 727:
+/***/ 720:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -513,11 +513,342 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      //操作
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
@@ -531,81 +862,106 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-refresh',
         ent: this.refresh
       }],
-      //表格
-      tableKey: [{
-        label: '名称',
-        width: '250',
-        prop: "name",
-        holder: '输入名称',
+      tableKey: [[{
+        label: '标记代码',
+        width: '',
+        prop: "markcode",
+        holder: '请输入标记代码',
         type: 'text'
       }, {
-        label: '默认',
-        width: '250',
-        prop: "is_default",
-        holder: '默认值',
-        type: 'select_def'
+        label: '标记名称',
+        width: '180',
+        prop: "markname",
+        holder: '请输入标记名称',
+        type: 'text'
+      }, {
+        label: '颜色',
+        width: '180',
+        prop: "color",
+        holder: '颜色',
+        type: 'color'
+      }, {
+        label: '描述',
+        width: '180',
+        prop: "description",
+        holder: '描述',
+        type: 'textarea'
       }, {
         label: '状态',
-        width: '250',
+        width: '200',
         prop: "status",
         holder: '状态',
-        type: 'select_stu'
+        type: 'select_stu',
+        doSort: true
+      }]],
+      url: ['/markcolors'],
+      title: ['新增颜色'],
+      ruleForm: [{
+        markcode: '',
+        markname: '',
+        color: '',
+        status: '1',
+        description: ''
       }],
-      url: '/freighttypes',
-      //新增
-      showAdd: false,
-      title: '新增',
-      ruleForm: {
-        name: '',
-        is_default: '0',
-        status: '1'
-      },
-      rules: {
-        name: [{ required: true, message: '请输入运费类型', trigger: 'blur' }]
-      },
-      addArr: [{
-        label: '运费类型',
-        prop: 'name',
-        holder: '请输入运费类型',
+      rules: [{
+        markcode: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
+        markname: [{ required: true, message: '请输入标记名称', trigger: 'blur' }],
+        color: [{ required: true, message: '请选择颜色', trigger: 'blur' }]
+      }],
+      addArr: [[{
+        label: '标记代码',
+        prop: 'markcode',
+        holder: '请输入标记代码',
         type: 'text'
       }, {
-        label: '是否默认',
-        prop: 'is_default',
-        holder: '请选择是或否',
-        type: 'select_def'
+        label: '标记名称',
+        prop: 'markname',
+        holder: '请输入标记名称',
+        type: 'text'
+      }, {
+        label: '标记颜色',
+        prop: 'color',
+        type: 'pickColor'
       }, {
         label: '状态',
         prop: 'status',
         holder: '请选择状态',
         type: 'select_stu'
-      }]
+      }, {
+        label: '描述',
+        prop: 'description',
+        holder: '请输入描述',
+        type: 'textarea'
+      }]]
     };
   },
 
   methods: {
-    //新增
     addNew: function addNew() {
       this.$store.dispatch('setShowAdd', true);
+    },
+    doDelMore: function doDelMore() {
+      this.$refs.tabs.$emit('delMore');
+    },
+    refresh: function refresh() {
+      this.$store.dispatch('refresh');
     },
     edit: function edit(row) {
       var obj = {
         id: row.id,
-        name: row.name,
-        is_default: row.is_default,
+        markcode: row.markcode,
+        markname: row.markname,
+        color: row.color,
+        description: row.description,
         status: row.status
       };
       this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url + "/");
+      this.$store.dispatch('setUrl', this.url[0] + "/");
       this.$store.dispatch('doEdit', obj);
-    },
-    doDelMore: function doDelMore() {
-      this.$refs.table.$emit('delMore');
-    },
-    refresh: function refresh() {
-      this.$refs.table.$emit('refresh');
     }
   },
   mounted: function mounted() {
+    this.$store.dispatch('setTabs', false);
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -616,7 +972,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 728:
+/***/ 721:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -626,21 +982,17 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("my-table", {
-        ref: "table",
-        attrs: { "table-key": _vm.tableKey, url: _vm.url },
-        on: { edit: _vm.edit }
-      }),
-      _vm._v(" "),
-      _c("add-mask", {
+      _c("v-tabs", {
+        ref: "tabs",
         attrs: {
-          showMask: _vm.showAdd,
+          "table-key": _vm.tableKey,
+          url: _vm.url,
           title: _vm.title,
           "rule-form": _vm.ruleForm,
           rules: _vm.rules,
-          "add-arr": _vm.addArr,
-          url: _vm.url
-        }
+          "add-arr": _vm.addArr
+        },
+        on: { edit: _vm.edit }
       })
     ],
     1
@@ -652,7 +1004,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-298d19fe", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-553ae4d4", module.exports)
   }
 }
 

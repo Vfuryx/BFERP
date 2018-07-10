@@ -1,8 +1,7 @@
 <template>
     <div>
         <!--表格-->
-        <div ref="table">
-            <!--ref="multipleTable" -->
+        <div>
             <el-table :data="tableData" fit highlight-current-row @selection-change="handleSelectionChange"
                       type="index"
                       v-loading="loading"
@@ -14,29 +13,46 @@
                         type="selection"
                         width="95" align="center" :checked="checkboxInit" @change="toggleChecked">
                 </el-table-column>
-                <el-table-column v-for="(item,index) in tableKey" :label="item.label" align="center" width="item.width" :key="index">
+                <el-table-column v-for="(item,index) in tableKey" :label="item.label" align="center" width="item.width"
+                                 :key="index" :sortable="item.sort" :prop="item.prop">
                     <template slot-scope="scope">
                         <span v-if="currentIndex =='index'+scope.$index">
                             <span v-if="item.type=='color'">
-                                 <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
+                                 <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit"
+                                                  size="mini"></el-color-picker>
                             </span>
                             <span v-else-if="item.type == 'select_stu'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit">
+                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder"
+                                            @change="handleEdit">
+                                     <!--<el-option v-for="i in status" :key="i.id" :label="i.label" :value="i.value"></el-option>-->
                                      <el-option label="0-停用" value="0"></el-option>
                                      <el-option label="1-启用" value="1"></el-option>
                                  </el-select>
                             </span>
                             <span v-else-if="item.type == 'select_def'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit">
+                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder"
+                                            @change="handleEdit">
+                                      <!--<el-option v-for="i in defaults" :key="i.id" :label="i.label" :value="i.value"></el-option>-->
                                      <el-option label="0-否" value="0"></el-option>
                                      <el-option label="1-是" value="1"></el-option>
                                  </el-select>
                             </span>
+                            <span v-else-if="item.type == 'select'">
+                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder"
+                                            @change="handleEdit">
+                                      <el-option v-for="i in options" :key="i.id" :label="i.label"
+                                                 :value="i.value"></el-option>
+                                     <!-- <el-option label="0-否" value="0"></el-option>
+                                      <el-option label="1-是" value="1"></el-option>-->
+                                 </el-select>
+                            </span>
                              <span v-else-if="item.type == 'textarea'">
-                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
+                                            :placeholder="item.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else>
-                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder"
+                                         @change="handleEdit"></el-input>
                             </span>
                      </span>
                         <span v-else>
@@ -96,7 +112,7 @@
 </template>
 <script>
   export default {
-    props:['tableKey','url'],
+    props: ['tableKey', 'url', 'options'],
     data() {
       return {
         checkboxInit: false,
@@ -105,26 +121,24 @@
         delArr: []
       }
     },
-    computed:{
-     loading:{
-       get: function(){
-         return this.$store.getters.loading
-       }
-     },
-      //当前id
-      currentIndex:{
-        get:function(){
-          return this.$store.getters.currentIndex
-        },
-        set:function(){
-
+    computed: {
+      loading: {
+        get: function () {
+          return this.$store.getters.loading
         }
       },
-      tableData:{
-       get:function(){
-         return this.$store.state.table.newData.data;
-       },
-        set:function(){}
+      //当前id
+      currentIndex: {
+        get: function () {
+          return this.$store.getters.currentIndex
+        },
+        set: function () {}
+      },
+      tableData: {
+        get: function () {
+          return this.$store.state.table.newData;
+        },
+        set: function () {}
       }
     },
     methods: {
@@ -148,31 +162,31 @@
         this.delArr = del.join(',');
       },
       delMore() {
-        this.$store.dispatch('setUrl',this.url);
-        this.$store.dispatch('setDelArr',this.delArr);
+        this.$store.dispatch('setUrl', this.url);
+        this.$store.dispatch('setDelArr', this.delArr);
         this.$store.dispatch('delMore')
-          .then(()=>{
+          .then(() => {
             this.getData();
           });
       },
       //刷新
       refresh() {
-        this.$store.dispatch('setLoad',true);
+        this.$store.dispatch('setLoad', true);
         this.getData();
         setTimeout(() => {
-          this.$store.dispatch('setLoad',false);
+          this.$store.dispatch('setLoad', false);
         }, 2000)
       },
       //编辑
       edit(index) {
-        this.$store.dispatch('setIndex',index);
+        this.$store.dispatch('setIndex', index);
       },
       handleEdit() {
         this.$store.dispatch('setInput');
       },
       //保存修改
       editSave(row) {
-        this.$emit('edit',row);
+        this.$emit('edit', row);
       },
       //取消修改
       editCancle() {
@@ -182,16 +196,16 @@
         });
         this.$store.dispatch('setVoid');
       },
-      getData(){
-        this.$store.dispatch('setUrl',this.url);
+      getData() {
+        this.$store.dispatch('setUrl', this.url);
         this.$store.dispatch('getData');
       }
     },
     mounted() {
       this.getData();
       this.$nextTick(function () {
-        this.$on('delMore',this.delMore);
-        this.$on('refresh',this.refresh)
+        this.$on('delMore', this.delMore);
+        this.$on('refresh', this.refresh)
       })
     },
   }

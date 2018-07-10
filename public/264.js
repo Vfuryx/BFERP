@@ -1,14 +1,14 @@
 webpackJsonp([264],{
 
-/***/ 445:
+/***/ 570:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(607)
+var __vue_script__ = __webpack_require__(852)
 /* template */
-var __vue_template__ = __webpack_require__(608)
+var __vue_template__ = __webpack_require__(853)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\CRMCustomer\\indexOfConsumption.vue"
+Component.options.__file = "resources\\assets\\js\\views\\afterSaleMag\\afterSCenter.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-df6a7842", Component.options)
+    hotAPI.createRecord("data-v-fcdcaf4a", Component.options)
   } else {
-    hotAPI.reload("data-v-df6a7842", Component.options)
+    hotAPI.reload("data-v-fcdcaf4a", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 607:
+/***/ 852:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,8 +63,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
+        cnt: '删除',
+        icon: 'bf-del',
+        ent: this.test
+      }, {
         cnt: '导出',
         icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '还原',
+        icon: 'bf-reduce',
         ent: this.test
       }, {
         cnt: '刷新',
@@ -94,7 +102,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 608:
+/***/ 853:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108,7 +116,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("index of consumption消费指数")])])
+    return _c("div", [_c("h2", [_vm._v("售后中心")])])
   }
 ]
 render._withStripped = true
@@ -116,7 +124,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-df6a7842", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-fcdcaf4a", module.exports)
   }
 }
 

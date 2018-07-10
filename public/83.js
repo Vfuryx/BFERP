@@ -1,14 +1,14 @@
 webpackJsonp([83],{
 
-/***/ 477:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(670)
+var __vue_script__ = __webpack_require__(638)
 /* template */
-var __vue_template__ = __webpack_require__(671)
+var __vue_template__ = __webpack_require__(639)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\dwnCenter\\orderDwn.vue"
+Component.options.__file = "resources\\assets\\js\\views\\financial\\accountCenter.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4ccc13b4", Component.options)
+    hotAPI.createRecord("data-v-e4bd7a1c", Component.options)
   } else {
-    hotAPI.reload("data-v-4ccc13b4", Component.options)
+    hotAPI.reload("data-v-e4bd7a1c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 670:
+/***/ 638:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,8 +63,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '下载',
-        icon: 'bf-dwn',
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '作废',
+        icon: 'bf-void',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
         ent: this.test
       }]
     };
@@ -90,7 +98,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 671:
+/***/ 639:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -104,7 +112,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("订单下载")])])
+    return _c("div", [_c("h2", [_vm._v("记账中心")])])
   }
 ]
 render._withStripped = true
@@ -112,7 +120,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4ccc13b4", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-e4bd7a1c", module.exports)
   }
 }
 

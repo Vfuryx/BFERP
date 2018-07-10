@@ -964,50 +964,29 @@ const constantRouterMap = [
 
   },
   {
-    path: '/example',
+    path: '/index',
     component: Layout,
     children: [
       {
-        path: 'example',
-        name: 'Example',
+        path: 'index',
+        name: 'Index',
         component: resolve => void(require(['../components/index.vue'], resolve)),
-        meta: {title: 'example', icon: '',requireAuth: true}
+        meta: {title: 'index', icon: '',requireAuth: true}
       }
     ]
   },
-  /* /* {
-       path: '/form',
-       component: Layout,
-       children: [
-           {
-               path: 'index',
-               name: 'Form',
-               component: resolve => void(require(['../views/form/index.vue'],resolve)),
-               meta: { title: '表单', icon: 'form' }
-           }
-       ]
-   },
-   /* {
-       name: 'Example',
-       path: '/example',
-       component: Layout,
-       redirect: '/example/table',
-       meta: { title: '例子', icon: 'example' },
-       children: [
-           {
-               path: 'table',
-               name: 'Table',
-               component: resolve => void(require(['../views/table/index.vue'],resolve)),
-               meta: { title: 'Table', icon: 'table' }
-           },
-           {
-               path: 'tree',
-               name: 'Tree',
-               component: resolve => void(require(['../views/tree/index.vue'],resolve)),
-               meta: { title: 'Tree', icon: 'tree' }
-           }
-       ]
-   },*/
+  {
+    path: '/test',
+    component: Layout,
+    children: [
+      {
+        path: 'test',
+        name: 'Test',
+        component: resolve => void(require(['../components/test.vue'], resolve)),
+        meta: {title: 'test', icon: '',requireAuth: true}
+      }
+    ]
+  },
   {
     path: '*',
     redirect: '/404',

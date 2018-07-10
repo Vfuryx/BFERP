@@ -13,6 +13,7 @@ const getters = {
   ok: state => state.opt.ok,
   delShow: state => state.delMask.delShow,
   loading: state => state.table.loading,
+  is_tabs: state => state.table.is_tabs,
   currentIndex: state => state.table.currentIndex,
   ruleForm: state => state.addMask.addObj,
   showMask: state => state.addMask.showMask,

@@ -424,11 +424,12 @@
   }
 </script>
 <style lang="scss" scoped></style>-->
+<!--
 <template>
     <div>
         <my-table :table-key="tableKey" @edit="edit" ref="table" :url="url"></my-table>
 
-        <!--新增-->
+        &lt;!&ndash;新增&ndash;&gt;
         <add-mask :showMask="showAdd" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"  :url="url"></add-mask>
     </div>
 </template>
@@ -533,4 +534,114 @@
     }
   }
 </script>
+
+-->
+
+<template>
+    <div>
+        <v-tabs :table-key="tableKey" :url="url" @edit="edit" ref="tabs" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"></v-tabs>
+    </div>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        //操作
+        newOpt: [
+          {
+            cnt: '新增',
+            icon: 'bf-add',
+            ent: this.addNew
+          },
+          {
+            cnt: '删除',
+            icon: 'bf-del',
+            ent: this.doDelMore
+          },
+          {
+            cnt: '刷新',
+            icon: 'bf-refresh',
+            ent: this.refresh
+          }
+        ],
+        //表格
+        tableKey:[[
+          {
+            label: '配送方式',
+            width: '280',
+            prop: "name",
+            holder:'配送方式',
+            type: 'text'
+          },
+          {
+            label: '状态',
+            width: '280',
+            prop: "status",
+            holder: '状态',
+            type: 'select_stu',
+            doSort: true
+          }
+        ]],
+        url:['/distmets'],
+        title: ['新增配送方式'],
+        ruleForm: [{
+          name: '',
+          status: '1'
+        }],
+        rules: [{
+          name: [
+            {required: true, message: '请输入配送方式', trigger: 'blur'},
+          ]
+        }],
+        addArr:[[
+          {
+            label:'配送方式',
+            prop:'name',
+            holder:'请输入配送方式',
+            type: 'text'
+          },
+          {
+            label:'状态',
+            prop:'status',
+            holder:'请选择状态',
+            type: 'select_stu'
+          }
+        ]]
+      }
+    },
+    methods:{
+      //新增
+      addNew(){
+        this.$store.dispatch('setShowAdd',true);
+      },
+
+      edit(row){
+        let obj = {
+          id: row.id,
+          name: row.name,
+          status: row.status
+        };
+        this.$store.dispatch('setRow',row);
+        this.$store.dispatch('setUrl',this.url[0]+"/");
+        this.$store.dispatch('doEdit',obj);
+      },
+
+      doDelMore(){
+        this.$refs.tabs.$emit('delMore')
+      },
+      refresh(){
+        this.$store.dispatch('refresh');
+      },
+    },
+    mounted(){
+      this.$store.dispatch('setTabs',false);
+      this.$store.dispatch('setOpt',this.newOpt);
+      let that = this;
+      $(window).resize(() => {
+        that.$store.dispatch('setOpt',that.newOpt);
+      });
+    }
+  }
+</script>
+
 

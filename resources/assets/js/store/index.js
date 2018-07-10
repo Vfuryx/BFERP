@@ -8,6 +8,8 @@ import opt from './modules/opt.js'
 import delMask from './modules/delMask.js'
 import table from './modules/table.js'
 import addMask from './modules/addMask.js'
+import LightTable from './modules/lightTable.js'
+import SonData from './modules/sonData.js'
 
 Vue.use(Vuex)
 
@@ -19,7 +21,9 @@ const store = new Vuex.Store({
     opt,
     delMask,
     table,
-    addMask
+    addMask,
+    LightTable,
+    SonData
   },
   getters
 })

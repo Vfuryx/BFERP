@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-dialog :title="title" :visible.sync="showMask" @close="closeDialog">
-            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+            <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" :class="{'half-form':halfForm}">
                 <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
                     <span v-if="item.type=='text'">
                        <el-input v-model="ruleForm[item.prop]" :placehold="item.holder"></el-input>
@@ -24,6 +24,15 @@
                     <span v-else-if="item.type=='textarea'">
                          <el-input type="textarea" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
                     </span>
+                    <span v-else-if="item.type=='tel'">
+                         <el-input type="tel" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
+                    </span>
+                    <span v-else-if="item.type=='new_casca'">
+                         <el-cascader
+                                 :options="options"
+                                 v-model="selectedOptions" clearable>
+  </el-cascader>
+                    </span>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -37,10 +46,36 @@
     import axios from 'axios'
     import qs from 'qs'
   export default {
-    props: ['title', 'ruleForm', 'rules', 'addArr','submitData','url'],
+    props: ['title', 'ruleForm', 'rules', 'addArr','submitData','url','halfForm'],
     data() {
       return {
         newForm:[],
+        selectedOptions: [],
+        options: [
+          /*一级*/
+          {
+          value: 'zhinan',
+          label: '指南',
+          children: [
+            /*二级*/
+            {
+            value: 'shejiyuanze',
+            label: '设计原则',
+            children: [
+              /*三级*/
+              {
+              value: 'yizhi',
+              label: '一致'
+            },
+              {
+              value: 'fankui',
+              label: '反馈'
+            }
+            ]
+          },
+          ]
+        },
+        ],
       }
     },
     computed:{
@@ -93,11 +128,7 @@
         this.$store.dispatch('setShowAdd',false);
       }
     },
-    mounted(){
-      /*this.$nextTick(function () {
-        this.$on('submitForm',this.submitForm)
-      })*/
-    }
+    mounted(){}
   }
 </script>
 <style>

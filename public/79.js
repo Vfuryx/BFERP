@@ -1,14 +1,14 @@
 webpackJsonp([79],{
 
-/***/ 447:
+/***/ 454:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(3)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(610)
+var __vue_script__ = __webpack_require__(618)
 /* template */
-var __vue_template__ = __webpack_require__(611)
+var __vue_template__ = __webpack_require__(619)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\financial\\financialAccount.vue"
+Component.options.__file = "resources\\assets\\js\\views\\order\\auditOfFinancialBrushes.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-48619284", Component.options)
+    hotAPI.createRecord("data-v-f734b1b4", Component.options)
   } else {
-    hotAPI.reload("data-v-48619284", Component.options)
+    hotAPI.reload("data-v-f734b1b4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,13 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 610:
+/***/ 618:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
 //
 //
 //
@@ -65,10 +63,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '新增',
-        icon: 'bf-add',
-        ent: this.test
-      }, {
         cnt: '修改',
         icon: 'bf-change',
         ent: this.test
@@ -81,12 +75,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-submit',
         ent: this.test
       }, {
+        cnt: '驳回',
+        icon: 'bf-reject',
+        ent: this.test
+      }, {
+        cnt: '审核',
+        icon: 'bf-audit',
+        ent: this.test
+      }, {
         cnt: '退审',
         icon: 'bf-auditfaild',
         ent: this.test
       }, {
-        cnt: '导入',
-        icon: 'bf-in',
+        cnt: '发货',
+        icon: 'bf-deliver',
+        ent: this.test
+      }, {
+        cnt: '批量处理',
+        icon: 'bf-more',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '下载',
+        icon: 'bf-dwn',
+        ent: this.test
+      }, {
+        cnt: '还原',
+        icon: 'bf-reduce',
         ent: this.test
       }, {
         cnt: '刷新',
@@ -116,7 +134,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 611:
+/***/ 619:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -130,7 +148,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("\n        财务记账\n    ")])])
+    return _c("div", [_c("h2", [_vm._v("财务刷单审核")])])
   }
 ]
 render._withStripped = true
@@ -138,7 +156,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-48619284", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-f734b1b4", module.exports)
   }
 }
 

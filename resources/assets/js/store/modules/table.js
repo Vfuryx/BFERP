@@ -1,7 +1,7 @@
 import {Message} from 'element-ui'
 import axios from 'axios'
 import qs from 'qs'
-import store from "../index";
+// import store from "../index";
 
 const table = {
   state: {
@@ -12,10 +12,10 @@ const table = {
     row: {},
     currentIndex: '',
     newData:[],
-    //  分页
     current_page: 0,
     per_page: 0,
-    page_total: 0
+    page_total: 0,
+    is_tabs: false
   },
   mutations: {
     SET_LOAD: (state,val) => {
@@ -81,6 +81,25 @@ const table = {
     },
     PAGE_TOTAL:(state,val)=>{
       state.page_total = val;
+    },
+    GET_DATA:(state)=>{
+      axios.get(state.url)
+        .then(res => {
+          state.newData = res.data.data;
+          state.loading = false;
+          let pg = res.data.meta.pagination;
+          state.current_page = pg.current_page;
+          state.per_page = pg.per_page;
+          state.page_total = pg.total;
+        })
+        .catch(err => {
+          Message.error({
+            message: err.message
+          });
+        })
+    },
+    SET_TABS:(state,val)=>{
+      state.is_tabs = val;
     }
   },
   actions: {
@@ -111,7 +130,7 @@ const table = {
     currentPage({commit}, val) {
       commit('CURRENT_PAGE', val);
     },
-    getData({state,commit}) {
+    /*getData({state,commit}) {
       state.newData = [];
       state.loading = true;
       axios.get(state.url)
@@ -128,6 +147,11 @@ const table = {
             message: err.message
           });
         })
+    },*/
+    getData({state,commit}) {
+      state.newData = [];
+      state.loading = true;
+      commit('GET_DATA');
     },
     //点击页码时设置页码
     setPagination({state,commit},val){
@@ -143,6 +167,16 @@ const table = {
             message: err.message
           });
         })
+    },
+    refresh({state,commit}){
+      state.loading = true;
+      commit('GET_DATA');
+      setTimeout(() => {
+        state.loading = false;
+      }, 2000)
+    },
+    setTabs({commit},val){
+      commit('SET_TABS',val);
     }
   }
 };

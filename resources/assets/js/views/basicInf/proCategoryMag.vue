@@ -476,11 +476,11 @@
     }
   }
 </script>-->
-<template>
+<!--<template>
     <div>
         <my-table :table-key="goodsType" @edit="edit" ref="table" :url="url"></my-table>
 
-        <!--新增-->
+        &lt;!&ndash;新增&ndash;&gt;
         <add-mask :showMask="showAdd" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"  :url="url"></add-mask>
     </div>
 </template>
@@ -623,6 +623,158 @@
       },
     },
     mounted(){
+      this.$store.dispatch('setOpt',this.newOpt);
+      let that = this;
+      $(window).resize(() => {
+        that.$store.dispatch('setOpt',that.newOpt);
+      });
+    }
+  }
+</script>-->
+<template>
+    <div>
+        <v-tabs :table-key="tableKey" :url="url" @edit="edit" ref="tabs" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"></v-tabs>
+    </div>
+</template>
+<script>
+  export default {
+    data(){
+      return {
+        //操作
+        newOpt: [
+          {
+            cnt: '新增',
+            icon: 'bf-add',
+            ent: this.addNew
+          },
+          {
+            cnt: '删除',
+            icon: 'bf-del',
+            ent: this.doDelMore
+          },
+          {
+            cnt: '刷新',
+            icon: 'bf-refresh',
+            ent: this.refresh
+          }
+        ],
+        //表格
+        tableKey:[[
+          {
+            label: '商品类别',
+            width: '180',
+            prop: "name",
+            holder:'请输入商品类别',
+            type: 'text'
+          },
+          {
+            label: '类别代码',
+            width: '180',
+            prop: "code",
+            holder: '请输入类别代码',
+            type: 'text'
+          },
+          {
+            label: '状态',
+            width: '200',
+            prop: "status",
+            holder: '请选择状态',
+            type: 'select_stu',
+            doSort: true
+          },
+          {
+            label: '商品描述',
+            width: '200',
+            prop: "description",
+            holder: '请输入描述',
+            type: 'textarea'
+          },
+          {
+            label: '商品备注',
+            width: '200',
+            prop: "remark",
+            holder: '请输入备注',
+            type: 'textarea'
+          },
+        ]],
+        url:['/goodscates'],
+        title: ['新增商品类别'],
+        ruleForm: [{
+          code: '',
+          name: '',
+          description: '',
+          remark:'',
+          status:'1'
+        }],
+        rules: [{
+          code: [
+            {required: true, message: '请输入标记代码', trigger: 'blur'},
+          ],
+          name: [
+            {required: true, message: '请输入标记名称', trigger: 'blur'},
+          ]
+        }],
+        addArr:[[
+          {
+            label:'类别代码',
+            prop:'code',
+            holder:'请输入代码',
+            type: 'text'
+          },
+          {
+            label:'类别名称',
+            prop:'name',
+            holder:'请输入名称',
+            type: 'text'
+          },
+          {
+            label:'商品描述',
+            prop:'description',
+            type: 'textarea',
+          },
+          {
+            label:'商品备注',
+            prop:'remark',
+            type: 'textarea',
+          },
+          {
+            label:'状态',
+            prop:'status',
+            holder:'请选择状态',
+            type: 'select_stu'
+          }
+        ]]
+      }
+    },
+    methods:{
+      //新增
+      addNew(){
+        this.$store.dispatch('setShowAdd',true);
+      },
+
+      edit(row){
+        let obj = {
+          id: row.id,
+          code: row.code,
+          name: row.name,
+          status: row.status,
+          remark: row.remark,
+          description: row.description
+        };
+        this.$store.dispatch('setRow',row);
+        this.$store.dispatch('setUrl',this.url[0]+"/");
+        this.$store.dispatch('doEdit',obj);
+      },
+
+      doDelMore(){
+        this.$refs.tabs.$emit('delMore')
+      },
+      refresh(){
+        this.$store.dispatch('refresh');
+      },
+    },
+    mounted(){
+      this.$store.dispatch('setTabs',false);
       this.$store.dispatch('setOpt',this.newOpt);
       let that = this;
       $(window).resize(() => {
