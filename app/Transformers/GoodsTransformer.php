@@ -24,7 +24,7 @@ class GoodsTransformer extends TransformerAbstract
             'img' => $goods->img,
             'url' => $goods->url,
             'status' => $goods->status,
-            'nis_stop_proick' => $goods->is_stop_pro,
+            'is_stop_pro' => $goods->is_stop_pro,
             'productspecs' => $goods->productSpecs()->with('combinations.comProSpec')->get(),
             'created_at' => $goods->created_at
                                     ->toDateTimeString(),
