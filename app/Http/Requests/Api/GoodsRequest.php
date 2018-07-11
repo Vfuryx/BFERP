@@ -21,7 +21,7 @@ class GoodsRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'goods_sn' => 'required|string|max:255',
+                    'commodity_code' => 'required|string|max:255',
                     'jd_sn' => 'required|string|max:255',
                     'vips_sn' => 'required|string|max:255',
                     'factory_model' => 'required|string|max:255',
@@ -50,7 +50,7 @@ class GoodsRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'goods_sn' => 'string|max:255',
+                    'commodity_code' => 'string|max:255',
                     'jd_sn' => 'string|max:255',
                     'vips_sn' => 'string|max:255',
                     'factory_model' => 'string|max:255',
@@ -95,9 +95,9 @@ class GoodsRequest extends FormRequest
     {
         return [
 
-            'goods_sn.required' => '商品编码必填',
-            'goods_sn.string' => '商品编码必须string类型',
-            'goods_sn.max' => '商品编码最大长度为255',
+            'commodity_code.required' => '商品编码必填',
+            'commodity_code.string' => '商品编码必须string类型',
+            'commodity_code.max' => '商品编码最大长度为255',
 
             'jd_sn.required' => '京东编码必填',
             'jd_sn.string' => '京东编码必须string类型',
@@ -158,7 +158,7 @@ class GoodsRequest extends FormRequest
     public function attributes()
     {
         return [
-            'goods_sn' => '商品编码',
+            'commodity_code' => '商品编码',
             'jd_sn' => '京东编码',
             'vips_sn' => '唯品会编码',
             'factory_model' => '工厂型号',

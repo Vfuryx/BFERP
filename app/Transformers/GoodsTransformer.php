@@ -11,7 +11,7 @@ class GoodsTransformer extends TransformerAbstract
     {
         return [
             'id' => $goods->id,
-            'goods_sn' => $goods->goods_sn,
+            'commodity_code' => $goods->commodity_code,
             'jd_sn' => $goods->jd_sn,
             'vips_sn' => $goods->vips_sn,
             'factory_model' => $goods->factory_model,

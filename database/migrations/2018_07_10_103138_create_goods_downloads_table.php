@@ -14,12 +14,23 @@ class CreateGoodsDownloadsTable extends Migration
     public function up()
     {
         Schema::create('goods_downloads', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name')->comment('产品名称');
-            $table->string('binds')->comment('产品的非关键属性列表.格式:pid:vid;pid:vid.');
-            $table->string('sale_props')->comment('产品的销售属性列表.格式:pid:vid;pid:vid');
-            $table->string('Price')->comment('产品的市场价.单位为元.精确到2位小数;如:200.07');
-            $table->string('desc')->comment('产品的描述.最大25000个字节');
+            $table->increments('goods_downloads_id')->comment('下载商品ID');
+            $table->unsignedInteger('shops_id')->comment('店铺id');
+            $table->unsignedBigInteger('num_iid')->comment('	商品数字id');
+            $table->unsignedBigInteger('cid')->comment('商品所属的叶子类目 id');
+            $table->string('seller_cids')->comment('商品所属的店铺内卖家自定义类目列表');
+            $table->string('props')->comment('商品属性 格式：pid:vid;pid:vid');
+            $table->string('title')->comment('商品标题,不能超过60字节');
+            $table->decimal('price',10,2)->comment('商品价格，格式：5.00；单位：元；精确到：分');
+            $table->integer('num')->comment('商品数量');
+            $table->string('nick')->comment('卖家昵称');
+            $table->string('pic_url')->comment('商品主图片地址');
+            $table->string('approve_status')->comment('商品上传后的状态。onsale出售中，instock库中');
+            $table->integer('valid_thru')->comment('7 有效期,7或者14（默认是7天）');
+            $table->string('type')->comment('商品类型(fixed:一口价;auction:拍卖)注：取消团购');
+            $table->dateTime('list_time')->commet('上架时间（格式：yyyy-MM-dd HH:mm:ss）');
+            $table->dateTime('delist_time')->commet('下架时间（格式：yyyy-MM-dd HH:mm:ss）');
+            $table->dateTime('modified ')->commet('商品修改时间（格式：yyyy-MM-dd HH:mm:ss）');
             $table->timestamps();
         });
     }

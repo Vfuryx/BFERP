@@ -13,11 +13,18 @@ class Shop extends Model
         'platform_id', 'is_waybill', 'status',
     ];
 
-    public function warehouse (){
+    public function warehouse ()
+    {
         return $this->belongsTo(Warehouse::class);
     }
 
-    public function platform(){
+    public function platform()
+    {
         return $this->belongsTo(Platform::class);
+    }
+
+    public function goodsDownloads()
+    {
+        return $this->hasMany(GoodsDownload::class);
     }
 }

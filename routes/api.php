@@ -21,7 +21,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-       'middleware' => ['api.throttle','token.canrefresh'],
+        'middleware' => ['api.throttle','token.canrefresh'],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
@@ -332,52 +332,58 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.departments.editstatusbyids');
 
          //商品资源
-         $api->get('goods', 'GoodsController@index')
-             ->name('api.goods.index');
-         $api->get('goods/{goods}', 'GoodsController@show')
-             ->name('api.goods.show');
-         $api->post('goods', 'GoodsController@store')
-             ->name('api.goods.store');
-         $api->patch('goods/{goods}', 'GoodsController@update')
-             ->name('api.goods.update');
-         $api->delete('goods/{goods}', 'GoodsController@destroy')
-             ->name('api.goods.destroy');
-         $api->delete('goods', 'GoodsController@destroybyids')
-             ->name('api.goods.destroybyids');
-         $api->put('goods', 'GoodsController@editStatusByIds')
-             ->name('api.goods.editstatusbyids');
+        $api->get('goods', 'GoodsController@index')
+            ->name('api.goods.index');
+        $api->get('goods/{goods}', 'GoodsController@show')
+            ->name('api.goods.show');
+        $api->post('goods', 'GoodsController@store')
+            ->name('api.goods.store');
+        $api->patch('goods/{goods}', 'GoodsController@update')
+            ->name('api.goods.update');
+        $api->delete('goods/{goods}', 'GoodsController@destroy')
+            ->name('api.goods.destroy');
+        $api->delete('goods', 'GoodsController@destroybyids')
+            ->name('api.goods.destroybyids');
+        $api->put('goods', 'GoodsController@editStatusByIds')
+            ->name('api.goods.editstatusbyids');
 
-         //产品规格资源
-         $api->get('productspecs', 'ProductSpecsController@index')
-             ->name('api.productspecs.index');
-         $api->get('productspecs/{productspec}', 'ProductSpecsController@show')
-             ->name('api.productspecs.show');
-         $api->post('productspecs', 'ProductSpecsController@store')
-             ->name('api.productspecs.store');
-         $api->patch('productspecs/{productspec}', 'ProductSpecsController@update')
-             ->name('api.productspecs.update');
-         $api->delete('productspecs/{productspec}', 'ProductSpecsController@destroy')
-             ->name('api.productspecs.destroy');
-         $api->delete('productspecs', 'ProductSpecsController@destroybyids')
-             ->name('api.goproductspecsods.destroybyids');
-         $api->put('productspecs', 'ProductSpecsController@editStatusByIds')
-             ->name('api.productspecs.editstatusbyids');
+        //产品规格资源
+        $api->get('productspecs', 'ProductSpecsController@index')
+            ->name('api.productspecs.index');
+        $api->get('productspecs/{productspec}', 'ProductSpecsController@show')
+            ->name('api.productspecs.show');
+        $api->post('productspecs', 'ProductSpecsController@store')
+            ->name('api.productspecs.store');
+        $api->patch('productspecs/{productspec}', 'ProductSpecsController@update')
+            ->name('api.productspecs.update');
+        $api->delete('productspecs/{productspec}', 'ProductSpecsController@destroy')
+            ->name('api.productspecs.destroy');
+        $api->delete('productspecs', 'ProductSpecsController@destroybyids')
+            ->name('api.goproductspecsods.destroybyids');
+        $api->put('productspecs', 'ProductSpecsController@editStatusByIds')
+            ->name('api.productspecs.editstatusbyids');
 
-         //组合资源
-         $api->get('combinations', 'CombinationsController@index')
-             ->name('api.combinations.index');
-         $api->get('combinations/{combination}', 'CombinationsController@show')
-             ->name('api.combinations.show');
-         $api->post('combinations', 'CombinationsController@store')
-             ->name('api.combinations.store');
-         $api->patch('combinations/{combination}', 'CombinationsController@update')
-             ->name('api.combinations.update');
-         $api->delete('combinations/{combination}', 'CombinationsController@destroy')
-             ->name('api.combinations.destroy');
-         $api->delete('combinations', 'CombinationsController@destroybyids')
-             ->name('api.combinations.destroybyids');
-         $api->put('combinations', 'CombinationsController@editStatusByIds')
-             ->name('api.combinations.editstatusbyids');
+        //组合资源
+        $api->get('combinations', 'CombinationsController@index')
+            ->name('api.combinations.index');
+        $api->get('combinations/{combination}', 'CombinationsController@show')
+            ->name('api.combinations.show');
+        $api->post('combinations', 'CombinationsController@store')
+            ->name('api.combinations.store');
+        $api->patch('combinations/{combination}', 'CombinationsController@update')
+            ->name('api.combinations.update');
+        $api->delete('combinations/{combination}', 'CombinationsController@destroy')
+            ->name('api.combinations.destroy');
+        $api->delete('combinations', 'CombinationsController@destroybyids')
+            ->name('api.combinations.destroybyids');
+        $api->put('combinations', 'CombinationsController@editStatusByIds')
+            ->name('api.combinations.editstatusbyids');
+
+        //下载商品资源 暂定
+        $api->get('goodsdownloads', 'GoodsDownloadsController@index')
+            ->name('api.goodsdownloads.index');
+
+
 
     
     });

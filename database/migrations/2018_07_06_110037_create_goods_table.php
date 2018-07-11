@@ -15,7 +15,7 @@ class CreateGoodsTable extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('goods_sn')->default('')->comment('商品编码');
+            $table->string('commodity_code')->default('')->comment('商品编码');
             $table->string('jd_sn')->default('')->comment('京东编码');
             $table->string('vips_sn')->default('')->comment('唯品会编码');
             $table->string('factory_model')->default('')->comment('工厂型号');

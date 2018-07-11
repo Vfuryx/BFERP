@@ -42,7 +42,7 @@ class GoodsController extends Controller
      *       "data": {
      *           {
      *          "id": 1,
-     *          "goods_sn": "商品编码",
+     *          "commodity_code": "商品编码",
      *          "jd_sn": "京东编码",
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
@@ -320,7 +320,7 @@ class GoodsController extends Controller
      * @Post("/goods")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("goods_sn", description="商品编码", required=true),
+     *      @Parameter("commodity_code", description="商品编码", required=true),
      *      @Parameter("jd_sn", description="京东编码", required=true),
      *      @Parameter("vips_sn", description="唯品会编码", required=true),
      *      @Parameter("factory_model", description="工厂型号", required=true),
@@ -337,7 +337,7 @@ class GoodsController extends Controller
      *      @Parameter("productspecs",type="json", description="产品规格json数据", required=true),
      * })
      * @Request({
-     *      "goods_sn": "商品编码",
+     *      "commodity_code": "商品编码",
      *      "jd_sn": "京东编码",
      *      "vips_sn": "唯品会编码",
      *      "factory_model": "工厂型号",
@@ -472,7 +472,7 @@ class GoodsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "goods_sn": "商品编码",
+     *          "commodity_code": "商品编码",
      *          "jd_sn": "京东编码",
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
@@ -778,7 +778,7 @@ class GoodsController extends Controller
      *      }),
      *      @Response(200, body={
      *          "id": 1,
-     *          "goods_sn": "商品编码",
+     *          "commodity_code": "商品编码",
      *          "jd_sn": "京东编码",
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
@@ -1041,7 +1041,7 @@ class GoodsController extends Controller
      * @Patch("/goods/:id")
      * @Versions({"v1"})
      * @Request({
-     *      "goods_sn": "商品编码",
+     *      "commodity_code": "商品编码",
      *      "jd_sn": "京东编码",
      *      "vips_sn": "唯品会编码",
      *      "factory_model": "工厂型号",
@@ -1214,7 +1214,7 @@ class GoodsController extends Controller
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "goods_sn": "商品编码1",
+     *          "commodity_code": "商品编码1",
      *          "jd_sn": "京东编码1",
      *          "vips_sn": "唯品会编码1",
      *          "factory_model": "工厂型号1",
