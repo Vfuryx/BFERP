@@ -20,15 +20,16 @@ class GoodsDownloadsController extends Controller
      * @Get("/goodsdownloads")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("shop_id", type="integer", description="店铺id", required=true)
-     *      @Parameter("dl_type",  description="下载类型 seller在售商品，inventory库存商品", required=true)
-     *      @Parameter("commodity_code",  description="商品编码", required=false)
+     *      @Parameter("shop_id", type="integer", description="店铺id", required=true),
+     *      @Parameter("dl_type",  description="下载类型 seller在售商品，inventory库存商品", required=true),
+     *      @Parameter("commodity_code",  description="商品编码", required=false, default="all"),
      * })
      * @Response(200, body={
      * "data": {
      *      {
      *        "PS": "安照erp做出界面，暂时还没数据"
-     *     }
+     *      }
+     *    }
      * })
      */
     public function index(GoodsDownloadRequest $request)

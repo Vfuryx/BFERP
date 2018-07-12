@@ -21,7 +21,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-        'middleware' => ['api.throttle','token.canrefresh'],
+       'middleware' => ['api.throttle','token.canrefresh'],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
@@ -382,6 +382,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //下载商品资源 暂定
         $api->get('goodsdownloads', 'GoodsDownloadsController@index')
             ->name('api.goodsdownloads.index');
+
+        //下载订单资源 暂定
+        $api->get('orderdownloads', 'OrderDownloadsController@index')
+            ->name('api.orderdownloads.index');
 
 
 

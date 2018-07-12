@@ -5058,7 +5058,7 @@ FORMAT: 1A
                 "data": [
                     {
                         "id": 1,
-                        "goods_sn": "商品编码",
+                        "commodity_code": "商品编码",
                         "jd_sn": "京东编码",
                         "vips_sn": "唯品会编码",
                         "factory_model": "工厂型号",
@@ -5330,7 +5330,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + goods_sn: (string, required) - 商品编码
+    + commodity_code: (string, required) - 商品编码
     + jd_sn: (string, required) - 京东编码
     + vips_sn: (string, required) - 唯品会编码
     + factory_model: (string, required) - 工厂型号
@@ -5352,7 +5352,7 @@ FORMAT: 1A
     + Body
 
             {
-                "goods_sn": "商品编码",
+                "commodity_code": "商品编码",
                 "jd_sn": "京东编码",
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
@@ -5491,7 +5491,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "goods_sn": "商品编码",
+                "commodity_code": "商品编码",
                 "jd_sn": "京东编码",
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
@@ -5763,7 +5763,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "goods_sn": "商品编码",
+                "commodity_code": "商品编码",
                 "jd_sn": "京东编码",
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
@@ -6023,7 +6023,7 @@ FORMAT: 1A
     + Body
 
             {
-                "goods_sn": "商品编码",
+                "commodity_code": "商品编码",
                 "jd_sn": "京东编码",
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
@@ -6204,7 +6204,7 @@ FORMAT: 1A
 
             {
                 "id": 1,
-                "goods_sn": "商品编码1",
+                "commodity_code": "商品编码1",
                 "jd_sn": "京东编码1",
                 "vips_sn": "唯品会编码1",
                 "factory_model": "工厂型号1",
@@ -7418,6 +7418,55 @@ FORMAT: 1A
     + Body
 
             []
+
+# goodsdownloads [/api]
+下载商品资源
+
+## 获取所有下载商品 [GET /api/goodsdownloads]
+
+
++ Parameters
+    + shop_id: (integer, required) - 店铺id
+    + dl_type: (string, required) - 下载类型 seller在售商品，inventory库存商品
+    + commodity_code: (string, optional) - 商品编码
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "PS": "安照erp做出界面，暂时还没数据"
+                    }
+                ]
+            }
+
+# orderdownloads [/api]
+订单下载资源
+
+## 获取所有订单下载 [GET /api/orderdownloads]
+
+
++ Parameters
+    + shop_id: (integer, required) - 交易编号
+    + start_created: (date, required) - 起始日期
+    + end_created: (date, required) - 结束日期
+    + buyer_nick: (string, optional) - 买家昵称
+        + Default: all
+    + tid: (integer, optional) - 交易编号
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "PS": "安照erp做出界面，暂时还没数据"
+                    }
+                ]
+            }
 
 # Authorizations [/api]
 登录资源

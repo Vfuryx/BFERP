@@ -16,7 +16,8 @@ class CreateGoodsDownloadsTable extends Migration
         Schema::create('goods_downloads', function (Blueprint $table) {
             $table->increments('goods_downloads_id')->comment('下载商品ID');
             $table->unsignedInteger('shops_id')->comment('店铺id');
-            $table->unsignedBigInteger('num_iid')->comment('	商品数字id');
+            $table->string('dl_type')->comment('下载类型 seller在售商品，inventory库存商品');
+            $table->unsignedBigInteger('num_iid')->comment('商品数字id');
             $table->unsignedBigInteger('cid')->comment('商品所属的叶子类目 id');
             $table->string('seller_cids')->comment('商品所属的店铺内卖家自定义类目列表');
             $table->string('props')->comment('商品属性 格式：pid:vid;pid:vid');
