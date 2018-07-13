@@ -1,14 +1,14 @@
 webpackJsonp([105],{
 
-/***/ 497:
+/***/ 499:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(702)
+var __vue_script__ = __webpack_require__(704)
 /* template */
-var __vue_template__ = __webpack_require__(703)
+var __vue_template__ = __webpack_require__(705)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 702:
+/***/ 704:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -105,14 +105,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      // show: false,
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
         ent: this.addNew
+      }, {
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.editInfo,
+        nClick: false
       }, {
         cnt: '删除',
         icon: 'bf-del',
@@ -138,22 +149,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       getsInfo: [[], [], [], []],
       tableHead: [[{
         label: '物流代码',
-        width: '220',
+        width: '250',
         prop: "code",
         holder: '请输入物流代码',
         type: 'text'
       }, {
         label: '物流名称',
-        width: '200',
+        width: '250',
         prop: "name",
         holder: '请输入物流名称',
         type: 'text'
       }, {
         label: '报表格式',
-        width: '220',
+        width: '240',
         prop: 'report',
         holder: '请选择报表格式',
-        type: 'select'
+        type: 'select',
+        val: this.sonArr
+      }, {
+        label: '运费类型',
+        width: '250',
+        prop: "freight_type",
+        holder: '请选择运费类型',
+        type: 'select',
+        val: this.sonArr
       },
       /* {
          label: '物流区域',
@@ -184,12 +203,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         type: 'number'
       },*/
       {
-        label: '运费类型',
-        width: '250',
-        prop: "freight_type",
-        holder: '请选择运费类型',
-        type: 'select'
-      }, {
         label: '物流电话',
         width: '250',
         prop: "phone",
@@ -209,80 +222,81 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         type: 'textarea'
       }, {
         label: '创建时间',
-        width: '230',
+        width: '280',
         prop: "created_at",
         holder: '请输入创建时间',
         type: 'text',
         beAble: true
       }, {
         label: '是否启用',
-        width: '180',
+        width: '200',
         prop: "status",
         holder: '请选择是否启用',
         type: 'select_def'
       }], [{
         label: '物流名称',
-        width: '220',
+        width: '240',
         prop: "logistics",
         holder: '请输入物流名称',
-        type: 'select'
+        type: 'select',
+        val: this.sonArr
       }, {
         label: '省',
-        width: '200',
+        width: '230',
         prop: "province",
         holder: '请输入所在省',
         type: 'text'
       }, {
         label: '市',
-        width: '200',
+        width: '230',
         prop: "city",
         holder: '请输入所在市',
         type: 'text'
       }, {
         label: '区',
-        width: '200',
+        width: '230',
         prop: "district",
         holder: '请输入所在区',
         type: 'text'
       }, {
         label: '提货地址',
-        width: '220',
+        width: '260',
         prop: "address",
         holder: '请输入详细地址',
         type: 'textarea'
       }, {
         label: '提货电话',
-        width: '200',
+        width: '230',
         prop: "phone",
         holder: '请输入提货电话',
         type: 'tel'
       }, {
         label: '物流费用',
-        width: '180',
+        width: '220',
         prop: "price",
         holder: '请输入物流费用',
         type: 'number'
       }, {
         label: '重量单价',
-        width: '180',
+        width: '220',
         prop: "weight_univalent",
         holder: '请输入重量单价',
         type: 'number'
       }, {
         label: '到达天数',
-        width: '180',
+        width: '200',
         prop: "expected_days",
         holder: '请输入到达天数',
         type: 'number'
       }, {
         label: '直达(中转)',
-        width: '180',
+        width: '250',
         prop: "route",
         holder: '请选择中转或直达',
         type: 'select_def'
       }, {
         label: '包邮',
-        width: '180',
+        width: '200',
         prop: "is_free_shipping",
         holder: '请选择是否包邮',
         type: 'select_def'
@@ -361,7 +375,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
        },*/
       {
         label: '创建时间',
-        width: '270',
+        width: '280',
         prop: "created_at",
         // holder: '请输入物流代码',
         type: 'text',
@@ -477,8 +491,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: '报表格式',
         prop: 'report_id',
         holder: '请选择报表格式',
-        type: 'select'
-        // val: this.reportType
+        type: 'select',
+        val: this.sonArr
       },
       /* {
          label:'物流区域',
@@ -487,6 +501,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
          type: 'text'
        },*/
       {
+        label: '运费类型',
+        prop: 'freight_type_id',
+        holder: '请输入运费类型',
+        type: 'select',
+        val: this.sonArr
+      }, {
         label: '预计天数',
         prop: 'expected_days',
         holder: '请输入预计天数',
@@ -502,11 +522,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         holder: '请输入物流地址',
         type: 'textarea'
       }, {
-        label: '运费类型',
-        prop: 'freight_type_id',
-        holder: '请输入运费类型',
-        type: 'select'
-      }, {
         label: '备注',
         prop: 'remark',
         holder: '请输入备注',
@@ -520,7 +535,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: '物流名称',
         prop: 'logistics_id',
         holder: '请输入物流名称',
-        type: 'select'
+        type: 'select',
+        val: this.sonArr
       }, {
         label: '省',
         prop: 'province',
@@ -639,39 +655,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       inputChange: false,
       multipleSelection: [],
       delArr: [],
+      sonArr: [],
       pagination: {
         current_page: 1,
         per_page: 0,
         page_total: 0
       },
-      showPage: true
-      // selects:[],
+      showPage: true,
+      doChange: [false, false, true, true],
+      editTitle: ['修改物流公司信息', '修改物流城市信息'],
+      editMask: [{ show: false }, { show: false }, { show: false }, { show: false }],
+      editId: '',
+      editData: {},
+      // editList: {},
+      leftTab: '修改'
     };
   },
-  beforeCreate: function beforeCreate() {},
 
-  watch: {
-    rep: function rep(newValue) {}
-  },
   computed: {
-    selects: {
-      get: function get() {
-        return this.$store.state.SonData.reports;
-      },
-      set: function set() {}
-    },
-    reportType: {
-      get: function get() {
-        return this.$store.state.SonData.reports;
-      },
-      set: function set() {}
-    },
-    freightsType: {
-      get: function get() {
-        return this.$store.state.SonData.freights;
-      },
-      set: function set() {}
-    }
+    /* selects: {
+       get: function () {
+         return this.$store.state.SonData.reports;
+       },
+       set: function () {
+       }
+     },
+     reportType: {
+       get: function () {
+         return this.$store.state.SonData.reports;
+       },
+       set: function () {
+       }
+     },
+     freightsType: {
+       get: function () {
+         return this.$store.state.SonData.freights
+       },
+       set: function () {
+       }
+     },*/
   },
   methods: {
     test: function test() {
@@ -680,12 +702,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleTabsClick: function handleTabsClick() {
       this.loading = true;
       this.getInfo(this.url[this.activeName]);
+      if (this.activeName == 2 || this.activeName == 3) {
+        this.newOpt[1].nClick = true;
+      } else {
+        this.newOpt[1].nClick = false;
+      }
     },
     addNew: function addNew() {
       this.showMaskArr[this.activeName].show = true;
     },
     CB_dialog: function CB_dialog(val) {
       this.showMaskArr[this.activeName].show = val;
+      this.editMask[this.activeName].show = val;
     },
     submitForm: function submitForm() {
       var _this = this;
@@ -718,7 +746,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
            expected_days: this.ruleForm[1].expected_days,
          };
        }*/
-      /*this.ruleForm[this.refArr[this.activeName]]*/
       this.$post(this.url[this.activeName], this.ruleForm[this.activeName]).then(function () {
         _this.$message({
           message: '添加成功',
@@ -743,6 +770,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*处理批量删除*/
     handleSelectionChange: function handleSelectionChange(val) {
+      if (val.length != 0) {
+        this.editId = val[0].id;
+      } else {
+        this.editId = '';
+      }
       this.multipleSelection = val;
       var del = [];
       this.multipleSelection.forEach(function (selectedItem) {
@@ -806,6 +838,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     editSave: function editSave(row) {
       var _this3 = this;
 
+      console.log(row);
       var newData = {};
       if (this.activeName == '0') {
         newData = {
@@ -861,6 +894,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this3.getInfo(_this3.url[_this3.activeName]);
           _this3.currentIndex = '';
           _this3.inputChange = false;
+          _this3.refresh();
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -884,60 +918,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleEdit: function handleEdit() {
       this.inputChange = true;
     },
-    getInfo: function getInfo(url) {
+    getSonData: function getSonData(url, propVal) {
       var _this4 = this;
+
+      this.$fetch(url).then(function (res) {
+        var obj = {};
+        obj[propVal] = res.data;
+        _this4.sonArr.push(obj);
+      });
+    },
+    getInfo: function getInfo(url) {
+      var _this5 = this;
 
       this.showPage = true;
       this.$fetch(url).then(function (res) {
-        _this4.getsInfo[_this4.activeName] = res.data;
-        _this4.loading = false;
+        _this5.getsInfo[_this5.activeName] = res.data;
+        _this5.loading = false;
         var pg = res.meta.pagination;
-        _this4.$store.dispatch('currentPage', pg.current_page);
-        _this4.$store.commit('PER_PAGE', pg.per_page);
-        _this4.$store.commit('PAGE_TOTAL', pg.total);
-        if (url == _this4.url[3]) {
-          _this4.$store.dispatch('setReports', res.data);
+        _this5.$store.dispatch('currentPage', pg.current_page);
+        _this5.$store.commit('PER_PAGE', pg.per_page);
+        _this5.$store.commit('PAGE_TOTAL', pg.total);
+        /* if (url == this.url[3]) {
+           this.$store.dispatch('setReports', res.data)
+         }*/
+        if (url == _this5.url[0]) {
+          var obj = {};
+          obj["0"] = res.data;
+          _this5.sonArr.push(obj);
         }
       }, function (err) {
         if (err.response) {
-          var arr = err.response.data.errors;
-          var arr1 = [];
-          for (var i in arr) {
-            arr1.push(arr[i]);
-          }
-          var str = arr1.join(',');
-          _this4.$message.error({
-            message: str
-          });
-        }
-      });
-    },
-    del: function del(row, e) {
-      // alert(1);
-      this.showDel = true;
-      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
-      this.delId = row.id;
-    },
-    cancelD: function cancelD() {
-      this.showDel = false;
-      this.$message({
-        message: '取消删除',
-        type: 'info'
-      });
-    },
-    confirmD: function confirmD(id) {
-      var _this5 = this;
-
-      this.$del(this.url[this.activeName] + '/' + id).then(function () {
-        _this5.$message({
-          message: '删除成功',
-          type: 'success'
-        });
-        _this5.showDel = false;
-        _this5.refresh();
-      }, function (err) {
-        if (err.response) {
-          _this5.showDel = false;
           var arr = err.response.data.errors;
           var arr1 = [];
           for (var i in arr) {
@@ -950,17 +960,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
-    refresh: function refresh() {
+    del: function del(row, e) {
+      this.showDel = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    cancelD: function cancelD() {
+      this.showDel = false;
+      this.$message({
+        message: '取消删除',
+        type: 'info'
+      });
+    },
+    confirmD: function confirmD(id) {
       var _this6 = this;
+
+      this.$del(this.url[this.activeName] + '/' + id).then(function () {
+        _this6.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this6.showDel = false;
+        _this6.refresh();
+      }, function (err) {
+        if (err.response) {
+          _this6.showDel = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this6.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    refresh: function refresh() {
+      var _this7 = this;
 
       this.loading = true;
       this.getInfo(this.url[this.activeName]);
       setTimeout(function () {
-        _this6.loading = false;
+        _this7.loading = false;
       }, 2000);
     },
     dbClick: function dbClick(row) {
-      var _this7 = this;
+      var _this8 = this;
 
       var id = row.id;
       this.activeName = '1';
@@ -970,28 +1017,137 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (res) {
           var arr = [];
           arr.push(res);
-          _this7.getsInfo[_this7.activeName] = arr;
-          _this7.loading = false;
+          _this8.getsInfo[_this8.activeName] = arr;
+          _this8.loading = false;
         } else {
-          _this7.$message({
+          _this8.$message({
             message: '没有查询到相关数据',
             type: 'info'
           });
-          _this7.getsInfo[_this7.activeName] = [];
+          _this8.getsInfo[_this8.activeName] = [];
         }
       }, function (err) {
         console.log(err);
-        _this7.$message.error({
+        _this8.$message.error({
           message: '查询失败'
         });
-        _this7.loading = false;
-        _this7.getsInfo[_this7.activeName] = [];
+        _this8.loading = false;
+        _this8.getsInfo[_this8.activeName] = [];
       });
+    },
+    editForm: function editForm() {
+      var _this9 = this;
+
+      var obj = {};
+      if (this.activeName == 0) {
+        obj = {
+          code: this.editData.code,
+          name: this.editData.name,
+          report_id: this.editData.report_id,
+          expected_days: this.editData.expected_days,
+          phone: this.editData.phone,
+          address: this.editData.address,
+          freight_type_id: this.editData.freight_type_id,
+          remark: this.editData.remark,
+          status: this.editData.status
+        };
+      } else if (this.activeName == 1) {
+        obj = {
+          logistics_id: this.editData.logistics_id,
+          province: this.editData.province,
+          city: this.editData.city,
+          district: this.editData.district,
+          address: this.editData.address,
+          phone: this.editData.phone,
+          price: this.editData.price,
+          weight_univalent: this.editData.weight_univalent,
+          expected_days: this.editData.expected_days,
+          route: this.editData.route,
+          is_free_shipping: this.editData.is_free_shipping,
+          remark: this.editData.remark
+        };
+      }
+      this.$patch(this.url[this.activeName] + '/' + this.editId, obj).then(function () {
+        _this9.$message({
+          message: '修改成功',
+          type: 'success'
+        });
+        _this9.editMask[_this9.activeName].show = false;
+        _this9.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this9.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    editInfo: function editInfo() {
+      var _this10 = this;
+
+      if (this.newOpt[1].nClick) {
+        return;
+      } else {
+        if (this.multipleSelection.length == 0) {
+          this.$message({
+            message: '没有选择要修改的数据',
+            type: 'warning'
+          });
+          return;
+        } else if (this.multipleSelection.length >= 2) {
+          this.$message({
+            message: '只能修改单条数据',
+            type: 'warning'
+          });
+          return;
+        } else {
+          this.editMask[this.activeName].show = true;
+          this.$fetch(this.url[this.activeName] + '/' + this.editId).then(function (res) {
+            if (_this10.activeName == 0) {
+              _this10.editData = {
+                code: res.code,
+                name: res.name,
+                report_id: res.report.id,
+                expected_days: res.expected_days,
+                phone: res.phone,
+                address: res.address,
+                freight_type_id: res.freight_type.id,
+                remark: res.remark,
+                status: res.status
+              };
+            } else if (_this10.activeName == 1) {
+              _this10.editData = {
+                logistics_id: res.logistics.id,
+                province: res.province,
+                city: res.city,
+                district: res.district,
+                address: res.address,
+                phone: res.phone,
+                price: res.price,
+                weight_univalent: res.weight_univalent,
+                expected_days: res.expected_days,
+                route: res.route,
+                is_free_shipping: res.is_free_shipping,
+                remark: res.remark
+              };
+            }
+          }, function (err) {
+            console.log(err);
+          });
+        }
+      }
     }
   },
   mounted: function mounted() {
-    console.log(this.a);
     this.getInfo(this.url[0]);
+    this.getSonData('/printreports', '2');
+    this.getSonData('/freighttypes', '3');
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -1002,7 +1158,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 703:
+/***/ 705:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1034,7 +1190,9 @@ var render = function() {
                   listData: _vm.getsInfo[this.activeName],
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+                  currentIndex: _vm.currentIndex,
+                  selects: _vm.sonArr,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -1059,7 +1217,8 @@ var render = function() {
                   listData: _vm.getsInfo[this.activeName],
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -1083,7 +1242,8 @@ var render = function() {
                   listData: _vm.getsInfo[this.activeName],
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -1107,7 +1267,8 @@ var render = function() {
                   listData: _vm.getsInfo[this.activeName],
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -1127,17 +1288,33 @@ var render = function() {
       _vm._v(" "),
       _c("add-new", {
         attrs: {
-          "visible-add": _vm.showMaskArr[_vm.activeName].show,
-          title: _vm.title[_vm.activeName],
-          "rule-form": _vm.ruleForm[_vm.activeName],
-          rules: _vm.rules[_vm.activeName],
+          "visible-add": _vm.showMaskArr[this.activeName].show,
+          title: _vm.title[this.activeName],
+          "rule-form": _vm.ruleForm[this.activeName],
+          rules: _vm.rules[this.activeName],
           "add-arr": _vm.addArr[_vm.activeName],
           url: _vm.url[_vm.activeName],
           "new-ref": _vm.refArr[_vm.activeName],
           halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.reportType
+          selects: _vm.sonArr
         },
         on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.editMask[this.activeName].show,
+          title: _vm.editTitle[_vm.activeName],
+          rules: _vm.rules[_vm.activeName],
+          "new-ref": _vm.refArr[_vm.activeName],
+          "rule-form": _vm.editData,
+          "add-arr": _vm.addArr[_vm.activeName],
+          url: _vm.url[_vm.activeName],
+          halfForm: _vm.halfForm[_vm.activeName].show,
+          selects: _vm.sonArr,
+          leftTab: _vm.leftTab
+        },
+        on: { submitEvent: _vm.editForm, "CB-dialog": _vm.CB_dialog }
       }),
       _vm._v(" "),
       _c(

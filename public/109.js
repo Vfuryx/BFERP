@@ -1,14 +1,14 @@
 webpackJsonp([109],{
 
-/***/ 519:
+/***/ 521:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(746)
+var __vue_script__ = __webpack_require__(748)
 /* template */
-var __vue_template__ = __webpack_require__(747)
+var __vue_template__ = __webpack_require__(749)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 746:
+/***/ 748:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -268,7 +268,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         holder: '请选择状态',
         type: 'select_stu'
       }],
-      refArr: ['ruleForm'],
+      refArr: 'ruleForm',
       showDel: false,
       delId: '',
       inputChange: false,
@@ -504,7 +504,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 747:
+/***/ 749:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -539,7 +539,7 @@ var render = function() {
           rules: _vm.rules,
           "add-arr": _vm.addArr,
           url: _vm.url,
-          "new-ref": _vm.refArr[0]
+          "new-ref": _vm.refArr
         },
         on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
       }),

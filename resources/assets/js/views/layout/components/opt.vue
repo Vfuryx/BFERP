@@ -3,8 +3,8 @@
         <div class="opt clearfix">
             <div v-for="(item,index) in opts" class="list" @click="addActive(index)" :class="{active:index==current}">
                 <el-tooltip :content="item.cnt" placement="top" effect="dark">
-                    <i class="iconfont optIcon" :class="item.icon" @click="item.ent">
-                        <span>{{item.cnt}}</span>
+                       <i class="iconfont optIcon" :class="item.nClick?'bf-forbid':item.icon" @click="item.ent" >
+                        <span class="text">{{item.cnt}}</span>
                     </i>
                 </el-tooltip>
             </div>
@@ -24,7 +24,7 @@
   export default{
     data(){
         return {
-          current:''
+          current:'',
         }
     },
     computed:{
@@ -44,3 +44,10 @@
     mounted(){}
     }
 </script>
+<style lang="scss" scoped>
+    .disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.6;
+    }
+</style>

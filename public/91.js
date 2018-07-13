@@ -1,14 +1,14 @@
 webpackJsonp([91],{
 
-/***/ 501:
+/***/ 503:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(710)
+var __vue_script__ = __webpack_require__(712)
 /* template */
-var __vue_template__ = __webpack_require__(711)
+var __vue_template__ = __webpack_require__(713)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,11 +48,16 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 710:
+/***/ 712:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
 //
 //
 //
@@ -101,6 +106,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-add',
         ent: this.addNew
       }, {
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.editInfo,
+        nClick: true
+      }, {
         cnt: '删除',
         icon: 'bf-del',
         ent: this.delMore
@@ -128,7 +138,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: '180',
         prop: "name",
         holder: '请输入名称',
-        type: 'text'
+        type: 'text',
+        beAble: true
       }, {
         label: '公司',
         width: '180',
@@ -229,7 +240,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: '',
         prop: "suppliers",
         holder: '请选择供应商名称',
-        type: 'select'
+        type: 'select',
+        val: this.sonArr
       }, {
         label: '系列代码',
         width: '',
@@ -397,7 +409,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: '供应商名',
         prop: 'suppliers_id',
         holder: '请输入供应商名称',
-        type: 'select'
+        type: 'select',
+        val: this.sonArr
       }, {
         label: '系列代码',
         prop: 'code',
@@ -437,65 +450,79 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         page_total: 0
       },
       resetValue: this.ruleForm,
-      showPage: true
+      showPage: true,
+      doChange: [true, false],
+      sonArr: [],
+      leftTab: '修改',
+      editMask: [{ show: false }, { show: false }],
+      editTitle: ['修改产品系列信息'],
+      editId: '',
+      editData: {}
     };
   },
 
   computed: {
-    suppliersId: {
-      get: function get() {
-        return this.$store.state.SonData.suppliers;
-      },
-      set: function set() {}
-    }
+    /* suppliersId: {
+       get: function () {
+         return this.$store.state.SonData.suppliers
+       },
+       set: function () {
+       }
+     }*/
   },
   methods: {
     test: function test() {},
     handleTabsClick: function handleTabsClick() {
       this.loading = true;
       this.getInfo(this.url[this.activeName]);
+      if (this.activeName == 1) {
+        this.newOpt[1].nClick = false;
+      } else {
+        this.newOpt[1].nClick = true;
+      }
     },
     addNew: function addNew() {
       this.showMaskArr[this.activeName].show = true;
     },
     CB_dialog: function CB_dialog(val) {
       this.showMaskArr[this.activeName].show = val;
+      this.editMask[this.activeName].show = val;
     },
     submitForm: function submitForm() {
       var _this = this;
 
-      var addObj = {};
-      if (this.activeName == '0') {
-        addObj = {
-          name: this.ruleForm[0].name,
-          company: this.ruleForm[0].company,
-          code: this.ruleForm[0].code,
-          province: this.ruleForm[0].province,
-          city: this.ruleForm[0].city,
-          district: this.ruleForm[0].district,
-          address: this.ruleForm[0].address,
-          zipcode: this.ruleForm[0].zipcode,
-          contacts: this.ruleForm[0].contacts,
-          phone: this.ruleForm[0].phone,
-          mobile: this.ruleForm[0].mobile,
-          fax: this.ruleForm[0].fax,
-          email: this.ruleForm[0].email,
-          remark: this.ruleForm[0].remark,
-          is_scan: this.ruleForm[0].is_scan,
-          status: this.ruleForm[0].status,
-          auto_valuationy: this.ruleForm[0].auto_valuationy
-        };
-      } else if (this.activeName == '1') {
-        addObj = {
-          suppliers_id: this.ruleForm[1].suppliers_id,
-          code: this.ruleForm[1].code,
-          name: this.ruleForm[1].name,
-          description: this.ruleForm[1].description,
-          remark: this.ruleForm[1].remark,
-          status: this.ruleForm[1].status
-        };
-      }
-      this.$post(this.url[this.activeName], addObj).then(function () {
+      /* let addObj = {};
+       if (this.activeName == '0') {
+         addObj = {
+           name: this.ruleForm[0].name,
+           company: this.ruleForm[0].company,
+           code: this.ruleForm[0].code,
+           province: this.ruleForm[0].province,
+           city: this.ruleForm[0].city,
+           district: this.ruleForm[0].district,
+           address: this.ruleForm[0].address,
+           zipcode: this.ruleForm[0].zipcode,
+           contacts: this.ruleForm[0].contacts,
+           phone: this.ruleForm[0].phone,
+           mobile: this.ruleForm[0].mobile,
+           fax: this.ruleForm[0].fax,
+           email: this.ruleForm[0].email,
+           remark: this.ruleForm[0].remark,
+           is_scan: this.ruleForm[0].is_scan,
+           status: this.ruleForm[0].status,
+           auto_valuationy: this.ruleForm[0].auto_valuationy
+         };
+       } else if (this.activeName == '1') {
+         addObj = {
+           suppliers_id: this.ruleForm[1].suppliers_id,
+           code: this.ruleForm[1].code,
+           name: this.ruleForm[1].name,
+           description: this.ruleForm[1].description,
+           remark: this.ruleForm[1].remark,
+           status: this.ruleForm[1].status
+         };
+       }*/
+      this.$post(this.url[this.activeName], this.ruleForm[this.activeName]).then(function () {
         _this.$message({
           message: '添加成功',
           type: 'success'
@@ -519,6 +546,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*处理批量删除*/
     handleSelectionChange: function handleSelectionChange(val) {
+      if (val.length != 0) {
+        this.editId = val[0].id;
+      } else {
+        this.editId = '';
+      }
       this.multipleSelection = val;
       var del = [];
       this.multipleSelection.forEach(function (selectedItem) {
@@ -657,7 +689,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this4.$store.commit('PER_PAGE', pg.per_page);
         _this4.$store.commit('PAGE_TOTAL', pg.total);
         if (url == _this4.url[0]) {
-          _this4.$store.dispatch('setSuppliers', res.data);
+          // this.sonArr.push(res.data);
+          var obj = {};
+          obj["0"] = res.data;
+          _this4.sonArr.push(obj);
+
+          // this.$store.dispatch('setSuppliers', res.data)
         } else if (url == _this4.url[1]) {
           _this4.$store.dispatch('setSeries', res.data);
         }
@@ -750,6 +787,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this7.loading = false;
         _this7.getsInfo[_this7.activeName] = [];
       });
+    },
+    editForm: function editForm() {
+      var _this8 = this;
+
+      var obj = {
+        suppliers_id: this.editData.suppliers_id,
+        code: this.editData.code,
+        name: this.editData.name,
+        description: this.editData.description,
+        remark: this.editData.remark,
+        status: this.editData.status
+      };
+      this.$patch(this.url[this.activeName] + '/' + this.editId, obj).then(function () {
+        _this8.$message({
+          message: '修改成功',
+          type: 'success'
+        });
+        _this8.editMask[_this8.activeName].show = false;
+        _this8.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this8.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    editInfo: function editInfo() {
+      var _this9 = this;
+
+      if (this.newOpt[1].nClick) {
+        return;
+      } else {
+        if (this.delArr.length == 0) {
+          this.$message({
+            message: '没有选择要修改的数据',
+            type: 'warning'
+          });
+          return;
+        } else if (this.delArr.length >= 2) {
+          this.$message({
+            message: '只能修改单条数据',
+            type: 'warning'
+          });
+          return;
+        } else {
+          this.editMask[this.activeName].show = true;
+          this.$fetch(this.url[this.activeName] + '/' + this.editId).then(function (res) {
+            _this9.editData = {
+              suppliers_id: res.suppliers.id,
+              code: res.code,
+              name: res.name,
+              description: res.description,
+              remark: res.remark,
+              status: res.status
+            };
+          }, function (err) {
+            console.log(err);
+          });
+        }
+      }
     }
   },
   mounted: function mounted() {
@@ -764,7 +868,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 711:
+/***/ 713:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -796,7 +900,8 @@ var render = function() {
                   listData: _vm.getsInfo[this.activeName],
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -822,7 +927,8 @@ var render = function() {
                   tableHead: _vm.tableHead[this.activeName],
                   loading: _vm.loading,
                   currentIndex: _vm.currentIndex,
-                  selects: _vm.suppliersId
+                  selects: _vm.sonArr,
+                  doChange: _vm.doChange[this.activeName]
                 },
                 on: {
                   handleSelect: _vm.handleSelectionChange,
@@ -850,9 +956,25 @@ var render = function() {
           url: _vm.url[_vm.activeName],
           "new-ref": _vm.refArr[_vm.activeName],
           halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.suppliersId
+          selects: _vm.sonArr
         },
         on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.editMask[this.activeName].show,
+          title: _vm.editTitle[_vm.activeName],
+          rules: _vm.rules[_vm.activeName],
+          "new-ref": _vm.refArr[_vm.activeName],
+          "rule-form": _vm.editData,
+          "add-arr": _vm.addArr[_vm.activeName],
+          url: _vm.url[_vm.activeName],
+          halfForm: _vm.halfForm[_vm.activeName].show,
+          selects: _vm.sonArr,
+          leftTab: _vm.leftTab
+        },
+        on: { submitEvent: _vm.editForm, "CB-dialog": _vm.CB_dialog }
       }),
       _vm._v(" "),
       _c(

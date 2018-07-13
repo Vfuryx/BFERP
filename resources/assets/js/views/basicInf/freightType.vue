@@ -130,7 +130,7 @@
         <!--新增-->
         <add-new :visible-add="showMaskArr" :title="title"
                  :rule-form="ruleForm" :rules="rules" :add-arr="addArr"
-                 :url="url" @submitEvent="submitForm" :new-ref="refArr[0]" @CB-dialog="CB_dialog"></add-new>
+                 :url="url" @submitEvent="submitForm" :new-ref="refArr" @CB-dialog="CB_dialog"></add-new>
         <!--删除-->
         <el-popover
                 placement="top"
@@ -168,8 +168,7 @@
           }
         ],
         getsInfo: [],
-        tableHead:
-          [
+        tableHead:[
             {
               label: '名称',
               width: '250',
@@ -228,7 +227,7 @@
             type: 'select_stu'
           }
         ] ,
-        refArr: ['ruleForm'],
+        refArr: 'ruleForm',
         showDel: false,
         delId: '',
         inputChange: false,

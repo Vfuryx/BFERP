@@ -163,6 +163,9 @@
                          <span v-else-if="item.type=='number'">
                                <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                         </span>
+                        <span v-if="item.type=='url'">
+                      <el-input size="small" type="url" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                    </span>
                         <span v-else-if="item.type == 'select_stu'">
                                  <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble">
                                      <el-option label="0-停用" value="0"></el-option>
@@ -180,10 +183,21 @@
                                         :placeholder="item.holder" @change="handleEdit"></el-input>
                         </span>
                         <span v-else-if="item.type == 'select'">
-                             <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble" v-for="(each,index) in selects" :key="index">
-                                 <el-option v-for="list in each" :key="list.id" :label="list.name" value="list.id"></el-option>
+                             <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble">
+                                 <!-- v-if="selects.length>1" -->
+                                 <span v-for="iList in selects" :key="iList.id">
+                                   <span v-if="iList[index]">
+                                    <el-option v-for="list in iList[index]" :key="list.id" :label="list.name?list.name:list.short_name" :value="list.id"></el-option></span>
+                               </span>
+                               <!--<span v-else>
+                                     <el-option v-for="list in selects[0]" :key="list.id" :label="list.name" :value="list.id"></el-option>
+                                   </span>-->
                              </el-select>
                         </span>
+                       <!-- &lt;!&ndash;是否行内编辑&ndash;&gt;
+                        <span v-else-if="item.beAble">
+                            {{scope.row[item.prop]}}
+                        </span>-->
                         <span v-else>
                                <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
@@ -201,7 +215,11 @@
                                  {{scope.row[item.prop]==0?'否':'是'}}
                             </span>
                         <span v-else-if="item.type=='select'">
-                                 {{scope.row[item.prop].name}}
+                            <span v-if="scope.row[item.prop].name==null">
+                                {{scope.row[item.prop].short_name}}
+                            </span>
+                            <span v-else-if="scope.row[item.prop].short_name==null"></span>
+                                {{scope.row[item.prop].name}}
                             </span>
                             <span v-else>
                                  {{scope.row[item.prop]}}
@@ -217,7 +235,9 @@
                             </el-button>
                         </span>
                     <span v-else>
-                           <el-button size="mini" @click="edit(scope.$index)">编辑</el-button>
+                        <span v-if="doChange">
+                             <el-button size="mini" @click="edit(scope.$index)">编辑</el-button>
+                        </span>
                         </span>
                     <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除
                     </el-button>
@@ -228,7 +248,7 @@
 </template>
 <script>
   export default {
-    props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects'],
+    props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects','doChange'],
     data() {
       return {
         checkboxInit: false,

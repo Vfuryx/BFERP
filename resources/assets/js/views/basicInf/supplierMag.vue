@@ -5,20 +5,25 @@
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
                              :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
                              @del="del" @dbClick="dbClick" :loading="loading" @edit="edit" :currentIndex="currentIndex"
-                             @editCancel="editCancel"></light-table>
+                             @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
             </el-tab-pane>
             <el-tab-pane label="产品系列" name="1">
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
                              :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
                              @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
-                             @editCancel="editCancel" :selects="suppliersId"></light-table>
+                             @editCancel="editCancel" :selects="sonArr" :doChange="doChange[this.activeName]"></light-table>
             </el-tab-pane>
         </el-tabs>
         <!--新增-->
         <add-new :visible-add="showMaskArr[activeName].show" :title="title[activeName]"
                  :rule-form="ruleForm[activeName]" :rules="rules[activeName]" :add-arr="addArr[activeName]"
                  :url="url[activeName]" @submitEvent="submitForm" :new-ref="refArr[activeName]" @CB-dialog="CB_dialog"
-                 :halfForm="halfForm[activeName].show" :selects="suppliersId"></add-new>
+                 :halfForm="halfForm[activeName].show" :selects="sonArr"></add-new>
+        <!--修改-->
+        <add-new :visible-add="editMask[this.activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]" :new-ref="refArr[activeName]"
+                 :rule-form="editData" :add-arr="addArr[activeName]"
+                 :url="url[activeName]" @submitEvent="editForm" @CB-dialog="CB_dialog"
+                 :halfForm="halfForm[activeName].show" :selects="sonArr" :leftTab="leftTab"></add-new>
         <!--删除-->
         <el-popover
                 placement="top"
@@ -46,6 +51,12 @@
             cnt: '新增',
             icon: 'bf-add',
             ent: this.addNew
+          },
+          {
+            cnt: '修改',
+            icon: 'bf-change',
+            ent: this.editInfo,
+            nClick: true
           },
           {
             cnt: '删除',
@@ -82,7 +93,8 @@
               width: '180',
               prop: "name",
               holder: '请输入名称',
-              type: 'text'
+              type: 'text',
+              beAble: true
             },
             {
               label: '公司',
@@ -202,7 +214,8 @@
               width: '',
               prop: "suppliers",
               holder: '请选择供应商名称',
-              type: 'select'
+              type: 'select',
+              val: this.sonArr
             },
             {
               label: '系列代码',
@@ -433,7 +446,8 @@
               label: '供应商名',
               prop: 'suppliers_id',
               holder: '请输入供应商名称',
-              type: 'select'
+              type: 'select',
+              val: this.sonArr
             },
             {
               label: '系列代码',
@@ -480,17 +494,24 @@
           page_total: 0
         },
         resetValue: this.ruleForm,
-        showPage: true
+        showPage: true,
+        doChange: [true, false],
+        sonArr:[],
+        leftTab:'修改',
+        editMask: [{show: false}, {show: false}],
+        editTitle: ['修改产品系列信息'],
+        editId:'',
+        editData: {},
       }
     },
     computed: {
-      suppliersId: {
+     /* suppliersId: {
         get: function () {
           return this.$store.state.SonData.suppliers
         },
         set: function () {
         }
-      }
+      }*/
     },
     methods: {
       test() {
@@ -498,15 +519,21 @@
       handleTabsClick() {
         this.loading = true;
         this.getInfo(this.url[this.activeName]);
+        if(this.activeName==1){
+          this.newOpt[1].nClick = false;
+        }else{
+          this.newOpt[1].nClick = true;
+        }
       },
       addNew() {
         this.showMaskArr[this.activeName].show = true;
       },
       CB_dialog(val) {
         this.showMaskArr[this.activeName].show = val;
+        this.editMask[this.activeName].show = val;
       },
       submitForm() {
-        let addObj = {};
+       /* let addObj = {};
         if (this.activeName == '0') {
           addObj = {
             name: this.ruleForm[0].name,
@@ -536,8 +563,8 @@
             remark: this.ruleForm[1].remark,
             status: this.ruleForm[1].status
           };
-        }
-        this.$post(this.url[this.activeName], addObj)
+        }*/
+        this.$post(this.url[this.activeName], this.ruleForm[this.activeName])
           .then(() => {
             this.$message({
               message: '添加成功',
@@ -561,6 +588,11 @@
       },
       /*处理批量删除*/
       handleSelectionChange(val) {
+        if (val.length != 0) {
+          this.editId = val[0].id;
+        } else {
+          this.editId = '';
+        }
         this.multipleSelection = val;
         let del = [];
         this.multipleSelection.forEach(selectedItem => {
@@ -695,7 +727,12 @@
             this.$store.commit('PER_PAGE', pg.per_page);
             this.$store.commit('PAGE_TOTAL', pg.total);
             if (url == this.url[0]) {
-              this.$store.dispatch('setSuppliers', res.data)
+              // this.sonArr.push(res.data);
+              let obj = {};
+              obj["0"] = res.data;
+              this.sonArr.push(obj);
+
+              // this.$store.dispatch('setSuppliers', res.data)
             } else if (url == this.url[1]) {
               this.$store.dispatch('setSeries', res.data)
             }
@@ -784,7 +821,72 @@
             this.loading = false;
             this.getsInfo[this.activeName] = [];
           })
-      }
+      },
+      editForm() {
+        let obj = {
+          suppliers_id: this.editData.suppliers_id,
+          code: this.editData.code,
+          name: this.editData.name,
+          description: this.editData.description,
+          remark: this.editData.remark,
+          status: this.editData.status
+        }
+        this.$patch(this.url[this.activeName] + '/' + this.editId, obj)
+          .then(() => {
+            this.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+            this.editMask[this.activeName].show = false;
+            this.refresh();
+          }, (err) => {
+            if (err.response) {
+              let arr = err.response.data.errors;
+              let arr1 = [];
+              for (let i in arr) {
+                arr1.push(arr[i]);
+              }
+              let str = arr1.join(',');
+              this.$message.error({
+                message: str
+              });
+            }
+          })
+      },
+      editInfo() {
+        if(this.newOpt[1].nClick){
+          return
+        }else{
+          if (this.delArr.length == 0) {
+            this.$message({
+              message: '没有选择要修改的数据',
+              type: 'warning'
+            });
+            return
+          } else if (this.delArr.length >= 2) {
+            this.$message({
+              message: '只能修改单条数据',
+              type: 'warning'
+            });
+            return
+          }
+          else {
+            this.editMask[this.activeName].show = true;
+            this.$fetch(this.url[this.activeName] + '/' + this.editId).then(res => {
+                this.editData = {
+                  suppliers_id: res.suppliers.id,
+                  code: res.code,
+                  name: res.name,
+                  description: res.description,
+                  remark: res.remark,
+                  status: res.status
+                  }
+            }, err => {
+              console.log(err);
+            })
+          }
+        }
+      },
     },
     mounted() {
       this.getInfo(this.url[0]);

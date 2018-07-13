@@ -64,10 +64,17 @@
         box-sizing: border-box;
         width: 85px;
 
-        &.active {
+        i.bf-forbid{
+          color: #d0211d;
+        }
 
-          i {
+        &.active {
+          i.optIcon {
             background-color: #4a99fa;
+
+            &.bf-forbid{
+              background-color: #d0211d;
+            }
 
             &:before {
               color: #fff;
@@ -86,6 +93,10 @@
           &:hover {
             background-color: #4a99fa;
 
+            &.bf-forbid{
+              background-color: #d0211d;
+            }
+
             &:before {
               color: #fff;
             }
@@ -96,7 +107,7 @@
           }
         }
 
-        span {
+        span.text {
           font-size: 12px;
           color: #666;
           text-align: left;
