@@ -744,7 +744,7 @@ class GoodsController extends Controller
                         foreach ($productspec['combinations'] as $combination) {
                             $validator = Validator::make($combination, $combinationRequest->rules(), $combinationRequest->messages());
                             if ($validator->fails()) {
-                                return new StoreResourceFailedException('The given data was invalid.', $validator->errors());
+                                throw new StoreResourceFailedException('The given data was invalid.', $validator->errors());
                             }
                             $productSpecs->combinations()->create($combination);
                         }
@@ -1282,7 +1282,7 @@ class GoodsController extends Controller
                         foreach ($productspec['combinations'] as $combination) {
                             $validator = Validator::make($combination, $combinationRequest->rules(), $combinationRequest->messages());
                             if ($validator->fails()) {
-                                return new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
+                                throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
                             }
                             Combination::findOrFail($combination['id'])->update($combination);
                         }
@@ -1324,14 +1324,20 @@ class GoodsController extends Controller
             $productSpecs = $goods->productSpecs();
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
+
+
             //删除规格
             $delPro = $productSpecs->delete();
+
+
 
             //删除产品
             $delGoods = $goods->delete();
 
-            if ($delCom == false || $delPro == false || $delGoods == false) {
-                return new DeleteResourceFailedException('The given data was invalid.');
+
+
+            if ($delCom === false || $delPro === false || $delGoods === false) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
             }
 
             DB::commit();
@@ -1383,8 +1389,8 @@ class GoodsController extends Controller
             //删除产品
             $delGoods = Goods::destroy($ids);
 
-            if ($delCom == false || $delPro == false || $delGoods == false) {
-                return new DeleteResourceFailedException('The given data was invalid.');
+            if ($delCom === false || $delPro === false || $delGoods === false) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
             }
 
             DB::commit();
