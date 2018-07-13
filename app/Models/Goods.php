@@ -29,4 +29,9 @@ class Goods extends Model
         return $this->belongsTo(GoodsCategory::class,'category_id');
     }
 
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
 }

@@ -732,7 +732,7 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             $goods = Goods::create($goodsRequest->all());
-            if ($goodsRequest->all('productspecs')) {
+            if ($goodsRequest->input('productspecs')) {
                 $productspecs = json_decode($goodsRequest->all('productspecs')['productspecs'], true);
                 foreach ($productspecs as $productspec) {
                     $validator = Validator::make($productspec, $productSpecRequest->rules(), $productSpecRequest->messages());
@@ -1269,7 +1269,7 @@ class GoodsController extends Controller
         DB::beginTransaction();
         try {
             $goods->update($goodsRequest->all());
-            if ($goodsRequest->all('productspecs')) {
+            if ($goodsRequest->input('productspecs')) {
                 $productspecs = json_decode($goodsRequest->all('productspecs')['productspecs'], true);
                 foreach ($productspecs as $productspec) {
 

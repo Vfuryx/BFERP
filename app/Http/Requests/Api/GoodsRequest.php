@@ -45,7 +45,7 @@ class GoodsRequest extends FormRequest
                     'url' => 'required|url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'sometimes|required|json'
+                    'productspecs' => 'sometimes|nullable|json'
                 ];
                 break;
             case 'PATCH':
@@ -74,7 +74,7 @@ class GoodsRequest extends FormRequest
                     'url' => 'url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'sometimes|json'
+                    'productspecs' => 'sometimes|nullable||json'
                 ];
                 break;
             case 'DELETE':

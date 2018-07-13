@@ -32,7 +32,7 @@ class ProductSpecsController extends Controller
      *              "id": 1,
      *              "goods": {
      *                  "id": 1,
-     *                  "goods_sn": "商品编码",
+     *                  "commodity_code": "商品编码",
      *                  "jd_sn": "京东编码",
      *                  "vips_sn": "唯品会编码",
      *                  "factory_model": "工厂型号",
@@ -206,7 +206,7 @@ class ProductSpecsController extends Controller
      *          "id": 1,
      *          "goods": {
      *              "id": 1,
-     *              "goods_sn": "商品编码",
+     *              "commodity_code": "商品编码",
      *              "jd_sn": "京东编码",
      *              "vips_sn": "唯品会编码",
      *              "factory_model": "工厂型号",
@@ -295,7 +295,7 @@ class ProductSpecsController extends Controller
      *          "id": 3,
                 "goods": {
                     "id": 1,
-                    "goods_sn": "商品编码1",
+                    "commodity_code": "商品编码1",
                     "jd_sn": "京东编码1",
                     "vips_sn": "唯品会编码1",
                     "factory_model": "工厂型号1",

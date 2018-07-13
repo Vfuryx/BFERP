@@ -25,4 +25,9 @@ class Supplier extends Model
         return $this->hasMany(Goods::class);
     }
 
+    public function purchaseDetails()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
+
 }

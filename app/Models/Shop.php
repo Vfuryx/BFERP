@@ -27,4 +27,9 @@ class Shop extends Model
     {
         return $this->hasMany(GoodsDownload::class);
     }
+
+    public function purchaseDetails()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
 }

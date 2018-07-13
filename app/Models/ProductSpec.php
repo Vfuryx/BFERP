@@ -34,6 +34,16 @@ class ProductSpec extends Model
         return $this->belongsTo(DistributionMethod::class);
     }
 
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
+    }
+
+    public function purchaseDetails()
+    {
+        return $this->hasMany(PurchaseDetail::class);
+    }
+
 
 
 }
