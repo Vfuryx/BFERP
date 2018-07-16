@@ -30,10 +30,10 @@ class CreatePurchasesTable extends Migration
             $table->string('source')->comment('采购单来源');
             $table->string('client_name')->comment('客户名');
             $table->string('buyer_nick')->comment('卖家昵称');
-            $table->tinyInteger('is_submit')->default(1)->comment('是否提交');
-            $table->tinyInteger('is_print')->comment('是否打印');
-            $table->tinyInteger('is_check')->comment('是否审核');
-            $table->tinyInteger('is_change')->comment('是否审核');
+            $table->tinyInteger('is_submit')->default(0)->comment('是否提交');
+            $table->tinyInteger('is_print')->default(0)->comment('是否打印');
+            $table->tinyInteger('is_check')->default(0)->comment('是否审核');
+            $table->tinyInteger('is_change')->default(0)->comment('是否修改');
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });

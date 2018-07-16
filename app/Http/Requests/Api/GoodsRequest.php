@@ -21,7 +21,7 @@ class GoodsRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'commodity_code' => 'required|string|max:255',
+                    'commodity_code' => 'required|string|max:255|unique:goods',
                     'jd_sn' => 'required|string|max:255',
                     'vips_sn' => 'required|string|max:255',
                     'factory_model' => 'required|string|max:255',
@@ -41,16 +41,18 @@ class GoodsRequest extends FormRequest
                     ],
                     'remark' => 'required|string|max:255',
                     'title' => 'required|string|max:255',
-                    'img' => 'required|string|max:255',
+                    'img' => 'required|url|max:255',
                     'url' => 'required|url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'sometimes|nullable|json'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'commodity_code' => 'string|max:255',
+                    'commodity_code' => [
+                        'string','max:255',
+                        Rule::unique('goods')->ignore($this->goods->id),
+                    ],
                     'jd_sn' => 'string|max:255',
                     'vips_sn' => 'string|max:255',
                     'factory_model' => 'string|max:255',
@@ -70,11 +72,10 @@ class GoodsRequest extends FormRequest
                     ],
                     'remark' => 'string|max:255',
                     'title' => 'string|max:255',
-                    'img' => 'string|max:255',
+                    'img' => 'url|max:255',
                     'url' => 'url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'sometimes|nullable||json'
                 ];
                 break;
             case 'DELETE':
@@ -95,6 +96,7 @@ class GoodsRequest extends FormRequest
     {
         return [
 
+            'commodity_code.unique' => '商品编码不能重复',
             'commodity_code.required' => '商品编码必填',
             'commodity_code.string' => '商品编码必须string类型',
             'commodity_code.max' => '商品编码最大长度为255',
@@ -136,7 +138,7 @@ class GoodsRequest extends FormRequest
             'title.max' => '商品标题最大长度为255',
 
             'img.required' => '商品图片必填',
-            'img.string' => '商品图片必须string类型',
+            'img.url' => '商品图片必须有效的url',
             'img.max' => '商品图片最大长度为255',
 
             'url.required' => '商品网址必填',
@@ -150,8 +152,6 @@ class GoodsRequest extends FormRequest
             'ids.string' => 'id组必须string类型',
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填',
-
-            'productspecs.json' => '产品规格必须是json格式',
         ];
     }
 
@@ -172,7 +172,6 @@ class GoodsRequest extends FormRequest
             'url' => '商品网址',
             'status' => '状态：0=停用，1=启用',
             'is_stop_pro' => '是否停产 默认 0 = 不停产  1 = 停产',
-            'productspecs' => '产品规格json格式'
         ];
     }
 }

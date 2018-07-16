@@ -8,7 +8,7 @@ class CreatePurchaseDetailsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 采购详细
      * @return void
      */
     public function up()

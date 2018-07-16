@@ -19,7 +19,6 @@ class Combination extends Model
     }
 
     //获取组合对应的产品规格
-
     public function comProSpec(){
         return $this->belongsTo(ProductSpec::class, 'com_pro_specs_id');
     }

@@ -22,110 +22,110 @@ class ProductSpecRequest extends FormRequest
             case 'POST':
                 return [
                     'goods_id' => [
-                        'sometimes','required','integer',
+                        'required','integer',
                         Rule::exists('goods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'spec_code' => 'sometimes|required|string|max:255|unique:product_specs',
-                    'jd_specs_code' => 'sometimes|required|string|max:255',
-                    'vips_specs_code' => 'sometimes|required|string|max:255',
-                    'tb_price' => 'sometimes|required|numeric',
-                    'cost' => 'sometimes|required|numeric',
-                    'price' => 'sometimes|required|numeric',
-                    'highest_price' => 'sometimes|required|numeric',
-                    'lowest_price' => 'sometimes|required|numeric',
-                    'warehouse_cost' => 'sometimes|required|numeric',
-                    'assembly_price' => 'sometimes|required|numeric',
-                    'discount' => 'sometimes|required|numeric',
-                    'commission' => 'sometimes|required|numeric',
-                    'is_combination' => 'sometimes|integer',
-                    'package_quantity' => 'sometimes|required|integer',
-                    'package_costs' => 'sometimes|required|numeric',
-                    'wooden_frame_costs' => 'sometimes|required|numeric',
-                    'purchase_freight' => 'sometimes|required|numeric',
-                    'inventory_warning' => 'sometimes|required|integer',
-                    'purchase_days_warning' => 'sometimes|required|integer',
-                    'available_warning' => 'sometimes|required|integer',
+                    'spec_code' => 'required|string|max:255|unique:product_specs',
+                    'jd_specs_code' => 'string|max:255',
+                    'vips_specs_code' => 'string|max:255',
+                    'tb_price' => 'required|numeric',
+                    'cost' => 'required|numeric',
+                    'price' => 'required|numeric',
+                    'highest_price' => 'required|numeric',
+                    'lowest_price' => 'required|numeric',
+                    'warehouse_cost' => 'numeric',
+                    'assembly_price' => 'numeric',
+                    'discount' => 'numeric',
+                    'commission' => 'numeric',
+                    'is_combination' => 'integer',
+                    'package_quantity' => 'integer',
+                    'package_costs' => 'numeric',
+                    'wooden_frame_costs' => 'numeric',
+                    'purchase_freight' => 'numeric',
+                    'inventory_warning' => 'required|integer',
+                    'purchase_days_warning' => 'required|integer',
+                    'available_warning' => 'required|integer',
                     'distribution_method_id' => [
-                        'sometimes', 'required','integer',
+                        'required','integer',
                         Rule::exists('distribution_methods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'bar_code' => 'sometimes|required|string|max:255',
-                    'img_url' => 'sometimes|required|url|max:255',
-                    'spec' => 'sometimes|required|string|max:255',
-                    'color' => 'sometimes|required|string|max:255',
-                    'materials' => 'sometimes|required|string|max:255',
-                    'function' => 'sometimes|required|string|max:255',
-                    'special' => 'sometimes|required|string|max:255',
-                    'other' => 'sometimes|required|string|max:255',
-                    'length' => 'sometimes|required|numeric',
-                    'width' => 'sometimes|required|numeric',
-                    'height' => 'sometimes|required|numeric',
-                    'volume' => 'sometimes|required|numeric',
-                    'weight' => 'sometimes|required|numeric',
-                    'remark' => 'sometimes|string|nullable|max:255',
-                    'finished_pro' => 'sometimes|integer',
-                    'is_stop_pro' => 'sometimes|integer',
-                    'status' => 'sometimes|integer'
+                    'bar_code' => 'string|max:255',
+                    'img_url' => 'url|max:255',
+                    'spec' => 'required|string|max:255',
+                    'color' => 'string|max:255',
+                    'materials' => 'string|max:255',
+                    'function' => 'string|max:255',
+                    'special' => 'string|max:255',
+                    'other' => 'string|max:255',
+                    'length' => 'numeric',
+                    'width' => 'numeric',
+                    'height' => 'numeric',
+                    'volume' => 'numeric',
+                    'weight' => 'numeric',
+                    'remark' => 'string|nullable|max:255',
+                    'finished_pro' => 'integer',
+                    'is_stop_pro' => 'integer',
+                    'status' => 'integer'
                 ];
                 break;
             case 'PATCH':
                 return [
                     'goods_id' => [
-                        'sometimes','integer',
+                        'integer',
                         Rule::exists('goods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
                     'spec_code' =>  [
-                        'sometimes','string','max:255',
+                        'string','max:255',
                         Rule::unique('product_specs')->ignore(isset($this->productspec->id)?$this->productspec->id:$id),
                     ],
-                    'jd_specs_code' => 'sometimes|string|max:255',
-                    'vips_specs_code' => 'sometimes|string|max:255',
-                    'tb_price' => 'sometimes|numeric',
-                    'cost' => 'sometimes|numeric',
-                    'price' => 'sometimes|numeric',
-                    'highest_price' => 'sometimes|numeric',
-                    'lowest_price' => 'sometimes|numeric',
-                    'warehouse_cost' => 'sometimes|numeric',
-                    'assembly_price' => 'sometimes|numeric',
-                    'discount' => 'sometimes|numeric',
-                    'commission' => 'sometimes|numeric',
-                    'is_combination' => 'sometimes|integer',
-                    'package_quantity' => 'sometimes|integer',
-                    'package_costs' => 'sometimes|numeric',
-                    'wooden_frame_costs' => 'sometimes|numeric',
-                    'purchase_freight' => 'sometimes|numeric',
-                    'inventory_warning' => 'sometimes|numeric',
-                    'purchase_days_warning' => 'sometimes|numeric',
-                    'available_warning' => 'sometimes|numeric',
+                    'jd_specs_code' => 'string|max:255',
+                    'vips_specs_code' => 'string|max:255',
+                    'tb_price' => 'numeric',
+                    'cost' => 'numeric',
+                    'price' => 'numeric',
+                    'highest_price' => 'numeric',
+                    'lowest_price' => 'numeric',
+                    'warehouse_cost' => 'numeric',
+                    'assembly_price' => 'numeric',
+                    'discount' => 'numeric',
+                    'commission' => 'numeric',
+                    'is_combination' => 'integer',
+                    'package_quantity' => 'integer',
+                    'package_costs' => 'numeric',
+                    'wooden_frame_costs' => 'numeric',
+                    'purchase_freight' => 'numeric',
+                    'inventory_warning' => 'integer',
+                    'purchase_days_warning' => 'integer',
+                    'available_warning' => 'integer',
                     'distribution_method_id' => [
-                        'sometimes','integer',
+                        'integer',
                         Rule::exists('distribution_methods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'bar_code' => 'sometimes|string|max:255',
-                    'img_url' => 'sometimes|url|max:255',
-                    'spec' => 'sometimes|string|max:255',
-                    'color' => 'sometimes|string|max:255',
-                    'materials' => 'sometimes|string|max:255',
-                    'function' => 'sometimes|string|max:255',
-                    'special' => 'sometimes|string|max:255',
-                    'other' => 'sometimes|string|max:255',
-                    'length' => 'sometimes|numeric',
-                    'width' => 'sometimes|numeric',
-                    'height' => 'sometimes|numeric',
-                    'volume' => 'sometimes|numeric',
-                    'weight' => 'sometimes|numeric',
-                    'remark' => 'sometimes|string|nullable|max:255',
-                    'finished_pro' => 'sometimes|integer',
-                    'is_stop_pro' => 'sometimes|integer',
-                    'status' => 'sometimes|integer',
+                    'bar_code' => 'string|max:255',
+                    'img_url' => 'url|max:255',
+                    'spec' => 'string|max:255',
+                    'color' => 'string|max:255',
+                    'materials' => 'string|max:255',
+                    'function' => 'string|max:255',
+                    'special' => 'string|max:255',
+                    'other' => 'string|max:255',
+                    'length' => 'numeric',
+                    'width' => 'numeric',
+                    'height' => 'numeric',
+                    'volume' => 'numeric',
+                    'weight' => 'numeric',
+                    'remark' => 'string|nullable|max:255',
+                    'finished_pro' => 'integer',
+                    'is_stop_pro' => 'integer',
+                    'status' => 'integer'
                 ];
                 break;
             case 'DELETE':
@@ -154,11 +154,9 @@ class ProductSpecRequest extends FormRequest
             'spec_code.max' => '规格编码最大长度为255',
             'spec_code.unique' => '规格编码不能重复',
 
-            'jd_specs_code.required' => '京东规格编码必填',
             'jd_specs_code.max' => '京东规格编码最大长度为255',
             'jd_specs_code.string' => '京东规格编码必须string类型',
 
-            'vips_specs_code.required' => '唯品会规格编码必填',
             'vips_specs_code.max' => '唯品会规格编码最大长度为255',
             'vips_specs_code.string' => '唯品会规格编码必须string类型',
 
@@ -177,30 +175,22 @@ class ProductSpecRequest extends FormRequest
             'lowest_price.required' => '最低售价必填',
             'lowest_price.numeric' => '最低售价必须是数字',
 
-            'warehouse_cost.required' => '仓库成本售价必填',
             'warehouse_cost.numeric' => '仓库成本售价必须是数字',
 
-            'assembly_price.required' => '装配价格售价必填',
             'assembly_price.numeric' => '装配价格售价必须是数字',
 
-            'discount.required' => '折扣必填',
             'discount.numeric' => '折扣必须是数字',
 
-            'commission.required' => '金佣点必填',
             'commission.numeric' => '金佣点必须是数字',
 
             'is_combination.integer' => '是否组合必须int类型',
 
-            'package_quantity.required' => '包件数量必填',
             'package_quantity.integer' => '包件数量必须int类型',
 
-            'package_costs.required' => '打包费用必填',
             'package_costs.numeric' => '打包费用必须是数字',
 
-            'wooden_frame_costs.required' => '木架费必填',
             'wooden_frame_costs.numeric' => '木架费用必须是数字',
 
-            'purchase_freight.required' => '采购运费必填',
             'purchase_freight.numeric' => '采购运费用必须是数字',
 
             'inventory_warning.required' => '库存预警(数量)必填',
@@ -216,51 +206,38 @@ class ProductSpecRequest extends FormRequest
             'distribution_method_id.integer' => '配送类别必须int类型',
             'distribution_method_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'bar_code.required' => '条形码必填',
             'bar_code.max' => '条形码最大长度为255',
             'bar_code.string' => '条形码必须string类型',
 
-            'img_url.required' => '图片地址必填',
             'img_url.max' => '图片地址最大长度为255',
             'img_url.url' => '图片地址必须有效的url',
 
-            'spec.required' => '规格必填',
             'spec.max' => '规格最大长度为255',
             'spec.string' => '规格必须string类型',
 
-            'color.required' => '颜色必填',
             'color.max' => '颜色最大长度为255',
             'color.string' => '颜色必须string类型',
 
-            'materials.required' => '材质必填',
             'materials.max' => '材质最大长度为255',
             'materials.string' => '材质必须string类型',
 
-            'function.required' => '功能必填',
             'function.max' => '功能最大长度为255',
             'function.string' => '功能必须string类型',
 
-            'special.required' => '特殊必填',
             'special.max' => '特殊最大长度为255',
             'special.string' => '特殊必须string类型',
 
-            'other.required' => '其他必填',
             'other.max' => '其他最大长度为255',
             'other.string' => '其他必须string类型',
 
-            'length.required' => '长度（mm）必填',
             'length.numeric' => '长度（mm）必须是数字',
 
-            'width.required' => '宽度（mm）必填',
             'width.numeric' => '宽度（mm）必须是数字',
 
-            'height.required' => '高度（mm）必填',
             'height.numeric' => '高度（mm）必须是数字',
 
-            'volume.required' => '体积(m²)必填',
             'volume.numeric' => '体积(m²)必须是数字',
 
-            'weight.required' => '重量必填',
             'weight.numeric' => '重量必须是数字',
 
             'finished_pro.integer' => '是否成品 0=不是 1=是必须int类型',

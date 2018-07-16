@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Api;
 
+use Illuminate\Support\Facades\DB;
+
 use App\Models\ProductSpec;
 use App\Transformers\ProductSpecTransformer;
 use App\Http\Requests\Api\ProductSpecRequest;
+use App\Models\Combination; 
 use App\Http\Controllers\Traits\CURDTrait;
+
+use Dingo\Api\Exception\DeleteResourceFailedException;
+
 
 /**
  * 产品规格资源
@@ -127,40 +133,40 @@ class ProductSpecsController extends Controller
      * @Parameters({
      *      @Parameter("goods_id",type="integer", description="产品id", required=true),
      *      @Parameter("spec_code", description="规格编码", required=true),
-     *      @Parameter("jd_specs_code", description="京东规格编码", required=true),
-     *      @Parameter("vips_specs_code", description="唯品会规格编码", required=true),
+     *      @Parameter("jd_specs_code", description="京东规格编码", required=false, default=""),
+     *      @Parameter("vips_specs_code", description="唯品会规格编码", required=false, default=""),
      *      @Parameter("tb_price",type="numeric", description="淘宝价格", required=true),
      *      @Parameter("cost",type="numeric", description="成本价格", required=true),
      *      @Parameter("price",type="numeric", description="售价", required=true),
      *      @Parameter("highest_price",type="numeric", description="最高售价", required=true),
      *      @Parameter("lowest_price",type="numeric", description="最低售价", required=true),
-     *      @Parameter("warehouse_cost",type="numeric", description="仓库成本", required=true),
-     *      @Parameter("assembly_price",type="numeric", description="装配价格", required=true),
-     *      @Parameter("discount",type="numeric", description="折扣", required=true),
-     *      @Parameter("commission",type="numeric", description="金佣点", required=true),
+     *      @Parameter("warehouse_cost",type="numeric", description="仓库成本", required=false, default=0.00),
+     *      @Parameter("assembly_price",type="numeric", description="装配价格", required=false, default=0.00),
+     *      @Parameter("discount",type="numeric", description="折扣", required=false, default=0.00),
+     *      @Parameter("commission",type="numeric", description="金佣点", required=false, default=0.00),
      *      @Parameter("is_combination",type="integer", description="是否组合", required=false,default=0),
-     *      @Parameter("package_quantity",type="integer", description="包件数量", required=true),
-     *      @Parameter("package_costs",type="numeric", description="打包费用", required=true),
-     *      @Parameter("wooden_frame_costs",type="numeric", description="木架费", required=true),
-     *      @Parameter("purchase_freight",type="numeric", description="采购运费", required=true),
+     *      @Parameter("package_quantity",type="integer", description="包件数量", required=false,default=0),
+     *      @Parameter("package_costs",type="numeric", description="打包费用", required=false, default=0.00),
+     *      @Parameter("wooden_frame_costs",type="numeric", description="木架费", required=false, default=0.00),
+     *      @Parameter("purchase_freight",type="numeric", description="采购运费", required=false, default=0.00),
      *      @Parameter("inventory_warning",type="integer", description="库存预警(数量)", required=true),
      *      @Parameter("purchase_days_warning",type="integer", description="采购预警天数", required=true),
      *      @Parameter("available_warning",type="integer", description="可售数预警", required=true),
      *      @Parameter("distribution_method_id",type="integer", description="配送类别", required=true),
-     *      @Parameter("bar_code", description="条形码", required=true),
-     *      @Parameter("img_url", type="url", description="图片地址", required=true),
-     *      @Parameter("spec", description="规格", required=true),
-     *      @Parameter("color", description="颜色", required=true),
-     *      @Parameter("materials", description="材质", required=true),
-     *      @Parameter("function", description="功能", required=true),
-     *      @Parameter("special", description="特殊", required=true),
-     *      @Parameter("other", description="其他", required=true),
-     *      @Parameter("length",type="numeric", description="长度（mm）", required=true),
-     *      @Parameter("width",type="numeric", description="宽度（mm）", required=true),
-     *      @Parameter("height",type="numeric", description="高度（mm）", required=true),
-     *      @Parameter("volume",type="numeric", description="体积(m²)", required=true),
-     *      @Parameter("weight",type="numeric", description="重量", required=true),
-     *      @Parameter("remark", description="备注", required=false),
+     *      @Parameter("bar_code", description="条形码", required=false, default=""),
+     *      @Parameter("img_url", type="url", description="图片地址", required=false, default=""),
+     *      @Parameter("spec", description="规格", required=false, default=""),
+     *      @Parameter("color", description="颜色", required=false, default=""),
+     *      @Parameter("materials", description="材质", required=false, default=""),
+     *      @Parameter("function", description="功能", required=false, default=""),
+     *      @Parameter("special", description="特殊", required=false, default=""),
+     *      @Parameter("other", description="其他", required=false, default=""),
+     *      @Parameter("length",type="numeric", description="长度（mm）", required=false, default=""),
+     *      @Parameter("width",type="numeric", description="宽度（mm）", required=false, default=""),
+     *      @Parameter("height",type="numeric", description="高度（mm）", required=false, default=""),
+     *      @Parameter("volume",type="numeric", description="体积(m²)", required=false, default=""),
+     *      @Parameter("weight",type="numeric", description="重量", required=false, default=""),
+     *      @Parameter("remark", description="备注", required=false, default=""),
      *      @Parameter("finished_pro",type="integer", description="是否成品 0 不是 1 是", required=false,default=0),
      *      @Parameter("is_stop_pro",type="integer", description="是否停产 0 不是 1 是", required=false,default=0),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
@@ -174,30 +180,6 @@ class ProductSpecsController extends Controller
      *              },
      *              "tb_price": {
      *                  "淘宝价格必须是数字"
-     *              },
-     *              "package_quantity": {
-     *                  "包件数量必填"
-     *              },
-     *              "img_url": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
-     *              },
-     *              "name": {
-     *                  "产品规格名称必填"
      *              },
      *           },
      *          "status_code": 422,
@@ -461,8 +443,29 @@ class ProductSpecsController extends Controller
      */
     public function destroy(ProductSpec $productspec)
     {
+        DB::beginTransaction();
+        try {
+            //删除组合
+            $productSpecs = $productspec->productSpecs();
+            $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
-        return $this->traitDestroy($productspec);
+            //删除规格
+            $delPro = $productSpecs->delete();
+
+            if ($delCom === false || $delPro === false ) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
+            }
+
+            DB::commit();
+        } catch (DeleteResourceFailedException $e) {
+            DB::rollback();
+            throw $e;
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        return $this->noContent();
     }
 
     /**
@@ -493,7 +496,32 @@ class ProductSpecsController extends Controller
      */
     public function destroybyIds(ProductSpecRequest $request)
     {
-        return $this->traitDestroybyIds($request, self::MODEL);
+        $ids = explode(',', $request->input('ids'));
+        DB::beginTransaction();
+
+        try {
+            //删除组合
+            $productSpecs = ProductSpec::whereIn('id',$ids);
+            
+            $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
+
+            //删除规格
+            $delPro = $productSpecs->delete();
+
+            if ($delCom === false || $delPro === false ) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
+            }
+
+            DB::commit();
+        } catch (DeleteResourceFailedException $e) {
+            DB::rollback();
+            throw $e;
+        } catch (\Exception $e) {
+            DB::rollback();
+            throw $e;
+        }
+
+        return $this->noContent();
     }
 
     /**
