@@ -29,9 +29,9 @@ class CreateGoodsDownloadsTable extends Migration
             $table->string('approve_status')->comment('商品上传后的状态。onsale出售中，instock库中');
             $table->integer('valid_thru')->comment('7 有效期,7或者14（默认是7天）');
             $table->string('type')->comment('商品类型(fixed:一口价;auction:拍卖)注：取消团购');
-            $table->dateTime('list_time')->commet('上架时间（格式：yyyy-MM-dd HH:mm:ss）');
-            $table->dateTime('delist_time')->commet('下架时间（格式：yyyy-MM-dd HH:mm:ss）');
-            $table->dateTime('modified ')->commet('商品修改时间（格式：yyyy-MM-dd HH:mm:ss）');
+            $table->timestamp('list_time')->nullable()->commet('上架时间（格式：yyyy-MM-dd HH:mm:ss）');
+            $table->timestamp('delist_time')->nullable()->commet('下架时间（格式：yyyy-MM-dd HH:mm:ss）');
+            $table->timestamp('modified')->nullable()->commet('商品修改时间（格式：yyyy-MM-dd HH:mm:ss）');
             $table->timestamps();
         });
     }

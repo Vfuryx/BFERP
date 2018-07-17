@@ -77,7 +77,7 @@ trait CURDTrait
      */
     public function traitUpdate($request, $model, $transformer)
     {
-        $model->update($request->all());
+        $model->update($request->validated());
         return $this->response
             ->item($model, $transformer)
             ->setStatusCode(201);

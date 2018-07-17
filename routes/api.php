@@ -387,9 +387,38 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->get('orderdownloads', 'OrderDownloadsController@index')
             ->name('api.orderdownloads.index');
 
+        //库存资源
+        $api->get('stocks', 'StocksController@index')
+            ->name('api.stocks.index');
+        $api->get('stocks/{stock}', 'StocksController@show')
+            ->name('api.stocks.show');
+        $api->post('stocks', 'StocksController@store')
+            ->name('api.stocks.store');
+        $api->delete('stocks/{stock}', 'StocksController@destroy')
+            ->name('api.stocks.destroy');
+        $api->delete('stocks', 'StocksController@destroybyids')
+            ->name('api.stocks.destroybyids');
+        $api->put('stocks', 'StocksController@editStatusByIds')
+            ->name('api.stocks.editstatusbyids');
+
+        //采购单资源
+        $api->get('purchases', 'PurchasesController@index')
+            ->name('api.purchases.index');
+        $api->get('purchases/{purchase}', 'PurchasesController@show')
+            ->name('api.purchases.show');
+        $api->post('purchases', 'PurchasesController@store')
+            ->name('api.purchases.store');
+        $api->delete('purchases/{purchase}', 'PurchasesController@destroy')
+            ->name('api.purchases.destroy');
+        $api->delete('purchases', 'PurchasesController@destroybyids')
+            ->name('api.purchases.destroybyids');
+        $api->put('purchases', 'PurchasesController@editStatusByIds')
+            ->name('api.purchases.editstatusbyids');
 
 
-    
+
+
+
     });
 
     $api->group([

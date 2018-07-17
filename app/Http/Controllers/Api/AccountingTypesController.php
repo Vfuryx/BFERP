@@ -98,7 +98,7 @@ class AccountingTypesController extends Controller
      */
     public function store(AccountingTypeRequest $request)
     {
-        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

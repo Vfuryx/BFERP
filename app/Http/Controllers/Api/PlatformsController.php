@@ -89,7 +89,7 @@ class PlatformsController extends Controller
      */
     public function store(PlatformRequest $request)
     {
-        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

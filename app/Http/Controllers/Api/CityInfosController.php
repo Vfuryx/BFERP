@@ -182,7 +182,7 @@ class CityInfosController extends Controller
      */
     public function store(CityInfoRequest $request)
     {
-        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

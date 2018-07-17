@@ -34,7 +34,7 @@ class GoodsDownloadsController extends Controller
      */
     public function index(GoodsDownloadRequest $request)
     {
-        return $request->all();
+        return $request->validated();
     }
 
 

@@ -37,6 +37,6 @@ class OrderDownloadsController extends Controller
      */
     public function index(OrderDownloadRequest $request)
     {
-        return $request->all();
+        return $request->validated();
     }
 }

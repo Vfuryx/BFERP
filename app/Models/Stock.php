@@ -7,7 +7,7 @@ class Stock extends Model
     protected $table = 'stocks';
 
     protected $fillable = [
-
+        'warehouse_id','goods_id','pro_specs_id','quantity','status'
     ];
 
     public function stockDelLogs()
@@ -27,7 +27,7 @@ class Stock extends Model
 
     public function productSpec()
     {
-        return $this->belongsTo(ProductSpec::class);
+        return $this->belongsTo(ProductSpec::class,'pro_specs_id');
     }
 
     public function suppliersReports()

@@ -27,7 +27,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->decimal('discount',10,2)->default(0.00)->comment('折扣');
             $table->string('colour_num')->comment('色号');
             $table->string('paint')->comment('油漆');
-            $table->dateTime('arrival_time')->comment('到货时间');
+            $table->timestamp('arrival_time')->nullable()->comment('到货时间');
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });

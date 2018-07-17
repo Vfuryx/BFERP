@@ -139,7 +139,7 @@ class SuppliersController extends Controller
      */
     public function store(SupplierRequest $request)
     {
-        return $this->traitStore($request->all(), self::MODEL, self::TRANSFORMER);
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**

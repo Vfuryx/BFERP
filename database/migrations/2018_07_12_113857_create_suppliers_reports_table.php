@@ -20,7 +20,7 @@ class CreateSuppliersReportsTable extends Migration
             $table->integer('purchase_quantity')->comment('采购数');
             $table->integer('warehousing_quantity')->comment('入库数');
             $table->integer('consignor')->comment('代发数');
-            $table->dateTime('delivery_time')->comment('到货时间');
+            $table->timestamp('delivery_time')->nullable()->comment('到货时间');
             $table->integer('fifo')->comment('先进先出发货数');
             $table->timestamps();
         });

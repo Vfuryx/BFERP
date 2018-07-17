@@ -18,10 +18,7 @@ class CreateStocksTable extends Migration
             $table->unsignedInteger('warehouse_id')->comment('仓库id');
             $table->unsignedInteger('goods_id')->comment('商品id');
             $table->unsignedInteger('pro_specs_id')->comment('产品规格id');
-            $table->integer('quantity',10)->default(0)->comment('库存数');
-
-
-
+            $table->integer('quantity')->comment('库存数');
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });

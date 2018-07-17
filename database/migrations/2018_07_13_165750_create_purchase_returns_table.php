@@ -18,9 +18,9 @@ class CreatePurchaseReturnsTable extends Migration
             $table->string('purchase_return_no')->comment('采购退货单号');
             $table->string('creator')->comment('创建人');
             $table->string('submitter')->default('')->comment('提交人');
-            $table->dateTime('submit_at')->default('')->comment('提交时间');
+            $table->timestamp('submit_at')->nullable()->comment('提交时间');
             $table->string('checker')->default('')->comment('审核人');
-            $table->dateTime('check_at')->default('')->comment('审核时间');
+            $table->timestamp('check_at')->nullable()->comment('审核时间');
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });
