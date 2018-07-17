@@ -1,14 +1,14 @@
 webpackJsonp([59],{
 
-/***/ 483:
+/***/ 486:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(672)
+var __vue_script__ = __webpack_require__(677)
 /* template */
-var __vue_template__ = __webpack_require__(673)
+var __vue_template__ = __webpack_require__(678)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\refund\\afterSaleReAudit.vue"
+Component.options.__file = "resources\\assets\\js\\views\\refund\\auditProofread.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f0d32ac", Component.options)
+    hotAPI.createRecord("data-v-908a3df4", Component.options)
   } else {
-    hotAPI.reload("data-v-7f0d32ac", Component.options)
+    hotAPI.reload("data-v-908a3df4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 672:
+/***/ 677:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -63,24 +63,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '修改',
-        icon: 'bf-change',
-        ent: this.test
-      }, {
-        cnt: '删除',
-        icon: 'bf-del',
-        ent: this.test
-      }, {
         cnt: '锁定',
         icon: 'bf-lock',
         ent: this.test
       }, {
         cnt: '解锁',
         icon: 'bf-delock',
-        ent: this.test
-      }, {
-        cnt: '驳回',
-        icon: 'bf-reject',
         ent: this.test
       }, {
         cnt: '审核',
@@ -105,20 +93,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.$store.state.opt.opts = this.newOpt;
-    this.$store.commit('change', this.newOpt);
-    var that = this;
-    $(window).resize(function () {
-      return function () {
-        that.$store.state.opt.opts = that.newOpt;
-        that.$store.commit('change', that.newOpt);
-      }();
-    });
   }
 });
 
 /***/ }),
 
-/***/ 673:
+/***/ 678:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -132,7 +112,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("售后退款审核")])])
+    return _c("div", [_c("h2", [_vm._v("审核校对")])])
   }
 ]
 render._withStripped = true
@@ -140,7 +120,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7f0d32ac", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-908a3df4", module.exports)
   }
 }
 

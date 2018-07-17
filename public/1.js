@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 577:
+/***/ 499:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(864)
+var __vue_script__ = __webpack_require__(703)
 /* template */
-var __vue_template__ = __webpack_require__(874)
+var __vue_template__ = __webpack_require__(713)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\index.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\logisticsMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7e6399ea", Component.options)
+    hotAPI.createRecord("data-v-54de388c", Component.options)
   } else {
-    hotAPI.reload("data-v-7e6399ea", Component.options)
+    hotAPI.reload("data-v-54de388c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -62,9 +62,9 @@ module.exports = Component.exports
 
 
 
-var base64 = __webpack_require__(868)
-var ieee754 = __webpack_require__(869)
-var isArray = __webpack_require__(870)
+var base64 = __webpack_require__(707)
+var ieee754 = __webpack_require__(708)
+var isArray = __webpack_require__(709)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1847,33 +1847,6 @@ function isnan (val) {
 /***/ }),
 
 /***/ 580:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return downloadTemplate; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
-
-// 下载模板
-var downloadTemplate = function downloadTemplate(scheduleType) {
-  __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/rest/schedule/template', {
-    params: {
-      "scheduleType": scheduleType
-    },
-    responseType: 'arraybuffer'
-  }).then(function (response) {
-    //创建一个blob对象,file的一种
-    var blob = new Blob([response.data], { type: 'application/x-xls' });
-    var link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = fileNames[scheduleType] + '_' + response.headers.datestr + '.xls';
-    link.click();
-  });
-};
-
-/***/ }),
-
-/***/ 581:
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -1883,7 +1856,7 @@ module.exports = __webpack_amd_options__;
 
 /***/ }),
 
-/***/ 582:
+/***/ 581:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/* cpexcel.js (C) 2013-present SheetJS -- http://sheetjs.com */
@@ -3394,23 +3367,24 @@ if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODE
 
 /***/ }),
 
-/***/ 583:
+/***/ 582:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 864:
+/***/ 703:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver__ = __webpack_require__(865);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver__ = __webpack_require__(704);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_file_saver__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx__ = __webpack_require__(867);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx__ = __webpack_require__(706);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_xlsx__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__api_schedule_js__ = __webpack_require__(580);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
 //
 //
 //
@@ -3455,6 +3429,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -3462,206 +3468,1154 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      //操作
+      parmas: [],
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
         ent: this.addNew
       }, {
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.editInfo,
+        nClick: false
+      }, {
         cnt: '删除',
         icon: 'bf-del',
-        ent: this.doDelMore
+        ent: this.delMore
+      }, {
+        cnt: '导入',
+        icon: 'bf-in',
+        ent: this.creatP
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.exportExcel
+      }, {
+        cnt: '同步',
+        icon: 'bf-sync',
+        ent: this.test
       }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.refresh
-      }, {
-        cnt: '导出',
-        icon: 'bf-refresh',
-        ent: this.exportExcel
-      }, {
-        cnt: '导入',
-        icon: 'bf-refresh',
-        ent: this.exportExcel
       }],
-      //表格
-      tableKey: [{
-        label: '标记代码',
-        width: '',
-        prop: "markcode",
-        holder: '代码'
+      activeName: '0',
+      getsInfo: [[], [], [], []],
+      tableHead: [[{
+        label: '物流代码',
+        width: '250',
+        prop: "code",
+        holder: '请输入物流代码',
+        type: 'text'
       }, {
-        label: '标记名称',
-        width: '180',
-        prop: "markname",
-        holder: '名称'
+        label: '物流名称',
+        width: '250',
+        prop: "name",
+        holder: '请输入物流名称',
+        type: 'text'
       }, {
-        label: '颜色',
-        width: '180',
-        prop: "color",
-        holder: '颜色',
-        type: 'color'
+        label: '报表格式',
+        width: '240',
+        prop: 'report',
+        holder: '请选择报表格式',
+        type: 'select',
+        val: this.sonArr
       }, {
-        label: '描述',
-        width: '180',
-        prop: "description",
-        holder: '描述'
+        label: '运费类型',
+        width: '250',
+        prop: "freight_type",
+        holder: '请选择运费类型',
+        type: 'select',
+        val: this.sonArr
+      },
+      /* {
+         label: '物流区域',
+         width: '300',
+         prop: "logistics_area",
+         holder: '请输入物流区域',
+         type: 'textarea'
+       },*/
+      {
+        label: '预计天数',
+        width: '220',
+        prop: "expected_days",
+        holder: '请输入天数',
+        type: 'number'
+      },
+      /*{
+        label: '发货数',
+        width: '220',
+        prop: "expected_days",
+        holder: '请输入发货订单数',
+        type: 'number'
+      },
+      {
+        label: '损坏次数',
+        width: '230',
+        prop: "expected_days",
+        holder: '请输入物流循坏货物此时',
+        type: 'number'
+      },*/
+      {
+        label: '物流电话',
+        width: '250',
+        prop: "phone",
+        holder: '请输入物流电话',
+        type: 'tel'
       }, {
-        label: '状态',
+        label: '物流地址',
+        width: '260',
+        prop: "address",
+        holder: '请输入物流地址',
+        type: 'textarea'
+      }, {
+        label: '备注',
+        width: '200',
+        prop: "remark",
+        holder: '请输入备注',
+        type: 'textarea'
+      }, {
+        label: '创建时间',
+        width: '320',
+        prop: "created_at",
+        holder: '请输入创建时间',
+        type: 'text',
+        beAble: true
+      }, {
+        label: '是否启用',
         width: '200',
         prop: "status",
-        holder: '状态',
-        type: 'select'
+        holder: '请选择是否启用',
+        type: 'select_def'
+      }], [{
+        label: '物流名称',
+        width: '240',
+        prop: "logistics",
+        holder: '请输入物流名称',
+        type: 'select',
+        val: this.sonArr
+      }, {
+        label: '省',
+        width: '230',
+        prop: "province",
+        holder: '请输入所在省',
+        type: 'text'
+      }, {
+        label: '市',
+        width: '230',
+        prop: "city",
+        holder: '请输入所在市',
+        type: 'text'
+      }, {
+        label: '区',
+        width: '230',
+        prop: "district",
+        holder: '请输入所在区',
+        type: 'text'
+      }, {
+        label: '提货地址',
+        width: '260',
+        prop: "address",
+        holder: '请输入详细地址',
+        type: 'textarea'
+      }, {
+        label: '提货电话',
+        width: '230',
+        prop: "phone",
+        holder: '请输入提货电话',
+        type: 'tel'
+      }, {
+        label: '物流费用',
+        width: '220',
+        prop: "price",
+        holder: '请输入物流费用',
+        type: 'number'
+      }, {
+        label: '重量单价',
+        width: '220',
+        prop: "weight_univalent",
+        holder: '请输入重量单价',
+        type: 'number'
+      }, {
+        label: '到达天数',
+        width: '200',
+        prop: "expected_days",
+        holder: '请输入到达天数',
+        type: 'number'
+      }, {
+        label: '直达(中转)',
+        width: '250',
+        prop: "route",
+        holder: '请选择中转或直达',
+        type: 'select_def'
+      }, {
+        label: '包邮',
+        width: '200',
+        prop: "is_free_shipping",
+        holder: '请选择是否包邮',
+        type: 'select_def'
+      }, {
+        label: '备注',
+        width: '200',
+        prop: "remark",
+        holder: '请输入备注',
+        type: 'textarea'
+      }], [{
+        label: '系统单号',
+        width: '250',
+        prop: "order_no",
+        holder: '请输入订单号',
+        type: 'text'
+      }, {
+        label: '商品编码',
+        width: '240',
+        prop: "good_sn",
+        holder: '请输入商品编码',
+        type: 'text'
+      }, {
+        label: '规格编码',
+        width: '220',
+        prop: "standard_code",
+        holder: '请输入规格编码',
+        type: 'text'
+      },
+      /*{
+        label: '商品名称',
+        width: '180',
+        prop: "code",
+        holder: '请输入物流代码',
+        type: 'text'
+      },*/
+      /* {
+         label: '规格名称',
+         width: '180',
+         prop: "code",
+         holder: '请输入物流代码',
+         type: 'text'
+       },*/
+      {
+        label: '损坏数量',
+        width: '220',
+        prop: "quantity",
+        holder: '请输入损坏数量',
+        type: 'number'
+      }, {
+        label: '损坏金额',
+        width: '220',
+        prop: "money",
+        holder: '请输入损坏金额',
+        type: 'number'
+      },
+      /*{
+        label: '损坏来源',
+        width: '180',
+        prop: "code",
+        holder: '请输入物流代码',
+        type: 'text'
+      },*/
+      {
+        label: '备注',
+        width: '240',
+        prop: "remark",
+        holder: '请输入备注',
+        type: 'textarea'
+      },
+      /* {
+         label: '创建人',
+         width: '180',
+         prop: "code",
+         holder: '请输入物流代码',
+         type: 'text'
+       },*/
+      {
+        label: '创建时间',
+        width: '280',
+        prop: "created_at",
+        // holder: '请输入物流代码',
+        type: 'text',
+        beAble: true
+      }], [{
+        label: '报表文件',
+        width: '220',
+        prop: "file",
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
+        width: '220',
+        prop: "name",
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        width: '200',
+        prop: "paper_format",
+        holder: '请输入报表格式',
+        type: 'text'
+      }, {
+        label: '状态',
+        width: '220',
+        prop: "status",
+        holder: '请选择是否启用',
+        type: 'select_stu'
+      }]],
+      loading: true,
+      currentIndex: '',
+      url: ['/logistics', '/cityinfos', '/damagedgoods', '/printreports'],
+      showMaskArr: [{ show: false }, { show: false }, { show: false }, { show: false }],
+      title: ['新增物流公司', '新增城市信息', '添加损坏商品', '添加报表格式'],
+      ruleForm: [{
+        code: '',
+        name: '',
+        report_id: '',
+        // logistics_area_id: '',
+        expected_days: '',
+        phone: '',
+        address: '',
+        freight_type_id: '',
+        remark: '',
+        status: '1'
+      }, {
+        logistics_id: '',
+        province: '',
+        city: '',
+        district: '',
+        address: '',
+        phone: '',
+        price: '',
+        weight_univalent: '',
+        expected_days: '',
+        route: '1',
+        is_free_shipping: '0',
+        remark: ''
+      }, {
+        order_no: '',
+        good_sn: '',
+        standard_code: '',
+        quantity: '',
+        money: '',
+        remark: '',
+        status: '1'
+      }, {
+        file: '',
+        name: '',
+        paper_format: '',
+        status: '1'
       }],
-      url: '/markcolors',
-      //新增
-      showAdd: false,
-      title: '新增标记颜色',
-      ruleForm: {
-        markcode: '',
-        markname: '',
-        color: '',
-        status: '1',
-        description: ''
-      },
-      rules: {
-        markcode: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
-        markname: [{ required: true, message: '请输入标记名称', trigger: 'blur' }],
-        color: [{ required: true, message: '请选择颜色', trigger: 'blur' }]
-      },
-      addArr: [{
-        label: '标记代码',
-        prop: 'markcode',
-        holder: '请输入标记代码',
+      rules: [{
+        code: [{ required: true, message: '请输入物流代码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入物流名称', trigger: 'blur' }],
+        report_id: [{ required: true, message: '请选择报表格式', trigger: 'blur' }],
+        expected_days: [{ required: true, message: '请输入预计天数', trigger: 'blur' }],
+        phone: [{ required: true, message: '请输入物流电话', trigger: 'blur' }],
+        address: [{ required: true, message: '请输入物流地址', trigger: 'blur' }],
+        freight_type_id: [{ required: true, message: '请选择运费类型', trigger: 'blur' }]
+      }, {
+        logistics_id: [{ required: true, message: '请输入物流id', trigger: 'blur' }],
+        province: [{ required: true, message: '请输入所在省', trigger: 'blur' }],
+        city: [{ required: true, message: '请输入所在市', trigger: 'blur' }],
+        district: [{ required: true, message: '请输入所在区', trigger: 'blur' }],
+        address: [{ required: true, message: '请输入详细地址', trigger: 'blur' }],
+        phone: [{ required: true, message: '请输入提货电话', trigger: 'blur' }],
+        price: [{ required: true, message: '请输入物流费用', trigger: 'blur' }],
+        weight_univalent: [{ required: true, message: '请输入重量单价', trigger: 'blur' }],
+        expected_days: [{ required: true, message: '请输入城市到达天数', trigger: 'blur' }]
+      }, {
+        order_no: [{ required: true, message: '请输入系统单号', trigger: 'blur' }],
+        good_sn: [{ required: true, message: '请输入商品编码', trigger: 'blur' }],
+        standard_code: [{ required: true, message: '请输入规格编码', trigger: 'blur' }],
+        quantity: [{ required: true, message: '请输入损坏数量', trigger: 'blur' }],
+        money: [{ required: true, message: '请输入损坏金额', trigger: 'blur' }]
+      }, {
+        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
+        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
+      }],
+      addArr: [[{
+        label: '物流代码',
+        prop: 'code',
+        holder: '请输入物流代码',
         type: 'text'
       }, {
-        label: '标记名称',
-        prop: 'markname',
-        holder: '请输入标记名称',
+        label: '物流名称',
+        prop: 'name',
+        holder: '请输入物流名称',
         type: 'text'
       }, {
-        label: '标记颜色',
-        prop: 'color',
-        type: 'pickColor'
+        label: '报表格式',
+        prop: 'report_id',
+        holder: '请选择报表格式',
+        type: 'select',
+        val: this.sonArr
+      },
+      /* {
+         label:'物流区域',
+         prop:'logistics_area_id',
+         holder:'请选择状态',
+         type: 'text'
+       },*/
+      {
+        label: '运费类型',
+        prop: 'freight_type_id',
+        holder: '请输入运费类型',
+        type: 'select',
+        val: this.sonArr
+      }, {
+        label: '预计天数',
+        prop: 'expected_days',
+        holder: '请输入预计天数',
+        type: 'number'
+      }, {
+        label: '物流电话',
+        prop: 'phone',
+        holder: '请输入物流电话',
+        type: 'tel'
+      }, {
+        label: '物流地址',
+        prop: 'address',
+        holder: '请输入物流地址',
+        type: 'textarea'
+      }, {
+        label: '备注',
+        prop: 'remark',
+        holder: '请输入备注',
+        type: 'textarea'
+      }, {
+        label: '状态',
+        prop: 'status',
+        holder: '请选择是否启用',
+        type: 'select_stu'
+      }], [{
+        label: '物流名称',
+        prop: 'logistics_id',
+        holder: '请输入物流名称',
+        type: 'select',
+        val: this.sonArr
+      }, {
+        label: '省',
+        prop: 'province',
+        holder: '请输入所在省',
+        type: 'text'
+      }, {
+        label: '市',
+        prop: 'city',
+        holder: '请输入所在市',
+        type: 'text'
+      }, {
+        label: '区',
+        prop: 'district',
+        holder: '请输入所在区',
+        type: 'text'
+      }, {
+        label: '提货电话',
+        prop: 'phone',
+        holder: '请输入提货电话',
+        type: 'tel'
+      }, {
+        label: '提货地址',
+        prop: 'address',
+        holder: '请输入提货地址',
+        type: 'textarea'
+      }, {
+        label: '物流费用',
+        prop: 'price',
+        holder: '请输入物流费用',
+        type: 'number'
+      }, {
+        label: '重量单价',
+        prop: 'weight_univalent',
+        holder: '请输入重量单价',
+        type: 'number'
+      }, {
+        label: '预计天数',
+        prop: 'expected_days',
+        holder: '请输入预计天数',
+        type: 'number'
+      }, {
+        label: '是否直达',
+        prop: 'route',
+        holder: '请选择是否直达',
+        type: 'select_def'
+      }, {
+        label: '是否包邮',
+        prop: 'is_free_shipping',
+        holder: '请选择是否直达',
+        type: 'select_def'
+      }, {
+        label: '备注',
+        prop: 'remark',
+        holder: '请输入备注',
+        type: 'textarea'
+      }], [{
+        label: '系统单号',
+        prop: 'order_no',
+        holder: '请输入系统单号',
+        type: 'text'
+      }, {
+        label: '商品编码',
+        prop: 'good_sn',
+        holder: '请输入商品编码',
+        type: 'text'
+      }, {
+        label: '规格编码',
+        prop: 'standard_code',
+        holder: '请输入规格编码',
+        type: 'text'
+      }, {
+        label: '损坏数量',
+        prop: 'quantity',
+        holder: '请输入损坏数量',
+        type: 'number'
+      }, {
+        label: '损坏金额',
+        prop: 'money',
+        holder: '请输入损坏金额',
+        type: 'number'
+      }, {
+        label: '备注',
+        prop: 'remark',
+        holder: '请输入备注',
+        type: 'textarea'
       }, {
         label: '状态',
         prop: 'status',
         holder: '请选择状态',
-        type: 'select'
+        type: 'select_stu'
+      }], [{
+        label: '报表文件',
+        prop: 'file',
+        holder: '请输入报表文件',
+        type: 'text'
       }, {
-        label: '描述',
-        prop: 'description',
-        holder: '请输入描述',
-        type: 'textarea'
-      }],
-
-      importUrl: '/markcolors', //后台接口config.admin_url+'rest/schedule/import/'
-      importHeaders: {
-        enctype: 'multipart/form-data',
-        cityCode: ''
+        label: '报表名称',
+        prop: 'name',
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        prop: 'paper_format',
+        holder: '请输入报表格式',
+        type: 'text'
+      }, {
+        label: '状态',
+        prop: 'status',
+        holder: '请选择状态',
+        type: 'select_stu'
+      }]],
+      halfForm: [{ show: true }, { show: true }, { show: false }, { show: false }],
+      refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage', 'ruleReports'],
+      showDel: false,
+      delId: '',
+      inputChange: false,
+      multipleSelection: [],
+      delArr: [],
+      sonArr: [],
+      pagination: {
+        current_page: 1,
+        per_page: 0,
+        page_total: 0
       },
-      name: 'import',
-      fileList: [],
-      withCredentials: true,
-      processing: false,
-      uploadTip: '点击上传',
-      importFlag: 1,
-      dialogImportVisible: false,
-      errorResults: []
+      showPage: true,
+      doChange: [false, false, true, true],
+      editTitle: ['修改物流公司信息', '修改物流城市信息'],
+      editMask: [{ show: false }, { show: false }, { show: false }, { show: false }],
+      editId: '',
+      editData: {},
+      // editList: {},
+      leftTab: '修改',
+      uploadShow: false,
+      uploadUrl: 'https://jsonplaceholder.typicode.com/posts/'
+
     };
   },
 
+  computed: {
+    /* selects: {
+       get: function () {
+         return this.$store.state.SonData.reports;
+       },
+       set: function () {
+       }
+     },
+     reportType: {
+       get: function () {
+         return this.$store.state.SonData.reports;
+       },
+       set: function () {
+       }
+     },
+     freightsType: {
+       get: function () {
+         return this.$store.state.SonData.freights
+       },
+       set: function () {
+       }
+     },*/
+    /* uploadUrl() {
+       // return `${axios.defaults.baseURL}todos/upload`
+     }*/
+  },
   methods: {
-    //新增
+    test: function test() {
+      console.log(1);
+    },
+    handleTabsClick: function handleTabsClick() {
+      this.loading = true;
+      this.getInfo(this.url[this.activeName]);
+      if (this.activeName == 2 || this.activeName == 3) {
+        this.newOpt[1].nClick = true;
+      } else {
+        this.newOpt[1].nClick = false;
+      }
+    },
     addNew: function addNew() {
-      this.$store.dispatch('setShowAdd', true);
+      this.showMaskArr[this.activeName].show = true;
     },
-    edit: function edit(row) {
-      var obj = {
-        id: row.id,
-        markcode: row.markcode,
-        markname: row.markname,
-        color: row.color,
-        description: row.description,
-        status: row.status
-      };
-      this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url + "/");
-      this.$store.dispatch('doEdit', obj);
+    CB_dialog: function CB_dialog(val) {
+      this.showMaskArr[this.activeName].show = val;
+      this.editMask[this.activeName].show = val;
     },
-    doDelMore: function doDelMore() {
-      this.$refs.table.$emit('delMore');
+    submitForm: function submitForm() {
+      var _this2 = this;
+
+      /* let addObj = {};
+       if (this.activeName == '0') {
+         addObj = {
+           code: this.ruleForm[0].code,
+           name: this.ruleForm[0].name,
+           report_id: this.ruleForm[0].report.id,
+           expected_days: this.ruleForm[0].expected_days,
+           phone: this.ruleForm[0].phone,
+           address: this.ruleForm[0].address,
+           freight_type_id: this.ruleForm[0].freight_type.id,
+           remark: this.ruleForm[0].remark,
+           status: this.ruleForm[0].status
+         };
+       } else if (this.activeName == '1') {
+         addObj = {
+           logistics_id: this.ruleForm[1].logistics_id,
+           province: this.ruleForm[1].province,
+           city: this.ruleForm[1].city,
+           district: this.ruleForm[1].district,
+           address: this.ruleForm[1].address,
+           phone: this.ruleForm[1].phone,
+           price: this.ruleForm[1].price,
+           weight_univalent: this.ruleForm[1].weight_univalent,
+           route: this.ruleForm[1].route,
+           expected_days: this.ruleForm[1].expected_days,
+           expected_days: this.ruleForm[1].expected_days,
+         };
+       }*/
+      this.$post(this.url[this.activeName], this.ruleForm[this.activeName]).then(function () {
+        _this2.$message({
+          message: '添加成功',
+          type: 'success'
+        });
+        _this2.showMaskArr[_this2.activeName].show = false;
+        _this2.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this2.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+
+    /*处理批量删除*/
+    handleSelectionChange: function handleSelectionChange(val) {
+      if (val.length != 0) {
+        this.editId = val[0].id;
+      } else {
+        this.editId = '';
+      }
+      this.multipleSelection = val;
+      var del = [];
+      this.multipleSelection.forEach(function (selectedItem) {
+        del.push(selectedItem.id);
+      });
+      this.delArr = del.join(',');
+    },
+    delMore: function delMore() {
+      var _this3 = this;
+
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
+        });
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this3.$del(_this3.url[_this3.activeName], { ids: _this3.delArr }).then(function () {
+            _this3.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this3.refresh();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this3.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this3.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+
+    /*修改保存*/
+    edit: function edit(index) {
+      this.currentIndex = 'index' + index;
+    },
+    editCancel: function editCancel() {
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+      this.currentIndex = '';
+    },
+    editSave: function editSave(row) {
+      var _this4 = this;
+
+      console.log(row);
+      var newData = {};
+      if (this.activeName == '0') {
+        newData = {
+          code: row.code,
+          name: row.name,
+          report: row.report,
+          expected_days: row.expected_days,
+          phone: row.phone,
+          address: row.address,
+          freight_type: row.freight_type,
+          remark: row.remark,
+          status: row.status
+        };
+      } else if (this.activeName == '1') {
+        newData = {
+          logistics: row.logistics.id,
+          province: row.province,
+          city: row.city,
+          district: row.district,
+          address: row.address,
+          phone: row.phone,
+          price: row.price,
+          weight_univalent: row.weight_univalent,
+          expected_days: row.expected_days,
+          route: row.route,
+          is_free_shipping: row.is_free_shipping,
+          remark: row.remark
+        };
+      } else if (this.activeName == '2') {
+        newData = {
+          order_no: row.order_no,
+          good_sn: row.good_sn,
+          standard_code: row.standard_code,
+          quantity: row.quantity,
+          money: row.money,
+          remark: row.remark
+          // status: row.status
+        };
+      } else if (this.activeName == '3') {
+        newData = {
+          file: row.file,
+          name: row.name,
+          paper_format: row.paper_format,
+          status: row.status
+        };
+      }
+      if (this.inputChange) {
+        this.$patch(this.url[this.activeName] + '/' + row.id, newData).then(function () {
+          _this4.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this4.getInfo(_this4.url[_this4.activeName]);
+          _this4.currentIndex = '';
+          _this4.inputChange = false;
+          _this4.refresh();
+        }, function (err) {
+          if (err.response) {
+            var arr = err.response.data.errors;
+            var arr1 = [];
+            for (var i in arr) {
+              arr1.push(arr[i]);
+            }
+            var str = arr1.join(',');
+            _this4.$message.error({
+              message: str
+            });
+          }
+        });
+      } else {
+        this.$message({
+          message: '数据未改动',
+          type: 'info'
+        });
+      }
+    },
+    handleEdit: function handleEdit() {
+      this.inputChange = true;
+    },
+    getSonData: function getSonData(url, propVal) {
+      var _this5 = this;
+
+      this.$fetch(url).then(function (res) {
+        var obj = {};
+        obj[propVal] = res.data;
+        _this5.sonArr.push(obj);
+      });
+    },
+    getInfo: function getInfo(url) {
+      var _this6 = this;
+
+      this.showPage = true;
+      this.$fetch(url).then(function (res) {
+        _this6.getsInfo[_this6.activeName] = res.data;
+        _this6.loading = false;
+        var pg = res.meta.pagination;
+        _this6.$store.dispatch('currentPage', pg.current_page);
+        _this6.$store.commit('PER_PAGE', pg.per_page);
+        _this6.$store.commit('PAGE_TOTAL', pg.total);
+        /* if (url == this.url[3]) {
+           this.$store.dispatch('setReports', res.data)
+         }*/
+        if (url == _this6.url[0]) {
+          var obj = {};
+          obj["0"] = res.data;
+          _this6.sonArr.push(obj);
+        }
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this6.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    del: function del(row, e) {
+      this.showDel = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    cancelD: function cancelD() {
+      this.showDel = false;
+      this.$message({
+        message: '取消删除',
+        type: 'info'
+      });
+    },
+    confirmD: function confirmD(id) {
+      var _this7 = this;
+
+      this.$del(this.url[this.activeName] + '/' + id).then(function () {
+        _this7.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this7.showDel = false;
+        _this7.refresh();
+      }, function (err) {
+        if (err.response) {
+          _this7.showDel = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this7.$message.error({
+            message: str
+          });
+        }
+      });
     },
     refresh: function refresh() {
-      this.$refs.table.$emit('refresh');
+      var _this8 = this;
+
+      this.loading = true;
+      this.getInfo(this.url[this.activeName]);
+      setTimeout(function () {
+        _this8.loading = false;
+      }, 2000);
+    },
+    dbClick: function dbClick(row) {
+      var _this9 = this;
+
+      var id = row.id;
+      this.activeName = '1';
+      this.loading = true;
+      this.showPage = false;
+      this.$fetch(this.url[1] + '/' + id).then(function (res) {
+        if (res) {
+          var arr = [];
+          arr.push(res);
+          _this9.getsInfo[_this9.activeName] = arr;
+          _this9.loading = false;
+        } else {
+          _this9.$message({
+            message: '没有查询到相关数据',
+            type: 'info'
+          });
+          _this9.getsInfo[_this9.activeName] = [];
+        }
+      }, function (err) {
+        console.log(err);
+        _this9.$message.error({
+          message: '查询失败'
+        });
+        _this9.loading = false;
+        _this9.getsInfo[_this9.activeName] = [];
+      });
+    },
+    editForm: function editForm() {
+      var _this10 = this;
+
+      var obj = {};
+      if (this.activeName == 0) {
+        obj = {
+          code: this.editData.code,
+          name: this.editData.name,
+          report_id: this.editData.report_id,
+          expected_days: this.editData.expected_days,
+          phone: this.editData.phone,
+          address: this.editData.address,
+          freight_type_id: this.editData.freight_type_id,
+          remark: this.editData.remark,
+          status: this.editData.status
+        };
+      } else if (this.activeName == 1) {
+        obj = {
+          logistics_id: this.editData.logistics_id,
+          province: this.editData.province,
+          city: this.editData.city,
+          district: this.editData.district,
+          address: this.editData.address,
+          phone: this.editData.phone,
+          price: this.editData.price,
+          weight_univalent: this.editData.weight_univalent,
+          expected_days: this.editData.expected_days,
+          route: this.editData.route,
+          is_free_shipping: this.editData.is_free_shipping,
+          remark: this.editData.remark
+        };
+      }
+      this.$patch(this.url[this.activeName] + '/' + this.editId, obj).then(function () {
+        _this10.$message({
+          message: '修改成功',
+          type: 'success'
+        });
+        _this10.editMask[_this10.activeName].show = false;
+        _this10.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this10.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    editInfo: function editInfo() {
+      var _this11 = this;
+
+      if (this.newOpt[1].nClick) {
+        return;
+      } else {
+        if (this.multipleSelection.length == 0) {
+          this.$message({
+            message: '没有选择要修改的数据',
+            type: 'warning'
+          });
+          return;
+        } else if (this.multipleSelection.length >= 2) {
+          this.$message({
+            message: '只能修改单条数据',
+            type: 'warning'
+          });
+          return;
+        } else {
+          this.editMask[this.activeName].show = true;
+          this.$fetch(this.url[this.activeName] + '/' + this.editId).then(function (res) {
+            if (_this11.activeName == 0) {
+              _this11.editData = {
+                code: res.code,
+                name: res.name,
+                report_id: res.report.id,
+                expected_days: res.expected_days,
+                phone: res.phone,
+                address: res.address,
+                freight_type_id: res.freight_type.id,
+                remark: res.remark,
+                status: res.status
+              };
+            } else if (_this11.activeName == 1) {
+              _this11.editData = {
+                logistics_id: res.logistics.id,
+                province: res.province,
+                city: res.city,
+                district: res.district,
+                address: res.address,
+                phone: res.phone,
+                price: res.price,
+                weight_univalent: res.weight_univalent,
+                expected_days: res.expected_days,
+                route: res.route,
+                is_free_shipping: res.is_free_shipping,
+                remark: res.remark
+              };
+            }
+          }, function (err) {
+            console.log(err);
+          });
+        }
+      }
     },
     exportExcel: function exportExcel() {
-      var wb = __WEBPACK_IMPORTED_MODULE_1_xlsx___default.a.utils.table_to_book(document.querySelector('#MyTable'));
+      var wb = __WEBPACK_IMPORTED_MODULE_1_xlsx___default.a.utils.table_to_book(document.querySelector('#outTable'));
       var wbout = __WEBPACK_IMPORTED_MODULE_1_xlsx___default.a.write(wb, { bookType: 'xlsx', bookSST: true, type: 'array' });
       try {
-        __WEBPACK_IMPORTED_MODULE_0_file_saver___default.a.saveAs(new Blob([wbout], { type: 'application/octet-stream' }), '用户提交返利表.xlsx');
+        __WEBPACK_IMPORTED_MODULE_0_file_saver___default.a.saveAs(new Blob([wbout], { type: 'application/octet-stream' }), '物流管理.xlsx');
       } catch (e) {
         if (typeof console !== 'undefined') console.log(e, wbout);
       }
       return wbout;
     },
-    importData: function importData() {
-      this.importFlag = 1;
-      this.fileList = [];
-      this.uploadTip = '点击上传';
-      this.processing = false;
-      this.dialogImportVisible = true;
-    },
-    outportData: function outportData() {
-      __WEBPACK_IMPORTED_MODULE_2__api_schedule_js__["a" /* downloadTemplate */]();
-    },
-    handlePreview: function handlePreview(file) {
-      //可以通过 file.response 拿到服务端返回数据
-    },
-    handleRemove: function handleRemove(file, fileList) {
-      //文件移除
-    },
-    beforeUpload: function beforeUpload(file) {
-      //上传前配置
-      this.importHeaders.cityCode = '上海'; //可以配置请求头
-      var excelfileExtend = ".xls,.xlsx"; //设置文件格式
-      var fileExtend = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
-      if (excelfileExtend.indexOf(fileExtend) <= -1) {
-        this.$message.error('文件格式错误');
-        return false;
-      }
-      this.uploadTip = '正在处理中...';
-      this.processing = true;
-    },
 
-    //上传错误
-    uploadFail: function uploadFail(err, file, fileList) {
-      this.uploadTip = '点击上传';
-      this.processing = false;
-      this.$message.error(err);
-    },
-
-    //上传成功
-    uploadSuccess: function uploadSuccess(response, file, fileList) {
-      this.uploadTip = '点击上传';
-      this.processing = false;
-      if (response.status === -1) {
-        this.errorResults = response.data;
-        if (this.errorResults) {
-          this.importFlag = 2;
-        } else {
-          this.dialogImportVisible = false;
-          this.$message.error(response.errorMsg);
+    /*上传*/
+    creatP: function creatP() {
+      this.uploadShow = true;
+      // 添加显示文件名，以及删除功能
+      var _this = this;
+      var oP = document.createElement('p');
+      oP.style.marginBottom = 10 + 'px';
+      oP.style.height = 60 + 'px';
+      oP.style.lineHeight = 60 + 'px';
+      oP.innerHTML = ' ' + sessionStorage.getItem('name') + '<span style=\'display:none;float:right;margin-right:15px;cursor:pointer\'>x</span>';
+      oP.addEventListener('mouseenter', function () {
+        this.childNodes[1].style.display = 'block';
+        this.style.background = '#9e9e9e';
+        this.style.color = '#fff';
+      });
+      oP.addEventListener('click', function (e) {
+        if (e.target.tagName === 'SPAN') {
+          _this.$refs.tip.removeChild(this);
         }
-      } else {
-        this.importFlag = 3;
-        this.dialogImportVisible = false;
-        this.$message.info('导入成功');
-        this.doSearch();
+      });
+      oP.addEventListener('mouseleave', function () {
+        this.childNodes[1].style.display = 'none';
+        this.style.background = '';
+        this.style.color = '#000';
+      });
+      _this.$refs.tip.appendChild(oP);
+    },
+    postBut: function postBut() {
+      // 模拟上传功能
+      var post = this.$refs.upload;
+      post.click();
+    },
+    handleOk: function handleOk() {
+      // 上传文件并解析数据
+      var _this = this;
+      var X = __WEBPACK_IMPORTED_MODULE_1_xlsx___default.a;
+      var rABS = false; // 是否转为二进制字符串
+      var files = this.$refs.upload.files;
+      for (var i = 0; i < files.length; i++) {
+        var f = files[i];
+        var reader = new FileReader();
+        var name = f.name;
+        sessionStorage.setItem('name', name);
+        reader.onload = function (e) {
+          var data = e.target.result;
+          var wb = void 0; // 读取完成的数据
+          if (rABS) {
+            wb = X.read(data, { type: 'binary' });
+          } else {
+            var arr = fixdata(data); // 手动转化
+            wb = X.read(btoa(arr), { type: 'base64' });
+          }
+          processWb(wb, 'json');
+        };
+        if (rABS) reader.readAsBinaryString(f);else reader.readAsArrayBuffer(f);
+        ;
+        // _this.$refs.tip.innerHTML = ''
+        _this.creatP();
+      }
+
+      // 将读取到的数据转为字符串
+      function processWb(wb, type) {
+        var output = '';
+        if (type === 'json') {
+          output = JSON.stringify(toJson(wb), 2, 2);
+          return output;
+        }
+      }
+
+      function fixdata(data) {
+        // 文件流转BinaryString
+        var o = '';
+        var l = 0;
+        var w = 10240;
+        for (; l < data.byteLength / w; ++l) {
+          o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+        }o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+        return o;
+      }
+
+      function toJson(workbook) {
+        var result = {};
+        // SheetNames是获取Sheets中Sheet的名字
+        // Sheets[Sheet名]获取第一个Sheet的数据
+        workbook.SheetNames.forEach(function (sheetName) {
+          var roa = __WEBPACK_IMPORTED_MODULE_1_xlsx___default.a.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+          if (roa.length > 0) {
+            result[sheetName] = roa;
+          }
+        });
+        var str = result.Sheet1;
+        _this.parmas.push(str);
+        console.log(_this.parmas);
+        _this.$emit('postdata', _this.parmas);
+        return result;
       }
     }
   },
   mounted: function mounted() {
+    this.getInfo(this.url[0]);
+    this.getSonData('/printreports', '2');
+    this.getSonData('/freighttypes', '3');
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -3672,7 +4626,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 865:
+/***/ 704:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -3858,7 +4812,7 @@ var saveAs = saveAs || (function(view) {
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports.saveAs = saveAs;
-} else if (("function" !== "undefined" && __webpack_require__(866) !== null) && (__webpack_require__(581) !== null)) {
+} else if (("function" !== "undefined" && __webpack_require__(705) !== null) && (__webpack_require__(580) !== null)) {
   !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
     return saveAs;
   }).call(exports, __webpack_require__, exports, module),
@@ -3868,7 +4822,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 /***/ }),
 
-/***/ 866:
+/***/ 705:
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -3878,7 +4832,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 867:
+/***/ 706:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, Buffer, process) {/*! xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
@@ -3892,8 +4846,8 @@ var current_codepage = 1200, current_ansi = 1252;
 /*global cptable:true, window */
 if(true) {
 	if(typeof cptable === 'undefined') {
-		if(typeof global !== 'undefined') global.cptable = __webpack_require__(582);
-		else if(typeof window !== 'undefined') window.cptable = __webpack_require__(582);
+		if(typeof global !== 'undefined') global.cptable = __webpack_require__(581);
+		else if(typeof window !== 'undefined') window.cptable = __webpack_require__(581);
 	}
 }
 
@@ -5038,7 +5992,7 @@ function filename(p) {
 	return (c === -1) ? p : p.slice(c+1);
 }
 var fs;
-function get_fs() { return fs || (fs = __webpack_require__(583)); }
+function get_fs() { return fs || (fs = __webpack_require__(582)); }
 function parse(file, options) {
 if(file.length < 512) throw new Error("CFB file size " + file.length + " < 512");
 var mver = 3;
@@ -5726,7 +6680,7 @@ return exports;
 
 if("function" !== 'undefined' && typeof module !== 'undefined' && typeof DO_NOT_EXPORT_CFB === 'undefined') { module.exports = CFB; }
 var _fs;
-if(true) try { _fs = __webpack_require__(583); } catch(e) {}
+if(true) try { _fs = __webpack_require__(582); } catch(e) {}
 
 /* normalize data for blob ctor */
 function blobify(data) {
@@ -5987,7 +6941,7 @@ var jszip;
 if(typeof JSZipSync !== 'undefined') jszip = JSZipSync;
 if(true) {
 	if(typeof module !== 'undefined' && module.exports) {
-		if(typeof jszip === 'undefined') jszip = __webpack_require__(871);
+		if(typeof jszip === 'undefined') jszip = __webpack_require__(710);
 	}
 }
 
@@ -6604,7 +7558,7 @@ var make_offcrypto = function(O, _crypto) {
 	var crypto;
 	if(typeof _crypto !== 'undefined') crypto = _crypto;
 	else if(true) {
-		try { crypto = __webpack_require__(872); }
+		try { crypto = __webpack_require__(711); }
 		catch(e) { crypto = null; }
 	}
 
@@ -23962,7 +24916,7 @@ return utils;
 })(utils);
 
 if(has_buf && "function" != 'undefined') (function() {
-	var Readable = __webpack_require__(873).Readable;
+	var Readable = __webpack_require__(712).Readable;
 
 	var write_csv_stream = function(sheet, opts) {
 		var stream = Readable();
@@ -24056,7 +25010,7 @@ var XLS = XLSX, ODS = XLSX;
 
 /***/ }),
 
-/***/ 868:
+/***/ 707:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24215,7 +25169,7 @@ function fromByteArray (uint8) {
 
 /***/ }),
 
-/***/ 869:
+/***/ 708:
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -24306,7 +25260,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 /***/ }),
 
-/***/ 870:
+/***/ 709:
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -24318,7 +25272,7 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 871:
+/***/ 710:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer, global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/*
@@ -24337,7 +25291,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
 */
 (function(e){
 	if("object"==typeof exports&&"undefined"!=typeof module&&"undefined"==typeof DO_NOT_EXPORT_JSZIP)module.exports=e();
-	else if("function"=="function"&&__webpack_require__(581)&&"undefined"==typeof DO_NOT_EXPORT_JSZIP){JSZipSync=e();!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+	else if("function"=="function"&&__webpack_require__(580)&&"undefined"==typeof DO_NOT_EXPORT_JSZIP){JSZipSync=e();!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));}
@@ -33326,21 +34280,21 @@ module.exports = ZStream;
 
 /***/ }),
 
-/***/ 872:
+/***/ 711:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 873:
+/***/ 712:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 874:
+/***/ 713:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -33350,136 +34304,241 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("my-table", {
-        ref: "table",
-        attrs: { "table-key": _vm.tableKey, url: _vm.url, id: "MyTable" },
-        on: { edit: _vm.edit }
-      }),
-      _vm._v(" "),
-      _c("add-mask", {
-        attrs: {
-          showMask: _vm.showAdd,
-          title: _vm.title,
-          "rule-form": _vm.ruleForm,
-          rules: _vm.rules,
-          "add-arr": _vm.addArr,
-          url: _vm.url
-        }
-      }),
-      _vm._v(" "),
       _c(
-        "el-dialog",
+        "el-tabs",
         {
-          staticClass: "dialog-import",
-          attrs: {
-            title: "导入",
-            visible: _vm.dialogImportVisible,
-            "modal-append-to-body": false,
-            "close-on-click-modal": false
-          },
-          on: {
-            "update:visible": function($event) {
-              _vm.dialogImportVisible = $event
-            }
+          on: { "tab-click": _vm.handleTabsClick },
+          model: {
+            value: _vm.activeName,
+            callback: function($$v) {
+              _vm.activeName = $$v
+            },
+            expression: "activeName"
           }
         },
         [
           _c(
-            "div",
-            {
-              class: {
-                "import-content": _vm.importFlag === 1,
-                "hide-dialog": _vm.importFlag !== 1
-              }
-            },
+            "el-tab-pane",
+            { attrs: { label: "物流公司", name: "0" } },
             [
-              _c(
-                "el-upload",
-                {
-                  staticClass: "upload-demo",
-                  attrs: {
-                    action: _vm.importUrl,
-                    name: _vm.name,
-                    headers: _vm.importHeaders,
-                    "on-preview": _vm.handlePreview,
-                    "on-remove": _vm.handleRemove,
-                    "before-upload": _vm.beforeUpload,
-                    "on-error": _vm.uploadFail,
-                    "on-success": _vm.uploadSuccess,
-                    "file-list": _vm.fileList,
-                    "with-credentials": _vm.withCredentials
-                  }
+              _c("light-table", {
+                ref: "table",
+                attrs: {
+                  listData: _vm.getsInfo[this.activeName],
+                  tableHead: _vm.tableHead[this.activeName],
+                  loading: _vm.loading,
+                  currentIndex: _vm.currentIndex,
+                  selects: _vm.sonArr,
+                  doChange: _vm.doChange[this.activeName],
+                  id: "outTable"
                 },
-                [
-                  _c(
-                    "el-button",
-                    {
-                      attrs: {
-                        size: "small",
-                        type: "primary",
-                        disabled: _vm.processing
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.uploadTip))]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "el-upload__tip",
-                      attrs: { slot: "tip" },
-                      slot: "tip"
-                    },
-                    [_vm._v("只能上传excel文件")]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c("div", { staticClass: "download-template" })
+                on: {
+                  handleSelect: _vm.handleSelectionChange,
+                  editSave: _vm.editSave,
+                  handleEdit: _vm.handleEdit,
+                  del: _vm.del,
+                  dbClick: _vm.dbClick,
+                  edit: _vm.edit,
+                  editCancel: _vm.editCancel
+                }
+              })
             ],
             1
           ),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              class: {
-                "import-failure": _vm.importFlag === 2,
-                "hide-dialog": _vm.importFlag !== 2
-              }
-            },
+            "el-tab-pane",
+            { attrs: { label: "物流城市", name: "1" } },
             [
-              _c("div", { staticClass: "failure-tips" }, [
-                _c("i", { staticClass: "el-icon-warning" }),
-                _vm._v("导入失败")
-              ]),
+              _c("light-table", {
+                attrs: {
+                  listData: _vm.getsInfo[this.activeName],
+                  tableHead: _vm.tableHead[this.activeName],
+                  loading: _vm.loading,
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
+                },
+                on: {
+                  handleSelect: _vm.handleSelectionChange,
+                  editSave: _vm.editSave,
+                  handleEdit: _vm.handleEdit,
+                  del: _vm.del,
+                  edit: _vm.edit,
+                  editCancel: _vm.editCancel
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-tab-pane",
+            { attrs: { label: "损坏商品", name: "2" } },
+            [
+              _c("light-table", {
+                attrs: {
+                  listData: _vm.getsInfo[this.activeName],
+                  tableHead: _vm.tableHead[this.activeName],
+                  loading: _vm.loading,
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
+                },
+                on: {
+                  handleSelect: _vm.handleSelectionChange,
+                  editSave: _vm.editSave,
+                  handleEdit: _vm.handleEdit,
+                  del: _vm.del,
+                  edit: _vm.edit,
+                  editCancel: _vm.editCancel
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-tab-pane",
+            { attrs: { label: "报表格式", name: "3" } },
+            [
+              _c("light-table", {
+                attrs: {
+                  listData: _vm.getsInfo[this.activeName],
+                  tableHead: _vm.tableHead[this.activeName],
+                  loading: _vm.loading,
+                  currentIndex: _vm.currentIndex,
+                  doChange: _vm.doChange[this.activeName]
+                },
+                on: {
+                  handleSelect: _vm.handleSelectionChange,
+                  editSave: _vm.editSave,
+                  handleEdit: _vm.handleEdit,
+                  del: _vm.del,
+                  edit: _vm.edit,
+                  editCancel: _vm.editCancel
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.showMaskArr[this.activeName].show,
+          title: _vm.title[this.activeName],
+          "rule-form": _vm.ruleForm[this.activeName],
+          rules: _vm.rules[this.activeName],
+          "add-arr": _vm.addArr[_vm.activeName],
+          url: _vm.url[_vm.activeName],
+          "new-ref": _vm.refArr[_vm.activeName],
+          halfForm: _vm.halfForm[_vm.activeName].show,
+          selects: _vm.sonArr
+        },
+        on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.editMask[this.activeName].show,
+          title: _vm.editTitle[_vm.activeName],
+          rules: _vm.rules[_vm.activeName],
+          "new-ref": _vm.refArr[_vm.activeName],
+          "rule-form": _vm.editData,
+          "add-arr": _vm.addArr[_vm.activeName],
+          url: _vm.url[_vm.activeName],
+          halfForm: _vm.halfForm[_vm.activeName].show,
+          selects: _vm.sonArr,
+          leftTab: _vm.leftTab
+        },
+        on: { submitEvent: _vm.editForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c(
+        "el-popover",
+        {
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.showDel,
+            callback: function($$v) {
+              _vm.showDel = $$v
+            },
+            expression: "showDel"
+          }
+        },
+        [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticStyle: { "text-align": "right", margin: "0" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
               _vm._v(" "),
-              _c("div", { staticClass: "failure-reason" }, [
-                _c("h4", [_vm._v("失败原因")]),
-                _vm._v(" "),
-                _c(
-                  "ul",
-                  _vm._l(_vm.errorResults, function(error, index) {
-                    return _c("li", { key: index }, [
-                      _vm._v(
-                        "第" +
-                          _vm._s(error.rowIdx + 1) +
-                          "行，错误：" +
-                          _vm._s(error.column) +
-                          "," +
-                          _vm._s(error.value) +
-                          "," +
-                          _vm._s(error.errorInfo)
-                      )
-                    ])
-                  })
-                )
-              ])
-            ]
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD(_vm.delId)
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
+            ],
+            1
           )
         ]
-      )
+      ),
+      _vm._v(" "),
+      _vm.showPage
+        ? _c(
+            "div",
+            [
+              _c("Pagination", {
+                attrs: { "page-url": _vm.url[_vm.activeName] }
+              })
+            ],
+            1
+          )
+        : _c("div"),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "upload" }, on: { click: _vm.postBut } }, [
+        _c("i", { staticClass: "el-icon-upload" }),
+        _vm._v(" "),
+        _c("div", { staticClass: "upload-text" }, [
+          _vm._v("请选择要上传的文件")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { ref: "tip" }),
+      _vm._v(" "),
+      _c("input", {
+        ref: "upload",
+        staticStyle: { visibility: "hidden" },
+        attrs: {
+          type: "file",
+          multiple: "multiple",
+          accept:
+            ".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+        },
+        on: {
+          change: function($event) {
+            _vm.handleOk()
+          }
+        }
+      })
     ],
     1
   )
@@ -33490,7 +34549,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7e6399ea", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-54de388c", module.exports)
   }
 }
 

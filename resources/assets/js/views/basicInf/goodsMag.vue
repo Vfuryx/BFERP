@@ -1,5 +1,34 @@
 <template>
     <div>
+        <div class="goodsSearchBox" v-if="goodsPage">
+            <span>
+                <label>商品名称</label>
+                <el-input v-model="searchBox.goodsName" clearable @keyup.enter.native="getData"></el-input>
+            </span>
+            <span>
+                <label>店铺名称</label>
+                <el-select v-model="searchBox.shopNames" clearable placeholder="请选择">
+                    <el-option v-for="item in searchBox.shopNames" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+            </span>
+            <span>
+                <label>供货商</label>
+                <el-select v-model="searchBox.supplier" clearable placeholder="请选择">
+                    <el-option v-for="item in searchBox.supplier" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+            </span>
+            <span>
+                <label>类别</label>
+                <el-select v-model="searchBox.kinds" clearable placeholder="请选择">
+                    <el-option v-for="item in searchBox.kinds" :key="item.value" :label="item.label" :value="item.value"></el-option>
+                </el-select>
+            </span>
+            <span>
+                <el-checkbox v-model="searchBox.isComb">组合产品</el-checkbox>
+                <el-checkbox v-model="searchBox.isStop">停产</el-checkbox>
+                <el-checkbox v-model="searchBox.isStatus">启用</el-checkbox>
+            </span>
+        </div>
         <el-tabs v-model="activeName" @tab-click="handleTabsClick">
             <el-tab-pane label="商品信息" name="0">
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
@@ -9,17 +38,45 @@
                              :doChange="doChange[this.activeName]"></light-table>
             </el-tab-pane>
             <el-tab-pane label="规格信息" name="1">
+                <!--   <el-table :data="tabData" fit highlight-current-row
+                             type="index"
+                             @selection-change="handleSelectionChange"
+                             element-loading-text="拼命加载中"
+                             v-loading="loading"
+                             element-loading-spinner="el-icon-loading"
+                             element-loading-background="rgba(0, 0, 0, 0.6)"
+                             @row-dblclick="addComb"
+                             :row-key="getRowKeys"
+                             @row-click="rowClick"
+                             @expand-change="showDetail"
+                             :expand-row-keys="expands"
+                   >
+                       <el-table-column
+                               type="selection"
+                               width="95" align="center"
+                               :checked="checkboxInit" @change="toggleChecked">
+                       </el-table-column>
+                       <el-table-column
+                               label="点击展开"
+                               width="100"
+                               type="expand"
+                       >
+                           <template slot-scope="props">
+                           </template>
+                       </el-table-column>
+                   </el-table>-->
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
                              :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
                              @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
-                             @editCancel="editCancel" :doChange="doChange[this.activeName]" @dbClick="addComb"></light-table>
+                             @editCancel="editCancel" :doChange="doChange[this.activeName]"
+                             @dbClick="addComb"></light-table>
             </el-tab-pane>
-          <!--  <el-tab-pane label="组合商品" name="2">
-                <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
-                             :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
-                             @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
-                             @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
-            </el-tab-pane>-->
+            <!--  <el-tab-pane label="组合商品" name="2">
+                  <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
+                               :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
+                               @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
+                               @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
+              </el-tab-pane>-->
         </el-tabs>
         <!--新增-->
         <add-new :visible-add="showMaskArr[this.activeName].show" :title="title[this.activeName]"
@@ -48,57 +105,75 @@
             <Pagination :page-url="url[activeName]"></Pagination>
         </div>
 
-        <el-dialog title="选择商品" :visible.sync="showComb">
-          <!--  <el-form :model="CombForm" :rules="combRules" ref="ruleForm" label-width="100px">
-                <el-form-item label="标记代码" prop="code">
-                    <el-input v-model="ruleForm.code" placehold=""></el-input>
-                </el-form-item>
-                <el-form-item label="标记名称" prop="name">
-                    <el-input v-model="ruleForm.name" placehold="请输入标记名称"></el-input>
-                </el-form-item>
-                <el-form-item label="颜色" prop="color">
-                    <el-color-picker v-model="ruleForm.color"></el-color-picker>
-                </el-form-item>
-                <el-form-item label="状态">
-                    <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                        <el-option label="停用" value="0"></el-option>
-                        <el-option label="启用" value="1"></el-option>
-                    </el-select>
-                </el-form-item>
-                <el-form-item label="描述" prop="desc">
-                    <el-input type="textarea" v-model="ruleForm.desc" placehode="请输入描述"></el-input>
-                </el-form-item>
-            </el-form>
-            <div slot="footer" class="dialog-footer">
-                <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
-                <el-button @click="resetForm('ruleForm')">重置</el-button>
-            </div>-->
+        <el-dialog title="选择商品" :visible.sync="showComb" class="goodsMag">
             <div>
-                <label>名称或编号</label><el-input clearable></el-input>
+                <label>名称或编号</label>
+                <el-input clearable style="width: 60%;margin:0 10px 0 5px;"></el-input>
                 <!-- v-model="searchBox.vip_name"-->
                 <el-button type="primary">查询</el-button>
             </div>
-            <el-table :data="this.getsInfo[1]" fit highlight-current-row
+            <!--读取的规格信息-->
+            <el-table :data="tData" fit highlight-current-row
                       type="index"
                       @selection-change="handleSelectionChange"
                       element-loading-text="拼命加载中"
                       v-loading="loading"
                       element-loading-spinner="el-icon-loading"
-                      element-loading-background="rgba(0, 0, 0, 0.6)">
+                      element-loading-background="rgba(0, 0, 0, 0.6)"
+                      ref="multipleTable"
+                      max-height="360"
+                      @row-dblclick="choiceComb">
                 <el-table-column
-                        type="selection"
-                        width="95" align="center"
-                        :checked="checkboxInit" @change="toggleChecked" label="组合">
+                        label="组合"
+                        width="55"
+                        type="selection">
+                    <!-- :checked="tData.is_combination"-->
                 </el-table-column>
-                <el-table-colum  prop="" label="商品编码" width=""></el-table-colum>
-                <el-table-colum  prop="" label="规格编码" width=""></el-table-colum>
-                <el-table-colum  prop="" label="商品名称" width=""></el-table-colum>
-                <el-table-colum  prop="" label="规格名称" width=""></el-table-colum>
-                <el-table-colum  prop="" label="是否成品" width=""></el-table-colum>
-                <el-table-colum  prop="" label="组合件数" width=""></el-table-colum>
+                <el-table-column
+                        prop="goods.commodity_code"
+                        label="商品编码"
+                        width="160"
+                        align="center">
+                </el-table-column>
+                <el-table-column
+                        prop="spec_code"
+                        label="规格编码"
+                        width="160" align="center">
+                </el-table-column>
+                <el-table-column
+                        prop="goods.short_name"
+                        label="商品名称"
+                        width="180"
+                        show-overflow-tooltip align="center">
+                </el-table-column>
+                <el-table-column
+                        prop="spec"
+                        label="规格名称"
+                        width="260"
+                        show-overflow-tooltip align="center">
+                </el-table-column>
+                <el-table-column
+                        label="是否成品"
+                        width="160"
+                        show-overflow-tooltip align="center">
+                    <template slot-scope="scope">{{ scope.row.finished_pro==0?'否':'是' }}</template>
+                </el-table-column>
+                <el-table-column
+                        label="组合件数"
+                        width="160"
+                        show-overflow-tooltip align="center" fixed="right">
+                    <template slot-scope="scope">
+                        <span v-if="combIndex=='index'+scope.row.id">
+                           <input type="number" v-model="countComp" style="width:62px">
+                        </span>
+                        <span v-else>
+                            {{0}}
+                        </span>
+                    </template>
+                </el-table-column>
             </el-table>
-            <div>
-                <el-button type="primary">确认</el-button>
+            <div style="text-align: right;">
+                <el-button type="primary" @click="confirmAddComb">确认</el-button>
                 <el-button>取消</el-button>
             </div>
         </el-dialog>
@@ -190,8 +265,8 @@
               prop: "nick",
               holder: '请选择店铺名称',
               type: 'text'
-             /* type: 'select',
-              val: this.sonArr*/
+              /* type: 'select',
+               val: this.sonArr*/
             },
             {
               label: '产品类别',
@@ -266,7 +341,7 @@
               prop: "spec_code",
               holder: '请输入规格编号',
               type: 'text',
-              beAble:true
+              beAble: true
             },
             {
               label: '京东规格编号',
@@ -275,15 +350,15 @@
               holder: '请输入京东规格编号',
               type: 'text'
             },
-           /* {
-              label: '商品简称',
-              width: '250',
-              prop: "goods",
-              holder: '请选择商品简称',
-              type: 'select',
-              val: this.sonArr,
-              beAble:true
-            },*/
+            /* {
+               label: '商品简称',
+               width: '250',
+               prop: "goods",
+               holder: '请选择商品简称',
+               type: 'select',
+               val: this.sonArr,
+               beAble:true
+             },*/
             {
               label: '唯品会规格编号',
               width: '300',
@@ -538,7 +613,7 @@
         ],
         loading: true,
         currentIndex: '',
-        url: ['/goods','/productspecs'],
+        url: ['/goods', '/productspecs'],
         /*  '/combinations'*/
         showMaskArr: [{show: false}, {show: false}, {show: false}],
         title: ['新增商品', '新增产品规格', '新增组合'],
@@ -768,13 +843,13 @@
         ],
         addArr: [
           [
-           /* {
-              label: '产品规格',
-              prop: 'productspecs',
-              holder: '请选择产品规格',
-              type: 'select',
-              val: this.sonArr
-            },*/
+            /* {
+               label: '产品规格',
+               prop: 'productspecs',
+               holder: '请选择产品规格',
+               type: 'select',
+               val: this.sonArr
+             },*/
             {
               label: '商品编号',
               prop: 'commodity_code',
@@ -799,9 +874,9 @@
               label: '店铺昵称',
               prop: 'nick',
               holder: '请选择店铺昵称',
-              type:'text'
-             /* type: 'select',
-              val: this.sonArr*/
+              type: 'text'
+              /* type: 'select',
+               val: this.sonArr*/
             },
             {
               label: '产品类别',
@@ -869,12 +944,12 @@
             }
           ],
           [
-           /* {
-              label: '商品简称',
-              prop: 'goods',
-              holder: '请输入规格图片',
-              type: 'text'
-            },*/
+            /* {
+               label: '商品简称',
+               prop: 'goods',
+               holder: '请输入规格图片',
+               type: 'text'
+             },*/
             {
               label: '规格编码',
               prop: 'spec_code',
@@ -1016,11 +1091,11 @@
               holder: '请输入条形码',
               type: 'text',
             }, {
-              label: '图片地址',
-              prop: 'img_url',
-              holder: '请输入图片地址',
-              type: 'url',
-            },
+            label: '图片地址',
+            prop: 'img_url',
+            holder: '请输入图片地址',
+            type: 'url',
+          },
             {
               label: '规格',
               prop: 'spec',
@@ -1162,11 +1237,33 @@
         editData: {},
         // editList: {},
         leftTab: '修改',
-        getsErrors:false,
-        showComb:false,
+        getsErrors: false,
+        showComb: false,
         CombForm: {},
-        combRules:{},
+        combRules: {},
+        checkboxInit: false,
+        multipleTable: [],
+        tData: [],
+        countComp: '',
+        compRow: {},
+        combIndex: '',
+        specRow: {},
+        goodsPage: true,
+        searchBox:{
+          goodsName:'',
+          shopNames:'',
+          supplier:'',
+          kinds:'',
+          isComb: false,
+          isStop: false,
+          isStatus: false
+        },
 
+        getRowKeys(row) {
+          return row.id;
+        },
+        expands: [],
+        tableData: []
       }
     },
     methods: {
@@ -1176,6 +1273,7 @@
       handleTabsClick() {
         this.loading = true;
         this.getInfo(this.url[this.activeName]);
+        this.goodsPage = this.activeName == 0 ? true : false;
         /* if (this.activeName == 2 || this.activeName == 3) {
           this.newOpt[1].nClick = true;
         } else {
@@ -1365,7 +1463,7 @@
           let obj = {};
           obj[propVal] = res.data;
           this.sonArr.push(obj);
-        },()=>{
+        }, () => {
           this.getsErrors = true
         })
       },
@@ -1384,10 +1482,12 @@
               let obj = {};
               obj["2"] = res.data;
               this.sonArr.push(obj)
-            }else if (url == this.url[1]){
+            }
+            else if (url == this.url[1]) {
+              this.tData = res.data;
               let obj = {};
               obj["0"] = res.data;
-              this.sonArr.push(obj)
+              this.sonArr.push(obj);
             }
           }, err => {
             if (err.response) {
@@ -1477,8 +1577,8 @@
             this.getsInfo[this.activeName] = [];
           })
       },
-       editInfo() {
-         if (this.newOpt[1].nClick) {
+      editInfo() {
+        if (this.newOpt[1].nClick) {
           return
         } else {
           if (this.multipleSelection.length == 0) {
@@ -1556,7 +1656,7 @@
                   is_stop_pro: res.is_stop_pro,
                   status: res.status
                 }
-              }else{
+              } else {
                 this.editData = {
                   product_specs: res.product_specs.id,
                   com_pro_specs: res.com_pro_specs.id,
@@ -1631,8 +1731,8 @@
             is_stop_pro: this.editData.is_stop_pro,
             status: this.editData.status
           }
-        }else{
-          obj={
+        } else {
+          obj = {
             product_specs: this.editData.product_specs,
             com_pro_specs: this.editData.com_pro_specs,
             count: this.editData.count,
@@ -1661,13 +1761,84 @@
             }
           })
       },
-      addComb(){
+      addComb(row) {
+        this.specRow = row;
         this.showComb = true;
+        this.$fetch('/combinations').then(res => {
+          console.log(res);
+        }, err => {
+        });
+      },
+      toggleChecked() {
+
+      },
+      choiceComb(row) {
+        this.compRow = row;
+        this.combIndex = 'index' + row.id;
+      },
+      confirmAddComb() {
+        /*如果没有输入件数，提示输入
+        * 如果没有双击确认，提示选择
+        * 都有的话，直接进入到产品规格子集中，弹框关闭*/
+        if (this.combIndex == '') {
+          this.$message({
+            message: '请双击选择要添加的组合',
+            type: 'info'
+          });
+          return
+        } else if (this.countComp == 0) {
+          this.$message({
+            message: '请选择要添加的组合个数',
+            type: 'info'
+          });
+          return
+        } else {
+          let obj = {
+            product_specs_id: this.specRow.id,
+            com_pro_specs_id: this.compRow.id,
+            count: this.countComp,
+          };
+          this.$post('/combinations', obj).then(res => {
+            this.$message({
+              message: '添加组合成功',
+              type: 'success'
+            });
+            this.showComb = false;
+
+            this.combIndex = '';
+            this.countComp = 0;
+            obj = {};
+            console.log(res);
+          }, err => {
+          })
+        }
+      },
+
+      rowClick(data, event, column) {
+        // console.log('点击行出发','column',column.label)
+        if (column.label !== '点击展开') {
+          this.expands = [];
+        }
+      },
+      //点击展开列表详细数据
+      showDetail(data, expandedRows) {
+        //控制只显示当前行
+        if (expandedRows.length) {
+          this.expands = [];
+          if (data) {
+            this.expands.push(data.id);
+          }
+        } else {
+          this.expands = [];
+        }
+      },
+      getData(){
+        console.log(this.searchBox);
       }
     },
     mounted() {
       this.getInfo(this.url[0]);
-      if(!this.getsErrors) {
+      if (!this.getsErrors) {
         this.getSonData('/suppliers', '5');
         this.getSonData('/goodscates', '4');
         // this.getSonData('/shops', '3');

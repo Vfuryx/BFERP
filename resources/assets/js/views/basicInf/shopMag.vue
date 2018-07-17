@@ -1,5 +1,15 @@
 <template>
     <div class="shopMag">
+        <div class="searchBox" v-if="shopPage">
+                <span>
+                <label>卖家昵称</label>
+                <el-input v-model="searchBox.buyNick" clearable class="half" @keyup.enter.native="getData"></el-input>
+            </span>
+                <span>
+                <label>店铺标题</label>
+                <el-input v-model="searchBox.shopTitle" clearable class="half" @keyup.enter.native="getData"></el-input>
+            </span>
+        </div>
         <el-tabs v-model="activeName" @tab-click="handleTabsClick">
             <el-tab-pane label="店铺信息" name="0">
                 <el-table :data="getsInfo[0]" fit highlight-current-row
@@ -493,7 +503,7 @@
 <script>
     // import AddNew from '../../components/addNew.vue'
   export default {
-      components:{
+    components:{
         // AddNew
       },
     data() {
@@ -704,7 +714,12 @@
           current_page:1,
           per_page: 0,
           page_total: 0
-        }
+        },
+        searchBox:{
+          buyNick:'',
+          shopTitle:''
+        },
+        shopPage: true
       }
     },
     computed:{
@@ -1080,7 +1095,12 @@
       handleTabsClick(){
         this.loading = true;
         this.getShopInfo(this.url[this.activeName]);
+        this.shopPage = this.activeName == 0?true:false;
       },
+      getData(){
+        alert(this.searchBox);
+        console.log(this.searchBox);
+      }
     },
     mounted() {
       this.getShopInfo(this.url[0]);

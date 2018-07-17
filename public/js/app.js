@@ -48132,77 +48132,77 @@ var constantRouterMap = [{
     path: 'merchandiser',
     name: 'Merchandiser',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(76).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(449)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(77).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(449)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '跟单部', icon: 'move', requireAuth: true }
   }, {
     path: 'financialDepart',
     name: 'FinancialDepart',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(78).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(450)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(79).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(450)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务部', icon: 'financial', requireAuth: true }
   }, {
     path: 'storage',
     name: 'Storage',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(70).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(451)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(71).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(451)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '仓储部', icon: 'store', requireAuth: true }
   }, {
     path: 'orderChanges',
     name: 'OrderChanges',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(74).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(452)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(75).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(452)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单变更', icon: 'chg', requireAuth: true }
   }, {
     path: 'orderCenter',
     name: 'OrderCenter',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(75).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(453)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(76).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(453)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单中心', icon: 'ordCenter', requireAuth: true }
   }, {
     path: 'redPackageDelivery',
     name: 'RedPackageDelivery',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(71).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(454)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(72).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(454)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '红包商品配送', icon: 'reddeli', requireAuth: true }
   }, {
     path: 'audit',
     name: 'Audit',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(80).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(455)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(81).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(455)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '审计部', icon: 'audit', requireAuth: true }
   }, {
     path: 'auditOfFinancialBrushes',
     name: 'AuditOfFinancialBrushes',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(79).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(456)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(80).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(456)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务刷单审核', icon: 'fiRea', requireAuth: true }
   }, {
     path: 'logisticsQueryOrder',
     name: 'LogisticsQueryOrder',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(77).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(457)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(78).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(457)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '物流查询订单', icon: 'query', requireAuth: true }
   }, {
     path: 'orderTracking',
     name: 'OrderTracking',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(72).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(458)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(73).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(458)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单跟踪', icon: 'track', requireAuth: true }
   }, {
     path: 'orderSettlement',
     name: 'OrderSettlement',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(73).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(459)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(74).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(459)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单结算', icon: 'settle', requireAuth: true }
   }]
@@ -48258,21 +48258,21 @@ var constantRouterMap = [{
     path: 'financialAccount',
     name: 'FinancialAccount',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(82).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(465)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(83).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(465)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务记账', icon: 'fiAc', requireAuth: true }
   }, {
     path: 'accountCenter',
     name: 'AccountCenter',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(83).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(466)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(84).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(466)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '记账中心', icon: 'asLa', requireAuth: true }
   }, {
     path: 'financialBill',
     name: 'FinancialBill',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(81).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(467)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(82).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(467)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务开票', icon: 'borrow', requireAuth: true }
   }]
@@ -48286,21 +48286,21 @@ var constantRouterMap = [{
     path: 'afterSalesVisit',
     name: 'AfterSalesVisit',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(21).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(468)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(22).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(468)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '售后回访', icon: 'afterS', requireAuth: true }
   }, {
     path: 'evaluationManagement',
     name: 'EvaluationManagement',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(20).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(469)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(21).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(469)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '评价管理', icon: 'evalua', requireAuth: true }
   }, {
     path: 'financialConfirmation',
     name: 'FinancialConfirmation',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(470)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(20).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(470)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务确认', icon: 'financial', requireAuth: true }
   }]
@@ -48314,42 +48314,42 @@ var constantRouterMap = [{
     path: 'purchaseOrder',
     name: 'PurchaseOrder',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(66).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(471)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(67).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(471)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '采购单管理', icon: 'puOr', requireAuth: true }
   }, {
     path: 'stockIn',
     name: 'StockIn',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(64).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(472)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(65).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(472)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '入库单管理', icon: 'stIn', requireAuth: true }
   }, {
     path: 'cancelPurchase',
     name: 'CancelPurchase',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(69).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(473)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(70).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(473)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '取消采购管理', icon: 'canPu', requireAuth: true }
   }, {
     path: 'purchaseReturns',
     name: 'PurchaseReturns',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(65).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(474)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(66).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(474)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '采购退货管理', icon: 'regoods', requireAuth: true }
   }, {
     path: 'purchaseFabric',
     name: 'PurchaseFabric',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(67).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(475)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(68).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(475)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '采购面料管理', icon: 'puFa', requireAuth: true }
   }, {
     path: 'otherStorage',
     name: 'OtherStorage',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(68).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(476)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(69).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(476)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '其他入库', icon: 'otSt', requireAuth: true }
   }]
@@ -48363,35 +48363,35 @@ var constantRouterMap = [{
     path: 'customerReApplication',
     name: 'CustomerReturnApplication',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(25).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(477)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(26).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(477)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '客服退货申请', icon: 'customer', requireAuth: true }
   }, {
     path: 'afterSaleReview',
     name: 'AfterSaleReview',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(26).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(478)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(27).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(478)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '售后退货审核', icon: 'cusRe', requireAuth: true }
   }, {
     path: 'warehouseReReview',
     name: 'WarehouseReReview',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(22).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(479)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(23).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(479)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '仓储退货审核', icon: 'waRe', requireAuth: true }
   }, {
     path: 'purchaseInSync',
     name: 'PurchaseInSync',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(24).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(480)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(25).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(480)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '采购库存同步', icon: 'sync', requireAuth: true }
   }, {
     path: 'returnMngCenter',
     name: 'ReturnMngCenter',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(23).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(481)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(24).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(481)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '退货管理中心', icon: 'reCt', requireAuth: true }
   }]
@@ -48405,35 +48405,35 @@ var constantRouterMap = [{
     path: 'customerReApplication',
     name: 'CustomerReApplication',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(57).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(482)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(58).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(482)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '客服退款申请', icon: 'customer', requireAuth: true }
   }, {
     path: 'afterSaleReAudit',
     name: 'AfterSaleReAudit',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(59).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(483)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(60).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(483)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '售后退款审核', icon: 'afterS', requireAuth: true }
   }, {
     path: 'financialReAudit',
     name: 'FinancialReAudit',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(56).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(484)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(57).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(484)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务退款审核', icon: 'fiRea', requireAuth: true }
   }, {
     path: 'refundCenter',
     name: 'RefundCenter',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(55).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(485)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(56).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(485)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '退款中心', icon: 'reCt', requireAuth: true }
   }, {
     path: 'auditProofread',
     name: 'AuditProofread',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(58).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(486)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(59).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(486)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '审核校对', icon: 'sync', requireAuth: true }
   }]
@@ -48447,56 +48447,56 @@ var constantRouterMap = [{
     path: 'inventoryInquire',
     name: 'InventoryInquire',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(13).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(487)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(14).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(487)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存查询', icon: 'query', requireAuth: true }
   }, {
     path: 'inventoryMove',
     name: 'InventoryMove',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(12).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(488)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(13).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(488)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存移动', icon: 'move', requireAuth: true }
   }, {
     path: 'portfolioInventory',
     name: 'PortfolioInventory',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(489)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(12).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(489)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '组合商品库存', icon: 'poFo', requireAuth: true }
   }, {
     path: 'inventoryAdjust',
     name: 'InventoryAdjust',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(490)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(490)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存调整', icon: 'sync', requireAuth: true }
   }, {
     path: 'inventoryCheck',
     name: 'InventoryCheck',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(14).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(491)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(15).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(491)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存盘点', icon: 'check', requireAuth: true }
   }, {
     path: 'borrowOrderMag',
     name: 'BorrowOrderMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(492)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(19).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(492)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '借出单管理', icon: 'borrow', requireAuth: true }
   }, {
     path: 'finishedProductMag',
     name: 'FinishedProductMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(493)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(18).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(493)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '成品仓管理', icon: 'pro', requireAuth: true }
   }, {
     path: 'halfProDelivery',
     name: 'HalfProDelivery',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(16).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(494)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(17).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(494)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '半成品出库', icon: 'hPro', requireAuth: true }
   }]
@@ -48510,21 +48510,21 @@ var constantRouterMap = [{
     path: 'orderDwn',
     name: 'OrderDownload',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(86).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(495)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(87).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(495)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单下载', icon: 'dwnorder', requireAuth: true }
   }, {
     path: 'productDwn',
     name: 'ProductDownload',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(85).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(496)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(86).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(496)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '商品下载', icon: 'dwngoods', requireAuth: true }
   }, {
     path: 'refundListDwn',
     name: 'RefundListDwn',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(84).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(497)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(85).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(497)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '退款单下载', icon: 'remoneylist', requireAuth: true }
   }]
@@ -48545,35 +48545,35 @@ var constantRouterMap = [{
     path: 'logisticsMag',
     name: 'Logistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(105).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(499)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(499)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '物流管理', icon: 'reddeli', requireAuth: true }
   }, {
     path: 'warehouseMag',
     name: 'Warehouse',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(87).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(500)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(88).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(500)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '仓库管理', icon: 'store', requireAuth: true }
   }, {
     path: 'shopMag',
     name: 'Shop',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(92).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(501)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(93).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(501)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '店铺管理', icon: 'shop', requireAuth: true }
   }, {
     path: 'memberMag',
     name: 'Member',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(103).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(502)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(104).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(502)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '会员管理', icon: 'vipM', requireAuth: true }
   }, {
     path: 'supplierMag',
     name: 'Supplier',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(91).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(503)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(92).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(503)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '供应商管理', icon: 'sup', requireAuth: true }
   }, {
@@ -48601,42 +48601,42 @@ var constantRouterMap = [{
     path: 'markerColorMag',
     name: 'MarkerColor',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(104).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(507)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(105).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(507)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '标记颜色管理', icon: 'colorM', requireAuth: true }
   }, {
     path: 'proCategoryMag',
     name: 'ProCategory',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(97).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(508)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(98).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(508)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '商品类别管理', icon: 'pType', requireAuth: true }
   }, {
     path: 'userAstSupplier',
     name: 'UserAstSupplier',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(90).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(509)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(91).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(509)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '用户关联供应商', icon: 'asso', requireAuth: true }
   }, {
     path: 'printerConf',
     name: 'PrinterConf',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(99).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(510)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(100).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(510)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '打印机配置', icon: 'print', requireAuth: true }
   }, {
     path: 'negativeInvConf',
     name: 'NegativeInvConf',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(101).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(511)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(102).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(511)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '负库存配置', icon: 'canPu', requireAuth: true }
   }, {
     path: 'userAstWarehouse',
     name: 'UserAstWarehouse',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(89).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(512)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(90).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(512)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '用户关联仓库', icon: 'assoW', requireAuth: true }
   }, {
@@ -48685,14 +48685,14 @@ var constantRouterMap = [{
     path: 'verificationConf',
     name: 'VerificationConf',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(88).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(519)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(89).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(519)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '核销配置', icon: 'audit', requireAuth: true }
   }, {
     path: 'quantumUser',
     name: 'QuantumUser',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(95).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(520)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(96).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(520)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '量子用户', icon: 'qUser', requireAuth: true }
   }, {
@@ -48713,14 +48713,14 @@ var constantRouterMap = [{
     path: 'proBom',
     name: 'ProBom',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(98).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(523)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(99).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(523)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '产品Bom', icon: 'pro', requireAuth: true }
   }, {
     path: 'relateLogistics',
     name: 'RelateLogistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(94).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(524)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(95).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(524)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '关联物流', icon: 'asLa', requireAuth: true }
   }, {
@@ -48734,21 +48734,21 @@ var constantRouterMap = [{
     path: 'proMap',
     name: 'ProMap',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(96).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(526)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(97).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(526)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '产品映射', icon: 'map', requireAuth: true }
   }, {
     path: 'miniPackageMag',
     name: 'MiniPackageMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(102).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(527)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(103).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(527)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '最小包管理', icon: 'min', requireAuth: true }
   }, {
     path: 'offlineAccountConf',
     name: 'OfflineAccountConf',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(100).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(528)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(101).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(528)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '线下账户配置', icon: 'cusMag', requireAuth: true }
   }, {
@@ -48762,7 +48762,7 @@ var constantRouterMap = [{
     path: 'shopGatheringMag',
     name: 'ShopGatheringMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(93).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(530)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(94).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(530)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '门店收款管理', icon: 'geth', requireAuth: true }
   }, {
@@ -48797,21 +48797,21 @@ var constantRouterMap = [{
     path: 'roleMag',
     name: 'RoleMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(534)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(534)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '角色管理', icon: 'role', requireAuth: true }
   }, {
     path: 'userMag',
     name: 'UserMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(535)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(9).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(535)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '用户管理', icon: 'cus', requireAuth: true }
   }, {
     path: 'roleAssociateUser',
     name: 'RoleAssociateUser',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(10).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(536)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(11).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(536)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '角色用户关联', icon: 'asso', requireAuth: true }
   }]
@@ -48825,28 +48825,28 @@ var constantRouterMap = [{
     path: 'saleStat1',
     name: 'SaleStatistics1.0',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(34).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(537)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(35).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(537)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '销售统计报表1.0', icon: 'sS1', requireAuth: true }
   }, {
     path: 'saleStat2',
     name: 'SaleStatistics2.0',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(33).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(538)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(34).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(538)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '销售统计报表2.0', icon: 'sS2', requireAuth: true }
   }, {
     path: 'saleStat3',
     name: 'SaleStatistics3.0',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(32).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(539)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(33).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(539)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '销售统计报表3.0', icon: 'sS3', requireAuth: true }
   }, {
     path: 'shipStat',
     name: 'ShipStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(30).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(540)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(31).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(540)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '发货统计报表', icon: 'shS', requireAuth: true }
   }, {
@@ -48860,70 +48860,70 @@ var constantRouterMap = [{
     path: 'financeStat',
     name: 'FinanceStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(47).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(541)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(48).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(541)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '财务统计报表', icon: 'fS', requireAuth: true }
   }, {
     path: 'refundStat',
     name: 'RefundStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(35).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(542)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(36).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(542)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '退款统计报表', icon: 'refS', requireAuth: true }
   }, {
     path: 'performanceStat',
     name: 'PerformanceStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(37).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(543)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(38).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(543)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '业绩统计报表', icon: 'perS', requireAuth: true }
   }, {
     path: 'invoicingStat',
     name: 'InvoicingStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(42).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(544)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(43).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(544)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '进销存统计报表', icon: 'invS', requireAuth: true }
   }, {
     path: 'orderDtl',
     name: 'OrderDetails',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(40).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(545)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(41).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(545)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '订单明细报表', icon: 'fiAc', requireAuth: true }
   }, {
     path: 'stockStat',
     name: 'StockStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(27).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(546)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(28).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(546)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存统计报表', icon: 'stock', requireAuth: true }
   }, {
     path: 'stockInStat',
     name: 'StockInStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(28).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(547)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(29).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(547)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '入库统计报表', icon: 'puOr', requireAuth: true }
   }, {
     path: 'businessData',
     name: 'BusinessData',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(51).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(548)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(52).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(548)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '业务数据报表', icon: 'pType', requireAuth: true }
   }, {
     path: 'packageStat',
     name: 'PackageStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(39).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(549)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(40).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(549)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '包件统计报表', icon: 'invS', requireAuth: true }
   }, {
     path: 'inventories',
     name: 'Inventories',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(44).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(550)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(45).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(550)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存动向报表', icon: 'sync', requireAuth: true }
   }, {
@@ -48937,98 +48937,98 @@ var constantRouterMap = [{
     path: 'everydayStat',
     name: 'EveryDayStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(48).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(551)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(49).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(551)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '每日报表统计', icon: 'everyS', requireAuth: true }
   }, {
     path: 'alipayStat',
     name: 'AlipayStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(53).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(552)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(54).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(552)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '支付宝统计报表', icon: 'remoneylist', requireAuth: true }
   }, {
     path: 'evalQuality',
     name: 'EvalQuality',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(49).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(553)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(50).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(553)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '评价定性报表', icon: 'afterS', requireAuth: true }
   }, {
     path: 'KPIStat',
     name: 'KPIStatistics',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(54).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(554)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(55).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(554)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '绩效统计报表', icon: 'KS', requireAuth: true }
   }, {
     path: 'customerCommission',
     name: 'CustomerCommission',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(50).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(555)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(51).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(555)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '客服提成报表', icon: 'cusMag', requireAuth: true }
   }, {
     path: 'sortDetail',
     name: 'SortDetail',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(29).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(556)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(30).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(556)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '分拣明细报表', icon: 'poFo', requireAuth: true }
   }, {
     path: 'performCommission',
     name: 'PerformCommission',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(38).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(557)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(39).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(557)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '业绩提成报表', icon: 'stIn', requireAuth: true }
   }, {
     path: 'saleSummary',
     name: 'SaleSummary',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(31).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(558)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(32).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(558)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '销售汇总报表', icon: 'ordCenter', requireAuth: true }
   }, {
     path: 'proAccount',
     name: 'ProAccount',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(36).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(559)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(37).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(559)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '产品核算报表', icon: 'pro', requireAuth: true }
   }, {
     path: 'halfProOut',
     name: 'HalfProOut',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(45).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(560)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(46).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(560)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '半成品出库报表', icon: 'hPro', requireAuth: true }
   }, {
     path: 'newSortDtl',
     name: 'NewSortDtl',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(41).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(561)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(42).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(561)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '新分拣明细报表', icon: 'newS', requireAuth: true }
   }, {
     path: 'averageMonthSale',
     name: 'AverageMonthSale',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(52).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(562)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(53).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(562)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '月均销量报表', icon: 'aveM', requireAuth: true }
   }, {
     path: 'inventoryWarn',
     name: 'InventoryWarn',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(43).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(563)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(44).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(563)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '库存预警报表', icon: 'warn', requireAuth: true }
   }, {
     path: 'freightMag',
     name: 'FreightMag',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(46).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(564)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(47).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(564)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '运费管理报表', icon: 'typeP', requireAuth: true }
   }]
@@ -49042,28 +49042,28 @@ var constantRouterMap = [{
     path: 'reSApplication',
     name: 'ReSApplication',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(63).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(565)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(64).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(565)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '补件申请', icon: 'fiAc', requireAuth: true }
   }, {
     path: 'reSReview',
     name: 'ReSReview',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(61).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(566)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(62).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(566)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '补件审核', icon: 'cusRe', requireAuth: true }
   }, {
     path: 'reSShip',
     name: 'ReSShip',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(60).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(567)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(61).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(567)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '补件发货', icon: 'ship', requireAuth: true }
   }, {
     path: 'reSCenter',
     name: 'ReSCenter',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(62).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(568)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(63).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(568)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: '补件中心', icon: 'asLa', requireAuth: true }
   }]
@@ -49137,7 +49137,7 @@ var constantRouterMap = [{
     path: 'index',
     name: 'Hello',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(576)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(8).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(576)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: 'Hello', icon: '', requireAuth: true }
   }]
@@ -49149,7 +49149,7 @@ var constantRouterMap = [{
     path: 'index',
     name: 'Index',
     component: function component(resolve) {
-      return void __webpack_require__.e/* require */(1).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(577)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
+      return void __webpack_require__.e/* require */(7).then(function() { var __WEBPACK_AMD_REQUIRE_ARRAY__ = [__webpack_require__(577)]; ((resolve).apply(null, __WEBPACK_AMD_REQUIRE_ARRAY__));}.bind(this)).catch(__webpack_require__.oe);
     },
     meta: { title: 'index', icon: '', requireAuth: true }
   }]
@@ -95982,7 +95982,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n.search_box .box span .el-input__inner {\n  height: 32px;\n  line-height: 32px;\n  padding-right: 0; }\n\n.search_box .box span .el-button--medium {\n  padding: 8px 20px !important; }\n\n.search_box .box span .el-range-separator {\n  width: 12%; }\n\n.search_box .box span i.el-range-input {\n  width: 35%; }\n\n.search_box .box span .el-date-editor .el-range__icon {\n  width: 18px; }\n\n.search_box .box span .el-date-editor .el-range-input {\n  width: 42%; }\n\n.search_box .box span .el-date-editor .el-range__close-icon {\n  width: 3px; }\n\n.search_box input::-webkit-outer-spin-button,\n.search_box input::-webkit-inner-spin-button {\n  -webkit-appearance: none !important;\n  margin: 0; }\n\n.search_box input[type=\"number\"] {\n  -moz-appearance: textfield; }\n\n.search_box .opt .el-button--medium {\n  padding: 8px 20px !important; }\n\nform.half-form {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%; }\n  form.half-form .el-form-item {\n    width: 50%; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list i.bf-forbid {\n          color: #d0211d; }\n        #app .main-container .opt .list.active i.optIcon {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i.optIcon.bf-forbid {\n            background-color: #d0211d; }\n          #app .main-container .opt .list.active i.optIcon:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i.optIcon span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover.bf-forbid {\n              background-color: #d0211d; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span.text {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .avatar-container {\n        height: 64px;\n        display: inline-block;\n        position: absolute;\n        right: 16px;\n        padding: 12px;\n        box-sizing: border-box; }\n        #app .main-container .navbar .avatar-container .avatar-wrapper {\n          cursor: pointer;\n          position: relative;\n          /* .el-icon-caret-bottom {\r\n            position: absolute;\r\n            right: -20px;\r\n            top: 25px;\r\n            font-size: 12px;\r\n          }*/ }\n          #app .main-container .navbar .avatar-container .avatar-wrapper .user-avatar {\n            width: 40px;\n            height: 40px;\n            border-radius: 10px; }\n          #app .main-container .navbar .avatar-container .avatar-wrapper span {\n            display: inline-block;\n            height: 40px;\n            vertical-align: middle;\n            line-height: 1;\n            margin-left: 6px; }\n        #app .main-container .navbar .avatar-container:hover {\n          background: #e6f7ff; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .context-menu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .context-menu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .context-menu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden; }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n        #app .sidebar-container .scrollbar-wrapper .el-submenu__title i {\n          transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar {\n    /*.el-submenu {\r\n      overflow: hidden;\r\n      & > .el-submenu__title {\r\n        padding-left: 10px !important;\r\n        transition: none;\r\n\r\n        .el-submenu__icon-arrow {\r\n          display: none;\r\n        }\r\n      }\r\n    }\r\n\r\n    .el-menu--collapse {\r\n      .el-submenu {\r\n        & > .el-submenu__title {\r\n          transition: none;\r\n          padding: 0;\r\n          text-align: center;\r\n          & > span {\r\n            height: 0;\r\n            width: 0;\r\n            overflow: hidden;\r\n            visibility: hidden;\r\n            display: inline-block;\r\n            //background-color: $subMenuBg !important;\r\n          }\r\n        }\r\n      }\r\n    }\r\n*/ }\n    #app .hideSidebar .logo {\n      width: 80px;\n      line-height: 60px;\n      text-align: center; }\n      #app .hideSidebar .logo .el-menu-item {\n        padding-left: 0 !important; }\n      #app .hideSidebar .logo .title {\n        display: none; }\n    #app .hideSidebar .sidebar-container {\n      width: 80px !important;\n      box-sizing: border-box;\n      background-color: #061b2c !important; }\n    #app .hideSidebar .main-container {\n      margin-left: 80px; }\n    #app .hideSidebar .submenu-title-noDropdown {\n      padding-left: 10px !important;\n      position: relative; }\n      #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n        padding: 0 10px !important; }\n    #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title {\n      text-align: center;\n      padding: 0; }\n      #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title span, #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title i.el-submenu__icon-arrow {\n        display: none; }\n    #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n      transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background-color: #f5222d;\n  display: -webkit-inline-box;\n  margin-right: 3px; }\n\n.statusActive {\n  background-color: #1890ff; }\n\n.el-select {\n  width: 100%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n.app-main {\n  overflow-y: auto; }\n\n.app-container {\n  padding: 20px; }\n", ""]);
+exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n.search_box .box span .el-input__inner {\n  height: 32px;\n  line-height: 32px;\n  padding-right: 0; }\n\n.search_box .box span .el-button--medium {\n  padding: 8px 20px !important; }\n\n.search_box .box span .el-range-separator {\n  width: 12%; }\n\n.search_box .box span i.el-range-input {\n  width: 35%; }\n\n.search_box .box span .el-date-editor .el-range__icon {\n  width: 18px; }\n\n.search_box .box span .el-date-editor .el-range-input {\n  width: 42%; }\n\n.search_box .box span .el-date-editor .el-range__close-icon {\n  width: 3px; }\n\n.search_box input::-webkit-outer-spin-button,\n.search_box input::-webkit-inner-spin-button {\n  -webkit-appearance: none !important;\n  margin: 0; }\n\n.search_box input[type=\"number\"] {\n  -moz-appearance: textfield; }\n\n.search_box .opt .el-button--medium {\n  padding: 8px 20px !important; }\n\nform.half-form {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%; }\n  form.half-form .el-form-item {\n    width: 50%; }\n\n.goodsMag .el-dialog__body {\n  padding: 20px; }\n\n.goodsMag .el-table {\n  margin: 15px 0; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list i.bf-forbid {\n          color: #d0211d; }\n        #app .main-container .opt .list.active i.optIcon {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i.optIcon.bf-forbid {\n            background-color: #d0211d; }\n          #app .main-container .opt .list.active i.optIcon:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i.optIcon span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover.bf-forbid {\n              background-color: #d0211d; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span.text {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .avatar-container {\n        height: 64px;\n        display: inline-block;\n        position: absolute;\n        right: 16px;\n        padding: 12px;\n        box-sizing: border-box; }\n        #app .main-container .navbar .avatar-container .avatar-wrapper {\n          cursor: pointer;\n          position: relative;\n          /* .el-icon-caret-bottom {\r\n            position: absolute;\r\n            right: -20px;\r\n            top: 25px;\r\n            font-size: 12px;\r\n          }*/ }\n          #app .main-container .navbar .avatar-container .avatar-wrapper .user-avatar {\n            width: 40px;\n            height: 40px;\n            border-radius: 10px; }\n          #app .main-container .navbar .avatar-container .avatar-wrapper span {\n            display: inline-block;\n            height: 40px;\n            vertical-align: middle;\n            line-height: 1;\n            margin-left: 6px; }\n        #app .main-container .navbar .avatar-container:hover {\n          background: #e6f7ff; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .context-menu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .context-menu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .context-menu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden; }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n        #app .sidebar-container .scrollbar-wrapper .el-submenu__title i {\n          transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar {\n    /*.el-submenu {\r\n      overflow: hidden;\r\n      & > .el-submenu__title {\r\n        padding-left: 10px !important;\r\n        transition: none;\r\n\r\n        .el-submenu__icon-arrow {\r\n          display: none;\r\n        }\r\n      }\r\n    }\r\n\r\n    .el-menu--collapse {\r\n      .el-submenu {\r\n        & > .el-submenu__title {\r\n          transition: none;\r\n          padding: 0;\r\n          text-align: center;\r\n          & > span {\r\n            height: 0;\r\n            width: 0;\r\n            overflow: hidden;\r\n            visibility: hidden;\r\n            display: inline-block;\r\n            //background-color: $subMenuBg !important;\r\n          }\r\n        }\r\n      }\r\n    }\r\n*/ }\n    #app .hideSidebar .logo {\n      width: 80px;\n      line-height: 60px;\n      text-align: center; }\n      #app .hideSidebar .logo .el-menu-item {\n        padding-left: 0 !important; }\n      #app .hideSidebar .logo .title {\n        display: none; }\n    #app .hideSidebar .sidebar-container {\n      width: 80px !important;\n      box-sizing: border-box;\n      background-color: #061b2c !important; }\n    #app .hideSidebar .main-container {\n      margin-left: 80px; }\n    #app .hideSidebar .submenu-title-noDropdown {\n      padding-left: 10px !important;\n      position: relative; }\n      #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n        padding: 0 10px !important; }\n    #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title {\n      text-align: center;\n      padding: 0; }\n      #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title span, #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title i.el-submenu__icon-arrow {\n        display: none; }\n    #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n      transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background-color: #f5222d;\n  display: -webkit-inline-box;\n  margin-right: 3px; }\n\n.statusActive {\n  background-color: #1890ff; }\n\n.el-select {\n  width: 100%; }\n\n.searchBox {\n  display: flex;\n  margin-bottom: 10px; }\n  .searchBox > span {\n    flex: 1; }\n    .searchBox > span > label {\n      font-size: 14px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500;\n      width: 56px;\n      display: inline-block;\n      text-align: right; }\n    .searchBox > span > .el-input.half {\n      width: 70%; }\n\n.goodsSearchBox {\n  margin-bottom: 10px; }\n  .goodsSearchBox > span {\n    display: inline-block;\n    width: 19%; }\n    .goodsSearchBox > span:last-child {\n      width: 22%; }\n    .goodsSearchBox > span > label {\n      font-size: 14px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500;\n      width: 56px;\n      display: inline-block;\n      text-align: right; }\n    .goodsSearchBox > span > .el-input {\n      width: 70%; }\n      .goodsSearchBox > span > .el-input > .el-input__inner {\n        width: 100%; }\n    .goodsSearchBox > span > .el-select {\n      width: 70%; }\n      .goodsSearchBox > span > .el-select > .el-input {\n        width: 100%; }\n        .goodsSearchBox > span > .el-select > .el-input > .el-input__inner {\n          width: 97%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n.app-main {\n  overflow-y: auto; }\n\n.app-container {\n  padding: 20px; }\n", ""]);
 
 // exports
 
@@ -117077,6 +117077,7 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //

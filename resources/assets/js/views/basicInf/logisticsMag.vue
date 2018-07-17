@@ -6,7 +6,7 @@
                              :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
                              @del="del" @dbClick="dbClick" :loading="loading" @edit="edit" :currentIndex="currentIndex"
                              @editCancel="editCancel" :selects="sonArr"
-                             :doChange="doChange[this.activeName]"></light-table>
+                             :doChange="doChange[this.activeName]" id="outTable" ref="table"></light-table>
             </el-tab-pane>
             <el-tab-pane label="物流城市" name="1">
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
@@ -33,7 +33,8 @@
                  :url="url[activeName]" @submitEvent="submitForm" :new-ref="refArr[activeName]" @CB-dialog="CB_dialog"
                  :halfForm="halfForm[activeName].show" :selects="sonArr"></add-new>
         <!--修改-->
-        <add-new :visible-add="editMask[this.activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]" :new-ref="refArr[activeName]"
+        <add-new :visible-add="editMask[this.activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]"
+                 :new-ref="refArr[activeName]"
                  :rule-form="editData" :add-arr="addArr[activeName]"
                  :url="url[activeName]" @submitEvent="editForm" @CB-dialog="CB_dialog"
                  :halfForm="halfForm[activeName].show" :selects="sonArr" :leftTab="leftTab"></add-new>
@@ -53,13 +54,34 @@
             <Pagination :page-url="url[activeName]"></Pagination>
         </div>
         <div v-else></div>
+        <!--上传-->
+        <div id="upload" @click="postBut">
+            <i class="el-icon-upload"></i>
+            <div class="upload-text">请选择要上传的文件</div>
+        </div>
+        <div ref='tip'></div>
+        <input type="file" style="visibility: hidden;" multiple="multiple" ref="upload" @change="handleOk()"
+               accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
+       <!-- &lt;!&ndash; 上传文件对话框 &ndash;&gt;
+        <el-dialog title="上传文件" :visible.sync="uploadShow">
+            <el-upload :action="uploadUrl" :on-success="uploadSuccess">
+                <el-button type="primary" icon="el-icon-upload">上传</el-button>
+            </el-upload>
+            <span slot="footer">
+                <el-button type="danger" icon="el-icon-close" @click="uploadShow=false">关闭</el-button>
+            </span>
+        </el-dialog>-->
     </div>
 </template>
 <script>
+  import FileSaver from 'file-saver'
+  import XLSX from 'xlsx'
+  import axios from 'axios'
+
   export default {
     data() {
       return {
-        // show: false,
+        parmas: [],
         newOpt: [
           {
             cnt: '新增',
@@ -80,12 +102,12 @@
           {
             cnt: '导入',
             icon: 'bf-in',
-            ent: this.test,
+            ent: this.creatP,
           },
           {
             cnt: '导出',
             icon: 'bf-out',
-            ent: this.test,
+            ent: this.exportExcel,
           },
           {
             cnt: '同步',
@@ -183,7 +205,7 @@
             },
             {
               label: '创建时间',
-              width: '280',
+              width: '320',
               prop: "created_at",
               holder: '请输入创建时间',
               type: 'text',
@@ -743,7 +765,7 @@
         inputChange: false,
         multipleSelection: [],
         delArr: [],
-        sonArr:[],
+        sonArr: [],
         pagination: {
           current_page: 1,
           per_page: 0,
@@ -756,31 +778,37 @@
         editId: '',
         editData: {},
         // editList: {},
-        leftTab:'修改',
+        leftTab: '修改',
+        uploadShow: false,
+        uploadUrl: 'https://jsonplaceholder.typicode.com/posts/',
+
       }
     },
     computed: {
-     /* selects: {
-        get: function () {
-          return this.$store.state.SonData.reports;
-        },
-        set: function () {
-        }
-      },
-      reportType: {
-        get: function () {
-          return this.$store.state.SonData.reports;
-        },
-        set: function () {
-        }
-      },
-      freightsType: {
-        get: function () {
-          return this.$store.state.SonData.freights
-        },
-        set: function () {
-        }
-      },*/
+      /* selects: {
+         get: function () {
+           return this.$store.state.SonData.reports;
+         },
+         set: function () {
+         }
+       },
+       reportType: {
+         get: function () {
+           return this.$store.state.SonData.reports;
+         },
+         set: function () {
+         }
+       },
+       freightsType: {
+         get: function () {
+           return this.$store.state.SonData.freights
+         },
+         set: function () {
+         }
+       },*/
+      /* uploadUrl() {
+         // return `${axios.defaults.baseURL}todos/upload`
+       }*/
     },
     methods: {
       test() {
@@ -789,9 +817,9 @@
       handleTabsClick() {
         this.loading = true;
         this.getInfo(this.url[this.activeName]);
-        if(this.activeName==2 || this.activeName == 3){
+        if (this.activeName == 2 || this.activeName == 3) {
           this.newOpt[1].nClick = true;
-        }else{
+        } else {
           this.newOpt[1].nClick = false;
         }
       },
@@ -1017,10 +1045,10 @@
             this.$store.dispatch('currentPage', pg.current_page);
             this.$store.commit('PER_PAGE', pg.per_page);
             this.$store.commit('PAGE_TOTAL', pg.total);
-           /* if (url == this.url[3]) {
-              this.$store.dispatch('setReports', res.data)
-            }*/
-            if(url==this.url[0]){
+            /* if (url == this.url[3]) {
+               this.$store.dispatch('setReports', res.data)
+             }*/
+            if (url == this.url[0]) {
               let obj = {};
               obj["0"] = res.data;
               this.sonArr.push(obj)
@@ -1163,9 +1191,9 @@
           })
       },
       editInfo() {
-        if(this.newOpt[1].nClick){
+        if (this.newOpt[1].nClick) {
           return
-        }else{
+        } else {
           if (this.multipleSelection.length == 0) {
             this.$message({
               message: '没有选择要修改的数据',
@@ -1215,6 +1243,113 @@
               console.log(err);
             })
           }
+        }
+      },
+      exportExcel() {
+        let wb = XLSX.utils.table_to_book(document.querySelector('#outTable'));
+        let wbout = XLSX.write(wb, {bookType: 'xlsx', bookSST: true, type: 'array'});
+        try {
+          FileSaver.saveAs(new Blob([wbout], {type: 'application/octet-stream'}), '物流管理.xlsx');
+        } catch (e) {
+          if (typeof console !== 'undefined')
+            console.log(e, wbout)
+        }
+        return wbout
+      },
+      /*上传*/
+      creatP() {
+        this.uploadShow = true;
+        // 添加显示文件名，以及删除功能
+        let _this = this;
+        let oP = document.createElement('p');
+        oP.style.marginBottom = 10 + 'px';
+        oP.style.height = 60 + 'px';
+        oP.style.lineHeight = 60 + 'px';
+        oP.innerHTML = ` ${sessionStorage.getItem('name')}<span style='display:none;float:right;margin-right:15px;cursor:pointer'>x</span>`;
+        oP.addEventListener('mouseenter', function () {
+          this.childNodes[1].style.display = 'block';
+          this.style.background = '#9e9e9e';
+          this.style.color = '#fff'
+        });
+        oP.addEventListener('click', function (e) {
+          if (e.target.tagName === 'SPAN') {
+            _this.$refs.tip.removeChild(this)
+          }
+        });
+        oP.addEventListener('mouseleave', function () {
+          this.childNodes[1].style.display = 'none';
+          this.style.background = '';
+          this.style.color = '#000'
+        });
+        _this.$refs.tip.appendChild(oP)
+      },
+      postBut() {
+        // 模拟上传功能
+        let post = this.$refs.upload;
+        post.click()
+      },
+      handleOk() {
+        // 上传文件并解析数据
+        let _this = this;
+        let X = XLSX;
+        let rABS = false;// 是否转为二进制字符串
+        let files = this.$refs.upload.files;
+        for (let i = 0; i < files.length; i++) {
+          let f = files[i];
+          let reader = new FileReader();
+          let name = f.name;
+          sessionStorage.setItem('name', name);
+          reader.onload = function (e) {
+            let data = e.target.result;
+            let wb;// 读取完成的数据
+            if (rABS) {
+              wb = X.read(data, {type: 'binary'})
+            } else {
+              let arr = fixdata(data);// 手动转化
+              wb = X.read(btoa(arr), {type: 'base64'})
+            }
+            processWb(wb, 'json')
+          };
+          if (rABS) reader.readAsBinaryString(f);
+          else reader.readAsArrayBuffer(f);
+          ;
+          // _this.$refs.tip.innerHTML = ''
+          _this.creatP()
+        }
+
+        // 将读取到的数据转为字符串
+        function processWb(wb, type) {
+          let output = '';
+          if (type === 'json') {
+            output = JSON.stringify(toJson(wb), 2, 2);
+            return output
+          }
+        }
+
+        function fixdata(data) { // 文件流转BinaryString
+          let o = '';
+          let l = 0;
+          let w = 10240;
+          for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)))
+          o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+          return o
+        }
+
+        function toJson(workbook) {
+          let result = {};
+          // SheetNames是获取Sheets中Sheet的名字
+          // Sheets[Sheet名]获取第一个Sheet的数据
+          workbook.SheetNames.forEach(function (sheetName) {
+            let roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+            if (roa.length > 0) {
+              result[sheetName] = roa
+            }
+          });
+          let str = result.Sheet1;
+          _this.parmas.push(str);
+          console.log(_this.parmas);
+          _this.$emit('postdata', _this.parmas);
+          return result
         }
       },
     },

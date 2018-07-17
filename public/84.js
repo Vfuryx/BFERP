@@ -1,14 +1,14 @@
 webpackJsonp([84],{
 
-/***/ 497:
+/***/ 466:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(700)
+var __vue_script__ = __webpack_require__(637)
 /* template */
-var __vue_template__ = __webpack_require__(701)
+var __vue_template__ = __webpack_require__(638)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\dwnCenter\\refundListDwn.vue"
+Component.options.__file = "resources\\assets\\js\\views\\financial\\accountCenter.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-35fa4cdc", Component.options)
+    hotAPI.createRecord("data-v-e4bd7a1c", Component.options)
   } else {
-    hotAPI.reload("data-v-35fa4cdc", Component.options)
+    hotAPI.reload("data-v-e4bd7a1c", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 700:
+/***/ 637:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67,8 +67,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-out',
         ent: this.test
       }, {
-        cnt: '下载',
-        icon: 'bf-dwn',
+        cnt: '作废',
+        icon: 'bf-void',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
         ent: this.test
       }]
     };
@@ -94,7 +98,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 701:
+/***/ 638:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -108,7 +112,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("退款单下载")])])
+    return _c("div", [_c("h2", [_vm._v("记账中心")])])
   }
 ]
 render._withStripped = true
@@ -116,7 +120,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-35fa4cdc", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-e4bd7a1c", module.exports)
   }
 }
 

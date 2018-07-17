@@ -560,3 +560,65 @@
   width: 100%;
 }
 
+.searchBox{
+  display: flex;
+  margin-bottom: 10px;
+
+  &>span{
+   flex:1;
+
+    &>label{
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      width: 56px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    &>.el-input.half{
+      width: 70%;
+    }
+  }
+}
+
+.goodsSearchBox{
+  margin-bottom: 10px;
+  &>span{
+    display: inline-block;
+    width: 19%;
+
+    &:last-child{
+      width: 22%;
+    }
+
+    &>label{
+      font-size: 14px;
+      color: rgba(0, 0, 0, 0.85);
+      font-weight: 500;
+      width: 56px;
+      display: inline-block;
+      text-align: right;
+    }
+
+    &>.el-input{
+      width: 70%;
+
+      &>.el-input__inner{
+        width: 100%;
+      }
+    }
+    &>.el-select{
+      width: 70%;
+
+      &>.el-input{
+        width: 100%;
+
+       &>.el-input__inner{
+         width: 97%;
+       }
+      }
+    }
+  }
+}
+

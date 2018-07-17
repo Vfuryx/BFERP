@@ -61,7 +61,6 @@
         width: 3px;
       }
 
-
     }
   }
 
@@ -82,14 +81,22 @@
   }
 }
 
-//.shopMag{
-  form.half-form{
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
+form.half-form {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 
-    .el-form-item{
-      width: 50%;
-    }
+  .el-form-item {
+    width: 50%;
   }
-//}
+}
+
+.goodsMag{
+  .el-dialog__body{
+    padding: 20px;
+  }
+
+  .el-table{
+    margin: 15px 0;
+  }
+}

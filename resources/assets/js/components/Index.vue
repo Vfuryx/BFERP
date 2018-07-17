@@ -1,11 +1,12 @@
+<!--
 <template>
     <div>
         <my-table :table-key="tableKey" @edit="edit" ref="table" :url="url" id="MyTable" ></my-table>
 
-        <!--新增-->
+        &lt;!&ndash;新增&ndash;&gt;
         <add-mask :showMask="showAdd" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr" :url="url"></add-mask>
 
-        <!-- 导入 -->
+        &lt;!&ndash; 导入 &ndash;&gt;
         <el-dialog title="导入" :visible.sync="dialogImportVisible" :modal-append-to-body="false" :close-on-click-modal="false" class="dialog-import">
             <div :class="{'import-content': importFlag === 1, 'hide-dialog': importFlag !== 1}">
                 <el-upload class="upload-demo"
@@ -19,13 +20,13 @@
                            :on-success="uploadSuccess"
                            :file-list="fileList"
                            :with-credentials="withCredentials">
-                    <!-- 是否支持发送cookie信息 -->
+                    &lt;!&ndash; 是否支持发送cookie信息 &ndash;&gt;
                     <el-button size="small" type="primary" :disabled="processing">{{uploadTip}}</el-button>
                     <div slot="tip" class="el-upload__tip">只能上传excel文件</div>
                 </el-upload>
                 <div class="download-template">
-                    <!--<a class="btn-download" @click="download">
-                        <i class="icon-download"></i>下载模板</a>-->
+                    &lt;!&ndash;<a class="btn-download" @click="download">
+                        <i class="icon-download"></i>下载模板</a>&ndash;&gt;
                 </div>
             </div>
             <div :class="{'import-failure': importFlag === 2, 'hide-dialog': importFlag !== 2}" >
@@ -286,3 +287,153 @@
   }
 </script>
 
+-->
+<template>
+    <el-table
+            :data="tableData5"
+            style="width: 100%">
+        <el-table-column type="expand">
+            <template slot-scope="props">
+                <el-table
+                        :data="tableData"
+                        style="width: 100%">
+                    <el-table-column
+                            prop="date"
+                            label="日期"
+                            sortable
+                            width="180"
+                            :filters="[{text: '2016-05-01', value: '2016-05-01'}, {text: '2016-05-02', value: '2016-05-02'}, {text: '2016-05-03', value: '2016-05-03'}, {text: '2016-05-04', value: '2016-05-04'}]"
+                            :filter-method="filterHandler"
+                    >
+                    </el-table-column>
+                    <el-table-column
+                            prop="name"
+                            label="姓名"
+                            width="180">
+                    </el-table-column>
+                    <el-table-column
+                            prop="address"
+                            label="地址"
+                            :formatter="formatter">
+                    </el-table-column>
+                    <el-table-column
+                            prop="tag"
+                            label="标签"
+                            width="100"
+                            :filters="[{ text: '家', value: '家' }, { text: '公司', value: '公司' }]"
+                            :filter-method="filterTag"
+                            filter-placement="bottom-end">
+                        <template slot-scope="scope">
+                            <el-tag
+                                    :type="scope.row.tag === '家' ? 'primary' : 'success'"
+                                    disable-transitions>{{scope.row.tag}}</el-tag>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </template>
+        </el-table-column>
+        <el-table-column
+                label="商品 ID"
+                prop="id">
+        </el-table-column>
+        <el-table-column
+                label="商品名称"
+                prop="name">
+        </el-table-column>
+        <el-table-column
+                label="描述"
+                prop="desc">
+        </el-table-column>
+    </el-table>
+</template>
+
+<style>
+    .demo-table-expand {
+        font-size: 0;
+    }
+    .demo-table-expand label {
+        width: 90px;
+        color: #99a9bf;
+    }
+    .demo-table-expand .el-form-item {
+        margin-right: 0;
+        margin-bottom: 0;
+        width: 50%;
+    }
+</style>
+
+<script>
+  export default {
+    data() {
+      return {
+        tableData5: [
+          {
+          id: '12987122',
+          name: '好滋好味鸡蛋仔',
+          category: '江浙小吃、小吃零食',
+          desc: '荷兰优质淡奶，奶香浓而不腻',
+          address: '上海市普陀区真北路',
+          shop: '王小虎夫妻店',
+          shopId: '10333'
+        }, {
+          id: '12987123',
+          name: '好滋好味鸡蛋仔',
+          category: '江浙小吃、小吃零食',
+          desc: '荷兰优质淡奶，奶香浓而不腻',
+          address: '上海市普陀区真北路',
+          shop: '王小虎夫妻店',
+          shopId: '10333'
+        }, {
+          id: '12987125',
+          name: '好滋好味鸡蛋仔',
+          category: '江浙小吃、小吃零食',
+          desc: '荷兰优质淡奶，奶香浓而不腻',
+          address: '上海市普陀区真北路',
+          shop: '王小虎夫妻店',
+          shopId: '10333'
+        }, {
+          id: '12987126',
+          name: '好滋好味鸡蛋仔',
+          category: '江浙小吃、小吃零食',
+          desc: '荷兰优质淡奶，奶香浓而不腻',
+          address: '上海市普陀区真北路',
+          shop: '王小虎夫妻店',
+          shopId: '10333'
+        }],
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄',
+          tag: '公司'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄',
+          tag: '家'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄',
+          tag: '公司'
+        }]
+      }
+    },
+    methods: {
+      formatter(row, column) {
+        return row.address;
+      },
+      filterTag(value, row) {
+        return row.tag === value;
+      },
+      filterHandler(value, row, column) {
+        const property = column['property'];
+        return row[property] === value;
+      }
+    }
+  }
+</script>

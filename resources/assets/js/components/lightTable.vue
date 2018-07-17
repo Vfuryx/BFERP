@@ -227,6 +227,7 @@
                      </span>
                 </template>
             </el-table-column>
+            <!-- fixed="right"-->
             <el-table-column label="操作" width="220" align="center">
                 <template slot-scope="scope">
                         <span v-if="currentIndex=='index'+scope.$index">

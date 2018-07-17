@@ -1,6 +1,17 @@
 <template>
     <div>
+        <div class="searchBox" v-if="currentPage">
+                <span>
+                <label>买家昵称</label>
+                <el-input v-model="searchBox.buyNick" clearable class="half" @keyup.enter.native="getData"></el-input>
+            </span>
+            <span>
+                <label>会员姓名</label>
+                <el-input v-model="searchBox.shopTitle" clearable class="half" @keyup.enter.native="getData"></el-input>
+            </span>
+        </div>
         <h2>会员管理</h2>
+
     </div>
 </template>
 <script>
@@ -38,12 +49,21 @@
             icon: 'bf-refresh',
             ent: this.test
           }
-        ]
+        ],
+        currentPage: true,
+        searchBox:{
+          buyNick:'',
+          shopTitle:''
+        },
       }
     },
     methods:{
       test(){
         console.log(1);
+      },
+      getData(){
+        alert(this.searchBox);
+        console.log(this.searchBox);
       }
     },
     mounted() {

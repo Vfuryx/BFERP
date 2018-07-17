@@ -1,14 +1,14 @@
 webpackJsonp([87],{
 
-/***/ 500:
+/***/ 495:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(706)
+var __vue_script__ = __webpack_require__(695)
 /* template */
-var __vue_template__ = __webpack_require__(707)
+var __vue_template__ = __webpack_require__(696)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\warehouseMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\dwnCenter\\orderDwn.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3a269c48", Component.options)
+    hotAPI.createRecord("data-v-4ccc13b4", Component.options)
   } else {
-    hotAPI.reload("data-v-3a269c48", Component.options)
+    hotAPI.reload("data-v-4ccc13b4", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,81 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 706:
+/***/ 695:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -63,142 +133,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '新增',
-        icon: 'bf-add',
-        ent: this.addNew
-      }, {
-        cnt: '删除',
-        icon: 'bf-del',
-        ent: this.doDelMore
-      }, {
-        cnt: '刷新',
-        icon: 'bf-refresh',
-        ent: this.refresh
+        cnt: '下载',
+        icon: 'bf-dwn',
+        ent: this.test
       }],
-      tableKey: [[{
-        label: '仓库名称',
-        width: '180',
-        prop: "name",
-        holder: '请输入标记名称',
-        type: 'text'
-      }, {
-        label: '仓库地址',
-        width: '260',
-        prop: "address",
-        holder: '请输入仓库地址',
-        type: 'text',
-        lists: 'more_prop'
-      }, {
-        label: '是否默认仓库',
-        width: '160',
-        prop: "is_default",
-        holder: '描述',
-        type: 'select_def'
-      }, {
-        label: '是否可用',
-        width: '160',
-        prop: "status",
-        holder: '状态',
-        type: 'select_stu',
-        doSort: true
-      }]],
-      url: ['/warehouses'],
-      title: ['新建仓库'],
-      ruleForm: [{
-        name: '',
-        province: '',
-        city: '',
-        district: '',
-        address: '',
-        is_default: '0',
-        status: '1'
-      }],
-      rules: [{
-        name: [{ required: true, message: '请输入仓库名称', trigger: 'blur' }],
-        province: [{ required: true, message: '请输入仓库地址(省)', trigger: 'blur' }],
-        city: [{ required: true, message: '请输入仓库地址(市)', trigger: 'blur' }],
-        district: [{ required: true, message: '请输入仓库地址(区)', trigger: 'blur' }],
-        address: [{ required: true, message: '请输入仓库地址(县)', trigger: 'blur' }]
-
-      }],
-      addArr: [[{
-        label: '仓库名称',
-        prop: 'name',
-        holder: '请输入仓库名称',
-        type: 'text'
-      }, {
-        label: '地址(省)',
-        prop: 'province',
-        holder: '请输入仓库地址(省)',
-        type: 'text'
-      }, {
-        label: '地址(市)',
-        prop: 'city',
-        holder: '请输入仓库地址(市)',
-        type: 'text'
-      }, {
-        label: '地址(区)',
-        prop: 'district',
-        holder: '请输入仓库地址(区)',
-        type: 'text'
-      }, {
-        label: '地址(县)',
-        prop: 'address',
-        holder: '请输入县及以下地址',
-        type: 'text'
-      }, {
-        label: '是否默认',
-        prop: 'is_default',
-        holder: '请选择是否默认',
-        type: 'select_def'
-      }, {
-        label: '是否可用',
-        prop: 'status',
-        holder: '请选择是否可用',
-        type: 'select_stu'
-      }]]
+      searchBox: {
+        shop_name: '',
+        dwn_type: '',
+        pro_num: '',
+        order_num: '',
+        shopNames: [{ label: '店铺1', value: 0 }, { label: '店铺2', value: 1 }],
+        work_date: ''
+      },
+      tableData3: [],
+      multipleSelection: []
     };
   },
 
   methods: {
-    addNew: function addNew() {
-      this.$store.dispatch('setShowAdd', true);
-    },
-    edit: function edit(row) {
-      var obj = {
-        id: row.id,
-        name: row.name,
-        province: row.province,
-        city: row.city,
-        district: row.district,
-        address: row.address,
-        is_default: row.is_default,
-        status: row.status
-      };
-      this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url[0] + "/");
-      this.$store.dispatch('doEdit', obj);
-    },
-    doDelMore: function doDelMore() {
-      this.$refs.tabs.$emit('delMore');
-    },
-    refresh: function refresh() {
-      this.$store.dispatch('refresh');
+    test: function test() {
+      console.log(1);
     }
   },
   mounted: function mounted() {
-    this.$store.dispatch('setTabs', false);
-    this.$store.dispatch('setOpt', this.newOpt);
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
     var that = this;
     $(window).resize(function () {
-      that.$store.dispatch('setOpt', that.newOpt);
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
     });
   }
 });
 
 /***/ }),
 
-/***/ 707:
+/***/ 696:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -208,18 +180,145 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("v-tabs", {
-        ref: "tabs",
-        attrs: {
-          "table-key": _vm.tableKey,
-          url: _vm.url,
-          title: _vm.title,
-          "rule-form": _vm.ruleForm,
-          rules: _vm.rules,
-          "add-arr": _vm.addArr
+      _c("h2", [_vm._v("订单下载")]),
+      _vm._v(" "),
+      _c("div", { staticClass: "box" }, [
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("店铺名称")]),
+            _vm._v(" "),
+            _c(
+              "el-select",
+              {
+                attrs: { clearable: "", placeholder: "请选择" },
+                model: {
+                  value: _vm.searchBox.shop_name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shop_name", $$v)
+                  },
+                  expression: "searchBox.shop_name"
+                }
+              },
+              _vm._l(_vm.searchBox.shopNames, function(item) {
+                return _c("el-option", {
+                  key: item.value,
+                  attrs: { label: item.label, value: item.value }
+                })
+              })
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("业务日期")]),
+            _vm._v(" "),
+            _c("el-date-picker", {
+              attrs: {
+                type: "daterange",
+                "range-separator": "至",
+                "start-placeholder": "开始日期",
+                "end-placeholder": "结束日期"
+              },
+              model: {
+                value: _vm.searchBox.work_date,
+                callback: function($$v) {
+                  _vm.$set(_vm.searchBox, "work_date", $$v)
+                },
+                expression: "searchBox.work_date"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("买家昵称")]),
+            _vm._v(" "),
+            _c("el-input", {
+              attrs: { clearable: "" },
+              model: {
+                value: _vm.searchBox.pro_num,
+                callback: function($$v) {
+                  _vm.$set(_vm.searchBox, "pro_num", $$v)
+                },
+                expression: "searchBox.pro_num"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("订单编号")]),
+            _vm._v(" "),
+            _c("el-input", {
+              attrs: { clearable: "" },
+              model: {
+                value: _vm.searchBox.order_num,
+                callback: function($$v) {
+                  _vm.$set(_vm.searchBox, "order_num", $$v)
+                },
+                expression: "searchBox.order_num"
+              }
+            })
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "el-table",
+        {
+          ref: "multipleTable",
+          staticStyle: { width: "100%" },
+          attrs: { data: _vm.tableData3, "tooltip-effect": "dark" },
+          on: { "selection-change": _vm.handleSelectionChange }
         },
-        on: { edit: _vm.edit }
-      })
+        [
+          _c("el-table-column", { attrs: { type: "selection", width: "55" } }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { label: "订单交易号", width: "120" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "", label: "应付金额", width: "120" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "", label: "实付金额", "show-overflow-tooltip": "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "", label: "买家昵称", "show-overflow-tooltip": "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "", label: "创建时间", "show-overflow-tooltip": "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: { prop: "", label: "订单状态", "show-overflow-tooltip": "" }
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              prop: "",
+              label: "分阶段状态",
+              "show-overflow-tooltip": ""
+            }
+          })
+        ],
+        1
+      )
     ],
     1
   )
@@ -230,7 +329,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-3a269c48", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4ccc13b4", module.exports)
   }
 }
 
