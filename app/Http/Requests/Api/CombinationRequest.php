@@ -22,18 +22,18 @@ class CombinationRequest extends FormRequest
             case 'POST':
                 return [
                     'product_specs_id' => [
-                        'required','integer',
+                        'sometimes','required','integer',
                         Rule::exists('product_specs','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
                     'com_pro_specs_id' => [
-                        'required','integer',
+                        'sometimes','required','integer',
                         Rule::exists('product_specs','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'count' => 'required|integer',
+                    'count' => 'sometimes|required|integer',
                     'status' => 'integer'
                 ];
                 break;

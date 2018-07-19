@@ -30,6 +30,7 @@ class PurchaseTransformer extends TransformerAbstract
             'is_change' => $purchase->is_change,
             'remark' => $purchase->remark,
             'status' => $purchase->status,
+            'purchase_details' => $purchase->purchaseDetails,
             'created_at' => $purchase->created_at
                                     ->toDateTimeString(),
             'updated_at' => $purchase->updated_at

@@ -22,19 +22,19 @@ class ProductSpecRequest extends FormRequest
             case 'POST':
                 return [
                     'goods_id' => [
-                        'required','integer',
+                        'sometimes','required','integer',
                         Rule::exists('goods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
-                    'spec_code' => 'required|string|max:255|unique:product_specs',
+                    'spec_code' => 'sometimes|required|string|max:255|unique:product_specs',
                     'jd_specs_code' => 'string|max:255',
                     'vips_specs_code' => 'string|max:255',
-                    'tb_price' => 'required|numeric',
-                    'cost' => 'required|numeric',
-                    'price' => 'required|numeric',
-                    'highest_price' => 'required|numeric',
-                    'lowest_price' => 'required|numeric',
+                    'tb_price' => 'sometimes|required|numeric',
+                    'cost' => 'sometimes|required|numeric',
+                    'price' => 'sometimes|required|numeric',
+                    'highest_price' => 'sometimes|required|numeric',
+                    'lowest_price' => 'sometimes|required|numeric',
                     'warehouse_cost' => 'numeric',
                     'assembly_price' => 'numeric',
                     'discount' => 'numeric',
@@ -44,18 +44,18 @@ class ProductSpecRequest extends FormRequest
                     'package_costs' => 'numeric',
                     'wooden_frame_costs' => 'numeric',
                     'purchase_freight' => 'numeric',
-                    'inventory_warning' => 'required|integer',
-                    'purchase_days_warning' => 'required|integer',
-                    'available_warning' => 'required|integer',
+                    'inventory_warning' => 'sometimes|required|integer',
+                    'purchase_days_warning' => 'sometimes|required|integer',
+                    'available_warning' => 'sometimes|required|integer',
                     'distribution_method_id' => [
-                        'required','integer',
+                        'sometimes','required','integer',
                         Rule::exists('distribution_methods','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
                     'bar_code' => 'string|max:255',
                     'img_url' => 'url|max:255',
-                    'spec' => 'required|string|max:255',
+                    'spec' => 'sometimes|required|string|max:255',
                     'color' => 'string|max:255',
                     'materials' => 'string|max:255',
                     'function' => 'string|max:255',

@@ -19,6 +19,7 @@ class CreatePurchasesTable extends Migration
             $table->string('purchase_status')->default("新建")->comment('采购状态:新建、部分完成、已完成');
             $table->string('order_no')->default('')->comment('订单编号（订单生成）');
             $table->unsignedInteger('user_id')->comment('用户id(创建人)');
+            $table->timestamp('print_at')->nullable()->comment('打印时间');
             $table->string('receiver')->default('')->comment('收货人');
             $table->string('receiver_address')->default('')->comment('收货地址');
             $table->unsignedInteger('warehouse_id')->default(0)->comment('仓库id');

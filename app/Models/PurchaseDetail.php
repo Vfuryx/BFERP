@@ -9,12 +9,13 @@ class PurchaseDetail extends Model
     protected $fillable = [
         'purchases_id', 'product_specs_id', 'purchase_quantity', 'shops_id',
         'suppliers_id', 'purchase_cost', 'purchase_freight', 'warehouse_cost',
-        'commission', 'discount', 'colour_num', 'paint', 'arrival_time', 'remark'
+        'commission', 'discount', 'colour_num', 'paint', 'arrival_time', 'remark',
+        'wooden_frame_costs'
     ];
 
     public function purchases()
     {
-        return $this->belongsTo(Purchase::class);
+        return $this->belongsTo(Purchase::class,'purchases_id');
     }
 
     public function productSpecs()

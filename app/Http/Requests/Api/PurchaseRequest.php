@@ -13,6 +13,7 @@ class PurchaseRequest extends FormRequest
      */
     public function rules()
     {
+
         switch ($this->method()) {
             case 'GET':
                 return [
@@ -26,27 +27,29 @@ class PurchaseRequest extends FormRequest
                     'receiver_address' => 'required|string|max:255',
                     'warehouse_id' => [
                         'required', 'integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                        Rule::exists('warehouses', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'remark' => 'string|nullable|max:255',
                     'status' => 'integer',
+                    'purchase_details' => 'json'
                 ];
                 break;
             case 'PATCH':
-                dd($this->getRouteResolver());
+                $publicRule = $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 0);
                 return [
-                    'receiver' => 'string|max:255',
-                    'receiver_address' => 'string|max:255',
+                    'receiver' => ['string', 'max:255',],
+                    'receiver_address' => ['string', 'max:255', $publicRule],
                     'warehouse_id' => [
                         'integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                        Rule::exists('warehouses', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
+                        $publicRule
                     ],
-                    'remark' => 'string|nullable|max:255',
-                    'status' => 'integer'
+                    'remark' => ['string', 'nullable', 'max:255', $publicRule],
+                    'status' => ['integer', $publicRule]
                 ];
                 break;
             case 'DELETE':
@@ -55,23 +58,47 @@ class PurchaseRequest extends FormRequest
                 ];
                 break;
             case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => [
-                        'integer',
-//                        Rule::exists('purchases')->where(function ($query) {
-//                            $query->where('is_submit', 0);
-//                        }),
-                    ],
-//                    'is_submit' => 'integer',
-//                    'is_print' => 'integer',
-//                    'is_check' => 'integer',
-                ];
+                switch ($this->route()->getActionMethod()) {
+                    case 'isSubmit':
+                        return [
+                            'is_submit' => [
+                                'required', 'boolean',
+                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 0)
+                            ]
+                        ];
+                        break;
+                    case 'isPrint':
+                        return [
+                            'is_print' => [
+                                'required', 'boolean',
+                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 1 && $this->purchase->is_print == 0)
+                            ]
+                        ];
+                        break;
+                    case 'isCheck':
+                        return [
+                            'is_check' => [
+                                'required', 'boolean',
+                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 1 && $this->purchase->is_check == 0)
+                            ]
+                        ];
+                        break;
+                    default:
+                        return [
+                            'ids' => 'required|string',
+                            'status' => [
+                                'integer',
+                                $this->publicRule($this->purchase->is_submit == 0)
+                            ]
+                        ];
+                        break;
+                }
                 break;
         }
     }
 
-    public function messages()
+    public
+    function messages()
     {
         return [
             'purchase_status.required' => '采购状态必填',
@@ -98,11 +125,23 @@ class PurchaseRequest extends FormRequest
             'status.integer' => '状态必须int类型',
             'id.exists' => '需要更改的数据id在数据库中未找到',
             'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型'
+            'ids.string' => 'id组必须string类型',
+
+            'is_submit.required' => '是否提交必填',
+            'is_submit.boolean' => '是否提交必须布尔类型',
+
+            'isPrint.required' => '是否打印必填',
+            'isPrint.boolean' => '是否打印必须布尔类型',
+
+            'is_check.required' => '是否审核必填',
+            'is_check.boolean' => '是否审核必须布尔类型',
+
+            'purchase_details' => '采购订单详情必须json类型'
         ];
     }
 
-    public function attributes()
+    public
+    function attributes()
     {
         return [
             'purchase_order_no' => '采购单号',
@@ -127,6 +166,22 @@ class PurchaseRequest extends FormRequest
             'remark' => '备注',
             'status' => '状态：0=停用，1=启用',
         ];
+    }
+
+    /**
+     * 通用规则
+     * @param bool $condition   判断的条件
+     * @param string $text      返回的信息
+     * @return \Closure         闭包
+     */
+    public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
+    {
+        return function($attribute, $value, $fail) use ($condition, $text) {
+            if ($condition) {
+                return true;
+            }
+            return $fail($text);
+        };
     }
 
 }

@@ -8,10 +8,9 @@ class Purchase extends Model
 
     protected $fillable = [
         'purchase_order_no', 'purchase_status', 'receiver', 'receiver_address',
-        'remark', 'warehouse_id', 'order_no', 'user_id',  'print_at',
-        'check_at', 'promise_delivery_time', 'salesman', 'source',
-        'client_name', 'buyer_nick', 'is_submit', 'is_print',
-        'is_check', 'is_change', 'status'
+        'remark', 'warehouse_id', 'order_no', 'user_id', 'promise_delivery_time',
+        'salesman', 'source', 'client_name', 'buyer_nick', 'is_submit', 'is_print',
+        'is_check', 'is_change', 'status', 'print_at'
     ];
 
     public function warehouse()
@@ -26,6 +25,6 @@ class Purchase extends Model
 
     public function purchaseDetails()
     {
-        return $this->hasMany(PurchaseDetail::class);
+        return $this->hasMany(PurchaseDetail::class,'purchases_id');
     }
 }

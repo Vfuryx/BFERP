@@ -21,7 +21,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-       'middleware' => ['api.throttle','token.canrefresh'],
+        'middleware' => ['api.throttle','token.canrefresh'],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
@@ -352,10 +352,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.productspecs.index');
         $api->get('productspecs/{productspec}', 'ProductSpecsController@show')
             ->name('api.productspecs.show');
-        $api->post('productspecs', 'ProductSpecsController@store')
-            ->name('api.productspecs.store');
-        $api->patch('productspecs/{productspec}', 'ProductSpecsController@update')
-            ->name('api.productspecs.update');
+//        $api->post('productspecs', 'ProductSpecsController@store')
+//            ->name('api.productspecs.store');
+//        $api->patch('productspecs/{productspec}', 'ProductSpecsController@update')
+//            ->name('api.productspecs.update');
         $api->delete('productspecs/{productspec}', 'ProductSpecsController@destroy')
             ->name('api.productspecs.destroy');
         $api->delete('productspecs', 'ProductSpecsController@destroybyids')
@@ -363,21 +363,21 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('productspecs', 'ProductSpecsController@editStatusByIds')
             ->name('api.productspecs.editstatusbyids');
 
-        //组合资源
-        $api->get('combinations', 'CombinationsController@index')
-            ->name('api.combinations.index');
-        $api->get('combinations/{combination}', 'CombinationsController@show')
-            ->name('api.combinations.show');
-        $api->post('combinations', 'CombinationsController@store')
-            ->name('api.combinations.store');
-        $api->patch('combinations/{combination}', 'CombinationsController@update')
-            ->name('api.combinations.update');
-        $api->delete('combinations/{combination}', 'CombinationsController@destroy')
-            ->name('api.combinations.destroy');
-        $api->delete('combinations', 'CombinationsController@destroybyids')
-            ->name('api.combinations.destroybyids');
-        $api->put('combinations', 'CombinationsController@editStatusByIds')
-            ->name('api.combinations.editstatusbyids');
+//        //组合资源
+//        $api->get('combinations', 'CombinationsController@index')
+//            ->name('api.combinations.index');
+//        $api->get('combinations/{combination}', 'CombinationsController@show')
+//            ->name('api.combinations.show');
+//        $api->post('combinations', 'CombinationsController@store')
+//            ->name('api.combinations.store');
+//        $api->patch('combinations/{combination}', 'CombinationsController@update')
+//            ->name('api.combinations.update');
+//        $api->delete('combinations/{combination}', 'CombinationsController@destroy')
+//            ->name('api.combinations.destroy');
+//        $api->delete('combinations', 'CombinationsController@destroybyids')
+//            ->name('api.combinations.destroybyids');
+//        $api->put('combinations', 'CombinationsController@editStatusByIds')
+//            ->name('api.combinations.editstatusbyids');
 
         //下载商品资源 暂定
         $api->get('goodsdownloads', 'GoodsDownloadsController@index')
@@ -410,13 +410,24 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchases.store');
         $api->delete('purchases/{purchase}', 'PurchasesController@destroy')
             ->name('api.purchases.destroy');
+        $api->patch('purchases/{purchase}', 'PurchasesController@update')
+            ->name('api.purchases.update');
         $api->delete('purchases', 'PurchasesController@destroybyids')
             ->name('api.purchases.destroybyids');
         $api->put('purchases', 'PurchasesController@editStatusByIds')
             ->name('api.purchases.editstatusbyids');
+        $api->put('purchases/{purchase}/submit', 'PurchasesController@isSubmit')
+            ->name('api.purchases.issubmit');
+        $api->put('purchases/{purchase}/print', 'PurchasesController@isPrint')
+            ->name('api.purchases.isprint');
+        $api->put('purchases/{purchase}/check', 'PurchasesController@isCheck')
+            ->name('api.purchases.ischeck');
 
-
-
+        //采购单详情
+        $api->delete('purchasedetails/{purchasedetail}', 'PurchaseDetailsController@destroy')
+            ->name('api.purchasedetails.destroy');
+        $api->delete('purchasedetails', 'PurchaseDetailsController@destroybyids')
+            ->name('api.purchasedetails.destroybyids');
 
 
     });
