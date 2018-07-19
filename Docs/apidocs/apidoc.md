@@ -1645,229 +1645,6 @@ FORMAT: 1A
 
             []
 
-# StorageTypes [/api]
-入库类型资源
-
-## 获取所有入库类型 [GET /api/storagetypes{?status}]
-
-
-+ Parameters
-    + status: (integer, optional) - 获取的状态
-        + Default: all
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-                "data": [
-                    {
-                        "id": 1,
-                        "name": "入库类型",
-                        "status": 1,
-                        "created_at": "2018-06-14 16:55:32",
-                        "updated_at": "2018-06-14 16:55:32"
-                    },
-                    {
-                        "id": 2,
-                        "name": "入库类型2",
-                        "status": 1,
-                        "created_at": "2018-06-14 16:55:36",
-                        "updated_at": "2018-06-14 16:55:36"
-                    }
-                ],
-                "meta": {
-                    "pagination": {
-                        "total": 2,
-                        "count": 2,
-                        "per_page": 10,
-                        "current_page": 1,
-                        "total_pages": 1,
-                        "links": {
-                            "previous": null,
-                            "next": "{{host}}/api/storagetypes?page=1"
-                        }
-                    }
-                }
-            }
-
-## 新增入库类型 [POST /api/storagetypes]
-
-
-+ Parameters
-    + name: (string, required) - 入库类型名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
-        + Default: 1
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "name": [
-                        "入库类型名称必填"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "name": "入库类型",
-                "status": "1",
-                "created_at": "2018-06-14 16:55:40",
-                "updated_at": "2018-06-14 16:55:40",
-                "meta": {
-                    "status_code": "201"
-                }
-            }
-
-## 显示单条入库类型 [GET /api/storagetypes/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "name": "入库类型",
-                "status": 1,
-                "created_at": "2018-06-14 16:55:32",
-                "updated_at": "2018-06-14 16:55:32"
-            }
-
-## 修改入库类型 [PATCH /api/storagetypes/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "name": [
-                        "入库类型名称必须string类型"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "name": "入库类型10",
-                "status": "1",
-                "created_at": "2018-06-14 16:55:32",
-                "updated_at": "2018-06-14 16:58:55"
-            }
-
-## 删除入库类型 [DELETE /api/storagetypes/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 204 (application/json)
-    + Body
-
-            []
-
-## 删除一组入库类型 [DELETE /api/storagetypes]
-
-
-+ Parameters
-    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
-
-+ Response 500 (application/json)
-    + Body
-
-            {
-                "message": "删除错误",
-                "code": 500,
-                "status_code": 500
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "ids": [
-                        "id组必填"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 204 (application/json)
-    + Body
-
-            []
-
-## 更改一组入库类型状态 [PUT /api/storagetypes]
-
-
-+ Parameters
-    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
-
-+ Response 500 (application/json)
-    + Body
-
-            {
-                "message": "更改错误",
-                "code": 500,
-                "status_code": 500
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "ids": [
-                        "id组必填"
-                    ],
-                    "status": [
-                        "状态必填"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 204 (application/json)
-    + Body
-
-            []
-
 # cityinfos [/api]
 城市信息资源
 
@@ -7839,6 +7616,229 @@ FORMAT: 1A
                 "errors": {
                     "ids": [
                         "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# stockintypes [/api]
+入库类型资源
+
+## 获取所有入库类型 [GET /api/stockintypes{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "入库类型",
+                        "status": 1,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "入库类型2",
+                        "status": 1,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/stockintypes?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增入库类型 [POST /api/stockintypes]
+
+
++ Parameters
+    + name: (string, required) - 入库类型名称
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "入库类型名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "入库类型",
+                "status": "1",
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条入库类型 [GET /api/stockintypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "入库类型",
+                "status": 1,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改入库类型 [PATCH /api/stockintypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "入库类型名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "入库类型10",
+                "status": "1",
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除入库类型 [DELETE /api/stockintypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组入库类型 [DELETE /api/stockintypes]
+
+
++ Parameters
+    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组入库类型状态 [PUT /api/stockintypes]
+
+
++ Parameters
+    + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
+    + status: (integer, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
                     ]
                 },
                 "status_code": 422

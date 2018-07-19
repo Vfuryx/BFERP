@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class StorageTypeRequest extends FormRequest
+class StockInTypeRequest extends FormRequest
 {
 
     /**
@@ -62,7 +62,7 @@ class StorageTypeRequest extends FormRequest
     {
         return [
             'name' => '入库类型名称',
-            'status' => '记账类型状态'
+            'status' => '状态'
         ];
     }
 

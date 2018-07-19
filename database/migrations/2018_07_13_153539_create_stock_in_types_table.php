@@ -8,7 +8,7 @@ class CreateStockInTypesTable extends Migration
 {
     /**
      * Run the migrations.
-     * 入库类型
+     * 入库类型表
      * @return void
      */
     public function up()

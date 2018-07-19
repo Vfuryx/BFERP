@@ -138,22 +138,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('goodscates', 'GoodsCategoriesController@editStatusByIds')
             ->name('api.goodscates.editstatusbyids');
     
-
-        //存储类型
-        $api->get('storagetypes', 'StorageTypesController@index')
-            ->name('api.storagetypes.index');
-        $api->get('storagetypes/{storagetype}', 'StorageTypesController@show')
-            ->name('api.storagetypes.show');
-        $api->post('storagetypes', 'StorageTypesController@store')
-            ->name('api.storagetypes.store');
-        $api->patch('storagetypes/{storagetype}', 'StorageTypesController@update')
-            ->name('api.storagetypes.update');
-        $api->delete('storagetypes/{storagetype}', 'StorageTypesController@destroy')
-            ->name('api.storagetypes.destroy');
-        $api->delete('storagetypes', 'StorageTypesController@destroybyids')
-            ->name('api.storagetypes.destroybyids');
-        $api->put('storagetypes', 'StorageTypesController@editStatusByIds')
-            ->name('api.storagetypes.editstatusbyids');
+//
+//        //入库类型
+//        $api->get('storagetypes', 'StorageTypesController@index')
+//            ->name('api.storagetypes.index');
+//        $api->get('storagetypes/{storagetype}', 'StorageTypesController@show')
+//            ->name('api.storagetypes.show');
+//        $api->post('storagetypes', 'StorageTypesController@store')
+//            ->name('api.storagetypes.store');
+//        $api->patch('storagetypes/{storagetype}', 'StorageTypesController@update')
+//            ->name('api.storagetypes.update');
+//        $api->delete('storagetypes/{storagetype}', 'StorageTypesController@destroy')
+//            ->name('api.storagetypes.destroy');
+//        $api->delete('storagetypes', 'StorageTypesController@destroybyids')
+//            ->name('api.storagetypes.destroybyids');
+//        $api->put('storagetypes', 'StorageTypesController@editStatusByIds')
+//            ->name('api.storagetypes.editstatusbyids');
             
         //城市信息
         $api->get('cityinfos', 'CityInfosController@index')
@@ -429,6 +429,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('purchasedetails', 'PurchaseDetailsController@destroybyids')
             ->name('api.purchasedetails.destroybyids');
 
+
+        //入库类型
+        $api->get('stockintypes', 'StockInTypesController@index')
+            ->name('api.stockintypes.index');
+        $api->get('stockintypes/{stockintype}', 'StockInTypesController@show')
+            ->name('api.stockintypes.show');
+        $api->post('stockintypes', 'StockInTypesController@store')
+            ->name('api.stockintypes.store');
+        $api->patch('stockintypes/{stockintype}', 'StockInTypesController@update')
+            ->name('api.stockintypes.update');
+        $api->delete('stockintypes/{stockintype}', 'StockInTypesController@destroy')
+            ->name('api.stockintypes.destroy');
+        $api->delete('stockintypes', 'StockInTypesController@destroybyids')
+            ->name('api.stockintypes.destroybyids');
+        $api->put('stockintypes', 'StockInTypesController@editStatusByIds')
+            ->name('api.stockintypes.editstatusbyids');
 
     });
 
