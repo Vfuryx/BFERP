@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <el-dialog :title="title" :visible.sync="showAdd" @close="close">
+    <div class="addNew">
+        <el-dialog :title="title" :visible.sync="showAdd" @close="close" :class="{'more-forms':moreForms}">
             <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="100px" :class="{'half-form':halfForm}">
                 <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
                     <span v-if="item.type=='text'">
@@ -32,25 +32,15 @@
                     </span>
                     <span v-else-if="item.type=='select'">
                            <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder" :disabled="item.beAble">
-                               <!--v-if="selects.length>1"-->
                                <span v-for="iList in selects" :key="iList.id">
                                    <span v-if="iList[index]">
                                     <el-option v-for="list in iList[index]" :key="list.id" :label="list.name" :value="list.id"></el-option>
                                        </span>
                                </span>
-                              <!-- <span v-else>
-                                     <el-option v-for="list in selects" :key="list.id" :label="list.name" :value="list.id"></el-option>
-                                   </span>-->
                            </el-select>
                     </span>
                     <span v-else-if="item.type=='textarea'">
                          <el-input type="textarea" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
-                    </span>
-                    <span v-else-if="item.type=='new_casca'">
-                         <el-cascader
-                                 :options="options"
-                                 v-model="selectedOptions" clearable>
-  </el-cascader>
                     </span>
                 </el-form-item>
             </el-form>
@@ -63,36 +53,9 @@
 </template>
 <script>
   export default {
-    props: ['visibleAdd','title', 'ruleForm', 'rules', 'addArr','submitData','url','newRef','halfForm','selects','leftTab'],
+    props: ['visibleAdd','title', 'ruleForm', 'rules', 'addArr','submitData','url','newRef','halfForm','selects','leftTab','moreForms'],
     data() {
       return {
-        /*级联*/
-        selectedOptions: [],
-        options: [
-          /*一级*/
-          {
-            value: 'zhinan',
-            label: '指南',
-            children: [
-              /*二级*/
-              {
-                value: 'shejiyuanze',
-                label: '设计原则',
-                children: [
-                  /*三级*/
-                  {
-                    value: 'yizhi',
-                    label: '一致'
-                  },
-                  {
-                    value: 'fankui',
-                    label: '反馈'
-                  }
-                ]
-              },
-            ]
-          },
-        ],
         showAdd: false
       }
     },
@@ -120,7 +83,7 @@
         this.$emit('CB-dialog',false)
       }
     },
-    mounted(){    }
+    mounted(){}
   }
 </script>
 <style>

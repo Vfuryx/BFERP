@@ -3500,7 +3500,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       activeName: '0',
-      getsInfo: [[], [], [], []],
+      /* []*/
+      getsInfo: [[], [], []],
       tableHead: [[{
         label: '物流代码',
         width: '250',
@@ -3734,36 +3735,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // holder: '请输入物流代码',
         type: 'text',
         beAble: true
-      }], [{
-        label: '报表文件',
-        width: '220',
-        prop: "file",
-        holder: '请输入报表文件',
-        type: 'text'
-      }, {
-        label: '报表名称',
-        width: '220',
-        prop: "name",
-        holder: '请输入报表名称',
-        type: 'text'
-      }, {
-        label: '报表格式',
-        width: '200',
-        prop: "paper_format",
-        holder: '请输入报表格式',
-        type: 'text'
-      }, {
-        label: '状态',
-        width: '220',
-        prop: "status",
-        holder: '请选择是否启用',
-        type: 'select_stu'
       }]],
       loading: true,
       currentIndex: '',
-      url: ['/logistics', '/cityinfos', '/damagedgoods', '/printreports'],
-      showMaskArr: [{ show: false }, { show: false }, { show: false }, { show: false }],
-      title: ['新增物流公司', '新增城市信息', '添加损坏商品', '添加报表格式'],
+      url: ['/logistics', '/cityinfos', '/damagedgoods'],
+      /*'/printreports'  '添加报表格式' , {show: false} 'ruleReports'  true {show: false}*/
+      showMaskArr: [{ show: false }, { show: false }, { show: false }],
+      title: ['新增物流公司', '新增城市信息', '添加损坏商品'],
       ruleForm: [{
         code: '',
         name: '',
@@ -3796,11 +3774,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         money: '',
         remark: '',
         status: '1'
-      }, {
-        file: '',
-        name: '',
-        paper_format: '',
-        status: '1'
       }],
       rules: [{
         code: [{ required: true, message: '请输入物流代码', trigger: 'blur' }],
@@ -3826,10 +3799,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         standard_code: [{ required: true, message: '请输入规格编码', trigger: 'blur' }],
         quantity: [{ required: true, message: '请输入损坏数量', trigger: 'blur' }],
         money: [{ required: true, message: '请输入损坏金额', trigger: 'blur' }]
-      }, {
-        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
-        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
-        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
       }],
       addArr: [[{
         label: '物流代码',
@@ -3981,29 +3950,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: 'status',
         holder: '请选择状态',
         type: 'select_stu'
-      }], [{
-        label: '报表文件',
-        prop: 'file',
-        holder: '请输入报表文件',
-        type: 'text'
-      }, {
-        label: '报表名称',
-        prop: 'name',
-        holder: '请输入报表名称',
-        type: 'text'
-      }, {
-        label: '报表格式',
-        prop: 'paper_format',
-        holder: '请输入报表格式',
-        type: 'text'
-      }, {
-        label: '状态',
-        prop: 'status',
-        holder: '请选择状态',
-        type: 'select_stu'
       }]],
-      halfForm: [{ show: true }, { show: true }, { show: false }, { show: false }],
-      refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage', 'ruleReports'],
+      halfForm: [{ show: true }, { show: true }, { show: false }],
+      refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage'],
       showDel: false,
       delId: '',
       inputChange: false,
@@ -4016,9 +3965,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         page_total: 0
       },
       showPage: true,
-      doChange: [false, false, true, true],
+      doChange: [false, false, true],
       editTitle: ['修改物流公司信息', '修改物流城市信息'],
-      editMask: [{ show: false }, { show: false }, { show: false }, { show: false }],
+      editMask: [{ show: false }, { show: false }, { show: false }],
       editId: '',
       editData: {},
       // editList: {},
@@ -4237,14 +4186,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           remark: row.remark
           // status: row.status
         };
-      } else if (this.activeName == '3') {
+      } /*else if (this.activeName == '3') {
         newData = {
           file: row.file,
           name: row.name,
           paper_format: row.paper_format,
           status: row.status
-        };
-      }
+        }
+        }*/
       if (this.inputChange) {
         this.$patch(this.url[this.activeName] + '/' + row.id, newData).then(function () {
           _this4.$message({
@@ -34374,31 +34323,6 @@ var render = function() {
           _c(
             "el-tab-pane",
             { attrs: { label: "损坏商品", name: "2" } },
-            [
-              _c("light-table", {
-                attrs: {
-                  listData: _vm.getsInfo[this.activeName],
-                  tableHead: _vm.tableHead[this.activeName],
-                  loading: _vm.loading,
-                  currentIndex: _vm.currentIndex,
-                  doChange: _vm.doChange[this.activeName]
-                },
-                on: {
-                  handleSelect: _vm.handleSelectionChange,
-                  editSave: _vm.editSave,
-                  handleEdit: _vm.handleEdit,
-                  del: _vm.del,
-                  edit: _vm.edit,
-                  editCancel: _vm.editCancel
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-tab-pane",
-            { attrs: { label: "报表格式", name: "3" } },
             [
               _c("light-table", {
                 attrs: {

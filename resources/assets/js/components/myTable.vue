@@ -84,16 +84,16 @@
                      </el-button>
                      </span>
                         <span v-else>
-                         <el-button
+                            <el-button
                                  size="mini"
                                  @click="edit(scope.$index)">编辑
-                     </el-button>
+                            </el-button>
+                            <el-button
+                                      size="mini"
+                                      type="danger"
+                                      @click="del(scope.row,$event)">删除
+                            </el-button>
                     </span>
-                        <el-button
-                                size="mini"
-                                type="danger"
-                                @click="del(scope.row,$event)">删除
-                        </el-button>
                     </template>
                 </el-table-column>
             </el-table>

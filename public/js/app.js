@@ -95982,7 +95982,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n.search_box .box span .el-input__inner {\n  height: 32px;\n  line-height: 32px;\n  padding-right: 0; }\n\n.search_box .box span .el-button--medium {\n  padding: 8px 20px !important; }\n\n.search_box .box span .el-range-separator {\n  width: 12%; }\n\n.search_box .box span i.el-range-input {\n  width: 35%; }\n\n.search_box .box span .el-date-editor .el-range__icon {\n  width: 18px; }\n\n.search_box .box span .el-date-editor .el-range-input {\n  width: 42%; }\n\n.search_box .box span .el-date-editor .el-range__close-icon {\n  width: 3px; }\n\n.search_box input::-webkit-outer-spin-button,\n.search_box input::-webkit-inner-spin-button {\n  -webkit-appearance: none !important;\n  margin: 0; }\n\n.search_box input[type=\"number\"] {\n  -moz-appearance: textfield; }\n\n.search_box .opt .el-button--medium {\n  padding: 8px 20px !important; }\n\nform.half-form {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%; }\n  form.half-form .el-form-item {\n    width: 50%; }\n\n.goodsMag .el-dialog__body {\n  padding: 20px; }\n\n.goodsMag .el-table {\n  margin: 15px 0; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list i.bf-forbid {\n          color: #d0211d; }\n        #app .main-container .opt .list.active i.optIcon {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i.optIcon.bf-forbid {\n            background-color: #d0211d; }\n          #app .main-container .opt .list.active i.optIcon:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i.optIcon span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover.bf-forbid {\n              background-color: #d0211d; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span.text {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .avatar-container {\n        height: 64px;\n        display: inline-block;\n        position: absolute;\n        right: 16px;\n        padding: 12px;\n        box-sizing: border-box; }\n        #app .main-container .navbar .avatar-container .avatar-wrapper {\n          cursor: pointer;\n          position: relative;\n          /* .el-icon-caret-bottom {\r\n            position: absolute;\r\n            right: -20px;\r\n            top: 25px;\r\n            font-size: 12px;\r\n          }*/ }\n          #app .main-container .navbar .avatar-container .avatar-wrapper .user-avatar {\n            width: 40px;\n            height: 40px;\n            border-radius: 10px; }\n          #app .main-container .navbar .avatar-container .avatar-wrapper span {\n            display: inline-block;\n            height: 40px;\n            vertical-align: middle;\n            line-height: 1;\n            margin-left: 6px; }\n        #app .main-container .navbar .avatar-container:hover {\n          background: #e6f7ff; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .context-menu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .context-menu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .context-menu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden; }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n        #app .sidebar-container .scrollbar-wrapper .el-submenu__title i {\n          transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar {\n    /*.el-submenu {\r\n      overflow: hidden;\r\n      & > .el-submenu__title {\r\n        padding-left: 10px !important;\r\n        transition: none;\r\n\r\n        .el-submenu__icon-arrow {\r\n          display: none;\r\n        }\r\n      }\r\n    }\r\n\r\n    .el-menu--collapse {\r\n      .el-submenu {\r\n        & > .el-submenu__title {\r\n          transition: none;\r\n          padding: 0;\r\n          text-align: center;\r\n          & > span {\r\n            height: 0;\r\n            width: 0;\r\n            overflow: hidden;\r\n            visibility: hidden;\r\n            display: inline-block;\r\n            //background-color: $subMenuBg !important;\r\n          }\r\n        }\r\n      }\r\n    }\r\n*/ }\n    #app .hideSidebar .logo {\n      width: 80px;\n      line-height: 60px;\n      text-align: center; }\n      #app .hideSidebar .logo .el-menu-item {\n        padding-left: 0 !important; }\n      #app .hideSidebar .logo .title {\n        display: none; }\n    #app .hideSidebar .sidebar-container {\n      width: 80px !important;\n      box-sizing: border-box;\n      background-color: #061b2c !important; }\n    #app .hideSidebar .main-container {\n      margin-left: 80px; }\n    #app .hideSidebar .submenu-title-noDropdown {\n      padding-left: 10px !important;\n      position: relative; }\n      #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n        padding: 0 10px !important; }\n    #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title {\n      text-align: center;\n      padding: 0; }\n      #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title span, #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title i.el-submenu__icon-arrow {\n        display: none; }\n    #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n      transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background-color: #f5222d;\n  display: -webkit-inline-box;\n  margin-right: 3px; }\n\n.statusActive {\n  background-color: #1890ff; }\n\n.el-select {\n  width: 100%; }\n\n.searchBox {\n  display: flex;\n  margin-bottom: 10px; }\n  .searchBox > span {\n    flex: 1; }\n    .searchBox > span > label {\n      font-size: 14px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500;\n      width: 56px;\n      display: inline-block;\n      text-align: right; }\n    .searchBox > span > .el-input.half {\n      width: 70%; }\n\n.goodsSearchBox {\n  margin-bottom: 10px; }\n  .goodsSearchBox > span {\n    display: inline-block;\n    width: 19%; }\n    .goodsSearchBox > span:last-child {\n      width: 22%; }\n    .goodsSearchBox > span > label {\n      font-size: 14px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500;\n      width: 56px;\n      display: inline-block;\n      text-align: right; }\n    .goodsSearchBox > span > .el-input {\n      width: 70%; }\n      .goodsSearchBox > span > .el-input > .el-input__inner {\n        width: 100%; }\n    .goodsSearchBox > span > .el-select {\n      width: 70%; }\n      .goodsSearchBox > span > .el-select > .el-input {\n        width: 100%; }\n        .goodsSearchBox > span > .el-select > .el-input > .el-input__inner {\n          width: 97%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n.app-main {\n  overflow-y: auto; }\n\n.app-container {\n  padding: 20px; }\n", ""]);
+exports.push([module.i, "/*fade*/\n.fade-enter-active,\n.fade-leave-active {\n  transition: opacity 0.28s; }\n\n.fade-enter,\n.fade-leave-active {\n  opacity: 0; }\n\n/*fade*/\n.breadcrumb-enter-active,\n.breadcrumb-leave-active {\n  transition: all .5s; }\n\n.breadcrumb-enter,\n.breadcrumb-leave-active {\n  opacity: 0;\n  transform: translateX(20px); }\n\n.breadcrumb-move {\n  transition: all .5s; }\n\n.breadcrumb-leave-active {\n  position: absolute; }\n\n.el-upload input[type=\"file\"] {\n  display: none !important; }\n\n.el-upload__input {\n  display: none; }\n\n.el-dialog {\n  transform: none;\n  left: 0;\n  position: relative;\n  margin: 0 auto; }\n\n.upload-container .el-upload {\n  width: 100%; }\n  .upload-container .el-upload .el-upload-dragger {\n    width: 100%;\n    height: 200px; }\n\n.search_box .box span .el-input__inner {\n  height: 32px;\n  line-height: 32px;\n  padding-right: 0; }\n\n.search_box .box span .el-button--medium {\n  padding: 8px 20px !important; }\n\n.search_box .box span .el-range-separator {\n  width: 12%; }\n\n.search_box .box span i.el-range-input {\n  width: 35%; }\n\n.search_box .box span .el-date-editor .el-range__icon {\n  width: 18px; }\n\n.search_box .box span .el-date-editor .el-range-input {\n  width: 42%; }\n\n.search_box .box span .el-date-editor .el-range__close-icon {\n  width: 3px; }\n\n.search_box input::-webkit-outer-spin-button,\n.search_box input::-webkit-inner-spin-button {\n  -webkit-appearance: none !important;\n  margin: 0; }\n\n.search_box input[type=\"number\"] {\n  -moz-appearance: textfield; }\n\n.search_box .opt .el-button--medium {\n  padding: 8px 20px !important; }\n\nform.half-form {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%; }\n  form.half-form .el-form-item {\n    width: 50%; }\n\n.goodsMag .el-dialog__body {\n  padding: 20px; }\n\n.goodsMag .el-table {\n  margin: 15px 0; }\n\n#app {\n  overflow: hidden; }\n  #app .logo {\n    margin: 0;\n    padding: 0;\n    display: inline-block;\n    height: 50px;\n    width: 241px;\n    position: fixed;\n    left: 0;\n    top: 0;\n    line-height: 50px;\n    background-color: #304156; }\n    #app .logo.el-menu {\n      border-right: none; }\n      #app .logo.el-menu img {\n        width: 35px; }\n    #app .logo span {\n      font-weight: bold;\n      font-size: 16px;\n      color: #bfcbd9; }\n    #app .logo .el-menu-item {\n      padding: 0; }\n    #app .logo .el-menu-item:focus, #app .logo .el-menu-item:hover {\n      outline: 0;\n      background-color: #001528; }\n  #app .main-container {\n    min-height: 800px;\n    margin-left: 240px;\n    background-color: #f0f1f5; }\n    #app .main-container .optOuter {\n      margin: 8px 24px;\n      background-color: #fff; }\n    #app .main-container .opt {\n      margin: 16px 24px 0 0;\n      height: 60px;\n      padding-left: 20px;\n      box-sizing: border-box;\n      overflow: hidden; }\n      #app .main-container .opt .list {\n        margin-right: 10px;\n        float: left;\n        text-align: center;\n        padding-top: 13px;\n        box-sizing: border-box;\n        width: 85px; }\n        #app .main-container .opt .list i.bf-forbid {\n          color: #d0211d; }\n        #app .main-container .opt .list.active i.optIcon {\n          background-color: #4a99fa; }\n          #app .main-container .opt .list.active i.optIcon.bf-forbid {\n            background-color: #d0211d; }\n          #app .main-container .opt .list.active i.optIcon:before {\n            color: #fff; }\n          #app .main-container .opt .list.active i.optIcon span {\n            color: #fff; }\n        #app .main-container .opt .list i {\n          display: flex;\n          justify-content: center; }\n          #app .main-container .opt .list i:hover {\n            background-color: #4a99fa; }\n            #app .main-container .opt .list i:hover.bf-forbid {\n              background-color: #d0211d; }\n            #app .main-container .opt .list i:hover:before {\n              color: #fff; }\n            #app .main-container .opt .list i:hover span {\n              color: #fff; }\n        #app .main-container .opt .list span.text {\n          font-size: 12px;\n          color: #666;\n          text-align: left;\n          margin-left: 5px; }\n        #app .main-container .opt .list:hover > p {\n          color: #4a99fa; }\n      #app .main-container .opt .optIcon {\n        background-color: #fff;\n        border-radius: 5px;\n        line-height: 35px;\n        box-sizing: border-box;\n        color: #666;\n        font-size: 20px;\n        text-align: center;\n        cursor: pointer;\n        border: 1px solid #e4e4e4; }\n      #app .main-container .opt > .dwn-more {\n        position: fixed;\n        right: 3px;\n        top: 150px;\n        cursor: pointer; }\n      #app .main-container .opt .hide-list {\n        position: fixed;\n        right: 10px;\n        top: 210px;\n        width: 85px;\n        z-index: 500;\n        text-align: center; }\n        #app .main-container .opt .hide-list span {\n          margin-left: 5px; }\n        #app .main-container .opt .hide-list > div > i:hover {\n          background-color: #4a99fa; }\n          #app .main-container .opt .hide-list > div > i:hover:before {\n            color: #fff; }\n          #app .main-container .opt .hide-list > div > i:hover span {\n            color: #fff; }\n        #app .main-container .opt .hide-list i {\n          display: flex;\n          justify-content: center;\n          margin-top: 10px; }\n        #app .main-container .opt .hide-list span {\n          font-size: 12px;\n          color: #666; }\n    #app .main-container .app-main {\n      margin: 8px 24px 50px;\n      padding: 20px;\n      box-sizing: border-box;\n      background-color: #fff; }\n    #app .main-container .navbar {\n      height: 64px;\n      line-height: 64px;\n      border-radius: 0 !important;\n      position: relative;\n      background-color: #fff;\n      /* .screenfull {\r\n           position: absolute;\r\n           right: 90px;\r\n           top: 16px;\r\n           color: red;\r\n       }*/ }\n      #app .main-container .navbar .hamburger-container {\n        line-height: 74px;\n        height: 64px;\n        float: left;\n        padding: 0 10px 0 24px; }\n      #app .main-container .navbar .app-breadcrumb.el-breadcrumb[data-v-766392a0] {\n        line-height: 64px; }\n      #app .main-container .navbar .avatar-container {\n        height: 64px;\n        display: inline-block;\n        position: absolute;\n        right: 16px;\n        padding: 12px;\n        box-sizing: border-box; }\n        #app .main-container .navbar .avatar-container .avatar-wrapper {\n          cursor: pointer;\n          position: relative;\n          /* .el-icon-caret-bottom {\r\n            position: absolute;\r\n            right: -20px;\r\n            top: 25px;\r\n            font-size: 12px;\r\n          }*/ }\n          #app .main-container .navbar .avatar-container .avatar-wrapper .user-avatar {\n            width: 40px;\n            height: 40px;\n            border-radius: 10px; }\n          #app .main-container .navbar .avatar-container .avatar-wrapper span {\n            display: inline-block;\n            height: 40px;\n            vertical-align: middle;\n            line-height: 1;\n            margin-left: 6px; }\n        #app .main-container .navbar .avatar-container:hover {\n          background: #e6f7ff; }\n      #app .main-container .navbar .right {\n        position: absolute;\n        right: 5px;\n        top: 0; }\n        #app .main-container .navbar .right i, #app .main-container .navbar .right span {\n          font-size: 25px;\n          cursor: pointer;\n          margin-right: 10px; }\n    #app .main-container .tags-view-container .tags-view-wrapper {\n      background: #fff;\n      height: 48px;\n      border-bottom: 1px solid #d8dce5;\n      box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);\n      /*box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);*/ }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item {\n        display: inline-block;\n        position: relative;\n        height: 30px;\n        line-height: 30px;\n        border: 1px solid #d8dce5;\n        color: #495060;\n        background: #fff;\n        padding: 0 8px;\n        box-sizing: border-box;\n        font-size: 12px;\n        margin: 9px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item:first-of-type {\n          margin-left: 24px; }\n        #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active {\n          background-color: #42b983;\n          color: #fff;\n          border-color: #42b983; }\n          #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item.active::before {\n            content: '';\n            background: #fff;\n            display: inline-block;\n            width: 8px;\n            height: 8px;\n            border-radius: 50%;\n            position: relative;\n            margin-right: 2px; }\n    #app .main-container .tags-view-container .context-menu {\n      margin: 0;\n      background: #fff;\n      z-index: 100;\n      position: absolute;\n      list-style-type: none;\n      padding: 5px 0;\n      border-radius: 4px;\n      font-size: 12px;\n      font-weight: 400;\n      color: #333;\n      box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.3); }\n      #app .main-container .tags-view-container .context-menu li {\n        margin: 0;\n        padding: 7px 16px;\n        cursor: pointer; }\n        #app .main-container .tags-view-container .context-menu li:hover {\n          background: #eee; }\n    #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close {\n      width: 16px;\n      height: 16px;\n      vertical-align: 2px;\n      border-radius: 50%;\n      text-align: center;\n      transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);\n      transform-origin: 100% 50%; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:before {\n        transform: scale(0.6);\n        display: inline-block;\n        vertical-align: -3px; }\n      #app .main-container .tags-view-container .tags-view-wrapper .tags-view-item .el-icon-close:hover {\n        background-color: #b4bccc;\n        color: #fff; }\n  #app .sidebar-container {\n    background-color: #061b2c !important;\n    width: 240px !important;\n    position: fixed;\n    font-size: 0;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 1001;\n    overflow: hidden; }\n    #app .sidebar-container .scrollbar-wrapper {\n      height: calc(100% + 15px); }\n      #app .sidebar-container .scrollbar-wrapper .el-scrollbar__view {\n        height: 100%; }\n      #app .sidebar-container .scrollbar-wrapper .el-submenu__title {\n        transition: none !important; }\n        #app .sidebar-container .scrollbar-wrapper .el-submenu__title i {\n          transition: none !important; }\n    #app .sidebar-container .is-horizontal {\n      display: none; }\n    #app .sidebar-container a {\n      display: inline-block;\n      width: 100%;\n      overflow: hidden; }\n    #app .sidebar-container .svg-icon {\n      margin-right: 16px; }\n    #app .sidebar-container .el-menu {\n      border: none;\n      height: 100%;\n      width: 100% !important; }\n  #app .hideSidebar {\n    /*.el-submenu {\r\n      overflow: hidden;\r\n      & > .el-submenu__title {\r\n        padding-left: 10px !important;\r\n        transition: none;\r\n\r\n        .el-submenu__icon-arrow {\r\n          display: none;\r\n        }\r\n      }\r\n    }\r\n\r\n    .el-menu--collapse {\r\n      .el-submenu {\r\n        & > .el-submenu__title {\r\n          transition: none;\r\n          padding: 0;\r\n          text-align: center;\r\n          & > span {\r\n            height: 0;\r\n            width: 0;\r\n            overflow: hidden;\r\n            visibility: hidden;\r\n            display: inline-block;\r\n            //background-color: $subMenuBg !important;\r\n          }\r\n        }\r\n      }\r\n    }\r\n*/ }\n    #app .hideSidebar .logo {\n      width: 80px;\n      line-height: 60px;\n      text-align: center; }\n      #app .hideSidebar .logo .el-menu-item {\n        padding-left: 0 !important; }\n      #app .hideSidebar .logo .title {\n        display: none; }\n    #app .hideSidebar .sidebar-container {\n      width: 80px !important;\n      box-sizing: border-box;\n      background-color: #061b2c !important; }\n    #app .hideSidebar .main-container {\n      margin-left: 80px; }\n    #app .hideSidebar .submenu-title-noDropdown {\n      padding-left: 10px !important;\n      position: relative; }\n      #app .hideSidebar .submenu-title-noDropdown .el-tooltip {\n        padding: 0 10px !important; }\n    #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title {\n      text-align: center;\n      padding: 0; }\n      #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title span, #app .hideSidebar .menu-wrapper .el-submenu .el-submenu__title i.el-submenu__icon-arrow {\n        display: none; }\n    #app .hideSidebar .el-menu, #app .hideSidebar .v-enter, #app .hideSidebar .v-enter-active, #app .hideSidebar .el-opacity-transition {\n      transition: none; }\n  #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title,\n  #app .sidebar-container .el-submenu .el-menu-item {\n    min-width: 240px !important;\n    background-color: #061b2c !important;\n    transition: none; }\n    #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:hover,\n    #app .sidebar-container .el-submenu .el-menu-item:hover {\n      background-color: #1890ff !important;\n      transition: none; }\n  #app .el-menu--collapse .el-menu .el-submenu {\n    min-width: 240px !important; }\n  #app .mobile .main-container {\n    margin-left: 0; }\n  #app .mobile .sidebar-container {\n    width: 240px !important; }\n  #app .mobile.hideSidebar .sidebar-container {\n    transform: translate3d(-240px, 0, 0); }\n  #app .withoutAnimation .main-container,\n  #app .withoutAnimation .sidebar-container, #app .withoutAnimation .el-menu, #app .withoutAnimation .el-menu--collapse, #app .withoutAnimation .v-leave-active, #app .withoutAnimation .horizontal-collapse-transition, #app .withoutAnimation .v-leave-to {\n    transition: none; }\n\n.el-pagination {\n  text-align: right;\n  margin: 10px -10px; }\n\n.el-table .tableColor {\n  display: inline-block;\n  width: 10px;\n  height: 10px; }\n\n.showStatus {\n  content: '';\n  width: 6px;\n  height: 6px;\n  border-radius: 50%;\n  background-color: #f5222d;\n  display: -webkit-inline-box;\n  margin-right: 3px; }\n\n.statusActive {\n  background-color: #1890ff; }\n\n.el-select {\n  width: 100%; }\n\n.searchBox {\n  display: flex;\n  margin-bottom: 10px; }\n  .searchBox > span {\n    flex: 1; }\n    .searchBox > span > label {\n      font-size: 12px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500;\n      width: 56px;\n      display: inline-block;\n      text-align: right; }\n    .searchBox > span > .el-input.half {\n      width: 70%; }\n\n.goodsSearchBox {\n  margin-bottom: 10px;\n  -webkit-display: flex;\n  display: flex;\n  -webkit-align-items: center;\n  align-items: center;\n  -webkit-justify-content: center;\n  justify-content: center; }\n  .goodsSearchBox > span {\n    flex: 1;\n    max-width: 22%;\n    min-width: 175px; }\n    .goodsSearchBox > span:last-child {\n      min-width: 220px; }\n      .goodsSearchBox > span:last-child > label {\n        margin-left: 8px !important; }\n    .goodsSearchBox > span > label {\n      font-size: 12px;\n      color: rgba(0, 0, 0, 0.85);\n      font-weight: 500; }\n    .goodsSearchBox > span > .el-input {\n      width: 70%; }\n      .goodsSearchBox > span > .el-input > .el-input__inner {\n        width: 100%; }\n    .goodsSearchBox > span > .el-select {\n      width: 70%; }\n      .goodsSearchBox > span > .el-select > .el-input {\n        width: 100%; }\n        .goodsSearchBox > span > .el-select > .el-input > .el-input__inner {\n          width: 97%; }\n\n.more-forms > div.el-dialog {\n  margin-top: 8vh !important;\n  width: 90%; }\n\n.more-forms .el-form-item {\n  width: 25% !important; }\n\n.more-forms form {\n  display: flex;\n  flex-wrap: wrap;\n  width: 100%; }\n\nbody {\n  height: 100%;\n  -moz-osx-font-smoothing: grayscale;\n  -webkit-font-smoothing: antialiased;\n  text-rendering: optimizeLegibility;\n  font-family: Helvetica Neue, Helvetica, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Arial, sans-serif; }\n\nlabel {\n  font-weight: 700; }\n\nhtml {\n  height: 100%;\n  box-sizing: border-box;\n  overflow: hidden; }\n\n#app, .app-wrapper, .main-container {\n  height: 100%; }\n\n*,\n*:before,\n*:after {\n  box-sizing: inherit; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  outline: none;\n  text-decoration: none; }\n\ndiv:focus {\n  outline: none; }\n\na:focus,\na:active {\n  outline: none; }\n\na,\na:focus,\na:hover {\n  cursor: pointer;\n  color: inherit;\n  text-decoration: none; }\n\n.clearfix:after {\n  visibility: hidden;\n  display: block;\n  font-size: 0;\n  content: \" \";\n  clear: both;\n  height: 0; }\n\n.app-main {\n  overflow-y: auto; }\n\n.app-container {\n  padding: 20px; }\n", ""]);
 
 // exports
 
@@ -115067,24 +115067,24 @@ var render = function() {
                                       }
                                     }
                                   },
-                                  [_vm._v("编辑\n                 ")]
+                                  [_vm._v("编辑\n                        ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { size: "mini", type: "danger" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.del(scope.row, $event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("删除\n                        ")]
                                 )
                               ],
                               1
-                            ),
-                        _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini", type: "danger" },
-                            on: {
-                              click: function($event) {
-                                _vm.del(scope.row, $event)
-                              }
-                            }
-                          },
-                          [_vm._v("删除\n                    ")]
-                        )
+                            )
                       ]
                     }
                   }
@@ -116356,23 +116356,23 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("编辑\n                 ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "el-button",
+                                  {
+                                    attrs: { size: "mini", type: "danger" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.del(scope.row, $event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("删除\n                ")]
                                 )
                               ],
                               1
-                            ),
-                        _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini", type: "danger" },
-                            on: {
-                              click: function($event) {
-                                _vm.del(scope.row, $event)
-                              }
-                            }
-                          },
-                          [_vm._v("删除\n                ")]
-                        )
+                            )
                       ]
                     }
                   }
@@ -117185,150 +117185,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects', 'doChange'],
+  props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects', 'doChange', 'height'],
   data: function data() {
     return {
       checkboxInit: false,
@@ -117375,6 +117234,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     dbClick: function dbClick(row) {
       this.$emit('dbClick', row);
+    },
+    rowClick: function rowClick(row) {
+      this.$emit('rowClick', row);
     }
   },
   mounted: function mounted() {}
@@ -117409,11 +117271,13 @@ var render = function() {
             type: "index",
             "element-loading-text": "拼命加载中",
             "element-loading-spinner": "el-icon-loading",
-            "element-loading-background": "rgba(0, 0, 0, 0.6)"
+            "element-loading-background": "rgba(0, 0, 0, 0.6)",
+            height: _vm.height
           },
           on: {
             "selection-change": _vm.handleSelectionChange,
-            "row-dblclick": _vm.dbClick
+            "row-dblclick": _vm.dbClick,
+            "row-click": _vm.rowClick
           }
         },
         [
@@ -117823,7 +117687,7 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("el-table-column", {
-            attrs: { label: "操作", width: "220", align: "center" },
+            attrs: { label: "操作", width: "160", align: "center" },
             scopedSlots: _vm._u([
               {
                 key: "default",
@@ -117857,41 +117721,45 @@ var render = function() {
                           ],
                           1
                         )
-                      : _c("span", [
-                          _vm.doChange
-                            ? _c(
-                                "span",
-                                [
-                                  _c(
-                                    "el-button",
-                                    {
-                                      attrs: { size: "mini" },
-                                      on: {
-                                        click: function($event) {
-                                          _vm.edit(scope.$index)
+                      : _c(
+                          "span",
+                          [
+                            _vm.doChange
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.edit(scope.$index)
+                                          }
                                         }
-                                      }
-                                    },
-                                    [_vm._v("编辑")]
-                                  )
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ]),
-                    _vm._v(" "),
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { size: "mini", type: "danger" },
-                        on: {
-                          click: function($event) {
-                            _vm.del(scope.row, $event)
-                          }
-                        }
-                      },
-                      [_vm._v("删除\n                ")]
-                    )
+                                      },
+                                      [_vm._v("编辑")]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.del(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除\n                ")]
+                            )
+                          ],
+                          1
+                        )
                   ]
                 }
               }
@@ -118527,23 +118395,23 @@ var render = function() {
                                 }
                               },
                               [_vm._v("编辑\n                 ")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.del(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除\n                ")]
                             )
                           ],
                           1
-                        ),
-                    _vm._v(" "),
-                    _c(
-                      "el-button",
-                      {
-                        attrs: { size: "mini", type: "danger" },
-                        on: {
-                          click: function($event) {
-                            _vm.del(scope.row, $event)
-                          }
-                        }
-                      },
-                      [_vm._v("删除\n                ")]
-                    )
+                        )
                   ]
                 }
               }
@@ -118670,7 +118538,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -118734,44 +118602,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['visibleAdd', 'title', 'ruleForm', 'rules', 'addArr', 'submitData', 'url', 'newRef', 'halfForm', 'selects', 'leftTab'],
+  props: ['visibleAdd', 'title', 'ruleForm', 'rules', 'addArr', 'submitData', 'url', 'newRef', 'halfForm', 'selects', 'leftTab', 'moreForms'],
   data: function data() {
     return {
-      /*级联*/
-      selectedOptions: [],
-      options: [
-      /*一级*/
-      {
-        value: 'zhinan',
-        label: '指南',
-        children: [
-        /*二级*/
-        {
-          value: 'shejiyuanze',
-          label: '设计原则',
-          children: [
-          /*三级*/
-          {
-            value: 'yizhi',
-            label: '一致'
-          }, {
-            value: 'fankui',
-            label: '反馈'
-          }]
-        }]
-      }],
       showAdd: false
     };
   },
@@ -118815,10 +118650,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "addNew" },
     [
       _c(
         "el-dialog",
         {
+          class: { "more-forms": _vm.moreForms },
           attrs: { title: _vm.title, visible: _vm.showAdd },
           on: {
             "update:visible": function($event) {
@@ -119078,27 +118915,7 @@ var render = function() {
                                   ],
                                   1
                                 )
-                              : item.type == "new_casca"
-                                ? _c(
-                                    "span",
-                                    [
-                                      _c("el-cascader", {
-                                        attrs: {
-                                          options: _vm.options,
-                                          clearable: ""
-                                        },
-                                        model: {
-                                          value: _vm.selectedOptions,
-                                          callback: function($$v) {
-                                            _vm.selectedOptions = $$v
-                                          },
-                                          expression: "selectedOptions"
-                                        }
-                                      })
-                                    ],
-                                    1
-                                  )
-                                : _vm._e()
+                              : _vm._e()
                 ]
               )
             })

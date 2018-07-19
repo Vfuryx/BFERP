@@ -556,7 +556,7 @@ var render = function() {
         scopedSlots: _vm._u([
           {
             key: "default",
-            fn: function(props) {
+            fn: function(scope) {
               return [
                 _c(
                   "el-table",

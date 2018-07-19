@@ -536,7 +536,6 @@
 </script>
 
 -->
-
 <template>
     <div>
         <v-tabs :table-key="tableKey" :url="url" @edit="edit" ref="tabs" :title="title" :rule-form="ruleForm" :rules="rules" :add-arr="addArr"></v-tabs>

@@ -20,12 +20,12 @@
                              @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
                              @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
             </el-tab-pane>
-            <el-tab-pane label="报表格式" name="3">
+         <!--   <el-tab-pane label="报表格式" name="3">
                 <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
                              :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
                              @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
                              @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
-            </el-tab-pane>
+            </el-tab-pane>-->
         </el-tabs>
         <!--新增-->
         <add-new :visible-add="showMaskArr[this.activeName].show" :title="title[this.activeName]"
@@ -121,7 +121,8 @@
           }
         ],
         activeName: '0',
-        getsInfo: [[], [], [], []],
+        /* []*/
+        getsInfo: [[], [], []],
         tableHead: [
           [
             {
@@ -386,7 +387,7 @@
               beAble: true
             }
           ],
-          [
+          /*[
             {
               label: '报表文件',
               width: '220',
@@ -415,13 +416,14 @@
               holder: '请选择是否启用',
               type: 'select_stu'
             }
-          ]
+          ]*/
         ],
         loading: true,
         currentIndex: '',
-        url: ['/logistics', '/cityinfos', '/damagedgoods', '/printreports'],
-        showMaskArr: [{show: false}, {show: false}, {show: false}, {show: false}],
-        title: ['新增物流公司', '新增城市信息', '添加损坏商品', '添加报表格式'],
+        url: ['/logistics', '/cityinfos', '/damagedgoods'],
+        /*'/printreports'  '添加报表格式' , {show: false} 'ruleReports'  true {show: false}*/
+        showMaskArr: [{show: false}, {show: false}, {show: false}],
+        title: ['新增物流公司', '新增城市信息', '添加损坏商品'],
         ruleForm: [
           {
             code: '',
@@ -458,12 +460,12 @@
             remark: '',
             status: '1',
           },
-          {
+        /*  {
             file: '',
             name: '',
             paper_format: '',
             status: '1'
-          }
+          }*/
         ],
         rules: [
           {
@@ -535,7 +537,7 @@
               {required: true, message: '请输入损坏金额', trigger: 'blur'},
             ],
           },
-          {
+         /* {
             file: [
               {required: true, message: '请输入文件', trigger: 'blur'},
             ],
@@ -545,7 +547,7 @@
             paper_format: [
               {required: true, message: '请输入报表格式', trigger: 'blur'},
             ],
-          }
+          }*/
         ],
         addArr: [
           [
@@ -731,7 +733,7 @@
               type: 'select_stu'
             }
           ],
-          [
+         /* [
             {
               label: '报表文件',
               prop: 'file',
@@ -756,10 +758,10 @@
               holder: '请选择状态',
               type: 'select_stu'
             }
-          ],
+          ],*/
         ],
-        halfForm: [{show: true}, {show: true}, {show: false}, {show: false}],
-        refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage', 'ruleReports'],
+        halfForm: [{show: true}, {show: true}, {show: false}],
+        refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage'],
         showDel: false,
         delId: '',
         inputChange: false,
@@ -772,9 +774,9 @@
           page_total: 0
         },
         showPage: true,
-        doChange: [false, false, true, true],
+        doChange: [false, false, true],
         editTitle: ['修改物流公司信息', '修改物流城市信息'],
-        editMask: [{show: false}, {show: false}, {show: false}, {show: false}],
+        editMask: [{show: false}, {show: false}, {show: false}],
         editId: '',
         editData: {},
         // editList: {},
@@ -986,14 +988,14 @@
             remark: row.remark
             // status: row.status
           }
-        } else if (this.activeName == '3') {
+        } /*else if (this.activeName == '3') {
           newData = {
             file: row.file,
             name: row.name,
             paper_format: row.paper_format,
             status: row.status
           }
-        }
+        }*/
         if (this.inputChange) {
           this.$patch(this.url[this.activeName] + '/' + row.id, newData)
             .then(() => {

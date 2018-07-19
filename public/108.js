@@ -234,6 +234,2436 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -273,8 +2703,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       activeName: '0',
-      getsInfo: [[], [], []],
-      tableHead: [[{
+      goodsInfo: [],
+      goodsHead: [{
         label: '产品图片',
         width: '250',
         prop: "img",
@@ -365,7 +2795,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: "status",
         holder: '请选择是否启用',
         type: 'select_def'
-      }], [{
+      }],
+      goodsChange: false,
+      goodsUrl: '/goods',
+      goodsLoading: true,
+      showMask: false,
+      /*存储的当前id商品对应的规格等信息*/
+      getsInfo: [[], [], []],
+      tableHead: [[], [{
         label: '规格编号',
         width: '300',
         prop: "spec_code",
@@ -601,14 +3038,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: '',
         prop: "status",
         type: 'select_stu'
-      }]],
+      }], []],
       loading: true,
       currentIndex: '',
-      url: ['/goods', '/productspecs'],
-      /*  '/combinations'*/
-      showMaskArr: [{ show: false }, { show: false }, { show: false }],
-      title: ['新增商品', '新增产品规格', '新增组合'],
-      ruleForm: [{
+      url: ['', '/productspecs'],
+      title: '新增商品',
+      ruleForm: {
         commodity_code: '',
         jd_sn: '',
         vips_sn: '',
@@ -624,52 +3059,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         is_stop_pro: '0',
         status: '1',
         productspecs: ''
-      }, {
-        goods_id: '',
-        spec_code: '',
-        jd_specs_code: '',
-        vips_specs_code: '',
-        tb_price: '',
-        cost: '',
-        price: '',
-        highest_price: '',
-        lowest_price: '',
-        warehouse_cost: '',
-        assembly_price: '',
-        discount: '',
-        commission: '',
-        is_combination: '0',
-        package_quantity: '',
-        package_costs: '',
-        wooden_frame_costs: '',
-        purchase_freight: '',
-        inventory_warning: '',
-        purchase_days_warning: '',
-        available_warning: '',
-        distribution_method_id: '',
-        bar_code: '',
-        img_url: '',
-        spec: '',
-        color: '',
-        function: '',
-        special: '',
-        other: '',
-        length: '',
-        width: '',
-        height: '',
-        volume: '',
-        weight: '',
-        remark: '',
-        finished_pro: '0',
-        is_stop_pro: '0',
-        status: '1'
-      }, {
-        product_specs: '',
-        com_pro_specs: '',
-        count: '1',
-        status: '1'
-      }],
-      rules: [{
+      },
+      rules: {
         commodity_code: [{ required: true, message: '请输入商品编码', trigger: 'blur' }],
         jd_sn: [{ required: true, message: '请输入京东编号', trigger: 'blur' }],
         vips_sn: [{ required: true, message: '请输入唯品会编号', trigger: 'blur' }],
@@ -682,49 +3073,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         img: [{ required: true, message: '请输入商品图片', trigger: 'blur' }],
         url: [{ required: true, message: '请输入商品网址', trigger: 'blur' }],
         productspecs: [{ required: true, message: '请选择产品规格', trigger: 'blur' }]
-
-      }, {
-        goods_id: [{ required: true, message: '请输入商品id', trigger: 'blur' }],
-        spec_code: [{ required: true, message: '请输入规格编码', trigger: 'blur' }],
-        jd_specs_code: [{ required: true, message: '请输入京东规格编码', trigger: 'blur' }],
-        vips_specs_code: [{ required: true, message: '请输入唯品会规格编码', trigger: 'blur' }],
-        tb_price: [{ required: true, message: '请输入淘宝价格', trigger: 'blur' }],
-        cost: [{ required: true, message: '请输入成本价格', trigger: 'blur' }],
-        price: [{ required: true, message: '请输入售价', trigger: 'blur' }],
-        highest_price: [{ required: true, message: '请输入最高售价', trigger: 'blur' }],
-        lowest_price: [{ required: true, message: '请输入最低售价', trigger: 'blur' }],
-        warehouse_cost: [{ required: true, message: '请输入仓库成本', trigger: 'blur' }],
-        assembly_price: [{ required: true, message: '请输入装配价格', trigger: 'blur' }],
-        discount: [{ required: true, message: '请输入最高售价', trigger: 'blur' }],
-        commission: [{ required: true, message: '请选择金佣点', trigger: 'blur' }],
-        is_combination: [{ required: true, message: '请选择是否组合', trigger: 'blur' }],
-        package_quantity: [{ required: true, message: '请输入包件数量', trigger: 'blur' }],
-        package_costs: [{ required: true, message: '请输入打包费用', trigger: 'blur' }],
-        wooden_frame_costs: [{ required: true, message: '请输入木架费', trigger: 'blur' }],
-        purchase_freight: [{ required: true, message: '请输入采购运费', trigger: 'blur' }],
-        inventory_warning: [{ required: true, message: '请输入库存预警(数量)', trigger: 'blur' }],
-        purchase_days_warning: [{ required: true, message: '请输入采购预警天数  ', trigger: 'blur' }],
-        available_warning: [{ required: true, message: '请输入可售数预警', trigger: 'blur' }],
-        distribution_method_id: [{ required: true, message: '请选择配送类别', trigger: 'blur' }],
-        bar_code: [{ required: true, message: '请输入条形码', trigger: 'blur' }],
-        img_url: [{ required: true, message: '请输入图片地址', trigger: 'blur' }],
-        spec: [{ required: true, message: '请输入产品图片', trigger: 'blur' }],
-        color: [{ required: true, message: '请输入产品颜色', trigger: 'blur' }],
-        materials: [{ required: true, message: '请输入产品材质', trigger: 'blur' }],
-        function: [{ required: true, message: '请输入功能', trigger: 'blur' }],
-        special: [{ required: true, message: '请输入特殊', trigger: 'blur' }],
-        other: [{ required: true, message: '请输入其他', trigger: 'blur' }],
-        length: [{ required: true, message: '请输入长度', trigger: 'blur' }],
-        width: [{ required: true, message: '请输入宽度', trigger: 'blur' }],
-        height: [{ required: true, message: '请输入高度', trigger: 'blur' }],
-        volume: [{ required: true, message: '请输入产品材质', trigger: 'blur' }],
-        weight: [{ required: true, message: '请输入重量', trigger: 'blur' }]
-      }, {
-        product_specs_id: [{ required: true, message: '请输入产品规格编码id', trigger: 'blur' }],
-        com_pro_specs_id: [{ required: true, message: '请输入组合产品规格编码id', trigger: 'blur' }],
-        count: [{ required: true, message: '请输入组件数', trigger: 'blur' }]
-      }],
-      addArr: [[
+      },
+      addArr: [
       /* {
          label: '产品规格',
          prop: 'productspecs',
@@ -810,235 +3160,96 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: 'status',
         holder: '请选择是否启用',
         type: 'select_stu'
-      }], [
+      }],
+      editArr: [
       /* {
-         label: '商品简称',
-         prop: 'goods',
-         holder: '请输入规格图片',
-         type: 'text'
+         label: '产品规格',
+         prop: 'productspecs',
+         holder: '请选择产品规格',
+         type: 'select',
+         val: this.sonArr
        },*/
       {
-        label: '规格编码',
-        prop: 'spec_code',
-        holder: '请输入规格编码',
-        type: 'text'
+        label: '商品编号',
+        prop: 'commodity_code',
+        holder: '请输入商品编号',
+        type: 'text',
+        nChange: true,
+        beAble: true
       }, {
         label: '京东编码',
-        prop: 'jd_specs_code',
-        holder: '请输入京东规格编码',
+        prop: 'jd_sn',
+        holder: '请输入京东编码',
         type: 'text'
-      }, {
-        label: '产品id',
-        prop: 'goods_id',
-        holder: '请选择产品id',
-        type: 'select',
-        val: this.sonArr
       }, {
         label: '唯品会码',
-        prop: 'vips_specs_code',
-        holder: '请输入唯品会规格编码',
+        prop: 'vips_sn',
+        holder: '请输入唯品会码',
         type: 'text'
       }, {
-        label: '淘宝价格',
-        prop: 'tb_price',
-        holder: '请输入淘宝价格',
-        type: 'number'
+        label: '店铺昵称',
+        prop: 'nick',
+        holder: '请选择店铺昵称',
+        type: 'text'
+        /* type: 'select',
+         val: this.sonArr*/
       }, {
-        label: '成本价格',
-        prop: 'cost',
-        holder: '请输入成本价格',
-        type: 'number'
-      }, {
-        label: '销售价格',
-        prop: 'price',
-        holder: '请输入销售价格',
-        type: 'number'
-      }, {
-        label: '最高售价',
-        prop: 'highest_price',
-        holder: '请输入最高售价',
-        type: 'number'
-      }, {
-        label: '最低售价',
-        prop: 'lowest_price',
-        holder: '请输入最低售价',
-        type: 'number'
-      }, {
-        label: '仓库成本',
-        prop: 'warehouse_cost',
-        holder: '请输入仓库成本',
-        type: 'number'
-      }, {
-        label: '装配价格',
-        prop: 'assembly_price',
-        holder: '请输入装配价格',
-        type: 'number'
-      }, {
-        label: '折扣',
-        prop: 'discount',
-        holder: '请输入折扣',
-        type: 'number'
-      }, {
-        label: '佣金点',
-        prop: 'commission',
-        holder: '请输入佣金点',
-        type: 'number'
-      }, {
-        label: '是否组合',
-        prop: 'is_combination',
-        holder: '请选择是否组合',
-        type: 'select_def'
-      }, {
-        label: '包件数量',
-        prop: 'package_quantity',
-        holder: '请输入包件数量',
-        type: 'number'
-      }, {
-        label: ' 打包费用',
-        prop: 'package_costs',
-        holder: '请输入打包费用',
-        type: 'number'
-      }, {
-        label: '木架费',
-        prop: 'wooden_frame_costs',
-        holder: '请输入木架费',
-        type: 'number'
-      }, {
-        label: '配送类别',
-        prop: 'distribution_method_id',
-        holder: '请选择配送类别',
+        label: '产品类别',
+        prop: 'category_id',
+        holder: '请选择产品类别',
         type: 'select',
         val: this.sonArr
       }, {
-        label: '采购运费',
-        prop: 'purchase_freight',
-        holder: '请输入采购运费',
-        type: 'number'
+        label: '供应商',
+        prop: 'supplier_id',
+        holder: '请选择供应商',
+        type: 'select',
+        val: this.sonArr
       }, {
-        label: '库存预警',
-        prop: 'inventory_warning',
-        holder: '请输入库存预警',
-        type: 'number'
-      }, {
-        label: '采购预警',
-        prop: 'purchase_days_warning',
-        holder: '请输入采购预警',
-        type: 'number'
-      }, {
-        label: '可售预警',
-        prop: 'available_warning',
-        holder: '请输入可售预警',
-        type: 'number'
-      }, {
-        label: '条形码',
-        prop: 'bar_code',
-        holder: '请输入条形码',
+        label: '工厂型号',
+        prop: 'factory_model',
+        holder: '请输入工厂型号',
         type: 'text'
       }, {
-        label: '图片地址',
-        prop: 'img_url',
-        holder: '请输入图片地址',
+        label: '商品简称',
+        prop: 'short_name',
+        holder: '请输入商品简称',
+        type: 'text',
+        nChange: true
+        // beAble: true
+      }, {
+        label: '商品标题',
+        prop: 'title',
+        holder: '请输入商品标题',
+        type: 'text'
+      }, {
+        label: '商品图片',
+        prop: 'img',
+        holder: '请输入商品图片',
+        type: 'text'
+      }, {
+        label: '商品网址',
+        prop: 'url',
+        holder: '请选择商品网址',
         type: 'url'
-      }, {
-        label: '规格',
-        prop: 'spec',
-        holder: '请输入规格',
-        type: 'text'
-      }, {
-        label: '颜色',
-        prop: 'color',
-        holder: '请输入颜色',
-        type: 'text'
-      }, {
-        label: '特殊',
-        prop: 'special',
-        holder: '请输入特殊',
-        type: 'text'
-      }, {
-        label: '材质',
-        prop: 'materials',
-        holder: '请输入材质',
-        type: 'text'
-      }, {
-        label: '功能',
-        prop: 'function',
-        holder: '请输入功能',
-        type: 'text'
-      }, {
-        label: '其他',
-        prop: 'other',
-        holder: '请输入其他',
-        type: 'text'
-      }, {
-        label: '长度',
-        prop: 'length',
-        holder: '请输入长度',
-        type: 'number'
-      }, {
-        label: '宽度',
-        prop: 'width',
-        holder: '请输入宽度',
-        type: 'number'
-      }, {
-        label: '高度',
-        prop: 'height',
-        holder: '请输入高度',
-        type: 'number'
-      }, {
-        label: '体积',
-        prop: 'volume',
-        holder: '请输入体积',
-        type: 'number'
-      }, {
-        label: '重量',
-        prop: 'weight',
-        holder: '请输入重量',
-        type: 'number'
-      }, {
-        label: '是否停产',
-        prop: 'is_stop_pro',
-        holder: '请选择是否停产',
-        type: 'select_def'
-      }, {
-        label: '是否成品',
-        prop: 'finished_pro',
-        holder: '请选择是否成品',
-        type: 'select_def'
-      }, {
-        label: '是否启用',
-        prop: 'status',
-        holder: '请选择是否启用',
-        type: 'select_stu'
       }, {
         label: '备注',
         prop: 'remark',
         holder: '请输入备注',
         type: 'textarea'
-      }], [{
-        label: '产品规格',
-        prop: 'product_specs_id',
-        holder: '请选择产品规格id',
-        type: 'select',
-        val: this.sonArr
       }, {
-        label: '组合规格',
-        prop: 'com_pro_specs_id',
-        holder: '请选择组合产品规格id',
-        type: 'select',
-        val: this.sonArr
-      }, {
-        label: '组合件数',
-        prop: 'count',
-        holder: '请输入组合件数',
-        type: 'number'
+        label: '是否停产',
+        prop: 'is_stop_pro',
+        holder: '请选择是否停产',
+        type: 'select_stu'
       }, {
         label: '状态',
         prop: 'status',
-        holder: '请选择状态',
+        holder: '请选择是否启用',
         type: 'select_stu'
-      }]],
-      halfForm: [{ show: true }, { show: true }, { show: false }],
-      refArr: ['ruleGoods', 'ruleSpecs', 'ruleCombination'],
+      }],
+      halfForm: true,
+      refArr: 'ruleGoods',
       showDel: false,
       delId: '',
       inputChange: false,
@@ -1050,15 +3261,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         per_page: 0,
         page_total: 0
       },
-      showPage: true,
       doChange: [false, false, false],
-      editTitle: ['修改商品信息', '修改物流城市信息'],
-      editMask: [{ show: false }, { show: false }, { show: false }],
+      editTitle: '修改商品信息',
+      editMask: false,
       editId: '',
       editData: {},
-      // editList: {},
       leftTab: '修改',
-      getsErrors: false,
       showComb: false,
       CombForm: {},
       combRules: {},
@@ -1069,7 +3277,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       compRow: {},
       combIndex: '',
       specRow: {},
-      goodsPage: true,
       searchBox: {
         goodsName: '',
         shopNames: '',
@@ -1079,46 +3286,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         isStop: false,
         isStatus: false
       },
-
-      getRowKeys: function getRowKeys(row) {
-        return row.id;
-      },
-
-      expands: [],
-      tableData: []
+      moreForms: true
     };
   },
 
   methods: {
-    test: function test() {
-      console.log(1);
-    },
-    handleTabsClick: function handleTabsClick() {
-      this.loading = true;
-      this.getInfo(this.url[this.activeName]);
-      this.goodsPage = this.activeName == 0 ? true : false;
-      /* if (this.activeName == 2 || this.activeName == 3) {
-        this.newOpt[1].nClick = true;
-      } else {
-        this.newOpt[1].nClick = false;
-      }*/
-    },
+    test: function test() {},
     addNew: function addNew() {
-      this.showMaskArr[this.activeName].show = true;
+      this.showMask = true;
     },
     CB_dialog: function CB_dialog(val) {
-      this.showMaskArr[this.activeName].show = val;
-      this.editMask[this.activeName].show = val;
+      this.showMask = val;
+      this.editMask = val;
     },
     submitForm: function submitForm() {
       var _this = this;
 
-      this.$post(this.url[this.activeName], this.ruleForm[this.activeName]).then(function () {
+      this.$post(this.goodsUrl, this.ruleForm).then(function () {
         _this.$message({
           message: '添加成功',
           type: 'success'
         });
-        _this.showMaskArr[_this.activeName].show = false;
+        _this.showMask = false;
         _this.refresh();
       }, function (err) {
         if (err.response) {
@@ -1137,12 +3326,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*处理批量删除*/
     handleSelectionChange: function handleSelectionChange(val) {
+      console.log(1);
       if (val.length != 0) {
         this.editId = val[0].id;
       } else {
         this.editId = '';
       }
       this.multipleSelection = val;
+      console.log(this.multipleSelection);
       var del = [];
       this.multipleSelection.forEach(function (selectedItem) {
         del.push(selectedItem.id);
@@ -1205,7 +3396,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     editSave: function editSave(row) {
       var _this3 = this;
 
-      console.log(row);
       var newData = {};
       if (this.activeName == '0') {
         newData = {
@@ -1288,37 +3478,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getSonData: function getSonData(url, propVal) {
       var _this4 = this;
 
-      this.getsErrors = false;
       this.$fetch(url).then(function (res) {
         var obj = {};
         obj[propVal] = res.data;
         _this4.sonArr.push(obj);
-      }, function () {
-        _this4.getsErrors = true;
-      });
+      }, function () {});
     },
-    getInfo: function getInfo(url) {
+
+    /*获取商品信息*/
+    getGoodsInfo: function getGoodsInfo() {
       var _this5 = this;
 
-      this.showPage = true;
-      this.getsErrors = false;
-      this.$fetch(url).then(function (res) {
-        _this5.getsInfo[_this5.activeName] = res.data;
-        _this5.loading = false;
+      this.goodsLoading = true;
+      this.$fetch(this.goodsUrl).then(function (res) {
+        _this5.goodsInfo = res.data;
+        _this5.goodsLoading = false;
         var pg = res.meta.pagination;
         _this5.$store.dispatch('currentPage', pg.current_page);
         _this5.$store.commit('PER_PAGE', pg.per_page);
         _this5.$store.commit('PAGE_TOTAL', pg.total);
-        if (url == _this5.url[0]) {
-          var obj = {};
-          obj["2"] = res.data;
-          _this5.sonArr.push(obj);
-        } else if (url == _this5.url[1]) {
-          _this5.tData = res.data;
-          var _obj = {};
-          _obj["0"] = res.data;
-          _this5.sonArr.push(_obj);
-        }
+        var obj = {};
+        obj["2"] = res.data;
+        _this5.sonArr.push(obj);
       }, function (err) {
         if (err.response) {
           var arr = err.response.data.errors;
@@ -1330,7 +3511,66 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this5.$message.error({
             message: str
           });
-          _this5.getsErrors = true;
+        }
+      });
+    },
+
+    /*切换tab时只显示id为第一条商品的规格及其他*/
+    handleTabsClick: function handleTabsClick() {
+      var _this6 = this;
+
+      this.loading = true;
+      var id = this.goodsInfo[0].id;
+      this.$fetch(this.url[this.activeName] + '/' + id).then(function (res) {
+        _this6.loading = false;
+        _this6.getsInfo[_this6.activeName] = res.data;
+        if (_this6.url[_this6.activeName] == '/productspecs') {
+          _this6.tData = res.data;
+          var obj = {};
+          obj["0"] = res.data;
+          _this6.sonArr.push(obj);
+        }
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this6.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+
+    /*在商品中单击时，tab显示为id为当前商品的规格及其他*/
+    rowClick: function rowClick(row) {
+      var _this7 = this;
+
+      console.log(row);
+      var id = row.id;
+      this.$fetch(this.url[this.activeName] + '/' + id).then(function (res) {
+        _this7.loading = false;
+        _this7.getsInfo[_this7.activeName] = res.data;
+        if (_this7.url[_this7.activeName] == '/productspecs') {
+          _this7.tData = res.data;
+          var obj = {};
+          obj["0"] = res.data;
+          _this7.sonArr.push(obj);
+        }
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this7.$message.error({
+            message: str
+          });
         }
       });
     },
@@ -1347,76 +3587,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     confirmD: function confirmD(id) {
-      var _this6 = this;
+      var _this8 = this;
 
-      this.$del(this.url[this.activeName] + '/' + id).then(function () {
-        _this6.$message({
+      this.$del(this.goodsUrl + '/' + id).then(function () {
+        _this8.$message({
           message: '删除成功',
           type: 'success'
         });
-        _this6.showDel = false;
-        _this6.refresh();
+        _this8.showDel = false;
+        _this8.refresh();
       }, function (err) {
         if (err.response) {
-          _this6.showDel = false;
+          _this8.showDel = false;
           var arr = err.response.data.errors;
           var arr1 = [];
           for (var i in arr) {
             arr1.push(arr[i]);
           }
           var str = arr1.join(',');
-          _this6.$message.error({
+          _this8.$message.error({
             message: str
           });
         }
       });
     },
     refresh: function refresh() {
-      var _this7 = this;
-
-      this.loading = true;
-      this.getInfo(this.url[this.activeName]);
-      setTimeout(function () {
-        _this7.loading = false;
-      }, 2000);
-    },
-    dbClick: function dbClick(row) {
-      var _this8 = this;
-
-      var id = row.id;
-      console.log(1);
-      console.log(id);
-      this.activeName = '1';
-      this.loading = true;
-      this.showPage = false;
-      this.$fetch(this.url[1] + '/' + id).then(function (res) {
-        if (res) {
-          var arr = [];
-          arr.push(res);
-          _this8.getsInfo[_this8.activeName] = arr;
-          _this8.loading = false;
-        } else {
-          _this8.$message({
-            message: '没有查询到相关数据',
-            type: 'info'
-          });
-          _this8.getsInfo[_this8.activeName] = [];
-        }
-      }, function (err) {
-        console.log(err);
-        _this8.$message.error({
-          message: '查询失败'
-        });
-        _this8.loading = false;
-        _this8.getsInfo[_this8.activeName] = [];
-      });
-    },
-    editInfo: function editInfo() {
       var _this9 = this;
 
+      this.goodsLoading = true;
+      this.getGoodsInfo();
+      setTimeout(function () {
+        _this9.goodsLoading = false;
+      }, 2000);
+    },
+
+    /*修改商品信息*/
+    editInfo: function editInfo() {
+      var _this10 = this;
+
+      /*如果修改按钮是不可点击状态*/
       if (this.newOpt[1].nClick) {
         return;
       } else {
+        /*如果没有选择要修改的项*/
         if (this.multipleSelection.length == 0) {
           this.$message({
             message: '没有选择要修改的数据',
@@ -1430,75 +3643,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           });
           return;
         } else {
-          this.editMask[this.activeName].show = true;
-          this.$fetch(this.url[this.activeName] + '/' + this.editId).then(function (res) {
-            if (_this9.activeName == 0) {
-              _this9.editData = {
-                commodity_code: res.commodity_code,
-                jd_sn: res.jd_sn,
-                vips_sn: res.vips_sn,
-                factory_model: res.factory_model,
-                short_name: res.short_name,
-                nick: res.nick,
-                supplier_id: res.supplier.id,
-                category_id: res.category.id,
-                remark: res.remark,
-                title: res.title,
-                img: res.img,
-                url: res.url,
-                is_stop_pro: res.is_stop_pro,
-                status: res.status,
-                productspecs: res.productspecs
-              };
-            } else if (_this9.activeName == 1) {
-              _this9.editData = {
-                goods_id: res.goods.id,
-                spec_code: res.spec_code,
-                jd_specs_code: res.jd_specs_code,
-                vips_specs_code: res.vips_specs_code,
-                tb_price: res.tb_price,
-                cost: res.cost,
-                price: res.price,
-                highest_price: res.highest_price,
-                lowest_price: res.lowest_price,
-                warehouse_cost: res.warehouse_cost,
-                assembly_price: res.assembly_price,
-                discount: res.discount,
-                commission: res.commission,
-                is_combination: res.is_combination,
-                package_quantity: res.package_quantity,
-                package_costs: res.package_costs,
-                wooden_frame_costs: res.wooden_frame_costs,
-                purchase_freight: res.purchase_freight,
-                inventory_warning: res.inventory_warning,
-                purchase_days_warning: res.purchase_days_warning,
-                available_warning: res.available_warning,
-                distribution_method_id: res.distribution_method.id,
-                bar_code: res.bar_code,
-                img_url: res.img_url,
-                spec: res.spec,
-                color: res.color,
-                function: res.function,
-                special: res.special,
-                other: res.other,
-                length: res.length,
-                width: res.width,
-                height: res.height,
-                volume: res.volume,
-                weight: res.weight,
-                remark: res.remark,
-                finished_pro: res.finished_pro,
-                is_stop_pro: res.is_stop_pro,
-                status: res.status
-              };
-            } else {
-              _this9.editData = {
-                product_specs: res.product_specs.id,
-                com_pro_specs: res.com_pro_specs.id,
-                count: res.count,
-                status: res.status
-              };
-            }
+          this.editMask = true;
+          this.$fetch(this.goodsUrl + '/' + this.editId).then(function (res) {
+            _this10.editData = {
+              commodity_code: res.commodity_code,
+              jd_sn: res.jd_sn,
+              vips_sn: res.vips_sn,
+              factory_model: res.factory_model,
+              short_name: res.short_name,
+              nick: res.nick,
+              supplier_id: res.supplier.id,
+              category_id: res.category.id,
+              remark: res.remark,
+              title: res.title,
+              img: res.img,
+              url: res.url,
+              is_stop_pro: res.is_stop_pro,
+              status: res.status
+              // productspecs: res.productspecs
+            };
           }, function (err) {
             console.log(err);
           });
@@ -1506,7 +3669,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
     editForm: function editForm() {
-      var _this10 = this;
+      var _this11 = this;
 
       var obj = {};
       if (this.activeName == 0) {
@@ -1577,12 +3740,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
       }
       this.$patch(this.url[this.activeName] + '/' + this.editId, obj).then(function () {
-        _this10.$message({
+        _this11.$message({
           message: '修改成功',
           type: 'success'
         });
-        _this10.editMask[_this10.activeName].show = false;
-        _this10.refresh();
+        _this11.editMask[_this11.activeName].show = false;
+        _this11.refresh();
       }, function (err) {
         if (err.response) {
           var arr = err.response.data.errors;
@@ -1591,7 +3754,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arr1.push(arr[i]);
           }
           var str = arr1.join(',');
-          _this10.$message.error({
+          _this11.$message.error({
             message: str
           });
         }
@@ -1604,13 +3767,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         console.log(res);
       }, function (err) {});
     },
-    toggleChecked: function toggleChecked() {},
     choiceComb: function choiceComb(row) {
       this.compRow = row;
       this.combIndex = 'index' + row.id;
     },
     confirmAddComb: function confirmAddComb() {
-      var _this11 = this;
+      var _this12 = this;
 
       /*如果没有输入件数，提示输入
       * 如果没有双击确认，提示选择
@@ -1634,57 +3796,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           count: this.countComp
         };
         this.$post('/combinations', obj).then(function (res) {
-          _this11.$message({
+          _this12.$message({
             message: '添加组合成功',
             type: 'success'
           });
-          _this11.showComb = false;
+          _this12.showComb = false;
 
-          _this11.combIndex = '';
-          _this11.countComp = 0;
+          _this12.combIndex = '';
+          _this12.countComp = 0;
           obj = {};
           console.log(res);
         }, function (err) {});
       }
     },
-    rowClick: function rowClick(data, event, column) {
-      // console.log('点击行出发','column',column.label)
-      if (column.label !== '点击展开') {
-        this.expands = [];
-      }
-    },
-
-    //点击展开列表详细数据
-    showDetail: function showDetail(data, expandedRows) {
-      //控制只显示当前行
-      if (expandedRows.length) {
-        this.expands = [];
-        if (data) {
-          this.expands.push(data.id);
-        }
-      } else {
-        this.expands = [];
-      }
-    },
     getData: function getData() {
       console.log(this.searchBox);
+    },
+
+    /*规格信息单击进行修改*/
+    rowEdit: function rowEdit() {
+      this.currentIndex = 'index' + index;
     }
   },
   mounted: function mounted() {
-    this.getInfo(this.url[0]);
-    if (!this.getsErrors) {
-      this.getSonData('/suppliers', '5');
-      this.getSonData('/goodscates', '4');
-      // this.getSonData('/shops', '3');
-      this.getSonData('/distmets', '17');
-    }
+    this.getGoodsInfo();
+    this.getSonData('/suppliers', '5');
+    this.getSonData('/goodscates', '4');
+    this.getSonData('/distmets', '17');
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
       that.$store.dispatch('setOpt', that.newOpt);
     });
-
-    console.log(this.sonArr);
   }
 });
 
@@ -1700,171 +3843,192 @@ var render = function() {
   return _c(
     "div",
     [
-      _vm.goodsPage
-        ? _c("div", { staticClass: "goodsSearchBox" }, [
-            _c(
-              "span",
-              [
-                _c("label", [_vm._v("商品名称")]),
-                _vm._v(" "),
-                _c("el-input", {
-                  attrs: { clearable: "" },
-                  nativeOn: {
-                    keyup: function($event) {
-                      if (
-                        !("button" in $event) &&
-                        _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                      ) {
-                        return null
-                      }
-                      return _vm.getData($event)
-                    }
-                  },
-                  model: {
-                    value: _vm.searchBox.goodsName,
-                    callback: function($$v) {
-                      _vm.$set(_vm.searchBox, "goodsName", $$v)
-                    },
-                    expression: "searchBox.goodsName"
+      _c("div", { staticClass: "goodsSearchBox" }, [
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("商品名称")]),
+            _vm._v(" "),
+            _c("el-input", {
+              attrs: { clearable: "" },
+              nativeOn: {
+                keyup: function($event) {
+                  if (
+                    !("button" in $event) &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
                   }
+                  return _vm.getData($event)
+                }
+              },
+              model: {
+                value: _vm.searchBox.goodsName,
+                callback: function($$v) {
+                  _vm.$set(_vm.searchBox, "goodsName", $$v)
+                },
+                expression: "searchBox.goodsName"
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("店铺名称")]),
+            _vm._v(" "),
+            _c(
+              "el-select",
+              {
+                attrs: { clearable: "", placeholder: "请选择" },
+                model: {
+                  value: _vm.searchBox.shopNames,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopNames", $$v)
+                  },
+                  expression: "searchBox.shopNames"
+                }
+              },
+              _vm._l(_vm.searchBox.shopNames, function(item) {
+                return _c("el-option", {
+                  key: item.value,
+                  attrs: { label: item.label, value: item.value }
                 })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              [
-                _c("label", [_vm._v("店铺名称")]),
-                _vm._v(" "),
-                _c(
-                  "el-select",
-                  {
-                    attrs: { clearable: "", placeholder: "请选择" },
-                    model: {
-                      value: _vm.searchBox.shopNames,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "shopNames", $$v)
-                      },
-                      expression: "searchBox.shopNames"
-                    }
-                  },
-                  _vm._l(_vm.searchBox.shopNames, function(item) {
-                    return _c("el-option", {
-                      key: item.value,
-                      attrs: { label: item.label, value: item.value }
-                    })
-                  })
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              [
-                _c("label", [_vm._v("供货商")]),
-                _vm._v(" "),
-                _c(
-                  "el-select",
-                  {
-                    attrs: { clearable: "", placeholder: "请选择" },
-                    model: {
-                      value: _vm.searchBox.supplier,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "supplier", $$v)
-                      },
-                      expression: "searchBox.supplier"
-                    }
-                  },
-                  _vm._l(_vm.searchBox.supplier, function(item) {
-                    return _c("el-option", {
-                      key: item.value,
-                      attrs: { label: item.label, value: item.value }
-                    })
-                  })
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              [
-                _c("label", [_vm._v("类别")]),
-                _vm._v(" "),
-                _c(
-                  "el-select",
-                  {
-                    attrs: { clearable: "", placeholder: "请选择" },
-                    model: {
-                      value: _vm.searchBox.kinds,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "kinds", $$v)
-                      },
-                      expression: "searchBox.kinds"
-                    }
-                  },
-                  _vm._l(_vm.searchBox.kinds, function(item) {
-                    return _c("el-option", {
-                      key: item.value,
-                      attrs: { label: item.label, value: item.value }
-                    })
-                  })
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "span",
-              [
-                _c(
-                  "el-checkbox",
-                  {
-                    model: {
-                      value: _vm.searchBox.isComb,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "isComb", $$v)
-                      },
-                      expression: "searchBox.isComb"
-                    }
-                  },
-                  [_vm._v("组合产品")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-checkbox",
-                  {
-                    model: {
-                      value: _vm.searchBox.isStop,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "isStop", $$v)
-                      },
-                      expression: "searchBox.isStop"
-                    }
-                  },
-                  [_vm._v("停产")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "el-checkbox",
-                  {
-                    model: {
-                      value: _vm.searchBox.isStatus,
-                      callback: function($$v) {
-                        _vm.$set(_vm.searchBox, "isStatus", $$v)
-                      },
-                      expression: "searchBox.isStatus"
-                    }
-                  },
-                  [_vm._v("启用")]
-                )
-              ],
-              1
+              })
             )
-          ])
-        : _vm._e(),
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("供货商")]),
+            _vm._v(" "),
+            _c(
+              "el-select",
+              {
+                attrs: { clearable: "", placeholder: "请选择" },
+                model: {
+                  value: _vm.searchBox.supplier,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "supplier", $$v)
+                  },
+                  expression: "searchBox.supplier"
+                }
+              },
+              _vm._l(_vm.searchBox.supplier, function(item) {
+                return _c("el-option", {
+                  key: item.value,
+                  attrs: { label: item.label, value: item.value }
+                })
+              })
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c("label", [_vm._v("类别")]),
+            _vm._v(" "),
+            _c(
+              "el-select",
+              {
+                attrs: { clearable: "", placeholder: "请选择" },
+                model: {
+                  value: _vm.searchBox.kinds,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "kinds", $$v)
+                  },
+                  expression: "searchBox.kinds"
+                }
+              },
+              _vm._l(_vm.searchBox.kinds, function(item) {
+                return _c("el-option", {
+                  key: item.value,
+                  attrs: { label: item.label, value: item.value }
+                })
+              })
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          [
+            _c(
+              "el-checkbox",
+              {
+                model: {
+                  value: _vm.searchBox.isComb,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "isComb", $$v)
+                  },
+                  expression: "searchBox.isComb"
+                }
+              },
+              [_vm._v("组合产品")]
+            ),
+            _vm._v(" "),
+            _c(
+              "el-checkbox",
+              {
+                model: {
+                  value: _vm.searchBox.isStop,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "isStop", $$v)
+                  },
+                  expression: "searchBox.isStop"
+                }
+              },
+              [_vm._v("停产")]
+            ),
+            _vm._v(" "),
+            _c(
+              "el-checkbox",
+              {
+                model: {
+                  value: _vm.searchBox.isStatus,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "isStatus", $$v)
+                  },
+                  expression: "searchBox.isStatus"
+                }
+              },
+              [_vm._v("启用")]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("light-table", {
+        attrs: {
+          listData: _vm.goodsInfo,
+          tableHead: _vm.goodsHead,
+          loading: _vm.goodsLoading,
+          currentIndex: _vm.currentIndex,
+          selects: _vm.sonArr,
+          doChange: _vm.goodsChange,
+          height: 300
+        },
+        on: {
+          handleSelect: _vm.handleSelectionChange,
+          editSave: _vm.editSave,
+          handleEdit: _vm.handleEdit,
+          del: _vm.del,
+          edit: _vm.edit,
+          editCancel: _vm.editCancel,
+          rowClick: _vm.rowClick
+        }
+      }),
+      _vm._v(" "),
+      _c("div", [_c("Pagination", { attrs: { "page-url": _vm.goodsUrl } })], 1),
       _vm._v(" "),
       _c(
         "el-tabs",
@@ -1879,32 +4043,9 @@ var render = function() {
           }
         },
         [
-          _c(
-            "el-tab-pane",
-            { attrs: { label: "商品信息", name: "0" } },
-            [
-              _c("light-table", {
-                attrs: {
-                  listData: _vm.getsInfo[this.activeName],
-                  tableHead: _vm.tableHead[this.activeName],
-                  loading: _vm.loading,
-                  currentIndex: _vm.currentIndex,
-                  selects: _vm.sonArr,
-                  doChange: _vm.doChange[this.activeName]
-                },
-                on: {
-                  handleSelect: _vm.handleSelectionChange,
-                  editSave: _vm.editSave,
-                  handleEdit: _vm.handleEdit,
-                  del: _vm.del,
-                  dbClick: _vm.dbClick,
-                  edit: _vm.edit,
-                  editCancel: _vm.editCancel
-                }
-              })
-            ],
-            1
-          ),
+          _c("el-tab-pane", { attrs: { label: "淘宝信息", name: "0" } }, [
+            _vm._v("\n            淘宝信息\n        ")
+          ]),
           _vm._v(" "),
           _c(
             "el-tab-pane",
@@ -1919,52 +4060,379 @@ var render = function() {
                   doChange: _vm.doChange[this.activeName]
                 },
                 on: {
-                  handleSelect: _vm.handleSelectionChange,
                   editSave: _vm.editSave,
                   handleEdit: _vm.handleEdit,
                   del: _vm.del,
                   edit: _vm.edit,
-                  editCancel: _vm.editCancel,
-                  dbClick: _vm.addComb
+                  editCancel: _vm.editCancel
                 }
               })
             ],
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("el-tab-pane", { attrs: { label: "商品网站", name: "2" } }, [
+            _vm._v("\n            商品网站\n        ")
+          ]),
+          _vm._v(" "),
+          _c("el-tab-pane", { attrs: { label: "操作记录", name: "3" } }, [
+            _vm._v("\n            操作记录\n        ")
+          ])
         ],
         1
       ),
       _vm._v(" "),
-      _c("add-new", {
-        attrs: {
-          "visible-add": _vm.showMaskArr[this.activeName].show,
-          title: _vm.title[this.activeName],
-          "rule-form": _vm.ruleForm[this.activeName],
-          rules: _vm.rules[this.activeName],
-          "add-arr": _vm.addArr[_vm.activeName],
-          url: _vm.url[_vm.activeName],
-          "new-ref": _vm.refArr[_vm.activeName],
-          halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.sonArr
+      _c(
+        "el-dialog",
+        {
+          class: { "more-forms": _vm.moreForms },
+          attrs: { title: _vm.title, visible: _vm.showMask },
+          on: {
+            "update:visible": function($event) {
+              _vm.showMask = $event
+            },
+            close: _vm.close
+          }
         },
-        on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
-      }),
-      _vm._v(" "),
-      _c("add-new", {
-        attrs: {
-          "visible-add": _vm.editMask[this.activeName].show,
-          title: _vm.editTitle[_vm.activeName],
-          rules: _vm.rules[_vm.activeName],
-          "new-ref": _vm.refArr[_vm.activeName],
-          "rule-form": _vm.editData,
-          "add-arr": _vm.addArr[_vm.activeName],
-          url: _vm.url[_vm.activeName],
-          halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.sonArr,
-          leftTab: _vm.leftTab
-        },
-        on: { submitEvent: _vm.editForm, "CB-dialog": _vm.CB_dialog }
-      }),
+        [
+          _c(
+            "el-form",
+            {
+              ref: "addGoods",
+              class: { "half-form": _vm.halfForm },
+              attrs: {
+                model: _vm.ruleForm,
+                rules: _vm.rules,
+                "label-width": "100px"
+              }
+            },
+            _vm._l(_vm.addArr, function(item, index) {
+              return _c(
+                "el-form-item",
+                { key: index, attrs: { label: item.label, prop: item.prop } },
+                [
+                  item.type == "text"
+                    ? _c(
+                        "span",
+                        [
+                          _c("el-input", {
+                            attrs: {
+                              placehold: item.holder,
+                              disabled: item.beAble
+                            },
+                            model: {
+                              value: _vm.ruleForm[item.prop],
+                              callback: function($$v) {
+                                _vm.$set(_vm.ruleForm, item.prop, $$v)
+                              },
+                              expression: "ruleForm[item.prop]"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  item.type == "tel"
+                    ? _c(
+                        "span",
+                        [
+                          _c("el-input", {
+                            attrs: {
+                              type: "tel",
+                              placehold: item.holder,
+                              disabled: item.beAble
+                            },
+                            model: {
+                              value: _vm.ruleForm[item.prop],
+                              callback: function($$v) {
+                                _vm.$set(_vm.ruleForm, item.prop, $$v)
+                              },
+                              expression: "ruleForm[item.prop]"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  item.type == "number"
+                    ? _c(
+                        "span",
+                        [
+                          _c("el-input", {
+                            attrs: {
+                              type: "number",
+                              placehold: item.holder,
+                              disabled: item.beAble
+                            },
+                            model: {
+                              value: _vm.ruleForm[item.prop],
+                              callback: function($$v) {
+                                _vm.$set(_vm.ruleForm, item.prop, $$v)
+                              },
+                              expression: "ruleForm[item.prop]"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  item.type == "url"
+                    ? _c(
+                        "span",
+                        [
+                          _c("el-input", {
+                            attrs: {
+                              type: "url",
+                              placehold: item.holder,
+                              disabled: item.beAble
+                            },
+                            model: {
+                              value: _vm.ruleForm[item.prop],
+                              callback: function($$v) {
+                                _vm.$set(_vm.ruleForm, item.prop, $$v)
+                              },
+                              expression: "ruleForm[item.prop]"
+                            }
+                          })
+                        ],
+                        1
+                      )
+                    : item.type == "pickColor"
+                      ? _c(
+                          "span",
+                          [
+                            _c("el-color-picker", {
+                              model: {
+                                value: _vm.ruleForm[item.prop],
+                                callback: function($$v) {
+                                  _vm.$set(_vm.ruleForm, item.prop, $$v)
+                                },
+                                expression: "ruleForm[item.prop]"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      : item.type == "select_stu"
+                        ? _c(
+                            "span",
+                            [
+                              _c(
+                                "el-select",
+                                {
+                                  attrs: {
+                                    placeholder: item.holder,
+                                    disabled: item.beAble
+                                  },
+                                  model: {
+                                    value: _vm.ruleForm[item.prop],
+                                    callback: function($$v) {
+                                      _vm.$set(_vm.ruleForm, item.prop, $$v)
+                                    },
+                                    expression: "ruleForm[item.prop]"
+                                  }
+                                },
+                                [
+                                  _c("el-option", {
+                                    attrs: { label: "停用", value: "0" }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("el-option", {
+                                    attrs: { label: "启用", value: "1" }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        : item.type == "select_def"
+                          ? _c(
+                              "span",
+                              [
+                                _c(
+                                  "el-select",
+                                  {
+                                    attrs: {
+                                      placeholder: item.holder,
+                                      disabled: item.beAble
+                                    },
+                                    model: {
+                                      value: _vm.ruleForm[item.prop],
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.ruleForm, item.prop, $$v)
+                                      },
+                                      expression: "ruleForm[item.prop]"
+                                    }
+                                  },
+                                  [
+                                    _c("el-option", {
+                                      attrs: { label: "否", value: "0" }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("el-option", {
+                                      attrs: { label: "是", value: "1" }
+                                    })
+                                  ],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : item.type == "select"
+                            ? _c(
+                                "span",
+                                [
+                                  _c(
+                                    "el-select",
+                                    {
+                                      attrs: {
+                                        placeholder: item.holder,
+                                        disabled: item.beAble
+                                      },
+                                      model: {
+                                        value: _vm.ruleForm[item.prop],
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.ruleForm, item.prop, $$v)
+                                        },
+                                        expression: "ruleForm[item.prop]"
+                                      }
+                                    },
+                                    _vm._l(_vm.selects, function(iList) {
+                                      return _c("span", { key: iList.id }, [
+                                        iList[index]
+                                          ? _c(
+                                              "span",
+                                              _vm._l(iList[index], function(
+                                                list
+                                              ) {
+                                                return _c("el-option", {
+                                                  key: list.id,
+                                                  attrs: {
+                                                    label: list.name,
+                                                    value: list.id
+                                                  }
+                                                })
+                                              })
+                                            )
+                                          : _vm._e()
+                                      ])
+                                    })
+                                  )
+                                ],
+                                1
+                              )
+                            : item.type == "textarea"
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        type: "textarea",
+                                        placehode: item.holder
+                                      },
+                                      model: {
+                                        value: _vm.ruleForm[item.prop],
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.ruleForm, item.prop, $$v)
+                                        },
+                                        expression: "ruleForm[item.prop]"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
+                ]
+              )
+            })
+          ),
+          _vm._v(" "),
+          _c("light-table", {
+            attrs: {
+              listData: _vm.getsInfo[1],
+              tableHead: _vm.tableHead[1],
+              loading: _vm.loading,
+              currentIndex: _vm.currentIndex,
+              doChange: _vm.doChange[1]
+            },
+            on: {
+              editSave: _vm.editSave,
+              handleEdit: _vm.handleEdit,
+              del: _vm.del,
+              edit: _vm.edit,
+              editCancel: _vm.editCancel
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dialog-footer clearfix",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "div",
+                { staticStyle: { float: "left" } },
+                [
+                  _c(
+                    "el-button",
+                    { attrs: { type: "primary" }, on: { click: _vm.addComb } },
+                    [_vm._v("添加组合")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.resetForm(_vm.goodsInfo)
+                        }
+                      }
+                    },
+                    [_vm._v("删除组合")]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticStyle: { float: "right" } },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary" },
+                      on: { click: _vm.submitForm }
+                    },
+                    [_vm._v("修改")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.resetForm(_vm.addGoods)
+                        }
+                      }
+                    },
+                    [_vm._v("重置")]
+                  )
+                ],
+                1
+              )
+            ]
+          )
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "el-popover",
@@ -2011,13 +4479,6 @@ var render = function() {
             1
           )
         ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { attrs: { show: _vm.showPage } },
-        [_c("Pagination", { attrs: { "page-url": _vm.url[_vm.activeName] } })],
-        1
       ),
       _vm._v(" "),
       _c(

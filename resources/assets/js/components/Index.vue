@@ -293,7 +293,7 @@
             :data="tableData5"
             style="width: 100%">
         <el-table-column type="expand">
-            <template slot-scope="props">
+            <template slot-scope="scope">
                 <el-table
                         :data="tableData"
                         style="width: 100%">
