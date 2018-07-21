@@ -17,8 +17,8 @@ class FreightTypesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = FreightTypeTransformer::class;
-    protected const MODEL = FreightType::class;
+    const TRANSFORMER = FreightTypeTransformer::class;
+    const MODEL = FreightType::class;
 
     /**
      * 获取所有运费类型 

@@ -17,8 +17,8 @@ class DepartmentsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = DepartmentTransformer::class;
-    protected const MODEL = Department::class;
+    const TRANSFORMER = DepartmentTransformer::class;
+    const MODEL = Department::class;
     
 
     /**

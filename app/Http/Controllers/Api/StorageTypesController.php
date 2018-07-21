@@ -17,8 +17,8 @@ class StorageTypesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = StorageTypeTransformer::class;
-    protected const MODEL = StorageType::class;
+    const TRANSFORMER = StorageTypeTransformer::class;
+    const MODEL = StorageType::class;
     
    /**
      * 获取所有入库类型 

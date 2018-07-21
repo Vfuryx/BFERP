@@ -17,8 +17,8 @@ class CombinationsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = CombinationTransformer::class;
-    protected const MODEL = Combination::class;
+    const TRANSFORMER = CombinationTransformer::class;
+    const MODEL = Combination::class;
 
     /**
      * 获取所有组合
@@ -278,10 +278,10 @@ class CombinationsController extends Controller
      *      })
      * })
      */
-     public function store(CombinationRequest $request)
-     {
-         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
-     }
+    public function store(CombinationRequest $request)
+    {
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
+    }
 
 
     /**

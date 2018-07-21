@@ -87,6 +87,17 @@ class StockIn extends Model
         $this->save();
     }
 
+    /**
+     * 打印
+     */
+    public function stockIn()
+    {
+        $this->stock_in_at = Carbon::now();
+        $this->warehouer = 'admin';
+        $this->is_stock_in = 1;
+        $this->save();
+    }
+
     public static function findAvailableNo()
     {
         // 订单流水号前缀

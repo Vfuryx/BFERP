@@ -39,18 +39,6 @@ class GoodsCategoryRequest extends FormRequest
                     'status' => 'integer',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',
-                    'id' => 'exists:goods_categories'
-                ];
-                break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -73,9 +61,6 @@ class GoodsCategoryRequest extends FormRequest
             'description.max' => '商品类别描述最大长度为255',
             'description.nullable' => '商品类别描述可为null',
             'description.string' => '商品类别描述必须string类型',
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型'
         ];
     }
 

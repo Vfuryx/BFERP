@@ -29,18 +29,6 @@ class DistributionMethodRequest extends FormRequest
                 return [
                     'name' => 'string',
                     'status' => 'integer',
-                    'id' => 'exists:distribution_methods'
-                ];
-                break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -53,9 +41,6 @@ class DistributionMethodRequest extends FormRequest
             'name.string' => '配送方式名称必须string类型',
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填',
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型'
         ];
     }
 

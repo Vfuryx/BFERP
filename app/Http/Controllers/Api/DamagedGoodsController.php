@@ -17,9 +17,9 @@ class DamagedGoodsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = DamagedGoodsTransformer::class;
-    protected const MODEL = DamagedGoods::class;
-    
+    const TRANSFORMER = DamagedGoodsTransformer::class;
+    const MODEL = DamagedGoods::class;
+
     /**
      * 获取所有损坏商品
      *

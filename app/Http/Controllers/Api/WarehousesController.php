@@ -17,8 +17,8 @@ class WarehousesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = WarehouseTransformer::class;
-    protected const MODEL = Warehouse::class;
+    const TRANSFORMER = WarehouseTransformer::class;
+    const MODEL = Warehouse::class;
     
     /**
      * 获取所有仓库

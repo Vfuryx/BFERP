@@ -17,8 +17,8 @@ class ShopsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = ShopTransformer::class;
-    protected const MODEL = Shop::class;
+    const TRANSFORMER = ShopTransformer::class;
+    const MODEL = Shop::class;
     
     /**
      * 获取所有店铺

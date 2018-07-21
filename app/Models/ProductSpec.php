@@ -36,7 +36,7 @@ class ProductSpec extends Model
 
     public function stock()
     {
-        return $this->hasMany(Stock::class);
+        return $this->hasOne(Stock::class,'pro_specs_id');
     }
 
 

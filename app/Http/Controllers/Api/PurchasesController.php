@@ -112,7 +112,6 @@ class PurchasesController extends Controller
      * @Post("/purchases")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("purchase_status", description="采购状态", required=true),
      *      @Parameter("receiver", description="收货人", required=true),
      *      @Parameter("receiver_address", description="收货地址", required=true),
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
@@ -122,7 +121,6 @@ class PurchasesController extends Controller
      * })
      * @Request({
      *     {
-     *          "purchase_status": "新建",
      *          "receiver": "收货人",
      *          "receiver_address": "收货地址",
      *          "warehouse_id": "1",
@@ -534,7 +532,7 @@ class PurchasesController extends Controller
      */
     public function isSubmit(Purchase $purchase)
     {
-        return $this->traitAction($purchase,$purchase->is_submit,'无需重复提交','input');
+        return $this->traitAction($purchase,!$purchase->status || $purchase->is_submit,'无需重复提交','input');
     }
 
     /**
@@ -559,7 +557,7 @@ class PurchasesController extends Controller
      */
     public function isPrint(Purchase $purchase)
     {
-        return $this->traitAction($purchase,!$purchase->is_submit || !$purchase->is_check || $purchase->is_print,'打印出错，是否未提交未审核或重复打印','print');
+        return $this->traitAction($purchase,!$purchase->status || !$purchase->is_submit || !$purchase->is_check || $purchase->is_print,'打印出错，是否未提交未审核或重复打印','print');
     }
 
     /**
@@ -584,7 +582,7 @@ class PurchasesController extends Controller
      */
     public function isCheck(Purchase $purchase)
     {
-        return $this->traitAction($purchase,!$purchase->is_submit || $purchase->is_check,'审核出错，是否未提交或重复审核','check');
+        return $this->traitAction($purchase,!$purchase->status || !$purchase->is_submit || $purchase->is_check,'审核出错，是否未提交或重复审核','check');
     }
 
 }

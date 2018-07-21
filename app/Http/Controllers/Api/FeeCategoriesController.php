@@ -18,8 +18,8 @@ class FeeCategoriesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = FeeCategoryTransformer::class;
-    protected const MODEL = FeeCategory::class;
+    const TRANSFORMER = FeeCategoryTransformer::class;
+    const MODEL = FeeCategory::class;
 
     /**
      * 获取所有费用类别

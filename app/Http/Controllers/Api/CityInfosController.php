@@ -17,9 +17,9 @@ class CityInfosController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = CityInfoTransformer::class;
-    protected const MODEL = CityInfo::class;
-    
+    const TRANSFORMER = CityInfoTransformer::class;
+    const MODEL = CityInfo::class;
+
     /**
      * 获取所有城市信息
      *

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\Api\AuthorizationRequest;
 
 /**
-* 登录资源
-* @Resource("Authorizations",uri="/api")
-*/
+ * 登录资源
+ * @Resource("Authorizations",uri="/api")
+ */
 class AuthorizationsController extends Controller
 {
     /**
@@ -24,7 +23,7 @@ class AuthorizationsController extends Controller
      *      @Response(401, body={"message":"用户名或密码错误","status_code":401}),
      *      @Response(422, body={"message":"422 Unprocessable Entity","errors":{"password":"密码最低为6位"},"status_code":422}),
      * })
-     */ 
+     */
     public function store(AuthorizationRequest $request)
     {
         $captchaData = \Cache::get($request->captcha_key);
@@ -60,7 +59,7 @@ class AuthorizationsController extends Controller
      *      @Response(200, body={"id":2,"username":"admin","email":"admin@admin.com","created_at":"2018-06-13 11:31:16","updated_at":"2018-06-13 11:31:16"}),
      *      @Response(401, body={"message":"Token not provided","status_code":401}),
      * })
-     */ 
+     */
     public function me()
     {
         return response()->json(auth()->user());
@@ -75,7 +74,7 @@ class AuthorizationsController extends Controller
      *      @Response(201, body={"access_token":"(token值)","token_type":"Bearer","expires_in":"3600(过期时间)"}),
      *      @Response(500, body={"message":"The token has been blacklisted","status_code":500}),
      * })
-     */ 
+     */
     public function update()
     {
         $token = \Auth::guard('api')->refresh();
@@ -91,7 +90,7 @@ class AuthorizationsController extends Controller
      *      @Request(headers={"Authorization":"bearer+空格+token值"}),
      *      @Response(500, body={"message": "Token has expired","status_code": 500}),
      * })
-     */ 
+     */
     public function destroy()
     {
         \Auth::guard('api')->logout();

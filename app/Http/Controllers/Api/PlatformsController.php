@@ -17,8 +17,8 @@ class PlatformsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = PlatformTransformer::class;
-    protected const MODEL = Platform::class;
+    const TRANSFORMER = PlatformTransformer::class;
+    const MODEL = Platform::class;
     
     /**
      * 获取所有平台类型

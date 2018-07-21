@@ -17,8 +17,8 @@ class FeeTypesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = FeeTypeTransformer::class;
-    protected const MODEL = FeeType::class;
+    const TRANSFORMER = FeeTypeTransformer::class;
+    const MODEL = FeeType::class;
 
     /**
      * 获取所有费用类型

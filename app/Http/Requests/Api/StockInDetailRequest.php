@@ -28,11 +28,15 @@ class StockInDetailRequest extends FormRequest
 //                            $query->where('status',1);
 //                        }),
 //                    ],
-                    'purchases_id' => [
+                    'purchase_details_id' => [
                         'sometimes','required','integer',
-                        Rule::exists('purchases','id')->where(function ($query) {
-                            $query->where('status',1);
-                        }),
+                        Rule::exists('purchase_details','id'),
+                        function($attribute, $value, $fail) {
+                            if (\App\Models\PurchaseDetail::query()->find($value)->purchases->status) {
+                                return true;
+                            }
+                            return $fail('订单没有开启');
+                        }
                     ],
                     'product_specs_id' => [
                         'sometimes','required','integer',
@@ -52,9 +56,9 @@ class StockInDetailRequest extends FormRequest
 //                            $query->where('status',1);
 //                        }),
 //                    ],
-                    'purchases_id' => [
+                    'purchase_details_id' => [
                         'integer',
-                        Rule::exists('purchases','id')->where(function ($query) {
+                        Rule::exists('purchase_details','id')->where(function ($query) {
                             $query->where('status',1);
                         }),
                     ],
@@ -68,17 +72,6 @@ class StockInDetailRequest extends FormRequest
                     'remark' => 'string|nullable|max:255',
                 ];
                 break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
-                ];
-                break;
         }
     }
 
@@ -89,9 +82,9 @@ class StockInDetailRequest extends FormRequest
             'stock_ins_id.integer' => '入库单id必须int类型',
             'stock_ins_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'purchases_id.required' => '采购单id必填',
-            'purchases_id.integer' => '采购单id必须int类型',
-            'purchases_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_details_id.required' => '采购单详情id必填',
+            'purchase_details_id.integer' => '采购单详情id必须int类型',
+            'purchase_details_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'product_specs_id.required' => '产品规格id必填',
             'product_specs_id.integer' => '产品规格id必须int类型',
@@ -104,10 +97,6 @@ class StockInDetailRequest extends FormRequest
             'remark.string' => '备注必须string类型',
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
-
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型',
         ];
     }
 
@@ -115,7 +104,7 @@ class StockInDetailRequest extends FormRequest
     {
         return [
             'stock_ins_id' => '入库单id',
-            'purchases_id' => '采购单id',
+            'purchase_details_id' => '采购单详情id',
             'product_specs_id' => '产品规格id',
             'stock_in_quantity' => '入库数量',
             'remark' => '备注',

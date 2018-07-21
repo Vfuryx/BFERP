@@ -17,8 +17,8 @@ class SuppliersController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = SupplierTransformer::class;
-    protected const MODEL = Supplier::class;
+    const TRANSFORMER = SupplierTransformer::class;
+    const MODEL = Supplier::class;
     
     /**
      * 获取所有供应商

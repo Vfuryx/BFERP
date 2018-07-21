@@ -17,8 +17,8 @@ class GoodsCategoriesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = GoodsCategoryTransformer::class;
-    protected const MODEL = GoodsCategory::class;
+    const TRANSFORMER = GoodsCategoryTransformer::class;
+    const MODEL = GoodsCategory::class;
 
     /**
      * 获取所有商品类别 

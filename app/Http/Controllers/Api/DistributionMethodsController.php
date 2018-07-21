@@ -17,8 +17,8 @@ class DistributionMethodsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = DistributionMethodTransformer::class;
-    protected const MODEL = DistributionMethod::class;
+    const TRANSFORMER = DistributionMethodTransformer::class;
+    const MODEL = DistributionMethod::class;
 
     /**
      * 获取所有配送方式 

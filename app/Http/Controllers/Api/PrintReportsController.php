@@ -17,8 +17,8 @@ class PrintReportsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = PrintReportTransformer::class;
-    protected const MODEL = PrintReport::class;
+    const TRANSFORMER = PrintReportTransformer::class;
+    const MODEL = PrintReport::class;
     
     /**
      * 获取所有打印报表

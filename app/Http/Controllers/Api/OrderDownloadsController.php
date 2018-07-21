@@ -15,7 +15,7 @@ class OrderDownloadsController extends Controller
 {
 
 //    protected const TRANSFORMER = MarkColorTransformer::class;
-    protected const MODEL = OrderDownload::class;
+    const MODEL = OrderDownload::class;
 
     /**
      * 获取所有订单下载

@@ -18,8 +18,8 @@ class AccountingTypesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = AccountingTypeTransformer::class;
-    protected const MODEL = AccType::class;
+    const TRANSFORMER = AccountingTypeTransformer::class;
+    const MODEL = AccType::class;
 
     /**
      * 获取所有记账类型

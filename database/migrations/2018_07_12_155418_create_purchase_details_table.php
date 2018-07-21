@@ -16,8 +16,10 @@ class CreatePurchaseDetailsTable extends Migration
         Schema::create('purchase_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('purchases_id')->comment('采购id');
+            $table->string('purchase_item_status')->default(\App\Models\Purchase::PURCHASE_STATUS_NEW)->comment('采购子单状态:新建、部分完成、已完成');
             $table->unsignedInteger('product_specs_id')->comment("产品规格id");
-            $table->integer('purchase_quantity')->comment("采购数");
+            $table->unsignedInteger('purchase_quantity')->comment("采购数");
+            $table->unsignedInteger('stock_in_count')->default(0)->comment("已入库数");
             $table->unsignedInteger('shops_id')->default(0)->comment("采购店铺id");
             $table->unsignedInteger('suppliers_id')->default(0)->comment("供应商id");
             $table->decimal('purchase_cost',10,2)->default(0.00)->comment("采购成本");

@@ -31,8 +31,8 @@ class GoodsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = GoodsTransformer::class;
-    protected const MODEL = Goods::class;
+    const TRANSFORMER = GoodsTransformer::class;
+    const MODEL = Goods::class;
 
     /**
      * 获取所有商品

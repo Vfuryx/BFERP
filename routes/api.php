@@ -38,7 +38,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.markcolors.destroy');
         $api->delete('markcolors', 'MarkColorsController@destroybyids')
             ->name('api.markcolors.destroybyids');
-        $api->put('markcolors', 'MarkColorsController@editStatusByIds')
+        $api->put('markcolors/editstatus', 'MarkColorsController@editStatusByIds')
             ->name('api.markcolors.editstatusbyids');
 
         //记账类型
@@ -54,7 +54,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.acctypes.destroy');
         $api->delete('acctypes', 'AccountingTypesController@destroybyids')
             ->name('api.acctypes.destroybyids');
-        $api->put('acctypes', 'AccountingTypesController@editStatusByIds')
+        $api->put('acctypes/editstatus', 'AccountingTypesController@editStatusByIds')
             ->name('api.acctypes.editstatusbyids');
 
             
@@ -71,7 +71,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.feetypes.destroy');
         $api->delete('feetypes', 'FeeTypesController@destroybyids')
             ->name('api.feetypes.destroybyids');
-        $api->put('feetypes', 'FeeTypesController@editStatusByIds')
+        $api->put('feetypes/editstatus', 'FeeTypesController@editStatusByIds')
             ->name('api.feetypes.editstatusbyids');
 
         //运输方式
@@ -87,7 +87,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.distmets.destroy');
         $api->delete('distmets', 'DistributionMethodsController@destroybyids')
             ->name('api.distmets.destroybyids');
-        $api->put('distmets', 'DistributionMethodsController@editStatusByIds')
+        $api->put('distmets/editstatus', 'DistributionMethodsController@editStatusByIds')
             ->name('api.distmets.editstatusbyids');
 
         //费用类别
@@ -103,7 +103,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.feecates.destroy');
         $api->delete('feecates', 'FeeCategoriesController@destroybyids')
             ->name('api.feecates.destroybyids');
-        $api->put('feecates', 'FeeCategoriesController@editStatusByIds')
+        $api->put('feecates/editstatus', 'FeeCategoriesController@editStatusByIds')
             ->name('api.feecates.editstatusbyids');
 
         //运费类型
@@ -119,7 +119,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.freighttypes.destroy');
         $api->delete('freighttypes', 'FreightTypesController@destroybyids')
             ->name('api.freighttypes.destroybyids');
-        $api->put('freighttypes', 'FreightTypesController@editStatusByIds')
+        $api->put('freighttypes/editstatus', 'FreightTypesController@editStatusByIds')
             ->name('api.freighttypes.editstatusbyids');
 
         //商品类别
@@ -135,7 +135,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.goodscates.destroy');
         $api->delete('goodscates', 'GoodsCategoriesController@destroybyids')
             ->name('api.goodscates.destroybyids');
-        $api->put('goodscates', 'GoodsCategoriesController@editStatusByIds')
+        $api->put('goodscates/editstatus', 'GoodsCategoriesController@editStatusByIds')
             ->name('api.goodscates.editstatusbyids');
     
 //
@@ -168,7 +168,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.cityinfos.destroy');
         $api->delete('cityinfos', 'CityInfosController@destroybyids')
             ->name('api.cityinfos.destroybyids');
-        $api->put('cityinfos', 'CityInfosController@editStatusByIds')
+        $api->put('cityinfos/editstatus', 'CityInfosController@editStatusByIds')
             ->name('api.cityinfos.editstatusbyids');            
             
         //损坏商品
@@ -184,7 +184,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.damagedgoods.destroy');
         $api->delete('damagedgoods', 'DamagedGoodsController@destroybyids')
             ->name('api.damagedgoods.destroybyids');
-        $api->put('damagedgoods', 'DamagedGoodsController@editStatusByIds')
+        $api->put('damagedgoods/editstatus', 'DamagedGoodsController@editStatusByIds')
             ->name('api.damagedgoods.editstatusbyids');            
         
         //物流区域资源
@@ -200,7 +200,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.logisticsareas.destroy');
         $api->delete('logisticsareas', 'LogisticsAreasController@destroybyids')
             ->name('api.logisticsareas.destroybyids');
-        $api->put('logisticsareas', 'LogisticsAreasController@editStatusByIds')
+        $api->put('logisticsareas/editstatus', 'LogisticsAreasController@editStatusByIds')
             ->name('api.logisticsareas.editstatusbyids');  
 
         //物流资源
@@ -216,7 +216,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.logistics.destroy');
         $api->delete('logistics', 'LogisticsController@destroybyids')
             ->name('api.logistics.destroybyids');
-        $api->put('logistics', 'LogisticsController@editStatusByIds')
+        $api->put('logistics/editstatus', 'LogisticsController@editStatusByIds')
             ->name('api.logistics.editstatusbyids');
 
         //物流资源
@@ -232,7 +232,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.warehouses.destroy');
         $api->delete('warehouses', 'WarehousesController@destroybyids')
             ->name('api.warehouses.destroybyids');
-        $api->put('warehouses', 'WarehousesController@editStatusByIds')
+        $api->put('warehouses/editstatus', 'WarehousesController@editStatusByIds')
             ->name('api.warehouses.editstatusbyids');
 
         //供应商资源
@@ -248,7 +248,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.suppliers.destroy');
         $api->delete('suppliers', 'SuppliersController@destroybyids')
             ->name('api.suppliers.destroybyids');
-        $api->put('suppliers', 'SuppliersController@editStatusByIds')
+        $api->put('suppliers/editstatus', 'SuppliersController@editStatusByIds')
             ->name('api.suppliers.editstatusbyids');
             
         //供应商资源
@@ -264,7 +264,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.shops.destroy');
         $api->delete('shops', 'ShopsController@destroybyids')
             ->name('api.shops.destroybyids');
-        $api->put('shops', 'ShopsController@editStatusByIds')
+        $api->put('shops/editstatus', 'ShopsController@editStatusByIds')
             ->name('api.shops.editstatusbyids');
             
         //系列资源
@@ -280,7 +280,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.series.destroy');
         $api->delete('series', 'SeriesController@destroybyids')
             ->name('api.series.destroybyids');
-        $api->put('series', 'SeriesController@editStatusByIds')
+        $api->put('series/editstatus', 'SeriesController@editStatusByIds')
             ->name('api.series.editstatusbyids'); 
                        
         //打印报表资源
@@ -296,7 +296,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.printreports.destroy');
         $api->delete('printreports', 'PrintReportsController@destroybyids')
             ->name('api.printreports.destroybyids');
-        $api->put('printreports', 'PrintReportsController@editStatusByIds')
+        $api->put('printreports/editstatus', 'PrintReportsController@editStatusByIds')
             ->name('api.printreports.editstatusbyids');  
 
         //平台资源
@@ -312,7 +312,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.platforms.destroy');
         $api->delete('platforms', 'PlatformsController@destroybyids')
             ->name('api.platforms.destroybyids');
-        $api->put('platforms', 'PlatformsController@editStatusByIds')
+        $api->put('platforms/editstatus', 'PlatformsController@editStatusByIds')
             ->name('api.platforms.editstatusbyids');
             
         //平台资源
@@ -328,7 +328,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.departments.destroy');
         $api->delete('departments', 'DepartmentsController@destroybyids')
             ->name('api.departments.destroybyids');
-        $api->put('departments', 'DepartmentsController@editStatusByIds')
+        $api->put('departments/editstatus', 'DepartmentsController@editStatusByIds')
             ->name('api.departments.editstatusbyids');
 
          //商品资源
@@ -344,7 +344,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.goods.destroy');
         $api->delete('goods', 'GoodsController@destroybyids')
             ->name('api.goods.destroybyids');
-        $api->put('goods', 'GoodsController@editStatusByIds')
+        $api->put('goods/editstatus', 'GoodsController@editStatusByIds')
             ->name('api.goods.editstatusbyids');
 
         //产品规格资源
@@ -360,7 +360,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.productspecs.destroy');
         $api->delete('productspecs', 'ProductSpecsController@destroybyids')
             ->name('api.goproductspecsods.destroybyids');
-        $api->put('productspecs', 'ProductSpecsController@editStatusByIds')
+        $api->put('productspecs/editstatus', 'ProductSpecsController@editStatusByIds')
             ->name('api.productspecs.editstatusbyids');
 
 //        //组合资源
@@ -398,7 +398,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stocks.destroy');
         $api->delete('stocks', 'StocksController@destroybyids')
             ->name('api.stocks.destroybyids');
-        $api->put('stocks', 'StocksController@editStatusByIds')
+        $api->put('stocks/editstatus', 'StocksController@editStatusByIds')
             ->name('api.stocks.editstatusbyids');
 
         //采购单资源
@@ -414,7 +414,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchases.update');
         $api->delete('purchases', 'PurchasesController@destroybyids')
             ->name('api.purchases.destroybyids');
-        $api->put('purchases', 'PurchasesController@editStatusByIds')
+        $api->put('purchases/editstatus', 'PurchasesController@editStatusByIds')
             ->name('api.purchases.editstatusbyids');
         $api->put('purchases/{purchase}/submit', 'PurchasesController@isSubmit')
             ->name('api.purchases.issubmit');
@@ -443,7 +443,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stockintypes.destroy');
         $api->delete('stockintypes', 'StockInTypesController@destroybyids')
             ->name('api.stockintypes.destroybyids');
-        $api->put('stockintypes', 'StockInTypesController@editStatusByIds')
+        $api->put('stockintypes/editstatus', 'StockInTypesController@editStatusByIds')
             ->name('api.stockintypes.editstatusbyids');
 
         //入库单
@@ -467,6 +467,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stockins.isprint');
         $api->put('stockins/{stockin}/check', 'StockInsContoller@isCheck')
             ->name('api.stockins.ischeck');
+        $api->put('stockins/{stockin}/stockin', 'StockInsContoller@stockIn')
+            ->name('api.stockins.stockin');
 
         //入库单详情
         $api->get('stockindetails', 'StockInDetailsController@index')
@@ -475,6 +477,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stockindetails.destroy');
         $api->delete('stockindetails', 'StockInDetailsController@destroybyids')
             ->name('api.stockindetails.destroybyids');
+
+
 
     });
 

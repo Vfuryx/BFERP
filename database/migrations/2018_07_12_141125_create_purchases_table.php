@@ -16,7 +16,7 @@ class CreatePurchasesTable extends Migration
         Schema::create('purchases', function (Blueprint $table) {
             $table->increments('id');
             $table->string('purchase_order_no')->default("")->comment('采购单号(系统生成)');
-            $table->string('purchase_status')->default("新建")->comment('采购状态:新建、部分完成、已完成');
+            $table->string('purchase_status')->default(\App\Models\Purchase::PURCHASE_STATUS_NEW)->comment('采购状态:新建、部分完成、已完成');
             $table->string('order_no')->default('')->comment('订单编号（订单生成）');
             $table->unsignedInteger('user_id')->comment('用户id(创建人)');
             $table->timestamp('print_at')->nullable()->comment('打印时间');

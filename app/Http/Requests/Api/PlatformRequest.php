@@ -27,18 +27,6 @@ class PlatformRequest extends FormRequest
                 return [
                     'name' => 'string',
                     'status' => 'integer',
-                    'id' => 'exists:platforms'
-                ];
-                break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -51,9 +39,6 @@ class PlatformRequest extends FormRequest
             'status.required' => '状态必填',
             'name.required' => '平台类型名称必填',
             'name.string' => '平台类型名称必须string类型',
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型'
         ];
     }
 

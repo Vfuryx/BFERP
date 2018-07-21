@@ -23,8 +23,8 @@ class ProductSpecsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = ProductSpecTransformer::class;
-    protected const MODEL = ProductSpec::class;
+    const TRANSFORMER = ProductSpecTransformer::class;
+    const MODEL = ProductSpec::class;
 
     /**
      * 获取所有产品规格

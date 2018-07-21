@@ -6,10 +6,20 @@ use Carbon\Carbon;
 
 class Purchase extends Model
 {
+    const PURCHASE_STATUS_NEW = 'new';
+    const PURCHASE_STATUS_SECTION = 'section';
+    const PURCHASE_STATUS_FINISH = 'finish';
+
+    public static $purchaseStatusMap = [
+        self::PURCHASE_STATUS_NEW => '新建',
+        self::PURCHASE_STATUS_SECTION => '部分完成',
+        self::PURCHASE_STATUS_FINISH => '完成'
+    ];
+
     protected $table = "purchases";
 
     protected $fillable = [
-        'purchase_order_no', 'purchase_status', 'receiver', 'receiver_address',
+        'purchase_order_no', 'receiver', 'receiver_address',
         'remark', 'warehouse_id', 'order_no', 'user_id', 'promise_delivery_time',
         'salesman', 'source', 'client_name', 'buyer_nick', 'is_submit', 'is_print',
         'is_check', 'is_change', 'status', 'print_at'
@@ -40,27 +50,14 @@ class Purchase extends Model
                 $model->is_change = 1;
             }
         });
-
     }
 
-    public function warehouse()
+    //设置状态
+    public function setPurchaseStatus($status)
     {
-        return $this->belongsTo(Warehouse::class);
-    }
+        $this->purchase_status = $status;
+        $this->save();
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    public function purchaseDetails()
-    {
-        return $this->hasMany(PurchaseDetail::class,'purchases_id');
-    }
-
-    public function stockInDetails()
-    {
-        return $this->hasMany(StockInDetail::class,'stock_ins_id');
     }
 
     /**
@@ -108,5 +105,26 @@ class Purchase extends Model
         }
 
         return false;
+    }
+
+
+    public function getPurchaseStatusAttribute($value)
+    {
+        return self::$purchaseStatusMap[$value?$value:self::PURCHASE_STATUS_NEW];
+    }
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function purchaseDetails()
+    {
+        return $this->hasMany(PurchaseDetail::class,'purchases_id');
     }
 }

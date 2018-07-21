@@ -34,7 +34,7 @@ class PurchaseDetailRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'purchase_quantity' => 'sometimes|required|integer',
+                    'purchase_quantity' => 'sometimes|required|integer|min:1',
                     'shops_id' =>  [
                         'integer',
                         Rule::exists('shops', 'id')->where(function($query) {
@@ -73,7 +73,7 @@ class PurchaseDetailRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'purchase_quantity' => ['integer'],
+                    'purchase_quantity' => ['integer','min:1'],
                     'shops_id' =>  [
                         'integer',
                         Rule::exists('shops', 'id')->where(function($query) {
@@ -98,11 +98,6 @@ class PurchaseDetailRequest extends FormRequest
                     'remark' => ['string','nullable','max:255'],
                 ];
                 break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
         }
     }
 
@@ -120,7 +115,8 @@ class PurchaseDetailRequest extends FormRequest
 
             'purchase_quantity.required' => '采购数必填',
             'purchase_quantity.integer' => '采购数必须int类型',
-            
+            'purchase_quantity.min' => '采购数不少于1',
+
             'shops_id.integer' => '采购店铺id必须int类型',
             'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
             
@@ -151,9 +147,6 @@ class PurchaseDetailRequest extends FormRequest
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
 
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型',
         ];
     }
 

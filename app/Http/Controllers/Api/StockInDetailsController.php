@@ -18,8 +18,8 @@ class StockInDetailsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = StockInDetailTransformer::class;
-    protected const MODEL = StockInDetail::class;
+    const TRANSFORMER = StockInDetailTransformer::class;
+    const MODEL = StockInDetail::class;
 
     /**
      * 获取所有入库单
@@ -52,29 +52,27 @@ class StockInDetailsController extends Controller
      *                  "created_at": "2018-07-20 13:06:52",
      *                  "updated_at": "2018-07-20 13:06:52"
      *              },
-     *              "purchase": {
+     *              "purchase_details_id": {
      *                  "id": 1,
-     *                  "purchase_order_no": "PO2018071718055128755",
-     *                  "purchase_status": "新建",
-     *                  "order_no": "",
-     *                  "user_id": 1,
-     *                  "receiver": "收货人3",
-     *                  "receiver_address": "收货地址3",
-     *                  "warehouse_id": 1,
-     *                  "promise_delivery_time": null,
-     *                  "salesman": "",
-     *                  "source": "",
-     *                  "client_name": "",
-     *                  "buyer_nick": "",
-     *                  "order_address": "",
-     *                  "is_submit": 1,
-     *                  "is_print": 1,
-     *                  "is_check": 1,
-     *                  "is_change": 0,
-     *                  "remark": "备注3",
-     *                  "status": 1,
-     *                  "created_at": "2018-07-17 18:05:51",
-     *                  "updated_at": "2018-07-18 14:16:33"
+     *                  "purchases_id": 13,
+     *                  "purchase_item_status": "新建",
+     *                  "product_specs_id": 1,
+     *                  "purchase_quantity": 10,
+     *                  "stock_in_count": 0,
+     *                  "shops_id": 1,
+     *                  "suppliers_id": 1,
+     *                  "purchase_cost": "10.00",
+     *                  "purchase_freight": "10.00",
+     *                  "warehouse_cost": "10.00",
+     *                  "commission": "10.00",
+     *                  "discount": "10.00",
+     *                  "colour_num": "色号",
+     *                  "paint": "油漆",
+     *                  "wooden_frame_costs": "0.00",
+     *                  "arrival_time": "2018-06-10 00:00:00",
+     *                  "remark": "备注",
+     *                  "created_at": "2018-07-21 16:22:05",
+     *                  "updated_at": "2018-07-21 16:22:05"
      *              },
      *              "product_spec": {
      *                  "id": 1,

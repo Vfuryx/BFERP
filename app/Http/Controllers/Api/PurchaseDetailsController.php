@@ -17,8 +17,8 @@ class PurchaseDetailsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = PurchaseDetailTransformer::class;
-    protected const MODEL = PurchaseDetail::class;
+    const TRANSFORMER = PurchaseDetailTransformer::class;
+    const MODEL = PurchaseDetail::class;
 
 //    /**
 //     * 获取所有采购单详情

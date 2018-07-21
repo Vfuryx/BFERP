@@ -17,8 +17,8 @@ class LogisticsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = LogisticsTransformer::class;
-    protected const MODEL = Logistics::class;
+    const TRANSFORMER = LogisticsTransformer::class;
+    const MODEL = Logistics::class;
     
     /**
      * 获取所有物流

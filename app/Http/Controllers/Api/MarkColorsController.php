@@ -17,8 +17,8 @@ class MarkColorsController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = MarkColorTransformer::class;
-    protected const MODEL = MarkColor::class;
+    const TRANSFORMER = MarkColorTransformer::class;
+    const MODEL = MarkColor::class;
 
     /**
      * 获取所有标记颜色 

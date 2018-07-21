@@ -37,18 +37,6 @@ class DamagedGoodsRequest extends FormRequest
                     'money' => 'numeric',
                     'remark' => 'string|nullable|max:255',
                     'status' => 'integer',
-                    'id' => 'exists:accounting_types'
-                ];
-                break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
                 ];
                 break;
         }
@@ -78,9 +66,6 @@ class DamagedGoodsRequest extends FormRequest
             'remark.string' => '备注必须string类型',
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
-
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型',
 
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填'

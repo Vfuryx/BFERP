@@ -27,7 +27,7 @@ class StockInTransformer extends TransformerAbstract
             'is_check' => $stockIn->is_check,
             'is_stock_in' => $stockIn->is_stock_in,
             'status' => $stockIn->status,
-            'stock_in_details' => $stockIn->stockInDetails()->with('purchase','productSpec')->get(),
+            'stock_in_details' => $stockIn->stockInDetails()->with('purchaseDetail','productSpec')->get(),
             'created_at' => $stockIn->created_at
                                     ->toDateTimeString(),
             'updated_at' => $stockIn->updated_at

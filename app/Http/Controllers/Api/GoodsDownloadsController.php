@@ -14,7 +14,7 @@ use App\Models\GoodsDownload;
 class GoodsDownloadsController extends Controller
 {
 //    protected const TRANSFORMER = CityInfoTransformer::class;
-    protected const MODEL = GoodsDownload::class;
+    const MODEL = GoodsDownload::class;
 
     /**
      * 获取所有下载商品

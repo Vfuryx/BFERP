@@ -17,8 +17,8 @@ class SeriesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = SeriesTransformer::class;
-    protected const MODEL = Series::class;
+    const TRANSFORMER = SeriesTransformer::class;
+    const MODEL = Series::class;
     
     /**
      * 获取所有系列

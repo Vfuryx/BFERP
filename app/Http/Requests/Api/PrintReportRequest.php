@@ -33,17 +33,6 @@ class PrintReportRequest extends FormRequest
                     'status' => 'integer'
                 ];
                 break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => 'required|integer'
-                ];
-                break;
         }
     }
 

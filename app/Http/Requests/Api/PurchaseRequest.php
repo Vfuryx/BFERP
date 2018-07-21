@@ -22,7 +22,6 @@ class PurchaseRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'purchase_status' => 'required|string|in:新建',
                     'receiver' => 'required|string|max:255',
                     'receiver_address' => 'required|string|max:255',
                     'warehouse_id' => [
@@ -53,20 +52,6 @@ class PurchaseRequest extends FormRequest
                     'purchase_details' => ['json',$publicRule]
                 ];
                 break;
-            case 'DELETE':
-                return [
-                    'ids' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                return [
-                    'ids' => 'required|string',
-                    'status' => [
-                        'integer',
-                        $this->publicRule($this->purchase->is_submit == 0)
-                    ]
-                ];
-                break;
         }
     }
 
@@ -74,10 +59,6 @@ class PurchaseRequest extends FormRequest
     function messages()
     {
         return [
-            'purchase_status.required' => '采购状态必填',
-            'purchase_status.string' => '采购状态必须string类型',
-            'purchase_status.in' => '采购状态必须为新建',
-
             'receiver.required' => '收货人必填',
             'receiver.string' => '收货人必须string类型',
             'receiver.max' => '收货人最大长度为255',
@@ -96,9 +77,6 @@ class PurchaseRequest extends FormRequest
 
             'status.required' => '状态必填',
             'status.integer' => '状态必须int类型',
-            'id.exists' => '需要更改的数据id在数据库中未找到',
-            'ids.required' => 'id组必填',
-            'ids.string' => 'id组必须string类型',
 
             'purchase_details.json' => '采购订单详情必须json类型'
         ];
@@ -109,7 +87,6 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'purchase_order_no' => '采购单号',
-            'purchase_status' => '采购状态:新建、部分完成、已完成',
             'order_no' => '订单编号',
             'user_id' => '创建人',
             'receiver' => '收货人',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Purchase;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -86,29 +87,27 @@ class StockInsContoller extends Controller
      *                  "remark": "备注",
      *                  "created_at": "2018-07-20 17:03:15",
      *                  "updated_at": "2018-07-20 17:03:15",
-     *                  "purchase": {
-     *                      "id": 1,
-     *                      "purchase_order_no": "PO2018071718055128755",
-     *                      "purchase_status": "新建",
-     *                      "order_no": "",
-     *                      "user_id": 1,
-     *                      "receiver": "收货人3",
-     *                      "receiver_address": "收货地址3",
-     *                      "warehouse_id": 1,
-     *                      "promise_delivery_time": null,
-     *                      "salesman": "",
-     *                      "source": "",
-     *                      "client_name": "",
-     *                      "buyer_nick": "",
-     *                      "order_address": "",
-     *                      "is_submit": 1,
-     *                      "is_print": 1,
-     *                      "is_check": 1,
-     *                      "is_change": 0,
-     *                      "remark": "备注3",
-     *                      "status": 1,
-     *                      "created_at": "2018-07-17 18:05:51",
-     *                      "updated_at": "2018-07-18 14:16:33"
+     *                  "purchase_details_id": {
+     *                       "id": 1,
+     *                       "purchases_id": 13,
+     *                       "purchase_item_status": "新建",
+     *                       "product_specs_id": 1,
+     *                       "purchase_quantity": 10,
+     *                       "stock_in_count": 0,
+     *                       "shops_id": 1,
+     *                       "suppliers_id": 1,
+     *                       "purchase_cost": "10.00",
+     *                       "purchase_freight": "10.00",
+     *                       "warehouse_cost": "10.00",
+     *                       "commission": "10.00",
+     *                       "discount": "10.00",
+     *                       "colour_num": "色号",
+     *                       "paint": "油漆",
+     *                       "wooden_frame_costs": "0.00",
+     *                       "arrival_time": "2018-06-10 00:00:00",
+     *                       "remark": "备注",
+     *                       "created_at": "2018-07-21 16:22:05",
+     *                       "updated_at": "2018-07-21 16:22:05"
      *                  },
      *                  "product_spec": {
      *                      "id": 1,
@@ -266,29 +265,27 @@ class StockInsContoller extends Controller
      *                  "remark": "备注",
      *                  "created_at": "2018-07-20 17:03:15",
      *                  "updated_at": "2018-07-20 17:03:15",
-     *                  "purchase": {
-     *                      "id": 1,
-     *                      "purchase_order_no": "PO2018071718055128755",
-     *                      "purchase_status": "新建",
-     *                      "order_no": "",
-     *                      "user_id": 1,
-     *                      "receiver": "收货人3",
-     *                      "receiver_address": "收货地址3",
-     *                      "warehouse_id": 1,
-     *                      "promise_delivery_time": null,
-     *                      "salesman": "",
-     *                      "source": "",
-     *                      "client_name": "",
-     *                      "buyer_nick": "",
-     *                      "order_address": "",
-     *                      "is_submit": 1,
-     *                      "is_print": 1,
-     *                      "is_check": 1,
-     *                      "is_change": 0,
-     *                      "remark": "备注3",
-     *                      "status": 1,
-     *                      "created_at": "2018-07-17 18:05:51",
-     *                      "updated_at": "2018-07-18 14:16:33"
+     *                  "purchase_details_id": {
+     *                       "id": 1,
+     *                       "purchases_id": 13,
+     *                       "purchase_item_status": "新建",
+     *                       "product_specs_id": 1,
+     *                       "purchase_quantity": 10,
+     *                       "stock_in_count": 0,
+     *                       "shops_id": 1,
+     *                       "suppliers_id": 1,
+     *                       "purchase_cost": "10.00",
+     *                       "purchase_freight": "10.00",
+     *                       "warehouse_cost": "10.00",
+     *                       "commission": "10.00",
+     *                       "discount": "10.00",
+     *                       "colour_num": "色号",
+     *                       "paint": "油漆",
+     *                       "wooden_frame_costs": "0.00",
+     *                       "arrival_time": "2018-06-10 00:00:00",
+     *                       "remark": "备注",
+     *                       "created_at": "2018-07-21 16:22:05",
+     *                       "updated_at": "2018-07-21 16:22:05"
      *                  },
      *                  "product_spec": {
      *                      "id": 1,
@@ -347,6 +344,7 @@ class StockInsContoller extends Controller
     public function store(StockInRequest $stockInRequest, StockInDetailRequest $stockInDetailRequest)
     {
 
+
         $stockIn = DB::transaction(function() use ($stockInRequest,$stockInDetailRequest){
             $date = $stockInRequest->validated();
 
@@ -363,6 +361,7 @@ class StockInsContoller extends Controller
                     $data = array_intersect_key($stockInDetail, $stockInDetailRequest->rules());
 
                     $stockIn->stockInDetails()->create($data);
+
                 }
             }
             return $stockIn;
@@ -427,29 +426,27 @@ class StockInsContoller extends Controller
      *                  "remark": "备注",
      *                  "created_at": "2018-07-20 17:03:15",
      *                  "updated_at": "2018-07-20 17:03:15",
-     *                  "purchase": {
-     *                      "id": 1,
-     *                      "purchase_order_no": "PO2018071718055128755",
-     *                      "purchase_status": "新建",
-     *                      "order_no": "",
-     *                      "user_id": 1,
-     *                      "receiver": "收货人3",
-     *                      "receiver_address": "收货地址3",
-     *                      "warehouse_id": 1,
-     *                      "promise_delivery_time": null,
-     *                      "salesman": "",
-     *                      "source": "",
-     *                      "client_name": "",
-     *                      "buyer_nick": "",
-     *                      "order_address": "",
-     *                      "is_submit": 1,
-     *                      "is_print": 1,
-     *                      "is_check": 1,
-     *                      "is_change": 0,
-     *                      "remark": "备注3",
-     *                      "status": 1,
-     *                      "created_at": "2018-07-17 18:05:51",
-     *                      "updated_at": "2018-07-18 14:16:33"
+     *                  "purchase_details_id": {
+     *                       "id": 1,
+     *                       "purchases_id": 13,
+     *                       "purchase_item_status": "新建",
+     *                       "product_specs_id": 1,
+     *                       "purchase_quantity": 10,
+     *                       "stock_in_count": 0,
+     *                       "shops_id": 1,
+     *                       "suppliers_id": 1,
+     *                       "purchase_cost": "10.00",
+     *                       "purchase_freight": "10.00",
+     *                       "warehouse_cost": "10.00",
+     *                       "commission": "10.00",
+     *                       "discount": "10.00",
+     *                       "colour_num": "色号",
+     *                       "paint": "油漆",
+     *                       "wooden_frame_costs": "0.00",
+     *                       "arrival_time": "2018-06-10 00:00:00",
+     *                       "remark": "备注",
+     *                       "created_at": "2018-07-21 16:22:05",
+     *                       "updated_at": "2018-07-21 16:22:05"
      *                  },
      *                  "product_spec": {
      *                      "id": 1,
@@ -576,29 +573,27 @@ class StockInsContoller extends Controller
      *                  "remark": "备注",
      *                  "created_at": "2018-07-20 17:03:15",
      *                  "updated_at": "2018-07-20 17:03:15",
-     *                  "purchase": {
-     *                      "id": 1,
-     *                      "purchase_order_no": "PO2018071718055128755",
-     *                      "purchase_status": "新建",
-     *                      "order_no": "",
-     *                      "user_id": 1,
-     *                      "receiver": "收货人3",
-     *                      "receiver_address": "收货地址3",
-     *                      "warehouse_id": 1,
-     *                      "promise_delivery_time": null,
-     *                      "salesman": "",
-     *                      "source": "",
-     *                      "client_name": "",
-     *                      "buyer_nick": "",
-     *                      "order_address": "",
-     *                      "is_submit": 1,
-     *                      "is_print": 1,
-     *                      "is_check": 1,
-     *                      "is_change": 0,
-     *                      "remark": "备注3",
-     *                      "status": 1,
-     *                      "created_at": "2018-07-17 18:05:51",
-     *                      "updated_at": "2018-07-18 14:16:33"
+     *                  "purchase_details_id": {
+     *                       "id": 1,
+     *                       "purchases_id": 13,
+     *                       "purchase_item_status": "新建",
+     *                       "product_specs_id": 1,
+     *                       "purchase_quantity": 10,
+     *                       "stock_in_count": 0,
+     *                       "shops_id": 1,
+     *                       "suppliers_id": 1,
+     *                       "purchase_cost": "10.00",
+     *                       "purchase_freight": "10.00",
+     *                       "warehouse_cost": "10.00",
+     *                       "commission": "10.00",
+     *                       "discount": "10.00",
+     *                       "colour_num": "色号",
+     *                       "paint": "油漆",
+     *                       "wooden_frame_costs": "0.00",
+     *                       "arrival_time": "2018-06-10 00:00:00",
+     *                       "remark": "备注",
+     *                       "created_at": "2018-07-21 16:22:05",
+     *                       "updated_at": "2018-07-21 16:22:05"
      *                  },
      *                  "product_spec": {
      *                      "id": 1,
@@ -809,7 +804,7 @@ class StockInsContoller extends Controller
      */
     public function isSubmit(StockIn $stockin)
     {
-        return $this->traitAction($stockin,$stockin->is_submit,'无需重复提交','input');
+        return $this->traitAction($stockin,!$stockin->status ||     $stockin->is_submit,'无需重复提交','input');
     }
 
     /**
@@ -829,7 +824,7 @@ class StockInsContoller extends Controller
      */
     public function isPrint(StockIn $stockin)
     {
-        return $this->traitAction($stockin,!$stockin->is_submit || !$stockin->is_check || $stockin->is_print,'打印出错，是否未提交未审核或重复打印','print');
+        return $this->traitAction($stockin,!$stockin->status || !$stockin->is_submit || !$stockin->is_check || $stockin->is_print,'打印出错，是否未提交未审核或重复打印','print');
     }
 
     /**
@@ -847,9 +842,46 @@ class StockInsContoller extends Controller
      */
     public function isCheck(StockIn $stockin)
     {
-        return $this->traitAction($stockin,!$stockin->is_submit || $stockin->is_check,'审核出错，是否未提交或重复审核','check');
+        return $this->traitAction($stockin,!$stockin->status || !$stockin->is_submit || $stockin->is_check,'审核出错，是否未提交或重复审核','check');
     }
 
 
+    /**
+     * 入库
+     *
+     * @PUT("/purchases/:id/stockin")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "入库出错",
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function stockIn(StockIn $stockin)
+    {
+        DB::transaction(function() use ($stockin){
+            //修改入库状态
+            $this->traitAction(
+                $stockin,
+                !$stockin->status || !$stockin->is_submit || !$stockin->is_check || !$stockin->is_submit || $stockin->is_stock_in,
+                '入库出错','stockIn'
+            );
+
+            //修改采购订单详情的状态、入库数。
+            foreach ( $stockin->stockInDetails as $item){
+                $item->purchaseDetail->addStockInCount($item->stock_in_quantity);
+            }
+
+            //修改库存数量
+            foreach ( $stockin->stockInDetails as $item){
+                $item->productSpec->stock->addQuantity($item->stock_in_quantity);
+            }
+
+        });
+
+        return $this->noContent();
+    }
 
 }

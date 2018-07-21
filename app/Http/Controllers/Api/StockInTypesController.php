@@ -17,8 +17,8 @@ class StockInTypesController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = StockInTypeTransformer::class;
-    protected const MODEL = StockInType::class;
+    const TRANSFORMER = StockInTypeTransformer::class;
+    const MODEL = StockInType::class;
 
     /**
      * 获取所有入库类型

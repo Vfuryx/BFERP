@@ -16,7 +16,7 @@ class CreateStockInDetailsTable extends Migration
         Schema::create('stock_in_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('stock_ins_id')->default(0)->comment('入库单id');
-            $table->unsignedInteger('purchases_id')->default(0)->comment('采购单id');
+            $table->unsignedInteger('purchase_details_id')->comment('采购单详情id');
             $table->unsignedInteger('product_specs_id')->comment("产品规格id");
             $table->integer('stock_in_quantity')->commetn('入库数量');
             $table->string('remark')->default('')->comment('备注');
