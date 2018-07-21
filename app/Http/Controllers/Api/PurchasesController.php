@@ -10,16 +10,15 @@ use App\Models\PurchaseDetail;
 
 use App\Http\Requests\Api\PurchaseRequest;
 use App\Http\Requests\Api\PurchaseDetailRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 
 use App\Transformers\PurchaseTransformer;
 
 use App\Http\Controllers\Traits\CURDTrait;
 use App\Http\Controllers\Traits\ProcedureTrait;
 
-use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\DeleteResourceFailedException;
-use Dingo\Api\Exception\UpdateResourceFailedException;
-
 
 /**
  * 采购单资源
@@ -30,8 +29,8 @@ class PurchasesController extends Controller
     use CURDTrait;
     use ProcedureTrait;
 
-    protected const TRANSFORMER = PurchaseTransformer::class;
-    protected const MODEL = Purchase::class;
+    const TRANSFORMER = PurchaseTransformer::class;
+    const MODEL = Purchase::class;
 
     /**
      * 获取所有采购单
@@ -228,13 +227,11 @@ class PurchasesController extends Controller
      */
     public function store(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest)
     {
-        DB::beginTransaction();
-        try {
+
+        $purchase = DB::transaction(function() use ($purchaseRequest,$purchaseDetailRequest){
             $date = $purchaseRequest->validated();
+
             $date['user_id'] = 1;//后期要更改
-            //PR:Purchase Request Form 采购申请单,公司内部使用;
-            //PO:Purchase Order Form 采购订单,公司对外使用。
-            $date['purchase_order_no'] = 'PO' . date('YmdHis') . str_pad(mt_rand(1, 99999), 5, 0, STR_PAD_LEFT);
 
             $purchase = Purchase::create($date);
 
@@ -244,25 +241,15 @@ class PurchasesController extends Controller
 
                 foreach ($purchasedDetails as $purchasedDetail) {
 
-                    $validator = Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages());
+                    Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages())->validate();
 
-                    if ($validator->fails()) {
-                        throw new StoreResourceFailedException('The given data was invalid.', $validator->errors());
-                    }
-
-                    $data = array_intersect_key($validator->getData(), $validator->getRules());
+                    $data = array_intersect_key($purchasedDetail, $purchaseDetailRequest->rules());
 
                     $purchase->purchaseDetails()->create($data);
                 }
             }
-            DB::commit();
-        } catch (StoreResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+            return $purchase;
+        });
 
         return $this->response
             ->item($purchase, new PurchaseTransformer())
@@ -334,7 +321,7 @@ class PurchasesController extends Controller
     }
 
     /**
-     * 修改城市信息
+     * 修改采购单
      *
      * @Patch("/purchases/:id")
      * @Versions({"v1"})
@@ -386,20 +373,19 @@ class PurchasesController extends Controller
      */
     public function update(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest, Purchase $purchase)
     {
-        DB::beginTransaction();
-        try {
-            $purchase::update($purchaseRequest->validated());
+
+        $purchase = DB::transaction(function() use ($purchaseRequest,$purchaseDetailRequest,$purchase){
+
+            $purchase->update($purchaseRequest->validated());
 
             if ($purchasedDetails = $purchaseRequest->input('purchase_details')) {
                 $purchasedDetails = json_decode($purchasedDetails, true);
                 foreach ($purchasedDetails as $purchasedDetail) {
                     //验证purchasedDetail数据
-                    $validator = Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages());
-                    if ($validator->fails()) {
-                        throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
-                    }
+                    Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages())->validate();
+
                     //过滤出经过验证的数据
-                    $data = array_intersect_key($validator->getData(), $validator->getRules());
+                    $data = array_intersect_key($purchasedDetail, $purchaseDetailRequest->rules());
 
                     //存在id则更新，否则插入
                     if(isset($purchasedDetail['id'])){
@@ -409,14 +395,8 @@ class PurchasesController extends Controller
                     }
                 }
             }
-            DB::commit();
-        } catch (UpdateResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+            return $purchase;
+        });
 
         return $this->response
             ->item($purchase, new PurchaseTransformer())
@@ -436,28 +416,19 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(Purchase $Purchase)
+    public function destroy(Purchase $purchase)
     {
-        DB::beginTransaction();
-        try {
+        DB::transaction(function() use ($purchase){
             //删除规格
-            $delPurDet = $Purchase->purchaseDetails()->delete();
+            $delPurDet = $purchase->purchaseDetails()->delete();
 
             //删除产品
-            $delPur = $Purchase->delete();
+            $delPur = $purchase->delete();
 
             if ($delPurDet === false || $delPur === false ) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
-
-            DB::commit();
-        } catch (DeleteResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+        });
 
         return $this->noContent();
     }
@@ -487,12 +458,11 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(PurchaseRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
 
-        try {
+        DB::transaction(function() use ($ids){
             //删除采购单详情
             $delPurDet = PurchaseDetail::whereIn('purchases_id',$ids)->delete();
 
@@ -502,15 +472,7 @@ class PurchasesController extends Controller
             if ($delPurDet === false || $delPur === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
-
-            DB::commit();
-        } catch (DeleteResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+        });
 
         return $this->errorResponse(204);
     }
@@ -545,7 +507,7 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(PurchaseRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }
@@ -570,9 +532,9 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isSubmit(PurchaseRequest $request, Purchase $purchase)
+    public function isSubmit(Purchase $purchase)
     {
-        return $this->traitIsSubmit($request, $purchase);
+        return $this->traitAction($purchase,$purchase->is_submit,'无需重复提交','input');
     }
 
     /**
@@ -595,9 +557,9 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isPrint(PurchaseRequest $request, Purchase $purchase)
+    public function isPrint(Purchase $purchase)
     {
-        return $this->traitIsPrint($request, $purchase);
+        return $this->traitAction($purchase,!$purchase->is_submit || !$purchase->is_check || $purchase->is_print,'打印出错，是否未提交未审核或重复打印','print');
     }
 
     /**
@@ -620,9 +582,9 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isCheck(PurchaseRequest $request, Purchase $purchase)
+    public function isCheck(Purchase $purchase)
     {
-        return $this->traitIsCheck($request, $purchase);
+        return $this->traitAction($purchase,!$purchase->is_submit || $purchase->is_check,'审核出错，是否未提交或重复审核','check');
     }
 
 }

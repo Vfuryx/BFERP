@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\OrderDownload;
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Http\Requests\Api\OrderDownloadRequest;
 /**
  * 订单下载资源

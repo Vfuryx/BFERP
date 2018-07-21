@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\MarkColor;
 use App\Http\Requests\Api\MarkColorRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\MarkColorTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -221,7 +223,7 @@ class MarkColorsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(MarkColorRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -256,7 +258,7 @@ class MarkColorsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(MarkColorRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

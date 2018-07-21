@@ -22,12 +22,12 @@ class PurchaseDetailRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'purchases_id' => [
-                        'sometimes','required', 'integer',
-                        Rule::exists('purchases', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
+//                    'purchases_id' => [
+//                        'sometimes','required', 'integer',
+//                        Rule::exists('purchases', 'id')->where(function($query) {
+//                            $query->where('status', 1);
+//                        }),
+//                    ],
                     'product_specs_id' => [
                         'sometimes','required', 'integer',
                         Rule::exists('product_specs', 'id')->where(function($query) {
@@ -60,47 +60,42 @@ class PurchaseDetailRequest extends FormRequest
                 ];
                 break;
             case 'PATCH':
-                $publicRule = $this->publicRule($this->purchasedetail->purchases->status == 1 && $this->purchasedetail->purchases->is_submit == 0);
                 return [
-                    'purchases_id' => [
-                        'integer',
-                        Rule::exists('purchases', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                        $publicRule
-                    ],
+//                    'purchases_id' => [
+//                        'integer',
+//                        Rule::exists('purchases', 'id')->where(function($query) {
+//                            $query->where('status', 1);
+//                        }),
+//                    ],
                     'product_specs_id' => [
                         'integer',
                         Rule::exists('product_specs', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
-                        $publicRule
                     ],
-                    'purchase_quantity' => ['integer',$publicRule],
+                    'purchase_quantity' => ['integer'],
                     'shops_id' =>  [
                         'integer',
                         Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
-                        $publicRule
                     ],
                     'suppliers_id' => [
                         'integer',
                         Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
-                        $publicRule
                     ],
-                    'purchase_cost' => ['numeric',$publicRule],
-                    'purchase_freight' => ['numeric',$publicRule],
-                    'warehouse_cost' => ['numeric',$publicRule],
-                    'commission' => ['numeric',$publicRule],
-                    'discount' => ['numeric',$publicRule],
-                    'colour_num' => ['string','max:255',$publicRule],
-                    'paint' => ['string','max:255',$publicRule],
-                    'wooden_frame_costs' => ['numeric',$publicRule],
-                    'arrival_time' => ['date',$publicRule],
-                    'remark' => ['string','nullable','max:255',$publicRule],
+                    'purchase_cost' => ['numeric'],
+                    'purchase_freight' => ['numeric'],
+                    'warehouse_cost' => ['numeric'],
+                    'commission' => ['numeric'],
+                    'discount' => ['numeric'],
+                    'colour_num' => ['string','max:255'],
+                    'paint' => ['string','max:255'],
+                    'wooden_frame_costs' => ['numeric'],
+                    'arrival_time' => ['date'],
+                    'remark' => ['string','nullable','max:255'],
                 ];
                 break;
             case 'DELETE':
@@ -183,21 +178,4 @@ class PurchaseDetailRequest extends FormRequest
             'remark' => '备注',
         ];
     }
-
-    /**
-     * 通用规则
-     * @param bool $condition   判断的条件
-     * @param string $text      返回的信息
-     * @return \Closure         闭包
-     */
-    public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
-    {
-        return function($attribute, $value, $fail) use ($condition, $text) {
-            if ($condition) {
-                return true;
-            }
-            return $fail($text);
-        };
-    }
-
 }

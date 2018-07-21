@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\Combination;
 use App\Transformers\CombinationTransformer;
 use App\Http\Requests\Api\CombinationRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Http\Controllers\Traits\CURDTrait;
 
 /**
@@ -569,7 +571,7 @@ class CombinationsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(CombinationRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -604,7 +606,7 @@ class CombinationsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(CombinationRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

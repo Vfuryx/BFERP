@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Department;
 use App\Http\Requests\Api\DepartmentRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\DepartmentTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -239,7 +241,7 @@ class DepartmentsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(DepartmentRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -274,7 +276,7 @@ class DepartmentsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(DepartmentRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

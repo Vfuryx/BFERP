@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\FeeCategoryRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\FeeCategoryTransformer;
 use App\Models\FeeCategory;
 use App\Http\Controllers\Traits\CURDTrait;
@@ -190,7 +192,7 @@ class FeeCategoriesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(FeeCategoryRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -225,7 +227,7 @@ class FeeCategoriesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(FeeCategoryRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

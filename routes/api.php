@@ -446,6 +446,36 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('stockintypes', 'StockInTypesController@editStatusByIds')
             ->name('api.stockintypes.editstatusbyids');
 
+        //入库单
+        $api->get('stockins', 'StockInsContoller@index')
+            ->name('api.stockins.index');
+        $api->get('stockins/{stockin}', 'StockInsContoller@show')
+            ->name('api.stockins.show');
+        $api->post('stockins', 'StockInsContoller@store')
+            ->name('api.stockins.store');
+        $api->patch('stockins/{stockin}', 'StockInsContoller@update')
+            ->name('api.stockins.update');
+        $api->delete('stockins/{stockin}', 'StockInsContoller@destroy')
+            ->name('api.stockins.destroy');
+        $api->delete('stockins', 'StockInsContoller@destroybyids')
+            ->name('api.stockins.destroybyids');
+        $api->put('stockins/editstatus', 'StockInsContoller@editStatusByIds')
+            ->name('api.stockins.editstatusbyids');
+        $api->put('stockins/{stockin}/submit', 'StockInsContoller@isSubmit')
+            ->name('api.stockins.issubmit');
+        $api->put('stockins/{stockin}/print', 'StockInsContoller@isPrint')
+            ->name('api.stockins.isprint');
+        $api->put('stockins/{stockin}/check', 'StockInsContoller@isCheck')
+            ->name('api.stockins.ischeck');
+
+        //入库单详情
+        $api->get('stockindetails', 'StockInDetailsController@index')
+            ->name('api.stockindetails.index');
+        $api->delete('stockindetails/{stockindetail}', 'StockInDetailsController@destroy')
+            ->name('api.stockindetails.destroy');
+        $api->delete('stockindetails', 'StockInDetailsController@destroybyids')
+            ->name('api.stockindetails.destroybyids');
+
     });
 
     $api->group([

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\DistributionMethod;
 use App\Http\Requests\Api\DistributionMethodRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\DistributionMethodTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -201,7 +203,7 @@ class DistributionMethodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(DistributionMethodRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -236,7 +238,7 @@ class DistributionMethodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(DistributionMethodRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\FreightType;
 use App\Http\Requests\Api\FreightTypeRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\FreightTypeTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -216,7 +218,7 @@ class FreightTypesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(FreightTypeRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -251,7 +253,7 @@ class FreightTypesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(FreightTypeRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

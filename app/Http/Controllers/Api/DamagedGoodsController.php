@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\DamagedGoods;
 use App\Http\Requests\Api\DamagedGoodsRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\DamagedGoodsTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -231,7 +233,7 @@ class DamagedGoodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(DamagedGoodsRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -266,7 +268,7 @@ class DamagedGoodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(DamagedGoodsRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

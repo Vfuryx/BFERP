@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Platform;
 use App\Http\Requests\Api\PlatformRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\PlatformTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -196,7 +198,7 @@ class PlatformsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(PlatformRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -231,7 +233,7 @@ class PlatformsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(PlatformRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

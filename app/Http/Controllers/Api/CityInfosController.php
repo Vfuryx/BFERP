@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\CityInfoRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\CityInfoTransformer;
 use App\Models\CityInfo;
 use App\Http\Controllers\Traits\CURDTrait;
@@ -341,7 +343,7 @@ class CityInfosController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(CityInfoRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -376,7 +378,7 @@ class CityInfosController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(CityInfoRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

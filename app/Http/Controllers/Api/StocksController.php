@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\StockRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\StockTransformer;
 use App\Models\Stock;
 use App\Http\Controllers\Traits\CURDTrait;
@@ -15,8 +17,8 @@ class StocksController extends Controller
 {
     use CURDTrait;
 
-    protected const TRANSFORMER = StockTransformer::class;
-    protected const MODEL = Stock::class;
+    const TRANSFORMER = StockTransformer::class;
+    const MODEL = Stock::class;
     
     /**
      * 获取所有库存
@@ -391,7 +393,7 @@ class StocksController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(StockRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -426,7 +428,7 @@ class StocksController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(StockRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

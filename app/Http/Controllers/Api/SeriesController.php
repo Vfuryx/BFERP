@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Series;
 use App\Http\Requests\Api\SeriesRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\SeriesTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -330,7 +332,7 @@ class SeriesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(SeriesRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -365,7 +367,7 @@ class SeriesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(SeriesRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

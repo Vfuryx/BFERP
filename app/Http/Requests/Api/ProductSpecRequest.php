@@ -21,12 +21,12 @@ class ProductSpecRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'goods_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('goods','id')->where(function ($query) {
-                            $query->where('status',1);
-                        }),
-                    ],
+//                    'goods_id' => [
+//                        'sometimes','required','integer',
+//                        Rule::exists('goods','id')->where(function ($query) {
+//                            $query->where('status',1);
+//                        }),
+//                    ],
                     'spec_code' => 'sometimes|required|string|max:255|unique:product_specs',
                     'jd_specs_code' => 'string|max:255',
                     'vips_specs_code' => 'string|max:255',
@@ -74,12 +74,12 @@ class ProductSpecRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-                    'goods_id' => [
-                        'integer',
-                        Rule::exists('goods','id')->where(function ($query) {
-                            $query->where('status',1);
-                        }),
-                    ],
+//                    'goods_id' => [
+//                        'integer',
+//                        Rule::exists('goods','id')->where(function ($query) {
+//                            $query->where('status',1);
+//                        }),
+//                    ],
                     'spec_code' =>  [
                         'string','max:255',
                         Rule::unique('product_specs')->ignore(isset($this->productspec->id)?$this->productspec->id:$id),

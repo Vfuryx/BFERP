@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Models\AccountingType as AccType;
 use App\Transformers\AccountingTypeTransformer;
 use App\Http\Requests\Api\AccountingTypeRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Http\Controllers\Traits\CURDTrait;
 
 
@@ -202,7 +204,7 @@ class AccountingTypesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(AccountingTypeRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -237,7 +239,7 @@ class AccountingTypesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(AccountingTypeRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

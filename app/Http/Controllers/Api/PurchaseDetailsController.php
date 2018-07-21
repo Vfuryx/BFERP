@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\PurchaseDetailRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\PurchaseDetailTransformer;
 use App\Models\PurchaseDetail;
 use App\Http\Controllers\Traits\CURDTrait;
@@ -267,7 +269,7 @@ class PurchaseDetailsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(PurchaseDetailRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }

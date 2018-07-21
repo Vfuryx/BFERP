@@ -12,6 +12,8 @@ use App\Models\Combination;
 use App\Http\Requests\Api\GoodsRequest;
 use App\Http\Requests\Api\ProductSpecRequest;
 use App\Http\Requests\Api\CombinationRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 
 use App\Transformers\GoodsTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
@@ -1671,7 +1673,7 @@ class GoodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(GoodsRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         $ids = explode(',', $request->input('ids'));
         DB::beginTransaction();
@@ -1733,7 +1735,7 @@ class GoodsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(GoodsRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

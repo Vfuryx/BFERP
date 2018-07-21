@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Supplier;
 use App\Http\Requests\Api\SupplierRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\SupplierTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -278,7 +280,7 @@ class SuppliersController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(SupplierRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -313,7 +315,7 @@ class SuppliersController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(SupplierRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

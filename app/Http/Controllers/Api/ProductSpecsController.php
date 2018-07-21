@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\ProductSpec;
 use App\Transformers\ProductSpecTransformer;
 use App\Http\Requests\Api\ProductSpecRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Models\Combination; 
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -494,7 +496,7 @@ class ProductSpecsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(ProductSpecRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         $ids = explode(',', $request->input('ids'));
         DB::beginTransaction();
@@ -554,7 +556,7 @@ class ProductSpecsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(ProductSpecRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

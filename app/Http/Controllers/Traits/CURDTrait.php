@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Traits;
 
 use Illuminate\Support\Facades\DB;
+
 /**
  * 基础增删改查方法复用
  */
@@ -15,22 +16,25 @@ trait CURDTrait
      * @param [type] $model         模型
      * @param [type] $transformer   转换器
      * @param integer $page         每页元素
+     * @param [type] $is_status     是否存在status
      * @return array
      */
-    public function allOrPage($request, $model, $transformer, $perPage = 0)
+    public function allOrPage($request, $model, $transformer, $perPage = 0, $is_status = 1)
     {
+        if($is_status){
+            $model = $model::whereIn('status', (array)$request->get('status', [1, 0]));
+        }else {
+            $model = $model::query();
+        }
+
         //不分页
         if($perPage === 0){
-            return $this->response->collection($model::all(),new $transformer);
+            return $this->response->collection($model->get(),new $transformer);
         }
 
         //分页响应返回
-        $ref = $model::whereIn(
-            'status',
-            (array)$request->get('status', [1, 0]))
-            ->paginate($perPage);
-
-        return $this->response->paginator($ref, $transformer);
+        $ref = $model->paginate($perPage);
+        return $this->response->paginator($ref,new  $transformer);
     }
 
     /**
@@ -105,17 +109,11 @@ trait CURDTrait
     public function traitDestroybyIds($request, $model)
     {
         $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
-
-        try {
+        DB::transaction(function() use ($ids,$model){
             if (count($ids) !== $model::destroy($ids)) {
-                $this->errorResponse(500);
+                return $this->errorResponse(500, '更改错误', 500);
             }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '删除错误', 500);
-        }
+        });
 
         return $this->errorResponse(204);
     }
@@ -131,17 +129,12 @@ trait CURDTrait
     {
         $ids = explode(',', $request->input('ids'));
         $status = $request->input('status');
-        DB::beginTransaction();
 
-        try {
+        DB::transaction(function() use ($ids,$model,$status){
             if (count($ids) !== $model::whereIn('id', $ids)->update(['status' => $status])) {
-                $this->errorResponse(500);
+                return $this->errorResponse(500, '更改错误', 500);
             }
-            DB::commit();
-        } catch (\Exception $e) {
-            DB::rollback();
-            return $this->errorResponse(500, '更改错误', 500);
-        }
+        });
 
         return $this->errorResponse(204);
     }

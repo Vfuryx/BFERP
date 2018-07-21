@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Shop;
 use App\Http\Requests\Api\ShopRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\ShopTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -338,7 +340,7 @@ class ShopsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(ShopRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -373,7 +375,7 @@ class ShopsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(ShopRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

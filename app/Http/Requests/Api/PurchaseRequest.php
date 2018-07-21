@@ -49,7 +49,8 @@ class PurchaseRequest extends FormRequest
                         $publicRule
                     ],
                     'remark' => ['string', 'nullable', 'max:255', $publicRule],
-                    'status' => ['integer', $publicRule]
+                    'status' => ['integer', $publicRule],
+                    'purchase_details' => ['json',$publicRule]
                 ];
                 break;
             case 'DELETE':
@@ -58,41 +59,13 @@ class PurchaseRequest extends FormRequest
                 ];
                 break;
             case 'PUT':
-                switch ($this->route()->getActionMethod()) {
-                    case 'isSubmit':
-                        return [
-                            'is_submit' => [
-                                'required', 'boolean',
-                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 0)
-                            ]
-                        ];
-                        break;
-                    case 'isPrint':
-                        return [
-                            'is_print' => [
-                                'required', 'boolean',
-                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 1 && $this->purchase->is_print == 0)
-                            ]
-                        ];
-                        break;
-                    case 'isCheck':
-                        return [
-                            'is_check' => [
-                                'required', 'boolean',
-                                $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 1 && $this->purchase->is_check == 0)
-                            ]
-                        ];
-                        break;
-                    default:
-                        return [
-                            'ids' => 'required|string',
-                            'status' => [
-                                'integer',
-                                $this->publicRule($this->purchase->is_submit == 0)
-                            ]
-                        ];
-                        break;
-                }
+                return [
+                    'ids' => 'required|string',
+                    'status' => [
+                        'integer',
+                        $this->publicRule($this->purchase->is_submit == 0)
+                    ]
+                ];
                 break;
         }
     }
@@ -127,16 +100,7 @@ class PurchaseRequest extends FormRequest
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型',
 
-            'is_submit.required' => '是否提交必填',
-            'is_submit.boolean' => '是否提交必须布尔类型',
-
-            'isPrint.required' => '是否打印必填',
-            'isPrint.boolean' => '是否打印必须布尔类型',
-
-            'is_check.required' => '是否审核必填',
-            'is_check.boolean' => '是否审核必须布尔类型',
-
-            'purchase_details' => '采购订单详情必须json类型'
+            'purchase_details.json' => '采购订单详情必须json类型'
         ];
     }
 

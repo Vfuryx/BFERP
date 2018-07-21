@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\PrintReport;
 use App\Http\Requests\Api\PrintReportRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\PrintReportTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -224,7 +226,7 @@ class PrintReportsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(PrintReportRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -259,7 +261,7 @@ class PrintReportsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(PrintReportRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }

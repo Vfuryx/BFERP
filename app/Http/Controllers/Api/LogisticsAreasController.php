@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\LogisticsArea;
 use App\Http\Requests\Api\LogisticsAreaRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\LogisticsAreaTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -212,7 +214,7 @@ class LogisticsAreasController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroybyIds(LogisticsAreaRequest $request)
+    public function destroybyIds(DestroyRequest $request)
     {
         return $this->traitDestroybyIds($request, self::MODEL);
     }
@@ -247,7 +249,7 @@ class LogisticsAreasController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function editStatusByIds(LogisticsAreaRequest $request)
+    public function editStatusByIds(EditStatuRequest $request)
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }
