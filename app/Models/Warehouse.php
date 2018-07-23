@@ -11,7 +11,8 @@ class Warehouse extends Model
         'address', 'is_default', 'status'
     ];
 
-    public function shops(){
+    public function shops()
+    {
         return $this->hasMany(Shop::class);
     }
 
@@ -25,8 +26,9 @@ class Warehouse extends Model
         return $this->hasMany(Purchase::class);
     }
 
-    public function stockIns(){
-        return $this->hasMany(StockIn::class,'warehouse_id');
+    public function stockIns()
+    {
+        return $this->hasMany(StockIn::class, 'warehouse_id');
     }
 
 }

@@ -19,7 +19,7 @@ class WarehousesController extends Controller
 
     const TRANSFORMER = WarehouseTransformer::class;
     const MODEL = Warehouse::class;
-    
+
     /**
      * 获取所有仓库
      *
@@ -119,10 +119,10 @@ class WarehousesController extends Controller
     public function store(WarehouseRequest $request)
     {
         //是否要重置默认
-        if($request->input('is_default') === '1'){
+        if ($request->input('is_default') === '1') {
             $this->tableResetDefault(self::MODEL);
         }
-        
+
         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
@@ -194,7 +194,7 @@ class WarehousesController extends Controller
     public function update(WarehouseRequest $request, Warehouse $warehouse)
     {
         //是否要重置默认
-        if($request->input('is_default') === '1'){
+        if ($request->input('is_default') === '1') {
             $this->tableResetDefault(self::MODEL);
         }
 
@@ -253,7 +253,7 @@ class WarehousesController extends Controller
     /**
      * 更改一组仓库状态
      * 
-     * @PUT("/warehouses")
+     * @PUT("/warehouses/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="仓库id组 格式: 1,2,3,4 ", required=true),

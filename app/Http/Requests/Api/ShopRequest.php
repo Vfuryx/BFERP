@@ -25,9 +25,9 @@ class ShopRequest extends FormRequest
                     'title' => 'required|string|max:255',
                     'session_key' => 'required|string|max:255',
                     'warehouse_id' => [
-                        'required','integer',
-                        Rule::exists('warehouses','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'shop_account' => 'required|string|max:255',
@@ -40,10 +40,10 @@ class ShopRequest extends FormRequest
                     'district' => 'required|string|max:255',
                     'address' => 'required|string|max:255',
                     'gross_profit_rate' => 'required|numeric',
-                    'platform_id' =>  [
-                        'required','integer',
-                        Rule::exists('platforms','id')->where(function ($query) {
-                            $query->where('status',1);
+                    'platform_id' => [
+                        'required', 'integer',
+                        Rule::exists('platforms', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'is_waybill' => 'integer',
@@ -57,8 +57,8 @@ class ShopRequest extends FormRequest
                     'session_key' => 'string|max:255',
                     'warehouse_id' => [
                         'integer',
-                        Rule::exists('warehouses','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'shop_account' => 'string|max:255',
@@ -71,10 +71,10 @@ class ShopRequest extends FormRequest
                     'district' => 'string|max:255',
                     'address' => 'string|max:255',
                     'gross_profit_rate' => 'numeric',
-                    'platform_id' =>  [
+                    'platform_id' => [
                         'integer',
-                        Rule::exists('platforms','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('platforms', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'is_waybill' => 'integer',
@@ -98,7 +98,7 @@ class ShopRequest extends FormRequest
             'session_key.required' => 'SessionKey必填',
             'session_key.max' => 'SessionKey最大长度为255',
             'session_key.string' => 'SessionKey必须string类型',
-     
+
             'warehouse_id.required' => '默认仓库id必填',
             'warehouse_id.integer' => '默认仓库id必须int类型',
             'warehouse_id.exists' => '需要添加的id在数据库中未找到或未启用',

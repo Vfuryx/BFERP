@@ -22,21 +22,21 @@ class StockRequest extends FormRequest
             case 'POST':
                 return [
                     'warehouse_id' => [
-                        'required','integer',
-                        Rule::exists('warehouses','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'goods_id' => [
-                        'required','integer',
-                        Rule::exists('goods','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('goods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'pro_specs_id' => [
-                        'required','integer','unique:stocks',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer', 'unique:stocks',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'quantity' => 'required|integer',
@@ -49,7 +49,7 @@ class StockRequest extends FormRequest
     public function messages()
     {
         return [
-     
+
             'warehouse_id.required' => '仓库id必填',
             'warehouse_id.integer' => '仓库id必须int类型',
             'warehouse_id.exists' => '需要添加的id在数据库中未找到或未启用',

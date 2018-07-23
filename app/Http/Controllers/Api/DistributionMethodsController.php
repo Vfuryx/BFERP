@@ -211,7 +211,7 @@ class DistributionMethodsController extends Controller
     /**
      * 更改一组配送方式状态 
      *  
-     * @PUT("/distmets") 
+     * @PUT("/distmets/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="配送方式id组 格式: 1,2,3,4 ", required=true),

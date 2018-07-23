@@ -19,7 +19,7 @@ class LogisticsAreasController extends Controller
 
     const TRANSFORMER = LogisticsAreaTransformer::class;
     const MODEL = LogisticsArea::class;
-    
+
     /**
      * 获取所有物流区域
      *
@@ -222,7 +222,7 @@ class LogisticsAreasController extends Controller
     /**
      * 更改一组物流区域状态
      * 
-     * @PUT("/logisticsareas")
+     * @PUT("/logisticsareas/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="物流区域id组 格式: 1,2,3,4 ", required=true),

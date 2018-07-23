@@ -33,7 +33,7 @@ class GoodsCategoryRequest extends FormRequest
                 return [
                     'name' => 'string',
                     'code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('goods_categories')->ignore($this->goodscate->id),
                     ],
                     'status' => 'integer',

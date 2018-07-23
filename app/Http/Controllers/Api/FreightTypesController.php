@@ -167,7 +167,7 @@ class FreightTypesController extends Controller
     public function update(FreightTypeRequest $request, FreightType $freighttype)
     {
         //是否要重置默认
-        if($request->input('is_default') === '1'){
+        if ($request->input('is_default') === '1') {
             $this->tableResetDefault(self::MODEL);
         }
 
@@ -226,7 +226,7 @@ class FreightTypesController extends Controller
     /**
      * 更改一组运费类型状态 
      *  
-     * @PUT("/freighttypes") 
+     * @PUT("/freighttypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="运费类型id组 格式: 1,2,3,4 ", required=true),

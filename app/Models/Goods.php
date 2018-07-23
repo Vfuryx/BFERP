@@ -16,7 +16,7 @@ class Goods extends Model
 
     public function productSpecs()
     {
-        return $this->hasMany(ProductSpec::class,'goods_id');
+        return $this->hasMany(ProductSpec::class, 'goods_id');
     }
 
     public function supplier()
@@ -26,7 +26,7 @@ class Goods extends Model
 
     public function goodsCategory()
     {
-        return $this->belongsTo(GoodsCategory::class,'category_id');
+        return $this->belongsTo(GoodsCategory::class, 'category_id');
     }
 
     public function stock()

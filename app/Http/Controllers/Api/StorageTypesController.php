@@ -19,8 +19,8 @@ class StorageTypesController extends Controller
 
     const TRANSFORMER = StorageTypeTransformer::class;
     const MODEL = StorageType::class;
-    
-   /**
+
+    /**
      * 获取所有入库类型 
      *  
      * @Get("/storagetypes{?status}")
@@ -156,7 +156,7 @@ class StorageTypesController extends Controller
      *      })
      * })
      */
-    public function update(StorageTypeRequest $request,StorageType $storagetype)
+    public function update(StorageTypeRequest $request, StorageType $storagetype)
     {
         return $this->traitUpdate($request, $storagetype, self::TRANSFORMER);
     }
@@ -178,7 +178,7 @@ class StorageTypesController extends Controller
     {
         return $this->traitDestroy($storagetype);
     }
-    
+
     /**
      * 删除一组入库类型 
      *  
@@ -213,7 +213,7 @@ class StorageTypesController extends Controller
     /**
      * 更改一组入库类型状态 
      *  
-     * @PUT("/storagetypes") 
+     * @PUT("/storagetypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="入库类型id组 格式: 1,2,3,4 ", required=true),

@@ -212,7 +212,7 @@ class AccountingTypesController extends Controller
     /**
      * 更改一组记账类型状态
      *
-     * @PUT("/acctypes")
+     * @PUT("/acctypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true),

@@ -48,9 +48,9 @@ class ProductSpecRequest extends FormRequest
                     'purchase_days_warning' => 'sometimes|required|integer',
                     'available_warning' => 'sometimes|required|integer',
                     'distribution_method_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('distribution_methods','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('distribution_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'bar_code' => 'string|max:255',
@@ -80,9 +80,9 @@ class ProductSpecRequest extends FormRequest
 //                            $query->where('status',1);
 //                        }),
 //                    ],
-                    'spec_code' =>  [
-                        'string','max:255',
-                        Rule::unique('product_specs')->ignore(isset($this->productspec->id)?$this->productspec->id:$id),
+                    'spec_code' => [
+                        'string', 'max:255',
+                        Rule::unique('product_specs')->ignore(isset($this->productspec->id) ? $this->productspec->id : $id),
                     ],
                     'jd_specs_code' => 'string|max:255',
                     'vips_specs_code' => 'string|max:255',
@@ -105,8 +105,8 @@ class ProductSpecRequest extends FormRequest
                     'available_warning' => 'integer',
                     'distribution_method_id' => [
                         'integer',
-                        Rule::exists('distribution_methods','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('distribution_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'bar_code' => 'string|max:255',

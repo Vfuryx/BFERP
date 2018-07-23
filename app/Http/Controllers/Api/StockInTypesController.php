@@ -156,7 +156,7 @@ class StockInTypesController extends Controller
      *      })
      * })
      */
-    public function update(StockInTypeRequest $request,StockInType $stockintype)
+    public function update(StockInTypeRequest $request, StockInType $stockintype)
     {
         return $this->traitUpdate($request, $stockintype, self::TRANSFORMER);
     }
@@ -213,7 +213,7 @@ class StockInTypesController extends Controller
     /**
      * 更改一组入库类型状态
      *
-     * @PUT("/stockintypes")
+     * @PUT("/stockintypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="入库类型id组 格式: 1,2,3,4 ", required=true),

@@ -45,7 +45,7 @@ class SupplierRequest extends FormRequest
                     'name' => 'string|max:255',
                     'company' => 'string|max:255',
                     'code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('suppliers')->ignore($this->supplier->id),
                     ],
                     'province' => 'string|max:255',
@@ -73,7 +73,7 @@ class SupplierRequest extends FormRequest
             'name.required' => '供应商名称必填',
             'name.max' => '供应商名称最大长度为255',
             'name.string' => '供应商名称必须string类型',
-            
+
             'company.required' => '供应商公司称必填',
             'company.max' => '供应商公司最大长度为255',
             'company.string' => '供应商公司必须string类型',

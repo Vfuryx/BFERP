@@ -3,7 +3,7 @@
 namespace App\Models;
 
 class CityInfo extends Model
-{    
+{
     protected $table = 'city_infos';
 
     protected $fillable = [
@@ -12,7 +12,8 @@ class CityInfo extends Model
         'is_free_shipping', 'remark', 'status'
     ];
 
-    public function logistics(){
+    public function logistics()
+    {
         return $this->belongsTo(Logistics::class);
     }
 

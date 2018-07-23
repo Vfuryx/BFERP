@@ -64,7 +64,7 @@ class WarehouseRequest extends FormRequest
             'address.required' => '仓库地（地址）必填',
             'address.max' => '仓库地（地址）最大长度为255',
             'address.string' => '仓库地（地址）必须string类型',
-    
+
             'is_default.integer' => '是否默认必须int类型',
 
             'status.required' => '状态必填',

@@ -200,7 +200,7 @@ class FeeCategoriesController extends Controller
     /**
      * 更改一组费用类别状态
      *
-     * @PUT("/feecates")
+     * @PUT("/feecates/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="费用类别id组 格式: 1,2,3,4 ", required=true),

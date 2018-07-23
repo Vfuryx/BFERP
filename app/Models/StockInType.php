@@ -12,7 +12,7 @@ class StockInType extends Model
 
     public function stockIns()
     {
-        return $this->hasMany(StockIn::class,'stock_in_types_id');
+        return $this->hasMany(StockIn::class, 'stock_in_types_id');
     }
 
 }

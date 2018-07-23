@@ -17,9 +17,9 @@ class GoodsDownloadRequest extends FormRequest
             case 'GET':
                 return [
                     'shop_id' => [
-                        'required','integer',
-                        Rule::exists('shops','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('shops', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'dl_type' => "required|string|max:255|in:seller,inventory",

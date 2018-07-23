@@ -4,7 +4,7 @@ namespace App\Models;
 
 class StockDelLog extends Model
 {
-    protected $table="stock_del_logs";
+    protected $table = "stock_del_logs";
 
     protected $fillable = [
         'stock_id', 'user_id', 'commodity_code', 'specs_code', 'warehouse_name',
@@ -13,6 +13,6 @@ class StockDelLog extends Model
 
     public function stock()
     {
-        return $this->belongsTo(Stock::class,'stock_id');
+        return $this->belongsTo(Stock::class, 'stock_id');
     }
 }

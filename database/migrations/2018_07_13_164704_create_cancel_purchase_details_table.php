@@ -15,7 +15,8 @@ class CreateCancelPurchaseDetailsTable extends Migration
     {
         Schema::create('cancel_purchase_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('product_specs_id')->comment("产品规格id");
+            $table->unsignedInteger('cancel_purchases_id')->comment('取消采购id');
+            $table->unsignedInteger('purchase_details_id')->comment("采购详细id");
             $table->integer('cancel_purchase_quantity')->comment("取消采购数");
             $table->timestamps();
         });

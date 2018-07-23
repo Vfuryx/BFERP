@@ -226,7 +226,7 @@ class PurchasesController extends Controller
     public function store(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest)
     {
 
-        $purchase = DB::transaction(function() use ($purchaseRequest,$purchaseDetailRequest){
+        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest) {
             $date = $purchaseRequest->validated();
 
             $date['user_id'] = 1;//后期要更改
@@ -372,7 +372,7 @@ class PurchasesController extends Controller
     public function update(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest, Purchase $purchase)
     {
 
-        $purchase = DB::transaction(function() use ($purchaseRequest,$purchaseDetailRequest,$purchase){
+        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest, $purchase) {
 
             $purchase->update($purchaseRequest->validated());
 
@@ -386,9 +386,9 @@ class PurchasesController extends Controller
                     $data = array_intersect_key($purchasedDetail, $purchaseDetailRequest->rules());
 
                     //存在id则更新，否则插入
-                    if(isset($purchasedDetail['id'])){
+                    if (isset($purchasedDetail['id'])) {
                         PurchaseDetail::findOrFail($purchasedDetail['id'])->update($data);
-                    }else{
+                    } else {
                         $purchase->purchaseDetails()->create($data);
                     }
                 }
@@ -416,14 +416,14 @@ class PurchasesController extends Controller
      */
     public function destroy(Purchase $purchase)
     {
-        DB::transaction(function() use ($purchase){
+        DB::transaction(function () use ($purchase) {
             //删除规格
             $delPurDet = $purchase->purchaseDetails()->delete();
 
             //删除产品
             $delPur = $purchase->delete();
 
-            if ($delPurDet === false || $delPur === false ) {
+            if ($delPurDet === false || $delPur === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
@@ -460,9 +460,9 @@ class PurchasesController extends Controller
     {
         $ids = explode(',', $request->input('ids'));
 
-        DB::transaction(function() use ($ids){
+        DB::transaction(function () use ($ids) {
             //删除采购单详情
-            $delPurDet = PurchaseDetail::whereIn('purchases_id',$ids)->delete();
+            $delPurDet = PurchaseDetail::whereIn('purchases_id', $ids)->delete();
 
             //删除采购单
             $delPur = Purchase::destroy($ids);
@@ -478,7 +478,7 @@ class PurchasesController extends Controller
     /**
      * 更改一组采购单状态
      *
-     * @PUT("/purchases")
+     * @PUT("/purchases/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="采购单id组 格式: 1,2,3,4 ", required=true),
@@ -532,7 +532,7 @@ class PurchasesController extends Controller
      */
     public function isSubmit(Purchase $purchase)
     {
-        return $this->traitAction($purchase,!$purchase->status || $purchase->is_submit,'无需重复提交','input');
+        return $this->traitAction($purchase, !$purchase->status || $purchase->is_submit, '无需重复提交', 'input');
     }
 
     /**
@@ -557,7 +557,7 @@ class PurchasesController extends Controller
      */
     public function isPrint(Purchase $purchase)
     {
-        return $this->traitAction($purchase,!$purchase->status || !$purchase->is_submit || !$purchase->is_check || $purchase->is_print,'打印出错，是否未提交未审核或重复打印','print');
+        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || !$purchase->is_check || $purchase->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
     }
 
     /**
@@ -582,7 +582,7 @@ class PurchasesController extends Controller
      */
     public function isCheck(Purchase $purchase)
     {
-        return $this->traitAction($purchase,!$purchase->status || !$purchase->is_submit || $purchase->is_check,'审核出错，是否未提交或重复审核','check');
+        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || $purchase->is_check, '审核出错，是否未提交或重复审核', 'check');
     }
 
 }

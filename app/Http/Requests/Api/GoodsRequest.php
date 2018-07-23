@@ -28,15 +28,15 @@ class GoodsRequest extends FormRequest
                     'short_name' => 'required|string|max:255',
                     'nick' => 'required|string|max:255',
                     'supplier_id' => [
-                        'required','integer',
-                        Rule::exists('suppliers','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('suppliers', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'category_id' => [
-                        'required','integer',
-                        Rule::exists('goods_categories','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('goods_categories', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'remark' => 'required|string|max:255',
@@ -51,7 +51,7 @@ class GoodsRequest extends FormRequest
             case 'PATCH':
                 return [
                     'commodity_code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('goods')->ignore($this->goods->id),
                     ],
                     'jd_sn' => 'string|max:255',
@@ -61,14 +61,14 @@ class GoodsRequest extends FormRequest
                     'nick' => 'string|max:255',
                     'supplier_id' => [
                         'integer',
-                        Rule::exists('suppliers','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('suppliers', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'category_id' => [
                         'integer',
-                        Rule::exists('goods_categories','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('goods_categories', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'remark' => 'string|max:255',

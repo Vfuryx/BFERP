@@ -16,8 +16,9 @@ trait ProcedureTrait
      * @param $method       方法
      * @return mixed
      */
-    public function traitAction($model,$condition,$fail,$method){
-        if($condition)
+    public function traitAction($model, $condition, $fail, $method)
+    {
+        if ($condition)
             throw new UpdateResourceFailedException($fail);
         $model->$method();
         return $this->noContent();

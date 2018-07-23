@@ -15,12 +15,13 @@ class CreateCancelPurchasesTable extends Migration
     {
         Schema::create('cancel_purchases', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('stock_in_no')->comment('取消采购单号');
-            $table->unsignedInteger('purchases_id')->default(0)->comment('采购单id');
+            $table->string('cancel_purchases_no')->comment('取消采购单号');
+            $table->unsignedInteger('purchases_id')->comment('采购单id');
             $table->string('creator')->comment('创建人');
             $table->string('submitter')->default('')->comment('提交人');
             $table->timestamp('submit_at')->nullable()->comment('提交时间');
             $table->tinyInteger('is_submit')->default(0)->comment('是否提交');
+            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

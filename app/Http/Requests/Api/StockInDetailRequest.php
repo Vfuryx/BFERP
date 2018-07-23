@@ -29,9 +29,9 @@ class StockInDetailRequest extends FormRequest
 //                        }),
 //                    ],
                     'purchase_details_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('purchase_details','id'),
-                        function($attribute, $value, $fail) {
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('purchase_details', 'id'),
+                        function ($attribute, $value, $fail) {
                             if (\App\Models\PurchaseDetail::query()->find($value)->purchases->status) {
                                 return true;
                             }
@@ -39,9 +39,9 @@ class StockInDetailRequest extends FormRequest
                         }
                     ],
                     'product_specs_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'stock_in_quantity' => 'sometimes|required|integer|min:1',
@@ -58,14 +58,14 @@ class StockInDetailRequest extends FormRequest
 //                    ],
                     'purchase_details_id' => [
                         'integer',
-                        Rule::exists('purchase_details','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('purchase_details', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'product_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'stock_in_quantity' => 'integer|min:1',

@@ -23,10 +23,10 @@ class LogisticsRequest extends FormRequest
                 return [
                     'code' => 'required|string|max:255|unique:logistics',
                     'name' => 'required|string|max:255',
-                    'report_id' =>  [
-                        'required','integer',
-                        Rule::exists('print_reports','id')->where(function ($query) {
-                            $query->where('status',1);
+                    'report_id' => [
+                        'required', 'integer',
+                        Rule::exists('print_reports', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
 //                    'logistics_area_id' =>  [
@@ -39,9 +39,9 @@ class LogisticsRequest extends FormRequest
                     'phone' => 'required|string|max:255',
                     'address' => 'required|string|max:255',
                     'freight_type_id' => [
-                        'required','integer',
-                        Rule::exists('freight_types','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('freight_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'remark' => 'string|nullable|max:255',
@@ -51,14 +51,14 @@ class LogisticsRequest extends FormRequest
             case 'PATCH':
                 return [
                     'code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('logistics')->ignore($this->logistics->id),
                     ],
                     'name' => 'string|max:255',
-                    'report_id' =>  [
+                    'report_id' => [
                         'integer',
-                        Rule::exists('print_reports','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('print_reports', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
 //                    'logistics_area_id' =>  [
@@ -72,8 +72,8 @@ class LogisticsRequest extends FormRequest
                     'address' => 'string|max:255',
                     'freight_type_id' => [
                         'integer',
-                        Rule::exists('freight_types','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('freight_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'remark' => 'string|nullable|max:255',

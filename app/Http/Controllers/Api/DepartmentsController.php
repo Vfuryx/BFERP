@@ -19,7 +19,7 @@ class DepartmentsController extends Controller
 
     const TRANSFORMER = DepartmentTransformer::class;
     const MODEL = Department::class;
-    
+
 
     /**
      * 获取所有部门
@@ -249,7 +249,7 @@ class DepartmentsController extends Controller
     /**
      * 更改一组部门状态
      *
-     * @PUT("/departments")
+     * @PUT("/departments/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="部门id组 格式: 1,2,3,4 ", required=true),

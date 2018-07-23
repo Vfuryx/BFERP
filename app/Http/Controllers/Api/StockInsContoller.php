@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Purchase;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
@@ -345,7 +344,7 @@ class StockInsContoller extends Controller
     {
 
 
-        $stockIn = DB::transaction(function() use ($stockInRequest,$stockInDetailRequest){
+        $stockIn = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest) {
             $date = $stockInRequest->validated();
 
             $stockIn = StockIn::create($date);
@@ -646,9 +645,9 @@ class StockInsContoller extends Controller
      *      })
      * })
      */
-    public function update(StockInRequest $stockInRequest,StockInDetailRequest $stockInDetailRequest,StockIn $stockin)
+    public function update(StockInRequest $stockInRequest, StockInDetailRequest $stockInDetailRequest, StockIn $stockin)
     {
-        $stockin = DB::transaction(function() use ($stockInRequest,$stockInDetailRequest,$stockin){
+        $stockin = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $stockin) {
 
             $stockin->update($stockInRequest->validated());
 
@@ -660,10 +659,10 @@ class StockInsContoller extends Controller
                     //过滤出经过验证的数据
                     $data = array_intersect_key($stockInDetail, $stockInDetailRequest->rules());
                     //存在id则更新，否则插入
-                    if(isset($stockInDetail['id'])){
+                    if (isset($stockInDetail['id'])) {
 
                         StockInDetail::findOrFail($stockInDetail['id'])->update($data);
-                    }else{
+                    } else {
                         $stockin->stockInDetails()->create($data);
                     }
                 }
@@ -673,7 +672,8 @@ class StockInsContoller extends Controller
 
         return $this->response
             ->item($stockin, new StockInTransformer())
-            ->setStatusCode(201);    }
+            ->setStatusCode(201);
+    }
 
     /**
      * 删除入库单
@@ -690,13 +690,13 @@ class StockInsContoller extends Controller
      */
     public function destroy(StockIn $stockin)
     {
-        DB::transaction(function() use ($stockin){
+        DB::transaction(function () use ($stockin) {
 
             $delStoDet = $stockin->stockInDetails()->delete();
 
             $delSto = $stockin->delete();
 
-            if ($delStoDet === false || $delSto === false ) {
+            if ($delStoDet === false || $delSto === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
@@ -734,8 +734,8 @@ class StockInsContoller extends Controller
     {
         $ids = explode(',', $request->input('ids'));
 
-        DB::transaction(function() use ($ids){
-            $delStoDet = StockInDetail::whereIn('stock_ins_id',$ids)->delete();
+        DB::transaction(function () use ($ids) {
+            $delStoDet = StockInDetail::whereIn('stock_ins_id', $ids)->delete();
 
             $delSto = StockIn::destroy($ids);
 
@@ -750,7 +750,7 @@ class StockInsContoller extends Controller
     /**
      * 更改一组入库单状态
      *
-     * @PUT("/stockins")
+     * @PUT("/stockins/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="入库单id组 格式: 1,2,3,4 ", required=true),
@@ -787,8 +787,6 @@ class StockInsContoller extends Controller
      *
      * @PUT("/purchases/:id/submit")
      * @Versions({"v1"})
-     * @Parameters({
-     * @Parameter("is_submit", type="integer", description="是否提交", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
@@ -804,7 +802,7 @@ class StockInsContoller extends Controller
      */
     public function isSubmit(StockIn $stockin)
     {
-        return $this->traitAction($stockin,!$stockin->status ||     $stockin->is_submit,'无需重复提交','input');
+        return $this->traitAction($stockin, !$stockin->status || $stockin->is_submit, '无需重复提交', 'input');
     }
 
     /**
@@ -812,8 +810,6 @@ class StockInsContoller extends Controller
      *
      * @PUT("/purchases/:id/print")
      * @Versions({"v1"})
-     * @Parameters({
-     * @Parameter("is_print", type="integer", description="是否打印", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "打印出错，是否未提交未审核或重复打印",
@@ -824,7 +820,7 @@ class StockInsContoller extends Controller
      */
     public function isPrint(StockIn $stockin)
     {
-        return $this->traitAction($stockin,!$stockin->status || !$stockin->is_submit || !$stockin->is_check || $stockin->is_print,'打印出错，是否未提交未审核或重复打印','print');
+        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || !$stockin->is_check || $stockin->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
     }
 
     /**
@@ -842,7 +838,7 @@ class StockInsContoller extends Controller
      */
     public function isCheck(StockIn $stockin)
     {
-        return $this->traitAction($stockin,!$stockin->status || !$stockin->is_submit || $stockin->is_check,'审核出错，是否未提交或重复审核','check');
+        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || $stockin->is_check, '审核出错，是否未提交或重复审核', 'check');
     }
 
 
@@ -861,21 +857,22 @@ class StockInsContoller extends Controller
      */
     public function stockIn(StockIn $stockin)
     {
-        DB::transaction(function() use ($stockin){
+        DB::transaction(function () use ($stockin) {
             //修改入库状态
             $this->traitAction(
                 $stockin,
                 !$stockin->status || !$stockin->is_submit || !$stockin->is_check || !$stockin->is_submit || $stockin->is_stock_in,
-                '入库出错','stockIn'
+                '入库出错',
+                'stockIn'
             );
 
             //修改采购订单详情的状态、入库数。
-            foreach ( $stockin->stockInDetails as $item){
+            foreach ($stockin->stockInDetails as $item) {
                 $item->purchaseDetail->addStockInCount($item->stock_in_quantity);
             }
 
             //修改库存数量
-            foreach ( $stockin->stockInDetails as $item){
+            foreach ($stockin->stockInDetails as $item) {
                 $item->productSpec->stock->addQuantity($item->stock_in_quantity);
             }
 

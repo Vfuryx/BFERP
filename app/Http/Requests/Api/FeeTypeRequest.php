@@ -25,9 +25,9 @@ class FeeTypeRequest extends FormRequest
                 return [
                     'name' => 'required|string|max:255',
                     'fee_category_id' => [
-                        'required','integer',
-                        Rule::exists('fee_categories','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('fee_categories', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'code' => 'required|string|max:255|unique:fee_types',
@@ -41,12 +41,12 @@ class FeeTypeRequest extends FormRequest
                     'name' => 'string',
                     'fee_category_id' => [
                         'integer',
-                        Rule::exists('fee_categories','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('fee_categories', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('fee_types')->ignore($this->feetype->id),
                     ],
                     'is_default' => 'integer',
@@ -64,11 +64,11 @@ class FeeTypeRequest extends FormRequest
             'name.required' => '费用名称必填',
             'name.max' => '费用名称最大长度为255',
             'name.string' => '费用名称必须string类型',
-            
+
             'fee_category_id.required' => '费用类别id必填',
             'fee_category_id.integer' => '费用类别id必须int类型',
             'fee_category_id.exists' => '需要添加的id在数据库中未找到或未启用',
-            
+
             'code.required' => '费用代码必填',
             'code.string' => '费用代码必须string类型',
             'code.max' => '费用代码最大长度为255',

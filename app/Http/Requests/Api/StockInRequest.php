@@ -23,15 +23,15 @@ class StockInRequest extends FormRequest
             case 'POST':
                 return [
                     'warehouse_id' => [
-                        'required','integer',
-                        Rule::exists('warehouses','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'stock_in_types_id' => [
-                        'required','integer',
-                        Rule::exists('stock_in_types','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('stock_in_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'status' => 'integer',
@@ -44,20 +44,20 @@ class StockInRequest extends FormRequest
                 return [
                     'warehouse_id' => [
                         'integer',
-                        Rule::exists('warehouses','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                         $publicRule
                     ],
                     'stock_in_types_id' => [
                         'integer',
-                        Rule::exists('stock_in_types','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('stock_in_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                         $publicRule
                     ],
-                    'status' => ['integer',$publicRule],
-                    'stock_in_details' => ['json',$publicRule]
+                    'status' => ['integer', $publicRule],
+                    'stock_in_details' => ['json', $publicRule]
                 ];
                 break;
         }
@@ -110,7 +110,7 @@ class StockInRequest extends FormRequest
      */
     public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
     {
-        return function($attribute, $value, $fail) use ($condition, $text) {
+        return function ($attribute, $value, $fail) use ($condition, $text) {
             if ($condition) {
                 return true;
             }

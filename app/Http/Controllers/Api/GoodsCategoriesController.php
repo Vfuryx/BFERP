@@ -71,7 +71,7 @@ class GoodsCategoriesController extends Controller
         return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
-   /**
+    /**
      * 新增商品类别 
      *  
      * @Post("/goodscates") 
@@ -136,12 +136,12 @@ class GoodsCategoriesController extends Controller
      * })
      */
     public function show($id)
-    {       
+    {
         return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
 
-/**
+    /**
      * 修改商品类别 
      *  
      * @Patch("/goodscates/:id") 
@@ -172,7 +172,7 @@ class GoodsCategoriesController extends Controller
      *      })
      * })
      */
-    public function update(GoodsCategoryRequest $request,GoodsCategory $goodscate)
+    public function update(GoodsCategoryRequest $request, GoodsCategory $goodscate)
     {
         return $this->traitUpdate($request, $goodscate, self::TRANSFORMER);
     }
@@ -194,7 +194,7 @@ class GoodsCategoriesController extends Controller
     {
         return $this->traitDestroy($goodscate);
     }
-    
+
     /**
      * 删除一组商品类别 
      *  
@@ -229,7 +229,7 @@ class GoodsCategoriesController extends Controller
     /**
      * 更改一组商品类别状态 
      *  
-     * @PUT("/goodscates") 
+     * @PUT("/goodscates/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="商品类别id组 格式: 1,2,3,4 ", required=true),

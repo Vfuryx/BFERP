@@ -29,21 +29,21 @@ class PurchaseDetailRequest extends FormRequest
 //                        }),
 //                    ],
                     'product_specs_id' => [
-                        'sometimes','required', 'integer',
-                        Rule::exists('product_specs', 'id')->where(function($query) {
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'purchase_quantity' => 'sometimes|required|integer|min:1',
-                    'shops_id' =>  [
+                    'shops_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
+                        Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'suppliers_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
+                        Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -69,20 +69,20 @@ class PurchaseDetailRequest extends FormRequest
 //                    ],
                     'product_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')->where(function($query) {
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'purchase_quantity' => ['integer','min:1'],
-                    'shops_id' =>  [
+                    'purchase_quantity' => ['integer', 'min:1'],
+                    'shops_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
+                        Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'suppliers_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
+                        Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -91,18 +91,18 @@ class PurchaseDetailRequest extends FormRequest
                     'warehouse_cost' => ['numeric'],
                     'commission' => ['numeric'],
                     'discount' => ['numeric'],
-                    'colour_num' => ['string','max:255'],
-                    'paint' => ['string','max:255'],
+                    'colour_num' => ['string', 'max:255'],
+                    'paint' => ['string', 'max:255'],
                     'wooden_frame_costs' => ['numeric'],
                     'arrival_time' => ['date'],
-                    'remark' => ['string','nullable','max:255'],
+                    'remark' => ['string', 'nullable', 'max:255'],
                 ];
                 break;
         }
     }
 
     public
-    function messages()
+        function messages()
     {
         return [
             'purchases_id.required' => '采购id必填',
@@ -119,10 +119,10 @@ class PurchaseDetailRequest extends FormRequest
 
             'shops_id.integer' => '采购店铺id必须int类型',
             'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
-            
+
             'suppliers_id.integer' => '供应商id必须int类型',
             'suppliers_id.exists' => '需要添加的id在数据库中未找到或未启用',
-            
+
             'purchase_cost.numeric' => '采购成本必须是数字',
 
             'purchase_freight.numeric' => '采购运费必须是数字',
@@ -151,7 +151,7 @@ class PurchaseDetailRequest extends FormRequest
     }
 
     public
-    function attributes()
+        function attributes()
     {
         return [
             'purchases_id' => '采购id',

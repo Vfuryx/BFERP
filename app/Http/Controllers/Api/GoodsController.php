@@ -775,7 +775,7 @@ class GoodsController extends Controller
         }
 
         return $this->response
-            ->item($goods, new  GoodsTransformer())
+            ->item($goods, new GoodsTransformer())
             ->setStatusCode(201)
             ->addMeta('status_code', '201');
     }
@@ -1544,7 +1544,7 @@ class GoodsController extends Controller
                 $productSpecs = json_decode($productSpecs, true);
                 foreach ($productSpecs as $productSpec) {
 
-                    $validator = Validator::make($productSpec, $productSpecRequest->rules(isset($productSpec['id'])?$productSpec['id']:''), $productSpecRequest->messages());
+                    $validator = Validator::make($productSpec, $productSpecRequest->rules(isset($productSpec['id']) ? $productSpec['id'] : ''), $productSpecRequest->messages());
                     if ($validator->fails()) {
                         throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
                     }
@@ -1552,7 +1552,7 @@ class GoodsController extends Controller
                     $data = array_intersect_key($validator->getData(), $validator->getRules());
 
                     //存在id则更新，否则插入
-                    if(isset($productSpec['id'])){
+                    if (isset($productSpec['id'])) {
 
                         $productSpecModel = ProductSpec::findOrFail($productSpec['id']);
                         $productSpecModel->update($data);
@@ -1567,14 +1567,14 @@ class GoodsController extends Controller
                                 $data = array_intersect_key($validator->getData(), $validator->getRules());
 
                                 //存在id则更新，否则插入
-                                if(isset($combination['id'])){
+                                if (isset($combination['id'])) {
                                     Combination::findOrFail($combination['id'])->update($data);
-                                }else{
+                                } else {
                                     $productSpecModel->combinations()->create($data);
                                 }
                             }
                         }
-                    }else{
+                    } else {
 
                         $productSpecs = $goods->productSpecs()->create($data);
 
@@ -1604,7 +1604,7 @@ class GoodsController extends Controller
         }
 
         return $this->response
-            ->item($goods, new  GoodsTransformer())
+            ->item($goods, new GoodsTransformer())
             ->setStatusCode(201);
     }
 
@@ -1680,7 +1680,7 @@ class GoodsController extends Controller
 
         try {
             //删除组合
-            $productSpecs = ProductSpec::whereIn('goods_id',$ids);
+            $productSpecs = ProductSpec::whereIn('goods_id', $ids);
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
             //删除规格
@@ -1708,7 +1708,7 @@ class GoodsController extends Controller
     /**
      * 更改一组商品状态
      *
-     * @PUT("/goods")
+     * @PUT("/goods/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="商品id组 格式: 1,2,3,4 ", required=true),

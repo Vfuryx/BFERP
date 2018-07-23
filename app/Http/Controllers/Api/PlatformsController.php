@@ -19,7 +19,7 @@ class PlatformsController extends Controller
 
     const TRANSFORMER = PlatformTransformer::class;
     const MODEL = Platform::class;
-    
+
     /**
      * 获取所有平台类型
      *
@@ -206,7 +206,7 @@ class PlatformsController extends Controller
     /**
      * 更改一组平台类型状态
      * 
-     * @PUT("/platforms")
+     * @PUT("/platforms/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="平台类型id组 格式: 1,2,3,4 ", required=true),

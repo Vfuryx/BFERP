@@ -127,10 +127,10 @@ class FeeTypesController extends Controller
     public function store(FeeTypeRequest $request)
     {
         //是否要重置默认
-        if($request->input('is_default') === '1'){
+        if ($request->input('is_default') === '1') {
             $this->tableResetDefault(self::MODEL);
         }
-        
+
         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
@@ -197,7 +197,7 @@ class FeeTypesController extends Controller
     public function update(FeeTypeRequest $request, FeeType $feetype)
     {
         //是否要重置默认
-        if($request->input('is_default') === '1'){
+        if ($request->input('is_default') === '1') {
             $this->tableResetDefault(self::MODEL);
         }
 
@@ -256,7 +256,7 @@ class FeeTypesController extends Controller
     /**
      * 更改一组费用类型状态
      *
-     * @PUT("/feetypes")
+     * @PUT("/feetypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true),

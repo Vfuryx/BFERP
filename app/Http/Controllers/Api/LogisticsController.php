@@ -19,7 +19,7 @@ class LogisticsController extends Controller
 
     const TRANSFORMER = LogisticsTransformer::class;
     const MODEL = Logistics::class;
-    
+
     /**
      * 获取所有物流
      *
@@ -307,7 +307,7 @@ class LogisticsController extends Controller
     /**
      * 更改一组物流状态
      * 
-     * @PUT("/logistics")
+     * @PUT("/logistics/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="物流id组 格式: 1,2,3,4 ", required=true),

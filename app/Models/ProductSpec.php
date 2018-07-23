@@ -25,8 +25,9 @@ class ProductSpec extends Model
         return $this->belongsTo(Goods::class);
     }
 
-    public function combinations(){
-        return $this->hasMany(Combination::class,'product_specs_id');
+    public function combinations()
+    {
+        return $this->hasMany(Combination::class, 'product_specs_id');
     }
 
     public function distributionMethod()
@@ -36,13 +37,13 @@ class ProductSpec extends Model
 
     public function stock()
     {
-        return $this->hasOne(Stock::class,'pro_specs_id');
+        return $this->hasOne(Stock::class, 'pro_specs_id');
     }
 
 
     public function stockInDetails()
     {
-        return $this->hasMany(StockInDetail::class,'product_specs_id');
+        return $this->hasMany(StockInDetail::class, 'product_specs_id');
     }
 
 

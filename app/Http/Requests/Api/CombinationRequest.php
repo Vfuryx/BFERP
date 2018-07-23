@@ -22,15 +22,15 @@ class CombinationRequest extends FormRequest
             case 'POST':
                 return [
                     'product_specs_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'com_pro_specs_id' => [
-                        'sometimes','required','integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'sometimes', 'required', 'integer',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'count' => 'sometimes|required|integer',
@@ -41,14 +41,14 @@ class CombinationRequest extends FormRequest
                 return [
                     'product_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'com_pro_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'count' => 'integer',

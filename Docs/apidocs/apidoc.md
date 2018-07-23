@@ -221,7 +221,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组标记颜色状态 [PUT /api/markcolors]
+## 更改一组标记颜色状态 [PUT /api/markcolors/editstatus]
 
 
 + Parameters
@@ -444,7 +444,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组记账类型状态 [PUT /api/acctypes]
+## 更改一组记账类型状态 [PUT /api/acctypes/editstatus]
 
 
 + Parameters
@@ -704,7 +704,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组费用类型状态 [PUT /api/feetypes]
+## 更改一组费用类型状态 [PUT /api/feetypes/editstatus]
 
 
 + Parameters
@@ -927,7 +927,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组配送方式状态 [PUT /api/distmets]
+## 更改一组配送方式状态 [PUT /api/distmets/editstatus]
 
 
 + Parameters
@@ -1137,7 +1137,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组费用类别状态 [PUT /api/feecates]
+## 更改一组费用类别状态 [PUT /api/feecates/editstatus]
 
 
 + Parameters
@@ -1367,7 +1367,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组运费类型状态 [PUT /api/freighttypes]
+## 更改一组运费类型状态 [PUT /api/freighttypes/editstatus]
 
 
 + Parameters
@@ -1608,7 +1608,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组商品类别状态 [PUT /api/goodscates]
+## 更改一组商品类别状态 [PUT /api/goodscates/editstatus]
 
 
 + Parameters
@@ -1972,7 +1972,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组城市信息状态 [PUT /api/cityinfos]
+## 更改一组城市信息状态 [PUT /api/cityinfos/editstatus]
 
 
 + Parameters
@@ -2226,7 +2226,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组损坏商品状态 [PUT /api/damagedgoods]
+## 更改一组损坏商品状态 [PUT /api/damagedgoods/editstatus]
 
 
 + Parameters
@@ -2458,7 +2458,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组物流区域状态 [PUT /api/logisticsareas]
+## 更改一组物流区域状态 [PUT /api/logisticsareas/editstatus]
 
 
 + Parameters
@@ -2778,7 +2778,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组物流状态 [PUT /api/logistics]
+## 更改一组物流状态 [PUT /api/logistics/editstatus]
 
 
 + Parameters
@@ -3035,7 +3035,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组仓库状态 [PUT /api/warehouses]
+## 更改一组仓库状态 [PUT /api/warehouses/editstatus]
 
 
 + Parameters
@@ -3338,7 +3338,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组供应商状态 [PUT /api/suppliers]
+## 更改一组供应商状态 [PUT /api/suppliers/editstatus]
 
 
 + Parameters
@@ -3700,7 +3700,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组店铺状态 [PUT /api/shops]
+## 更改一组店铺状态 [PUT /api/shops/editstatus]
 
 
 + Parameters
@@ -4053,7 +4053,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组系列状态 [PUT /api/series]
+## 更改一组系列状态 [PUT /api/series/editstatus]
 
 
 + Parameters
@@ -4300,7 +4300,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组打印报表状态 [PUT /api/printreports]
+## 更改一组打印报表状态 [PUT /api/printreports/editstatus]
 
 
 + Parameters
@@ -4519,7 +4519,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组平台类型状态 [PUT /api/platforms]
+## 更改一组平台类型状态 [PUT /api/platforms/editstatus]
 
 
 + Parameters
@@ -4781,7 +4781,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组部门状态 [PUT /api/departments]
+## 更改一组部门状态 [PUT /api/departments/editstatus]
 
 
 + Parameters
@@ -6328,7 +6328,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组商品状态 [PUT /api/goods]
+## 更改一组商品状态 [PUT /api/goods/editstatus]
 
 
 + Parameters
@@ -6598,7 +6598,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组产品规格状态 [PUT /api/productspecs]
+## 更改一组产品规格状态 [PUT /api/productspecs/editstatus]
 
 
 + Parameters
@@ -7059,7 +7059,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组库存状态 [PUT /api/stocks]
+## 更改一组库存状态 [PUT /api/stocks/editstatus]
 
 
 + Parameters
@@ -7463,7 +7463,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组采购单状态 [PUT /api/purchases]
+## 更改一组采购单状态 [PUT /api/purchases/editstatus]
 
 
 + Parameters
@@ -7810,7 +7810,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组入库类型状态 [PUT /api/stockintypes]
+## 更改一组入库类型状态 [PUT /api/stockintypes/editstatus]
 
 
 + Parameters
@@ -8487,7 +8487,7 @@ FORMAT: 1A
 
             []
 
-## 更改一组入库单状态 [PUT /api/stockins]
+## 更改一组入库单状态 [PUT /api/stockins/editstatus]
 
 
 + Parameters
@@ -8527,9 +8527,6 @@ FORMAT: 1A
 ## 提交 [PUT /api/purchases/:id/submit]
 
 
-+ Parameters
-    + is_submit: (integer, required) - 是否提交
-
 + Response 422 (application/json)
     + Body
 
@@ -8550,9 +8547,6 @@ FORMAT: 1A
 
 ## 打印 [PUT /api/purchases/:id/print]
 
-
-+ Parameters
-    + is_print: (integer, required) - 是否打印
 
 + Response 422 (application/json)
     + Body
@@ -8742,6 +8736,846 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 入库单id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# cancelpurchases [/api]
+取消采购资源
+
+## 获取所有取消采购 [GET /api/cancelpurchases{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 19,
+                        "cancel_purchases_no": "CP2018072316423654591",
+                        "purchase": {
+                            "id": 13,
+                            "purchase_order_no": "PO2018072116220517242",
+                            "purchase_status": "新建",
+                            "order_no": "",
+                            "user_id": 1,
+                            "print_at": null,
+                            "receiver": "收货人3",
+                            "receiver_address": "收货地址3",
+                            "warehouse_id": 1,
+                            "promise_delivery_time": null,
+                            "salesman": "",
+                            "source": "",
+                            "client_name": "",
+                            "buyer_nick": "",
+                            "order_address": "",
+                            "is_submit": 0,
+                            "is_print": 0,
+                            "is_check": 0,
+                            "is_change": 1,
+                            "remark": "备注5",
+                            "status": 1,
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        },
+                        "creator": "admin",
+                        "submitter": null,
+                        "submit_at": null,
+                        "is_submit": null,
+                        "cancel_purchase_details": [
+                            {
+                                "id": 14,
+                                "cancel_purchases_id": 19,
+                                "purchase_details_id": 1,
+                                "cancel_purchase_quantity": 1,
+                                "created_at": "2018-07-23 16:42:37",
+                                "updated_at": "2018-07-23 16:42:37",
+                                "purchase_detail": {
+                                    "id": 1,
+                                    "purchases_id": 13,
+                                    "purchase_item_status": "新建",
+                                    "product_specs_id": 1,
+                                    "purchase_quantity": 10,
+                                    "stock_in_count": 0,
+                                    "shops_id": 1,
+                                    "suppliers_id": 1,
+                                    "purchase_cost": "0.00",
+                                    "purchase_freight": "10.00",
+                                    "warehouse_cost": "10.00",
+                                    "commission": "10.00",
+                                    "discount": "10.00",
+                                    "colour_num": "色号",
+                                    "paint": "油漆",
+                                    "wooden_frame_costs": "0.00",
+                                    "arrival_time": "2018-06-10 00:00:00",
+                                    "remark": "备注",
+                                    "created_at": "2018-07-21 16:22:05",
+                                    "updated_at": "2018-07-23 16:26:19"
+                                }
+                            },
+                            {
+                                "id": 15,
+                                "cancel_purchases_id": 19,
+                                "purchase_details_id": 2,
+                                "cancel_purchase_quantity": 1,
+                                "created_at": "2018-07-23 16:42:37",
+                                "updated_at": "2018-07-23 16:42:37",
+                                "purchase_detail": {
+                                    "id": 2,
+                                    "purchases_id": 13,
+                                    "purchase_item_status": "新建",
+                                    "product_specs_id": 1,
+                                    "purchase_quantity": 10,
+                                    "stock_in_count": 0,
+                                    "shops_id": 1,
+                                    "suppliers_id": 1,
+                                    "purchase_cost": "0.00",
+                                    "purchase_freight": "10.00",
+                                    "warehouse_cost": "10.00",
+                                    "commission": "10.00",
+                                    "discount": "10.00",
+                                    "colour_num": "色号",
+                                    "paint": "油漆",
+                                    "wooden_frame_costs": "0.00",
+                                    "arrival_time": "2018-06-10 00:00:00",
+                                    "remark": "备注",
+                                    "created_at": "2018-07-21 16:22:05",
+                                    "updated_at": "2018-07-23 16:26:19"
+                                }
+                            }
+                        ],
+                        "created_at": "2018-07-23 16:42:36",
+                        "updated_at": "2018-07-23 16:42:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/cancelpurchases?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增取消采购 [POST /api/cancelpurchases]
+
+
++ Parameters
+    + purchases_id: (integer, required) - 采购单id
+    + cancel_purchase_details[*][purchase_details_id]: (integer, required) - 采购详细id
+    + cancel_purchase_details[*][cancel_purchase_quantity]: (integer, required) - 取消采购数
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "purchases_id": 13,
+                    "cancel_purchase_details[0][purchase_details_id]": 1,
+                    "cancel_purchase_details[0][cancel_purchase_quantity]": 5,
+                    "cancel_purchase_details[1][purchase_details_id]": 2,
+                    "cancel_purchase_details[1][cancel_purchase_quantity]": 5
+                }
+            ]
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "cancel_purchase_details.0.cancel_purchase_quantity": [
+                        "取消采购数必须int类型"
+                    ],
+                    "purchases_id": [
+                        "需要添加的id在数据库中未找到或未启用或已完成"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 19,
+                "cancel_purchases_no": "CP2018072316423654591",
+                "purchase": {
+                    "id": 13,
+                    "purchase_order_no": "PO2018072116220517242",
+                    "purchase_status": "新建",
+                    "order_no": "",
+                    "user_id": 1,
+                    "print_at": null,
+                    "receiver": "收货人3",
+                    "receiver_address": "收货地址3",
+                    "warehouse_id": 1,
+                    "promise_delivery_time": null,
+                    "salesman": "",
+                    "source": "",
+                    "client_name": "",
+                    "buyer_nick": "",
+                    "order_address": "",
+                    "is_submit": 0,
+                    "is_print": 0,
+                    "is_check": 0,
+                    "is_change": 1,
+                    "remark": "备注5",
+                    "status": 1,
+                    "created_at": "2018-07-21 16:22:05",
+                    "updated_at": "2018-07-23 16:26:19"
+                },
+                "creator": "admin",
+                "submitter": null,
+                "submit_at": null,
+                "is_submit": null,
+                "cancel_purchase_details": [
+                    {
+                        "id": 14,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 1,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 1,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 2,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-23 16:42:36",
+                "updated_at": "2018-07-23 16:42:36",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条取消采购 [GET /api/cancelpurchases/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 19,
+                "cancel_purchases_no": "CP2018072316423654591",
+                "purchase": {
+                    "id": 13,
+                    "purchase_order_no": "PO2018072116220517242",
+                    "purchase_status": "新建",
+                    "order_no": "",
+                    "user_id": 1,
+                    "print_at": null,
+                    "receiver": "收货人3",
+                    "receiver_address": "收货地址3",
+                    "warehouse_id": 1,
+                    "promise_delivery_time": null,
+                    "salesman": "",
+                    "source": "",
+                    "client_name": "",
+                    "buyer_nick": "",
+                    "order_address": "",
+                    "is_submit": 0,
+                    "is_print": 0,
+                    "is_check": 0,
+                    "is_change": 1,
+                    "remark": "备注5",
+                    "status": 1,
+                    "created_at": "2018-07-21 16:22:05",
+                    "updated_at": "2018-07-23 16:26:19"
+                },
+                "creator": "admin",
+                "submitter": null,
+                "submit_at": null,
+                "is_submit": null,
+                "cancel_purchase_details": [
+                    {
+                        "id": 14,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 1,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 1,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 2,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-23 16:42:36",
+                "updated_at": "2018-07-23 16:42:36"
+            }
+
+## 修改取消采购 [PATCH /api/cancelpurchases/:id]
+
+
++ Parameters
+    + purchases_id: (integer, required) - 采购单id
+    + cancel_purchase_details[*][id]: (integer, optional) - 取消采购 id (不存在 id 则视为新建)
+    + cancel_purchase_details[*][purchase_details_id]: (integer, required) - 采购详细id
+    + cancel_purchase_details[*][cancel_purchase_quantity]: (integer, required) - 取消采购数
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "purchases_id": 13,
+                    "cancel_purchase_details[0][id]": 14,
+                    "cancel_purchase_details[0][purchase_details_id]": 1,
+                    "cancel_purchase_details[0][cancel_purchase_quantity]": 1,
+                    "cancel_purchase_details[1][purchase_details_id]": 2,
+                    "cancel_purchase_details[1][cancel_purchase_quantity]": 1
+                }
+            ]
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "warehouse_id": [
+                        "仓库id必填"
+                    ],
+                    "stock_in_types_id": [
+                        "需要添加的id在数据库中未找到或未启用"
+                    ],
+                    "stock_in_details": [
+                        "取消采购详情必须json类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 19,
+                "cancel_purchases_no": "CP2018072316423654591",
+                "purchase": {
+                    "id": 13,
+                    "purchase_order_no": "PO2018072116220517242",
+                    "purchase_status": "新建",
+                    "order_no": "",
+                    "user_id": 1,
+                    "print_at": null,
+                    "receiver": "收货人3",
+                    "receiver_address": "收货地址3",
+                    "warehouse_id": 1,
+                    "promise_delivery_time": null,
+                    "salesman": "",
+                    "source": "",
+                    "client_name": "",
+                    "buyer_nick": "",
+                    "order_address": "",
+                    "is_submit": 0,
+                    "is_print": 0,
+                    "is_check": 0,
+                    "is_change": 1,
+                    "remark": "备注5",
+                    "status": 1,
+                    "created_at": "2018-07-21 16:22:05",
+                    "updated_at": "2018-07-23 16:26:19"
+                },
+                "creator": "admin",
+                "submitter": null,
+                "submit_at": null,
+                "is_submit": null,
+                "cancel_purchase_details": [
+                    {
+                        "id": 14,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 1,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 1,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 2,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 16,
+                        "cancel_purchases_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 17:01:21",
+                        "updated_at": "2018-07-23 17:01:21",
+                        "purchase_detail": {
+                            "id": 2,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-23 16:42:36",
+                "updated_at": "2018-07-23 16:42:36"
+            }
+
+## 删除取消采购 [DELETE /api/cancelpurchases/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组取消采购 [DELETE /api/cancelpurchases]
+
+
++ Parameters
+    + ids: (string, required) - 取消采购id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组取消采购状态 [PUT /api/cancelpurchases/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 取消采购id组 格式: 1,2,3,4 
+    + status: (integer, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 提交 [PUT /api/purchases/:id/submit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "is_submit": [
+                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# cancelpurchasedetails [/api]
+取消采购单详情资源
+
+## 获取所有取消采购单详情 [GET /api/cancelpurchasedetails{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "stock_in": {
+                            "id": 1,
+                            "stock_in_no": "IS2018072013065251993",
+                            "warehouse_id": 1,
+                            "stock_in_types_id": 1,
+                            "creator": "1",
+                            "submitter": "",
+                            "submit_at": null,
+                            "checker": "",
+                            "check_at": null,
+                            "warehouer": "",
+                            "stock_in_at": null,
+                            "is_submit": 0,
+                            "is_check": 0,
+                            "is_stock_in": 0,
+                            "status": 1,
+                            "created_at": "2018-07-20 13:06:52",
+                            "updated_at": "2018-07-20 13:06:52"
+                        },
+                        "purchase_details_id": {
+                            "id": 1,
+                            "purchases_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "10.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-21 16:22:05"
+                        },
+                        "product_spec": {
+                            "id": 1,
+                            "goods_id": 1,
+                            "spec_code": "规格编码3",
+                            "jd_specs_code": "京东规格编码",
+                            "vips_specs_code": "唯品会规格编码",
+                            "tb_price": "10.00",
+                            "cost": "10.00",
+                            "price": "10.00",
+                            "highest_price": "10.00",
+                            "lowest_price": "10.00",
+                            "warehouse_cost": "10.00",
+                            "assembly_price": "10.00",
+                            "discount": "1.00",
+                            "commission": "1.00",
+                            "is_combination": 0,
+                            "package_quantity": 10,
+                            "package_costs": "10.00",
+                            "wooden_frame_costs": "10.00",
+                            "purchase_freight": "10.00",
+                            "inventory_warning": 10,
+                            "purchase_days_warning": 1,
+                            "available_warning": 10,
+                            "distribution_method_id": 1,
+                            "bar_code": "条形码2",
+                            "img_url": "http://image.img.com",
+                            "spec": "规格",
+                            "color": "颜色",
+                            "materials": "材质",
+                            "function": "功能",
+                            "special": "特殊",
+                            "other": "其他",
+                            "length": 10,
+                            "width": 10,
+                            "height": 10,
+                            "volume": 10,
+                            "weight": 10,
+                            "remark": "备注",
+                            "finished_pro": 1,
+                            "is_stop_pro": 0,
+                            "status": 1,
+                            "created_at": "2018-07-18 17:42:36",
+                            "updated_at": "2018-07-18 17:42:36"
+                        },
+                        "stock_in_quantity": 10,
+                        "created_at": "2018-07-20 16:06:32",
+                        "updated_at": "2018-07-20 16:13:43"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": ""
+                        }
+                    }
+                }
+            }
+
+## 删除取消采购单详情 [DELETE /api/cancelpurchasedetails/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组取消采购单详情 [DELETE /api/cancelpurchasedetails]
+
+
++ Parameters
+    + ids: (string, required) - 取消采购单详情id组 格式: 1,2,3,4 
 
 + Response 500 (application/json)
     + Body

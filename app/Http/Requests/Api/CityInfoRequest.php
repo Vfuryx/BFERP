@@ -22,9 +22,9 @@ class CityInfoRequest extends FormRequest
             case 'POST':
                 return [
                     'logistics_id' => [
-                        'required','integer',
-                        Rule::exists('logistics','id')->where(function ($query) {
-                            $query->where('status',1);
+                        'required', 'integer',
+                        Rule::exists('logistics', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'province' => 'required|string|max:255',
@@ -45,8 +45,8 @@ class CityInfoRequest extends FormRequest
                 return [
                     'logistics_id' => [
                         'integer',
-                        Rule::exists('logistics','id')->where(function ($query) {
-                            $query->where('status',1);
+                        Rule::exists('logistics', 'id')->where(function ($query) {
+                            $query->where('status', 1);
                         }),
                     ],
                     'province' => 'string|max:255',
@@ -76,7 +76,7 @@ class CityInfoRequest extends FormRequest
             'province.required' => '省必填',
             'province.string' => '省必须string类型',
             'province.max' => '省最大长度为255',
-            
+
             'city.required' => '市必填',
             'city.string' => '市必须string类型',
             'city.max' => '市最大长度为255',

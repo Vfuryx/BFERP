@@ -19,7 +19,7 @@ class PrintReportsController extends Controller
 
     const TRANSFORMER = PrintReportTransformer::class;
     const MODEL = PrintReport::class;
-    
+
     /**
      * 获取所有打印报表
      *
@@ -234,7 +234,7 @@ class PrintReportsController extends Controller
     /**
      * 更改一组打印报表状态
      * 
-     * @PUT("/printreports")
+     * @PUT("/printreports/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="打印报表id组 格式: 1,2,3,4 ", required=true),

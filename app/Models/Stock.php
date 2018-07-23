@@ -9,7 +9,7 @@ class Stock extends Model
     protected $table = 'stocks';
 
     protected $fillable = [
-        'warehouse_id','goods_id','pro_specs_id','quantity','status'
+        'warehouse_id', 'goods_id', 'pro_specs_id', 'quantity', 'status'
     ];
 
 
@@ -17,7 +17,8 @@ class Stock extends Model
      * 增加库存
      * @param $amount   增加的数量
      */
-    public function addQuantity($amount){
+    public function addQuantity($amount)
+    {
         if ($amount < 0) {
             throw new UpdateResourceFailedException('加库存不可小于0');
         }
@@ -40,7 +41,7 @@ class Stock extends Model
 
     public function stockDelLogs()
     {
-        return $this->hasMany(StockDelLog::class,'stock_id');
+        return $this->hasMany(StockDelLog::class, 'stock_id');
     }
 
     public function warehouse()
@@ -55,7 +56,7 @@ class Stock extends Model
 
     public function productSpec()
     {
-        return $this->belongsTo(ProductSpec::class,'pro_specs_id');
+        return $this->belongsTo(ProductSpec::class, 'pro_specs_id');
     }
 
     public function suppliersReports()

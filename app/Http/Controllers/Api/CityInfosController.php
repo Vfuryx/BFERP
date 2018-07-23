@@ -351,7 +351,7 @@ class CityInfosController extends Controller
     /**
      * 更改一组城市信息状态
      * 
-     * @PUT("/cityinfos")
+     * @PUT("/cityinfos/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true),

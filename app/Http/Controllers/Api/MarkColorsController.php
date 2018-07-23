@@ -110,7 +110,7 @@ class MarkColorsController extends Controller
      * })
      */
     public function store(MarkColorRequest $request)
-    {  
+    {
         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
@@ -231,7 +231,7 @@ class MarkColorsController extends Controller
     /**
      * 更改一组标记颜色状态 
      *  
-     * @PUT("/markcolors") 
+     * @PUT("/markcolors/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="标记颜色id组 格式: 1,2,3,4 ", required=true),

@@ -13,7 +13,7 @@ class Shop extends Model
         'platform_id', 'is_waybill', 'status',
     ];
 
-    public function warehouse ()
+    public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);
     }

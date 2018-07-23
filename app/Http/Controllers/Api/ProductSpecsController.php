@@ -9,7 +9,7 @@ use App\Transformers\ProductSpecTransformer;
 use App\Http\Requests\Api\ProductSpecRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
-use App\Models\Combination; 
+use App\Models\Combination;
 use App\Http\Controllers\Traits\CURDTrait;
 
 use Dingo\Api\Exception\DeleteResourceFailedException;
@@ -454,7 +454,7 @@ class ProductSpecsController extends Controller
             //删除规格
             $delPro = $productSpecs->delete();
 
-            if ($delCom === false || $delPro === false ) {
+            if ($delCom === false || $delPro === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
 
@@ -503,14 +503,14 @@ class ProductSpecsController extends Controller
 
         try {
             //删除组合
-            $productSpecs = ProductSpec::whereIn('id',$ids);
-            
+            $productSpecs = ProductSpec::whereIn('id', $ids);
+
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
             //删除规格
             $delPro = $productSpecs->delete();
 
-            if ($delCom === false || $delPro === false ) {
+            if ($delCom === false || $delPro === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
 
@@ -529,7 +529,7 @@ class ProductSpecsController extends Controller
     /**
      * 更改一组产品规格状态
      *
-     * @PUT("/productspecs")
+     * @PUT("/productspecs/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="产品规格id组 格式: 1,2,3,4 ", required=true),

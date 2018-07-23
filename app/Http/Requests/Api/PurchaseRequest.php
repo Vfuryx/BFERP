@@ -26,7 +26,7 @@ class PurchaseRequest extends FormRequest
                     'receiver_address' => 'required|string|max:255',
                     'warehouse_id' => [
                         'required', 'integer',
-                        Rule::exists('warehouses', 'id')->where(function($query) {
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -38,25 +38,25 @@ class PurchaseRequest extends FormRequest
             case 'PATCH':
                 $publicRule = $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 0);
                 return [
-                    'receiver' => ['string', 'max:255',],
+                    'receiver' => ['string', 'max:255', ],
                     'receiver_address' => ['string', 'max:255', $publicRule],
                     'warehouse_id' => [
                         'integer',
-                        Rule::exists('warehouses', 'id')->where(function($query) {
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                         $publicRule
                     ],
                     'remark' => ['string', 'nullable', 'max:255', $publicRule],
                     'status' => ['integer', $publicRule],
-                    'purchase_details' => ['json',$publicRule]
+                    'purchase_details' => ['json', $publicRule]
                 ];
                 break;
         }
     }
 
     public
-    function messages()
+        function messages()
     {
         return [
             'receiver.required' => '收货人必填',
@@ -83,7 +83,7 @@ class PurchaseRequest extends FormRequest
     }
 
     public
-    function attributes()
+        function attributes()
     {
         return [
             'purchase_order_no' => '采购单号',
@@ -117,7 +117,7 @@ class PurchaseRequest extends FormRequest
      */
     public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
     {
-        return function($attribute, $value, $fail) use ($condition, $text) {
+        return function ($attribute, $value, $fail) use ($condition, $text) {
             if ($condition) {
                 return true;
             }

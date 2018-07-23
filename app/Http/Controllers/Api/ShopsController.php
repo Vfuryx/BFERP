@@ -19,7 +19,7 @@ class ShopsController extends Controller
 
     const TRANSFORMER = ShopTransformer::class;
     const MODEL = Shop::class;
-    
+
     /**
      * 获取所有店铺
      *
@@ -348,7 +348,7 @@ class ShopsController extends Controller
     /**
      * 更改一组店铺状态
      * 
-     * @PUT("/shops")
+     * @PUT("/shops/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="店铺id组 格式: 1,2,3,4 ", required=true),

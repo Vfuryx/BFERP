@@ -21,20 +21,20 @@ trait CURDTrait
      */
     public function allOrPage($request, $model, $transformer, $perPage = 0, $is_status = 1)
     {
-        if($is_status){
+        if ($is_status) {
             $model = $model::whereIn('status', (array)$request->get('status', [1, 0]));
-        }else {
+        } else {
             $model = $model::query();
         }
 
         //不分页
-        if($perPage === 0){
-            return $this->response->collection($model->get(),new $transformer);
+        if ($perPage === 0) {
+            return $this->response->collection($model->get(), new $transformer);
         }
 
         //分页响应返回
         $ref = $model->paginate($perPage);
-        return $this->response->paginator($ref,new  $transformer);
+        return $this->response->paginator($ref, new $transformer);
     }
 
     /**
@@ -45,7 +45,8 @@ trait CURDTrait
      * @param [type] $transformer   转换器
      * @return array
      */
-    public function traitStore($date, $model, $transformer){
+    public function traitStore($date, $model, $transformer)
+    {
 
         $ref = new $model();
         $ref->fill($date);
@@ -109,7 +110,7 @@ trait CURDTrait
     public function traitDestroybyIds($request, $model)
     {
         $ids = explode(',', $request->input('ids'));
-        DB::transaction(function() use ($ids,$model){
+        DB::transaction(function () use ($ids, $model) {
             if (count($ids) !== $model::destroy($ids)) {
                 return $this->errorResponse(500, '更改错误', 500);
             }
@@ -130,7 +131,7 @@ trait CURDTrait
         $ids = explode(',', $request->input('ids'));
         $status = $request->input('status');
 
-        DB::transaction(function() use ($ids,$model,$status){
+        DB::transaction(function () use ($ids, $model, $status) {
             if (count($ids) !== $model::whereIn('id', $ids)->update(['status' => $status])) {
                 return $this->errorResponse(500, '更改错误', 500);
             }
@@ -145,8 +146,9 @@ trait CURDTrait
      * @param [type] $model     模型
      * @return void
      */
-    public function tableResetDefault($model){
-        $model::where('is_default',1)->update(['is_default' => 0]);
+    public function tableResetDefault($model)
+    {
+        $model::where('is_default', 1)->update(['is_default' => 0]);
     }
 
 }

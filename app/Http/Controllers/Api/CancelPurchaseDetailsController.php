@@ -2,28 +2,27 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\StockInDetail;
-use App\Http\Requests\Api\StockInDetailRequest;
+use App\Models\CancelPurchaseDetail;
+use App\Http\Requests\Api\CancelPurchaseDetailRequest;
 use App\Http\Requests\Api\DestroyRequest;
-use App\Transformers\StockInDetailTransformer;
+use App\Transformers\CancelPurchaseDetailTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
-
 /**
- * 入库单资源
- * @Resource("stockindetails",uri="/api")
+ * 取消采购单详情资源
+ * @Resource("cancelpurchasedetails",uri="/api")
  */
-class StockInDetailsController extends Controller
+class CancelPurchaseDetailsController extends Controller
 {
     use CURDTrait;
 
-    const TRANSFORMER = StockInDetailTransformer::class;
-    const MODEL = StockInDetail::class;
+    const TRANSFORMER = CancelPurchaseDetailTransformer::class;
+    const MODEL = CancelPurchaseDetail::class;
 
     /**
-     * 获取所有入库单
+     * 获取所有取消采购单详情
      *
-     * @Get("/stockindetails{?status}")
+     * @Get("/cancelpurchasedetails{?status}")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
@@ -137,16 +136,16 @@ class StockInDetailsController extends Controller
      *     }
      * })
      */
-    public function index(StockInDetailRequest $request)
+    public function index(CancelPurchaseDetailRequest $request)
     {
         return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10, 0);
     }
 
 
     /**
-     * 删除入库单
+     * 删除取消采购单详情
      *
-     * @Delete("/stockindetails/:id")
+     * @Delete("/cancelpurchasedetails/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -156,19 +155,19 @@ class StockInDetailsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(StockInDetail $stockindetail)
+    public function destroy(CancelPurchaseDetail $cancelpurchasedetail)
     {
 
-        return $this->traitDestroy($stockindetail);
+        return $this->traitDestroy($cancelpurchasedetail);
     }
 
     /**
-     * 删除一组入库单
+     * 删除一组取消采购单详情
      *
-     * @Delete("/stockindetails")
+     * @Delete("/cancelpurchasedetails")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="入库单id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="取消采购单详情id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(500, body={

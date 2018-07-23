@@ -277,7 +277,7 @@ class PurchaseDetailsController extends Controller
 //    /**
 //     * 更改一组采购单详情状态
 //     *
-//     * @PUT("/purchasedetails")
+//     * @PUT("/purchasedetails/editstatus")
 //     * @Versions({"v1"})
 //     * @Parameters({
 //     *      @Parameter("ids", description="采购单详情id组 格式: 1,2,3,4 ", required=true),
@@ -308,5 +308,5 @@ class PurchaseDetailsController extends Controller
 //    {
 //        return $this->traitEditStatusByIds($request, self::MODEL);
 //    }
-    
+
 }

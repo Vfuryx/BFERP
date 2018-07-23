@@ -479,6 +479,31 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stockindetails.destroybyids');
 
 
+        //取消采购
+        $api->get('cancelpurchases', 'CancelPurchasesController@index')
+            ->name('api.cancelpurchases.index');
+        $api->get('cancelpurchases/{cancelpurchase}', 'CancelPurchasesController@show')
+            ->name('api.cancelpurchases.show');
+        $api->post('cancelpurchases', 'CancelPurchasesController@store')
+            ->name('api.cancelpurchases.store');
+        $api->patch('cancelpurchases/{cancelpurchase}', 'CancelPurchasesController@update')
+            ->name('api.cancelpurchases.update');
+        $api->delete('cancelpurchases/{cancelpurchase}', 'CancelPurchasesController@destroy')
+            ->name('api.cancelpurchases.destroy');
+        $api->delete('cancelpurchases', 'CancelPurchasesController@destroybyids')
+            ->name('api.cancelpurchases.destroybyids');
+        $api->put('cancelpurchases/editstatus', 'CancelPurchasesController@editStatusByIds')
+            ->name('api.cancelpurchases.editstatusbyids');
+        $api->put('cancelpurchases/{cancelpurchase}/submit', 'CancelPurchasesController@isSubmit')
+            ->name('api.cancelpurchases.issubmit');
+
+        //取消采购单详情
+        $api->get('cancelpurchasedetails', 'CancelPurchaseDetailsController@index')
+            ->name('api.cancelpurchasedetails.index');
+        $api->delete('cancelpurchasedetails/{cancelpurchasedetail}', 'CancelPurchaseDetailsController@destroy')
+            ->name('api.cancelpurchasedetails.destroy');
+        $api->delete('cancelpurchasedetails', 'CancelPurchaseDetailsController@destroybyids')
+            ->name('api.cancelpurchasedetails.destroybyids');
 
     });
 

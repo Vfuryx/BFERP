@@ -579,7 +579,7 @@ class CombinationsController extends Controller
     /**
      * 更改一组组合状态
      *
-     * @PUT("/combinations")
+     * @PUT("/combinations/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="组合id组 格式: 1,2,3,4 ", required=true),

@@ -19,7 +19,7 @@ class SuppliersController extends Controller
 
     const TRANSFORMER = SupplierTransformer::class;
     const MODEL = Supplier::class;
-    
+
     /**
      * 获取所有供应商
      *
@@ -288,7 +288,7 @@ class SuppliersController extends Controller
     /**
      * 更改一组供应商状态
      * 
-     * @PUT("/suppliers")
+     * @PUT("/suppliers/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="供应商id组 格式: 1,2,3,4 ", required=true),

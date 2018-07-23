@@ -241,7 +241,7 @@ class DamagedGoodsController extends Controller
     /**
      * 更改一组损坏商品状态
      *
-     * @PUT("/damagedgoods")
+     * @PUT("/damagedgoods/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="损坏商品id组 格式: 1,2,3,4 ", required=true),

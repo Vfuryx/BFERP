@@ -4,7 +4,7 @@ namespace App\Models;
 
 class SuppliersReport extends Model
 {
-    protected $table="suppliers_reports";
+    protected $table = "suppliers_reports";
 
     protected $fillable = [
         'stock_id', 'supplier_id', 'purchase', 'warehousing_quantity', 'consignor',
@@ -13,6 +13,6 @@ class SuppliersReport extends Model
 
     public function stock()
     {
-        return $this->belongsTo(Stock::class,'stock_id');
+        return $this->belongsTo(Stock::class, 'stock_id');
     }
 }

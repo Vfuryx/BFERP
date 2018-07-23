@@ -19,7 +19,7 @@ class StocksController extends Controller
 
     const TRANSFORMER = StockTransformer::class;
     const MODEL = Stock::class;
-    
+
     /**
      * 获取所有库存
      *
@@ -401,7 +401,7 @@ class StocksController extends Controller
     /**
      * 更改一组库存状态
      * 
-     * @PUT("/stocks")
+     * @PUT("/stocks/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="库存id组 格式: 1,2,3,4 ", required=true),

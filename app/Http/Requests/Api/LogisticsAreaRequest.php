@@ -29,7 +29,7 @@ class LogisticsAreaRequest extends FormRequest
             case 'PATCH':
                 return [
                     'code' => [
-                        'string','max:255',
+                        'string', 'max:255',
                         Rule::unique('logistics_areas')->ignore($this->logisticsarea->id),
                     ],
                     'name' => 'string|max:255',

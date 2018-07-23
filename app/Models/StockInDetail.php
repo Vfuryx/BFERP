@@ -13,18 +13,18 @@ class StockInDetail extends Model
 
     public function stockIn()
     {
-        return $this->belongsTo(StockIn::class,'stock_ins_id');
+        return $this->belongsTo(StockIn::class, 'stock_ins_id');
     }
 
     public function purchaseDetail()
     {
-        return $this->belongsTo(PurchaseDetail::class,'purchase_details_id');
+        return $this->belongsTo(PurchaseDetail::class, 'purchase_details_id');
     }
 
 
     public function productSpec()
     {
-        return $this->belongsTo(ProductSpec::class,'product_specs_id');
+        return $this->belongsTo(ProductSpec::class, 'product_specs_id');
     }
 
 

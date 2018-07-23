@@ -41,10 +41,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
-    * 获取与用户关联的角色
-    */
-   public function roles()
-   {
-       return $this->hasMany('App\Models\Role');
-   }
+     * 获取与用户关联的角色
+     */
+    public function roles()
+    {
+        return $this->hasMany('App\Models\Role');
+    }
 }

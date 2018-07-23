@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rolegroup extends Model
 {
-    protected $table="role_groups";
+    protected $table = "role_groups";
 
     /**
-    * 分组下的角色
-    */
-   public function roles()
-   {
-       return $this->hasMany('App\Models\Role');
-   }
+     * 分组下的角色
+     */
+    public function roles()
+    {
+        return $this->hasMany('App\Models\Role');
+    }
 }

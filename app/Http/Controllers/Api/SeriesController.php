@@ -19,7 +19,7 @@ class SeriesController extends Controller
 
     const TRANSFORMER = SeriesTransformer::class;
     const MODEL = Series::class;
-    
+
     /**
      * 获取所有系列
      *
@@ -340,7 +340,7 @@ class SeriesController extends Controller
     /**
      * 更改一组系列状态
      * 
-     * @PUT("/series")
+     * @PUT("/series/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="系列id组 格式: 1,2,3,4 ", required=true),
