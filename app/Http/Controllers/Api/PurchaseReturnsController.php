@@ -138,7 +138,7 @@ class PurchaseReturnsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("remark", description="采购退货单备注", required=false),
-     *      @Parameter("status", type="integer", description="状态", required=false， default=“1”),
+     *      @Parameter("status", type="integer", description="状态", required=false, default="1"),
      *      @Parameter("purchase_return_details[0][stocks_id]",type="integer", description="库存id", required=true),
      *      @Parameter("purchase_return_details[0][purchase_return_quantity]",type="integer", description="采购退货数", required=true),
      *      @Parameter("purchase_return_details[0][suppliers_id]",type="integer", description="供应商id", required=true),
@@ -232,7 +232,7 @@ class PurchaseReturnsController extends Controller
      *              }
      *          },
      *          "created_at": "2018-07-24 11:44:07",
-     *          "updated_at": "2018-07-24 11:44:07"
+     *          "updated_at": "2018-07-24 11:44:07",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -355,8 +355,8 @@ class PurchaseReturnsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("remark", description="采购退货单备注", required=false),
-     *      @Parameter("status", type="integer", description="状态", required=false， default=“1”),
-     *      @Parameter("purchase_return_details[0][id]",type="integer", description="采购退货id (不存在 id 则视为新建)", required=false),
+     *      @Parameter("status", type="integer", description="状态", required=false, default="1"),
+     *      @Parameter("purchase_return_details[0][id]",type="integer", description="采购退货id (不存在 id 则视为新建)",required=false),
      *      @Parameter("purchase_return_details[0][stocks_id]",type="integer", description="库存id", required=true),
      *      @Parameter("purchase_return_details[0][purchase_return_quantity]",type="integer", description="采购退货数", required=true),
      *      @Parameter("purchase_return_details[0][suppliers_id]",type="integer", description="供应商id", required=true),

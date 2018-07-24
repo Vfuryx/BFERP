@@ -433,4 +433,59 @@ class StocksController extends Controller
         return $this->traitEditStatusByIds($request, self::MODEL);
     }
 
+
+    /**
+     * 根据仓库获取可写入的产品
+     *
+     * @Get("stocks/saveableproduct")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("warehouses_id", type="integer", description="仓库id", required=true)
+     * })
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "warehouses_id": {
+     *                  "仓库id必填"
+     *              },
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(200, body={
+     *          "data": {
+     *              {
+     *                  "id": 20,
+     *                  "commodity_code": "1",
+     *                  "short_name": "1",
+     *                  "pro_specs": "spec_code",
+     *                  "spec": "1",
+     *                  "color": "1",
+     *                  "materials": "1"
+     *              },
+     *              {
+     *                  "id": 21,
+     *                  "commodity_code": "1",
+     *                  "short_name": "1",
+     *                  "pro_specs": "spec_code",
+     *                  "spec": "1",
+     *                  "color": "1",
+     *                  "materials": "1"
+     *              }
+     *          }
+     *      })
+     * })
+     */
+    public function saveableProduct(\App\Http\Requests\Api\SaveableProductRequest $request , Stock $stock)
+    {
+        $warehouseID = $request->input('warehouses_id');
+        $existence = $stock->getStcokByWarehouseId($warehouseID,['pro_specs_id'])->pluck('pro_specs_id')->toArray();
+
+        return $this->response->collection(
+            \App\Models\ProductSpec::query()->whereNotIn('id',$existence)->get(),
+            new \App\Transformers\SaveableProductTransformer()
+        );
+
+    }
+
 }

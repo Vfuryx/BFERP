@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Dingo\Api\Exception\UpdateResourceFailedException;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Stock extends Model
 {
@@ -37,6 +38,16 @@ class Stock extends Model
         }
 
         return $this->newQuery()->where('id', $this->id)->where('quantity', '>=', $amount)->decrement('quantity', $amount);
+    }
+
+    /**
+     * 根据仓库获取库存信息
+     * @param $id
+     * @param array $columns
+     * @return mixed
+     */
+    public function getStcokByWarehouseId($id ,Array $columns = ['*']){
+        return $this->newQuery()->whereWarehouseId($id)->select($columns)->get();
     }
 
     public function stockDelLogs()

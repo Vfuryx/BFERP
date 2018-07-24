@@ -390,6 +390,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //库存资源
         $api->get('stocks', 'StocksController@index')
             ->name('api.stocks.index');
+        $api->get('stocks/saveableproduct', 'StocksController@saveableProduct')
+            ->name('api.stocks.saveableproduct');
         $api->get('stocks/{stock}', 'StocksController@show')
             ->name('api.stocks.show');
         $api->post('stocks', 'StocksController@store')

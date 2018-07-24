@@ -7096,6 +7096,51 @@ FORMAT: 1A
 
             []
 
+## 根据仓库获取可写入的产品 [GET /api/stocks/saveableproduct]
+
+
++ Parameters
+    + warehouses_id: (integer, required) - 仓库id
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "warehouses_id": [
+                        "仓库id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 20,
+                        "commodity_code": "1",
+                        "short_name": "1",
+                        "pro_specs": "spec_code",
+                        "spec": "1",
+                        "color": "1",
+                        "materials": "1"
+                    },
+                    {
+                        "id": 21,
+                        "commodity_code": "1",
+                        "short_name": "1",
+                        "pro_specs": "spec_code",
+                        "spec": "1",
+                        "color": "1",
+                        "materials": "1"
+                    }
+                ]
+            }
+
 # purchases [/api]
 采购单资源
 
@@ -9572,6 +9617,1006 @@ FORMAT: 1A
             []
 
 ## 删除一组取消采购单详情 [DELETE /api/cancelpurchasedetails]
+
+
++ Parameters
+    + ids: (string, required) - 取消采购单详情id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# purchasereturns [/api]
+采购退货资源
+
+## 获取所有采购退货 [GET /api/purchasereturns{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "purchase_return_no": "RG2018072411440706967",
+                        "creator": "admin",
+                        "is_submit": 0,
+                        "submitter": "",
+                        "submit_at": null,
+                        "is_check": 0,
+                        "checker": "",
+                        "check_at": null,
+                        "is_print": 0,
+                        "remark": "采购退货单备注",
+                        "status": 1,
+                        "purchase_return_details": [
+                            {
+                                "id": 1,
+                                "purchase_returns_id": 1,
+                                "stocks_id": 1,
+                                "purchase_return_quantity": 10,
+                                "suppliers_id": 1,
+                                "price_differences": "1.00",
+                                "purchase_return_types_id": 1,
+                                "created_at": "2018-07-24 11:44:07",
+                                "updated_at": "2018-07-24 11:44:07",
+                                "stock": {
+                                    "id": 1,
+                                    "warehouse_id": 1,
+                                    "goods_id": 1,
+                                    "pro_specs_id": 1,
+                                    "quantity": 20,
+                                    "status": 1,
+                                    "created_at": "2018-07-21 18:20:53",
+                                    "updated_at": "2018-07-21 18:27:38"
+                                },
+                                "supplier": {
+                                    "id": 1,
+                                    "name": "1",
+                                    "company": "1",
+                                    "code": "1",
+                                    "province": "1",
+                                    "city": "1",
+                                    "district": "1",
+                                    "address": "1",
+                                    "zipcode": "1",
+                                    "contacts": "1",
+                                    "phone": "1",
+                                    "mobile": "132131343242",
+                                    "fax": "1",
+                                    "email": "132@re.cn",
+                                    "remark": "1",
+                                    "is_scan": 1,
+                                    "status": 1,
+                                    "auto_valuation": 1,
+                                    "created_at": "2018-07-17 17:54:01",
+                                    "updated_at": "2018-07-17 17:54:01"
+                                },
+                                "purchase_return_types": {
+                                    "id": 1,
+                                    "name": "采购退货类型名称",
+                                    "status": 1,
+                                    "created_at": "2018-07-24 10:24:13",
+                                    "updated_at": "2018-07-24 10:24:13"
+                                }
+                            }
+                        ],
+                        "created_at": "2018-07-24 11:44:07",
+                        "updated_at": "2018-07-24 11:44:07"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/purchasereturns?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增采购退货 [POST /api/purchasereturns]
+
+
++ Parameters
+    + remark: (string, optional) - 采购退货单备注
+    + status: (integer, optional) - 状态
+        + Default: 1
+    + purchase_return_details[0][stocks_id]: (integer, required) - 库存id
+    + purchase_return_details[0][purchase_return_quantity]: (integer, required) - 采购退货数
+    + purchase_return_details[0][suppliers_id]: (integer, required) - 供应商id
+    + purchase_return_details[0][price_differences]: (integer, required) - 差价
+    + purchase_return_details[0][purchase_return_types_id]: (integer, required) - 采购退货类型id
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "remark": "采购退货单备注",
+                    "status": 1,
+                    "purchase_return_details[0][stocks_id]": 1,
+                    "purchase_return_details[0][purchase_return_quantity]": 12,
+                    "purchase_return_details[0][suppliers_id]": 1,
+                    "purchase_return_details[0][price_differences]": 1,
+                    "purchase_return_details[0][purchase_return_types_id]": 1
+                }
+            ]
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "status": [
+                        "状态必须int类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "purchase_return_no": "RG2018072411440706967",
+                "creator": "admin",
+                "is_submit": null,
+                "submitter": null,
+                "submit_at": null,
+                "is_check": null,
+                "checker": null,
+                "check_at": null,
+                "is_print": null,
+                "remark": "采购退货单备注",
+                "status": 1,
+                "purchase_return_details": [
+                    {
+                        "id": 1,
+                        "purchase_returns_id": 1,
+                        "stocks_id": 1,
+                        "purchase_return_quantity": 10,
+                        "suppliers_id": 1,
+                        "price_differences": "1.00",
+                        "purchase_return_types_id": 1,
+                        "created_at": "2018-07-24 11:44:07",
+                        "updated_at": "2018-07-24 11:44:07",
+                        "stock": {
+                            "id": 1,
+                            "warehouse_id": 1,
+                            "goods_id": 1,
+                            "pro_specs_id": 1,
+                            "quantity": 20,
+                            "status": 1,
+                            "created_at": "2018-07-21 18:20:53",
+                            "updated_at": "2018-07-21 18:27:38"
+                        },
+                        "supplier": {
+                            "id": 1,
+                            "name": "1",
+                            "company": "1",
+                            "code": "1",
+                            "province": "1",
+                            "city": "1",
+                            "district": "1",
+                            "address": "1",
+                            "zipcode": "1",
+                            "contacts": "1",
+                            "phone": "1",
+                            "mobile": "132131343242",
+                            "fax": "1",
+                            "email": "132@re.cn",
+                            "remark": "1",
+                            "is_scan": 1,
+                            "status": 1,
+                            "auto_valuation": 1,
+                            "created_at": "2018-07-17 17:54:01",
+                            "updated_at": "2018-07-17 17:54:01"
+                        },
+                        "purchase_return_types": {
+                            "id": 1,
+                            "name": "采购退货类型名称",
+                            "status": 1,
+                            "created_at": "2018-07-24 10:24:13",
+                            "updated_at": "2018-07-24 10:24:13"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-24 11:44:07",
+                "updated_at": "2018-07-24 11:44:07",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条采购退货 [GET /api/purchasereturns/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "purchase_return_no": "RG2018072411440706967",
+                "creator": "admin",
+                "is_submit": 0,
+                "submitter": "",
+                "submit_at": null,
+                "is_check": 0,
+                "checker": "",
+                "check_at": null,
+                "is_print": 0,
+                "remark": "采购退货单备注",
+                "status": 1,
+                "purchase_return_details": [
+                    {
+                        "id": 1,
+                        "purchase_returns_id": 1,
+                        "stocks_id": 1,
+                        "purchase_return_quantity": 10,
+                        "suppliers_id": 1,
+                        "price_differences": "1.00",
+                        "purchase_return_types_id": 1,
+                        "created_at": "2018-07-24 11:44:07",
+                        "updated_at": "2018-07-24 11:44:07",
+                        "stock": {
+                            "id": 1,
+                            "warehouse_id": 1,
+                            "goods_id": 1,
+                            "pro_specs_id": 1,
+                            "quantity": 20,
+                            "status": 1,
+                            "created_at": "2018-07-21 18:20:53",
+                            "updated_at": "2018-07-21 18:27:38"
+                        },
+                        "supplier": {
+                            "id": 1,
+                            "name": "1",
+                            "company": "1",
+                            "code": "1",
+                            "province": "1",
+                            "city": "1",
+                            "district": "1",
+                            "address": "1",
+                            "zipcode": "1",
+                            "contacts": "1",
+                            "phone": "1",
+                            "mobile": "132131343242",
+                            "fax": "1",
+                            "email": "132@re.cn",
+                            "remark": "1",
+                            "is_scan": 1,
+                            "status": 1,
+                            "auto_valuation": 1,
+                            "created_at": "2018-07-17 17:54:01",
+                            "updated_at": "2018-07-17 17:54:01"
+                        },
+                        "purchase_return_types": {
+                            "id": 1,
+                            "name": "采购退货类型名称",
+                            "status": 1,
+                            "created_at": "2018-07-24 10:24:13",
+                            "updated_at": "2018-07-24 10:24:13"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-24 11:44:07",
+                "updated_at": "2018-07-24 11:44:07"
+            }
+
+## 修改采购退货 [PATCH /api/purchasereturns/:id]
+
+
++ Parameters
+    + remark: (string, optional) - 采购退货单备注
+    + status: (integer, optional) - 状态
+        + Default: 1
+    + purchase_return_details[0][id]: (integer, optional) - 采购退货id (不存在 id 则视为新建)
+    + purchase_return_details[0][stocks_id]: (integer, required) - 库存id
+    + purchase_return_details[0][purchase_return_quantity]: (integer, required) - 采购退货数
+    + purchase_return_details[0][suppliers_id]: (integer, required) - 供应商id
+    + purchase_return_details[0][price_differences]: (integer, required) - 差价
+    + purchase_return_details[0][purchase_return_types_id]: (integer, required) - 采购退货类型id
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "remark": "采购退货单备注",
+                    "status": 1,
+                    "purchase_return_details[0][id]": 1,
+                    "purchase_return_details[0][stocks_id]": 1,
+                    "purchase_return_details[0][purchase_return_quantity]": 12,
+                    "purchase_return_details[0][suppliers_id]": 1,
+                    "purchase_return_details[0][price_differences]": 1,
+                    "purchase_return_details[0][purchase_return_types_id]": 1
+                }
+            ]
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "status": [
+                        "状态必须int类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 19,
+                "cancel_$purchasereturns_no": "CP2018072316423654591",
+                "purchase": {
+                    "id": 13,
+                    "purchase_order_no": "PO2018072116220517242",
+                    "purchase_status": "新建",
+                    "order_no": "",
+                    "user_id": 1,
+                    "print_at": null,
+                    "receiver": "收货人3",
+                    "receiver_address": "收货地址3",
+                    "warehouse_id": 1,
+                    "promise_delivery_time": null,
+                    "salesman": "",
+                    "source": "",
+                    "client_name": "",
+                    "buyer_nick": "",
+                    "order_address": "",
+                    "is_submit": 0,
+                    "is_print": 0,
+                    "is_check": 0,
+                    "is_change": 1,
+                    "remark": "备注5",
+                    "status": 1,
+                    "created_at": "2018-07-21 16:22:05",
+                    "updated_at": "2018-07-23 16:26:19"
+                },
+                "creator": "admin",
+                "submitter": null,
+                "submit_at": null,
+                "is_submit": null,
+                "cancel_purchase_details": [
+                    {
+                        "id": 14,
+                        "cancel_$purchasereturns_id": 19,
+                        "purchase_details_id": 1,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 1,
+                            "$purchasereturns_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 15,
+                        "cancel_$purchasereturns_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 16:42:37",
+                        "updated_at": "2018-07-23 16:42:37",
+                        "purchase_detail": {
+                            "id": 2,
+                            "$purchasereturns_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    },
+                    {
+                        "id": 16,
+                        "cancel_$purchasereturns_id": 19,
+                        "purchase_details_id": 2,
+                        "cancel_purchase_quantity": 1,
+                        "created_at": "2018-07-23 17:01:21",
+                        "updated_at": "2018-07-23 17:01:21",
+                        "purchase_detail": {
+                            "id": 2,
+                            "$purchasereturns_id": 13,
+                            "purchase_item_status": "新建",
+                            "product_specs_id": 1,
+                            "purchase_quantity": 10,
+                            "stock_in_count": 0,
+                            "shops_id": 1,
+                            "suppliers_id": 1,
+                            "purchase_cost": "0.00",
+                            "purchase_freight": "10.00",
+                            "warehouse_cost": "10.00",
+                            "commission": "10.00",
+                            "discount": "10.00",
+                            "colour_num": "色号",
+                            "paint": "油漆",
+                            "wooden_frame_costs": "0.00",
+                            "arrival_time": "2018-06-10 00:00:00",
+                            "remark": "备注",
+                            "created_at": "2018-07-21 16:22:05",
+                            "updated_at": "2018-07-23 16:26:19"
+                        }
+                    }
+                ],
+                "created_at": "2018-07-23 16:42:36",
+                "updated_at": "2018-07-23 16:42:36"
+            }
+
+## 删除采购退货 [DELETE /api/purchasereturns/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组采购退货 [DELETE /api/purchasereturns]
+
+
++ Parameters
+    + ids: (string, required) - 采购退货id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组采购退货状态 [PUT /api/purchasereturns/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 采购退货id组 格式: 1,2,3,4 
+    + status: (integer, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 提交 [PUT /api/purchasereturns/:id/submit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "is_submit": [
+                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 退审 [PUT /api/purchasereturns/:id/check]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 审核 [PUT /api/purchasereturns/:id/check]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "审核出错，是否未提交或重复审核",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 打印 [PUT /api/purchasereturns/:id/print]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "打印出错，是否未提交未审核或重复打印",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# purchasereturntypes [/api]
+采购退货类型资源
+
+## 获取所有采购退货类型 [GET /api/purchasereturntypes{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "采购退货类型",
+                        "status": 1,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "采购退货类型2",
+                        "status": 1,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/purchasereturntypes?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增采购退货类型 [POST /api/purchasereturntypes]
+
+
++ Parameters
+    + name: (string, required) - 采购退货类型名称
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "采购退货类型名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "采购退货类型",
+                "status": "1",
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条采购退货类型 [GET /api/purchasereturntypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "采购退货类型",
+                "status": 1,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改采购退货类型 [PATCH /api/purchasereturntypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "采购退货类型名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "采购退货类型10",
+                "status": "1",
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除采购退货类型 [DELETE /api/purchasereturntypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组采购退货类型 [DELETE /api/purchasereturntypes]
+
+
++ Parameters
+    + ids: (string, required) - 采购退货类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组采购退货类型状态 [PUT /api/purchasereturntypes/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 采购退货类型id组 格式: 1,2,3,4 
+    + status: (integer, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# purchasereturndetails [/api]
+取消采购单详情资源
+
+## 获取所有取消采购单详情 [GET /api/purchasereturndetails{?status}]
+
+
++ Parameters
+    + status: (integer, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "purchase_return": {
+                            "id": 1,
+                            "purchase_return_no": "RG2018072411440706967",
+                            "creator": "admin",
+                            "is_submit": 1,
+                            "submitter": "",
+                            "submit_at": null,
+                            "is_check": 1,
+                            "checker": "admin",
+                            "check_at": "2018-07-24 15:00:53",
+                            "is_print": 1,
+                            "remark": "采购退货单备注1",
+                            "status": 1,
+                            "created_at": "2018-07-24 11:44:07",
+                            "updated_at": "2018-07-24 15:00:53"
+                        },
+                        "stock": {
+                            "id": 1,
+                            "warehouse_id": 1,
+                            "goods_id": 1,
+                            "pro_specs_id": 1,
+                            "quantity": 8,
+                            "status": 1,
+                            "created_at": "2018-07-21 18:20:53",
+                            "updated_at": "2018-07-24 15:00:53"
+                        },
+                        "purchase_return_quantity": 12,
+                        "supplier": {
+                            "id": 1,
+                            "name": "1",
+                            "company": "1",
+                            "code": "1",
+                            "province": "1",
+                            "city": "1",
+                            "district": "1",
+                            "address": "1",
+                            "zipcode": "1",
+                            "contacts": "1",
+                            "phone": "1",
+                            "mobile": "132131343242",
+                            "fax": "1",
+                            "email": "132@re.cn",
+                            "remark": "1",
+                            "is_scan": 1,
+                            "status": 1,
+                            "auto_valuation": 1,
+                            "created_at": "2018-07-17 17:54:01",
+                            "updated_at": "2018-07-17 17:54:01"
+                        },
+                        "price_differences": "1.00",
+                        "purchase_return_type": {
+                            "id": 1,
+                            "name": "采购退货类型名称",
+                            "status": 1,
+                            "created_at": "2018-07-24 10:24:13",
+                            "updated_at": "2018-07-24 10:24:13"
+                        },
+                        "created_at": "2018-07-24 11:44:07",
+                        "updated_at": "2018-07-24 12:50:25"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": ""
+                        }
+                    }
+                }
+            }
+
+## 删除取消采购单详情 [DELETE /api/purchasereturndetails/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组取消采购单详情 [DELETE /api/purchasereturndetails]
 
 
 + Parameters

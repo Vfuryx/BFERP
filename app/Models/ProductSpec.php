@@ -20,6 +20,8 @@ class ProductSpec extends Model
         'remark', 'finished_pro', 'is_stop_pro', 'status'
     ];
 
+
+
     public function goods()
     {
         return $this->belongsTo(Goods::class);
@@ -52,7 +54,4 @@ class ProductSpec extends Model
     {
         return $this->hasMany(PurchaseDetail::class);
     }
-
-
-
 }
