@@ -63,4 +63,9 @@ class Stock extends Model
     {
         return $this->hasMany(SuppliersReport::class);
     }
+
+    public function purchaseReturnDetails()
+    {
+        return $this->hasMany(PurchaseReturnDetail::class,'stocks_id');
+    }
 }

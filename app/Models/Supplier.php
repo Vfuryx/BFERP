@@ -30,4 +30,8 @@ class Supplier extends Model
         return $this->hasMany(PurchaseDetail::class);
     }
 
+    public function purchaseReturnDetails()
+    {
+        return $this->hasMany(PurchaseReturnDetail::class,'suppliers_id');
+    }
 }

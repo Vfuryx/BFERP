@@ -15,7 +15,8 @@ class CreatePurchaseReturnDetailsTable extends Migration
     {
         Schema::create('purchase_return_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('product_specs_id')->comment("产品规格id");
+            $table->unsignedInteger('purchase_returns_id')->comment("采购退货id");
+            $table->unsignedInteger('stocks_id')->comment("库存id");
             $table->integer('purchase_return_quantity')->comment("采购退货数");
             $table->unsignedInteger('suppliers_id')->comment('供应商id');
             $table->decimal('price_differences',10,2)->comment('差价');

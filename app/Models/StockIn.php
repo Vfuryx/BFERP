@@ -89,7 +89,7 @@ class StockIn extends Model
     }
 
     /**
-     * 打印
+     * 入库
      */
     public function stockIn()
     {

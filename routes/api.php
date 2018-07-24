@@ -505,6 +505,55 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('cancelpurchasedetails', 'CancelPurchaseDetailsController@destroybyids')
             ->name('api.cancelpurchasedetails.destroybyids');
 
+        //采购退货
+        $api->get('purchasereturns', 'PurchaseReturnsController@index')
+            ->name('api.purchasereturns.index');
+        $api->get('purchasereturns/{purchasereturn}', 'PurchaseReturnsController@show')
+            ->name('api.purchasereturns.show');
+        $api->post('purchasereturns', 'PurchaseReturnsController@store')
+            ->name('api.purchasereturns.store');
+        $api->patch('purchasereturns/{purchasereturn}', 'PurchaseReturnsController@update')
+            ->name('api.purchasereturns.update');
+        $api->delete('purchasereturns/{purchasereturn}', 'PurchaseReturnsController@destroy')
+            ->name('api.purchasereturns.destroy');
+        $api->delete('purchasereturns', 'PurchaseReturnsController@destroybyids')
+            ->name('api.purchasereturns.destroybyids');
+        $api->put('purchasereturns/editstatus', 'PurchaseReturnsController@editStatusByIds')
+            ->name('api.purchasereturns.editstatusbyids');
+        $api->put('purchasereturns/{purchasereturn}/submit', 'PurchaseReturnsController@isSubmit')
+            ->name('api.purchasereturns.issubmit');
+        $api->put('purchasereturns/{purchasereturn}/check', 'PurchaseReturnsController@isCheck')
+            ->name('api.purchasereturns.ischeck');
+        $api->put('purchasereturns/{purchasereturn}/print', 'PurchaseReturnsController@isPrint')
+            ->name('api.purchasereturns.isprint');
+        $api->put('purchasereturns/{purchasereturn}/retrial', 'PurchaseReturnsController@isRetrial')
+            ->name('api.purchasereturns.isretrial');
+
+        //采购退货类型
+        $api->get('purchasereturntypes', 'PurchaseReturnTypesController@index')
+            ->name('api.purchasereturntypes.index');
+        $api->get('purchasereturntypes/{purchasereturntype}', 'PurchaseReturnTypesController@show')
+            ->name('api.purchasereturntypes.show');
+        $api->post('purchasereturntypes', 'PurchaseReturnTypesController@store')
+            ->name('api.purchasereturntypes.store');
+        $api->patch('purchasereturntypes/{purchasereturntype}', 'PurchaseReturnTypesController@update')
+            ->name('api.purchasereturntypes.update');
+        $api->delete('purchasereturntypes/{purchasereturntype}', 'PurchaseReturnTypesController@destroy')
+            ->name('api.purchasereturntypes.destroy');
+        $api->delete('purchasereturntypes', 'PurchaseReturnTypesController@destroybyids')
+            ->name('api.purchasereturntypes.destroybyids');
+        $api->put('purchasereturntypes/editstatus', 'PurchaseReturnTypesController@editStatusByIds')
+            ->name('api.purchasereturntypes.editstatusbyids');
+
+        //采购退货详情
+        $api->get('purchasereturndetails', 'PurchaseReturnDetailsController@index')
+            ->name('api.purchasereturndetails.index');
+        $api->delete('purchasereturndetails/{purchasereturndetail}', 'PurchaseReturnDetailsController@destroy')
+            ->name('api.purchasereturndetails.destroy');
+        $api->delete('purchasereturndetails', 'PurchaseReturnDetailsController@destroybyids')
+            ->name('api.purchasereturndetails.destroybyids');
+
+
     });
 
     $api->group([
