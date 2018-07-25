@@ -53,7 +53,7 @@ class CreateProductSpecsTable extends Migration
             $table->string('remark')->default('')->comment('备注');
             $table->tinyInteger('finished_pro')->default(0)->comment('是否成品 0=不是 1=是');
             $table->tinyInteger('is_stop_pro')->default(0)->comment('是否停产 0 不是 1 是');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            // $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

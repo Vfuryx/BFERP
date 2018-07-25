@@ -355,102 +355,7 @@ class GoodsController extends Controller
      *      "url": "https://www.taobao.com/",
      *      "status": 1,
      *      "nis_stop_proick": 1,
-     *      "productspecs": {
-     *          {
-     *              "spec_code": "规格编码",
-     *              "jd_specs_code": "京东规格编码",
-     *              "vips_specs_code": "唯品会规格编码",
-     *              "tb_price": "10",
-     *              "cost": "10",
-     *              "price": "10",
-     *              "highest_price": "10",
-     *              "lowest_price": "10",
-     *              "warehouse_cost": "10",
-     *              "assembly_price": "10",
-     *              "discount": "1",
-     *              "commission": "1",
-     *              "is_combination": "1",
-     *              "combinations": {
-     *              {
-     *                  "com_pro_specs_id": 1,
-     *                  "count": 1
-     *              },
-     *              {
-     *                  "com_pro_specs_id": 1,
-     *                  "count": 1
-     *              }
-     *              },
-     *              "package_quantity": "10",
-     *              "package_costs": "10",
-     *              "wooden_frame_costs": "10",
-     *              "purchase_freight": "10",
-     *              "inventory_warning": "10",
-     *              "purchase_days_warning": "1",
-     *              "available_warning": "10",
-     *              "distribution_method_id": "1",
-     *              "bar_code": "条形码",
-     *              "img_url": "http://image.img.com",
-     *              "spec": "规格",
-     *              "color": "颜色",
-     *              "materials": "材质",
-     *              "function": "功能",
-     *              "special": "特殊",
-     *              "other": "其他",
-     *              "length": "10",
-     *              "width": "10",
-     *              "height": "10",
-     *              "volume": "10",
-     *              "weight": "10",
-     *              "remark": "备注",
-     *              "finished_pro": "1",
-     *              "is_stop_pro": "0",
-     *              "status": "1",
-     *              "created_at": "2018-07-07 16:14:17",
-     *              "updated_at": "2018-07-07 16:14:17"
-     *          },
-     *          {
-     *              "spec_code": "规格编码2",
-     *              "jd_specs_code": "京东规格编码2",
-     *              "vips_specs_code": "唯品会规格编码2",
-     *              "tb_price": "10",
-     *              "cost": "10",
-     *              "price": "10",
-     *              "highest_price": "10",
-     *              "lowest_price": "10",
-     *              "warehouse_cost": "10",
-     *              "assembly_price": "10",
-     *              "discount": "1",
-     *              "commission": "1",
-     *              "is_combination": "0",
-     *              "package_quantity": "10",
-     *              "package_costs": "10",
-     *              "wooden_frame_costs": "10",
-     *              "purchase_freight": "10",
-     *              "inventory_warning": "10",
-     *              "purchase_days_warning": "1",
-     *              "available_warning": "10",
-     *              "distribution_method_id": "1",
-     *              "bar_code": "条形码2",
-     *              "img_url": "http://image.img.com",
-     *              "spec": "规格",
-     *              "color": "颜色",
-     *              "materials": "材质",
-     *              "function": "功能",
-     *              "special": "特殊",
-     *              "other": "其他",
-     *              "length": "10",
-     *              "width": "10",
-     *              "height": "10",
-     *              "volume": "10",
-     *              "weight": "10",
-     *              "remark": "备注",
-     *              "finished_pro": "1",
-     *              "is_stop_pro": "0",
-     *              "status": "1",
-     *              "created_at": "2018-07-07 16:14:17",
-     *              "updated_at": "2018-07-07 16:14:17"
-     *          }
-     *      }
+
      *})
      * @Transaction({
      *      @Response(422, body={
@@ -733,46 +638,34 @@ class GoodsController extends Controller
      */
     public function store(GoodsRequest $goodsRequest, ProductSpecRequest $productSpecRequest, CombinationRequest $combinationRequest)
     {
-        DB::beginTransaction();
-        try {
+
+        $goods = DB::transaction(function () use ($goodsRequest, $productSpecRequest, $combinationRequest) {
             $goods = Goods::create($goodsRequest->validated());
             if ($productSpecs = $goodsRequest->input('productspecs')) {
-                $productSpecs = json_decode($productSpecs, true);
                 foreach ($productSpecs as $productSpec) {
-                    $validator = Validator::make($productSpec, $productSpecRequest->rules(), $productSpecRequest->messages());
+                    //计算要通过的字段
+                    $rules = collect($productSpecRequest->rules())->map(function($item,$index){
+                        $index = explode('.',$index);
+                        return end($index);
+                    })->flip()->toArray();
 
-                    if ($validator->fails()) {
-                        throw new StoreResourceFailedException('The given data was invalid.', $validator->errors());
-                    }
-
-                    $data = array_intersect_key($validator->getData(), $validator->getRules());
-
-                    $productSpecs = $goods->productSpecs()->create($data);
+                    $proSpec = $goods->productSpecs()->create(array_intersect_key($productSpec, $rules));
 
                     if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+                        //计算要通过的字段
+                        $rules = collect($combinationRequest->rules())->map(function($item,$index){
+                            $index = explode('.',$index);
+                            return end($index);
+                        })->flip()->toArray();
 
                         foreach ($productSpec['combinations'] as $combination) {
-
-                            $validator = Validator::make($combination, $combinationRequest->rules(), $combinationRequest->messages());
-
-                            if ($validator->fails()) {
-                                throw new StoreResourceFailedException('The given data was invalid.', $validator->errors());
-                            }
-
-                            $data = array_intersect_key($validator->getData(), $validator->getRules());
-                            $productSpecs->combinations()->create($data);
+                            $proSpec->combinations()->create(array_intersect_key($combination, $rules));
                         }
                     }
                 }
             }
-            DB::commit();
-        } catch (StoreResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+            return $goods;
+        });
 
         return $this->response
             ->item($goods, new GoodsTransformer())
@@ -1537,71 +1430,68 @@ class GoodsController extends Controller
     public function update(GoodsRequest $goodsRequest, ProductSpecRequest $productSpecRequest, CombinationRequest $combinationRequest, Goods $goods)
     {
 
-        DB::beginTransaction();
-        try {
-            $goods->update($goodsRequest->all());
-            if ($productSpecs = $goodsRequest->input('productspecs')) {
-                $productSpecs = json_decode($productSpecs, true);
-                foreach ($productSpecs as $productSpec) {
+        $goods = DB::transaction(function () use ($goodsRequest, $productSpecRequest, $combinationRequest, $goods) {
 
-                    $validator = Validator::make($productSpec, $productSpecRequest->rules(isset($productSpec['id']) ? $productSpec['id'] : ''), $productSpecRequest->messages());
-                    if ($validator->fails()) {
-                        throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
-                    }
-                    //过滤出经过验证的数据
-                    $data = array_intersect_key($validator->getData(), $validator->getRules());
+            $goods->update($goodsRequest->validated());
+
+            if ($productSpecs = $goodsRequest->input('productspecs')) {
+                foreach ($productSpecs as $productSpec) {
 
                     //存在id则更新，否则插入
                     if (isset($productSpec['id'])) {
 
-                        $productSpecModel = ProductSpec::findOrFail($productSpec['id']);
-                        $productSpecModel->update($data);
+                        //计算要通过的字段
+                        $rules = collect($productSpecRequest->rules())->map(function($item,$index){
+                            $index = explode('.',$index);
+                            return end($index);
+                        })->flip()->toArray();
+
+                        $goods->productSpecs()->findOrFail($productSpec['id'])->update(array_intersect_key($productSpec, $rules));
 
                         if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+
                             foreach ($productSpec['combinations'] as $combination) {
-                                $validator = Validator::make($combination, $combinationRequest->rules(), $combinationRequest->messages());
-                                if ($validator->fails()) {
-                                    throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
-                                }
-                                //过滤出经过验证的数据
-                                $data = array_intersect_key($validator->getData(), $validator->getRules());
+
+                                //计算要通过的字段
+                                $rules = collect($combinationRequest->rules())->map(function($item,$index){
+                                    $index = explode('.',$index);
+                                    return end($index);
+                                })->flip()->toArray();
 
                                 //存在id则更新，否则插入
                                 if (isset($combination['id'])) {
-                                    Combination::findOrFail($combination['id'])->update($data);
+                                    $goods->productSpecs()->findOrFail($productSpec['id'])->combinations()->findOrFail($combination['id'])->update(array_intersect_key($combination, $rules));
                                 } else {
-                                    $productSpecModel->combinations()->create($data);
+                                    $goods->productSpecs()->findOrFail($productSpec['id'])->combinations()->create(array_intersect_key($combination, $rules));
                                 }
                             }
                         }
-                    } else {
 
-                        $productSpecs = $goods->productSpecs()->create($data);
+                    } else {
+                        //计算要通过的字段
+                        $rules = collect($productSpecRequest->rules())->map(function($item,$index){
+                            $index = explode('.',$index);
+                            return end($index);
+                        })->flip()->toArray();
+
+                        $proSpec = $goods->productSpecs()->create(array_intersect_key($productSpec, $rules));
 
                         if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+                            //计算要通过的字段
+                            $rules = collect($combinationRequest->rules())->map(function($item,$index){
+                                $index = explode('.',$index);
+                                return end($index);
+                            })->flip()->toArray();
+
                             foreach ($productSpec['combinations'] as $combination) {
-
-                                $validator = Validator::make($combination, $combinationRequest->rules(), $combinationRequest->messages());
-
-                                if ($validator->fails()) {
-                                    throw new UpdateResourceFailedException('The given data was invalid.', $validator->errors());
-                                }
-
-                                $data = array_intersect_key($validator->getData(), $validator->getRules());
-                                $productSpecs->combinations()->create($data);
+                                $proSpec->combinations()->create(array_intersect_key($combination, $rules));
                             }
                         }
                     }
                 }
             }
-            DB::commit();
-        } catch (UpdateResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+            return $goods;
+        });
 
         return $this->response
             ->item($goods, new GoodsTransformer())

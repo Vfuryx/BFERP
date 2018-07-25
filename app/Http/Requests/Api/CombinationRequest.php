@@ -21,38 +21,26 @@ class CombinationRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'product_specs_id' => [
-                        'sometimes', 'required', 'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                    'productspecs.*.combinations.*.com_pro_specs_id' => [
+                        'required', 'integer',
+                        Rule::exists('product_specs', 'id')
                     ],
-                    'com_pro_specs_id' => [
-                        'sometimes', 'required', 'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'count' => 'sometimes|required|integer',
-                    'status' => 'integer'
+                    'productspecs.*.combinations.*.count' => 'required|integer',
+                    // 'productspecs.*.combinations.*.status' => 'integer'
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'product_specs_id' => [
+                    'productspecs.*.combinations.*.id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                        Rule::exists('combinations', 'id')
                     ],
-                    'com_pro_specs_id' => [
+                    'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                        Rule::exists('product_specs', 'id')
                     ],
-                    'count' => 'integer',
-                    'status' => 'integer',
+                    'productspecs.*.combinations.*.count' => 'integer',
+                    // 'productspecs.*.combinations.*.status' => 'integer',
 
                 ];
                 break;
@@ -63,19 +51,23 @@ class CombinationRequest extends FormRequest
     {
         return [
 
-            'product_specs_id.required' => '产品规格id必填',
-            'product_specs_id.integer' => '产品规格id必须int类型',
-            'product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'productspecs.*.combinations.*.id.required' => '组合id必填',
+            'productspecs.*.combinations.*.id.integer' => '组合id必须int类型',
+            'productspecs.*.combinations.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'com_pro_specs_id.required' => '组合产品规格id必填',
-            'com_pro_specs_id.integer' => '组合产品规格id必须int类型',
-            'com_pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'productspecs.*.combinations.*.product_specs_id.required' => '产品规格id必填',
+            'productspecs.*.combinations.*.product_specs_id.integer' => '产品规格id必须int类型',
+            'productspecs.*.combinations.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'count.required' => '组合件数必填',
-            'count.integer' => '组合件数必须int类型',
+            'productspecs.*.combinations.*.com_pro_specs_id.required' => '组合产品规格id必填',
+            'productspecs.*.combinations.*.com_pro_specs_id.integer' => '组合产品规格id必须int类型',
+            'productspecs.*.combinations.*.com_pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'status.integer' => '状态必须int类型',
-            'status.required' => '状态必填'
+            'productspecs.*.combinations.*.count.required' => '组合件数必填',
+            'productspecs.*.combinations.*.count.integer' => '组合件数必须int类型',
+
+            'productspecs.*.combinations.*.status.integer' => '状态必须int类型',
+            'productspecs.*.combinations.*.status.required' => '状态必填'
         ];
     }
 

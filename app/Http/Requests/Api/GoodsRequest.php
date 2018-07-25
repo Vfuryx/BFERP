@@ -45,7 +45,6 @@ class GoodsRequest extends FormRequest
                     'url' => 'required|url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'json'
                 ];
                 break;
             case 'PATCH':
@@ -77,7 +76,6 @@ class GoodsRequest extends FormRequest
                     'url' => 'url|max:255',
                     'status' => 'integer',
                     'is_stop_pro' => 'integer',
-                    'productspecs' => 'json'
                 ];
                 break;
         }
@@ -141,7 +139,6 @@ class GoodsRequest extends FormRequest
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填',
 
-            'productspecs.json' => '产品规格必须json格式'
         ];
     }
 

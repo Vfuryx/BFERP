@@ -455,7 +455,8 @@ class StocksController extends Controller
      *      @Response(200, body={
      *          "data": {
      *              {
-     *                  "id": 20,
+     *                  "goods_id": 19,
+     *                  "product_spec_id": 3,
      *                  "commodity_code": "1",
      *                  "short_name": "1",
      *                  "pro_specs": "spec_code",
@@ -464,8 +465,8 @@ class StocksController extends Controller
      *                  "materials": "1"
      *              },
      *              {
-     *                  "id": 21,
-     *                  "commodity_code": "1",
+     *                  "goods_id": 19,
+     *                  "product_spec_id": 3,
      *                  "short_name": "1",
      *                  "pro_specs": "spec_code",
      *                  "spec": "1",
