@@ -9,6 +9,9 @@ use App\Transformers\StockTransformer;
 use App\Models\Stock;
 use App\Http\Controllers\Traits\CURDTrait;
 
+use Carbon\Carbon;
+use Dingo\Api\Exception\StoreResourceFailedException;
+
 /**
  * 库存资源
  * @Resource("stocks",uri="/api")
@@ -138,11 +141,11 @@ class StocksController extends Controller
      * @Post("/stocks")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
-     *      @Parameter("goods_id",type="integer", description="商品id", required=true),
-     *      @Parameter("pro_specs_id",type="integer", description="产品规格id", required=true),
-     *      @Parameter("quantity",type="integer", description="库存数", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("stocks[0][warehouse_id]",type="integer", description="仓库id", required=true),
+     *      @Parameter("stocks[0][goods_id]",type="integer", description="商品id", required=true),
+     *      @Parameter("stocks[0][pro_specs_id]",type="integer", description="产品规格id", required=true),
+     *      @Parameter("stocks[0][quantity]",type="integer", description="库存数", required=true),
+     *      @Parameter("stocks[0][status]",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -245,7 +248,26 @@ class StocksController extends Controller
      */
     public function store(StockRequest $request)
     {
-        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
+        $stocks = collect($request->validated()['stocks']);
+        //判断是否有重复的规格
+        if($stocks->count() != $stocks->groupBy('pro_specs_id')->count())
+            throw new StoreResourceFailedException('写入失败');
+
+        $data = $stocks->map(function($item){
+            $item['updated_at'] = Carbon::now()->toDateTimeString();
+            $item['created_at'] = Carbon::now()->toDateTimeString();
+            return $item;
+        })->toArray();
+
+        if(!Stock::query()->insert($data))
+            throw new StoreResourceFailedException('写入失败');
+
+        $warehouseId = $stocks->first()['warehouse_id'];
+        $proSpecsId = $stocks->pluck('pro_specs_id')->all();
+
+        $ref = Stock::where('warehouse_id',$warehouseId)->whereIn('pro_specs_id',$proSpecsId)->get();
+
+        return $this->response->collection($ref, self::TRANSFORMER)->setStatusCode(201);
     }
 
     /**

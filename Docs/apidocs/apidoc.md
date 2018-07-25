@@ -6819,11 +6819,11 @@ FORMAT: 1A
 
 
 + Parameters
-    + warehouse_id: (integer, required) - 仓库id
-    + goods_id: (integer, required) - 商品id
-    + pro_specs_id: (integer, required) - 产品规格id
-    + quantity: (integer, required) - 库存数
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + stocks[0][warehouse_id]: (integer, required) - 仓库id
+    + stocks[0][goods_id]: (integer, required) - 商品id
+    + stocks[0][pro_specs_id]: (integer, required) - 产品规格id
+    + stocks[0][quantity]: (integer, required) - 库存数
+    + stocks[0][status]: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)

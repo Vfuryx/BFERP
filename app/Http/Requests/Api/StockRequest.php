@@ -21,26 +21,24 @@ class StockRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'warehouse_id' => [
+                    'stocks.*.warehouse_id' => [
                         'required', 'integer',
                         Rule::exists('warehouses', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'goods_id' => [
+                    'stocks.*.goods_id' => [
                         'required', 'integer',
                         Rule::exists('goods', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'pro_specs_id' => [
+                    'stocks.*.pro_specs_id' => [
                         'required', 'integer', 'unique:stocks',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                        Rule::exists('product_specs', 'id')
                     ],
-                    'quantity' => 'required|integer',
-                    'status' => 'integer'
+                    'stocks.*.quantity' => 'required|integer',
+                    'stocks.*.status' => 'integer'
                 ];
                 break;
         }
@@ -50,24 +48,24 @@ class StockRequest extends FormRequest
     {
         return [
 
-            'warehouse_id.required' => '仓库id必填',
-            'warehouse_id.integer' => '仓库id必须int类型',
-            'warehouse_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stocks.*.warehouse_id.required' => '仓库id必填',
+            'stocks.*.warehouse_id.integer' => '仓库id必须int类型',
+            'stocks.*.warehouse_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'goods_id.required' => '默认商品id必填',
-            'goods_id.integer' => '默认商品id必须int类型',
-            'goods_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stocks.*.goods_id.required' => '默认商品id必填',
+            'stocks.*.goods_id.integer' => '默认商品id必须int类型',
+            'stocks.*.goods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'pro_specs_id.unique' => '产品规格id不能重复',
-            'pro_specs_id.required' => '产品规格id必填',
-            'pro_specs_id.integer' => '产品规格id必须int类型',
-            'pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stocks.*.pro_specs_id.unique' => '产品规格id不能重复',
+            'stocks.*.pro_specs_id.required' => '产品规格id必填',
+            'stocks.*.pro_specs_id.integer' => '产品规格id必须int类型',
+            'stocks.*.pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'quantity.required' => '库存数必填',
-            'quantity.integer' => '库存数必须int类型',
+            'stocks.*.quantity.required' => '库存数必填',
+            'stocks.*.quantity.integer' => '库存数必须int类型',
 
-            'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'stocks.*.status.required' => '状态必填',
+            'stocks.*.status.integer' => '状态必须int类型',
         ];
     }
 

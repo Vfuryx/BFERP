@@ -299,15 +299,19 @@ class CancelPurchasesController extends Controller
     {
 
         $cancelPurchase = DB::transaction(function () use ($cancelPurchaseRequest, $cancelPurchaseDetailRequest) {
-            $date = $cancelPurchaseRequest->validated();
 
-            $cancelPurchase = CancelPurchase::create($date);
+            $cancelPurchase = CancelPurchase::create($cancelPurchaseRequest->validated());
 
             if ($cancelPurchaseDetails = $cancelPurchaseDetailRequest->input('cancel_purchase_details')) {
 
                 foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
+                    //计算要通过的字段
+                    $rules = collect($cancelPurchaseDetailRequest->rules())->map(function($item,$index){
+                        $index = explode('.',$index);
+                        return end($index);
+                    })->flip()->toArray();
 
-                    $cancelPurchase->cancelPurchaseDetails()->create($cancelPurchaseDetail);
+                    $cancelPurchase->cancelPurchaseDetails()->create(array_intersect_key($cancelPurchaseDetail, $rules));
                 }
             }
             return $cancelPurchase;
@@ -620,11 +624,18 @@ class CancelPurchasesController extends Controller
 
                 foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
 
+                    //计算要通过的字段
+                    $rules = collect($cancelPurchaseDetailRequest->rules())->map(function($item,$index){
+                        $index = explode('.',$index);
+                        return end($index);
+                    })->flip()->toArray();
+
                     //存在id则更新，否则插入
                     if (isset($cancelPurchaseDetail['id'])) {
-                        $cancelpurchase->cancelPurchaseDetails()->findOrFail($cancelPurchaseDetail['id'])->update($cancelPurchaseDetail);
+
+                        $cancelpurchase->cancelPurchaseDetails()->findOrFail($cancelPurchaseDetail['id'])->update(array_intersect_key($cancelPurchaseDetail, $rules));
                     } else {
-                        $cancelpurchase->cancelPurchaseDetails()->create($cancelPurchaseDetail);
+                        $cancelpurchase->cancelPurchaseDetails()->create(array_intersect_key($cancelPurchaseDetail, $rules));
                     }
                 }
             }

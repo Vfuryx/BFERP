@@ -1263,15 +1263,14 @@ class GoodsController extends Controller
 
             if ($productSpecs = $goodsRequest->input('productspecs')) {
                 foreach ($productSpecs as $productSpec) {
+                    //计算要通过的字段
+                    $rules = collect($productSpecRequest->rules())->map(function($item,$index){
+                        $index = explode('.',$index);
+                        return end($index);
+                    })->flip()->toArray();
 
                     //存在id则更新，否则插入
                     if (isset($productSpec['id'])) {
-
-                        //计算要通过的字段
-                        $rules = collect($productSpecRequest->rules())->map(function($item,$index){
-                            $index = explode('.',$index);
-                            return end($index);
-                        })->flip()->toArray();
 
                         $goods->productSpecs()->findOrFail($productSpec['id'])->update(array_intersect_key($productSpec, $rules));
 
@@ -1295,12 +1294,6 @@ class GoodsController extends Controller
                         }
 
                     } else {
-                        //计算要通过的字段
-                        $rules = collect($productSpecRequest->rules())->map(function($item,$index){
-                            $index = explode('.',$index);
-                            return end($index);
-                        })->flip()->toArray();
-
                         $proSpec = $goods->productSpecs()->create(array_intersect_key($productSpec, $rules));
 
                         if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
