@@ -363,21 +363,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('productspecs/editstatus', 'ProductSpecsController@editStatusByIds')
             ->name('api.productspecs.editstatusbyids');
 
-//        //组合资源
-//        $api->get('combinations', 'CombinationsController@index')
-//            ->name('api.combinations.index');
-//        $api->get('combinations/{combination}', 'CombinationsController@show')
-//            ->name('api.combinations.show');
-//        $api->post('combinations', 'CombinationsController@store')
-//            ->name('api.combinations.store');
-//        $api->patch('combinations/{combination}', 'CombinationsController@update')
-//            ->name('api.combinations.update');
-//        $api->delete('combinations/{combination}', 'CombinationsController@destroy')
-//            ->name('api.combinations.destroy');
-//        $api->delete('combinations', 'CombinationsController@destroybyids')
-//            ->name('api.combinations.destroybyids');
-//        $api->put('combinations', 'CombinationsController@editStatusByIds')
-//            ->name('api.combinations.editstatusbyids');
+        //组合资源
+        $api->delete('combinations/{combination}', 'CombinationsController@destroy')
+            ->name('api.combinations.destroy');
+        $api->delete('combinations', 'CombinationsController@destroybyids')
+            ->name('api.combinations.destroybyids');
 
         //下载商品资源 暂定
         $api->get('goodsdownloads', 'GoodsDownloadsController@index')

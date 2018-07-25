@@ -11,7 +11,7 @@ class ProductSpecRequest extends FormRequest
      *
      * @return array
      */
-    public function rules($id = 0)
+    public function rules()
     {
         switch ($this->method()) {
             case 'GET':
@@ -68,19 +68,13 @@ class ProductSpecRequest extends FormRequest
                 break;
             case 'PATCH':
                 return [
-//                    'goods_id' => [
-//                        'integer',
-//                        Rule::exists('goods','id')->where(function ($query) {
-//                            $query->where('status',1);
-//                        }),
-//                    ],
                     'productspecs.*.id' => [
                         'integer',
-                        Rule::exists('productspecs', 'id')
+                        Rule::exists('product_specs', 'id')
                     ],
                     'productspecs.*.spec_code' => [
                         'string', 'max:255',
-                        Rule::unique('product_specs')->ignore(isset($this->productspec->id) ? $this->productspec->id : $id),
+                        Rule::unique('product_specs')->ignore($this->productspecs[0]['id']),
                     ],
                     'productspecs.*.jd_specs_code' => 'string|max:255',
                     'productspecs.*.vips_specs_code' => 'string|max:255',
@@ -285,7 +279,6 @@ class ProductSpecRequest extends FormRequest
             'remark' => '备注',
             'finished_pro' => '是否成品 0 不是 1 是',
             'is_stop_pro' => '是否停产 0 不是 1 是',
-            'status' => '状态：0=停用，1=启用',
         ];
     }
 }

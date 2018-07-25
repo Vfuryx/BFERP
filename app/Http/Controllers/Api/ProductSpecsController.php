@@ -123,7 +123,7 @@ class ProductSpecsController extends Controller
      */
     public function index(ProductSpecRequest $request)
     {
-        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10,0);
     }
 
 

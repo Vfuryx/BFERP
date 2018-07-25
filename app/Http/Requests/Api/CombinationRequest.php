@@ -26,7 +26,6 @@ class CombinationRequest extends FormRequest
                         Rule::exists('product_specs', 'id')
                     ],
                     'productspecs.*.combinations.*.count' => 'required|integer',
-                    // 'productspecs.*.combinations.*.status' => 'integer'
                 ];
                 break;
             case 'PATCH':
@@ -40,7 +39,6 @@ class CombinationRequest extends FormRequest
                         Rule::exists('product_specs', 'id')
                     ],
                     'productspecs.*.combinations.*.count' => 'integer',
-                    // 'productspecs.*.combinations.*.status' => 'integer',
 
                 ];
                 break;
@@ -66,8 +64,6 @@ class CombinationRequest extends FormRequest
             'productspecs.*.combinations.*.count.required' => '组合件数必填',
             'productspecs.*.combinations.*.count.integer' => '组合件数必须int类型',
 
-            'productspecs.*.combinations.*.status.integer' => '状态必须int类型',
-            'productspecs.*.combinations.*.status.required' => '状态必填'
         ];
     }
 
@@ -77,7 +73,6 @@ class CombinationRequest extends FormRequest
             'product_specs_id' => '产品规格id',
             'com_pro_specs_id' => '组合产品规格id',
             'count' => '组合件数',
-            'status' => '状态：0=停用，1=启用'
         ];
     }
 
