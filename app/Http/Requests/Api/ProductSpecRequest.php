@@ -21,14 +21,14 @@ class ProductSpecRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'productspecs.*.spec_code' => 'sometimes|required|string|max:255|unique:product_specs',
+                    'productspecs.*.spec_code' => 'required|string|max:255|unique:product_specs',
                     'productspecs.*.jd_specs_code' => 'string|max:255',
                     'productspecs.*.vips_specs_code' => 'string|max:255',
-                    'productspecs.*.tb_price' => 'sometimes|required|numeric',
-                    'productspecs.*.cost' => 'sometimes|required|numeric',
-                    'productspecs.*.price' => 'sometimes|required|numeric',
-                    'productspecs.*.highest_price' => 'sometimes|required|numeric',
-                    'productspecs.*.lowest_price' => 'sometimes|required|numeric',
+                    'productspecs.*.tb_price' => 'required|numeric',
+                    'productspecs.*.cost' => 'required|numeric',
+                    'productspecs.*.price' => 'required|numeric',
+                    'productspecs.*.highest_price' => 'required|numeric',
+                    'productspecs.*.lowest_price' => 'required|numeric',
                     'productspecs.*.warehouse_cost' => 'numeric',
                     'productspecs.*.assembly_price' => 'numeric',
                     'productspecs.*.discount' => 'numeric',
@@ -38,18 +38,18 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.package_costs' => 'numeric',
                     'productspecs.*.wooden_frame_costs' => 'numeric',
                     'productspecs.*.purchase_freight' => 'numeric',
-                    'productspecs.*.inventory_warning' => 'sometimes|required|integer',
-                    'productspecs.*.purchase_days_warning' => 'sometimes|required|integer',
-                    'productspecs.*.available_warning' => 'sometimes|required|integer',
+                    'productspecs.*.inventory_warning' => 'required|integer',
+                    'productspecs.*.purchase_days_warning' => 'required|integer',
+                    'productspecs.*.available_warning' => 'required|integer',
                     'productspecs.*.distribution_method_id' => [
-                        'sometimes', 'required', 'integer',
+                        'required', 'integer',
                         Rule::exists('distribution_methods', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'productspecs.*.bar_code' => 'string|max:255',
                     'productspecs.*.img_url' => 'url|max:255',
-                    'productspecs.*.spec' => 'sometimes|required|string|max:255',
+                    'productspecs.*.spec' => 'required|string|max:255',
                     'productspecs.*.color' => 'string|max:255',
                     'productspecs.*.materials' => 'string|max:255',
                     'productspecs.*.function' => 'string|max:255',
@@ -129,10 +129,6 @@ class ProductSpecRequest extends FormRequest
             'productspecs.*.id.required' => '规格id必填',
             'productspecs.*.id.integer' => '规格id必须int类型',
             'productspecs.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
-
-            'productspecs.*.goods_id.required' => '产品id必填',
-            'productspecs.*.goods_id.integer' => '产品id必须int类型',
-            'productspecs.*.goods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'productspecs.*.spec_code.required' => '规格编码必填',
             'productspecs.*.spec_code.string' => '规格编码必须string类型',

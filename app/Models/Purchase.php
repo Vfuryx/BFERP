@@ -41,6 +41,17 @@ class Purchase extends Model
                     return false;
                 }
             }
+
+            // 如果模型的 user_id 字段为空
+            if (!$model->user_id) {
+
+                $model->user_id = 1;
+                // 如果生成失败，则终止创建订单
+                if (!$model->user_id) {
+                    return false;
+                }
+            }
+
         });
 
         //字段有修改才会触发

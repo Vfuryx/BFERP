@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Goods;
@@ -18,10 +17,7 @@ use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\GoodsTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
-use Dingo\Api\Exception\StoreResourceFailedException;
 use Dingo\Api\Exception\DeleteResourceFailedException;
-use Dingo\Api\Exception\UpdateResourceFailedException;
-
 
 /**
  * 商品资源
@@ -336,44 +332,44 @@ class GoodsController extends Controller
      *      @Parameter("is_stop_pro",type="integer", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=0),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=true),
-     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=true),
-     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=true),
-     *      @Parameter("productspecs[0][tb_price]", description="淘宝价格", required=true),
-     *      @Parameter("productspecs[0][cost]", description="成本价格", required=true),
-     *      @Parameter("productspecs[0][price]", description="售价", required=true),
-     *      @Parameter("productspecs[0][highest_price]", description="最高售价", required=true),
-     *      @Parameter("productspecs[0][lowest_price]", description="最低售价", required=true),
-     *      @Parameter("productspecs[0][warehouse_cost]", description="仓库成本", required=true),
-     *      @Parameter("productspecs[0][assembly_price]", description="装配价格", required=true),
-     *      @Parameter("productspecs[0][discount]", description="折扣", required=true),
-     *      @Parameter("productspecs[0][commission]", description="金佣点", required=true),
-     *      @Parameter("productspecs[0][is_combination]", description="是否组合", required=true),
-     *      @Parameter("productspecs[0][package_quantity]", description="包件数量", required=true),
-     *      @Parameter("productspecs[0][package_costs]", description="打包费用", required=true),
-     *      @Parameter("productspecs[0][wooden_frame_costs]", description="木架费", required=true),
-     *      @Parameter("productspecs[0][purchase_freight]", description="采购运费", required=true),
-     *      @Parameter("productspecs[0][inventory_warning]", description="库存预警(数量)", required=true),
-     *      @Parameter("productspecs[0][purchase_days_warning]", description="采购预警天数", required=true),
-     *      @Parameter("productspecs[0][available_warning]", description="可售数预警", required=true),
-     *      @Parameter("productspecs[0][distribution_method_id]", description="配送类别", required=true),
-     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=true),
-     *      @Parameter("productspecs[0][img_url]", description="图片地址", required=true),
+     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=false),
+     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=false),
+     *      @Parameter("productspecs[0][tb_price]", type="numeric", description="淘宝价格", required=true),
+     *      @Parameter("productspecs[0][cost]", type="numeric", description="成本价格", required=true),
+     *      @Parameter("productspecs[0][price]", type="numeric", description="售价", required=true),
+     *      @Parameter("productspecs[0][highest_price]", type="numeric", description="最高售价", required=true),
+     *      @Parameter("productspecs[0][lowest_price]", type="numeric", description="最低售价", required=true),
+     *      @Parameter("productspecs[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
+     *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
+     *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("productspecs[0][commission]", type="numeric", description="金佣点", required=false),
+     *      @Parameter("productspecs[0][is_combination]", type="integer", description="是否组合", required=true),
+     *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
+     *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
+     *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("productspecs[0][purchase_freight]", type="numeric", description="采购运费", required=false),
+     *      @Parameter("productspecs[0][inventory_warning]", type="integer", description="库存预警(数量)", required=true),
+     *      @Parameter("productspecs[0][purchase_days_warning]", type="integer", description="采购预警天数", required=true),
+     *      @Parameter("productspecs[0][available_warning]", type="integer", description="可售数预警", required=true),
+     *      @Parameter("productspecs[0][distribution_method_id]", type="integer", description="配送类别", required=true),
+     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=false),
+     *      @Parameter("productspecs[0][img_url]", description="图片地址", type="url", required=false),
      *      @Parameter("productspecs[0][spec]", description="规格", required=true),
-     *      @Parameter("productspecs[0][color]", description="颜色", required=true),
-     *      @Parameter("productspecs[0][materials]", description="材质", required=true),
-     *      @Parameter("productspecs[0][function]", description="功能", required=true),
-     *      @Parameter("productspecs[0][special]", description="特殊", required=true),
-     *      @Parameter("productspecs[0][other]", description="其他", required=true),
-     *      @Parameter("productspecs[0][length]", description="长度（mm）", required=true),
-     *      @Parameter("productspecs[0][width]", description="宽度（mm）", required=true),
-     *      @Parameter("productspecs[0][height]", description="高度（mm）", required=true),
-     *      @Parameter("productspecs[0][volume]", description="体积(m²)", required=true),
-     *      @Parameter("productspecs[0][weight]", description="重量", required=true),
-     *      @Parameter("productspecs[0][remark]", description="备注", required=true),
-     *      @Parameter("productspecs[0][finished_pro]", description="是否成品 0 不是 1 是", required=true),
-     *      @Parameter("productspecs[0][is_stop_pro]", description="是否停产 0 不是 1 是", required=true),
-     *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", description="组合产品规格id", required=true),
-     *      @Parameter("productspecs[0][combinations][0][count]", description="组合件数", required=true),
+     *      @Parameter("productspecs[0][color]", description="颜色", required=false),
+     *      @Parameter("productspecs[0][materials]", description="材质", required=false),
+     *      @Parameter("productspecs[0][function]", description="功能", required=false),
+     *      @Parameter("productspecs[0][special]", description="特殊", required=false),
+     *      @Parameter("productspecs[0][other]", description="其他", required=false),
+     *      @Parameter("productspecs[0][length]", type="numeric", description="长度（mm）", required=false),
+     *      @Parameter("productspecs[0][width]", type="numeric", description="宽度（mm）", required=false),
+     *      @Parameter("productspecs[0][height]", type="numeric", description="高度（mm）", required=false),
+     *      @Parameter("productspecs[0][volume]", type="numeric", description="体积(m²)", required=false),
+     *      @Parameter("productspecs[0][weight]", type="numeric", description="重量", required=false),
+     *      @Parameter("productspecs[0][remark]", description="备注", required=false),
+     *      @Parameter("productspecs[0][finished_pro]", type="integer", description="是否成品 0 不是 1 是", required=false),
+     *      @Parameter("productspecs[0][is_stop_pro]", type="integer", description="是否停产 0 不是 1 是", required=false),
+     *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=true),
+     *      @Parameter("productspecs[0][combinations][0][count]", type="integer", description="组合件数", required=true),
      * })
      * @Request({
      *      "commodity_code": "商品编码",
@@ -603,30 +599,34 @@ class GoodsController extends Controller
      *      })
      * })
      */
-    public function store(GoodsRequest $goodsRequest, ProductSpecRequest $productSpecRequest, CombinationRequest $combinationRequest)
+    public function store(GoodsRequest $goodsRequest,
+                          ProductSpecRequest $productSpecRequest,
+                          CombinationRequest $combinationRequest,
+                          \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $goods = DB::transaction(function () use ($goodsRequest, $productSpecRequest, $combinationRequest) {
-            $goods = Goods::create($goodsRequest->validated());
-            if ($productSpecs = $goodsRequest->input('productspecs')) {
-                foreach ($productSpecs as $productSpec) {
-                    //计算要通过的字段
-                    $rules = collect($productSpecRequest->rules())->map(function($item,$index){
-                        $index = explode('.',$index);
-                        return end($index);
-                    })->flip()->toArray();
+        $goods = DB::transaction(function () use ($goodsRequest,
+                                                  $productSpecRequest,
+                                                  $combinationRequest,
+                                                  $validatedHandler) {
 
-                    $proSpec = $goods->productSpecs()->create(array_intersect_key($productSpec, $rules));
+            $goods = Goods::create($goodsRequest->validated());
+
+            if ($productSpecs = $goodsRequest->input('productspecs')) {
+
+                foreach ($productSpecs as $productSpec) {
+
+                    $proSpec = $goods->productSpecs()->create(
+                        $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec)
+                    );
 
                     if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-                        //计算要通过的字段
-                        $rules = collect($combinationRequest->rules())->map(function($item,$index){
-                            $index = explode('.',$index);
-                            return end($index);
-                        })->flip()->toArray();
 
                         foreach ($productSpec['combinations'] as $combination) {
-                            $proSpec->combinations()->create(array_intersect_key($combination, $rules));
+
+                            $proSpec->combinations()->create(
+                                $validatedHandler->getValidatedData($combinationRequest->rules(), $combination)
+                            );
                         }
                     }
                 }
@@ -809,61 +809,61 @@ class GoodsController extends Controller
      * @Patch("/goods/:id")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("commodity_code", description="商品编码", required=true),
-     *      @Parameter("jd_sn", description="京东编码", required=true),
-     *      @Parameter("vips_sn", description="唯品会编码", required=true),
-     *      @Parameter("factory_model", description="工厂型号", required=true),
-     *      @Parameter("short_name", description="商品简称", required=true),
-     *      @Parameter("nick", description="卖家昵称（店铺昵称）", required=true),
-     *      @Parameter("supplier_id",type="integer", description="供应商id", required=true),
-     *      @Parameter("category_id",type="integer", description="产品类别id", required=true),
+     *      @Parameter("commodity_code", description="商品编码", required=false),
+     *      @Parameter("jd_sn", description="京东编码", required=false),
+     *      @Parameter("vips_sn", description="唯品会编码", required=false),
+     *      @Parameter("factory_model", description="工厂型号", required=false),
+     *      @Parameter("short_name", description="商品简称", required=false),
+     *      @Parameter("nick", description="卖家昵称（店铺昵称）", required=false),
+     *      @Parameter("supplier_id",type="integer", description="供应商id", required=false),
+     *      @Parameter("category_id",type="integer", description="产品类别id", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("title", description="商品标题", required=true),
-     *      @Parameter("img", description="商品图片", required=true),
-     *      @Parameter("url",type="url", description="商品网址", required=true),
-     *      @Parameter("is_stop_pro",type="integer", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=0),
+     *      @Parameter("title", description="商品标题", required=false),
+     *      @Parameter("img", description="商品图片", required=false),
+     *      @Parameter("url",type="url", description="商品网址", required=false),
+     *      @Parameter("is_stop_pro", type="integer", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=0),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("productspecs[0][id]", description="规格id ( 存在 id 视为更新，不存在视为插入 )", required=false),
-     *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=true),
-     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=true),
-     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=true),
-     *      @Parameter("productspecs[0][tb_price]", description="淘宝价格", required=true),
-     *      @Parameter("productspecs[0][cost]", description="成本价格", required=true),
-     *      @Parameter("productspecs[0][price]", description="售价", required=true),
-     *      @Parameter("productspecs[0][highest_price]", description="最高售价", required=true),
-     *      @Parameter("productspecs[0][lowest_price]", description="最低售价", required=true),
-     *      @Parameter("productspecs[0][warehouse_cost]", description="仓库成本", required=true),
-     *      @Parameter("productspecs[0][assembly_price]", description="装配价格", required=true),
-     *      @Parameter("productspecs[0][discount]", description="折扣", required=true),
-     *      @Parameter("productspecs[0][commission]", description="金佣点", required=true),
-     *      @Parameter("productspecs[0][is_combination]", description="是否组合", required=true),
-     *      @Parameter("productspecs[0][package_quantity]", description="包件数量", required=true),
-     *      @Parameter("productspecs[0][package_costs]", description="打包费用", required=true),
-     *      @Parameter("productspecs[0][wooden_frame_costs]", description="木架费", required=true),
-     *      @Parameter("productspecs[0][purchase_freight]", description="采购运费", required=true),
-     *      @Parameter("productspecs[0][inventory_warning]", description="库存预警(数量)", required=true),
-     *      @Parameter("productspecs[0][purchase_days_warning]", description="采购预警天数", required=true),
-     *      @Parameter("productspecs[0][available_warning]", description="可售数预警", required=true),
-     *      @Parameter("productspecs[0][distribution_method_id]", description="配送类别", required=true),
-     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=true),
-     *      @Parameter("productspecs[0][img_url]", description="图片地址", required=true),
-     *      @Parameter("productspecs[0][spec]", description="规格", required=true),
-     *      @Parameter("productspecs[0][color]", description="颜色", required=true),
-     *      @Parameter("productspecs[0][materials]", description="材质", required=true),
-     *      @Parameter("productspecs[0][function]", description="功能", required=true),
-     *      @Parameter("productspecs[0][special]", description="特殊", required=true),
-     *      @Parameter("productspecs[0][other]", description="其他", required=true),
-     *      @Parameter("productspecs[0][length]", description="长度（mm）", required=true),
-     *      @Parameter("productspecs[0][width]", description="宽度（mm）", required=true),
-     *      @Parameter("productspecs[0][height]", description="高度（mm）", required=true),
-     *      @Parameter("productspecs[0][volume]", description="体积(m²)", required=true),
-     *      @Parameter("productspecs[0][weight]", description="重量", required=true),
-     *      @Parameter("productspecs[0][remark]", description="备注", required=true),
-     *      @Parameter("productspecs[0][finished_pro]", description="是否成品 0 不是 1 是", required=true),
-     *      @Parameter("productspecs[0][is_stop_pro]", description="是否停产 0 不是 1 是", required=true),
-     *      @Parameter("productspecs[0][combinations][0][id]", description="组合id ( 存在 id 视为更新，不存在视为插入 )", required=false),
-     *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", description="组合产品规格id", required=true),
-     *      @Parameter("productspecs[0][combinations][0][count]", description="组合件数", required=true),
+     *      @Parameter("productspecs[0][id]",type="integer", description="规格id ( 存在 id 视为更新，不存在视为插入 )", required=false),
+     *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=false),
+     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=false),
+     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=false),
+     *      @Parameter("productspecs[0][tb_price]", type="numeric", description="淘宝价格", required=false),
+     *      @Parameter("productspecs[0][cost]", type="numeric", description="成本价格", required=false),
+     *      @Parameter("productspecs[0][price]", type="numeric", description="售价", required=false),
+     *      @Parameter("productspecs[0][highest_price]", type="numeric", description="最高售价", required=false),
+     *      @Parameter("productspecs[0][lowest_price]", type="numeric", description="最低售价", required=false),
+     *      @Parameter("productspecs[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
+     *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
+     *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("productspecs[0][commission]", type="numeric", description="金佣点", required=false),
+     *      @Parameter("productspecs[0][is_combination]", type="integer", description="是否组合", required=false),
+     *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
+     *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
+     *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("productspecs[0][purchase_freight]", type="numeric", description="采购运费", required=false),
+     *      @Parameter("productspecs[0][inventory_warning]", type="integer", description="库存预警(数量)", required=false),
+     *      @Parameter("productspecs[0][purchase_days_warning]", type="integer", description="采购预警天数", required=false),
+     *      @Parameter("productspecs[0][available_warning]", type="integer", description="可售数预警", required=false),
+     *      @Parameter("productspecs[0][distribution_method_id]", type="integer", description="配送类别", required=false),
+     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=false),
+     *      @Parameter("productspecs[0][img_url]", description="图片地址", type="url", required=false),
+     *      @Parameter("productspecs[0][spec]", description="规格", required=false),
+     *      @Parameter("productspecs[0][color]", description="颜色", required=false),
+     *      @Parameter("productspecs[0][materials]", description="材质", required=false),
+     *      @Parameter("productspecs[0][function]", description="功能", required=false),
+     *      @Parameter("productspecs[0][special]", description="特殊", required=false),
+     *      @Parameter("productspecs[0][other]", description="其他", required=false),
+     *      @Parameter("productspecs[0][length]", type="numeric", description="长度（mm）", required=false),
+     *      @Parameter("productspecs[0][width]", type="numeric", description="宽度（mm）", required=false),
+     *      @Parameter("productspecs[0][height]", type="numeric", description="高度（mm）", required=false),
+     *      @Parameter("productspecs[0][volume]", type="numeric", description="体积(m²)", required=false),
+     *      @Parameter("productspecs[0][weight]", type="numeric", description="重量", required=false),
+     *      @Parameter("productspecs[0][remark]", description="备注", required=false),
+     *      @Parameter("productspecs[0][finished_pro]", type="integer", description="是否成品 0 不是 1 是", required=false),
+     *      @Parameter("productspecs[0][is_stop_pro]", type="integer", description="是否停产 0 不是 1 是", required=false),
+     *      @Parameter("productspecs[0][combinations][0][id]", type="integer", description="组合id ( 存在 id 视为更新，不存在视为插入 )", required=false),
+     *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=false),
+     *      @Parameter("productspecs[0][combinations][0][count]", type="integer", description="组合件数", required=false),
      * })
      * @Request({
      *      "commodity_code": "商品编码",
@@ -953,36 +953,36 @@ class GoodsController extends Controller
      *          "short_name": "商品简称1",
      *          "nick": "卖家昵称1",
      *          "supplier": {
-     *          "id": 1,
-     *          "name": "供应商名称",
-     *          "company": "供应商公司",
-     *          "code": "公司代码",
-     *          "province": "省",
-     *          "city": "市",
-     *          "district": "区",
-     *          "address": "地址",
-     *          "zipcode": "邮编",
-     *          "contacts": "联系人",
-     *          "phone": "电话",
-     *          "mobile": "手机",
-     *          "fax": "传真",
-     *          "email": "935661686@qq.com",
-     *          "remark": "备注",
-     *          "is_scan": 1,
-     *          "status": 1,
-     *          "auto_valuation": 1,
-     *          "created_at": "2018-07-07 09:57:48",
-     *          "updated_at": "2018-07-07 09:57:48"
+     *              "id": 1,
+     *              "name": "供应商名称",
+     *              "company": "供应商公司",
+     *              "code": "公司代码",
+     *              "province": "省",
+     *              "city": "市",
+     *              "district": "区",
+     *              "address": "地址",
+     *              "zipcode": "邮编",
+     *              "contacts": "联系人",
+     *              "phone": "电话",
+     *              "mobile": "手机",
+     *              "fax": "传真",
+     *              "email": "935661686@qq.com",
+     *              "remark": "备注",
+     *              "is_scan": 1,
+     *              "status": 1,
+     *              "auto_valuation": 1,
+     *              "created_at": "2018-07-07 09:57:48",
+     *              "updated_at": "2018-07-07 09:57:48"
      *          },
      *          "category": {
-     *          "id": 1,
-     *          "code": "商品类别代码",
-     *          "name": "商品类别名",
-     *          "description": "详情",
-     *          "remark": "备注",
-     *          "status": 1,
-     *          "created_at": "2018-07-07 09:58:22",
-     *          "updated_at": "2018-07-07 09:58:22"
+     *              "id": 1,
+     *              "code": "商品类别代码",
+     *              "name": "商品类别名",
+     *              "description": "详情",
+     *              "remark": "备注",
+     *              "status": 1,
+     *              "created_at": "2018-07-07 09:58:22",
+     *              "updated_at": "2018-07-07 09:58:22"
      *          },
      *          "remark": "备注1",
      *          "title": "商品标题1",
@@ -1253,58 +1253,59 @@ class GoodsController extends Controller
      *      })
      * })
      */
-    public function update(GoodsRequest $goodsRequest, ProductSpecRequest $productSpecRequest, CombinationRequest $combinationRequest, Goods $goods)
+    public function update(GoodsRequest $goodsRequest,
+                           ProductSpecRequest $productSpecRequest,
+                           CombinationRequest $combinationRequest,
+                           Goods $goods,
+                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-
-        $goods = DB::transaction(function () use ($goodsRequest, $productSpecRequest, $combinationRequest, $goods) {
+        $goods = DB::transaction(function () use ($goodsRequest,
+                                                  $productSpecRequest,
+                                                  $combinationRequest,
+                                                  $goods,
+                                                  $validatedHandler) {
 
             $goods->update($goodsRequest->validated());
 
             if ($productSpecs = $goodsRequest->input('productspecs')) {
+
                 foreach ($productSpecs as $productSpec) {
                     //计算要通过的字段
-                    $rules = collect($productSpecRequest->rules())->map(function($item,$index){
-                        $index = explode('.',$index);
-                        return end($index);
-                    })->flip()->toArray();
+                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(),$productSpec);
 
                     //存在id则更新，否则插入
                     if (isset($productSpec['id'])) {
 
-                        $goods->productSpecs()->findOrFail($productSpec['id'])->update(array_intersect_key($productSpec, $rules));
+                        $goods->productSpecs()->findOrFail($productSpec['id'])->update($data);
 
                         if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
 
                             foreach ($productSpec['combinations'] as $combination) {
 
-                                //计算要通过的字段
-                                $rules = collect($combinationRequest->rules())->map(function($item,$index){
-                                    $index = explode('.',$index);
-                                    return end($index);
-                                })->flip()->toArray();
-
+                                $combinationData = $validatedHandler->getValidatedData(
+                                    $combinationRequest->rules(), $combination
+                                );
                                 //存在id则更新，否则插入
                                 if (isset($combination['id'])) {
-                                    $goods->productSpecs()->findOrFail($productSpec['id'])->combinations()->findOrFail($combination['id'])->update(array_intersect_key($combination, $rules));
+                                    $goods->productSpecs()->findOrFail($productSpec['id'])
+                                          ->combinations()->findOrFail($combination['id'])
+                                          ->update($combinationData);
                                 } else {
-                                    $goods->productSpecs()->findOrFail($productSpec['id'])->combinations()->create(array_intersect_key($combination, $rules));
+                                    $goods->productSpecs()->findOrFail($productSpec['id'])
+                                          ->combinations()->create($combinationData);
                                 }
                             }
                         }
-
                     } else {
-                        $proSpec = $goods->productSpecs()->create(array_intersect_key($productSpec, $rules));
+                        $proSpec = $goods->productSpecs()->create($data);
 
                         if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-                            //计算要通过的字段
-                            $rules = collect($combinationRequest->rules())->map(function($item,$index){
-                                $index = explode('.',$index);
-                                return end($index);
-                            })->flip()->toArray();
 
                             foreach ($productSpec['combinations'] as $combination) {
-                                $proSpec->combinations()->create(array_intersect_key($combination, $rules));
+                                $proSpec->combinations()->create($validatedHandler->getValidatedData(
+                                    $combinationRequest->rules(), $combination
+                                ));
                             }
                         }
                     }

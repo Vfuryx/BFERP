@@ -19,6 +19,7 @@ use App\Http\Controllers\Traits\CURDTrait;
 use App\Http\Controllers\Traits\ProcedureTrait;
 
 use Dingo\Api\Exception\DeleteResourceFailedException;
+use Dingo\Api\Exception\UpdateResourceFailedException;
 
 /**
  * 采购单资源
@@ -117,7 +118,20 @@ class PurchasesController extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("purchase_details", type="json", description="采购单详情", required=false),
+     *      @Parameter("purchase_details[0][product_specs_id]", type="integer", description="产品规格id", required=true),
+     *      @Parameter("purchase_details[0][purchase_quantity]", type="integer", description="采购数", required=true),
+     *      @Parameter("purchase_details[0][shops_id]", type="integer", description="采购店铺id", required=true),
+     *      @Parameter("purchase_details[0][suppliers_id]", type="integer", description="供应商id", required=true),
+     *      @Parameter("purchase_details[0][purchase_cost]", type="numeric", description="采购成本", required=true),
+     *      @Parameter("purchase_details[0][purchase_freight]", type="numeric", description="采购运费", required=true),
+     *      @Parameter("purchase_details[0][warehouse_cost]", type="numeric", description="仓库成本", required=true),
+     *      @Parameter("purchase_details[0][commission]", type="numeric", description="金佣点", required=false),
+     *      @Parameter("purchase_details[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_details[0][colour_num]", description="色号", required=false),
+     *      @Parameter("purchase_details[0][paint]", description="油漆", required=false),
+     *      @Parameter("purchase_details[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_details[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_details[0][remark]", description="备注", required=false),
      * })
      * @Request({
      *     {
@@ -126,40 +140,20 @@ class PurchasesController extends Controller
      *          "warehouse_id": "1",
      *          "remark": "备注",
      *          "status": "1",
-     *          "created_at": "2018-07-17 18:05:51",
-     *          "updated_at": "2018-07-17 18:05:51",
-     *          "purchase_details": {
-     *              {
-     *                  "product_specs_id": "2",
-     *                  "purchase_quantity": "10",
-     *                  "shops_id": "1",
-     *                  "suppliers_id": "1",
-     *                  "purchase_cost": "10",
-     *                  "purchase_freight": "10",
-     *                  "warehouse_cost": "10",
-     *                  "commission": "10",
-     *                  "discount": "10",
-     *                  "colour_num": "色号",
-     *                  "paint": "油漆",
-     *                  "arrival_time": "2018-6-10 00:00:00",
-     *                  "remark": "备注"
-     *              },
-     *              {
-     *                  "product_specs_id": "2",
-     *                  "purchase_quantity": "10",
-     *                  "shops_id": "1",
-     *                  "suppliers_id": "1",
-     *                  "purchase_cost": "10",
-     *                  "purchase_freight": "10",
-     *                  "warehouse_cost": "10",
-     *                  "commission": "10",
-     *                  "discount": "10",
-     *                  "colour_num": "色号",
-     *                  "paint": "油漆",
-     *                  "arrival_time": "2018-6-10 00:00:00",
-     *                  "remark": "备注"
-     *              }
-     *          }
+     *          "purchase_details[0][product_specs_id]":1,
+     *          "purchase_details[0][purchase_quantity]":10,
+     *          "purchase_details[0][shops_id]":1,
+     *          "purchase_details[0][suppliers_id]":1,
+     *          "purchase_details[0][purchase_cost]":10,
+     *          "purchase_details[0][purchase_freight]":10,
+     *          "purchase_details[0][warehouse_cost]":10,
+     *          "purchase_details[0][commission]":10,
+     *          "purchase_details[0][discount]":10,
+     *          "purchase_details[0][colour_num]":"色号",
+     *          "purchase_details[0][paint]":"油漆",
+     *          "purchase_details[0][wooden_frame_costs]":10,
+     *          "purchase_details[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_details[0][remark]":"备注",
      *      }
      *})
      * @Transaction({
@@ -223,27 +217,22 @@ class PurchasesController extends Controller
      *      })
      * })
      */
-    public function store(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest)
+    public function store(PurchaseRequest $purchaseRequest,
+                          PurchaseDetailRequest $purchaseDetailRequest,
+                          \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest) {
-            $date = $purchaseRequest->validated();
+        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest, $validatedHandler) {
 
-            $date['user_id'] = 1;//后期要更改
-
-            $purchase = Purchase::create($date);
+            $purchase = Purchase::create($purchaseRequest->validated());
 
             if ($purchasedDetails = $purchaseRequest->input('purchase_details')) {
 
-                $purchasedDetails = json_decode($purchasedDetails, true);
-
                 foreach ($purchasedDetails as $purchasedDetail) {
 
-                    Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages())->validate();
-
-                    $data = array_intersect_key($purchasedDetail, $purchaseDetailRequest->rules());
-
-                    $purchase->purchaseDetails()->create($data);
+                    $purchase->purchaseDetails()->create(
+                        $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchasedDetail)
+                    );
                 }
             }
             return $purchase;
@@ -323,6 +312,52 @@ class PurchasesController extends Controller
      *
      * @Patch("/purchases/:id")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("receiver", description="收货人", required=false),
+     *      @Parameter("receiver_address", description="收货地址", required=false),
+     *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
+     *      @Parameter("remark", description="备注", required=false),
+     *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("purchase_details[0][id]", type="integer", description="采购详情id", required=false),
+     *      @Parameter("purchase_details[0][product_specs_id]", type="integer", description="产品规格id", required=false),
+     *      @Parameter("purchase_details[0][purchase_quantity]", type="integer", description="采购数", required=false),
+     *      @Parameter("purchase_details[0][shops_id]", type="integer", description="采购店铺id", required=false),
+     *      @Parameter("purchase_details[0][suppliers_id]", type="integer", description="供应商id", required=false),
+     *      @Parameter("purchase_details[0][purchase_cost]", type="numeric", description="采购成本", required=false),
+     *      @Parameter("purchase_details[0][purchase_freight]", type="numeric", description="采购运费", required=false),
+     *      @Parameter("purchase_details[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
+     *      @Parameter("purchase_details[0][commission]", type="numeric", description="金佣点", required=false),
+     *      @Parameter("purchase_details[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_details[0][colour_num]", description="色号", required=false),
+     *      @Parameter("purchase_details[0][paint]", description="油漆", required=false),
+     *      @Parameter("purchase_details[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_details[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_details[0][remark]", description="备注", required=false),
+     * })
+     * @Request({
+     *     {
+     *          "receiver": "收货人",
+     *          "receiver_address": "收货地址",
+     *          "warehouse_id": "1",
+     *          "remark": "备注",
+     *          "status": "1",
+     *          "purchase_details[0][id]":1,
+     *          "purchase_details[0][product_specs_id]":1,
+     *          "purchase_details[0][purchase_quantity]":10,
+     *          "purchase_details[0][shops_id]":1,
+     *          "purchase_details[0][suppliers_id]":1,
+     *          "purchase_details[0][purchase_cost]":10,
+     *          "purchase_details[0][purchase_freight]":10,
+     *          "purchase_details[0][warehouse_cost]":10,
+     *          "purchase_details[0][commission]":10,
+     *          "purchase_details[0][discount]":10,
+     *          "purchase_details[0][colour_num]":"色号",
+     *          "purchase_details[0][paint]":"油漆",
+     *          "purchase_details[0][wooden_frame_costs]":10,
+     *          "purchase_details[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_details[0][remark]":"备注",
+     *      }
+     *})
      * @Transaction({
      *      @Response(404, body={
      *          "message": "No query results for model ",
@@ -369,25 +404,30 @@ class PurchasesController extends Controller
      *      })
      * })
      */
-    public function update(PurchaseRequest $purchaseRequest, PurchaseDetailRequest $purchaseDetailRequest, Purchase $purchase)
+    public function update(PurchaseRequest $purchaseRequest,
+                           PurchaseDetailRequest $purchaseDetailRequest,
+                           Purchase $purchase,
+                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
+        //判断是否提交
+        if ($purchase->is_submit)
+            throw new UpdateResourceFailedException('已提交无法修改');
 
-        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest, $purchase) {
+        $purchase = DB::transaction(function () use ($purchaseRequest,
+                                                     $purchaseDetailRequest,
+                                                     $purchase,
+                                                     $validatedHandler) {
 
             $purchase->update($purchaseRequest->validated());
 
             if ($purchasedDetails = $purchaseRequest->input('purchase_details')) {
-                $purchasedDetails = json_decode($purchasedDetails, true);
+
                 foreach ($purchasedDetails as $purchasedDetail) {
-                    //验证purchasedDetail数据
-                    Validator::make($purchasedDetail, $purchaseDetailRequest->rules(), $purchaseDetailRequest->messages())->validate();
-
                     //过滤出经过验证的数据
-                    $data = array_intersect_key($purchasedDetail, $purchaseDetailRequest->rules());
-
+                    $data = $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchasedDetail);
                     //存在id则更新，否则插入
                     if (isset($purchasedDetail['id'])) {
-                        PurchaseDetail::findOrFail($purchasedDetail['id'])->update($data);
+                        $purchase->purchaseDetails->findOrFail($purchasedDetail['id'])->update($data);
                     } else {
                         $purchase->purchaseDetails()->create($data);
                     }

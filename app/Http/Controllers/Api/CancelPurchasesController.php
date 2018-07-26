@@ -295,23 +295,23 @@ class CancelPurchasesController extends Controller
      *      })
      * })
      */
-    public function store(CancelPurchaseRequest $cancelPurchaseRequest,CancelPurchaseDetailRequest $cancelPurchaseDetailRequest)
+    public function store(CancelPurchaseRequest $cancelPurchaseRequest,
+                          CancelPurchaseDetailRequest $cancelPurchaseDetailRequest,
+                          \App\Handlers\ValidatedHandler $validatedHandler)
     {
-
-        $cancelPurchase = DB::transaction(function () use ($cancelPurchaseRequest, $cancelPurchaseDetailRequest) {
+        $cancelPurchase = DB::transaction(function () use ($cancelPurchaseRequest, $cancelPurchaseDetailRequest, $validatedHandler) {
 
             $cancelPurchase = CancelPurchase::create($cancelPurchaseRequest->validated());
 
             if ($cancelPurchaseDetails = $cancelPurchaseDetailRequest->input('cancel_purchase_details')) {
 
                 foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
-                    //计算要通过的字段
-                    $rules = collect($cancelPurchaseDetailRequest->rules())->map(function($item,$index){
-                        $index = explode('.',$index);
-                        return end($index);
-                    })->flip()->toArray();
 
-                    $cancelPurchase->cancelPurchaseDetails()->create(array_intersect_key($cancelPurchaseDetail, $rules));
+                    $cancelPurchase->cancelPurchaseDetails()->create(
+                        $validatedHandler->getValidatedData(
+                            $cancelPurchaseDetailRequest->rules(),
+                            $cancelPurchaseDetail)
+                    );
                 }
             }
             return $cancelPurchase;
@@ -610,13 +610,17 @@ class CancelPurchasesController extends Controller
      */
     public function update(CancelPurchaseRequest $cancelPurchaseRequest,
                            CancelPurchaseDetailRequest $cancelPurchaseDetailRequest,
-                           CancelPurchase $cancelpurchase)
+                           CancelPurchase $cancelpurchase,
+                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
         //判断是否提交
         if ($cancelpurchase->is_submit)
             throw new UpdateResourceFailedException('已提交无法修改');
 
-        $cancelpurchase = DB::transaction(function () use ($cancelPurchaseRequest, $cancelPurchaseDetailRequest, $cancelpurchase) {
+        $cancelpurchase = DB::transaction(function () use ($cancelPurchaseRequest,
+                                                           $cancelPurchaseDetailRequest,
+                                                           $cancelpurchase,
+                                                           $validatedHandler) {
 
             $cancelpurchase->update($cancelPurchaseRequest->validated());
 
@@ -624,18 +628,14 @@ class CancelPurchasesController extends Controller
 
                 foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
 
-                    //计算要通过的字段
-                    $rules = collect($cancelPurchaseDetailRequest->rules())->map(function($item,$index){
-                        $index = explode('.',$index);
-                        return end($index);
-                    })->flip()->toArray();
+                    $data = $validatedHandler->getValidatedData($cancelPurchaseDetailRequest->rules(), $cancelPurchaseDetail);
 
                     //存在id则更新，否则插入
                     if (isset($cancelPurchaseDetail['id'])) {
 
-                        $cancelpurchase->cancelPurchaseDetails()->findOrFail($cancelPurchaseDetail['id'])->update(array_intersect_key($cancelPurchaseDetail, $rules));
+                        $cancelpurchase->cancelPurchaseDetails()->findOrFail($cancelPurchaseDetail['id'])->update($data);
                     } else {
-                        $cancelpurchase->cancelPurchaseDetails()->create(array_intersect_key($cancelPurchaseDetail, $rules));
+                        $cancelpurchase->cancelPurchaseDetails()->create($data);
                     }
                 }
             }

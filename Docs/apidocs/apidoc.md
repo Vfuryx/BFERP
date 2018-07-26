@@ -5121,44 +5121,44 @@ FORMAT: 1A
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
     + productspecs[0][spec_code]: (string, required) - 规格编码
-    + productspecs[0][jd_specs_code]: (string, required) - 京东规格编码
-    + productspecs[0][vips_specs_code]: (string, required) - 唯品会规格编码
-    + productspecs[0][tb_price]: (string, required) - 淘宝价格
-    + productspecs[0][cost]: (string, required) - 成本价格
-    + productspecs[0][price]: (string, required) - 售价
-    + productspecs[0][highest_price]: (string, required) - 最高售价
-    + productspecs[0][lowest_price]: (string, required) - 最低售价
-    + productspecs[0][warehouse_cost]: (string, required) - 仓库成本
-    + productspecs[0][assembly_price]: (string, required) - 装配价格
-    + productspecs[0][discount]: (string, required) - 折扣
-    + productspecs[0][commission]: (string, required) - 金佣点
-    + productspecs[0][is_combination]: (string, required) - 是否组合
-    + productspecs[0][package_quantity]: (string, required) - 包件数量
-    + productspecs[0][package_costs]: (string, required) - 打包费用
-    + productspecs[0][wooden_frame_costs]: (string, required) - 木架费
-    + productspecs[0][purchase_freight]: (string, required) - 采购运费
-    + productspecs[0][inventory_warning]: (string, required) - 库存预警(数量)
-    + productspecs[0][purchase_days_warning]: (string, required) - 采购预警天数
-    + productspecs[0][available_warning]: (string, required) - 可售数预警
-    + productspecs[0][distribution_method_id]: (string, required) - 配送类别
-    + productspecs[0][bar_code]: (string, required) - 条形码
-    + productspecs[0][img_url]: (string, required) - 图片地址
+    + productspecs[0][jd_specs_code]: (string, optional) - 京东规格编码
+    + productspecs[0][vips_specs_code]: (string, optional) - 唯品会规格编码
+    + productspecs[0][tb_price]: (numeric, required) - 淘宝价格
+    + productspecs[0][cost]: (numeric, required) - 成本价格
+    + productspecs[0][price]: (numeric, required) - 售价
+    + productspecs[0][highest_price]: (numeric, required) - 最高售价
+    + productspecs[0][lowest_price]: (numeric, required) - 最低售价
+    + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
+    + productspecs[0][discount]: (numeric, optional) - 折扣
+    + productspecs[0][commission]: (numeric, optional) - 金佣点
+    + productspecs[0][is_combination]: (integer, required) - 是否组合
+    + productspecs[0][package_quantity]: (integer, optional) - 包件数量
+    + productspecs[0][package_costs]: (numeric, optional) - 打包费用
+    + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + productspecs[0][purchase_freight]: (numeric, optional) - 采购运费
+    + productspecs[0][inventory_warning]: (integer, required) - 库存预警(数量)
+    + productspecs[0][purchase_days_warning]: (integer, required) - 采购预警天数
+    + productspecs[0][available_warning]: (integer, required) - 可售数预警
+    + productspecs[0][distribution_method_id]: (integer, required) - 配送类别
+    + productspecs[0][bar_code]: (string, optional) - 条形码
+    + productspecs[0][img_url]: (url, optional) - 图片地址
     + productspecs[0][spec]: (string, required) - 规格
-    + productspecs[0][color]: (string, required) - 颜色
-    + productspecs[0][materials]: (string, required) - 材质
-    + productspecs[0][function]: (string, required) - 功能
-    + productspecs[0][special]: (string, required) - 特殊
-    + productspecs[0][other]: (string, required) - 其他
-    + productspecs[0][length]: (string, required) - 长度（mm）
-    + productspecs[0][width]: (string, required) - 宽度（mm）
-    + productspecs[0][height]: (string, required) - 高度（mm）
-    + productspecs[0][volume]: (string, required) - 体积(m²)
-    + productspecs[0][weight]: (string, required) - 重量
-    + productspecs[0][remark]: (string, required) - 备注
-    + productspecs[0][finished_pro]: (string, required) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (string, required) - 是否停产 0 不是 1 是
-    + productspecs[0][combinations][0][com_pro_specs_id]: (string, required) - 组合产品规格id
-    + productspecs[0][combinations][0][count]: (string, required) - 组合件数
+    + productspecs[0][color]: (string, optional) - 颜色
+    + productspecs[0][materials]: (string, optional) - 材质
+    + productspecs[0][function]: (string, optional) - 功能
+    + productspecs[0][special]: (string, optional) - 特殊
+    + productspecs[0][other]: (string, optional) - 其他
+    + productspecs[0][length]: (numeric, optional) - 长度（mm）
+    + productspecs[0][width]: (numeric, optional) - 宽度（mm）
+    + productspecs[0][height]: (numeric, optional) - 高度（mm）
+    + productspecs[0][volume]: (numeric, optional) - 体积(m²)
+    + productspecs[0][weight]: (numeric, optional) - 重量
+    + productspecs[0][remark]: (string, optional) - 备注
+    + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
+    + productspecs[0][is_stop_pro]: (integer, optional) - 是否停产 0 不是 1 是
+    + productspecs[0][combinations][0][com_pro_specs_id]: (integer, required) - 组合产品规格id
+    + productspecs[0][combinations][0][count]: (integer, required) - 组合件数
 
 + Request (application/json)
     + Body
@@ -5560,63 +5560,63 @@ FORMAT: 1A
 
 
 + Parameters
-    + commodity_code: (string, required) - 商品编码
-    + jd_sn: (string, required) - 京东编码
-    + vips_sn: (string, required) - 唯品会编码
-    + factory_model: (string, required) - 工厂型号
-    + short_name: (string, required) - 商品简称
-    + nick: (string, required) - 卖家昵称（店铺昵称）
-    + supplier_id: (integer, required) - 供应商id
-    + category_id: (integer, required) - 产品类别id
+    + commodity_code: (string, optional) - 商品编码
+    + jd_sn: (string, optional) - 京东编码
+    + vips_sn: (string, optional) - 唯品会编码
+    + factory_model: (string, optional) - 工厂型号
+    + short_name: (string, optional) - 商品简称
+    + nick: (string, optional) - 卖家昵称（店铺昵称）
+    + supplier_id: (integer, optional) - 供应商id
+    + category_id: (integer, optional) - 产品类别id
     + remark: (string, optional) - 备注
-    + title: (string, required) - 商品标题
-    + img: (string, required) - 商品图片
-    + url: (url, required) - 商品网址
+    + title: (string, optional) - 商品标题
+    + img: (string, optional) - 商品图片
+    + url: (url, optional) - 商品网址
     + is_stop_pro: (integer, optional) - 是否停产 默认 0 = 不停产  1 = 停产
         + Default: 0
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + productspecs[0][id]: (string, optional) - 规格id ( 存在 id 视为更新，不存在视为插入 )
-    + productspecs[0][spec_code]: (string, required) - 规格编码
-    + productspecs[0][jd_specs_code]: (string, required) - 京东规格编码
-    + productspecs[0][vips_specs_code]: (string, required) - 唯品会规格编码
-    + productspecs[0][tb_price]: (string, required) - 淘宝价格
-    + productspecs[0][cost]: (string, required) - 成本价格
-    + productspecs[0][price]: (string, required) - 售价
-    + productspecs[0][highest_price]: (string, required) - 最高售价
-    + productspecs[0][lowest_price]: (string, required) - 最低售价
-    + productspecs[0][warehouse_cost]: (string, required) - 仓库成本
-    + productspecs[0][assembly_price]: (string, required) - 装配价格
-    + productspecs[0][discount]: (string, required) - 折扣
-    + productspecs[0][commission]: (string, required) - 金佣点
-    + productspecs[0][is_combination]: (string, required) - 是否组合
-    + productspecs[0][package_quantity]: (string, required) - 包件数量
-    + productspecs[0][package_costs]: (string, required) - 打包费用
-    + productspecs[0][wooden_frame_costs]: (string, required) - 木架费
-    + productspecs[0][purchase_freight]: (string, required) - 采购运费
-    + productspecs[0][inventory_warning]: (string, required) - 库存预警(数量)
-    + productspecs[0][purchase_days_warning]: (string, required) - 采购预警天数
-    + productspecs[0][available_warning]: (string, required) - 可售数预警
-    + productspecs[0][distribution_method_id]: (string, required) - 配送类别
-    + productspecs[0][bar_code]: (string, required) - 条形码
-    + productspecs[0][img_url]: (string, required) - 图片地址
-    + productspecs[0][spec]: (string, required) - 规格
-    + productspecs[0][color]: (string, required) - 颜色
-    + productspecs[0][materials]: (string, required) - 材质
-    + productspecs[0][function]: (string, required) - 功能
-    + productspecs[0][special]: (string, required) - 特殊
-    + productspecs[0][other]: (string, required) - 其他
-    + productspecs[0][length]: (string, required) - 长度（mm）
-    + productspecs[0][width]: (string, required) - 宽度（mm）
-    + productspecs[0][height]: (string, required) - 高度（mm）
-    + productspecs[0][volume]: (string, required) - 体积(m²)
-    + productspecs[0][weight]: (string, required) - 重量
-    + productspecs[0][remark]: (string, required) - 备注
-    + productspecs[0][finished_pro]: (string, required) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (string, required) - 是否停产 0 不是 1 是
-    + productspecs[0][combinations][0][id]: (string, optional) - 组合id ( 存在 id 视为更新，不存在视为插入 )
-    + productspecs[0][combinations][0][com_pro_specs_id]: (string, required) - 组合产品规格id
-    + productspecs[0][combinations][0][count]: (string, required) - 组合件数
+    + productspecs[0][id]: (integer, optional) - 规格id ( 存在 id 视为更新，不存在视为插入 )
+    + productspecs[0][spec_code]: (string, optional) - 规格编码
+    + productspecs[0][jd_specs_code]: (string, optional) - 京东规格编码
+    + productspecs[0][vips_specs_code]: (string, optional) - 唯品会规格编码
+    + productspecs[0][tb_price]: (numeric, optional) - 淘宝价格
+    + productspecs[0][cost]: (numeric, optional) - 成本价格
+    + productspecs[0][price]: (numeric, optional) - 售价
+    + productspecs[0][highest_price]: (numeric, optional) - 最高售价
+    + productspecs[0][lowest_price]: (numeric, optional) - 最低售价
+    + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
+    + productspecs[0][discount]: (numeric, optional) - 折扣
+    + productspecs[0][commission]: (numeric, optional) - 金佣点
+    + productspecs[0][is_combination]: (integer, optional) - 是否组合
+    + productspecs[0][package_quantity]: (integer, optional) - 包件数量
+    + productspecs[0][package_costs]: (numeric, optional) - 打包费用
+    + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + productspecs[0][purchase_freight]: (numeric, optional) - 采购运费
+    + productspecs[0][inventory_warning]: (integer, optional) - 库存预警(数量)
+    + productspecs[0][purchase_days_warning]: (integer, optional) - 采购预警天数
+    + productspecs[0][available_warning]: (integer, optional) - 可售数预警
+    + productspecs[0][distribution_method_id]: (integer, optional) - 配送类别
+    + productspecs[0][bar_code]: (string, optional) - 条形码
+    + productspecs[0][img_url]: (url, optional) - 图片地址
+    + productspecs[0][spec]: (string, optional) - 规格
+    + productspecs[0][color]: (string, optional) - 颜色
+    + productspecs[0][materials]: (string, optional) - 材质
+    + productspecs[0][function]: (string, optional) - 功能
+    + productspecs[0][special]: (string, optional) - 特殊
+    + productspecs[0][other]: (string, optional) - 其他
+    + productspecs[0][length]: (numeric, optional) - 长度（mm）
+    + productspecs[0][width]: (numeric, optional) - 宽度（mm）
+    + productspecs[0][height]: (numeric, optional) - 高度（mm）
+    + productspecs[0][volume]: (numeric, optional) - 体积(m²)
+    + productspecs[0][weight]: (numeric, optional) - 重量
+    + productspecs[0][remark]: (string, optional) - 备注
+    + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
+    + productspecs[0][is_stop_pro]: (integer, optional) - 是否停产 0 不是 1 是
+    + productspecs[0][combinations][0][id]: (integer, optional) - 组合id ( 存在 id 视为更新，不存在视为插入 )
+    + productspecs[0][combinations][0][com_pro_specs_id]: (integer, optional) - 组合产品规格id
+    + productspecs[0][combinations][0][count]: (integer, optional) - 组合件数
 
 + Request (application/json)
     + Body
@@ -7245,7 +7245,20 @@ FORMAT: 1A
     + remark: (string, optional) - 备注
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + purchase_details: (json, optional) - 采购单详情
+    + purchase_details[0][product_specs_id]: (integer, required) - 产品规格id
+    + purchase_details[0][purchase_quantity]: (integer, required) - 采购数
+    + purchase_details[0][shops_id]: (integer, required) - 采购店铺id
+    + purchase_details[0][suppliers_id]: (integer, required) - 供应商id
+    + purchase_details[0][purchase_cost]: (numeric, required) - 采购成本
+    + purchase_details[0][purchase_freight]: (numeric, required) - 采购运费
+    + purchase_details[0][warehouse_cost]: (numeric, required) - 仓库成本
+    + purchase_details[0][commission]: (numeric, optional) - 金佣点
+    + purchase_details[0][discount]: (numeric, optional) - 折扣
+    + purchase_details[0][colour_num]: (string, optional) - 色号
+    + purchase_details[0][paint]: (string, optional) - 油漆
+    + purchase_details[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_details[0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_details[0][remark]: (string, optional) - 备注
 
 + Request (application/json)
     + Body
@@ -7257,40 +7270,20 @@ FORMAT: 1A
                     "warehouse_id": "1",
                     "remark": "备注",
                     "status": "1",
-                    "created_at": "2018-07-17 18:05:51",
-                    "updated_at": "2018-07-17 18:05:51",
-                    "purchase_details": [
-                        {
-                            "product_specs_id": "2",
-                            "purchase_quantity": "10",
-                            "shops_id": "1",
-                            "suppliers_id": "1",
-                            "purchase_cost": "10",
-                            "purchase_freight": "10",
-                            "warehouse_cost": "10",
-                            "commission": "10",
-                            "discount": "10",
-                            "colour_num": "色号",
-                            "paint": "油漆",
-                            "arrival_time": "2018-6-10 00:00:00",
-                            "remark": "备注"
-                        },
-                        {
-                            "product_specs_id": "2",
-                            "purchase_quantity": "10",
-                            "shops_id": "1",
-                            "suppliers_id": "1",
-                            "purchase_cost": "10",
-                            "purchase_freight": "10",
-                            "warehouse_cost": "10",
-                            "commission": "10",
-                            "discount": "10",
-                            "colour_num": "色号",
-                            "paint": "油漆",
-                            "arrival_time": "2018-6-10 00:00:00",
-                            "remark": "备注"
-                        }
-                    ]
+                    "purchase_details[0][product_specs_id]": 1,
+                    "purchase_details[0][purchase_quantity]": 10,
+                    "purchase_details[0][shops_id]": 1,
+                    "purchase_details[0][suppliers_id]": 1,
+                    "purchase_details[0][purchase_cost]": 10,
+                    "purchase_details[0][purchase_freight]": 10,
+                    "purchase_details[0][warehouse_cost]": 10,
+                    "purchase_details[0][commission]": 10,
+                    "purchase_details[0][discount]": 10,
+                    "purchase_details[0][colour_num]": "色号",
+                    "purchase_details[0][paint]": "油漆",
+                    "purchase_details[0][wooden_frame_costs]": 10,
+                    "purchase_details[0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_details[0][remark]": "备注"
                 }
             ]
 
@@ -7423,6 +7416,57 @@ FORMAT: 1A
 
 ## 修改采购单 [PATCH /api/purchases/:id]
 
+
++ Parameters
+    + receiver: (string, optional) - 收货人
+    + receiver_address: (string, optional) - 收货地址
+    + warehouse_id: (integer, optional) - 仓库id
+    + remark: (string, optional) - 备注
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+    + purchase_details[0][id]: (integer, optional) - 采购详情id
+    + purchase_details[0][product_specs_id]: (integer, optional) - 产品规格id
+    + purchase_details[0][purchase_quantity]: (integer, optional) - 采购数
+    + purchase_details[0][shops_id]: (integer, optional) - 采购店铺id
+    + purchase_details[0][suppliers_id]: (integer, optional) - 供应商id
+    + purchase_details[0][purchase_cost]: (numeric, optional) - 采购成本
+    + purchase_details[0][purchase_freight]: (numeric, optional) - 采购运费
+    + purchase_details[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + purchase_details[0][commission]: (numeric, optional) - 金佣点
+    + purchase_details[0][discount]: (numeric, optional) - 折扣
+    + purchase_details[0][colour_num]: (string, optional) - 色号
+    + purchase_details[0][paint]: (string, optional) - 油漆
+    + purchase_details[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_details[0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "receiver": "收货人",
+                    "receiver_address": "收货地址",
+                    "warehouse_id": "1",
+                    "remark": "备注",
+                    "status": "1",
+                    "purchase_details[0][id]": 1,
+                    "purchase_details[0][product_specs_id]": 1,
+                    "purchase_details[0][purchase_quantity]": 10,
+                    "purchase_details[0][shops_id]": 1,
+                    "purchase_details[0][suppliers_id]": 1,
+                    "purchase_details[0][purchase_cost]": 10,
+                    "purchase_details[0][purchase_freight]": 10,
+                    "purchase_details[0][warehouse_cost]": 10,
+                    "purchase_details[0][commission]": 10,
+                    "purchase_details[0][discount]": 10,
+                    "purchase_details[0][colour_num]": "色号",
+                    "purchase_details[0][paint]": "油漆",
+                    "purchase_details[0][wooden_frame_costs]": 10,
+                    "purchase_details[0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_details[0][remark]": "备注"
+                }
+            ]
 
 + Response 404 (application/json)
     + Body
@@ -8065,7 +8109,10 @@ FORMAT: 1A
     + stock_in_types_id: (integer, required) - 入库类型id
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + stock_in_details: (json, required) - 入库单详情
+    + stock_in_details[0][purchase_details_id]: (integer, required) - 采购单详情id
+    + stock_in_details[0][product_specs_id]: (integer, required) - 产品规格id
+    + stock_in_details[0][stock_in_quantity]: (integer, required) - 入库数量
+    + stock_in_details[0][remark]: (string, optional) - 备注
 
 + Request (application/json)
     + Body
@@ -8075,14 +8122,10 @@ FORMAT: 1A
                     "warehouse_id": 1,
                     "stock_in_types_id": 1,
                     "status": 1,
-                    "stock_in_details": [
-                        {
-                            "purchases_id": 1,
-                            "product_specs_id": 1,
-                            "stock_in_quantity": 5,
-                            "remark": "备注"
-                        }
-                    ]
+                    "stock_in_details[0][purchase_details_id]": 1,
+                    "stock_in_details[0][product_specs_id]": 1,
+                    "stock_in_details[0][stock_in_quantity]": 10,
+                    "stock_in_details[0][remark]": "备注"
                 }
             ]
 
@@ -8097,9 +8140,6 @@ FORMAT: 1A
                     ],
                     "stock_in_types_id": [
                         "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "stock_in_details": [
-                        "入库单详情必须json类型"
                     ]
                 },
                 "status_code": 422
@@ -8358,6 +8398,33 @@ FORMAT: 1A
 ## 修改入库单 [PATCH /api/stockins/:id]
 
 
++ Parameters
+    + warehouse_id: (integer, optional) - 仓库id
+    + stock_in_types_id: (integer, optional) - 入库类型id
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+    + stock_in_details[0][id]: (integer, optional) - 入库单详情id (存在则视为更新 不存在视为插入)
+    + stock_in_details[0][purchase_details_id]: (integer, optional) - 采购单详情id
+    + stock_in_details[0][product_specs_id]: (integer, optional) - 产品规格id
+    + stock_in_details[0][stock_in_quantity]: (integer, optional) - 入库数量
+    + stock_in_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "warehouse_id": 1,
+                    "stock_in_types_id": 1,
+                    "status": 1,
+                    "stock_in_details[0][id]": 1,
+                    "stock_in_details[0][purchase_details_id]": 1,
+                    "stock_in_details[0][product_specs_id]": 1,
+                    "stock_in_details[0][stock_in_quantity]": 10,
+                    "stock_in_details[0][remark]": "备注"
+                }
+            ]
+
 + Response 404 (application/json)
     + Body
 
@@ -8377,9 +8444,6 @@ FORMAT: 1A
                     ],
                     "stock_in_types_id": [
                         "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "stock_in_details": [
-                        "入库单详情必须json类型"
                     ]
                 },
                 "status_code": 422
@@ -9778,7 +9842,7 @@ FORMAT: 1A
     + purchase_return_details[0][stocks_id]: (integer, required) - 库存id
     + purchase_return_details[0][purchase_return_quantity]: (integer, required) - 采购退货数
     + purchase_return_details[0][suppliers_id]: (integer, required) - 供应商id
-    + purchase_return_details[0][price_differences]: (integer, required) - 差价
+    + purchase_return_details[0][price_differences]: (numeric, required) - 差价
     + purchase_return_details[0][purchase_return_types_id]: (integer, required) - 采购退货类型id
 
 + Request (application/json)
@@ -9973,13 +10037,12 @@ FORMAT: 1A
 + Parameters
     + remark: (string, optional) - 采购退货单备注
     + status: (integer, optional) - 状态
-        + Default: 1
     + purchase_return_details[0][id]: (integer, optional) - 采购退货id (不存在 id 则视为新建)
-    + purchase_return_details[0][stocks_id]: (integer, required) - 库存id
-    + purchase_return_details[0][purchase_return_quantity]: (integer, required) - 采购退货数
-    + purchase_return_details[0][suppliers_id]: (integer, required) - 供应商id
-    + purchase_return_details[0][price_differences]: (integer, required) - 差价
-    + purchase_return_details[0][purchase_return_types_id]: (integer, required) - 采购退货类型id
+    + purchase_return_details[0][stocks_id]: (integer, optional) - 库存id
+    + purchase_return_details[0][purchase_return_quantity]: (integer, optional) - 采购退货数
+    + purchase_return_details[0][suppliers_id]: (integer, optional) - 供应商id
+    + purchase_return_details[0][price_differences]: (numeric, optional) - 差价
+    + purchase_return_details[0][purchase_return_types_id]: (integer, optional) - 采购退货类型id
 
 + Request (application/json)
     + Body

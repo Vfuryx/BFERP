@@ -22,80 +22,68 @@ class PurchaseDetailRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-//                    'purchases_id' => [
-//                        'sometimes','required', 'integer',
-//                        Rule::exists('purchases', 'id')->where(function($query) {
-//                            $query->where('status', 1);
-//                        }),
-//                    ],
-                    'product_specs_id' => [
-                        'sometimes', 'required', 'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                    'purchase_details.*.product_specs_id' => [
+                        'required', 'integer',
+                        Rule::exists('product_specs', 'id')
                     ],
-                    'purchase_quantity' => 'sometimes|required|integer|min:1',
-                    'shops_id' => [
+                    'purchase_details.*.purchase_quantity' => 'required|integer|min:1',
+                    'purchase_details.*.shops_id' => [
                         'integer',
                         Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'suppliers_id' => [
+                    'purchase_details.*.suppliers_id' => [
                         'integer',
                         Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'purchase_cost' => 'numeric',
-                    'purchase_freight' => 'numeric',
-                    'warehouse_cost' => 'numeric',
-                    'commission' => 'numeric',
-                    'discount' => 'numeric',
-                    'colour_num' => 'string|max:255',
-                    'paint' => 'string|max:255',
-                    'wooden_frame_costs' => 'numeric',
-                    'arrival_time' => 'date',
-                    'remark' => 'string|nullable|max:255'
+                    'purchase_details.*.purchase_cost' => 'numeric',
+                    'purchase_details.*.purchase_freight' => 'numeric',
+                    'purchase_details.*.warehouse_cost' => 'numeric',
+                    'purchase_details.*.commission' => 'numeric',
+                    'purchase_details.*.discount' => 'numeric',
+                    'purchase_details.*.colour_num' => 'string|max:255',
+                    'purchase_details.*.paint' => 'string|max:255',
+                    'purchase_details.*.wooden_frame_costs' => 'numeric',
+                    'purchase_details.*.arrival_time' => 'date',
+                    'purchase_details.*.remark' => 'string|nullable|max:255'
                 ];
                 break;
             case 'PATCH':
                 return [
-//                    'purchases_id' => [
-//                        'integer',
-//                        Rule::exists('purchases', 'id')->where(function($query) {
-//                            $query->where('status', 1);
-//                        }),
-//                    ],
-                    'product_specs_id' => [
+                    'purchase_details.*.id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                        Rule::exists('purchase_details', 'id')
                     ],
-                    'purchase_quantity' => ['integer', 'min:1'],
-                    'shops_id' => [
+                    'purchase_details.*.product_specs_id' => [
+                        'integer',
+                        Rule::exists('product_specs', 'id')
+                    ],
+                    'purchase_details.*.purchase_quantity' => ['integer', 'min:1'],
+                    'purchase_details.*.shops_id' => [
                         'integer',
                         Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'suppliers_id' => [
+                    'purchase_details.*.suppliers_id' => [
                         'integer',
                         Rule::exists('shops', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'purchase_cost' => ['numeric'],
-                    'purchase_freight' => ['numeric'],
-                    'warehouse_cost' => ['numeric'],
-                    'commission' => ['numeric'],
-                    'discount' => ['numeric'],
-                    'colour_num' => ['string', 'max:255'],
-                    'paint' => ['string', 'max:255'],
-                    'wooden_frame_costs' => ['numeric'],
-                    'arrival_time' => ['date'],
-                    'remark' => ['string', 'nullable', 'max:255'],
+                    'purchase_details.*.purchase_cost' => ['numeric'],
+                    'purchase_details.*.purchase_freight' => ['numeric'],
+                    'purchase_details.*.warehouse_cost' => ['numeric'],
+                    'purchase_details.*.commission' => ['numeric'],
+                    'purchase_details.*.discount' => ['numeric'],
+                    'purchase_details.*.colour_num' => ['string', 'max:255'],
+                    'purchase_details.*.paint' => ['string', 'max:255'],
+                    'purchase_details.*.wooden_frame_costs' => ['numeric'],
+                    'purchase_details.*.arrival_time' => ['date'],
+                    'purchase_details.*.remark' => ['string', 'nullable', 'max:255'],
                 ];
                 break;
         }
@@ -105,47 +93,47 @@ class PurchaseDetailRequest extends FormRequest
         function messages()
     {
         return [
-            'purchases_id.required' => '采购id必填',
-            'purchases_id.integer' => '采购id必须int类型',
-            'purchases_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_details.*.id.required' => '采购详情id必填',
+            'purchase_details.*.id.integer' => '采购详情id必须int类型',
+            'purchase_details.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'product_specs_id.required' => '产品规格id必填',
-            'product_specs_id.integer' => '产品规格id必须int类型',
-            'product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_details.*.product_specs_id.required' => '产品规格id必填',
+            'purchase_details.*.product_specs_id.integer' => '产品规格id必须int类型',
+            'purchase_details.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'purchase_quantity.required' => '采购数必填',
-            'purchase_quantity.integer' => '采购数必须int类型',
-            'purchase_quantity.min' => '采购数不少于1',
+            'purchase_details.*.purchase_quantity.required' => '采购数必填',
+            'purchase_details.*.purchase_quantity.integer' => '采购数必须int类型',
+            'purchase_details.*.purchase_quantity.min' => '采购数不少于1',
 
-            'shops_id.integer' => '采购店铺id必须int类型',
-            'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_details.*.shops_id.integer' => '采购店铺id必须int类型',
+            'purchase_details.*.shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'suppliers_id.integer' => '供应商id必须int类型',
-            'suppliers_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_details.*.suppliers_id.integer' => '供应商id必须int类型',
+            'purchase_details.*.suppliers_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'purchase_cost.numeric' => '采购成本必须是数字',
+            'purchase_details.*.purchase_cost.numeric' => '采购成本必须是数字',
 
-            'purchase_freight.numeric' => '采购运费必须是数字',
+            'purchase_details.*.purchase_freight.numeric' => '采购运费必须是数字',
 
-            'warehouse_cost.numeric' => '仓库成本必须是数字',
+            'purchase_details.*.warehouse_cost.numeric' => '仓库成本必须是数字',
 
-            'commission.numeric' => '金佣点',
+            'purchase_details.*.commission.numeric' => '金佣点',
 
-            'discount.numeric' => '折扣',
+            'purchase_details.*.discount.numeric' => '折扣',
 
-            'colour_num.max' => '色号最大长度为255',
-            'colour_num.string' => '色号必须string类型',
+            'purchase_details.*.colour_num.max' => '色号最大长度为255',
+            'purchase_details.*.colour_num.string' => '色号必须string类型',
 
-            'paint.max' => '油漆最大长度为255',
-            'paint.string' => '油漆必须string类型',
+            'purchase_details.*.paint.max' => '油漆最大长度为255',
+            'purchase_details.*.paint.string' => '油漆必须string类型',
 
-            'wooden_frame_costs.numeric' => '木架费',
+            'purchase_details.*.wooden_frame_costs.numeric' => '木架费',
 
-            'arrival_time.date' => '到货时间必须data类型',
+            'purchase_details.*.arrival_time.date' => '到货时间必须data类型',
 
-            'remark.string' => '备注必须string类型',
-            'remark.nullable' => '备注可为null',
-            'remark.max' => '备注最大长度为255',
+            'purchase_details.*.remark.string' => '备注必须string类型',
+            'purchase_details.*.remark.nullable' => '备注可为null',
+            'purchase_details.*.remark.max' => '备注最大长度为255',
 
         ];
     }

@@ -35,7 +35,6 @@ class StockInRequest extends FormRequest
                         }),
                     ],
                     'status' => 'integer',
-                    'stock_in_details' => 'json'
                 ];
                 break;
             case 'PATCH':
@@ -57,7 +56,6 @@ class StockInRequest extends FormRequest
                         $publicRule
                     ],
                     'status' => ['integer', $publicRule],
-                    'stock_in_details' => ['json', $publicRule]
                 ];
                 break;
         }
@@ -76,8 +74,6 @@ class StockInRequest extends FormRequest
 
             'status.integer' => '状态必须int类型',
             'status.required' => '状态必填',
-
-            'stock_in_details.json' => '入库单详情必须json类型'
         ];
     }
 

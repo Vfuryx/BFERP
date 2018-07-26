@@ -142,7 +142,7 @@ class PurchaseReturnsController extends Controller
      *      @Parameter("purchase_return_details[0][stocks_id]",type="integer", description="库存id", required=true),
      *      @Parameter("purchase_return_details[0][purchase_return_quantity]",type="integer", description="采购退货数", required=true),
      *      @Parameter("purchase_return_details[0][suppliers_id]",type="integer", description="供应商id", required=true),
-     *      @Parameter("purchase_return_details[0][price_differences]",type="integer", description="差价", required=true),
+     *      @Parameter("purchase_return_details[0][price_differences]",type="numeric", description="差价", required=true),
      *      @Parameter("purchase_return_details[0][purchase_return_types_id]",type="integer", description="采购退货类型id", required=true),
      * })
      * @Request({
@@ -152,7 +152,7 @@ class PurchaseReturnsController extends Controller
      *          "purchase_return_details[0][stocks_id]":1,
      *          "purchase_return_details[0][purchase_return_quantity]":12,
      *          "purchase_return_details[0][suppliers_id]":1,
-     *          "purchase_return_details[0][price_differences]":1,
+     *          "purchase_return_details[0][price_differences]":1.00,
      *          "purchase_return_details[0][purchase_return_types_id]":1,
      *     }
      *})
@@ -239,18 +239,21 @@ class PurchaseReturnsController extends Controller
      *      })
      * })
      */
-    public function store(PurchaseReturnRequest $purchaseReturnRequest, PurchaseReturnDetailRequest $purchaseReturnDetailRequest)
+    public function store(PurchaseReturnRequest $purchaseReturnRequest,
+                          PurchaseReturnDetailRequest $purchaseReturnDetailRequest,
+                          \App\Handlers\ValidatedHandler $validatedHandler)
     {
-        $purchaseReturn = DB::transaction(function () use ($purchaseReturnRequest, $purchaseReturnDetailRequest) {
-            $date = $purchaseReturnRequest->validated();
+        $purchaseReturn = DB::transaction(function () use ($purchaseReturnRequest, $purchaseReturnDetailRequest, $validatedHandler) {
 
-            $purchaseReturn = PurchaseReturn::create($date);
+            $purchaseReturn = PurchaseReturn::create($purchaseReturnRequest->validated());
 
             if ($purchaseReturnDetails = $purchaseReturnDetailRequest->input('purchase_return_details')) {
 
                 foreach ($purchaseReturnDetails as $purchaseReturnDetail) {
 
-                    $purchaseReturn->purchaseReturnDetails()->create($purchaseReturnDetail);
+                    $purchaseReturn->purchaseReturnDetails()->create(
+                        $validatedHandler->getValidatedData($purchaseReturnDetailRequest->rules(), $purchaseReturnDetail)
+                    );
                 }
             }
             return $purchaseReturn;
@@ -355,13 +358,13 @@ class PurchaseReturnsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("remark", description="采购退货单备注", required=false),
-     *      @Parameter("status", type="integer", description="状态", required=false, default="1"),
+     *      @Parameter("status", type="integer", description="状态", required=false),
      *      @Parameter("purchase_return_details[0][id]",type="integer", description="采购退货id (不存在 id 则视为新建)",required=false),
-     *      @Parameter("purchase_return_details[0][stocks_id]",type="integer", description="库存id", required=true),
-     *      @Parameter("purchase_return_details[0][purchase_return_quantity]",type="integer", description="采购退货数", required=true),
-     *      @Parameter("purchase_return_details[0][suppliers_id]",type="integer", description="供应商id", required=true),
-     *      @Parameter("purchase_return_details[0][price_differences]",type="integer", description="差价", required=true),
-     *      @Parameter("purchase_return_details[0][purchase_return_types_id]",type="integer", description="采购退货类型id", required=true),
+     *      @Parameter("purchase_return_details[0][stocks_id]",type="integer", description="库存id", required=false),
+     *      @Parameter("purchase_return_details[0][purchase_return_quantity]",type="integer", description="采购退货数", required=false),
+     *      @Parameter("purchase_return_details[0][suppliers_id]",type="integer", description="供应商id", required=false),
+     *      @Parameter("purchase_return_details[0][price_differences]",type="numeric", description="差价", required=false),
+     *      @Parameter("purchase_return_details[0][purchase_return_types_id]",type="integer", description="采购退货类型id", required=false),
      * })
      * @Request({
      *     {
@@ -520,24 +523,30 @@ class PurchaseReturnsController extends Controller
      */
     public function update(PurchaseReturnRequest $purchaseReturnRequest,
                            PurchaseReturnDetailRequest $purchaseReturnDetailRequest,
-                           PurchaseReturn $purchasereturn)
+                           PurchaseReturn $purchasereturn,
+                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
         //判断是否提交
         if ($purchasereturn->is_submit)
             throw new UpdateResourceFailedException('已提交无法修改');
 
-        $purchasereturn = DB::transaction(function () use ($purchaseReturnRequest, $purchaseReturnDetailRequest, $purchasereturn) {
+        $purchasereturn = DB::transaction(function () use ($purchaseReturnRequest,
+                                                           $purchaseReturnDetailRequest,
+                                                           $purchasereturn,
+                                                           $validatedHandler) {
 
             $purchasereturn->update($purchaseReturnRequest->validated());
 
             if ($purchaseReturnDetails = $purchaseReturnDetailRequest->input('purchase_return_details')) {
 
                 foreach ($purchaseReturnDetails as $purchaseReturnDetail) {
+                    //过滤出经过验证的数据
+                    $data = $validatedHandler->getValidatedData($purchaseReturnDetailRequest->rules(), $purchaseReturnDetail);
                     //存在id则更新，否则插入
                     if (isset($purchaseReturnDetail['id'])) {
-                        $purchasereturn->purchaseReturnDetails()->findOrFail($purchaseReturnDetail['id'])->update($purchaseReturnDetail);
+                        $purchasereturn->purchaseReturnDetails()->findOrFail($data);
                     } else {
-                        $purchasereturn->purchaseReturnDetails()->create($purchaseReturnDetail);
+                        $purchasereturn->purchaseReturnDetails()->create($data);
                     }
                 }
             }

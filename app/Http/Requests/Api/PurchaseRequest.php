@@ -32,24 +32,20 @@ class PurchaseRequest extends FormRequest
                     ],
                     'remark' => 'string|nullable|max:255',
                     'status' => 'integer',
-                    'purchase_details' => 'json'
                 ];
                 break;
             case 'PATCH':
-                $publicRule = $this->publicRule($this->purchase->status == 1 && $this->purchase->is_submit == 0);
                 return [
                     'receiver' => ['string', 'max:255', ],
-                    'receiver_address' => ['string', 'max:255', $publicRule],
+                    'receiver_address' => ['string', 'max:255'],
                     'warehouse_id' => [
                         'integer',
                         Rule::exists('warehouses', 'id')->where(function ($query) {
                             $query->where('status', 1);
-                        }),
-                        $publicRule
+                        })
                     ],
-                    'remark' => ['string', 'nullable', 'max:255', $publicRule],
-                    'status' => ['integer', $publicRule],
-                    'purchase_details' => ['json', $publicRule]
+                    'remark' => ['string', 'nullable', 'max:255'],
+                    'status' => ['integer' ],
                 ];
                 break;
         }
@@ -78,7 +74,6 @@ class PurchaseRequest extends FormRequest
             'status.required' => '状态必填',
             'status.integer' => '状态必须int类型',
 
-            'purchase_details.json' => '采购订单详情必须json类型'
         ];
     }
 
@@ -109,20 +104,5 @@ class PurchaseRequest extends FormRequest
         ];
     }
 
-    /**
-     * 通用规则
-     * @param bool $condition   判断的条件
-     * @param string $text      返回的信息
-     * @return \Closure         闭包
-     */
-    public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
-    {
-        return function ($attribute, $value, $fail) use ($condition, $text) {
-            if ($condition) {
-                return true;
-            }
-            return $fail($text);
-        };
-    }
 
 }

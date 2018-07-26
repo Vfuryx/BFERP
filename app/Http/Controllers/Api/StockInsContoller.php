@@ -188,21 +188,20 @@ class StockInsContoller extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=true),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("stock_in_details",type="json", description="入库单详情", required=true),
+     *      @Parameter("stock_in_details[0][purchase_details_id]",type="integer", description="采购单详情id", required=true),
+     *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=true),
+     *      @Parameter("stock_in_details[0][stock_in_quantity]",type="integer", description="入库数量", required=true),
+     *      @Parameter("stock_in_details[0][remark]", description="备注", required=false),
      * })
      * @Request({
      *     {
      *          "warehouse_id": 1,
      *          "stock_in_types_id": 1,
      *          "status": 1,
-     *          "stock_in_details": {
-     *              {
-     *                  "purchases_id": 1,
-     *                  "product_specs_id": 1,
-     *                  "stock_in_quantity": 5,
-     *                  "remark": "备注"
-     *              }
-     *          }
+     *          "stock_in_details[0][purchase_details_id]":1,
+     *          "stock_in_details[0][product_specs_id]":1,
+     *          "stock_in_details[0][stock_in_quantity]":10,
+     *          "stock_in_details[0][remark]":"备注",
      *     }
      *})
      * @Transaction({
@@ -214,9 +213,6 @@ class StockInsContoller extends Controller
      *              },
      *              "stock_in_types_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
-     *              },
-     *              "stock_in_details": {
-     *                  "入库单详情必须json类型"
      *              },
      *           },
      *          "status_code": 422,
@@ -340,27 +336,21 @@ class StockInsContoller extends Controller
      *      })
      * })
      */
-    public function store(StockInRequest $stockInRequest, StockInDetailRequest $stockInDetailRequest)
+    public function store(StockInRequest $stockInRequest,
+                          StockInDetailRequest $stockInDetailRequest,
+                          \App\Handlers\ValidatedHandler $validatedHandler)
     {
+        $stockIn = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $validatedHandler) {
 
-
-        $stockIn = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest) {
-            $date = $stockInRequest->validated();
-
-            $stockIn = StockIn::create($date);
+            $stockIn = StockIn::create($stockInRequest->validated());
 
             if ($stockInDetails = $stockInRequest->input('stock_in_details')) {
 
-                $stockInDetails = json_decode($stockInDetails, true);
-
                 foreach ($stockInDetails as $stockInDetail) {
 
-                    Validator::make($stockInDetail, $stockInDetailRequest->rules(), $stockInDetailRequest->messages())->validate();
-
-                    $data = array_intersect_key($stockInDetail, $stockInDetailRequest->rules());
-
-                    $stockIn->stockInDetails()->create($data);
-
+                    $stockIn->stockInDetails()->create(
+                        $validatedHandler->getValidatedData($stockInDetailRequest->rules(), $stockInDetail)
+                    );
                 }
             }
             return $stockIn;
@@ -509,6 +499,28 @@ class StockInsContoller extends Controller
      *
      * @Patch("/stockins/:id")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
+     *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=false),
+     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("stock_in_details[0][id]",type="integer", description="入库单详情id (存在则视为更新 不存在视为插入)", required=false),
+     *      @Parameter("stock_in_details[0][purchase_details_id]",type="integer", description="采购单详情id", required=false),
+     *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=false),
+     *      @Parameter("stock_in_details[0][stock_in_quantity]",type="integer", description="入库数量", required=false),
+     *      @Parameter("stock_in_details[0][remark]", description="备注", required=false),
+     * })
+     * @Request({
+     *     {
+     *          "warehouse_id": 1,
+     *          "stock_in_types_id": 1,
+     *          "status": 1,
+     *          "stock_in_details[0][id]":1,
+     *          "stock_in_details[0][purchase_details_id]":1,
+     *          "stock_in_details[0][product_specs_id]":1,
+     *          "stock_in_details[0][stock_in_quantity]":10,
+     *          "stock_in_details[0][remark]":"备注",
+     *     }
+     *})
      * @Transaction({
      *      @Response(404, body={
      *          "message": "No query results for model ",
@@ -522,9 +534,6 @@ class StockInsContoller extends Controller
      *              },
      *              "stock_in_types_id": {
      *                  "需要添加的id在数据库中未找到或未启用"
-     *              },
-     *              "stock_in_details": {
-     *                  "入库单详情必须json类型"
      *              },
      *           },
      *          "status_code": 422
@@ -645,23 +654,24 @@ class StockInsContoller extends Controller
      *      })
      * })
      */
-    public function update(StockInRequest $stockInRequest, StockInDetailRequest $stockInDetailRequest, StockIn $stockin)
+    public function update(StockInRequest $stockInRequest,
+                           StockInDetailRequest $stockInDetailRequest,
+                           StockIn $stockin,
+                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
-        $stockin = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $stockin) {
+        $stockin = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $stockin, $validatedHandler) {
 
             $stockin->update($stockInRequest->validated());
 
             if ($stockInDetails = $stockInRequest->input('stock_in_details')) {
-                $stockInDetails = json_decode($stockInDetails, true);
+
                 foreach ($stockInDetails as $stockInDetail) {
-                    //验证purchasedDetail数据
-                    Validator::make($stockInDetail, $stockInDetailRequest->rules(), $stockInDetailRequest->messages())->validate();
                     //过滤出经过验证的数据
-                    $data = array_intersect_key($stockInDetail, $stockInDetailRequest->rules());
+                    $data = $validatedHandler->getValidatedData($stockInDetailRequest->rules(), $stockInDetail);
+
                     //存在id则更新，否则插入
                     if (isset($stockInDetail['id'])) {
-
-                        StockInDetail::findOrFail($stockInDetail['id'])->update($data);
+                        $stockin->stockInDetails()->findOrFail($stockInDetail['id'])->update($data);
                     } else {
                         $stockin->stockInDetails()->create($data);
                     }
