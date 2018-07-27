@@ -23,8 +23,8 @@ class CreatePurchasesTable extends Migration
             $table->string('receiver')->default('')->comment('收货人');
             $table->string('receiver_address')->default('')->comment('收货地址');
             $table->unsignedInteger('warehouse_id')->default(0)->comment('仓库id');
-            $table->timestamp('promise_delivery_time')->nullable()->comment('承诺发货时间（订单生成）');
-            $table->string('salesman')->default('')->comment('原订单业务员（订单生成）');
+            $table->date('promise_ship_time')->nullable()->comment('承诺发货时间（订单生成）');
+            $table->string('business_personnel')->default('')->comment('原订单业务员（订单生成）');
             $table->string('source')->default('')->comment('采购单来源（订单生成）');
             $table->string('client_name')->default('')->comment('客户名（订单生成）');
             $table->string('buyer_nick')->default('')->comment('卖家昵称（订单生成）');

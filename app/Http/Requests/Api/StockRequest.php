@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\ProductSpec;
 use Illuminate\Validation\Rule;
 
 class StockRequest extends FormRequest
@@ -20,22 +21,31 @@ class StockRequest extends FormRequest
                 ];
                 break;
             case 'POST':
+//                dd($this->stocks);
                 return [
                     'stocks.*.warehouse_id' => [
                         'required', 'integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                        Rule::exists('warehouses', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'stocks.*.goods_id' => [
                         'required', 'integer',
-                        Rule::exists('goods', 'id')->where(function ($query) {
+                        Rule::exists('goods', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'stocks.*.pro_specs_id' => [
-                        'required', 'integer', 'unique:stocks',
-                        Rule::exists('product_specs', 'id')
+                        'required', 'integer',
+                        function($attribute, $value, $fail) {
+                            $ProductSpec = \App\Models\Stock::query()
+                                ->where('warehouse_id', $this->stocks[explode('.', $attribute)[1]]['warehouse_id'])
+                                ->where('pro_specs_id', $value);
+                            if (!$ProductSpec->count()) {
+                                return true;
+                            }
+                            return $fail('产品规格id在同一个仓库不能重复');
+                        },
                     ],
                     'stocks.*.quantity' => 'required|integer',
                     'stocks.*.status' => 'integer'
@@ -56,7 +66,6 @@ class StockRequest extends FormRequest
             'stocks.*.goods_id.integer' => '默认商品id必须int类型',
             'stocks.*.goods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'stocks.*.pro_specs_id.unique' => '产品规格id不能重复',
             'stocks.*.pro_specs_id.required' => '产品规格id必填',
             'stocks.*.pro_specs_id.integer' => '产品规格id必须int类型',
             'stocks.*.pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
