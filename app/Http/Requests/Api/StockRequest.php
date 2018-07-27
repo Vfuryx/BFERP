@@ -17,7 +17,8 @@ class StockRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'integer',
+                    'warehouse_id' => 'integer'
                 ];
                 break;
             case 'POST':

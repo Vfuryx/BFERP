@@ -29,7 +29,8 @@ class StocksController extends Controller
      * @Get("/stocks{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all"),
+     *      @Parameter("status", type="warehouse_id", description="获取的仓库id", required=false)
      * })
      * @Response(200, body={
      * "data": {

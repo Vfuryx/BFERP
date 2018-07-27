@@ -6712,6 +6712,7 @@ FORMAT: 1A
 + Parameters
     + status: (integer, optional) - 获取的状态
         + Default: all
+    + status: (warehouse_id, optional) - 获取的仓库id
 
 + Response 200 (application/json)
     + Body

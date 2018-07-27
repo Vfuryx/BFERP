@@ -21,16 +21,23 @@ trait CURDTrait
      */
     public function allOrPage($request, $model, $transformer, $perPage = 0, $is_status = 1)
     {
+
         if ($is_status) {
             $model = $model::whereIn('status', (array)$request->get('status', [1, 0]));
         } else {
             $model = $model::query();
         }
 
+        //拼接特定条件的查询
+        if($field = $request->except('status')){
+            $model->where($request->validated());
+        }
+
         //不分页
         if ($perPage === 0) {
             return $this->response->collection($model->get(), new $transformer);
         }
+
 
         //分页响应返回
         $ref = $model->paginate($perPage);
