@@ -10,8 +10,8 @@ class StockIn extends Model
 
     protected $fillable = [
         'stock_in_no', 'warehouse_id', 'stock_in_types_id', 'creator',
-        'submitter', 'submit_at', 'checker', 'check_at', 'warehouer',
-        'stock_in_at', 'is_submit', 'is_check', 'is_stock_in', 'status',
+        'submitter', 'submit_at', 'auditor', 'audit_at', 'warehouer',
+        'stock_in_at', 'is_submit', 'is_audit', 'is_stock_in', 'status',
         'print_at', 'is_print'
     ];
 
@@ -70,11 +70,11 @@ class StockIn extends Model
     /**
      * 审核
      */
-    public function check()
+    public function audit()
     {
-        $this->check_at = Carbon::now();
-        $this->checker = 'admin';
-        $this->is_check = 1;
+        $this->audit_at = Carbon::now();
+        $this->auditor = 'admin';
+        $this->is_audit = 1;
         $this->save();
     }
 

@@ -24,9 +24,9 @@ class CreateStockInsTable extends Migration
             $table->timestamp('submit_at')->nullable()->comment('提交时间');
             $table->tinyInteger('is_print')->default(0)->comment('是否打印');
             $table->timestamp('print_at')->nullable()->comment('打印时间');
-            $table->tinyInteger('is_check')->default(0)->comment('是否审核');
-            $table->string('checker')->default('')->comment('审核人');
-            $table->timestamp('check_at')->nullable()->comment('审核时间');
+            $table->tinyInteger('is_audit')->default(0)->comment('是否审核');
+            $table->string('auditor')->default('')->comment('审核人');
+            $table->timestamp('audit_at')->nullable()->comment('审核时间');
             $table->tinyInteger('is_stock_in')->default(0)->comment('是否入库');
             $table->string('warehouer')->default('')->comment('入库人');
             $table->timestamp('stock_in_at')->nullable()->comment('入库时间');

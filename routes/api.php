@@ -412,8 +412,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchases.issubmit');
         $api->put('purchases/{purchase}/print', 'PurchasesController@isPrint')
             ->name('api.purchases.isprint');
-        $api->put('purchases/{purchase}/check', 'PurchasesController@isCheck')
-            ->name('api.purchases.ischeck');
+        $api->put('purchases/{purchase}/audit', 'PurchasesController@isAudit')
+            ->name('api.purchases.isAudit');
 
         //采购单详情
         $api->delete('purchasedetails/{purchasedetail}', 'PurchaseDetailsController@destroy')
@@ -457,8 +457,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stockins.issubmit');
         $api->put('stockins/{stockin}/print', 'StockInsContoller@isPrint')
             ->name('api.stockins.isprint');
-        $api->put('stockins/{stockin}/check', 'StockInsContoller@isCheck')
-            ->name('api.stockins.ischeck');
+        $api->put('stockins/{stockin}/audit', 'StockInsContoller@isAudit')
+            ->name('api.stockins.isAudit');
         $api->put('stockins/{stockin}/stockin', 'StockInsContoller@stockIn')
             ->name('api.stockins.stockin');
 
@@ -514,11 +514,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchasereturns.editstatusbyids');
         $api->put('purchasereturns/{purchasereturn}/submit', 'PurchaseReturnsController@isSubmit')
             ->name('api.purchasereturns.issubmit');
-        $api->put('purchasereturns/{purchasereturn}/check', 'PurchaseReturnsController@isCheck')
-            ->name('api.purchasereturns.ischeck');
+        $api->put('purchasereturns/{purchasereturn}/audit', 'PurchaseReturnsController@isAudit')
+            ->name('api.purchasereturns.isAudit');
         $api->put('purchasereturns/{purchasereturn}/print', 'PurchaseReturnsController@isPrint')
             ->name('api.purchasereturns.isprint');
-        $api->put('purchasereturns/{purchasereturn}/retrial', 'PurchaseReturnsController@isRetrial')
+        $api->put('purchasereturns/{purchasereturn}/auditfaild', 'PurchaseReturnsController@isAuditFaild')
             ->name('api.purchasereturns.isretrial');
 
         //采购退货类型

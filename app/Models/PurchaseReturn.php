@@ -70,7 +70,7 @@ class PurchaseReturn extends Model
     /**
      * 退审
      */
-    public function retrial()
+    public function auditFaild()
     {
         $this->is_submit = 0;
         $this->submitter = '';
@@ -81,11 +81,11 @@ class PurchaseReturn extends Model
     /**
      * 审核
      */
-    public function check()
+    public function audit()
     {
-        $this->check_at = Carbon::now();
-        $this->checker = 'admin';
-        $this->is_check = 1;
+        $this->audit_at = Carbon::now();
+        $this->auditor = 'admin';
+        $this->is_audit = 1;
         $this->save();
     }
 

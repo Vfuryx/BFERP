@@ -22,7 +22,7 @@ class Purchase extends Model
         'purchase_order_no', 'receiver', 'receiver_address',
         'remark', 'warehouse_id', 'order_no', 'user_id', 'promise_ship_time',
         'business_personnel', 'source', 'client_name', 'buyer_nick', 'is_submit', 'is_print',
-        'is_check', 'is_change', 'status', 'print_at'
+        'status', 'print_at'
     ];
 
     //观察者
@@ -83,9 +83,9 @@ class Purchase extends Model
     /**
      * 审核
      */
-    public function check()
+    public function audit()
     {
-        $this->is_check = 1;
+        $this->is_audit = 1;
         $this->save();
     }
 

@@ -48,9 +48,9 @@ class PurchaseReturnsController extends Controller
      *          "is_submit": 0,
      *          "submitter": "",
      *          "submit_at": null,
-     *          "is_check": 0,
-     *          "checker": "",
-     *          "check_at": null,
+     *          "is_audit": 0,
+     *          "auditor": "",
+     *          "audit_at": null,
      *          "is_print": 0,
      *          "remark": "采购退货单备注",
      *          "status": 1,
@@ -173,9 +173,9 @@ class PurchaseReturnsController extends Controller
      *          "is_submit": null,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_check": null,
-     *          "checker": null,
-     *          "check_at": null,
+     *          "is_audit": null,
+     *          "auditor": null,
+     *          "audit_at": null,
      *          "is_print": null,
      *          "remark": "采购退货单备注",
      *          "status": 1,
@@ -282,9 +282,9 @@ class PurchaseReturnsController extends Controller
      *          "is_submit": 0,
      *          "submitter": "",
      *          "submit_at": null,
-     *          "is_check": 0,
-     *          "checker": "",
-     *          "check_at": null,
+     *          "is_audit": 0,
+     *          "auditor": "",
+     *          "audit_at": null,
      *          "is_print": 0,
      *          "remark": "采购退货单备注",
      *          "status": 1,
@@ -413,7 +413,7 @@ class PurchaseReturnsController extends Controller
      *              "order_address": "",
      *              "is_submit": 0,
      *              "is_print": 0,
-     *              "is_check": 0,
+     *              "is_audit": 0,
      *              "is_change": 1,
      *              "remark": "备注5",
      *              "status": 1,
@@ -703,7 +703,7 @@ class PurchaseReturnsController extends Controller
     /**
      * 退审
      *
-     * @PUT("/purchasereturns/:id/check")
+     * @PUT("/purchasereturns/:id/auditfaild")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
@@ -713,13 +713,13 @@ class PurchaseReturnsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isRetrial(PurchaseReturn $purchasereturn)
+    public function isAuditFaild(PurchaseReturn $purchasereturn)
     {
 
         return $this->traitAction($purchasereturn,
-            !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_check,
+            !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_audit,
             '无法退审',
-            'retrial'
+            'auditFaild'
         );
 
     }
@@ -727,7 +727,7 @@ class PurchaseReturnsController extends Controller
     /**
      * 审核
      *
-     * @PUT("/purchasereturns/:id/check")
+     * @PUT("/purchasereturns/:id/audit")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
@@ -737,15 +737,15 @@ class PurchaseReturnsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isCheck(PurchaseReturn $purchasereturn)
+    public function isAudit(PurchaseReturn $purchasereturn)
     {
         DB::transaction(function () use ($purchasereturn) {
 
 
             $this->traitAction($purchasereturn,
-                !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_check,
+                !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_audit,
                 '审核出错，是否未提交或重复审核',
-                'check');
+                'audit');
 
             //生成出库单，记录出库的数量等信息
 
@@ -777,7 +777,7 @@ class PurchaseReturnsController extends Controller
      */
     public function isPrint(PurchaseReturn $purchasereturn)
     {
-        return $this->traitAction($purchasereturn, !$purchasereturn->status || !$purchasereturn->is_submit || !$purchasereturn->is_check || $purchasereturn->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
+        return $this->traitAction($purchasereturn, !$purchasereturn->status || !$purchasereturn->is_submit || !$purchasereturn->is_audit || $purchasereturn->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
     }
 
 }

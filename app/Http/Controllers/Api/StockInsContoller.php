@@ -68,12 +68,12 @@ class StockInsContoller extends Controller
      *          "creator": 1,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "checker": null,
-     *          "check_at": null,
+     *          "auditor": null,
+     *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
      *          "is_submit": null,
-     *          "is_check": null,
+     *          "is_audit": null,
      *          "is_stock_in": null,
      *          "status": "0",
      *          "stock_in_details": {
@@ -242,12 +242,12 @@ class StockInsContoller extends Controller
      *          "creator": 1,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "checker": null,
-     *          "check_at": null,
+     *          "auditor": null,
+     *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
      *          "is_submit": null,
-     *          "is_check": null,
+     *          "is_audit": null,
      *          "is_stock_in": null,
      *          "status": "0",
      *          "stock_in_details": {
@@ -397,12 +397,12 @@ class StockInsContoller extends Controller
      *          "creator": 1,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "checker": null,
-     *          "check_at": null,
+     *          "auditor": null,
+     *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
      *          "is_submit": null,
-     *          "is_check": null,
+     *          "is_audit": null,
      *          "is_stock_in": null,
      *          "status": "0",
      *          "stock_in_details": {
@@ -563,12 +563,12 @@ class StockInsContoller extends Controller
      *          "creator": 1,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "checker": null,
-     *          "check_at": null,
+     *          "auditor": null,
+     *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
      *          "is_submit": null,
-     *          "is_check": null,
+     *          "is_audit": null,
      *          "is_stock_in": null,
      *          "status": "0",
      *          "stock_in_details": {
@@ -830,13 +830,13 @@ class StockInsContoller extends Controller
      */
     public function isPrint(StockIn $stockin)
     {
-        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || !$stockin->is_check || $stockin->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
+        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || !$stockin->is_audit || $stockin->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
     }
 
     /**
      * 审核
      *
-     * @PUT("/purchases/:id/check")
+     * @PUT("/purchases/:id/audit")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
@@ -846,9 +846,9 @@ class StockInsContoller extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isCheck(StockIn $stockin)
+    public function isAudit(StockIn $stockin)
     {
-        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || $stockin->is_check, '审核出错，是否未提交或重复审核', 'check');
+        return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || $stockin->is_audit, '审核出错，是否未提交或重复审核', 'audit');
     }
 
 
@@ -871,7 +871,7 @@ class StockInsContoller extends Controller
             //修改入库状态
             $this->traitAction(
                 $stockin,
-                !$stockin->status || !$stockin->is_submit || !$stockin->is_check || !$stockin->is_submit || $stockin->is_stock_in,
+                !$stockin->status || !$stockin->is_submit || !$stockin->is_audit || !$stockin->is_submit || $stockin->is_stock_in,
                 '入库出错',
                 'stockIn'
             );

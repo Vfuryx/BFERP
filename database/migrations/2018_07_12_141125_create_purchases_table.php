@@ -31,7 +31,7 @@ class CreatePurchasesTable extends Migration
             $table->string('order_address')->default('')->comment('订单地址（订单生成）');
             $table->tinyInteger('is_submit')->default(0)->comment('是否提交');
             $table->tinyInteger('is_print')->default(0)->comment('是否打印');
-            $table->tinyInteger('is_check')->default(0)->comment('是否审核');
+            $table->tinyInteger('is_audit')->default(0)->comment('是否审核');
             $table->tinyInteger('is_change')->default(0)->comment('是否修改');
             $table->string('remark')->default('')->comment('备注');
             $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');

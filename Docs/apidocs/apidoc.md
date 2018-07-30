@@ -7194,7 +7194,7 @@ FORMAT: 1A
                         "order_address": "",
                         "is_submit": 0,
                         "is_print": 0,
-                        "is_check": 0,
+                        "is_audit": 0,
                         "is_change": 0,
                         "remark": "备注3",
                         "status": 1,
@@ -7321,7 +7321,7 @@ FORMAT: 1A
                 "order_address": null,
                 "is_submit": null,
                 "is_print": null,
-                "is_check": null,
+                "is_audit": null,
                 "is_change": null,
                 "remark": "备注3",
                 "status": "1",
@@ -7385,7 +7385,7 @@ FORMAT: 1A
                 "order_address": "",
                 "is_submit": 0,
                 "is_print": 0,
-                "is_check": 0,
+                "is_audit": 0,
                 "is_change": 0,
                 "remark": "备注3",
                 "status": 1,
@@ -7516,7 +7516,7 @@ FORMAT: 1A
                 "order_address": "",
                 "is_submit": 0,
                 "is_print": 0,
-                "is_check": 0,
+                "is_audit": 0,
                 "is_change": 0,
                 "remark": "备注1",
                 "status": "1",
@@ -7658,11 +7658,11 @@ FORMAT: 1A
 
             []
 
-## 审核 [PUT /api/purchases/:id/check]
+## 审核 [PUT /api/purchases/:id/audit]
 
 
 + Parameters
-    + is_check: (integer, required) - 是否审核
+    + is_audit: (integer, required) - 是否审核
 
 + Response 422 (application/json)
     + Body
@@ -7670,7 +7670,7 @@ FORMAT: 1A
             {
                 "message": "422 Unprocessable Entity",
                 "errors": {
-                    "is_check": [
+                    "is_audit": [
                         "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
                     ]
                 },
@@ -7997,12 +7997,12 @@ FORMAT: 1A
                         "creator": 1,
                         "submitter": null,
                         "submit_at": null,
-                        "checker": null,
-                        "check_at": null,
+                        "auditor": null,
+                        "audit_at": null,
                         "warehouer": null,
                         "stock_in_at": null,
                         "is_submit": null,
-                        "is_check": null,
+                        "is_audit": null,
                         "is_stock_in": null,
                         "status": "0",
                         "stock_in_details": [
@@ -8174,12 +8174,12 @@ FORMAT: 1A
                 "creator": 1,
                 "submitter": null,
                 "submit_at": null,
-                "checker": null,
-                "check_at": null,
+                "auditor": null,
+                "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
                 "is_submit": null,
-                "is_check": null,
+                "is_audit": null,
                 "is_stock_in": null,
                 "status": "0",
                 "stock_in_details": [
@@ -8306,12 +8306,12 @@ FORMAT: 1A
                 "creator": 1,
                 "submitter": null,
                 "submit_at": null,
-                "checker": null,
-                "check_at": null,
+                "auditor": null,
+                "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
                 "is_submit": null,
-                "is_check": null,
+                "is_audit": null,
                 "is_stock_in": null,
                 "status": "0",
                 "stock_in_details": [
@@ -8478,12 +8478,12 @@ FORMAT: 1A
                 "creator": 1,
                 "submitter": null,
                 "submit_at": null,
-                "checker": null,
-                "check_at": null,
+                "auditor": null,
+                "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
                 "is_submit": null,
-                "is_check": null,
+                "is_audit": null,
                 "is_stock_in": null,
                 "status": "0",
                 "stock_in_details": [
@@ -8691,7 +8691,7 @@ FORMAT: 1A
 
             []
 
-## 审核 [PUT /api/purchases/:id/check]
+## 审核 [PUT /api/purchases/:id/audit]
 
 
 + Response 422 (application/json)
@@ -8748,12 +8748,12 @@ FORMAT: 1A
                             "creator": "1",
                             "submitter": "",
                             "submit_at": null,
-                            "checker": "",
-                            "check_at": null,
+                            "auditor": "",
+                            "audit_at": null,
                             "warehouer": "",
                             "stock_in_at": null,
                             "is_submit": 0,
-                            "is_check": 0,
+                            "is_audit": 0,
                             "is_stock_in": 0,
                             "status": 1,
                             "created_at": "2018-07-20 13:06:52",
@@ -8930,7 +8930,7 @@ FORMAT: 1A
                             "order_address": "",
                             "is_submit": 0,
                             "is_print": 0,
-                            "is_check": 0,
+                            "is_audit": 0,
                             "is_change": 1,
                             "remark": "备注5",
                             "status": 1,
@@ -9083,7 +9083,7 @@ FORMAT: 1A
                     "order_address": "",
                     "is_submit": 0,
                     "is_print": 0,
-                    "is_check": 0,
+                    "is_audit": 0,
                     "is_change": 1,
                     "remark": "备注5",
                     "status": 1,
@@ -9198,7 +9198,7 @@ FORMAT: 1A
                     "order_address": "",
                     "is_submit": 0,
                     "is_print": 0,
-                    "is_check": 0,
+                    "is_audit": 0,
                     "is_change": 1,
                     "remark": "备注5",
                     "status": 1,
@@ -9349,7 +9349,7 @@ FORMAT: 1A
                     "order_address": "",
                     "is_submit": 0,
                     "is_print": 0,
-                    "is_check": 0,
+                    "is_audit": 0,
                     "is_change": 1,
                     "remark": "备注5",
                     "status": 1,
@@ -9588,12 +9588,12 @@ FORMAT: 1A
                             "creator": "1",
                             "submitter": "",
                             "submit_at": null,
-                            "checker": "",
-                            "check_at": null,
+                            "auditor": "",
+                            "audit_at": null,
                             "warehouer": "",
                             "stock_in_at": null,
                             "is_submit": 0,
-                            "is_check": 0,
+                            "is_audit": 0,
                             "is_stock_in": 0,
                             "status": 1,
                             "created_at": "2018-07-20 13:06:52",
@@ -9756,9 +9756,9 @@ FORMAT: 1A
                         "is_submit": 0,
                         "submitter": "",
                         "submit_at": null,
-                        "is_check": 0,
-                        "checker": "",
-                        "check_at": null,
+                        "is_audit": 0,
+                        "auditor": "",
+                        "audit_at": null,
                         "is_print": 0,
                         "remark": "采购退货单备注",
                         "status": 1,
@@ -9884,9 +9884,9 @@ FORMAT: 1A
                 "is_submit": null,
                 "submitter": null,
                 "submit_at": null,
-                "is_check": null,
-                "checker": null,
-                "check_at": null,
+                "is_audit": null,
+                "auditor": null,
+                "audit_at": null,
                 "is_print": null,
                 "remark": "采购退货单备注",
                 "status": 1,
@@ -9970,9 +9970,9 @@ FORMAT: 1A
                 "is_submit": 0,
                 "submitter": "",
                 "submit_at": null,
-                "is_check": 0,
-                "checker": "",
-                "check_at": null,
+                "is_audit": 0,
+                "auditor": "",
+                "audit_at": null,
                 "is_print": 0,
                 "remark": "采购退货单备注",
                 "status": 1,
@@ -10106,7 +10106,7 @@ FORMAT: 1A
                     "order_address": "",
                     "is_submit": 0,
                     "is_print": 0,
-                    "is_check": 0,
+                    "is_audit": 0,
                     "is_change": 1,
                     "remark": "备注5",
                     "status": 1,
@@ -10320,7 +10320,7 @@ FORMAT: 1A
 
             []
 
-## 退审 [PUT /api/purchasereturns/:id/check]
+## 退审 [PUT /api/purchasereturns/:id/auditfaild]
 
 
 + Response 422 (application/json)
@@ -10336,7 +10336,7 @@ FORMAT: 1A
 
             []
 
-## 审核 [PUT /api/purchasereturns/:id/check]
+## 审核 [PUT /api/purchasereturns/:id/audit]
 
 
 + Response 422 (application/json)
@@ -10615,9 +10615,9 @@ FORMAT: 1A
                             "is_submit": 1,
                             "submitter": "",
                             "submit_at": null,
-                            "is_check": 1,
-                            "checker": "admin",
-                            "check_at": "2018-07-24 15:00:53",
+                            "is_audit": 1,
+                            "auditor": "admin",
+                            "audit_at": "2018-07-24 15:00:53",
                             "is_print": 1,
                             "remark": "采购退货单备注1",
                             "status": 1,

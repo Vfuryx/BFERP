@@ -27,7 +27,7 @@ class PurchaseTransformer extends TransformerAbstract
             'order_address' => $purchase->order_address,
             'is_submit' => $purchase->is_submit,
             'is_print' => $purchase->is_print,
-            'is_check' => $purchase->is_check,
+            'is_audit' => $purchase->is_audit,
             'is_change' => $purchase->is_change,
             'remark' => $purchase->remark,
             'status' => $purchase->status,

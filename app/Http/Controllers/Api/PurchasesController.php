@@ -60,7 +60,7 @@ class PurchasesController extends Controller
      *          "order_address": "",
      *          "is_submit": 0,
      *          "is_print": 0,
-     *          "is_check": 0,
+     *          "is_audit": 0,
      *          "is_change": 0,
      *          "remark": "备注3",
      *          "status": 1,
@@ -183,7 +183,7 @@ class PurchasesController extends Controller
      *          "order_address": null,
      *          "is_submit": null,
      *          "is_print": null,
-     *          "is_check": null,
+     *          "is_audit": null,
      *          "is_change": null,
      *          "remark": "备注3",
      *          "status": "1",
@@ -271,7 +271,7 @@ class PurchasesController extends Controller
      *          "order_address": "",
      *          "is_submit": 0,
      *          "is_print": 0,
-     *          "is_check": 0,
+     *          "is_audit": 0,
      *          "is_change": 0,
      *          "remark": "备注3",
      *          "status": 1,
@@ -395,7 +395,7 @@ class PurchasesController extends Controller
      *          "order_address": "",
      *          "is_submit": 0,
      *          "is_print": 0,
-     *          "is_check": 0,
+     *          "is_audit": 0,
      *          "is_change": 0,
      *          "remark": "备注1",
      *          "status": "1",
@@ -597,21 +597,21 @@ class PurchasesController extends Controller
      */
     public function isPrint(Purchase $purchase)
     {
-        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || !$purchase->is_check || $purchase->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
+        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || !$purchase->is_audit || $purchase->is_print, '打印出错，是否未提交未审核或重复打印', 'print');
     }
 
     /**
      * 审核
      *
-     * @PUT("/purchases/:id/check")
+     * @PUT("/purchases/:id/audit")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("is_check", type="integer", description="是否审核", required=true)})
+     * @Parameter("is_audit", type="integer", description="是否审核", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "is_check": {
+     *              "is_audit": {
      *                  "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
      *              }
      *           },
@@ -620,9 +620,9 @@ class PurchasesController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function isCheck(Purchase $purchase)
+    public function isAudit(Purchase $purchase)
     {
-        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || $purchase->is_check, '审核出错，是否未提交或重复审核', 'check');
+        return $this->traitAction($purchase, !$purchase->status || !$purchase->is_submit || $purchase->is_audit, '审核出错，是否未提交或重复审核', 'audit');
     }
 
 }
