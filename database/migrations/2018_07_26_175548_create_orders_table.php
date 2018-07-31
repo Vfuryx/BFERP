@@ -103,8 +103,9 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('is_audit_faild')->default(0)->comment('是否退审');
             $table->tinyInteger('is_print')->default(0)->comment('是否打印');
 
-            //
-
+            //货审
+            $table->tinyInteger('is_one_audit')->default(0)->comment('是否跟单一审');
+            $table->tinyInteger('is_cargo_audit')->default(0)->comment('是否货审');
 
 
             $table->timestamps();

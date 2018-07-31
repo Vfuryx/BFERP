@@ -17,7 +17,11 @@ class PurchaseRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'integer',
+                    'purchase_status' => Rule::in([
+                        \App\Models\Purchase::PURCHASE_STATUS_NEW,
+                        \App\Models\Purchase::PURCHASE_STATUS_SECTION,
+                        \App\Models\Purchase::PURCHASE_STATUS_FINISH]),
                 ];
                 break;
             case 'POST':
@@ -55,6 +59,8 @@ class PurchaseRequest extends FormRequest
         function messages()
     {
         return [
+            'purchase_status.in' => '采购状态必须是：新建、部分完成、已完成',
+
             'receiver.required' => '收货人必填',
             'receiver.string' => '收货人必须string类型',
             'receiver.max' => '收货人最大长度为255',

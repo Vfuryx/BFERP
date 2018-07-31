@@ -39,7 +39,8 @@ class PurchasesController extends Controller
      * @Get("/purchases{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all"),
+     *      @Parameter("purchase_status", description="采购状态 状态分别是(new,section,finish)", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {

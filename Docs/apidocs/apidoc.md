@@ -7171,6 +7171,8 @@ FORMAT: 1A
 + Parameters
     + status: (integer, optional) - 获取的状态
         + Default: all
+    + purchase_status: (string, optional) - 采购状态 状态分别是(new,section,finish)
+        + Default: all
 
 + Response 200 (application/json)
     + Body
