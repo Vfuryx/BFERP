@@ -18,7 +18,8 @@ class CreateOrderItemsTable extends Migration
             $table->unsignedInteger('orders_id')->comment('订单id');
             $table->unsignedInteger('goods_id')->comment('商品id');
             $table->unsignedInteger('product_specs_id')->comment('产品规格id');
-            $table->integer('quantity')->comment("数量");
+            $table->integer('quantity',10,2)->default(0.00)->comment("数量");
+            $table->float('total_volume')->comment('总体积');
             $table->string('paint')->comment("油漆");
             $table->tinyInteger('is_printing')->default(0)->comment('是否需要印刷');
             $table->decimal('printing_fee')->default(0.00)->comment('印刷费用');

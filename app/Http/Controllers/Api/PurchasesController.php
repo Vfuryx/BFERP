@@ -427,7 +427,7 @@ class PurchasesController extends Controller
                     $data = $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchasedDetail);
                     //存在id则更新，否则插入
                     if (isset($purchasedDetail['id'])) {
-                        $purchase->purchaseDetails->findOrFail($purchasedDetail['id'])->update($data);
+                        $purchase->purchaseDetails()->findOrFail($purchasedDetail['id'])->update($data);
                     } else {
                         $purchase->purchaseDetails()->create($data);
                     }
