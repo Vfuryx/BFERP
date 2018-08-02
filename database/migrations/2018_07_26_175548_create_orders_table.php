@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('order_status')->default(1)->comment('订单状态');
             $table->string('order_source')->comment('订单来源');
             $table->string('system_order_no')->comment('系统订单号');
             $table->string('member_nick')->comment('会员昵称（对应淘宝买家昵称一类）');
@@ -90,6 +91,7 @@ class CreateOrdersTable extends Migration
             $table->string('locker_name')->comment('锁定人名称 (解锁后这里要清除)');
             $table->string('locker_account')->comment('锁定人账号 (解锁后这里要清除)');
             $table->timestamp('audit_at')->nullable()->comment('客服审核时间');
+
             //拼接
             $table->string('association_taobao_oid')->default('')->comment('单号关联');
             //操作
@@ -98,15 +100,6 @@ class CreateOrdersTable extends Migration
             $table->tinyInteger('is_association')->default(0)->comment('是否关联订单');
 
             //客审
-            $table->tinyInteger('is_lock')->default(0)->comment('是否锁定订单 (锁定后才能进行修改、合并、拆分、关联、删除)');
-            $table->tinyInteger('is_audit')->default(0)->comment('是否审核');
-            $table->tinyInteger('is_audit_faild')->default(0)->comment('是否退审');
-            $table->tinyInteger('is_print')->default(0)->comment('是否打印');
-
-            //货审
-            $table->tinyInteger('is_one_audit')->default(0)->comment('是否跟单一审');
-            $table->tinyInteger('is_cargo_audit')->default(0)->comment('是否货审');
-
 
             $table->timestamps();
         });

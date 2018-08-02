@@ -32,4 +32,8 @@ class Shop extends Model
     {
         return $this->hasMany(PurchaseDetail::class);
     }
+    public function purchaseLists()
+    {
+        return $this->hasMany(PurchaseList::class);
+    }
 }

@@ -2,26 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\PurchaseList;
 use App\Http\Requests\Api\DestroyRequest;
-use App\Transformers\PurchaseDetailTransformer;
-use App\Models\PurchaseDetail;
+
 use App\Http\Controllers\Traits\CURDTrait;
 
 /**
- * 采购单详情资源
- * @Resource("purchasedetails",uri="/api")
+ * 采购清单资源
+ * @Resource("purchaselists",uri="/api")
  */
-class PurchaseDetailsController extends Controller
+class PurchaseListsController extends Controller
 {
     use CURDTrait;
 
-    const TRANSFORMER = PurchaseDetailTransformer::class;
-    const MODEL = PurchaseDetail::class;
+    const MODEL = PurchaseList::class;
 
     /**
-     * 删除采购单详情
+     * 删除采购清单
      *
-     * @Delete("/purchasedetails/:id")
+     * @Delete("/purchaselists/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -31,18 +30,18 @@ class PurchaseDetailsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(PurchaseDetail $Purchasedetail)
+    public function destroy(PurchaseList $purchaselist)
     {
-        return $this->traitDestroy($Purchasedetail);
+        $this->traitJoint2Destroy($purchaselist,'purchaseDetails');
     }
 
     /**
-     * 删除一组采购单详情
+     * 删除一组采购清单
      *
-     * @Delete("/purchasedetails")
+     * @Delete("/purchaselists")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="采购单详情id组 格式: 1,2,3,4 ", required=true)})
+     * @Parameter("ids", description="采购清单id组 格式: 1,2,3,4 ", required=true)})
      * @Transaction({
      *      @Response(500, body={
      *          "message": "删除错误",
@@ -63,7 +62,7 @@ class PurchaseDetailsController extends Controller
      */
     public function destroybyIds(DestroyRequest $request)
     {
-        return $this->traitDestroybyIds($request, self::MODEL);
+        $this->traitJoint2DestroybyIds($request->input('ids'),'purchaseDetails',self::MODEL);
     }
 
 }

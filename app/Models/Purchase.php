@@ -134,10 +134,15 @@ class Purchase extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function purchaseDetails()
+    public function purchaseLists()
     {
-        return $this->hasMany(PurchaseDetail::class, 'purchases_id');
+        return $this->hasMany(PurchaseList::class, 'purchases_id');
     }
+
+//    public function purchaseDetails()
+//    {
+//        return $this->hasMany(PurchaseDetail::class, 'purchases_id');
+//    }
 
     public function cancelPurchases()
     {

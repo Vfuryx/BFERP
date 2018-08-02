@@ -415,12 +415,17 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('purchases/{purchase}/audit', 'PurchasesController@isAudit')
             ->name('api.purchases.isAudit');
 
+        //采购清单
+        $api->delete('purchaselists/{purchaselist}', 'PurchaseListsController@destroy')
+            ->name('api.purchaselists.destroy');
+        $api->delete('purchaselists', 'PurchaseListsController@destroybyids')
+            ->name('api.purchaselists.destroybyids');
+
         //采购单详情
         $api->delete('purchasedetails/{purchasedetail}', 'PurchaseDetailsController@destroy')
             ->name('api.purchasedetails.destroy');
         $api->delete('purchasedetails', 'PurchaseDetailsController@destroybyids')
             ->name('api.purchasedetails.destroybyids');
-
 
         //入库类型
         $api->get('stockintypes', 'StockInTypesController@index')

@@ -162,7 +162,7 @@ class ProductSpecRequest extends FormRequest
 
             'productspecs.*.discount.numeric' => '折扣必须是数字',
 
-            'productspecs.*.commission.numeric' => '金佣点必须是数字',
+            'productspecs.*.commission.numeric' => '佣金点必须是数字',
 
             'productspecs.*.is_combination.integer' => '是否组合必须int类型',
 
@@ -249,7 +249,7 @@ class ProductSpecRequest extends FormRequest
             'warehouse_cost' => '仓库成本',
             'assembly_price' => '装配价格',
             'discount' => '折扣',
-            'commission' => '金佣点',
+            'commission' => '佣金点',
             'is_combination' => '是否组合',
             'package_quantity' => '包件数量',
             'package_costs' => '打包费用',

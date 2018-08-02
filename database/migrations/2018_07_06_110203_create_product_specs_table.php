@@ -27,7 +27,7 @@ class CreateProductSpecsTable extends Migration
             $table->decimal('warehouse_cost',10,2)->default(0.00)->comment('仓库成本');
             $table->decimal('assembly_price',10,2)->default(0.00)->comment('装配价格');
             $table->decimal('discount',10,2)->default(0.00)->comment('折扣');
-            $table->decimal('commission',10,2)->default(0.00)->comment('金佣点');
+            $table->decimal('commission',10,2)->default(0.00)->comment('佣金点');
             $table->tinyInteger('is_combination')->default(0)->comment('是否组合');
             $table->integer('package_quantity')->default(0)->comment('包件数量');
             $table->decimal('package_costs',10,2)->default(0.00)->comment('打包费用');

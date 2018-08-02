@@ -9,7 +9,7 @@ class PurchaseTransformer extends TransformerAbstract
 {
     public function transform(Purchase $purchase)
     {
-        return [
+        $data = [
             'id' => $purchase->id,
             'purchase_order_no' => $purchase->purchase_order_no,
             'purchase_status' => $purchase->purchase_status,
@@ -31,11 +31,62 @@ class PurchaseTransformer extends TransformerAbstract
             'is_change' => $purchase->is_change,
             'remark' => $purchase->remark,
             'status' => $purchase->status,
-            'purchase_details' => $purchase->purchaseDetails,
-            'created_at' => $purchase->created_at
-                                    ->toDateTimeString(),
-            'updated_at' => $purchase->updated_at
-                                    ->toDateTimeString(),
+            'created_at' => $purchase->created_at->toDateTimeString(),
         ];
+
+        if (request()->route()->getActionMethod() != 'index') {
+            //提取 采购列表 和 采购明细 数据
+            $purchaseLists = $purchase->load('purchaseLists.productSpec', 'purchaseLists.purchaseDetails');
+
+            $purchaseLists = $purchaseLists->purchaseLists->map(function($item) {
+                $data['id'] = $item->id;
+                $data['product_specs_id'] = $item->product_specs_id;
+                $data['product_specs_spec_code'] = $item->productSpec->spec_code;
+                $data['product_specs_spec'] = $item->productSpec->spec;
+                $data['goods_short_name'] = $item->productSpec->goods->short_name;
+                $data['goods_commodity_code'] = $item->productSpec->goods->commodity_code;
+                $data['suppliers_id'] = $item->suppliers_id;
+                $data['suppliers_name'] = $item->supplier->name;
+                $data['shops_id'] = $item->shops_id;
+                $data['shop_title'] = $item->shop->title;
+                $data['purchase_quantity'] = $item->purchase_quantity;
+                $data['purchase_cost'] = $item->purchase_cost;
+                $data['purchase_freight'] = $item->purchase_freight;
+                $data['warehouse_cost'] = $item->warehouse_cost;
+                $data['commission'] = $item->commission;
+                $data['discount'] = $item->discount;
+                $data['wooden_frame_costs'] = $item->wooden_frame_costs;
+                $data['arrival_time'] = $item->arrival_time;
+                $data['remark'] = $item->remark;
+                $data['purchase_details'] = $item->purchaseDetails->map(function($item) {
+                    $data['id'] = $item->id;
+                    $data['product_specs_id'] = $item->product_specs_id;
+                    $data['product_specs_spec_code'] = $item->productSpec->spec_code;
+                    $data['product_specs_spec'] = $item->productSpec->spec;
+                    $data['goods_short_name'] = $item->productSpec->goods->short_name;
+                    $data['goods_commodity_code'] = $item->productSpec->goods->commodity_code;
+                    $data['suppliers_id'] = $item->suppliers_id;
+                    $data['suppliers_name'] = $item->supplier->name;
+                    $data['shops_id'] = $item->shops_id;
+                    $data['shop_title'] = $item->shop->title;
+                    $data['purchase_quantity'] = $item->purchase_quantity;
+                    $data['purchase_cost'] = $item->purchase_cost;
+                    $data['purchase_freight'] = $item->purchase_freight;
+                    $data['warehouse_cost'] = $item->warehouse_cost;
+                    $data['commission'] = $item->commission;
+                    $data['discount'] = $item->discount;
+                    $data['wooden_frame_costs'] = $item->wooden_frame_costs;
+                    $data['arrival_time'] = $item->arrival_time;
+                    $data['remark'] = $item->remark;
+                    return $data;
+                });
+                return $data;
+            });
+
+            $data = array_merge($data, ['purchase_lists' => $purchaseLists]);
+        }
+
+
+        return $data;
     }
 }

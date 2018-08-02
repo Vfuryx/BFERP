@@ -48,10 +48,13 @@ class ProductSpec extends Model
         return $this->hasMany(StockInDetail::class, 'product_specs_id');
     }
 
-
-
     public function purchaseDetails()
     {
         return $this->hasMany(PurchaseDetail::class);
+    }
+
+    public function purchaseLists()
+    {
+        return $this->hasMany(PurchaseList::class);
     }
 }

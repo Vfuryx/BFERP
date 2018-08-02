@@ -108,6 +108,31 @@ trait CURDTrait
     }
 
     /**
+     * 两表关联删除
+     *
+     * @param [model] $model    模型
+     * @param [string] $load    关联的表
+     * @return void
+     */
+    public function traitJoint2Destroy($model,$load)
+    {
+        DB::transaction(function () use ($model,$load) {
+
+            $model = $model->load($load);
+
+            $item = $model->purchaseDetails()->delete();
+
+            $model = $model->delete();
+
+            if ($item === false || $model === false) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
+            }
+        });
+
+        return $this->noContent();
+    }
+
+    /**
      * 批量删除
      *
      * @param [request] $request    请求
@@ -125,6 +150,41 @@ trait CURDTrait
 
         return $this->errorResponse(204);
     }
+
+
+    /**
+     * 批量两表关联删除
+     *
+     * @param [string] $ids      要删除的ids
+     * @param [string] $with     关联的表
+     * @param [string] $model    模型
+     * @return mix
+     */
+    public function traitJoint2DestroybyIds($ids,$with,$model)
+    {
+        $ids = explode(',', $ids);
+
+        DB::transaction(function () use ($ids,$with,$model) {
+
+            $model = $model::query()->whereIn('id',$ids)->with($with);
+
+            //删除明细
+            $model->get()->map(function($item) use ($with){
+                if(!$item->$with()->delete()){
+                    throw new DeleteResourceFailedException('The given data was invalid.');
+                }
+            });
+
+            //删除清单
+            if (!$model->delete()) {
+                throw new DeleteResourceFailedException('The given data was invalid.');
+            }
+        });
+
+        return $this->errorResponse(204);
+    }
+
+
 
     /**
      * 批量修改状态

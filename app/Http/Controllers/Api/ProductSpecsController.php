@@ -145,7 +145,7 @@ class ProductSpecsController extends Controller
 //     *      @Parameter("warehouse_cost",type="numeric", description="仓库成本", required=false, default=0.00),
 //     *      @Parameter("assembly_price",type="numeric", description="装配价格", required=false, default=0.00),
 //     *      @Parameter("discount",type="numeric", description="折扣", required=false, default=0.00),
-//     *      @Parameter("commission",type="numeric", description="金佣点", required=false, default=0.00),
+//     *      @Parameter("commission",type="numeric", description="佣金点", required=false, default=0.00),
 //     *      @Parameter("is_combination",type="integer", description="是否组合", required=false,default=0),
 //     *      @Parameter("package_quantity",type="integer", description="包件数量", required=false,default=0),
 //     *      @Parameter("package_costs",type="numeric", description="打包费用", required=false, default=0.00),
@@ -445,8 +445,7 @@ class ProductSpecsController extends Controller
      */
     public function destroy(ProductSpec $productspec)
     {
-        DB::beginTransaction();
-        try {
+        DB::transaction(function () use ($productspec) {
             //删除组合
             $productSpecs = $productspec->productSpecs();
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
@@ -458,14 +457,7 @@ class ProductSpecsController extends Controller
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
 
-            DB::commit();
-        } catch (DeleteResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+        });
 
         return $this->noContent();
     }
@@ -499,9 +491,8 @@ class ProductSpecsController extends Controller
     public function destroybyIds(DestroyRequest $request)
     {
         $ids = explode(',', $request->input('ids'));
-        DB::beginTransaction();
 
-        try {
+        DB::transaction(function () use ($ids) {
             //删除组合
             $productSpecs = ProductSpec::whereIn('id', $ids);
 
@@ -513,15 +504,7 @@ class ProductSpecsController extends Controller
             if ($delCom === false || $delPro === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
-
-            DB::commit();
-        } catch (DeleteResourceFailedException $e) {
-            DB::rollback();
-            throw $e;
-        } catch (\Exception $e) {
-            DB::rollback();
-            throw $e;
-        }
+        });
 
         return $this->noContent();
     }

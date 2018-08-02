@@ -5131,7 +5131,7 @@ FORMAT: 1A
     + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
     + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
     + productspecs[0][discount]: (numeric, optional) - 折扣
-    + productspecs[0][commission]: (numeric, optional) - 金佣点
+    + productspecs[0][commission]: (numeric, optional) - 佣金点
     + productspecs[0][is_combination]: (integer, required) - 是否组合
     + productspecs[0][package_quantity]: (integer, optional) - 包件数量
     + productspecs[0][package_costs]: (numeric, optional) - 打包费用
@@ -5588,7 +5588,7 @@ FORMAT: 1A
     + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
     + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
     + productspecs[0][discount]: (numeric, optional) - 折扣
-    + productspecs[0][commission]: (numeric, optional) - 金佣点
+    + productspecs[0][commission]: (numeric, optional) - 佣金点
     + productspecs[0][is_combination]: (integer, optional) - 是否组合
     + productspecs[0][package_quantity]: (integer, optional) - 包件数量
     + productspecs[0][package_costs]: (numeric, optional) - 打包费用
@@ -7180,11 +7180,12 @@ FORMAT: 1A
             {
                 "data": [
                     {
-                        "id": 91,
-                        "purchase_order_no": "PO2018071912575762929",
+                        "id": 49,
+                        "purchase_order_no": "PO2018080209522019409",
                         "purchase_status": "新建",
                         "order_no": "",
                         "user_id": 1,
+                        "print_at": null,
                         "receiver": "收货人3",
                         "receiver_address": "收货地址3",
                         "warehouse_id": 1,
@@ -7198,32 +7199,33 @@ FORMAT: 1A
                         "is_print": 0,
                         "is_audit": 0,
                         "is_change": 0,
-                        "remark": "备注3",
+                        "remark": "备注5",
                         "status": 1,
-                        "purchase_details": [
-                            {
-                                "id": 5,
-                                "purchases_id": 91,
-                                "product_specs_id": 2,
-                                "purchase_quantity": 10,
-                                "shops_id": 1,
-                                "suppliers_id": 1,
-                                "purchase_cost": "10.00",
-                                "purchase_freight": "10.00",
-                                "warehouse_cost": "10.00",
-                                "commission": "10.00",
-                                "discount": "10.00",
-                                "colour_num": "色号",
-                                "paint": "油漆",
-                                "wooden_frame_costs": "0.00",
-                                "arrival_time": "2018-06-10 00:00:00",
-                                "remark": "备注",
-                                "created_at": "2018-07-19 12:57:58",
-                                "updated_at": "2018-07-19 12:57:58"
-                            }
-                        ],
-                        "created_at": "2018-07-19 12:57:58",
-                        "updated_at": "2018-07-19 12:57:58"
+                        "created_at": "2018-08-02 09:52:20"
+                    },
+                    {
+                        "id": 50,
+                        "purchase_order_no": "PO2018080209561891369",
+                        "purchase_status": "新建",
+                        "order_no": "",
+                        "user_id": 1,
+                        "print_at": null,
+                        "receiver": "收货人3",
+                        "receiver_address": "收货地址3",
+                        "warehouse_id": 1,
+                        "promise_ship_time": null,
+                        "business_personnel": "",
+                        "source": "",
+                        "client_name": "",
+                        "buyer_nick": "",
+                        "order_address": "",
+                        "is_submit": 0,
+                        "is_print": 0,
+                        "is_audit": 0,
+                        "is_change": 0,
+                        "remark": "备注5",
+                        "status": 1,
+                        "created_at": "2018-08-02 09:56:18"
                     }
                 ],
                 "meta": {
@@ -7248,20 +7250,30 @@ FORMAT: 1A
     + remark: (string, optional) - 备注
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + purchase_details[0][product_specs_id]: (integer, required) - 产品规格id
-    + purchase_details[0][purchase_quantity]: (integer, required) - 采购数
-    + purchase_details[0][shops_id]: (integer, required) - 采购店铺id
-    + purchase_details[0][suppliers_id]: (integer, required) - 供应商id
-    + purchase_details[0][purchase_cost]: (numeric, required) - 采购成本
-    + purchase_details[0][purchase_freight]: (numeric, required) - 采购运费
-    + purchase_details[0][warehouse_cost]: (numeric, required) - 仓库成本
-    + purchase_details[0][commission]: (numeric, optional) - 金佣点
-    + purchase_details[0][discount]: (numeric, optional) - 折扣
-    + purchase_details[0][colour_num]: (string, optional) - 色号
-    + purchase_details[0][paint]: (string, optional) - 油漆
-    + purchase_details[0][wooden_frame_costs]: (numeric, optional) - 木架费
-    + purchase_details[0][arrival_time]: (dateTime, optional) - 到货时间
-    + purchase_details[0][remark]: (string, optional) - 备注
+    + purchase_lists[0][product_specs_id]: (integer, required) - 产品规格id
+    + purchase_lists[0][purchase_quantity]: (integer, required) - 采购数
+    + purchase_lists[0][shops_id]: (integer, required) - 采购店铺id
+    + purchase_lists[0][suppliers_id]: (integer, required) - 供应商id
+    + purchase_lists[0][purchase_cost]: (numeric, required) - 采购成本
+    + purchase_lists[0][purchase_freight]: (numeric, required) - 采购运费
+    + purchase_lists[0][warehouse_cost]: (numeric, required) - 仓库成本
+    + purchase_lists[0][commission]: (numeric, optional) - 佣金点
+    + purchase_lists[0][discount]: (numeric, optional) - 折扣
+    + purchase_lists[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_lists[0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_lists[0][remark]: (string, optional) - 备注
+    + purchase_lists[0][purchase_details][0][product_specs_id]: (integer, required) - 产品规格id
+    + purchase_lists[0][purchase_details][0][purchase_quantity]: (integer, required) - 采购数
+    + purchase_lists[0][purchase_details][0][shops_id]: (integer, required) - 采购店铺id
+    + purchase_lists[0][purchase_details][0][suppliers_id]: (integer, required) - 供应商id
+    + purchase_lists[0][purchase_details][0][purchase_cost]: (numeric, required) - 采购成本
+    + purchase_lists[0][purchase_details][0][purchase_freight]: (numeric, required) - 采购运费
+    + purchase_lists[0][purchase_details][0][warehouse_cost]: (numeric, required) - 仓库成本
+    + purchase_lists[0][purchase_details][0][commission]: (numeric, optional) - 佣金点
+    + purchase_lists[0][purchase_details][0][discount]: (numeric, optional) - 折扣
+    + purchase_lists[0][purchase_details][0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_lists[0][purchase_details][0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_lists[0][purchase_details][0][remark]: (string, optional) - 备注
 
 + Request (application/json)
     + Body
@@ -7273,20 +7285,30 @@ FORMAT: 1A
                     "warehouse_id": "1",
                     "remark": "备注",
                     "status": "1",
-                    "purchase_details[0][product_specs_id]": 1,
-                    "purchase_details[0][purchase_quantity]": 10,
-                    "purchase_details[0][shops_id]": 1,
-                    "purchase_details[0][suppliers_id]": 1,
-                    "purchase_details[0][purchase_cost]": 10,
-                    "purchase_details[0][purchase_freight]": 10,
-                    "purchase_details[0][warehouse_cost]": 10,
-                    "purchase_details[0][commission]": 10,
-                    "purchase_details[0][discount]": 10,
-                    "purchase_details[0][colour_num]": "色号",
-                    "purchase_details[0][paint]": "油漆",
-                    "purchase_details[0][wooden_frame_costs]": 10,
-                    "purchase_details[0][arrival_time]": "2018-6-10 00:00:00",
-                    "purchase_details[0][remark]": "备注"
+                    "purchase_lists[0][product_specs_id]": 9,
+                    "purchase_lists[0][purchase_quantity]": 10,
+                    "purchase_lists[0][shops_id]": 1,
+                    "purchase_lists[0][suppliers_id]": 1,
+                    "purchase_lists[0][purchase_cost]": 10,
+                    "purchase_lists[0][purchase_freight]": 10,
+                    "purchase_lists[0][warehouse_cost]": 10,
+                    "purchase_lists[0][commission]": 10,
+                    "purchase_lists[0][discount]": 10,
+                    "purchase_lists[0][wooden_frame_costs]": 10,
+                    "purchase_lists[0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_lists[0][remark]": "备注",
+                    "purchase_lists[0][purchase_details][0][product_specs_id]": 11,
+                    "purchase_lists[0][purchase_details][0][purchase_quantity]": 10,
+                    "purchase_lists[0][purchase_details][0][shops_id]": 1,
+                    "purchase_lists[0][purchase_details][0][suppliers_id]": 1,
+                    "purchase_lists[0][purchase_details][0][purchase_cost]": 10,
+                    "purchase_lists[0][purchase_details][0][purchase_freight]": 10,
+                    "purchase_lists[0][purchase_details][0][warehouse_cost]": 10,
+                    "purchase_lists[0][purchase_details][0][commission]": 10,
+                    "purchase_lists[0][purchase_details][0][discount]": 10,
+                    "purchase_lists[0][purchase_details][0][wooden_frame_costs]": 10,
+                    "purchase_lists[0][purchase_details][0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_lists[0][purchase_details][0][remark]": "备注"
                 }
             ]
 
@@ -7307,11 +7329,12 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 91,
-                "purchase_order_no": "PO2018071912575762929",
+                "id": 66,
+                "purchase_order_no": "PO2018080216025968866",
                 "purchase_status": "新建",
                 "order_no": null,
                 "user_id": 1,
+                "print_at": null,
                 "receiver": "收货人3",
                 "receiver_address": "收货地址3",
                 "warehouse_id": "1",
@@ -7325,32 +7348,76 @@ FORMAT: 1A
                 "is_print": null,
                 "is_audit": null,
                 "is_change": null,
-                "remark": "备注3",
+                "remark": "备注5",
                 "status": "1",
-                "purchase_details": [
+                "created_at": "2018-08-02 16:02:59",
+                "purchase_lists": [
                     {
-                        "id": 5,
-                        "purchases_id": 91,
-                        "product_specs_id": 2,
-                        "purchase_quantity": 10,
-                        "shops_id": 1,
+                        "id": 64,
+                        "product_specs_id": 9,
+                        "product_specs_spec_code": "321",
+                        "product_specs_spec": "32gsdgsa",
+                        "goods_short_name": "商品简称",
+                        "goods_commodity_code": "商品编码1",
                         "suppliers_id": 1,
+                        "suppliers_name": "供应商1",
+                        "shops_id": 1,
+                        "shop_title": "店铺标题",
+                        "purchase_quantity": 10,
                         "purchase_cost": "10.00",
                         "purchase_freight": "10.00",
                         "warehouse_cost": "10.00",
                         "commission": "10.00",
                         "discount": "10.00",
-                        "colour_num": "色号",
-                        "paint": "油漆",
-                        "wooden_frame_costs": "0.00",
+                        "wooden_frame_costs": "1.00",
                         "arrival_time": "2018-06-10 00:00:00",
                         "remark": "备注",
-                        "created_at": "2018-07-19 12:57:58",
-                        "updated_at": "2018-07-19 12:57:58"
+                        "purchase_details": [
+                            {
+                                "id": 73,
+                                "product_specs_id": 10,
+                                "product_specs_spec_code": "1ca",
+                                "product_specs_spec": "32",
+                                "goods_short_name": "商品简称",
+                                "goods_commodity_code": "商品编码10",
+                                "suppliers_id": 1,
+                                "suppliers_name": "供应商1",
+                                "shops_id": 1,
+                                "shop_title": "店铺标题",
+                                "purchase_quantity": 10,
+                                "purchase_cost": "10.00",
+                                "purchase_freight": "10.00",
+                                "warehouse_cost": "10.00",
+                                "commission": "10.00",
+                                "discount": "10.00",
+                                "wooden_frame_costs": "1.00",
+                                "arrival_time": "2018-06-10 00:00:00",
+                                "remark": "备注"
+                            },
+                            {
+                                "id": 74,
+                                "product_specs_id": 11,
+                                "product_specs_spec_code": "cccc",
+                                "product_specs_spec": "32",
+                                "goods_short_name": "321",
+                                "goods_commodity_code": "21",
+                                "suppliers_id": 1,
+                                "suppliers_name": "供应商1",
+                                "shops_id": 1,
+                                "shop_title": "店铺标题",
+                                "purchase_quantity": 10,
+                                "purchase_cost": "10.00",
+                                "purchase_freight": "10.00",
+                                "warehouse_cost": "10.00",
+                                "commission": "10.00",
+                                "discount": "10.00",
+                                "wooden_frame_costs": "1.00",
+                                "arrival_time": "2018-06-10 00:00:00",
+                                "remark": "备注"
+                            }
+                        ]
                     }
                 ],
-                "created_at": "2018-07-19 12:57:58",
-                "updated_at": "2018-07-19 12:57:58",
                 "meta": {
                     "status_code": "201"
                 }
@@ -7371,11 +7438,12 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 91,
-                "purchase_order_no": "PO2018071912575762929",
+                "id": 66,
+                "purchase_order_no": "PO2018080216025968866",
                 "purchase_status": "新建",
                 "order_no": "",
                 "user_id": 1,
+                "print_at": null,
                 "receiver": "收货人3",
                 "receiver_address": "收货地址3",
                 "warehouse_id": 1,
@@ -7389,32 +7457,76 @@ FORMAT: 1A
                 "is_print": 0,
                 "is_audit": 0,
                 "is_change": 0,
-                "remark": "备注3",
+                "remark": "备注5",
                 "status": 1,
-                "purchase_details": [
+                "created_at": "2018-08-02 16:02:59",
+                "purchase_lists": [
                     {
-                        "id": 5,
-                        "purchases_id": 91,
-                        "product_specs_id": 2,
-                        "purchase_quantity": 10,
-                        "shops_id": 1,
+                        "id": 64,
+                        "product_specs_id": 9,
+                        "product_specs_spec_code": "321",
+                        "product_specs_spec": "32gsdgsa",
+                        "goods_short_name": "商品简称",
+                        "goods_commodity_code": "商品编码1",
                         "suppliers_id": 1,
+                        "suppliers_name": "供应商1",
+                        "shops_id": 1,
+                        "shop_title": "店铺标题",
+                        "purchase_quantity": 10,
                         "purchase_cost": "10.00",
                         "purchase_freight": "10.00",
                         "warehouse_cost": "10.00",
                         "commission": "10.00",
                         "discount": "10.00",
-                        "colour_num": "色号",
-                        "paint": "油漆",
-                        "wooden_frame_costs": "0.00",
+                        "wooden_frame_costs": "1.00",
                         "arrival_time": "2018-06-10 00:00:00",
                         "remark": "备注",
-                        "created_at": "2018-07-19 12:57:58",
-                        "updated_at": "2018-07-19 12:57:58"
+                        "purchase_details": [
+                            {
+                                "id": 73,
+                                "product_specs_id": 10,
+                                "product_specs_spec_code": "1ca",
+                                "product_specs_spec": "32",
+                                "goods_short_name": "商品简称",
+                                "goods_commodity_code": "商品编码10",
+                                "suppliers_id": 1,
+                                "suppliers_name": "供应商1",
+                                "shops_id": 1,
+                                "shop_title": "店铺标题",
+                                "purchase_quantity": 10,
+                                "purchase_cost": "10.00",
+                                "purchase_freight": "10.00",
+                                "warehouse_cost": "10.00",
+                                "commission": "10.00",
+                                "discount": "10.00",
+                                "wooden_frame_costs": "1.00",
+                                "arrival_time": "2018-06-10 00:00:00",
+                                "remark": "备注"
+                            },
+                            {
+                                "id": 74,
+                                "product_specs_id": 11,
+                                "product_specs_spec_code": "cccc",
+                                "product_specs_spec": "32",
+                                "goods_short_name": "321",
+                                "goods_commodity_code": "21",
+                                "suppliers_id": 1,
+                                "suppliers_name": "供应商1",
+                                "shops_id": 1,
+                                "shop_title": "店铺标题",
+                                "purchase_quantity": 10,
+                                "purchase_cost": "10.00",
+                                "purchase_freight": "10.00",
+                                "warehouse_cost": "10.00",
+                                "commission": "10.00",
+                                "discount": "10.00",
+                                "wooden_frame_costs": "1.00",
+                                "arrival_time": "2018-06-10 00:00:00",
+                                "remark": "备注"
+                            }
+                        ]
                     }
-                ],
-                "created_at": "2018-07-19 12:57:58",
-                "updated_at": "2018-07-19 12:57:58"
+                ]
             }
 
 ## 修改采购单 [PATCH /api/purchases/:id]
@@ -7427,21 +7539,32 @@ FORMAT: 1A
     + remark: (string, optional) - 备注
     + status: (integer, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + purchase_details[0][id]: (integer, optional) - 采购详情id
-    + purchase_details[0][product_specs_id]: (integer, optional) - 产品规格id
-    + purchase_details[0][purchase_quantity]: (integer, optional) - 采购数
-    + purchase_details[0][shops_id]: (integer, optional) - 采购店铺id
-    + purchase_details[0][suppliers_id]: (integer, optional) - 供应商id
-    + purchase_details[0][purchase_cost]: (numeric, optional) - 采购成本
-    + purchase_details[0][purchase_freight]: (numeric, optional) - 采购运费
-    + purchase_details[0][warehouse_cost]: (numeric, optional) - 仓库成本
-    + purchase_details[0][commission]: (numeric, optional) - 金佣点
-    + purchase_details[0][discount]: (numeric, optional) - 折扣
-    + purchase_details[0][colour_num]: (string, optional) - 色号
-    + purchase_details[0][paint]: (string, optional) - 油漆
-    + purchase_details[0][wooden_frame_costs]: (numeric, optional) - 木架费
-    + purchase_details[0][arrival_time]: (dateTime, optional) - 到货时间
-    + purchase_details[0][remark]: (string, optional) - 备注
+    + purchase_lists[0][id]: (integer, optional) - 采购清单id
+    + purchase_lists[0][product_specs_id]: (integer, optional) - 产品规格id
+    + purchase_lists[0][purchase_quantity]: (integer, optional) - 采购数
+    + purchase_lists[0][shops_id]: (integer, optional) - 采购店铺id
+    + purchase_lists[0][suppliers_id]: (integer, optional) - 供应商id
+    + purchase_lists[0][purchase_cost]: (numeric, optional) - 采购成本
+    + purchase_lists[0][purchase_freight]: (numeric, optional) - 采购运费
+    + purchase_lists[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + purchase_lists[0][commission]: (numeric, optional) - 佣金点
+    + purchase_lists[0][discount]: (numeric, optional) - 折扣
+    + purchase_lists[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_lists[0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_lists[0][remark]: (string, optional) - 备注
+    + purchase_lists[0][purchase_details][0][id]: (integer, optional) - 采购明细id
+    + purchase_lists[0][purchase_details][0][product_specs_id]: (integer, optional) - 产品规格id
+    + purchase_lists[0][purchase_details][0][purchase_quantity]: (integer, optional) - 采购数
+    + purchase_lists[0][purchase_details][0][shops_id]: (integer, optional) - 采购店铺id
+    + purchase_lists[0][purchase_details][0][suppliers_id]: (integer, optional) - 供应商id
+    + purchase_lists[0][purchase_details][0][purchase_cost]: (numeric, optional) - 采购成本
+    + purchase_lists[0][purchase_details][0][purchase_freight]: (numeric, optional) - 采购运费
+    + purchase_lists[0][purchase_details][0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + purchase_lists[0][purchase_details][0][commission]: (numeric, optional) - 佣金点
+    + purchase_lists[0][purchase_details][0][discount]: (numeric, optional) - 折扣
+    + purchase_lists[0][purchase_details][0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + purchase_lists[0][purchase_details][0][arrival_time]: (dateTime, optional) - 到货时间
+    + purchase_lists[0][purchase_details][0][remark]: (string, optional) - 备注
 
 + Request (application/json)
     + Body
@@ -7453,21 +7576,30 @@ FORMAT: 1A
                     "warehouse_id": "1",
                     "remark": "备注",
                     "status": "1",
-                    "purchase_details[0][id]": 1,
-                    "purchase_details[0][product_specs_id]": 1,
-                    "purchase_details[0][purchase_quantity]": 10,
-                    "purchase_details[0][shops_id]": 1,
-                    "purchase_details[0][suppliers_id]": 1,
-                    "purchase_details[0][purchase_cost]": 10,
-                    "purchase_details[0][purchase_freight]": 10,
-                    "purchase_details[0][warehouse_cost]": 10,
-                    "purchase_details[0][commission]": 10,
-                    "purchase_details[0][discount]": 10,
-                    "purchase_details[0][colour_num]": "色号",
-                    "purchase_details[0][paint]": "油漆",
-                    "purchase_details[0][wooden_frame_costs]": 10,
-                    "purchase_details[0][arrival_time]": "2018-6-10 00:00:00",
-                    "purchase_details[0][remark]": "备注"
+                    "purchase_lists[0][product_specs_id]": 9,
+                    "purchase_lists[0][purchase_quantity]": 10,
+                    "purchase_lists[0][shops_id]": 1,
+                    "purchase_lists[0][suppliers_id]": 1,
+                    "purchase_lists[0][purchase_cost]": 10,
+                    "purchase_lists[0][purchase_freight]": 10,
+                    "purchase_lists[0][warehouse_cost]": 10,
+                    "purchase_lists[0][commission]": 10,
+                    "purchase_lists[0][discount]": 10,
+                    "purchase_lists[0][wooden_frame_costs]": 10,
+                    "purchase_lists[0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_lists[0][remark]": "备注",
+                    "purchase_lists[0][purchase_details][0][product_specs_id]": 11,
+                    "purchase_lists[0][purchase_details][0][purchase_quantity]": 10,
+                    "purchase_lists[0][purchase_details][0][shops_id]": 1,
+                    "purchase_lists[0][purchase_details][0][suppliers_id]": 1,
+                    "purchase_lists[0][purchase_details][0][purchase_cost]": 10,
+                    "purchase_lists[0][purchase_details][0][purchase_freight]": 10,
+                    "purchase_lists[0][purchase_details][0][warehouse_cost]": 10,
+                    "purchase_lists[0][purchase_details][0][commission]": 10,
+                    "purchase_lists[0][purchase_details][0][discount]": 10,
+                    "purchase_lists[0][purchase_details][0][wooden_frame_costs]": 10,
+                    "purchase_lists[0][purchase_details][0][arrival_time]": "2018-6-10 00:00:00",
+                    "purchase_lists[0][purchase_details][0][remark]": "备注"
                 }
             ]
 
@@ -7502,14 +7634,15 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 1,
-                "purchase_order_no": "PO2018071718055128755",
+                "id": 49,
+                "purchase_order_no": "PO2018080209522019409",
                 "purchase_status": "新建",
                 "order_no": "",
                 "user_id": 1,
-                "receiver": "收货人1",
-                "receiver_address": "收货地址1",
-                "warehouse_id": "1",
+                "print_at": null,
+                "receiver": "收货人3",
+                "receiver_address": "收货地址3",
+                "warehouse_id": 1,
                 "promise_ship_time": null,
                 "business_personnel": "",
                 "source": "",
@@ -7520,10 +7653,64 @@ FORMAT: 1A
                 "is_print": 0,
                 "is_audit": 0,
                 "is_change": 0,
-                "remark": "备注1",
-                "status": "1",
-                "created_at": "2018-07-17 18:05:51",
-                "updated_at": "2018-07-17 18:33:06"
+                "remark": "备注5",
+                "status": 1,
+                "purchase_lists": [
+                    {
+                        "product_specs_id": 9,
+                        "product_specs_spec_code": "规格编码",
+                        "product_specs_spec": "产品规格",
+                        "goods_short_name": "商品简称",
+                        "goods_commodity_code": "商品编码1",
+                        "suppliers_name": "供应商1",
+                        "shop_title": "店铺标题",
+                        "purchase_lists_purchase_cost": "10.00",
+                        "purchase_lists_purchase_freight": "10.00",
+                        "purchase_lists_warehouse_cost": "10.00",
+                        "purchase_lists_commission": "10.00",
+                        "purchase_lists_discount": "10.00",
+                        "purchase_lists_wooden_frame_costs": "1.00",
+                        "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+                        "purchase_lists_remark": "备注"
+                    }
+                ],
+                "purchase_details": [
+                    {
+                        "product_specs_id": 10,
+                        "product_specs_spec_code": "规格编码2",
+                        "product_specs_spec": "产品规格2",
+                        "goods_short_name": "商品简称2",
+                        "goods_commodity_code": "商品编码10",
+                        "suppliers_name": "供应商1",
+                        "shop_title": "店铺标题",
+                        "purchase_lists_purchase_cost": "10.00",
+                        "purchase_lists_purchase_freight": "10.00",
+                        "purchase_lists_warehouse_cost": "10.00",
+                        "purchase_lists_commission": "10.00",
+                        "purchase_lists_discount": "10.00",
+                        "purchase_lists_wooden_frame_costs": "1.00",
+                        "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+                        "purchase_lists_remark": "备注"
+                    },
+                    {
+                        "product_specs_id": 11,
+                        "product_specs_spec_code": "规格编码3",
+                        "product_specs_spec": "产品规格3",
+                        "goods_short_name": "商品简称3",
+                        "goods_commodity_code": "商品编码12",
+                        "suppliers_name": "供应商1",
+                        "shop_title": "店铺标题",
+                        "purchase_lists_purchase_cost": "10.00",
+                        "purchase_lists_purchase_freight": "10.00",
+                        "purchase_lists_warehouse_cost": "10.00",
+                        "purchase_lists_commission": "10.00",
+                        "purchase_lists_discount": "10.00",
+                        "purchase_lists_wooden_frame_costs": "1.00",
+                        "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+                        "purchase_lists_remark": "备注"
+                    }
+                ],
+                "created_at": "2018-08-02 09:52:20"
             }
 
 ## 删除采购单 [DELETE /api/purchases/:id]
@@ -7674,6 +7861,58 @@ FORMAT: 1A
                 "errors": {
                     "is_audit": [
                         "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# purchaselists [/api]
+采购清单资源
+
+## 删除采购清单 [DELETE /api/purchaselists/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组采购清单 [DELETE /api/purchaselists]
+
+
++ Parameters
+    + ids: (string, required) - 采购清单id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
                     ]
                 },
                 "status_code": 422

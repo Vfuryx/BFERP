@@ -9,9 +9,9 @@ class PurchaseDetail extends Model
     protected $table = "purchase_details";
 
     protected $fillable = [
-        'purchases_id', 'product_specs_id', 'purchase_quantity', 'shops_id',
+        'product_specs_id', 'purchase_quantity', 'shops_id',
         'suppliers_id', 'purchase_cost', 'purchase_freight', 'warehouse_cost',
-        'commission', 'discount', 'colour_num', 'paint', 'arrival_time', 'remark',
+        'commission', 'discount', 'arrival_time', 'remark',
         'wooden_frame_costs'
     ];
 
@@ -110,24 +110,24 @@ class PurchaseDetail extends Model
     }
 
 
-    public function purchases()
+    public function purchaseList()
     {
-        return $this->belongsTo(Purchase::class, 'purchases_id');
+        return $this->belongsTo(PurchaseList::class, 'purchase_lists_id');
     }
 
-    public function productSpecs()
+    public function productSpec()
     {
-        return $this->belongsTo(ProductSpec::class);
+        return $this->belongsTo(ProductSpec::class,'product_specs_id');
     }
 
     public function shop()
     {
-        return $this->belongsTo(Shop::class);
+        return $this->belongsTo(Shop::class,'shops_id');
     }
 
-    public function suppliers()
+    public function supplier()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class, 'suppliers_id');
     }
 
     public function stockInDetails()

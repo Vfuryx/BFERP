@@ -20,8 +20,6 @@ class PurchaseDetailTransformer extends TransformerAbstract
             'purchase_freight' => $purchaseDetail->purchase_freight,
             'warehouse_cost' => $purchaseDetail->warehouse_cost,
             'commission' => $purchaseDetail->commission,
-            'discount' => $purchaseDetail->discount,
-            'colour_num' => $purchaseDetail->colour_num,
             'paint' => $purchaseDetail->paint,
             'arrival_time' => $purchaseDetail->arrival_time,
             'remark' => $purchaseDetail->remark,

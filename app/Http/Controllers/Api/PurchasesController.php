@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Validator;
+use App\Models\PurchaseList;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Purchase;
 use App\Models\PurchaseDetail;
 
 use App\Http\Requests\Api\PurchaseRequest;
+use App\Http\Requests\Api\PurchaseListRequest;
 use App\Http\Requests\Api\PurchaseDetailRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
@@ -45,11 +46,12 @@ class PurchasesController extends Controller
      * @Response(200, body={
      * "data": {
      *      {
-     *          "id": 91,
-     *          "purchase_order_no": "PO2018071912575762929",
+     *          "id": 49,
+     *          "purchase_order_no": "PO2018080209522019409",
      *          "purchase_status": "新建",
      *          "order_no": "",
      *          "user_id": 1,
+     *          "print_at": null,
      *          "receiver": "收货人3",
      *          "receiver_address": "收货地址3",
      *          "warehouse_id": 1,
@@ -63,33 +65,34 @@ class PurchasesController extends Controller
      *          "is_print": 0,
      *          "is_audit": 0,
      *          "is_change": 0,
-     *          "remark": "备注3",
+     *          "remark": "备注5",
      *          "status": 1,
-     *          "purchase_details": {
-     *              {
-     *                  "id": 5,
-     *                  "purchases_id": 91,
-     *                  "product_specs_id": 2,
-     *                  "purchase_quantity": 10,
-     *                  "shops_id": 1,
-     *                  "suppliers_id": 1,
-     *                  "purchase_cost": "10.00",
-     *                  "purchase_freight": "10.00",
-     *                  "warehouse_cost": "10.00",
-     *                  "commission": "10.00",
-     *                  "discount": "10.00",
-     *                  "colour_num": "色号",
-     *                  "paint": "油漆",
-     *                  "wooden_frame_costs": "0.00",
-     *                  "arrival_time": "2018-06-10 00:00:00",
-     *                  "remark": "备注",
-     *                  "created_at": "2018-07-19 12:57:58",
-     *                  "updated_at": "2018-07-19 12:57:58"
-     *              }
-     *          },
-     *          "created_at": "2018-07-19 12:57:58",
-     *          "updated_at": "2018-07-19 12:57:58"
+     *          "created_at": "2018-08-02 09:52:20"
      *      },
+     *      {
+     *          "id": 50,
+     *          "purchase_order_no": "PO2018080209561891369",
+     *          "purchase_status": "新建",
+     *          "order_no": "",
+     *          "user_id": 1,
+     *          "print_at": null,
+     *          "receiver": "收货人3",
+     *          "receiver_address": "收货地址3",
+     *          "warehouse_id": 1,
+     *          "promise_ship_time": null,
+     *          "business_personnel": "",
+     *          "source": "",
+     *          "client_name": "",
+     *          "buyer_nick": "",
+     *          "order_address": "",
+     *          "is_submit": 0,
+     *          "is_print": 0,
+     *          "is_audit": 0,
+     *          "is_change": 0,
+     *          "remark": "备注5",
+     *          "status": 1,
+     *          "created_at": "2018-08-02 09:56:18"
+     *      }
      *     },
      *     "meta": {
      *         "pagination": {
@@ -119,20 +122,30 @@ class PurchasesController extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("purchase_details[0][product_specs_id]", type="integer", description="产品规格id", required=true),
-     *      @Parameter("purchase_details[0][purchase_quantity]", type="integer", description="采购数", required=true),
-     *      @Parameter("purchase_details[0][shops_id]", type="integer", description="采购店铺id", required=true),
-     *      @Parameter("purchase_details[0][suppliers_id]", type="integer", description="供应商id", required=true),
-     *      @Parameter("purchase_details[0][purchase_cost]", type="numeric", description="采购成本", required=true),
-     *      @Parameter("purchase_details[0][purchase_freight]", type="numeric", description="采购运费", required=true),
-     *      @Parameter("purchase_details[0][warehouse_cost]", type="numeric", description="仓库成本", required=true),
-     *      @Parameter("purchase_details[0][commission]", type="numeric", description="金佣点", required=false),
-     *      @Parameter("purchase_details[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("purchase_details[0][colour_num]", description="色号", required=false),
-     *      @Parameter("purchase_details[0][paint]", description="油漆", required=false),
-     *      @Parameter("purchase_details[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("purchase_details[0][arrival_time]", type="dateTime", description="到货时间", required=false),
-     *      @Parameter("purchase_details[0][remark]", description="备注", required=false),
+     *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=true),
+     *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=true),
+     *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=true),
+     *      @Parameter("purchase_lists[0][purchase_freight]", type="numeric", description="采购运费", required=true),
+     *      @Parameter("purchase_lists[0][warehouse_cost]", type="numeric", description="仓库成本", required=true),
+     *      @Parameter("purchase_lists[0][commission]", type="numeric", description="佣金点", required=false),
+     *      @Parameter("purchase_lists[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_lists[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_lists[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_lists[0][remark]", description="备注", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][product_specs_id]", type="integer", description="产品规格id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_quantity]", type="integer", description="采购数", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][shops_id]", type="integer", description="采购店铺id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][suppliers_id]", type="integer", description="供应商id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_cost]", type="numeric", description="采购成本", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_freight]", type="numeric", description="采购运费", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][warehouse_cost]", type="numeric", description="仓库成本", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][commission]", type="numeric", description="佣金点", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][remark]", description="备注", required=false),
      * })
      * @Request({
      *     {
@@ -141,20 +154,42 @@ class PurchasesController extends Controller
      *          "warehouse_id": "1",
      *          "remark": "备注",
      *          "status": "1",
-     *          "purchase_details[0][product_specs_id]":1,
-     *          "purchase_details[0][purchase_quantity]":10,
-     *          "purchase_details[0][shops_id]":1,
-     *          "purchase_details[0][suppliers_id]":1,
-     *          "purchase_details[0][purchase_cost]":10,
-     *          "purchase_details[0][purchase_freight]":10,
-     *          "purchase_details[0][warehouse_cost]":10,
-     *          "purchase_details[0][commission]":10,
-     *          "purchase_details[0][discount]":10,
-     *          "purchase_details[0][colour_num]":"色号",
-     *          "purchase_details[0][paint]":"油漆",
-     *          "purchase_details[0][wooden_frame_costs]":10,
-     *          "purchase_details[0][arrival_time]":"2018-6-10 00:00:00",
-     *          "purchase_details[0][remark]":"备注",
+     *          "purchase_lists[0][product_specs_id]":9,
+     *          "purchase_lists[0][purchase_quantity]":10,
+     *          "purchase_lists[0][shops_id]":1,
+     *          "purchase_lists[0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_freight]":10,
+     *          "purchase_lists[0][warehouse_cost]":10,
+     *          "purchase_lists[0][commission]":10,
+     *          "purchase_lists[0][discount]":10,
+     *          "purchase_lists[0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][remark]":"备注",
+     *          "purchase_lists[0][purchase_details][0][product_specs_id]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
+     *          "purchase_lists[0][purchase_details][0][shops_id]":1,
+     *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_details][0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_freight]":10,
+     *          "purchase_lists[0][purchase_details][0][warehouse_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][commission]":10,
+     *          "purchase_lists[0][purchase_details][0][discount]":10,
+     *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][purchase_details][0][remark]":"备注",
+     *          "purchase_lists[0][purchase_details][0][product_specs_id]":11,
+     *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
+     *          "purchase_lists[0][purchase_details][0][shops_id]":1,
+     *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_details][0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_freight]":10,
+     *          "purchase_lists[0][purchase_details][0][warehouse_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][commission]":10,
+     *          "purchase_lists[0][purchase_details][0][discount]":10,
+     *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][purchase_details][0][remark]":"备注",
      *      }
      *})
      * @Transaction({
@@ -168,11 +203,12 @@ class PurchasesController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 91,
-     *          "purchase_order_no": "PO2018071912575762929",
+     *          "id": 66,
+     *          "purchase_order_no": "PO2018080216025968866",
      *          "purchase_status": "新建",
      *          "order_no": null,
      *          "user_id": 1,
+     *          "print_at": null,
      *          "receiver": "收货人3",
      *          "receiver_address": "收货地址3",
      *          "warehouse_id": "1",
@@ -186,32 +222,76 @@ class PurchasesController extends Controller
      *          "is_print": null,
      *          "is_audit": null,
      *          "is_change": null,
-     *          "remark": "备注3",
+     *          "remark": "备注5",
      *          "status": "1",
-     *          "purchase_details": {
-     *          {
-     *              "id": 5,
-     *              "purchases_id": 91,
-     *              "product_specs_id": 2,
-     *              "purchase_quantity": 10,
-     *              "shops_id": 1,
-     *              "suppliers_id": 1,
-     *              "purchase_cost": "10.00",
-     *              "purchase_freight": "10.00",
-     *              "warehouse_cost": "10.00",
-     *              "commission": "10.00",
-     *              "discount": "10.00",
-     *              "colour_num": "色号",
-     *              "paint": "油漆",
-     *              "wooden_frame_costs": "0.00",
-     *              "arrival_time": "2018-06-10 00:00:00",
-     *              "remark": "备注",
-     *              "created_at": "2018-07-19 12:57:58",
-     *              "updated_at": "2018-07-19 12:57:58"
-     *          }
+     *          "created_at": "2018-08-02 16:02:59",
+     *          "purchase_lists": {
+     *              {
+     *                  "id": 64,
+     *                  "product_specs_id": 9,
+     *                  "product_specs_spec_code": "321",
+     *                  "product_specs_spec": "32gsdgsa",
+     *                  "goods_short_name": "商品简称",
+     *                  "goods_commodity_code": "商品编码1",
+     *                  "suppliers_id": 1,
+     *                  "suppliers_name": "供应商1",
+     *                  "shops_id": 1,
+     *                  "shop_title": "店铺标题",
+     *                  "purchase_quantity": 10,
+     *                  "purchase_cost": "10.00",
+     *                  "purchase_freight": "10.00",
+     *                  "warehouse_cost": "10.00",
+     *                  "commission": "10.00",
+     *                  "discount": "10.00",
+     *                  "wooden_frame_costs": "1.00",
+     *                  "arrival_time": "2018-06-10 00:00:00",
+     *                  "remark": "备注",
+     *                  "purchase_details": {
+     *                      {
+     *                          "id": 73,
+     *                          "product_specs_id": 10,
+     *                          "product_specs_spec_code": "1ca",
+     *                          "product_specs_spec": "32",
+     *                          "goods_short_name": "商品简称",
+     *                          "goods_commodity_code": "商品编码10",
+     *                          "suppliers_id": 1,
+     *                          "suppliers_name": "供应商1",
+     *                          "shops_id": 1,
+     *                          "shop_title": "店铺标题",
+     *                          "purchase_quantity": 10,
+     *                          "purchase_cost": "10.00",
+     *                          "purchase_freight": "10.00",
+     *                          "warehouse_cost": "10.00",
+     *                          "commission": "10.00",
+     *                          "discount": "10.00",
+     *                          "wooden_frame_costs": "1.00",
+     *                          "arrival_time": "2018-06-10 00:00:00",
+     *                          "remark": "备注"
+     *                      },
+     *                      {
+     *                          "id": 74,
+     *                          "product_specs_id": 11,
+     *                          "product_specs_spec_code": "cccc",
+     *                          "product_specs_spec": "32",
+     *                          "goods_short_name": "321",
+     *                          "goods_commodity_code": "21",
+     *                          "suppliers_id": 1,
+     *                          "suppliers_name": "供应商1",
+     *                          "shops_id": 1,
+     *                          "shop_title": "店铺标题",
+     *                          "purchase_quantity": 10,
+     *                          "purchase_cost": "10.00",
+     *                          "purchase_freight": "10.00",
+     *                          "warehouse_cost": "10.00",
+     *                          "commission": "10.00",
+     *                          "discount": "10.00",
+     *                          "wooden_frame_costs": "1.00",
+     *                          "arrival_time": "2018-06-10 00:00:00",
+     *                          "remark": "备注"
+     *                      }
+     *                  }
+     *              }
      *          },
-     *          "created_at": "2018-07-19 12:57:58",
-     *          "updated_at": "2018-07-19 12:57:58",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -219,21 +299,29 @@ class PurchasesController extends Controller
      * })
      */
     public function store(PurchaseRequest $purchaseRequest,
+                          PurchaseListRequest $purchaseListRequest,
                           PurchaseDetailRequest $purchaseDetailRequest,
                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
-
-        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseDetailRequest, $validatedHandler) {
+        $purchase = DB::transaction(function () use ($purchaseRequest, $purchaseListRequest, $purchaseDetailRequest, $validatedHandler) {
 
             $purchase = Purchase::create($purchaseRequest->validated());
 
-            if ($purchasedDetails = $purchaseRequest->input('purchase_details')) {
+            if ($purchaseLists = $purchaseRequest->input('purchase_lists')) {
 
-                foreach ($purchasedDetails as $purchasedDetail) {
-
-                    $purchase->purchaseDetails()->create(
-                        $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchasedDetail)
+                foreach ($purchaseLists as $purchaseList) {
+                    $purchaseListModel = $purchase->purchaseLists()->create(
+                        $validatedHandler->getValidatedData($purchaseListRequest->rules(), $purchaseList)
                     );
+
+                    if ($purchaseDetails = $purchaseList['purchase_details'] ?? null) {
+                        foreach ($purchaseDetails as $purchaseDetail) {
+                            $purchaseListModel->purchaseDetails()->create(
+                                $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchaseDetail)
+                            );
+                        }
+                    }
+
                 }
             }
             return $purchase;
@@ -256,11 +344,12 @@ class PurchasesController extends Controller
      *          "status_code": 404,
      *      }),
      *      @Response(200, body={
-     *          "id": 91,
-     *          "purchase_order_no": "PO2018071912575762929",
+     *          "id": 66,
+     *          "purchase_order_no": "PO2018080216025968866",
      *          "purchase_status": "新建",
      *          "order_no": "",
      *          "user_id": 1,
+     *          "print_at": null,
      *          "receiver": "收货人3",
      *          "receiver_address": "收货地址3",
      *          "warehouse_id": 1,
@@ -274,32 +363,76 @@ class PurchasesController extends Controller
      *          "is_print": 0,
      *          "is_audit": 0,
      *          "is_change": 0,
-     *          "remark": "备注3",
+     *          "remark": "备注5",
      *          "status": 1,
-     *          "purchase_details": {
+     *          "created_at": "2018-08-02 16:02:59",
+     *          "purchase_lists": {
      *              {
-     *                  "id": 5,
-     *                  "purchases_id": 91,
-     *                  "product_specs_id": 2,
-     *                  "purchase_quantity": 10,
-     *                  "shops_id": 1,
+     *                  "id": 64,
+     *                  "product_specs_id": 9,
+     *                  "product_specs_spec_code": "321",
+     *                  "product_specs_spec": "32gsdgsa",
+     *                  "goods_short_name": "商品简称",
+     *                  "goods_commodity_code": "商品编码1",
      *                  "suppliers_id": 1,
+     *                  "suppliers_name": "供应商1",
+     *                  "shops_id": 1,
+     *                  "shop_title": "店铺标题",
+     *                  "purchase_quantity": 10,
      *                  "purchase_cost": "10.00",
      *                  "purchase_freight": "10.00",
      *                  "warehouse_cost": "10.00",
      *                  "commission": "10.00",
      *                  "discount": "10.00",
-     *                  "colour_num": "色号",
-     *                  "paint": "油漆",
-     *                  "wooden_frame_costs": "0.00",
+     *                  "wooden_frame_costs": "1.00",
      *                  "arrival_time": "2018-06-10 00:00:00",
      *                  "remark": "备注",
-     *                  "created_at": "2018-07-19 12:57:58",
-     *                  "updated_at": "2018-07-19 12:57:58"
+     *                  "purchase_details": {
+     *                      {
+     *                          "id": 73,
+     *                          "product_specs_id": 10,
+     *                          "product_specs_spec_code": "1ca",
+     *                          "product_specs_spec": "32",
+     *                          "goods_short_name": "商品简称",
+     *                          "goods_commodity_code": "商品编码10",
+     *                          "suppliers_id": 1,
+     *                          "suppliers_name": "供应商1",
+     *                          "shops_id": 1,
+     *                          "shop_title": "店铺标题",
+     *                          "purchase_quantity": 10,
+     *                          "purchase_cost": "10.00",
+     *                          "purchase_freight": "10.00",
+     *                          "warehouse_cost": "10.00",
+     *                          "commission": "10.00",
+     *                          "discount": "10.00",
+     *                          "wooden_frame_costs": "1.00",
+     *                          "arrival_time": "2018-06-10 00:00:00",
+     *                          "remark": "备注"
+     *                      },
+     *                      {
+     *                          "id": 74,
+     *                          "product_specs_id": 11,
+     *                          "product_specs_spec_code": "cccc",
+     *                          "product_specs_spec": "32",
+     *                          "goods_short_name": "321",
+     *                          "goods_commodity_code": "21",
+     *                          "suppliers_id": 1,
+     *                          "suppliers_name": "供应商1",
+     *                          "shops_id": 1,
+     *                          "shop_title": "店铺标题",
+     *                          "purchase_quantity": 10,
+     *                          "purchase_cost": "10.00",
+     *                          "purchase_freight": "10.00",
+     *                          "warehouse_cost": "10.00",
+     *                          "commission": "10.00",
+     *                          "discount": "10.00",
+     *                          "wooden_frame_costs": "1.00",
+     *                          "arrival_time": "2018-06-10 00:00:00",
+     *                          "remark": "备注"
+     *                      }
+     *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-19 12:57:58",
-     *          "updated_at": "2018-07-19 12:57:58"
+     *          }
      *      })
      * })
      */
@@ -319,21 +452,32 @@ class PurchasesController extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("purchase_details[0][id]", type="integer", description="采购详情id", required=false),
-     *      @Parameter("purchase_details[0][product_specs_id]", type="integer", description="产品规格id", required=false),
-     *      @Parameter("purchase_details[0][purchase_quantity]", type="integer", description="采购数", required=false),
-     *      @Parameter("purchase_details[0][shops_id]", type="integer", description="采购店铺id", required=false),
-     *      @Parameter("purchase_details[0][suppliers_id]", type="integer", description="供应商id", required=false),
-     *      @Parameter("purchase_details[0][purchase_cost]", type="numeric", description="采购成本", required=false),
-     *      @Parameter("purchase_details[0][purchase_freight]", type="numeric", description="采购运费", required=false),
-     *      @Parameter("purchase_details[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
-     *      @Parameter("purchase_details[0][commission]", type="numeric", description="金佣点", required=false),
-     *      @Parameter("purchase_details[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("purchase_details[0][colour_num]", description="色号", required=false),
-     *      @Parameter("purchase_details[0][paint]", description="油漆", required=false),
-     *      @Parameter("purchase_details[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("purchase_details[0][arrival_time]", type="dateTime", description="到货时间", required=false),
-     *      @Parameter("purchase_details[0][remark]", description="备注", required=false),
+     *      @Parameter("purchase_lists[0][id]", type="integer", description="采购清单id", required=false),
+     *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=false),
+     *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=false),
+     *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=false),
+     *      @Parameter("purchase_lists[0][purchase_freight]", type="numeric", description="采购运费", required=false),
+     *      @Parameter("purchase_lists[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
+     *      @Parameter("purchase_lists[0][commission]", type="numeric", description="佣金点", required=false),
+     *      @Parameter("purchase_lists[0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_lists[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_lists[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_lists[0][remark]", description="备注", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][id]", type="integer", description="采购明细id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][product_specs_id]", type="integer", description="产品规格id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_quantity]", type="integer", description="采购数", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][shops_id]", type="integer", description="采购店铺id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][suppliers_id]", type="integer", description="供应商id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_cost]", type="numeric", description="采购成本", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][purchase_freight]", type="numeric", description="采购运费", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][commission]", type="numeric", description="佣金点", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][discount]", type="numeric", description="折扣", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][remark]", description="备注", required=false),
      * })
      * @Request({
      *     {
@@ -342,21 +486,42 @@ class PurchasesController extends Controller
      *          "warehouse_id": "1",
      *          "remark": "备注",
      *          "status": "1",
-     *          "purchase_details[0][id]":1,
-     *          "purchase_details[0][product_specs_id]":1,
-     *          "purchase_details[0][purchase_quantity]":10,
-     *          "purchase_details[0][shops_id]":1,
-     *          "purchase_details[0][suppliers_id]":1,
-     *          "purchase_details[0][purchase_cost]":10,
-     *          "purchase_details[0][purchase_freight]":10,
-     *          "purchase_details[0][warehouse_cost]":10,
-     *          "purchase_details[0][commission]":10,
-     *          "purchase_details[0][discount]":10,
-     *          "purchase_details[0][colour_num]":"色号",
-     *          "purchase_details[0][paint]":"油漆",
-     *          "purchase_details[0][wooden_frame_costs]":10,
-     *          "purchase_details[0][arrival_time]":"2018-6-10 00:00:00",
-     *          "purchase_details[0][remark]":"备注",
+     *          "purchase_lists[0][product_specs_id]":9,
+     *          "purchase_lists[0][purchase_quantity]":10,
+     *          "purchase_lists[0][shops_id]":1,
+     *          "purchase_lists[0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_freight]":10,
+     *          "purchase_lists[0][warehouse_cost]":10,
+     *          "purchase_lists[0][commission]":10,
+     *          "purchase_lists[0][discount]":10,
+     *          "purchase_lists[0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][remark]":"备注",
+     *          "purchase_lists[0][purchase_details][0][product_specs_id]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
+     *          "purchase_lists[0][purchase_details][0][shops_id]":1,
+     *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_details][0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_freight]":10,
+     *          "purchase_lists[0][purchase_details][0][warehouse_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][commission]":10,
+     *          "purchase_lists[0][purchase_details][0][discount]":10,
+     *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][purchase_details][0][remark]":"备注",
+     *          "purchase_lists[0][purchase_details][0][product_specs_id]":11,
+     *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
+     *          "purchase_lists[0][purchase_details][0][shops_id]":1,
+     *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
+     *          "purchase_lists[0][purchase_details][0][purchase_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][purchase_freight]":10,
+     *          "purchase_lists[0][purchase_details][0][warehouse_cost]":10,
+     *          "purchase_lists[0][purchase_details][0][commission]":10,
+     *          "purchase_lists[0][purchase_details][0][discount]":10,
+     *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
+     *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][purchase_details][0][remark]":"备注",
      *      }
      *})
      * @Transaction({
@@ -380,14 +545,15 @@ class PurchasesController extends Controller
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
-     *          "id": 1,
-     *          "purchase_order_no": "PO2018071718055128755",
+     *          "id": 49,
+     *          "purchase_order_no": "PO2018080209522019409",
      *          "purchase_status": "新建",
      *          "order_no": "",
      *          "user_id": 1,
-     *          "receiver": "收货人1",
-     *          "receiver_address": "收货地址1",
-     *          "warehouse_id": "1",
+     *          "print_at": null,
+     *          "receiver": "收货人3",
+     *          "receiver_address": "收货地址3",
+     *          "warehouse_id": 1,
      *          "promise_ship_time": null,
      *          "business_personnel": "",
      *          "source": "",
@@ -398,14 +564,69 @@ class PurchasesController extends Controller
      *          "is_print": 0,
      *          "is_audit": 0,
      *          "is_change": 0,
-     *          "remark": "备注1",
-     *          "status": "1",
-     *          "created_at": "2018-07-17 18:05:51",
-     *          "updated_at": "2018-07-17 18:33:06"
+     *          "remark": "备注5",
+     *          "status": 1,
+     *          "purchase_lists": {
+     *              {
+     *                  "product_specs_id": 9,
+     *                  "product_specs_spec_code": "规格编码",
+     *                  "product_specs_spec": "产品规格",
+     *                  "goods_short_name": "商品简称",
+     *                  "goods_commodity_code": "商品编码1",
+     *                  "suppliers_name": "供应商1",
+     *                  "shop_title": "店铺标题",
+     *                  "purchase_lists_purchase_cost": "10.00",
+     *                  "purchase_lists_purchase_freight": "10.00",
+     *                  "purchase_lists_warehouse_cost": "10.00",
+     *                  "purchase_lists_commission": "10.00",
+     *                  "purchase_lists_discount": "10.00",
+     *                  "purchase_lists_wooden_frame_costs": "1.00",
+     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+     *                  "purchase_lists_remark": "备注"
+     *              }
+     *          },
+     *          "purchase_details": {
+     *              {
+     *                  "product_specs_id": 10,
+     *                  "product_specs_spec_code": "规格编码2",
+     *                  "product_specs_spec": "产品规格2",
+     *                  "goods_short_name": "商品简称2",
+     *                  "goods_commodity_code": "商品编码10",
+     *                  "suppliers_name": "供应商1",
+     *                  "shop_title": "店铺标题",
+     *                  "purchase_lists_purchase_cost": "10.00",
+     *                  "purchase_lists_purchase_freight": "10.00",
+     *                  "purchase_lists_warehouse_cost": "10.00",
+     *                  "purchase_lists_commission": "10.00",
+     *                  "purchase_lists_discount": "10.00",
+     *                  "purchase_lists_wooden_frame_costs": "1.00",
+     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+     *                  "purchase_lists_remark": "备注"
+     *              },
+     *              {
+     *                  "product_specs_id": 11,
+     *                  "product_specs_spec_code": "规格编码3",
+     *                  "product_specs_spec": "产品规格3",
+     *                  "goods_short_name": "商品简称3",
+     *                  "goods_commodity_code": "商品编码12",
+     *                  "suppliers_name": "供应商1",
+     *                  "shop_title": "店铺标题",
+     *                  "purchase_lists_purchase_cost": "10.00",
+     *                  "purchase_lists_purchase_freight": "10.00",
+     *                  "purchase_lists_warehouse_cost": "10.00",
+     *                  "purchase_lists_commission": "10.00",
+     *                  "purchase_lists_discount": "10.00",
+     *                  "purchase_lists_wooden_frame_costs": "1.00",
+     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
+     *                  "purchase_lists_remark": "备注"
+     *              }
+     *          },
+     *          "created_at": "2018-08-02 09:52:20",
      *      })
      * })
      */
     public function update(PurchaseRequest $purchaseRequest,
+                           PurchaseListRequest $purchaseListRequest,
                            PurchaseDetailRequest $purchaseDetailRequest,
                            Purchase $purchase,
                            \App\Handlers\ValidatedHandler $validatedHandler)
@@ -415,25 +636,53 @@ class PurchasesController extends Controller
             throw new UpdateResourceFailedException('已提交无法修改');
 
         $purchase = DB::transaction(function () use ($purchaseRequest,
+                                                     $purchaseListRequest,
                                                      $purchaseDetailRequest,
                                                      $purchase,
                                                      $validatedHandler) {
 
             $purchase->update($purchaseRequest->validated());
 
-            if ($purchasedDetails = $purchaseRequest->input('purchase_details')) {
+            if ($purchaseLists = $purchaseRequest->input('purchase_lists')) {
 
-                foreach ($purchasedDetails as $purchasedDetail) {
+                foreach ($purchaseLists as $purchaseList) {
                     //过滤出经过验证的数据
-                    $data = $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchasedDetail);
+                    $data = $validatedHandler->getValidatedData($purchaseListRequest->rules(), $purchaseList);
                     //存在id则更新，否则插入
-                    if (isset($purchasedDetail['id'])) {
-                        $purchase->purchaseDetails()->findOrFail($purchasedDetail['id'])->update($data);
+                    if (isset($purchaseList['id'])) {
+                        $purchase->purchaseLists()->findOrFail($purchaseList['id'])->update($data);
+
+                        if ($purchaseDetails = $purchaseList['purchase_details'] ?? null) {
+                            foreach ($purchaseDetails as $purchaseDetail) {
+                                $purchaseDetailData = $validatedHandler->getValidatedData(
+                                    $purchaseDetailRequest->rules(), $purchaseDetail
+                                );
+
+                                //存在id则更新，否则插入
+                                if (isset($purchaseDetail['id'])) {
+                                    $purchase->purchaseLists()->findOrFail($purchaseList['id'])
+                                        ->purchaseDetails()->findOrFail($purchaseDetail['id'])
+                                        ->update($purchaseDetailData);
+                                } else {
+                                    $purchase->purchaseLists()->findOrFail($purchaseList['id'])
+                                        ->purchaseDetails()->create($purchaseDetailData);
+                                }
+                            }
+                        }
                     } else {
-                        $purchase->purchaseDetails()->create($data);
+
+                        $purchaseListModel = $purchase->purchaseLists()->create($data);
+                        if ($purchaseDetails = $purchaseList['purchase_details'] ?? null) {
+                            foreach ($purchaseDetails as $purchaseDetail) {
+                                $purchaseListModel->purchaseDetails()->create(
+                                    $validatedHandler->getValidatedData($purchaseDetailRequest->rules(), $purchaseDetail)
+                                );
+                            }
+                        }
                     }
                 }
             }
+
             return $purchase;
         });
 
@@ -459,12 +708,16 @@ class PurchasesController extends Controller
     {
         DB::transaction(function () use ($purchase) {
             //删除规格
-            $delPurDet = $purchase->purchaseDetails()->delete();
+            $purchaseLists = $purchase->purchaseLists();
+            $delPurDet = PurchaseDetail::whereIn('purchase_lists_id', $purchaseLists->pluck('id')->toArray())->delete();
 
-            //删除产品
-            $delPur = $purchase->delete();
+            //删除列表
+            $purchaseLists = $purchaseLists->delete();
 
-            if ($delPurDet === false || $delPur === false) {
+            //删除采购单
+            $purchase = $purchase->delete();
+
+            if ($delPurDet === false || $purchaseLists === false || $purchase == false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
@@ -502,18 +755,23 @@ class PurchasesController extends Controller
         $ids = explode(',', $request->input('ids'));
 
         DB::transaction(function () use ($ids) {
+
+            //删除
+            $purchaseList = PurchaseList::whereIn('purchases_id', $ids);
+            $purchaseDetail = PurchaseDetail::whereIn('purchase_lists_id', $purchaseList->pluck('id')->toArray())->delete();
+
             //删除采购单详情
-            $delPurDet = PurchaseDetail::whereIn('purchases_id', $ids)->delete();
+            $purchaseList = $purchaseList->delete();
 
             //删除采购单
-            $delPur = Purchase::destroy($ids);
+            $purchase = Purchase::destroy($ids);
 
-            if ($delPurDet === false || $delPur === false) {
+            if ($purchaseDetail === false || $purchaseList === false || $purchase === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
 
-        return $this->errorResponse(204);
+        return $this->noContent();
     }
 
     /**
