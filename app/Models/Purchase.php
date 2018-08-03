@@ -16,6 +16,12 @@ class Purchase extends Model
         self::PURCHASE_STATUS_FINISH => '完成'
     ];
 
+    public static $purchaseStatusCodeMap = [
+        self::PURCHASE_STATUS_NEW => -1,
+        self::PURCHASE_STATUS_SECTION => 0,
+        self::PURCHASE_STATUS_FINISH => 1
+    ];
+
     protected $table = "purchases";
 
     protected $fillable = [
@@ -99,6 +105,51 @@ class Purchase extends Model
         $this->save();
     }
 
+    /**
+     * 检查并修改采购订单状态
+     */
+    public function checkAndChangePurchaseStatus()
+    {
+        //查找采购清单层级
+        $purchase = $this->load('purchaseLists.purchaseDetails');
+
+        $purchaseLists = $purchase->purchaseLists;
+
+        $sum = $purchaseLists->map(function($item) {
+            $sum = $item->purchaseDetails->map(function($item) {
+                return self::$purchaseStatusCodeMap[$item->getOriginal('purchase_item_status')];
+            })->sum();
+            return $this->countPurchaseStatus($sum, $item->purchaseDetails->count());
+        })->sum();
+
+        $this->purchase_status = array_search($this->countPurchaseStatus($sum, $purchaseLists->count()), self::$purchaseStatusCodeMap);
+
+        $this->save();
+
+        return true;
+    }
+
+    /**
+     * 计算出采购单状态
+     * @param $sum          和
+     * @param $itemCont     子订单的个数
+     */
+    private function countPurchaseStatus($sum, $itemCont)
+    {
+        switch ($sum + $itemCont) {
+            case 0:
+                return self::$purchaseStatusCodeMap[self::PURCHASE_STATUS_NEW];
+                break;
+            case  $sum * 2:
+                return self::$purchaseStatusCodeMap[self::PURCHASE_STATUS_FINISH];
+                break;
+            default:
+                return self::$purchaseStatusCodeMap[self::PURCHASE_STATUS_SECTION];
+                break;
+        }
+    }
+
+
     public static function findAvailableNo()
     {
         // 订单流水号前缀
@@ -146,6 +197,6 @@ class Purchase extends Model
 
     public function cancelPurchases()
     {
-        return $this->hasMany(CancelPurchase::class,'purchases_id');
+        return $this->hasMany(CancelPurchase::class, 'purchases_id');
     }
 }

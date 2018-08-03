@@ -38,9 +38,9 @@ class PurchaseList extends Model
         return $this->belongsTo(Supplier::class, 'suppliers_id');
     }
 
-    public function stockInDetails()
+    public function stockInDetail()
     {
-        return $this->hasMany(StockInDetail::class, 'purchase_details_id');
+        return $this->hasOne(StockInDetail::class, 'purchase_lists_id');
     }
 
 }

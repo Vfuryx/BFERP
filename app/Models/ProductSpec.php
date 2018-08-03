@@ -20,11 +20,71 @@ class ProductSpec extends Model
         'remark', 'finished_pro', 'is_stop_pro', 'status'
     ];
 
+    /**
+     * 根据仓库 id 定位库存数据进行入库操作
+     * @param $warehouseId      仓库id
+     * @param $amount           入库数
+     */
+    public function stockInByWarehouseId($warehouseId, $amount)
+    {
+        //判断是否组合
+        if ($this->is_combination) {
+            $this->getCombinationsOfALlProductSpec()->map(function($item) use ($warehouseId, $amount) {
+                $stocks = $item->load(['stocks' => function($query) use ($warehouseId, $amount) {
+                    $query->where('warehouse_id', $warehouseId);
+                }])->stocks;
+                //判断是否存在库存
+                if($stocks->count()){
+                    $stocks->first()->addQuantity($amount);
+                }else{
+                    //不存在则新建
+                    \App\Models\Stock::create([
+                        'warehouse_id'=>$warehouseId,
+                        'goods_id'=>$this->goods_id,
+                        'pro_specs_id'=>$this->id,
+                        'quantity'=>$amount
+                    ]);
+                }
+            });
+        } else {
+            //不是组合直接录入
+            $stocks = $this->load(['stocks' => function($query) use ($warehouseId, $amount) {
+                $query->where('warehouse_id', $warehouseId);
+            }])->stocks;
+            //判断是否存在库存
+            if($stocks->count()){
+                $stocks->first()->addQuantity($amount);
+            }else{
+                //不存在则新建
+                \App\Models\Stock::create([
+                    'warehouse_id'=>$warehouseId,
+                    'goods_id'=>$this->goods_id,
+                    'pro_specs_id'=>$this->id,
+                    'quantity'=>$amount
+                ]);
+            }
+        }
+    }
+
+
+    /**
+     * 获取组合里面的所有子规格
+     *
+     * @return mix    object 返回的是组合的子规格对象集 或者 false
+     */
+    public function getCombinationsOfALlProductSpec()
+    {
+        //不是组合规格
+        if(!$this->is_combination)
+            return false;
+
+        return $this->load('combinations.comProSpec')->combinations->pluck('comProSpec');
+    }
 
 
     public function goods()
     {
-        return $this->belongsTo(Goods::class,'goods_id');
+        return $this->belongsTo(Goods::class, 'goods_id');
     }
 
     public function combinations()
@@ -37,9 +97,9 @@ class ProductSpec extends Model
         return $this->belongsTo(DistributionMethod::class);
     }
 
-    public function stock()
+    public function stocks()
     {
-        return $this->hasOne(Stock::class, 'pro_specs_id');
+        return $this->hasMany(Stock::class, 'pro_specs_id');
     }
 
 
@@ -48,9 +108,9 @@ class ProductSpec extends Model
         return $this->hasMany(StockInDetail::class, 'product_specs_id');
     }
 
-    public function purchaseDetails()
+    public function purchaseDetail()
     {
-        return $this->hasMany(PurchaseDetail::class);
+        return $this->hasOne(PurchaseDetail::class, 'product_specs_id');
     }
 
     public function purchaseLists()

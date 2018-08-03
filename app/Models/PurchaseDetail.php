@@ -20,7 +20,11 @@ class PurchaseDetail extends Model
         return \App\Models\Purchase::$purchaseStatusMap[$value ? $value : \App\Models\Purchase::PURCHASE_STATUS_NEW];
     }
 
-    //添加入库数
+    /**
+     * 添加入库并且修改子采购单状态
+     *
+     * @param $amount 数量
+     */
     public function addStockInCount($amount)
     {
         if (!in_array($this->getOriginal('purchase_item_status'), [\App\Models\Purchase::PURCHASE_STATUS_NEW, \App\Models\Purchase::PURCHASE_STATUS_SECTION])) {
@@ -32,6 +36,7 @@ class PurchaseDetail extends Model
         if ($this->purchase_quantity - $this->stock_in_count < $amount) {
             throw new UpdateResourceFailedException('入库数量超过采购数量');
         }
+
         $this->increment('stock_in_count', $amount);
 
         if($this->stock_in_count){
@@ -42,25 +47,10 @@ class PurchaseDetail extends Model
             } else {
                 $this->purchase_item_status = \App\Models\Purchase::PURCHASE_STATUS_SECTION;
             }
-
-            $this->save();
-
-            //设置父订单状态
-            $itemFinishCount = $this->where('purchases_id', $this->purchases_id)->where('purchase_item_status', \App\Models\Purchase::PURCHASE_STATUS_FINISH)->count();
-            $itemCount = $this->where('purchases_id', $this->purchases_id)->count();
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_NEW && $itemCount == $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_FINISH);
-            }
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_NEW && $itemCount != $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_SECTION);
-            }
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_SECTION && $itemCount == $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_FINISH);
-            }
         }
+
+        $this->save();
+        return true;
     }
 
     //减少采购数

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\StockIn;
@@ -188,9 +187,10 @@ class StockInsContoller extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=true),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
-     *      @Parameter("stock_in_details[0][purchase_details_id]",type="integer", description="采购单详情id", required=true),
+     *      @Parameter("stock_in_details[0][purchase_lists_id]",type="integer", description="采购单详情id", required=true),
      *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=true),
      *      @Parameter("stock_in_details[0][stock_in_quantity]",type="integer", description="入库数量", required=true),
+     *      @Parameter("stock_in_details[0][total_fee]",type="number", description="总额", required=true),
      *      @Parameter("stock_in_details[0][remark]", description="备注", required=false),
      * })
      * @Request({
@@ -198,7 +198,7 @@ class StockInsContoller extends Controller
      *          "warehouse_id": 1,
      *          "stock_in_types_id": 1,
      *          "status": 1,
-     *          "stock_in_details[0][purchase_details_id]":1,
+     *          "stock_in_details[0][purchase_lists_id]":1,
      *          "stock_in_details[0][product_specs_id]":1,
      *          "stock_in_details[0][stock_in_quantity]":10,
      *          "stock_in_details[0][remark]":"备注",
@@ -340,14 +340,10 @@ class StockInsContoller extends Controller
                           StockInDetailRequest $stockInDetailRequest,
                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
-        $stockIn = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $validatedHandler) {
-
+        $stockIn = DB::transaction(function() use ($stockInRequest, $stockInDetailRequest, $validatedHandler) {
             $stockIn = StockIn::create($stockInRequest->validated());
-
             if ($stockInDetails = $stockInRequest->input('stock_in_details')) {
-
                 foreach ($stockInDetails as $stockInDetail) {
-
                     $stockIn->stockInDetails()->create(
                         $validatedHandler->getValidatedData($stockInDetailRequest->rules(), $stockInDetail)
                     );
@@ -504,9 +500,10 @@ class StockInsContoller extends Controller
      *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=false),
      *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
      *      @Parameter("stock_in_details[0][id]",type="integer", description="入库单详情id (存在则视为更新 不存在视为插入)", required=false),
-     *      @Parameter("stock_in_details[0][purchase_details_id]",type="integer", description="采购单详情id", required=false),
+     *      @Parameter("stock_in_details[0][purchase_lists_id]",type="integer", description="采购单详情id", required=false),
      *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=false),
      *      @Parameter("stock_in_details[0][stock_in_quantity]",type="integer", description="入库数量", required=false),
+     *      @Parameter("stock_in_details[0][total_fee]",type="number", description="总额", required=false),
      *      @Parameter("stock_in_details[0][remark]", description="备注", required=false),
      * })
      * @Request({
@@ -515,7 +512,7 @@ class StockInsContoller extends Controller
      *          "stock_in_types_id": 1,
      *          "status": 1,
      *          "stock_in_details[0][id]":1,
-     *          "stock_in_details[0][purchase_details_id]":1,
+     *          "stock_in_details[0][purchase_lists_id]":1,
      *          "stock_in_details[0][product_specs_id]":1,
      *          "stock_in_details[0][stock_in_quantity]":10,
      *          "stock_in_details[0][remark]":"备注",
@@ -659,7 +656,7 @@ class StockInsContoller extends Controller
                            StockIn $stockin,
                            \App\Handlers\ValidatedHandler $validatedHandler)
     {
-        $stockin = DB::transaction(function () use ($stockInRequest, $stockInDetailRequest, $stockin, $validatedHandler) {
+        $stockin = DB::transaction(function() use ($stockInRequest, $stockInDetailRequest, $stockin, $validatedHandler) {
 
             $stockin->update($stockInRequest->validated());
 
@@ -700,7 +697,7 @@ class StockInsContoller extends Controller
      */
     public function destroy(StockIn $stockin)
     {
-        DB::transaction(function () use ($stockin) {
+        DB::transaction(function() use ($stockin) {
 
             $delStoDet = $stockin->stockInDetails()->delete();
 
@@ -744,7 +741,7 @@ class StockInsContoller extends Controller
     {
         $ids = explode(',', $request->input('ids'));
 
-        DB::transaction(function () use ($ids) {
+        DB::transaction(function() use ($ids) {
             $delStoDet = StockInDetail::whereIn('stock_ins_id', $ids)->delete();
 
             $delSto = StockIn::destroy($ids);
@@ -851,7 +848,6 @@ class StockInsContoller extends Controller
         return $this->traitAction($stockin, !$stockin->status || !$stockin->is_submit || $stockin->is_audit, '审核出错，是否未提交或重复审核', 'audit');
     }
 
-
     /**
      * 入库
      *
@@ -867,7 +863,7 @@ class StockInsContoller extends Controller
      */
     public function stockIn(StockIn $stockin)
     {
-        DB::transaction(function () use ($stockin) {
+        DB::transaction(function() use ($stockin) {
             //修改入库状态
             $this->traitAction(
                 $stockin,
@@ -876,15 +872,17 @@ class StockInsContoller extends Controller
                 'stockIn'
             );
 
-            //修改采购订单详情的状态、入库数。
-            foreach ($stockin->stockInDetails as $item) {
-                $item->purchaseDetail->addStockInCount($item->stock_in_quantity);
-            }
+            $stockin->stockInDetails->map(function($stockInDetail) use ($stockin) {
 
-            //修改库存数量
-            foreach ($stockin->stockInDetails as $item) {
-                $item->productSpec->stock->addQuantity($item->stock_in_quantity);
-            }
+                $stockInDetail->purchaseList->purchaseDetails->map(function($purchaseDetail) use ($stockin, $stockInDetail) {
+                    //修改子采购单明细的状态、入库数。
+                    $purchaseDetail->addStockInCount($stockInDetail->stock_in_quantity);
+                    //修改库存数量
+                    $purchaseDetail->productSpec->stockInByWarehouseId($stockin->warehouse_id,$stockInDetail->stock_in_quantity);
+                });
+                //检查并修改主采购订单状态
+                $stockInDetail->purchaseList->purchase->checkAndChangePurchaseStatus();
+            });
 
         });
 

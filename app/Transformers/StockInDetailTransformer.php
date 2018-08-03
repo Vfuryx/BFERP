@@ -12,9 +12,11 @@ class StockInDetailTransformer extends TransformerAbstract
         return [
             'id' => $stockInDetail->id,
             'stock_in' => $stockInDetail->stockIn,
-            'purchase_details_id' => $stockInDetail->purchase_details_id,
+            'purchase_lists_id' => $stockInDetail->purchase_lists_id,
             'product_spec' => $stockInDetail->productSpec,
             'stock_in_quantity' => $stockInDetail->stock_in_quantity,
+            'total_fee' => $stockInDetail->total_fee,
+            'remark' => $stockInDetail->remark,
             'created_at' => $stockInDetail->created_at
                                     ->toDateTimeString(),
             'updated_at' => $stockInDetail->updated_at
