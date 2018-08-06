@@ -10,6 +10,11 @@ class StockInType extends Model
         'name', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function stockIns()
     {
         return $this->hasMany(StockIn::class, 'stock_in_types_id');

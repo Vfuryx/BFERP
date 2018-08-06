@@ -26,7 +26,7 @@ class SuppliersController extends Controller
      * @Get("/suppliers{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -46,9 +46,9 @@ class SuppliersController extends Controller
      *          "fax": "传真",
      *          "email": "邮箱",
      *          "remark": "备注",
-     *          "is_scan": 1,
-     *          "status": 1,
-     *          "auto_valuation": 1,
+     *          "is_scan": true,
+     *          "status": true,
+     *          "auto_valuation": true,
      *          "created_at": "2018-07-05 10:55:27",
      *          "updated_at": "2018-07-05 10:55:27"
      *      }
@@ -89,9 +89,9 @@ class SuppliersController extends Controller
      *      @Parameter("fax", description="传真", required=true),
      *      @Parameter("email", description="邮箱", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("is_scan",type="integer", description="是否启用扫描", required=false, default=1),
-     *      @Parameter("auto_valuation",type="integer", description="是否采购自动计价", required=false, default=1),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_scan",type="boolean", description="是否启用扫描", required=false, default=true),
+     *      @Parameter("auto_valuation",type="boolean", description="是否采购自动计价", required=false, default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -128,9 +128,9 @@ class SuppliersController extends Controller
      *          "fax": "传真",
      *          "email": "邮箱",
      *          "remark": "备注",
-     *          "is_scan": "1",
-     *          "status": "1",
-     *          "auto_valuation": "1",
+     *          "is_scan": true,
+     *          "status": true,
+     *          "auto_valuation": true,
      *          "created_at": "2018-07-05 10:55:27",
      *          "updated_at": "2018-07-05 10:55:27",
      *          "meta": {
@@ -169,9 +169,9 @@ class SuppliersController extends Controller
      *          "mobile": "手机",
      *          "fax": "传真",
      *          "remark": "备注",
-     *          "is_scan": 1,
-     *          "status": 1,
-     *          "auto_valuation": 1,
+     *          "is_scan": true,
+     *          "status": true,
+     *          "auto_valuation": true,
      *          "created_at": "2018-07-04 11:11:39",
      *          "updated_at": "2018-07-04 11:11:39"
      *      })
@@ -223,9 +223,9 @@ class SuppliersController extends Controller
      *          "fax": "传真",
      *          "email": "邮箱",
      *          "remark": "备注",
-     *          "is_scan": 1,
-     *          "status": 1,
-     *          "auto_valuation": 1,
+     *          "is_scan": true,
+     *          "status": true,
+     *          "auto_valuation": true,
      *          "created_at": "2018-07-05 10:55:27",
      *          "updated_at": "2018-07-05 10:55:27"
      *      })
@@ -292,7 +292,7 @@ class SuppliersController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="供应商id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

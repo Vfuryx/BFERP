@@ -43,7 +43,7 @@
     "markname": "取消订单",
     "color": "#555555",
     "description": "描述",
-    "status": 0,
+    "status": false,
     "created_at": "2018-06-11 15:04:17",
     "updated_at": "2018-06-11 15:04:17"
 }
@@ -58,7 +58,7 @@
             "markname": "取消订单",
             "color": "#555555",
             "description": "描述",
-            "status": 0,
+            "status": false,
             "created_at": "2018-06-11 15:04:17",
             "updated_at": "2018-06-11 15:04:17"
         }

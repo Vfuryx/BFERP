@@ -38,7 +38,7 @@ class CancelPurchasesController extends Controller
      * @Get("/cancelpurchases{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -61,19 +61,19 @@ class CancelPurchasesController extends Controller
      *              "client_name": "",
      *              "buyer_nick": "",
      *              "order_address": "",
-     *              "is_submit": 0,
-     *              "is_print": 0,
-     *              "is_audit": 0,
-     *              "is_change": 1,
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": true,
      *              "remark": "备注5",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-21 16:22:05",
      *              "updated_at": "2018-07-23 16:26:19"
      *          },
      *          "creator": "admin",
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "cancel_purchase_details": {
      *              {
      *                  "id": 14,
@@ -212,19 +212,19 @@ class CancelPurchasesController extends Controller
      *              "client_name": "",
      *              "buyer_nick": "",
      *              "order_address": "",
-     *              "is_submit": 0,
-     *              "is_print": 0,
-     *              "is_audit": 0,
-     *              "is_change": 1,
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": true,
      *              "remark": "备注5",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-21 16:22:05",
      *              "updated_at": "2018-07-23 16:26:19"
      *          },
      *          "creator": "admin",
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "cancel_purchase_details": {
      *              {
      *                  "id": 14,
@@ -352,19 +352,19 @@ class CancelPurchasesController extends Controller
      *              "client_name": "",
      *              "buyer_nick": "",
      *              "order_address": "",
-     *              "is_submit": 0,
-     *              "is_print": 0,
-     *              "is_audit": 0,
-     *              "is_change": 1,
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": true,
      *              "remark": "备注5",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-21 16:22:05",
      *              "updated_at": "2018-07-23 16:26:19"
      *          },
      *          "creator": "admin",
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "cancel_purchase_details": {
      *              {
      *                  "id": 14,
@@ -498,19 +498,19 @@ class CancelPurchasesController extends Controller
      *              "client_name": "",
      *              "buyer_nick": "",
      *              "order_address": "",
-     *              "is_submit": 0,
-     *              "is_print": 0,
-     *              "is_audit": 0,
-     *              "is_change": 1,
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": true,
      *              "remark": "备注5",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-21 16:22:05",
      *              "updated_at": "2018-07-23 16:26:19"
      *          },
      *          "creator": "admin",
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "cancel_purchase_details": {
      *              {
      *                  "id": 14,
@@ -726,7 +726,7 @@ class CancelPurchasesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="取消采购id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -14,7 +14,7 @@ class WarehouseRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -24,8 +24,8 @@ class WarehouseRequest extends FormRequest
                     'city' => 'required|string|max:255',
                     'district' => 'required|string|max:255',
                     'address' => 'required|string|max:255',
-                    'is_default' => 'integer',
-                    'status' => 'integer',
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -35,8 +35,8 @@ class WarehouseRequest extends FormRequest
                     'city' => 'string|max:255',
                     'district' => 'string|max:255',
                     'address' => 'string|max:255',
-                    'is_default' => 'integer',
-                    'status' => 'integer',
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -65,10 +65,10 @@ class WarehouseRequest extends FormRequest
             'address.max' => '仓库地（地址）最大长度为255',
             'address.string' => '仓库地（地址）必须string类型',
 
-            'is_default.integer' => '是否默认必须int类型',
+            'is_default.boolean' => '是否默认必须布尔类型',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

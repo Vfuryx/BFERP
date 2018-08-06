@@ -11,6 +11,12 @@ class Warehouse extends Model
         'address', 'is_default', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'is_default' => 'boolean',
+        'status' => 'boolean'
+    ];
+
     public function shops()
     {
         return $this->hasMany(Shop::class);

@@ -26,7 +26,7 @@ class CityInfosController extends Controller
      * @Get("/cityinfos{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -43,7 +43,7 @@ class CityInfosController extends Controller
      *              "address": "物流地址",
      *              "freight_type_id": 1,
      *              "remark": "",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-02 17:40:39",
      *              "updated_at": "2018-07-02 17:40:42"
      *          },
@@ -56,9 +56,9 @@ class CityInfosController extends Controller
      *          "weight_univalent": "100.00",
      *          "expected_days": 1,
      *          "route": 1,
-     *          "is_free_shipping": 1,
+     *          "is_free_shipping": true,
      *          "remark": "1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-02 17:44:32",
      *          "updated_at": "2018-07-02 17:44:32"
      *      },
@@ -75,7 +75,7 @@ class CityInfosController extends Controller
      *              "address": "物流地址",
      *              "freight_type_id": 1,
      *              "remark": "",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-02 17:40:39",
      *              "updated_at": "2018-07-02 17:40:42"
      *          },
@@ -88,9 +88,9 @@ class CityInfosController extends Controller
      *          "weight_univalent": "100.00",
      *          "expected_days": 1,
      *          "route": 1,
-     *          "is_free_shipping": 1,
+     *          "is_free_shipping": true,
      *          "remark": "1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-02 17:58:56",
      *          "updated_at": "2018-07-02 17:58:56"
      *      }
@@ -128,9 +128,9 @@ class CityInfosController extends Controller
      *      @Parameter("weight_univalent",type="numeric", description="重量单价", required=true),
      *      @Parameter("expected_days",type="integer", description="城市到达天数", required=true),
      *      @Parameter("route",type="integer", description="中转或直达：0=中转，1=直达", required=false, default=1),
-     *      @Parameter("is_free_shipping",type="integer", description="是否包邮", required=false, default=0),
+     *      @Parameter("is_free_shipping",type="boolean", description="是否包邮", required=false, default=0),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -158,7 +158,7 @@ class CityInfosController extends Controller
      *              "address": "物流地址",
      *              "freight_type_id": 1,
      *              "remark": "",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-02 17:40:39",
      *              "updated_at": "2018-07-02 17:40:42"
      *          },
@@ -171,9 +171,9 @@ class CityInfosController extends Controller
      *          "weight_univalent": "100.00",
      *          "expected_days": "1",
      *          "route": "1",
-     *          "is_free_shipping": "1",
+     *          "is_free_shipping": true,
      *          "remark": "1",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-02 17:44:32",
      *          "updated_at": "2018-07-02 17:44:32",
      *          "meta": {
@@ -210,7 +210,7 @@ class CityInfosController extends Controller
      *              "address": "物流地址",
      *              "freight_type_id": 1,
      *              "remark": "",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-02 17:40:39",
      *              "updated_at": "2018-07-02 17:40:42"
      *          },
@@ -223,9 +223,9 @@ class CityInfosController extends Controller
      *          "weight_univalent": "100.00",
      *          "expected_days": 1,
      *          "route": 1,
-     *          "is_free_shipping": 1,
+     *          "is_free_shipping": true,
      *          "remark": "1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-02 17:44:32",
      *          "updated_at": "2018-07-02 17:44:32"
      *      })
@@ -274,7 +274,7 @@ class CityInfosController extends Controller
      *              "address": "物流地址",
      *              "freight_type_id": 1,
      *              "remark": "",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-02 17:40:39",
      *              "updated_at": "2018-07-02 17:40:42"
      *          },
@@ -287,9 +287,9 @@ class CityInfosController extends Controller
      *          "weight_univalent": "100.00",
      *          "expected_days": "1",
      *          "route": "1",
-     *          "is_free_shipping": "1",
+     *          "is_free_shipping": true,
      *          "remark": "1",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-02 17:44:32",
      *          "updated_at": "2018-07-02 18:06:55"
      *      })
@@ -355,7 +355,7 @@ class CityInfosController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="城市信息id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

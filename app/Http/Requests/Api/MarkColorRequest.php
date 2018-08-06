@@ -18,7 +18,7 @@ class MarkColorRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -27,7 +27,7 @@ class MarkColorRequest extends FormRequest
                     'markname' => 'required|string',
                     'color' => 'required|string|max:255',
                     'description' => 'string|nullable|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -39,7 +39,7 @@ class MarkColorRequest extends FormRequest
                     'markname' => 'string',
                     'color' => 'string|max:255',
                     'description' => 'string|nullable|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -61,7 +61,7 @@ class MarkColorRequest extends FormRequest
             'description.nullable' => '标记描述可为null',
             'description.max' => '标记描述最大长度为255',
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

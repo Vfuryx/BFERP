@@ -28,8 +28,8 @@ class CreateGoodsTable extends Migration
             $table->string('title')->default('')->comment('商品标题');
             $table->string('img')->default('')->comment('商品图片');
             $table->string('url')->default('')->comment('商品网址');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
-            $table->tinyInteger('is_stop_pro')->default(0)->comment('是否停产 默认 0 = 不停产  1 = 停产');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
+            $table->boolean('is_stop_pro')->default(false)->comment('是否停产 默认 0 = 不停产  1 = 停产');
             $table->timestamps();
         });
     }

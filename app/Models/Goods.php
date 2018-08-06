@@ -14,6 +14,12 @@ class Goods extends Model
         'img', 'url', 'status', 'is_stop_pro'
     ];
 
+    //设置类型
+    protected $casts = [
+        'is_stop_pro' => 'boolean',
+        'status' => 'boolean'
+    ];
+
     public function productSpecs()
     {
         return $this->hasMany(ProductSpec::class, 'goods_id');

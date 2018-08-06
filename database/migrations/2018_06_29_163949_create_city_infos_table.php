@@ -25,9 +25,9 @@ class CreateCityInfosTable extends Migration
             $table->decimal('weight_univalent',10,2)->default(0.00)->comment('重量单价');
             $table->tinyInteger('expected_days')->default(1)->comment('城市到达天数');
             $table->tinyInteger('route')->default(1)->comment('中转或直达：0=中转，1=直达');
-            $table->tinyInteger('is_free_shipping')->default(0)->comment('是否包邮');
+            $table->boolean('is_free_shipping')->default(false)->comment('是否包邮');
             $table->string('remark')->default('')->comment('备注');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

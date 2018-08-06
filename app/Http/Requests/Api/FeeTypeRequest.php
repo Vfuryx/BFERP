@@ -18,7 +18,7 @@ class FeeTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -31,8 +31,8 @@ class FeeTypeRequest extends FormRequest
                         }),
                     ],
                     'code' => 'required|string|max:255|unique:fee_types',
-                    'is_default' => 'integer',
-                    'status' => 'integer',
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                     'remark' => 'string|nullable|max:255'
                 ];
                 break;
@@ -49,8 +49,8 @@ class FeeTypeRequest extends FormRequest
                         'string', 'max:255',
                         Rule::unique('fee_types')->ignore($this->feetype->id),
                     ],
-                    'is_default' => 'integer',
-                    'status' => 'integer',
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                     'remark' => 'string|nullable|max:255',
                 ];
                 break;
@@ -74,13 +74,13 @@ class FeeTypeRequest extends FormRequest
             'code.max' => '费用代码最大长度为255',
             'code.unique' => '费用代码不能重复',
 
-            'is_default.integer' => '是否默认必须int类型',
+            'is_default.boolean' => '是否默认必须布尔类型',
             'remark.string' => '费用类别备注必须string类型',
             'remark.nullable' => '费用类别备注可为null',
             'remark.max' => '费用类别备注最大长度为255',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

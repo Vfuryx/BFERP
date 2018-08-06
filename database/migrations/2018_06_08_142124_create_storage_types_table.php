@@ -16,7 +16,7 @@ class CreateStorageTypesTable extends Migration
         Schema::create('storage_types', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('入库类型名称');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

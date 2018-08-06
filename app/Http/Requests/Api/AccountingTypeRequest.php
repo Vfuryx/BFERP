@@ -14,19 +14,19 @@ class AccountingTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -35,7 +35,7 @@ class AccountingTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
             'name.required' => '记账类型名称必填',
             'name.string' => '记账类型名称必须string类型',

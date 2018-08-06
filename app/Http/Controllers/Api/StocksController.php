@@ -29,7 +29,7 @@ class StocksController extends Controller
      * @Get("/stocks{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all"),
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
      *      @Parameter("status", type="warehouse_id", description="获取的仓库id", required=false)
      * })
      * @Response(200, body={
@@ -43,8 +43,8 @@ class StocksController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1sfd",
      *              "address": "仓库地（地址）1fdf",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 15:44:00",
      *              "updated_at": "2018-07-07 18:29:12"
      *          },
@@ -62,8 +62,8 @@ class StocksController extends Controller
      *              "title": "商品标题",
      *              "img": "商品图片",
      *              "url": "https://www.taobao.com/",
-     *              "status": 1,
-     *              "is_stop_pro": 1,
+     *              "status": true,
+     *              "is_stop_pro":  true,
      *              "created_at": "2018-07-13 18:48:47",
      *              "updated_at": "2018-07-13 18:48:47",
      *              "deleted_at": null
@@ -83,7 +83,7 @@ class StocksController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -106,15 +106,15 @@ class StocksController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-16 11:53:01",
      *              "updated_at": "2018-07-16 11:53:01",
      *              "deleted_at": null
      *          },
      *          "quantity": 10,
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-16 17:08:11",
      *          "updated_at": "2018-07-16 17:08:11"
      *      },
@@ -167,8 +167,8 @@ class StocksController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1sfd",
      *              "address": "仓库地（地址）1fdf",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 15:44:00",
      *              "updated_at": "2018-07-07 18:29:12"
      *          },
@@ -186,8 +186,8 @@ class StocksController extends Controller
      *              "title": "商品标题",
      *              "img": "商品图片",
      *              "url": "https://www.taobao.com/",
-     *              "status": 1,
-     *              "is_stop_pro": 1,
+     *              "status": true,
+     *              "is_stop_pro":  true,
      *              "created_at": "2018-07-13 18:48:47",
      *              "updated_at": "2018-07-13 18:48:47",
      *              "deleted_at": null
@@ -207,7 +207,7 @@ class StocksController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -230,15 +230,15 @@ class StocksController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-16 11:53:20",
      *              "updated_at": "2018-07-16 11:53:20",
      *              "deleted_at": null
      *          },
      *          "quantity": "10",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-16 17:18:36",
      *          "updated_at": "2018-07-16 17:18:36",
      *          "meta": {
@@ -290,8 +290,8 @@ class StocksController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1sfd",
      *              "address": "仓库地（地址）1fdf",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 15:44:00",
      *              "updated_at": "2018-07-07 18:29:12"
      *          },
@@ -309,8 +309,8 @@ class StocksController extends Controller
      *              "title": "商品标题",
      *              "img": "商品图片",
      *              "url": "https://www.taobao.com/",
-     *              "status": 1,
-     *              "is_stop_pro": 1,
+     *              "status": true,
+     *              "is_stop_pro":  true,
      *              "created_at": "2018-07-13 18:48:47",
      *              "updated_at": "2018-07-13 18:48:47",
      *              "deleted_at": null
@@ -330,7 +330,7 @@ class StocksController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -353,15 +353,15 @@ class StocksController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-16 11:53:01",
      *              "updated_at": "2018-07-16 11:53:01",
      *              "deleted_at": null
      *          },
      *          "quantity": 10,
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-16 17:08:11",
      *          "updated_at": "2018-07-16 17:08:11"
      *      })
@@ -428,7 +428,7 @@ class StocksController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="库存id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -43,7 +43,7 @@ class CreateOrdersTable extends Migration
             $table->decimal('preferential_cashback',10,2)->default(0.00)->comment('优惠返现');
             $table->decimal('favorable_cashback',10,2)->default(0.00)->comment('好评返现');
             $table->unsignedInteger('customer_types_id')->default(0.00)->comment('客户类型');
-            $table->tinyInteger('is_invoice')->default(0)->comment('是否要发票');
+            $table->boolean('is_invoice')->default(false)->comment('是否要发票');
             $table->decimal('invoice_express_fee',10,2)->default(0.00)->comment('发票快递费');
             $table->string('express_invoice_title')->default('')->comment('快递发票抬头');
             $table->string('contract_no')->default('')->comment('合同单号');
@@ -53,8 +53,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('warehouses_id')->comment('发货仓库id');
             $table->date('payment_date')->nullable()->comment('支付日期');
             $table->decimal('interest_concessions')->default(0.00)->comment('让利');
-            $table->tinyInteger('is_notice')->default(0)->comment('等通知发货 0 否 1 是');
-            $table->tinyInteger('is_cancel_after_verification')->default(0)->comment('是否核销 0 否 1 是');
+            $table->boolean('is_notice')->default(false)->comment('等通知发货 0 否 1 是');
+            $table->boolean('is_cancel_after_verification')->default(false)->comment('是否核销 0 否 1 是');
             $table->string('accept_order_user')->default('')->comment('接单用户');
             $table->string('tax_number')->default('')->comment('税号');
             $table->string('receipt')->default('')->comment('收据');
@@ -95,9 +95,9 @@ class CreateOrdersTable extends Migration
             //拼接
             $table->string('association_taobao_oid')->default('')->comment('单号关联');
             //操作
-            $table->tinyInteger('is_merge')->default(0)->comment('是否合并');
-            $table->tinyInteger('is_split')->default(0)->comment('是否拆分');
-            $table->tinyInteger('is_association')->default(0)->comment('是否关联订单');
+            $table->boolean('is_merge')->default(false)->comment('是否合并');
+            $table->boolean('is_split')->default(false)->comment('是否拆分');
+            $table->boolean('is_association')->default(false)->comment('是否关联订单');
 
             //客审
 

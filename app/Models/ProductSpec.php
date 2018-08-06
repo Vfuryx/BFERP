@@ -20,6 +20,17 @@ class ProductSpec extends Model
         'remark', 'finished_pro', 'is_stop_pro', 'status'
     ];
 
+    protected $dates = [
+        'print_at'
+    ];
+
+    //设置类型
+    protected $casts = [
+        'is_stop_pro' => 'boolean',
+        'finished_pro' => 'boolean',
+        'is_combination' => 'boolean',
+    ];
+
     /**
      * 根据仓库 id 定位库存数据进行入库操作
      * @param $warehouseId      仓库id

@@ -26,7 +26,7 @@ class PrintReportsController extends Controller
      * @Get("/printreports{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -35,7 +35,7 @@ class PrintReportsController extends Controller
      *          "file": "报表文件",
      *          "name": "报表名称",
      *          "paper_format": "报表格式",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 17:50:46",
      *          "updated_at": "2018-07-03 17:50:49"
      *      },
@@ -44,7 +44,7 @@ class PrintReportsController extends Controller
      *          "file": "报表文件",
      *          "name": "报表名称",
      *          "paper_format": "报表格式",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-04 14:27:11",
      *          "updated_at": "2018-07-04 14:27:11"
      *      }
@@ -75,7 +75,7 @@ class PrintReportsController extends Controller
      *      @Parameter("file", description="报表文件", required=true),
      *      @Parameter("name", description="报表名称", required=true),
      *      @Parameter("paper_format", description="报表格式", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -101,7 +101,7 @@ class PrintReportsController extends Controller
      *          "file": "报表文件",
      *          "name": "报表名称",
      *          "paper_format": "报表格式",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-04 14:27:11",
      *          "updated_at": "2018-07-04 14:27:11",
      *          "meta": {
@@ -130,7 +130,7 @@ class PrintReportsController extends Controller
      *          "file": "报表文件",
      *          "name": "报表名称",
      *          "paper_format": "报表格式",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 17:50:46",
      *          "updated_at": "2018-07-03 17:50:49"
      *      })
@@ -171,7 +171,7 @@ class PrintReportsController extends Controller
      *          "file": "报表文件10",
      *          "name": "报表名称10",
      *          "paper_format": "报表格式10",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-03 17:50:46",
      *          "updated_at": "2018-07-04 14:31:34"
      *      })
@@ -238,7 +238,7 @@ class PrintReportsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="打印报表id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

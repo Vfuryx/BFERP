@@ -16,14 +16,14 @@ class LogisticsAreaRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'code' => 'required|string|max:255|unique:logistics_areas',
                     'name' => 'required|string|max:255',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -33,7 +33,7 @@ class LogisticsAreaRequest extends FormRequest
                         Rule::unique('logistics_areas')->ignore($this->logisticsarea->id),
                     ],
                     'name' => 'string|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -52,7 +52,7 @@ class LogisticsAreaRequest extends FormRequest
             'name.string' => '区域名称必须string类型',
             'name.max' => '区域名称最大长度为255',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填'
         ];
     }

@@ -20,8 +20,8 @@ class CreateCancelPurchasesTable extends Migration
             $table->string('creator')->comment('创建人');
             $table->string('submitter')->default('')->comment('提交人');
             $table->timestamp('submit_at')->nullable()->comment('提交时间');
-            $table->tinyInteger('is_submit')->default(0)->comment('是否提交');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('is_submit')->default(false)->comment('是否提交');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

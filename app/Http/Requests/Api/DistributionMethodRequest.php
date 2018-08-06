@@ -16,19 +16,19 @@ class DistributionMethodRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -39,7 +39,7 @@ class DistributionMethodRequest extends FormRequest
         return [
             'name.required' => '配送方式名称必填',
             'name.string' => '配送方式名称必须string类型',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
         ];
     }

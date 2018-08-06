@@ -16,7 +16,7 @@ class SupplierRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -35,9 +35,9 @@ class SupplierRequest extends FormRequest
                     'fax' => 'required|string|max:255',
                     'email' => 'required|email|max:255',
                     'remark' => 'string|nullable|max:255',
-                    'is_scan' => 'integer',
-                    'auto_valuation' => 'integer',
-                    'status' => 'integer',
+                    'is_scan' => 'boolean',
+                    'auto_valuation' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -59,9 +59,9 @@ class SupplierRequest extends FormRequest
                     'fax' => 'string|max:255',
                     'email' => 'email|max:255',
                     'remark' => 'string|nullable|max:255',
-                    'is_scan' => 'integer',
-                    'auto_valuation' => 'integer',
-                    'status' => 'integer',
+                    'is_scan' => 'boolean',
+                    'auto_valuation' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -127,12 +127,12 @@ class SupplierRequest extends FormRequest
             'remark.nullable' => '供应商备注可为null',
             'remark.max' => '供应商备注最大长度为255',
 
-            'is_scan.integer' => '是否启用扫描必须int类型',
+            'is_scan.boolean' => '是否启用扫描必须布尔类型',
 
-            'auto_valuation.integer' => '是否采购自动计价必须int类型',
+            'auto_valuation.boolean' => '是否采购自动计价必须布尔类型',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

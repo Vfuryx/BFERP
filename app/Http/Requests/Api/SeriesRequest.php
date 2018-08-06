@@ -16,7 +16,7 @@ class SeriesRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -31,7 +31,7 @@ class SeriesRequest extends FormRequest
                     'name' => 'required|string|max:255',
                     'description' => 'string|nullable|max:255',
                     'remark' => 'string|nullable|max:255',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -49,7 +49,7 @@ class SeriesRequest extends FormRequest
                     'name' => 'required|string|max:255',
                     'description' => 'string|nullable|max:255',
                     'remark' => 'string|nullable|max:255',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -80,7 +80,7 @@ class SeriesRequest extends FormRequest
             'remark.max' => '备注最大长度为255',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

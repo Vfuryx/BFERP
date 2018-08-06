@@ -15,7 +15,7 @@ class EditStatuRequest extends FormRequest
             case 'PUT':
                 return [
                     'ids' => 'required|string',
-                    'status' => 'required|integer'
+                    'status' => 'required|boolean'
                 ];
                 break;
             default:
@@ -29,7 +29,7 @@ class EditStatuRequest extends FormRequest
         return [
             'ids.required' => 'id组必填',
             'ids.string' => 'id组必须string类型',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
         ];
     }

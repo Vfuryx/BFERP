@@ -32,7 +32,7 @@ class ProductSpecsController extends Controller
      * @Get("/productspecs{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      *       "data": {
@@ -52,8 +52,8 @@ class ProductSpecsController extends Controller
      *                  "title": "商品标题",
      *                  "img": "商品图片",
      *                  "url": "https://www.taobao.com/",
-     *                  "status": 1,
-     *                  "is_stop_pro": 1,
+     *                  "status": true,
+     *                  "is_stop_pro":  true,
      *                  "created_at": "2018-07-07 09:59:36",
      *                  "updated_at": "2018-07-07 10:06:01",
      *                  "deleted_at": null
@@ -70,7 +70,7 @@ class ProductSpecsController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -81,7 +81,7 @@ class ProductSpecsController extends Controller
      *              "distribution_method": {
      *                  "id": 1,
      *                  "name": "配送方式",
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-07-07 10:40:40",
      *                  "updated_at": "2018-07-07 10:40:40"
      *              },
@@ -99,9 +99,9 @@ class ProductSpecsController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 10:41:02",
      *              "updated_at": "2018-07-07 10:51:12",
      *           }
@@ -171,7 +171,7 @@ class ProductSpecsController extends Controller
 //     *      @Parameter("remark", description="备注", required=false, default=""),
 //     *      @Parameter("finished_pro",type="integer", description="是否成品 0 不是 1 是", required=false,default=0),
 //     *      @Parameter("is_stop_pro",type="integer", description="是否停产 0 不是 1 是", required=false,default=0),
-//     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+//     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
 //     * })
 //     * @Transaction({
 //     *      @Response(422, body={
@@ -202,8 +202,8 @@ class ProductSpecsController extends Controller
 //     *              "title": "商品标题",
 //     *              "img": "商品图片",
 //     *              "url": "https://www.taobao.com/",
-//     *              "status": 1,
-//     *              "is_stop_pro": 1,
+//     *              "status": true,
+//     *              "is_stop_pro":  true,
 //     *              "created_at": "2018-07-07 09:59:36",
 //     *              "updated_at": "2018-07-07 10:06:01",
 //     *              "deleted_at": null
@@ -220,7 +220,7 @@ class ProductSpecsController extends Controller
 //     *          "assembly_price": "10.00",
 //     *          "discount": "1.00",
 //     *          "commission": "1.00",
-//     *          "is_combination": 0,
+//     *          "is_combination": false,
 //     *          "package_quantity": 10,
 //     *          "package_costs": "10.00",
 //     *          "wooden_frame_costs": "10.00",
@@ -231,7 +231,7 @@ class ProductSpecsController extends Controller
 //     *          "distribution_method": {
 //     *          "id": 1,
 //     *          "name": "配送方式",
-//     *          "status": 1,
+//     *          "status": true,
 //     *          "created_at": "2018-07-07 10:40:40",
 //     *          "updated_at": "2018-07-07 10:40:40"
 //     *          },
@@ -249,9 +249,9 @@ class ProductSpecsController extends Controller
 //     *          "volume": 10,
 //     *          "weight": 10,
 //     *          "remark": "备注",
-//     *          "finished_pro": 1,
-//     *          "is_stop_pro": 0,
-//     *          "status": 1,
+//     *          "finished_pro":  true,
+//     *          "is_stop_pro": false,
+//     *          "status": true,
 //     *          "created_at": "2018-07-07 10:41:02",
 //     *          "updated_at": "2018-07-07 10:51:12",
 //     *          "meta": {
@@ -291,8 +291,8 @@ class ProductSpecsController extends Controller
                     "title": "商品标题1",
                     "img": "商品图片1",
                     "url": "https://www.taobao.com/",
-                    "status": 1,
-                    "is_stop_pro": 1,
+                    "status": true,
+                    "is_stop_pro":  true,
                     "created_at": "2018-07-07 09:59:36",
                     "updated_at": "2018-07-07 10:06:01",
                     "deleted_at": null
@@ -309,7 +309,7 @@ class ProductSpecsController extends Controller
                 "assembly_price": "10.00",
                 "discount": "1.00",
                 "commission": "1.00",
-                "is_combination": 0,
+                "is_combination": false,
                 "package_quantity": 10,
                 "package_costs": "10.00",
                 "wooden_frame_costs": "10.00",
@@ -320,7 +320,7 @@ class ProductSpecsController extends Controller
                 "distribution_method": {
                     "id": 1,
                     "name": "配送方式",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-07 10:40:40",
                     "updated_at": "2018-07-07 10:40:40"
                 },
@@ -338,9 +338,9 @@ class ProductSpecsController extends Controller
                 "volume": 10,
                 "weight": 10,
                 "remark": "备注",
-                "finished_pro": 1,
-                "is_stop_pro": 0,
-                "status": 1,
+                "finished_pro":  true,
+                "is_stop_pro": false,
+                "status": true,
                 "created_at": "2018-07-07 10:41:02",
                 "updated_at": "2018-07-07 10:51:12"
      *      })
@@ -399,7 +399,7 @@ class ProductSpecsController extends Controller
 //     *          "distribution_method": {
 //     *          "id": 1,
 //     *          "name": "配送方式",
-//     *          "status": 1,
+//     *          "status": true,
 //     *          "created_at": "2018-07-07 10:40:40",
 //     *          "updated_at": "2018-07-07 10:40:40"
 //     *          },
@@ -418,8 +418,8 @@ class ProductSpecsController extends Controller
 //     *          "weight": "10",
 //     *          "remark": "备注",
 //     *          "finished_pro": "1",
-//     *          "is_stop_pro": "0",
-//     *          "status": "1",
+//     *          "is_stop_pro": false,
+//     *          "status": true,
 //     *          "created_at": "2018-07-07 10:41:02",
 //     *          "updated_at": "2018-07-07 10:51:12"
 //     *      })
@@ -516,7 +516,7 @@ class ProductSpecsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="产品规格id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -31,6 +31,19 @@ class Purchase extends Model
         'status', 'print_at'
     ];
 
+    protected $dates = [
+        'print_at'
+    ];
+
+    //设置类型
+    protected $casts = [
+        'is_submit' => 'boolean',
+        'is_print' => 'boolean',
+        'is_audit' => 'boolean',
+        'is_change' => 'boolean',
+        'status' => 'boolean'
+    ];
+
     //观察者
     protected static function boot()
     {

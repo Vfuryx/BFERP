@@ -26,7 +26,7 @@ class DamagedGoodsController extends Controller
      * @Get("/damagedgoods{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -82,7 +82,7 @@ class DamagedGoodsController extends Controller
      *      @Parameter("quantity",type="integer", description="损坏数量", required=true),
      *      @Parameter("money",type="numeric", description="损坏金额", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -245,7 +245,7 @@ class DamagedGoodsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="损坏商品id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

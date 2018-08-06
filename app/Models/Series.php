@@ -13,6 +13,11 @@ class Series extends Model
         'remark', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function suppliers()
     {
         return $this->belongsTo(Supplier::class);

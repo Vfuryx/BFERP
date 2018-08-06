@@ -45,6 +45,7 @@ class PurchaseTransformer extends TransformerAbstract
                 $data['product_specs_spec'] = $item->productSpec->spec;
                 $data['goods_short_name'] = $item->productSpec->goods->short_name;
                 $data['goods_commodity_code'] = $item->productSpec->goods->commodity_code;
+                $data['stock_in_count'] = $item->stock_in_count;
                 $data['suppliers_id'] = $item->suppliers_id;
                 $data['suppliers_name'] = $item->supplier->name;
                 $data['shops_id'] = $item->shops_id;

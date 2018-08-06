@@ -26,7 +26,7 @@ class ShopsController extends Controller
      * @Get("/shops{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -42,8 +42,8 @@ class ShopsController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1",
      *              "address": "仓库地（地址）1",
-     *              "is_default": 1,
-     *              "status": 1,
+     *              "is_default": true,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:24",
      *              "updated_at": "2018-07-05 10:49:24"
      *          },
@@ -60,12 +60,12 @@ class ShopsController extends Controller
      *          "platform": {
      *              "id": 1,
      *              "name": "平台类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:30",
      *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": 2,
-     *          "status": 1,
+     *          "is_waybill": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 10:49:44",
      *          "updated_at": "2018-07-05 10:49:44"
      *      }
@@ -108,8 +108,8 @@ class ShopsController extends Controller
      *      @Parameter("address", description="发货地（地址）", required=true),
      *      @Parameter("gross_profit_rate", description="毛利率（%）", required=true),
      *      @Parameter("platform_id",type="integer", description="平台类型", required=true),
-     *      @Parameter("is_waybill",type="integer", description="电子面单", required=false,default=1),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_waybill",type="boolean", description="电子面单", required=false,default=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -136,8 +136,8 @@ class ShopsController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1",
      *              "address": "仓库地（地址）1",
-     *              "is_default": 1,
-     *              "status": 1,
+     *              "is_default": true,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:24",
      *              "updated_at": "2018-07-05 10:49:24"
      *          },
@@ -154,12 +154,12 @@ class ShopsController extends Controller
      *          "platform": {
      *              "id": 1,
      *              "name": "平台类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:30",
      *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": "2",
-     *          "status": "1",
+     *          "is_waybill": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 10:49:44",
      *          "updated_at": "2018-07-05 10:49:44",
      *          "meta": {
@@ -194,8 +194,8 @@ class ShopsController extends Controller
      *              "city": "仓库地（市）4",
      *              "district": "仓库地（区）4",
      *              "address": "仓库地（地址）4",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-04 10:26:13",
      *              "updated_at": "2018-07-04 10:48:23"
      *          },
@@ -212,12 +212,12 @@ class ShopsController extends Controller
      *          "platform": {
      *              "id": 1,
      *              "name": "平台名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-04 12:54:52",
      *              "updated_at": "2018-07-04 12:54:55"
      *          },
-     *          "is_waybill": 1,
-     *          "status": 1,
+     *          "is_waybill": true,
+     *          "status": true,
      *          "created_at": "2018-07-04 12:56:57",
      *          "updated_at": "2018-07-04 12:56:57"
      *      })
@@ -262,8 +262,8 @@ class ShopsController extends Controller
      *              "city": "仓库地（市）1",
      *              "district": "仓库地（区）1",
      *              "address": "仓库地（地址）1",
-     *              "is_default": 1,
-     *              "status": 1,
+     *              "is_default": true,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:24",
      *              "updated_at": "2018-07-05 10:49:24"
      *          },
@@ -280,12 +280,12 @@ class ShopsController extends Controller
      *          "platform": {
      *              "id": 1,
      *              "name": "平台类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-05 10:49:30",
      *              "updated_at": "2018-07-05 10:49:30"
      *          },
-     *          "is_waybill": 2,
-     *          "status": 1,
+     *          "is_waybill": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 10:49:44",
      *          "updated_at": "2018-07-05 10:49:44"
      *      })
@@ -352,7 +352,7 @@ class ShopsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="店铺id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

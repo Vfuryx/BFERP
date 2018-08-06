@@ -55,8 +55,23 @@ class Order extends Model
 
     ];
 
-
-
     protected $fillable = [];
+
+    protected $dates = [
+        'created',
+        'audit_at',
+        'est_con_time',
+        'audit_at',
+    ];
+
+    //设置类型
+    protected $casts = [
+        'is_invoice' => 'boolean',
+        'is_notice' => 'boolean',
+        'is_cancel_after_verification' => 'boolean',
+        'is_merge' => 'boolean',
+        'is_split' => 'boolean',
+        'is_association' => 'boolean',
+    ];
 
 }

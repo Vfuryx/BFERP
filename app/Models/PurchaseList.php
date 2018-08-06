@@ -8,10 +8,30 @@ class PurchaseList extends Model
 
     protected $fillable = [
         'purchases_id', 'product_specs_id', 'purchase_quantity', 'shops_id',
-        'suppliers_id', 'purchase_cost', 'purchase_freight', 'warehouse_cost',
-        'commission', 'discount', 'arrival_time', 'remark',
-        'wooden_frame_costs'
+        'commodity_code', 'suppliers_id', 'purchase_cost',
+        'purchase_freight', 'warehouse_cost', 'commission', 'discount',
+        'arrival_time', 'remark', 'wooden_frame_costs'
     ];
+
+    /**
+     * 添加入库数量
+     *
+     * @param $amount 数量
+     */
+    public function addStockInCount($amount)
+    {
+        if ($amount < 0) {
+            throw new UpdateResourceFailedException('数量不可小于0');
+        }
+        if ($this->purchase_quantity - $this->stock_in_count < $amount) {
+            throw new UpdateResourceFailedException('入库数量超过采购数量');
+        }
+
+        $this->increment('stock_in_count', $amount);
+
+        $this->save();
+        return true;
+    }
 
     public function purchase()
     {

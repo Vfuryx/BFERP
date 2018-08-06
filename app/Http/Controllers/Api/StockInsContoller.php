@@ -38,7 +38,7 @@ class StockInsContoller extends Controller
      * @Get("/stockins{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -52,15 +52,15 @@ class StockInsContoller extends Controller
      *              "city": "仓库地（市）",
      *              "district": "仓库地（区）",
      *              "address": "测试",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-17 17:39:54",
      *              "updated_at": "2018-07-19 14:13:27"
      *          },
      *          "stock_in_type": {
      *              "id": 1,
      *              "name": "入库类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-19 17:51:13",
      *              "updated_at": "2018-07-19 17:58:07"
      *          },
@@ -71,10 +71,10 @@ class StockInsContoller extends Controller
      *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
-     *          "is_submit": null,
-     *          "is_audit": null,
-     *          "is_stock_in": null,
-     *          "status": "0",
+     *          "is_submit": false,
+     *          "is_audit": false,
+     *          "is_stock_in": true,
+     *          "status": false,
      *          "stock_in_details": {
      *              {
      *                  "id": 9,
@@ -122,7 +122,7 @@ class StockInsContoller extends Controller
      *                      "assembly_price": "10.00",
      *                      "discount": "1.00",
      *                      "commission": "1.00",
-     *                      "is_combination": 0,
+     *                      "is_combination": false,
      *                      "package_quantity": 10,
      *                      "package_costs": "10.00",
      *                      "wooden_frame_costs": "10.00",
@@ -145,9 +145,9 @@ class StockInsContoller extends Controller
      *                      "volume": 10,
      *                      "weight": 10,
      *                      "remark": "备注",
-     *                      "finished_pro": 1,
-     *                      "is_stop_pro": 0,
-     *                      "status": 1,
+     *                      "finished_pro":  true,
+     *                      "is_stop_pro": false,
+     *                      "status": true,
      *                      "created_at": "2018-07-18 17:42:36",
      *                      "updated_at": "2018-07-18 17:42:36"
      *                  }
@@ -186,7 +186,7 @@ class StockInsContoller extends Controller
      * @Parameters({
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
      *      @Parameter("stock_in_details[0][purchase_lists_id]",type="integer", description="采购单详情id", required=true),
      *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=true),
      *      @Parameter("stock_in_details[0][stock_in_quantity]",type="integer", description="入库数量", required=true),
@@ -197,7 +197,7 @@ class StockInsContoller extends Controller
      *     {
      *          "warehouse_id": 1,
      *          "stock_in_types_id": 1,
-     *          "status": 1,
+     *          "status": true,
      *          "stock_in_details[0][purchase_lists_id]":1,
      *          "stock_in_details[0][product_specs_id]":1,
      *          "stock_in_details[0][stock_in_quantity]":10,
@@ -227,15 +227,15 @@ class StockInsContoller extends Controller
      *              "city": "仓库地（市）",
      *              "district": "仓库地（区）",
      *              "address": "测试",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-17 17:39:54",
      *              "updated_at": "2018-07-19 14:13:27"
      *          },
      *          "stock_in_type": {
      *              "id": 1,
      *              "name": "入库类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-19 17:51:13",
      *              "updated_at": "2018-07-19 17:58:07"
      *          },
@@ -246,10 +246,10 @@ class StockInsContoller extends Controller
      *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
-     *          "is_submit": null,
-     *          "is_audit": null,
-     *          "is_stock_in": null,
-     *          "status": "0",
+     *          "is_submit": false,
+     *          "is_audit": false,
+     *          "is_stock_in": true,
+     *          "status": false,
      *          "stock_in_details": {
      *              {
      *                  "id": 9,
@@ -297,7 +297,7 @@ class StockInsContoller extends Controller
      *                      "assembly_price": "10.00",
      *                      "discount": "1.00",
      *                      "commission": "1.00",
-     *                      "is_combination": 0,
+     *                      "is_combination": false,
      *                      "package_quantity": 10,
      *                      "package_costs": "10.00",
      *                      "wooden_frame_costs": "10.00",
@@ -320,9 +320,9 @@ class StockInsContoller extends Controller
      *                      "volume": 10,
      *                      "weight": 10,
      *                      "remark": "备注",
-     *                      "finished_pro": 1,
-     *                      "is_stop_pro": 0,
-     *                      "status": 1,
+     *                      "finished_pro":  true,
+     *                      "is_stop_pro": false,
+     *                      "status": true,
      *                      "created_at": "2018-07-18 17:42:36",
      *                      "updated_at": "2018-07-18 17:42:36"
      *                  }
@@ -378,15 +378,15 @@ class StockInsContoller extends Controller
      *              "city": "仓库地（市）",
      *              "district": "仓库地（区）",
      *              "address": "测试",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-17 17:39:54",
      *              "updated_at": "2018-07-19 14:13:27"
      *          },
      *          "stock_in_type": {
      *              "id": 1,
      *              "name": "入库类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-19 17:51:13",
      *              "updated_at": "2018-07-19 17:58:07"
      *          },
@@ -397,10 +397,10 @@ class StockInsContoller extends Controller
      *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
-     *          "is_submit": null,
-     *          "is_audit": null,
-     *          "is_stock_in": null,
-     *          "status": "0",
+     *          "is_submit": false,
+     *          "is_audit": false,
+     *          "is_stock_in": true,
+     *          "status": false,
      *          "stock_in_details": {
      *              {
      *                  "id": 9,
@@ -448,7 +448,7 @@ class StockInsContoller extends Controller
      *                      "assembly_price": "10.00",
      *                      "discount": "1.00",
      *                      "commission": "1.00",
-     *                      "is_combination": 0,
+     *                      "is_combination": false,
      *                      "package_quantity": 10,
      *                      "package_costs": "10.00",
      *                      "wooden_frame_costs": "10.00",
@@ -471,9 +471,9 @@ class StockInsContoller extends Controller
      *                      "volume": 10,
      *                      "weight": 10,
      *                      "remark": "备注",
-     *                      "finished_pro": 1,
-     *                      "is_stop_pro": 0,
-     *                      "status": 1,
+     *                      "finished_pro":  true,
+     *                      "is_stop_pro": false,
+     *                      "status": true,
      *                      "created_at": "2018-07-18 17:42:36",
      *                      "updated_at": "2018-07-18 17:42:36"
      *                  }
@@ -498,7 +498,7 @@ class StockInsContoller extends Controller
      * @Parameters({
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
      *      @Parameter("stock_in_types_id",type="integer", description="入库类型id", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
      *      @Parameter("stock_in_details[0][id]",type="integer", description="入库单详情id (存在则视为更新 不存在视为插入)", required=false),
      *      @Parameter("stock_in_details[0][purchase_lists_id]",type="integer", description="采购单详情id", required=false),
      *      @Parameter("stock_in_details[0][product_specs_id]",type="integer", description="产品规格id", required=false),
@@ -510,7 +510,7 @@ class StockInsContoller extends Controller
      *     {
      *          "warehouse_id": 1,
      *          "stock_in_types_id": 1,
-     *          "status": 1,
+     *          "status": true,
      *          "stock_in_details[0][id]":1,
      *          "stock_in_details[0][purchase_lists_id]":1,
      *          "stock_in_details[0][product_specs_id]":1,
@@ -545,15 +545,15 @@ class StockInsContoller extends Controller
      *              "city": "仓库地（市）",
      *              "district": "仓库地（区）",
      *              "address": "测试",
-     *              "is_default": 0,
-     *              "status": 1,
+     *              "is_default": false,
+     *              "status": true,
      *              "created_at": "2018-07-17 17:39:54",
      *              "updated_at": "2018-07-19 14:13:27"
      *          },
      *          "stock_in_type": {
      *              "id": 1,
      *              "name": "入库类型名称1",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-19 17:51:13",
      *              "updated_at": "2018-07-19 17:58:07"
      *          },
@@ -564,10 +564,10 @@ class StockInsContoller extends Controller
      *          "audit_at": null,
      *          "warehouer": null,
      *          "stock_in_at": null,
-     *          "is_submit": null,
-     *          "is_audit": null,
-     *          "is_stock_in": null,
-     *          "status": "0",
+     *          "is_submit": false,
+     *          "is_audit": false,
+     *          "is_stock_in": true,
+     *          "status": false,
      *          "stock_in_details": {
      *              {
      *                  "id": 9,
@@ -615,7 +615,7 @@ class StockInsContoller extends Controller
      *                      "assembly_price": "10.00",
      *                      "discount": "1.00",
      *                      "commission": "1.00",
-     *                      "is_combination": 0,
+     *                      "is_combination": false,
      *                      "package_quantity": 10,
      *                      "package_costs": "10.00",
      *                      "wooden_frame_costs": "10.00",
@@ -638,9 +638,9 @@ class StockInsContoller extends Controller
      *                      "volume": 10,
      *                      "weight": 10,
      *                      "remark": "备注",
-     *                      "finished_pro": 1,
-     *                      "is_stop_pro": 0,
-     *                      "status": 1,
+     *                      "finished_pro":  true,
+     *                      "is_stop_pro": false,
+     *                      "status": true,
      *                      "created_at": "2018-07-18 17:42:36",
      *                      "updated_at": "2018-07-18 17:42:36"
      *                  }
@@ -761,7 +761,7 @@ class StockInsContoller extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="入库单id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={
@@ -873,8 +873,9 @@ class StockInsContoller extends Controller
             );
 
             $stockin->stockInDetails->map(function($stockInDetail) use ($stockin) {
-
-                $stockInDetail->purchaseList->purchaseDetails->map(function($purchaseDetail) use ($stockin, $stockInDetail) {
+                $purchaseList = $stockInDetail->purchaseList;
+                $purchaseList->addStockInCount($stockInDetail->stock_in_quantity);
+                $purchaseList->purchaseDetails->map(function($purchaseDetail) use ($stockin, $stockInDetail) {
                     //修改子采购单明细的状态、入库数。
                     $purchaseDetail->addStockInCount($stockInDetail->stock_in_quantity);
                     //修改库存数量

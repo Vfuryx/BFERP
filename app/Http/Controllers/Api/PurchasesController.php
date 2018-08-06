@@ -40,7 +40,7 @@ class PurchasesController extends Controller
      * @Get("/purchases{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all"),
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false,default="all"),
      *      @Parameter("purchase_status", description="采购状态 状态分别是(new,section,finish)", required=false, default="all")
      * })
      * @Response(200, body={
@@ -61,12 +61,12 @@ class PurchasesController extends Controller
      *          "client_name": "",
      *          "buyer_nick": "",
      *          "order_address": "",
-     *          "is_submit": 0,
-     *          "is_print": 0,
-     *          "is_audit": 0,
-     *          "is_change": 0,
+     *          "is_submit": false,
+     *          "is_print": false,
+     *          "is_audit": false,
+     *          "is_change": false,
      *          "remark": "备注5",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-08-02 09:52:20"
      *      },
      *      {
@@ -85,12 +85,12 @@ class PurchasesController extends Controller
      *          "client_name": "",
      *          "buyer_nick": "",
      *          "order_address": "",
-     *          "is_submit": 0,
-     *          "is_print": 0,
-     *          "is_audit": 0,
-     *          "is_change": 0,
+     *          "is_submit": false,
+     *          "is_print": false,
+     *          "is_audit": false,
+     *          "is_change": false,
      *          "remark": "备注5",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-08-02 09:56:18"
      *      }
      *     },
@@ -121,9 +121,10 @@ class PurchasesController extends Controller
      *      @Parameter("receiver_address", description="收货地址", required=true),
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status", type="boolean", description="状态(false:停用,true:启用)", required=false,default=true),
      *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=true),
      *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=true),
+     *      @Parameter("purchase_lists[0][commodity_code]", description="商品编码", required=true),
      *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=true),
      *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=true),
      *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=true),
@@ -153,9 +154,10 @@ class PurchasesController extends Controller
      *          "receiver_address": "收货地址",
      *          "warehouse_id": "1",
      *          "remark": "备注",
-     *          "status": "1",
+     *          "status": true,
      *          "purchase_lists[0][product_specs_id]":9,
      *          "purchase_lists[0][purchase_quantity]":10,
+     *          "purchase_lists[0][commodity_code]":"商品编码1",
      *          "purchase_lists[0][shops_id]":1,
      *          "purchase_lists[0][suppliers_id]":1,
      *          "purchase_lists[0][purchase_cost]":10,
@@ -218,12 +220,12 @@ class PurchasesController extends Controller
      *          "client_name": null,
      *          "buyer_nick": null,
      *          "order_address": null,
-     *          "is_submit": null,
-     *          "is_print": null,
-     *          "is_audit": null,
-     *          "is_change": null,
+     *          "is_submit": false,
+     *          "is_print": false,
+     *          "is_audit": false,
+     *          "is_change": false,
      *          "remark": "备注5",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-08-02 16:02:59",
      *          "purchase_lists": {
      *              {
@@ -233,6 +235,7 @@ class PurchasesController extends Controller
      *                  "product_specs_spec": "32gsdgsa",
      *                  "goods_short_name": "商品简称",
      *                  "goods_commodity_code": "商品编码1",
+     *                  "stock_in_count": 0,
      *                  "suppliers_id": 1,
      *                  "suppliers_name": "供应商1",
      *                  "shops_id": 1,
@@ -324,9 +327,10 @@ class PurchasesController extends Controller
 
                 }
             }
-            return $purchase;
+            return $purchase->id;
         });
-
+        //从新获取存入的数据去除有些的null数据，方便前端判断
+        $purchase = self::find($purchase);
         return $this->response
             ->item($purchase, new PurchaseTransformer())
             ->setStatusCode(201)
@@ -359,12 +363,12 @@ class PurchasesController extends Controller
      *          "client_name": "",
      *          "buyer_nick": "",
      *          "order_address": "",
-     *          "is_submit": 0,
-     *          "is_print": 0,
-     *          "is_audit": 0,
-     *          "is_change": 0,
+     *          "is_submit": false,
+     *          "is_print": false,
+     *          "is_audit": false,
+     *          "is_change": false,
      *          "remark": "备注5",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-08-02 16:02:59",
      *          "purchase_lists": {
      *              {
@@ -373,6 +377,7 @@ class PurchasesController extends Controller
      *                  "product_specs_spec_code": "321",
      *                  "product_specs_spec": "32gsdgsa",
      *                  "goods_short_name": "商品简称",
+     *                  "stock_in_count": 0,
      *                  "goods_commodity_code": "商品编码1",
      *                  "suppliers_id": 1,
      *                  "suppliers_name": "供应商1",
@@ -451,10 +456,11 @@ class PurchasesController extends Controller
      *      @Parameter("receiver_address", description="收货地址", required=false),
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status", type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status", type="boolean", description="状态(false:停用,true:启用)", required=false,default=true),
      *      @Parameter("purchase_lists[0][id]", type="integer", description="采购清单id", required=false),
      *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=false),
      *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=false),
+     *      @Parameter("purchase_lists[0][commodity_code]", description="商品编码", required=false),
      *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=false),
      *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=false),
      *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=false),
@@ -485,9 +491,10 @@ class PurchasesController extends Controller
      *          "receiver_address": "收货地址",
      *          "warehouse_id": "1",
      *          "remark": "备注",
-     *          "status": "1",
+     *          "status": true,
      *          "purchase_lists[0][product_specs_id]":9,
      *          "purchase_lists[0][purchase_quantity]":10,
+     *          "purchase_lists[0][commodity_code]":"商品编码1",
      *          "purchase_lists[0][shops_id]":1,
      *          "purchase_lists[0][suppliers_id]":1,
      *          "purchase_lists[0][purchase_cost]":10,
@@ -560,12 +567,12 @@ class PurchasesController extends Controller
      *          "client_name": "",
      *          "buyer_nick": "",
      *          "order_address": "",
-     *          "is_submit": 0,
-     *          "is_print": 0,
-     *          "is_audit": 0,
-     *          "is_change": 0,
+     *          "is_submit": false,
+     *          "is_print": false,
+     *          "is_audit": false,
+     *          "is_change": false,
      *          "remark": "备注5",
-     *          "status": 1,
+     *          "status": true,
      *          "purchase_lists": {
      *              {
      *                  "product_specs_id": 9,
@@ -573,6 +580,7 @@ class PurchasesController extends Controller
      *                  "product_specs_spec": "产品规格",
      *                  "goods_short_name": "商品简称",
      *                  "goods_commodity_code": "商品编码1",
+     *                  "stock_in_count": 0,
      *                  "suppliers_name": "供应商1",
      *                  "shop_title": "店铺标题",
      *                  "purchase_lists_purchase_cost": "10.00",
@@ -670,7 +678,6 @@ class PurchasesController extends Controller
                             }
                         }
                     } else {
-
                         $purchaseListModel = $purchase->purchaseLists()->create($data);
                         if ($purchaseDetails = $purchaseList['purchase_details'] ?? null) {
                             foreach ($purchaseDetails as $purchaseDetail) {
@@ -781,7 +788,7 @@ class PurchasesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="采购单id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用,1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={
@@ -815,7 +822,7 @@ class PurchasesController extends Controller
      * @PUT("/purchases/:id/submit")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("is_submit", type="integer", description="是否提交", required=true)})
+     * @Parameter("is_submit", type="boolean", description="是否提交", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
@@ -840,7 +847,7 @@ class PurchasesController extends Controller
      * @PUT("/purchases/:id/print")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("is_print", type="integer", description="是否打印", required=true)})
+     * @Parameter("is_print", type="boolean", description="是否打印", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
@@ -865,7 +872,7 @@ class PurchasesController extends Controller
      * @PUT("/purchases/:id/audit")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("is_audit", type="integer", description="是否审核", required=true)})
+     * @Parameter("is_audit", type="boolean", description="是否审核", required=true)})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",

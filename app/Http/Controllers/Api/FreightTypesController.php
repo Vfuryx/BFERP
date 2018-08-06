@@ -26,23 +26,23 @@ class FreightTypesController extends Controller
      * @Get("/freighttypes{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
      *         {
      *             "id": 2,
      *             "name": "运费类型名1",
-     *             "is_default": 1,
-     *             "status": 1,
+     *             "is_default": true,
+     *             "status": true,
      *             "created_at": "2018-06-14 15:59:10",
      *             "updated_at": "2018-06-14 15:59:10"
      *         },
      *         {
      *             "id": 3,
      *             "name": "运费类型名2",
-     *             "is_default": 1,
-     *             "status": 1,
+     *             "is_default": true,
+     *             "status": true,
      *             "created_at": "2018-06-14 15:59:12",
      *             "updated_at": "2018-06-14 15:59:12"        
      *         }
@@ -74,8 +74,8 @@ class FreightTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="运费类型名称", required=true),
-     *      @Parameter("is_default",type="integer", description="是否默认", required=false,default=0),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_default",type="boolean", description="是否默认", required=false, default=0),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -90,8 +90,8 @@ class FreightTypesController extends Controller
      *      @Response(201, body={
      *          "id": 3,
      *          "name": "运费类型名1",
-     *          "is_default": "1",
-     *          "status": "1",
+     *          "is_default": true,
+     *          "status": true,
      *          "created_at": "2018-06-14 15:59:12",
      *          "updated_at": "2018-06-14 15:59:12",
      *          "meta": {
@@ -123,8 +123,8 @@ class FreightTypesController extends Controller
      *      @Response(200, body={
      *          "id": 2,
      *          "name": "运费类型名1",
-     *          "is_default": 1,
-     *          "status": 1,
+     *          "is_default": true,
+     *          "status": true,
      *          "created_at": "2018-06-14 15:59:10",
      *          "updated_at": "2018-06-14 15:59:10"
      *      })
@@ -157,8 +157,8 @@ class FreightTypesController extends Controller
      *      @Response(201, body={
      *          "id": 2,
      *          "name": "运费类型名1",
-     *          "is_default": "1",
-     *          "status": "1",
+     *          "is_default": true,
+     *          "status": true,
      *          "created_at": "2018-06-14 15:59:10",
      *          "updated_at": "2018-06-14 15:59:10"
      *      })
@@ -230,7 +230,7 @@ class FreightTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="运费类型id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

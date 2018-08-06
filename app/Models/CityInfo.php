@@ -12,6 +12,12 @@ class CityInfo extends Model
         'is_free_shipping', 'remark', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'is_free_shipping' => 'boolean',
+        'status' => 'boolean'
+    ];
+
     public function logistics()
     {
         return $this->belongsTo(Logistics::class);

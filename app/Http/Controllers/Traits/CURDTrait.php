@@ -54,10 +54,9 @@ trait CURDTrait
      */
     public function traitStore($date, $model, $transformer)
     {
-
-        $ref = new $model();
-        $ref->fill($date);
-        $ref->save();
+        $id = $model::create($date)->id;
+        //从新获取存入的数据去除有些的null数据，方便前端判断
+        $ref = $model::find($id);
         return $this->response
             ->item($ref, $transformer)
             ->setStatusCode(201)
@@ -168,14 +167,12 @@ trait CURDTrait
 
             $model = $model::query()->whereIn('id',$ids)->with($with);
 
-            //删除明细
             $model->get()->map(function($item) use ($with){
                 if(!$item->$with()->delete()){
                     throw new DeleteResourceFailedException('The given data was invalid.');
                 }
             });
 
-            //删除清单
             if (!$model->delete()) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }

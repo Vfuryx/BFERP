@@ -17,7 +17,7 @@ class DepartmentRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -34,8 +34,8 @@ class DepartmentRequest extends FormRequest
                         },
                     ],
                     'remark' => 'string|nullable|max:255',
-                    'is_verify' => 'integer',
-                    'status' => 'integer',
+                    'is_verify' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -55,8 +55,8 @@ class DepartmentRequest extends FormRequest
                         },
                     ],
                     'remark' => 'string|nullable|max:255',
-                    'is_verify' => 'integer',
-                    'status' => 'integer',
+                    'is_verify' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -82,10 +82,10 @@ class DepartmentRequest extends FormRequest
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
             
-            'is_verify.integer' => '是否验证必须int类型',
+            'is_verify.boolean' => '是否验证必须布尔类型',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

@@ -26,7 +26,7 @@ class CombinationsController extends Controller
      * @Get("/combinations{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      *       "data": {
@@ -47,7 +47,7 @@ class CombinationsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 0,
+     *                  "is_combination": false,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -70,9 +70,9 @@ class CombinationsController extends Controller
      *                  "volume": 10,
      *                  "weight": 10,
      *                  "remark": "备注",
-     *                  "finished_pro": 1,
-     *                  "is_stop_pro": 0,
-     *                  "status": 1,
+     *                  "finished_pro":  true,
+     *                  "is_stop_pro": false,
+     *                  "status": true,
      *                  "created_at": "2018-07-07 10:41:02",
      *                  "updated_at": "2018-07-07 10:51:12",
      *                  "deleted_at": null
@@ -92,7 +92,7 @@ class CombinationsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 0,
+     *                  "is_combination": false,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -115,15 +115,15 @@ class CombinationsController extends Controller
      *                  "volume": 10,
      *                  "weight": 10,
      *                  "remark": "备注",
-     *                  "finished_pro": 1,
-     *                  "is_stop_pro": 0,
-     *                  "status": 1,
+     *                  "finished_pro":  true,
+     *                  "is_stop_pro": false,
+     *                  "status": true,
      *                  "created_at": "2018-07-07 11:29:49",
      *                  "updated_at": "2018-07-07 11:29:49",
      *                  "deleted_at": null
      *              },
      *              "count": 1,
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-06 16:59:20",
      *              "updated_at": "2018-07-06 16:59:20"
      *           }
@@ -175,7 +175,7 @@ class CombinationsController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -198,9 +198,9 @@ class CombinationsController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 10:41:02",
      *              "updated_at": "2018-07-07 10:51:12",
      *              "deleted_at": null
@@ -220,7 +220,7 @@ class CombinationsController extends Controller
      *              "assembly_price": "10.00",
      *              "discount": "1.00",
      *              "commission": "1.00",
-     *              "is_combination": 0,
+     *              "is_combination": false,
      *              "package_quantity": 10,
      *              "package_costs": "10.00",
      *              "wooden_frame_costs": "10.00",
@@ -243,15 +243,15 @@ class CombinationsController extends Controller
      *              "volume": 10,
      *              "weight": 10,
      *              "remark": "备注",
-     *              "finished_pro": 1,
-     *              "is_stop_pro": 0,
-     *              "status": 1,
+     *              "finished_pro":  true,
+     *              "is_stop_pro": false,
+     *              "status": true,
      *              "created_at": "2018-07-07 11:29:49",
      *              "updated_at": "2018-07-07 11:29:49",
      *              "deleted_at": null
      *          },
      *          "count": 1,
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-06 16:59:20",
      *          "updated_at": "2018-07-06 16:59:20"
      *      })

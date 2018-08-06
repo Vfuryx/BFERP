@@ -26,7 +26,7 @@ class LogisticsAreasController extends Controller
      * @Get("/logisticsareas{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -34,7 +34,7 @@ class LogisticsAreasController extends Controller
      *          "id": 1,
      *          "code": "区域代码1",
      *          "name": "区域名称1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 16:29:28",
      *          "updated_at": "2018-07-03 16:29:28"
      *      },
@@ -42,7 +42,7 @@ class LogisticsAreasController extends Controller
      *          "id": 2,
      *          "code": "区域代码2",
      *          "name": "区域名称2",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 16:35:55",
      *          "updated_at": "2018-07-03 16:35:55"
      *      }
@@ -72,7 +72,7 @@ class LogisticsAreasController extends Controller
      * @Parameters({
      *      @Parameter("code", description="区域代码", required=true),
      *      @Parameter("name", description="区域名称", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -94,7 +94,7 @@ class LogisticsAreasController extends Controller
      *          "id": 1,
      *          "code": "区域代码1",
      *          "name": "区域名称1",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-03 16:29:28",
      *          "updated_at": "2018-07-03 16:29:28",
      *          "meta": {
@@ -122,7 +122,7 @@ class LogisticsAreasController extends Controller
      *          "id": 1,
      *          "code": "区域代码1",
      *          "name": "区域名称1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 16:29:28",
      *          "updated_at": "2018-07-03 16:29:28"
      *      })
@@ -159,7 +159,7 @@ class LogisticsAreasController extends Controller
      *          "id": 1,
      *          "code": "区域代码10",
      *          "name": "区域名称10",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-03 16:29:28",
      *          "updated_at": "2018-07-03 16:38:32"
      *      })
@@ -226,7 +226,7 @@ class LogisticsAreasController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="物流区域id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

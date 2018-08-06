@@ -28,7 +28,7 @@ class CreateProductSpecsTable extends Migration
             $table->decimal('assembly_price',10,2)->default(0.00)->comment('装配价格');
             $table->decimal('discount',10,2)->default(0.00)->comment('折扣');
             $table->decimal('commission',10,2)->default(0.00)->comment('佣金点');
-            $table->tinyInteger('is_combination')->default(0)->comment('是否组合');
+            $table->boolean('is_combination')->default(false)->comment('是否组合');
             $table->integer('package_quantity')->default(0)->comment('包件数量');
             $table->decimal('package_costs',10,2)->default(0.00)->comment('打包费用');
             $table->decimal('wooden_frame_costs',10,2)->default(0.00)->comment('木架费');
@@ -51,9 +51,9 @@ class CreateProductSpecsTable extends Migration
             $table->double('volume',10,2)->default(0.00)->comment('体积(m²)');
             $table->double('weight',10,2)->default(0.00)->comment('重量');
             $table->string('remark')->default('')->comment('备注');
-            $table->tinyInteger('finished_pro')->default(0)->comment('是否成品 0=不是 1=是');
-            $table->tinyInteger('is_stop_pro')->default(0)->comment('是否停产 0 不是 1 是');
-            // $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('finished_pro')->default(false)->comment('是否成品 0=不是 1=是');
+            $table->boolean('is_stop_pro')->default(false)->comment('是否停产 0 不是 1 是');
+            // $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

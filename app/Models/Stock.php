@@ -12,7 +12,11 @@ class Stock extends Model
     protected $fillable = [
         'warehouse_id', 'goods_id', 'pro_specs_id', 'quantity', 'status'
     ];
-
+    
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
 
     /**
      * 增加库存

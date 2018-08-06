@@ -10,6 +10,11 @@ class GoodsCategory extends Model
         'code', 'name', 'description', 'remark', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function goods()
     {
         return $this->hasMany(Goods::class);

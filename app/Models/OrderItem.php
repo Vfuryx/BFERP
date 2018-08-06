@@ -8,5 +8,11 @@ class OrderItem extends Model
 
     protected $fillable = [];
 
+    //设置类型
+    protected $casts = [
+        'is_printing' => 'boolean',
+        'is_spot_goods' => 'boolean',
+    ];
+
 
 }

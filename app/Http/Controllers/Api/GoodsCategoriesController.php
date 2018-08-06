@@ -26,7 +26,7 @@ class GoodsCategoriesController extends Controller
      * @Get("/goodscates{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -34,7 +34,7 @@ class GoodsCategoriesController extends Controller
      *             "id": 1,
      *             "code": "商品类别代码1",
      *             "name": "商品类别名1",
-     *             "status": 1,
+     *             "status": true,
      *             "description": "商品类别详情1",
      *             "remark": "商品类别备注1",
      *             "created_at": "2018-06-14 16:33:26",
@@ -44,7 +44,7 @@ class GoodsCategoriesController extends Controller
      *             "id": 2,
      *             "code": "商品类别代码2",
      *             "name": "商品类别名2",
-     *             "status": 1,
+     *             "status": true,
      *             "description": "商品类别详情2",
      *             "remark": "商品类别备注2",
      *             "created_at": "2018-06-14 16:40:44",
@@ -81,7 +81,7 @@ class GoodsCategoriesController extends Controller
      *      @Parameter("name", description="商品类别名称", required=true),
      *      @Parameter("description", description="描述", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -97,7 +97,7 @@ class GoodsCategoriesController extends Controller
      *          "id": 1,
      *          "code": "商品类别代码1",
      *          "name": "商品类别名1",
-     *          "status": "1",
+     *          "status": true,
      *          "description": "商品类别详情1",
      *          "remark": "商品类别备注1",
      *          "created_at": "2018-06-14 16:33:26",
@@ -127,7 +127,7 @@ class GoodsCategoriesController extends Controller
      *          "id": 1,
      *          "code": "商品类别代码1",
      *          "name": "商品类别名1",
-     *          "status": 1,
+     *          "status": true,
      *          "description": "商品类别详情1",
      *          "remark": "商品类别备注1",
      *          "created_at": "2018-06-14 16:33:26",
@@ -164,7 +164,7 @@ class GoodsCategoriesController extends Controller
      *          "id": 3,
      *          "code": "商品类别代码30",
      *          "name": "商品类别名30",
-     *          "status": "1",
+     *          "status": true,
      *          "description": "商品类别详情30",
      *          "remark": "商品类别备注30",
      *          "created_at": "2018-06-14 16:40:54",
@@ -233,7 +233,7 @@ class GoodsCategoriesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="商品类别id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -26,7 +26,7 @@ class StockInDetailsController extends Controller
      * @Get("/stockindetails{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -44,10 +44,10 @@ class StockInDetailsController extends Controller
      *                  "audit_at": null,
      *                  "warehouer": "",
      *                  "stock_in_at": null,
-     *                  "is_submit": 0,
-     *                  "is_audit": 0,
+     *                  "is_submit": false,
+     *                  "is_audit": false,
      *                  "is_stock_in": 0,
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-07-20 13:06:52",
      *                  "updated_at": "2018-07-20 13:06:52"
      *              },
@@ -88,7 +88,7 @@ class StockInDetailsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 0,
+     *                  "is_combination": false,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -111,9 +111,9 @@ class StockInDetailsController extends Controller
      *                  "volume": 10,
      *                  "weight": 10,
      *                  "remark": "备注",
-     *                  "finished_pro": 1,
-     *                  "is_stop_pro": 0,
-     *                  "status": 1,
+     *                  "finished_pro":  true,
+     *                  "is_stop_pro": false,
+     *                  "status": true,
      *                  "created_at": "2018-07-18 17:42:36",
      *                  "updated_at": "2018-07-18 17:42:36"
      *              },

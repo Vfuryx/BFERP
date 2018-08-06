@@ -16,7 +16,7 @@ class CityInfoRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -36,9 +36,9 @@ class CityInfoRequest extends FormRequest
                     'weight_univalent' => 'required|numeric',
                     'expected_days' => 'required|integer',
                     'route' => 'integer',
-                    'is_free_shipping' => 'integer',
+                    'is_free_shipping' => 'boolean',
                     'remark' => 'string|nullable|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -58,9 +58,9 @@ class CityInfoRequest extends FormRequest
                     'weight_univalent' => 'numeric',
                     'expected_days' => 'integer',
                     'route' => 'integer',
-                    'is_free_shipping' => 'integer',
+                    'is_free_shipping' => 'boolean',
                     'remark' => 'string|nullable|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -98,12 +98,12 @@ class CityInfoRequest extends FormRequest
             'expected_days.required' => '城市到达天数必填',
             'expected_days.integer' => '城市到达天数必须int类型',
             'route.integer' => '中转或直达必须int类型',
-            'is_free_shipping.integer' => '是否包邮必须int类型',
+            'is_free_shipping.boolean' => '是否包邮必须布尔类型',
             'remark.string' => '备注必须string类型',
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填'
         ];
     }

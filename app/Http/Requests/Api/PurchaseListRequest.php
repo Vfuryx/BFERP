@@ -17,7 +17,7 @@ class PurchaseListRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -27,15 +27,27 @@ class PurchaseListRequest extends FormRequest
                         Rule::exists('product_specs', 'id')
                     ],
                     'purchase_lists.*.purchase_quantity' => 'required|integer|min:1',
+                    'purchase_lists.*.commodity_code' => [
+                        'required', 'string',
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //判断是否属于这个规格的商品编码
+                            if (\App\Models\ProductSpec::findOrfail($this->purchase_lists[$ex[1]]['product_specs_id'])
+                                ->goods->where('commodity_code',$value)->count() == 1) {
+                                return true;
+                            }
+                            return $fail('规格不属于这个商品');
+                        },
+                    ],
                     'purchase_lists.*.shops_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function ($query) {
+                        Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'purchase_lists.*.suppliers_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function ($query) {
+                        Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -71,15 +83,27 @@ class PurchaseListRequest extends FormRequest
                         }
                     ],
                     'purchase_lists.*.purchase_quantity' => ['integer', 'min:1'],
+                    'purchase_lists.*.commodity_code' =>   [
+                        'string',
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //判断是否属于这个规格的商品编码
+                            if (\App\Models\ProductSpec::findOrfail($this->purchase_lists[$ex[1]]['product_specs_id'])
+                                    ->goods->where('commodity_code',$value)->count() == 1) {
+                                return true;
+                            }
+                            return $fail('规格不属于这个商品');
+                        }
+                    ],
                     'purchase_lists.*.shops_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function ($query) {
+                        Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
                     'purchase_lists.*.suppliers_id' => [
                         'integer',
-                        Rule::exists('shops', 'id')->where(function ($query) {
+                        Rule::exists('shops', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -111,6 +135,9 @@ class PurchaseListRequest extends FormRequest
             'purchase_lists.*.purchase_quantity.required' => '采购数必填',
             'purchase_lists.*.purchase_quantity.integer' => '采购数必须int类型',
             'purchase_lists.*.purchase_quantity.min' => '采购数不少于1',
+
+            'purchase_lists.*.commodity_code.required' => '商品编码必填',
+            'purchase_lists.*.commodity_code.string' => '商品编码必须字符串类型',
 
             'purchase_lists.*.shops_id.integer' => '采购店铺id必须int类型',
             'purchase_lists.*.shops_id.exists' => '需要添加的id在数据库中未找到或未启用',

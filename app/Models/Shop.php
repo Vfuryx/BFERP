@@ -13,6 +13,12 @@ class Shop extends Model
         'platform_id', 'is_waybill', 'status',
     ];
 
+    //设置类型
+    protected $casts = [
+        'is_waybill' => 'boolean',
+        'status' => 'boolean'
+    ];
+
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);

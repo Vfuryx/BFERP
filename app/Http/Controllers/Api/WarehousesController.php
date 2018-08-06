@@ -26,7 +26,7 @@ class WarehousesController extends Controller
      * @Get("/warehouses{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -37,8 +37,8 @@ class WarehousesController extends Controller
      *          "city": "仓库地（市）1",
      *          "district": "仓库地（区）1",
      *          "address": "仓库地（地址）1",
-     *          "is_default": 1,
-     *          "status": 1,
+     *          "is_default": true,
+     *          "status": true,
      *          "created_at": "2018-07-04 10:06:35",
      *          "updated_at": "2018-07-04 10:06:35"
      *      },
@@ -49,8 +49,8 @@ class WarehousesController extends Controller
      *          "city": "仓库地（市）2",
      *          "district": "仓库地（区）2",
      *          "address": "仓库地（地址）2",
-     *          "is_default": 0,
-     *          "status": 1,
+     *          "is_default": false,
+     *          "status": true,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      }
@@ -83,8 +83,8 @@ class WarehousesController extends Controller
      *      @Parameter("city", description="仓库地（市）", required=true),
      *      @Parameter("district", description="仓库地（区）", required=true),
      *      @Parameter("address", description="仓库地（地址）", required=true),
-     *      @Parameter("is_default",type="integer", description="是否默认", required=false, default=0),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_default",type="boolean", description="是否默认", required=false, default=0),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -106,8 +106,8 @@ class WarehousesController extends Controller
      *          "city": "仓库地（市）1",
      *          "district": "仓库地（区）1",
      *          "address": "仓库地（地址）1",
-     *          "is_default": "1",
-     *          "status": "1",
+     *          "is_default": true,
+     *          "status": true,
      *          "created_at": "2018-07-04 10:06:35",
      *          "updated_at": "2018-07-04 10:06:35",
      *          "meta": {
@@ -143,8 +143,8 @@ class WarehousesController extends Controller
      *          "city": "仓库地（市）2",
      *          "district": "仓库地（区）2",
      *          "address": "仓库地（地址）2",
-     *          "is_default": 0,
-     *          "status": 1,
+     *          "is_default": false,
+     *          "status": true,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      })
@@ -185,7 +185,7 @@ class WarehousesController extends Controller
      *          "district": "仓库地（区）2",
      *          "address": "仓库地（地址）2",
      *          "is_default": "0",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-04 10:15:49",
      *          "updated_at": "2018-07-04 10:20:04"
      *      })
@@ -257,7 +257,7 @@ class WarehousesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="仓库id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

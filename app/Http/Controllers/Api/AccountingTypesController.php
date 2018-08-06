@@ -27,21 +27,21 @@ class AccountingTypesController extends Controller
      * @Get("/acctypes{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      *       "data": {
      *           {
      *               "id": 1,
      *               "name": "记账类型1",
-     *               "status": 1,
+     *               "status": true,
      *               "created_at": "2018-06-14 13:59:42",
      *               "updated_at": "2018-06-14 13:59:42"
      *           },
      *           {
      *               "id": 2,
      *               "name": "记账类型2",
-     *               "status": 0,
+     *               "status": false,
      *               "created_at": "2018-06-14 13:59:46",
      *               "updated_at": "2018-06-14 13:59:46"
      *           }
@@ -74,7 +74,7 @@ class AccountingTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="记账类型名称", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -89,7 +89,7 @@ class AccountingTypesController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "记账类型1",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-06-14 13:43:37",
      *          "updated_at": "2018-06-14 13:43:37",
      *          "meta": {
@@ -116,7 +116,7 @@ class AccountingTypesController extends Controller
      *      @Response(200, body={
      *          "id": 1,
      *          "name": "记账类型1",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-06-14 13:59:42",
      *          "updated_at": "2018-06-14 13:59:42"
      *      })
@@ -149,7 +149,7 @@ class AccountingTypesController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "记账类型10",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-06-14 13:59:42",
      *          "updated_at": "2018-06-14 14:06:30"
      *      })
@@ -216,7 +216,7 @@ class AccountingTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -20,8 +20,8 @@ class CreateWarehousesTable extends Migration
             $table->string('city')->default('')->comment('仓库地（市）');
             $table->string('district')->default('')->comment('仓库地（区）');
             $table->string('address')->default('')->comment('仓库地（地址）');
-            $table->tinyInteger('is_default')->default(0)->comment('是否默认');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('is_default')->default(false)->comment('是否默认');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

@@ -12,6 +12,12 @@ class Logistics extends Model
         'remark', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
+
     public function cityInfos()
     {
         return $this->hasMany(CityInfo::class);

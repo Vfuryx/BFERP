@@ -17,14 +17,14 @@ class GoodsCategoryRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'name' => 'required|string',
                     'code' => 'required|string|max:255|unique:goods_categories',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255'
                 ];
@@ -36,7 +36,7 @@ class GoodsCategoryRequest extends FormRequest
                         'string', 'max:255',
                         Rule::unique('goods_categories')->ignore($this->goodscate->id),
                     ],
-                    'status' => 'integer',
+                    'status' => 'boolean',
                     'remark' => 'nullable|string|max:255',
                     'description' => 'nullable|string|max:255',
                 ];
@@ -53,7 +53,7 @@ class GoodsCategoryRequest extends FormRequest
             'code.string' => '商品类别代码必须string类型',
             'code.max' => '商品类别代码最大长度为255',
             'code.unique' => '商品类别代码不能重复',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
             'remark.max' => '商品类别备注最大长度为255',
             'remark.nullable' => '商品类别备注可为null',

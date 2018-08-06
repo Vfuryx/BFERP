@@ -17,7 +17,7 @@ class CancelPurchaseRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -56,7 +56,7 @@ class CancelPurchaseRequest extends FormRequest
             'purchases_id.integer' => '采购单id必须int类型',
             'purchases_id.exists' => '需要添加的id在数据库中未找到或未启用或已完成',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

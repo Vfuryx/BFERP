@@ -17,7 +17,7 @@ class StockInRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -34,7 +34,7 @@ class StockInRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -55,7 +55,7 @@ class StockInRequest extends FormRequest
                         }),
                         $publicRule
                     ],
-                    'status' => ['integer', $publicRule],
+                    'status' => ['boolean', $publicRule],
                 ];
                 break;
         }
@@ -72,7 +72,7 @@ class StockInRequest extends FormRequest
             'stock_in_types_id.integer' => '入库类型id必须int类型',
             'stock_in_types_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
         ];
     }

@@ -37,7 +37,7 @@ class PurchaseReturnsController extends Controller
      * @Get("/purchasereturns{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -45,15 +45,15 @@ class PurchaseReturnsController extends Controller
      *          "id": 1,
      *          "purchase_return_no": "RG2018072411440706967",
      *          "creator": "admin",
-     *          "is_submit": 0,
+     *          "is_submit": false,
      *          "submitter": "",
      *          "submit_at": null,
-     *          "is_audit": 0,
+     *          "is_audit": false,
      *          "auditor": "",
      *          "audit_at": null,
-     *          "is_print": 0,
+     *          "is_print": false,
      *          "remark": "采购退货单备注",
-     *          "status": 1,
+     *          "status": true,
      *          "purchase_return_details": {
      *              {
      *                  "id": 1,
@@ -71,7 +71,7 @@ class PurchaseReturnsController extends Controller
      *                      "goods_id": 1,
      *                      "pro_specs_id": 1,
      *                      "quantity": 20,
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-21 18:20:53",
      *                      "updated_at": "2018-07-21 18:27:38"
      *                  },
@@ -91,16 +91,16 @@ class PurchaseReturnsController extends Controller
      *                      "fax": "1",
      *                      "email": "132@re.cn",
      *                      "remark": "1",
-     *                      "is_scan": 1,
-     *                      "status": 1,
-     *                      "auto_valuation": 1,
+     *                      "is_scan": true,
+     *                      "status": true,
+     *                      "auto_valuation": true,
      *                      "created_at": "2018-07-17 17:54:01",
      *                      "updated_at": "2018-07-17 17:54:01"
      *                  },
      *                  "purchase_return_types": {
      *                      "id": 1,
      *                      "name": "采购退货类型名称",
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-24 10:24:13",
      *                      "updated_at": "2018-07-24 10:24:13"
      *                  }
@@ -170,15 +170,15 @@ class PurchaseReturnsController extends Controller
      *          "id": 1,
      *          "purchase_return_no": "RG2018072411440706967",
      *          "creator": "admin",
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_audit": null,
+     *          "is_audit": false,
      *          "auditor": null,
      *          "audit_at": null,
-     *          "is_print": null,
+     *          "is_print": false,
      *          "remark": "采购退货单备注",
-     *          "status": 1,
+     *          "status": true,
      *          "purchase_return_details": {
      *              {
      *                  "id": 1,
@@ -196,7 +196,7 @@ class PurchaseReturnsController extends Controller
      *                      "goods_id": 1,
      *                      "pro_specs_id": 1,
      *                      "quantity": 20,
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-21 18:20:53",
      *                      "updated_at": "2018-07-21 18:27:38"
      *                  },
@@ -216,16 +216,16 @@ class PurchaseReturnsController extends Controller
      *                      "fax": "1",
      *                      "email": "132@re.cn",
      *                      "remark": "1",
-     *                      "is_scan": 1,
-     *                      "status": 1,
-     *                      "auto_valuation": 1,
+     *                      "is_scan": true,
+     *                      "status": true,
+     *                      "auto_valuation": true,
      *                      "created_at": "2018-07-17 17:54:01",
      *                      "updated_at": "2018-07-17 17:54:01"
      *                  },
      *                  "purchase_return_types": {
      *                      "id": 1,
      *                      "name": "采购退货类型名称",
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-24 10:24:13",
      *                      "updated_at": "2018-07-24 10:24:13"
      *                  }
@@ -279,15 +279,15 @@ class PurchaseReturnsController extends Controller
      *          "id": 1,
      *          "purchase_return_no": "RG2018072411440706967",
      *          "creator": "admin",
-     *          "is_submit": 0,
+     *          "is_submit": false,
      *          "submitter": "",
      *          "submit_at": null,
-     *          "is_audit": 0,
+     *          "is_audit": false,
      *          "auditor": "",
      *          "audit_at": null,
-     *          "is_print": 0,
+     *          "is_print": false,
      *          "remark": "采购退货单备注",
-     *          "status": 1,
+     *          "status": true,
      *          "purchase_return_details": {
      *              {
      *                  "id": 1,
@@ -305,7 +305,7 @@ class PurchaseReturnsController extends Controller
      *                      "goods_id": 1,
      *                      "pro_specs_id": 1,
      *                      "quantity": 20,
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-21 18:20:53",
      *                      "updated_at": "2018-07-21 18:27:38"
      *                  },
@@ -325,16 +325,16 @@ class PurchaseReturnsController extends Controller
      *                      "fax": "1",
      *                      "email": "132@re.cn",
      *                      "remark": "1",
-     *                      "is_scan": 1,
-     *                      "status": 1,
-     *                      "auto_valuation": 1,
+     *                      "is_scan": true,
+     *                      "status": true,
+     *                      "auto_valuation": true,
      *                      "created_at": "2018-07-17 17:54:01",
      *                      "updated_at": "2018-07-17 17:54:01"
      *                  },
      *                  "purchase_return_types": {
      *                      "id": 1,
      *                      "name": "采购退货类型名称",
-     *                      "status": 1,
+     *                      "status": true,
      *                      "created_at": "2018-07-24 10:24:13",
      *                      "updated_at": "2018-07-24 10:24:13"
      *                  }
@@ -411,19 +411,19 @@ class PurchaseReturnsController extends Controller
      *              "client_name": "",
      *              "buyer_nick": "",
      *              "order_address": "",
-     *              "is_submit": 0,
-     *              "is_print": 0,
-     *              "is_audit": 0,
-     *              "is_change": 1,
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": true,
      *              "remark": "备注5",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-21 16:22:05",
      *              "updated_at": "2018-07-23 16:26:19"
      *          },
      *          "creator": "admin",
      *          "submitter": null,
      *          "submit_at": null,
-     *          "is_submit": null,
+     *          "is_submit": false,
      *          "cancel_purchase_details": {
      *              {
      *                  "id": 14,
@@ -638,7 +638,7 @@ class PurchaseReturnsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="采购退货id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

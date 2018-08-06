@@ -10,6 +10,11 @@ class PurchaseReturnType extends Model
         'name', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function purchaseReturnDetail()
     {
         return $this->hasMany(PurchaseReturnDetail::class, 'purchase_return_types_id');

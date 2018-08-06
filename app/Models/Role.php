@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
+    protected $table = "roles";
+
+    protected $fillable = [
+        'role_group_id', 'name', 'description',
+        'status', 'remark'
+    ];
+
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     /**
      * 获取与角色关联的权限
      */

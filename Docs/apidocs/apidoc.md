@@ -24,7 +24,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -38,7 +38,7 @@ FORMAT: 1A
                         "markname": "取消订单",
                         "color": "#555555",
                         "description": "描述",
-                        "status": 0,
+                        "status": false,
                         "created_at": "2018-06-11 15:04:17",
                         "updated_at": "2018-06-11 15:04:17"
                     },
@@ -48,7 +48,7 @@ FORMAT: 1A
                         "markname": "测试挖",
                         "color": "#888888",
                         "description": "我不是描述",
-                        "status": 0,
+                        "status": false,
                         "created_at": "2018-06-12 09:52:16",
                         "updated_at": "2018-06-12 09:52:16"
                     }
@@ -76,7 +76,7 @@ FORMAT: 1A
     + markname: (string, required) - 标记名称
     + color: (string, required) - 颜色
     + description: (string, optional) - 描述
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -101,7 +101,7 @@ FORMAT: 1A
                 "markname": "标记名称0",
                 "color": "颜色值0",
                 "description": "描述0",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-13 19:03:59",
                 "updated_at": "2018-06-13 19:03:59",
                 "meta": {
@@ -129,7 +129,7 @@ FORMAT: 1A
                 "markname": "标记名称0",
                 "color": "颜色值0",
                 "description": "描述0",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-13 19:03:59",
                 "updated_at": "2018-06-13 19:03:59"
             }
@@ -167,7 +167,7 @@ FORMAT: 1A
                 "markname": "标记名称0",
                 "color": "颜色值0",
                 "description": "描述0",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-13 19:03:59",
                 "updated_at": "2018-06-13 19:03:59"
             }
@@ -226,7 +226,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 标记颜色id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -265,7 +265,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -276,14 +276,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "记账类型1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-14 13:59:42",
                         "updated_at": "2018-06-14 13:59:42"
                     },
                     {
                         "id": 2,
                         "name": "记账类型2",
-                        "status": 0,
+                        "status": false,
                         "created_at": "2018-06-14 13:59:46",
                         "updated_at": "2018-06-14 13:59:46"
                     }
@@ -308,7 +308,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 记账类型名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -330,7 +330,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "记账类型1",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 13:43:37",
                 "updated_at": "2018-06-14 13:43:37",
                 "meta": {
@@ -355,7 +355,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "记账类型1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 13:59:42",
                 "updated_at": "2018-06-14 13:59:42"
             }
@@ -390,7 +390,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "记账类型10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 13:59:42",
                 "updated_at": "2018-06-14 14:06:30"
             }
@@ -449,7 +449,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 记账类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -488,7 +488,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -501,14 +501,14 @@ FORMAT: 1A
                         "fee_category": {
                             "id": 1,
                             "name": "费用类别",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-06-25 10:45:30",
                             "updated_at": "2018-06-25 10:45:30"
                         },
                         "name": "费用类型",
                         "code": "费用类型代码",
-                        "is_default": 1,
-                        "status": 1,
+                        "is_default": true,
+                        "status": true,
                         "remark": "费用类型代码备注",
                         "created_at": "2018-06-14 15:28:13",
                         "updated_at": "2018-06-14 15:28:13"
@@ -518,14 +518,14 @@ FORMAT: 1A
                         "fee_category": {
                             "id": 2,
                             "name": "费用类别2",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-06-25 10:45:32",
                             "updated_at": "2018-06-25 10:45:32"
                         },
                         "name": "费用类型2",
                         "code": "费用类型代码2",
-                        "is_default": 1,
-                        "status": 1,
+                        "is_default": true,
+                        "status": true,
                         "remark": "费用类型代码2备注",
                         "created_at": "2018-06-14 15:31:33",
                         "updated_at": "2018-06-14 15:31:33"
@@ -551,9 +551,9 @@ FORMAT: 1A
     + name: (string, required) - 费用名称
     + code: (string, required) - 费用代码
     + remark: (string, optional) - 费用类别备注
-    + is_default: (integer, optional) - 是否默认
+    + is_default: (boolean, optional) - 是否默认
         + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -580,8 +580,8 @@ FORMAT: 1A
                 "fee_category_id": "1",
                 "name": "费用类型",
                 "code": "费用类型代码",
-                "is_default": "1",
-                "status": "1",
+                "is_default": true,
+                "status": true,
                 "remark": "费用类型代码备注",
                 "created_at": "2018-06-14 15:31:33",
                 "updated_at": "2018-06-14 15:31:33",
@@ -609,8 +609,8 @@ FORMAT: 1A
                 "fee_category_id": 1,
                 "name": "费用类型",
                 "code": "费用类型代码",
-                "is_default": 1,
-                "status": 1,
+                "is_default": true,
+                "status": true,
                 "remark": "费用类型代码备注",
                 "created_at": "2018-06-14 15:28:13",
                 "updated_at": "2018-06-14 15:28:13"
@@ -648,8 +648,8 @@ FORMAT: 1A
                 "fee_category_id": "1",
                 "name": "费用类型1",
                 "code": "费用类型代码1",
-                "is_default": "1",
-                "status": "1",
+                "is_default": true,
+                "status": true,
                 "remark": "费用类型代码1备注",
                 "created_at": "2018-06-14 15:28:13",
                 "updated_at": "2018-06-14 15:46:06"
@@ -709,7 +709,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 费用类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -748,7 +748,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -759,14 +759,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "配送方式",
-                        "status": "1",
+                        "status": true,
                         "created_at": "2018-06-14 14:39:45",
                         "updated_at": "2018-06-14 14:39:45"
                     },
                     {
                         "id": 2,
                         "name": "配送方式2",
-                        "status": "1",
+                        "status": true,
                         "created_at": "2018-06-14 14:42:23",
                         "updated_at": "2018-06-14 14:42:23"
                     }
@@ -791,7 +791,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 配送方式名
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -813,7 +813,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:39:45",
                 "meta": {
@@ -838,7 +838,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:45:14"
             }
@@ -873,7 +873,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "配送方式1",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 14:39:45",
                 "updated_at": "2018-06-14 14:40:45"
             }
@@ -932,7 +932,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 配送方式id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -971,7 +971,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -982,14 +982,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "费用类别1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-25 10:45:30",
                         "updated_at": "2018-06-25 10:45:30"
                     },
                     {
                         "id": 2,
                         "name": "费用类别2",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-25 10:45:32",
                         "updated_at": "2018-06-25 10:45:32"
                     }
@@ -1023,7 +1023,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 15:02:10",
                 "updated_at": "2018-06-14 15:02:10",
                 "meta": {
@@ -1048,7 +1048,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 15:01:51",
                 "updated_at": "2018-06-14 15:01:51"
             }
@@ -1083,7 +1083,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "费用类别10",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 15:01:51",
                 "updated_at": "2018-06-14 15:07:56"
             }
@@ -1142,7 +1142,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 费用类别id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1181,7 +1181,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -1192,16 +1192,16 @@ FORMAT: 1A
                     {
                         "id": 2,
                         "name": "运费类型名1",
-                        "is_default": 1,
-                        "status": 1,
+                        "is_default": true,
+                        "status": true,
                         "created_at": "2018-06-14 15:59:10",
                         "updated_at": "2018-06-14 15:59:10"
                     },
                     {
                         "id": 3,
                         "name": "运费类型名2",
-                        "is_default": 1,
-                        "status": 1,
+                        "is_default": true,
+                        "status": true,
                         "created_at": "2018-06-14 15:59:12",
                         "updated_at": "2018-06-14 15:59:12"
                     }
@@ -1226,9 +1226,9 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 运费类型名称
-    + is_default: (integer, optional) - 是否默认
+    + is_default: (boolean, optional) - 是否默认
         + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1250,8 +1250,8 @@ FORMAT: 1A
             {
                 "id": 3,
                 "name": "运费类型名1",
-                "is_default": "1",
-                "status": "1",
+                "is_default": true,
+                "status": true,
                 "created_at": "2018-06-14 15:59:12",
                 "updated_at": "2018-06-14 15:59:12",
                 "meta": {
@@ -1276,8 +1276,8 @@ FORMAT: 1A
             {
                 "id": 2,
                 "name": "运费类型名1",
-                "is_default": 1,
-                "status": 1,
+                "is_default": true,
+                "status": true,
                 "created_at": "2018-06-14 15:59:10",
                 "updated_at": "2018-06-14 15:59:10"
             }
@@ -1312,8 +1312,8 @@ FORMAT: 1A
             {
                 "id": 2,
                 "name": "运费类型名1",
-                "is_default": "1",
-                "status": "1",
+                "is_default": true,
+                "status": true,
                 "created_at": "2018-06-14 15:59:10",
                 "updated_at": "2018-06-14 15:59:10"
             }
@@ -1372,7 +1372,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 运费类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1411,7 +1411,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -1423,7 +1423,7 @@ FORMAT: 1A
                         "id": 1,
                         "code": "商品类别代码1",
                         "name": "商品类别名1",
-                        "status": 1,
+                        "status": true,
                         "description": "商品类别详情1",
                         "remark": "商品类别备注1",
                         "created_at": "2018-06-14 16:33:26",
@@ -1433,7 +1433,7 @@ FORMAT: 1A
                         "id": 2,
                         "code": "商品类别代码2",
                         "name": "商品类别名2",
-                        "status": 1,
+                        "status": true,
                         "description": "商品类别详情2",
                         "remark": "商品类别备注2",
                         "created_at": "2018-06-14 16:40:44",
@@ -1463,7 +1463,7 @@ FORMAT: 1A
     + name: (string, required) - 商品类别名称
     + description: (string, optional) - 描述
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1486,7 +1486,7 @@ FORMAT: 1A
                 "id": 1,
                 "code": "商品类别代码1",
                 "name": "商品类别名1",
-                "status": "1",
+                "status": true,
                 "description": "商品类别详情1",
                 "remark": "商品类别备注1",
                 "created_at": "2018-06-14 16:33:26",
@@ -1514,7 +1514,7 @@ FORMAT: 1A
                 "id": 1,
                 "code": "商品类别代码1",
                 "name": "商品类别名1",
-                "status": 1,
+                "status": true,
                 "description": "商品类别详情1",
                 "remark": "商品类别备注1",
                 "created_at": "2018-06-14 16:33:26",
@@ -1552,7 +1552,7 @@ FORMAT: 1A
                 "id": 3,
                 "code": "商品类别代码30",
                 "name": "商品类别名30",
-                "status": "1",
+                "status": true,
                 "description": "商品类别详情30",
                 "remark": "商品类别备注30",
                 "created_at": "2018-06-14 16:40:54",
@@ -1613,7 +1613,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 商品类别id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -1652,7 +1652,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -1673,7 +1673,7 @@ FORMAT: 1A
                             "address": "物流地址",
                             "freight_type_id": 1,
                             "remark": "",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-02 17:40:39",
                             "updated_at": "2018-07-02 17:40:42"
                         },
@@ -1686,9 +1686,9 @@ FORMAT: 1A
                         "weight_univalent": "100.00",
                         "expected_days": 1,
                         "route": 1,
-                        "is_free_shipping": 1,
+                        "is_free_shipping": true,
                         "remark": "1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-02 17:44:32",
                         "updated_at": "2018-07-02 17:44:32"
                     },
@@ -1705,7 +1705,7 @@ FORMAT: 1A
                             "address": "物流地址",
                             "freight_type_id": 1,
                             "remark": "",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-02 17:40:39",
                             "updated_at": "2018-07-02 17:40:42"
                         },
@@ -1718,9 +1718,9 @@ FORMAT: 1A
                         "weight_univalent": "100.00",
                         "expected_days": 1,
                         "route": 1,
-                        "is_free_shipping": 1,
+                        "is_free_shipping": true,
                         "remark": "1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-02 17:58:56",
                         "updated_at": "2018-07-02 17:58:56"
                     }
@@ -1752,10 +1752,10 @@ FORMAT: 1A
     + expected_days: (integer, required) - 城市到达天数
     + route: (integer, optional) - 中转或直达：0=中转，1=直达
         + Default: 1
-    + is_free_shipping: (integer, optional) - 是否包邮
+    + is_free_shipping: (boolean, optional) - 是否包邮
         + Default: 0
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -1787,7 +1787,7 @@ FORMAT: 1A
                     "address": "物流地址",
                     "freight_type_id": 1,
                     "remark": "",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-02 17:40:39",
                     "updated_at": "2018-07-02 17:40:42"
                 },
@@ -1800,9 +1800,9 @@ FORMAT: 1A
                 "weight_univalent": "100.00",
                 "expected_days": "1",
                 "route": "1",
-                "is_free_shipping": "1",
+                "is_free_shipping": true,
                 "remark": "1",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-02 17:44:32",
                 "updated_at": "2018-07-02 17:44:32",
                 "meta": {
@@ -1837,7 +1837,7 @@ FORMAT: 1A
                     "address": "物流地址",
                     "freight_type_id": 1,
                     "remark": "",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-02 17:40:39",
                     "updated_at": "2018-07-02 17:40:42"
                 },
@@ -1850,9 +1850,9 @@ FORMAT: 1A
                 "weight_univalent": "100.00",
                 "expected_days": 1,
                 "route": 1,
-                "is_free_shipping": 1,
+                "is_free_shipping": true,
                 "remark": "1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-02 17:44:32",
                 "updated_at": "2018-07-02 17:44:32"
             }
@@ -1903,7 +1903,7 @@ FORMAT: 1A
                     "address": "物流地址",
                     "freight_type_id": 1,
                     "remark": "",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-02 17:40:39",
                     "updated_at": "2018-07-02 17:40:42"
                 },
@@ -1916,9 +1916,9 @@ FORMAT: 1A
                 "weight_univalent": "100.00",
                 "expected_days": "1",
                 "route": "1",
-                "is_free_shipping": "1",
+                "is_free_shipping": true,
                 "remark": "1",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-02 17:44:32",
                 "updated_at": "2018-07-02 18:06:55"
             }
@@ -1977,7 +1977,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 城市信息id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -2016,7 +2016,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -2069,7 +2069,7 @@ FORMAT: 1A
     + quantity: (integer, required) - 损坏数量
     + money: (numeric, required) - 损坏金额
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -2231,7 +2231,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 损坏商品id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -2270,7 +2270,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -2282,7 +2282,7 @@ FORMAT: 1A
                         "id": 1,
                         "code": "区域代码1",
                         "name": "区域名称1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-03 16:29:28",
                         "updated_at": "2018-07-03 16:29:28"
                     },
@@ -2290,7 +2290,7 @@ FORMAT: 1A
                         "id": 2,
                         "code": "区域代码2",
                         "name": "区域名称2",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-03 16:35:55",
                         "updated_at": "2018-07-03 16:35:55"
                     }
@@ -2313,7 +2313,7 @@ FORMAT: 1A
 + Parameters
     + code: (string, required) - 区域代码
     + name: (string, required) - 区域名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -2339,7 +2339,7 @@ FORMAT: 1A
                 "id": 1,
                 "code": "区域代码1",
                 "name": "区域名称1",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-03 16:29:28",
                 "updated_at": "2018-07-03 16:29:28",
                 "meta": {
@@ -2365,7 +2365,7 @@ FORMAT: 1A
                 "id": 1,
                 "code": "区域代码1",
                 "name": "区域名称1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-03 16:29:28",
                 "updated_at": "2018-07-03 16:29:28"
             }
@@ -2404,7 +2404,7 @@ FORMAT: 1A
                 "id": 1,
                 "code": "区域代码10",
                 "name": "区域名称10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-03 16:29:28",
                 "updated_at": "2018-07-03 16:38:32"
             }
@@ -2463,7 +2463,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 物流区域id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -2502,7 +2502,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -2519,7 +2519,7 @@ FORMAT: 1A
                             "file": "报表文件",
                             "name": "报表名称",
                             "paper_format": "报表格式",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-03 17:50:46",
                             "updated_at": "2018-07-03 17:50:49"
                         },
@@ -2529,13 +2529,13 @@ FORMAT: 1A
                         "freight_type": {
                             "id": 1,
                             "name": "运费名称1",
-                            "status": 1,
-                            "is_default": 1,
+                            "status": true,
+                            "is_default": true,
                             "created_at": "2018-07-03 17:51:25",
                             "updated_at": "2018-07-03 17:51:25"
                         },
                         "remark": "备注",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-03 17:52:28",
                         "updated_at": "2018-07-03 17:52:28"
                     }
@@ -2564,7 +2564,7 @@ FORMAT: 1A
     + address: (string, required) - 物流地址
     + freight_type_id: (integer, required) - 运费类型id
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -2598,7 +2598,7 @@ FORMAT: 1A
                     "file": "报表文件",
                     "name": "报表名称",
                     "paper_format": "报表格式",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
                 },
@@ -2608,13 +2608,13 @@ FORMAT: 1A
                 "freight_type": {
                     "id": 1,
                     "name": "运费名称1",
-                    "status": 1,
-                    "is_default": 1,
+                    "status": true,
+                    "is_default": true,
                     "created_at": "2018-07-03 17:51:25",
                     "updated_at": "2018-07-03 17:51:25"
                 },
                 "remark": "备注",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-03 17:52:28",
                 "updated_at": "2018-07-03 17:52:28",
                 "meta": {
@@ -2645,7 +2645,7 @@ FORMAT: 1A
                     "file": "报表文件",
                     "name": "报表名称",
                     "paper_format": "报表格式",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
                 },
@@ -2655,13 +2655,13 @@ FORMAT: 1A
                 "freight_type": {
                     "id": 1,
                     "name": "运费名称1",
-                    "status": 1,
-                    "is_default": 1,
+                    "status": true,
+                    "is_default": true,
                     "created_at": "2018-07-03 17:51:25",
                     "updated_at": "2018-07-03 17:51:25"
                 },
                 "remark": "备注",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-03 17:52:28",
                 "updated_at": "2018-07-03 17:52:28"
             }
@@ -2708,7 +2708,7 @@ FORMAT: 1A
                     "file": "报表文件",
                     "name": "报表名称",
                     "paper_format": "报表格式",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-03 17:50:46",
                     "updated_at": "2018-07-03 17:50:49"
                 },
@@ -2718,13 +2718,13 @@ FORMAT: 1A
                 "freight_type": {
                     "id": 1,
                     "name": "运费名称1",
-                    "status": 1,
-                    "is_default": 1,
+                    "status": true,
+                    "is_default": true,
                     "created_at": "2018-07-03 17:51:25",
                     "updated_at": "2018-07-03 17:51:25"
                 },
                 "remark": "备注",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-03 17:52:28",
                 "updated_at": "2018-07-03 18:30:59"
             }
@@ -2783,7 +2783,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 物流id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -2822,7 +2822,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -2837,8 +2837,8 @@ FORMAT: 1A
                         "city": "仓库地（市）1",
                         "district": "仓库地（区）1",
                         "address": "仓库地（地址）1",
-                        "is_default": 1,
-                        "status": 1,
+                        "is_default": true,
+                        "status": true,
                         "created_at": "2018-07-04 10:06:35",
                         "updated_at": "2018-07-04 10:06:35"
                     },
@@ -2849,8 +2849,8 @@ FORMAT: 1A
                         "city": "仓库地（市）2",
                         "district": "仓库地（区）2",
                         "address": "仓库地（地址）2",
-                        "is_default": 0,
-                        "status": 1,
+                        "is_default": false,
+                        "status": true,
                         "created_at": "2018-07-04 10:15:49",
                         "updated_at": "2018-07-04 10:20:04"
                     }
@@ -2876,9 +2876,9 @@ FORMAT: 1A
     + city: (string, required) - 仓库地（市）
     + district: (string, required) - 仓库地（区）
     + address: (string, required) - 仓库地（地址）
-    + is_default: (integer, optional) - 是否默认
+    + is_default: (boolean, optional) - 是否默认
         + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -2907,8 +2907,8 @@ FORMAT: 1A
                 "city": "仓库地（市）1",
                 "district": "仓库地（区）1",
                 "address": "仓库地（地址）1",
-                "is_default": "1",
-                "status": "1",
+                "is_default": true,
+                "status": true,
                 "created_at": "2018-07-04 10:06:35",
                 "updated_at": "2018-07-04 10:06:35",
                 "meta": {
@@ -2937,8 +2937,8 @@ FORMAT: 1A
                 "city": "仓库地（市）2",
                 "district": "仓库地（区）2",
                 "address": "仓库地（地址）2",
-                "is_default": 0,
-                "status": 1,
+                "is_default": false,
+                "status": true,
                 "created_at": "2018-07-04 10:15:49",
                 "updated_at": "2018-07-04 10:20:04"
             }
@@ -2981,7 +2981,7 @@ FORMAT: 1A
                 "district": "仓库地（区）2",
                 "address": "仓库地（地址）2",
                 "is_default": "0",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 10:15:49",
                 "updated_at": "2018-07-04 10:20:04"
             }
@@ -3040,7 +3040,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 仓库id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -3079,7 +3079,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -3103,9 +3103,9 @@ FORMAT: 1A
                         "fax": "传真",
                         "email": "邮箱",
                         "remark": "备注",
-                        "is_scan": 1,
-                        "status": 1,
-                        "auto_valuation": 1,
+                        "is_scan": true,
+                        "status": true,
+                        "auto_valuation": true,
                         "created_at": "2018-07-05 10:55:27",
                         "updated_at": "2018-07-05 10:55:27"
                     }
@@ -3139,11 +3139,11 @@ FORMAT: 1A
     + fax: (string, required) - 传真
     + email: (string, required) - 邮箱
     + remark: (string, optional) - 备注
-    + is_scan: (integer, optional) - 是否启用扫描
+    + is_scan: (boolean, optional) - 是否启用扫描
         + Default: 1
-    + auto_valuation: (integer, optional) - 是否采购自动计价
+    + auto_valuation: (boolean, optional) - 是否采购自动计价
         + Default: 1
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -3187,9 +3187,9 @@ FORMAT: 1A
                 "fax": "传真",
                 "email": "邮箱",
                 "remark": "备注",
-                "is_scan": "1",
-                "status": "1",
-                "auto_valuation": "1",
+                "is_scan": true,
+                "status": true,
+                "auto_valuation": true,
                 "created_at": "2018-07-05 10:55:27",
                 "updated_at": "2018-07-05 10:55:27",
                 "meta": {
@@ -3226,9 +3226,9 @@ FORMAT: 1A
                 "mobile": "手机",
                 "fax": "传真",
                 "remark": "备注",
-                "is_scan": 1,
-                "status": 1,
-                "auto_valuation": 1,
+                "is_scan": true,
+                "status": true,
+                "auto_valuation": true,
                 "created_at": "2018-07-04 11:11:39",
                 "updated_at": "2018-07-04 11:11:39"
             }
@@ -3282,9 +3282,9 @@ FORMAT: 1A
                 "fax": "传真",
                 "email": "邮箱",
                 "remark": "备注",
-                "is_scan": 1,
-                "status": 1,
-                "auto_valuation": 1,
+                "is_scan": true,
+                "status": true,
+                "auto_valuation": true,
                 "created_at": "2018-07-05 10:55:27",
                 "updated_at": "2018-07-05 10:55:27"
             }
@@ -3343,7 +3343,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 供应商id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -3382,7 +3382,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -3402,8 +3402,8 @@ FORMAT: 1A
                             "city": "仓库地（市）1",
                             "district": "仓库地（区）1",
                             "address": "仓库地（地址）1",
-                            "is_default": 1,
-                            "status": 1,
+                            "is_default": true,
+                            "status": true,
                             "created_at": "2018-07-05 10:49:24",
                             "updated_at": "2018-07-05 10:49:24"
                         },
@@ -3420,12 +3420,12 @@ FORMAT: 1A
                         "platform": {
                             "id": 1,
                             "name": "平台类型名称1",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-05 10:49:30",
                             "updated_at": "2018-07-05 10:49:30"
                         },
-                        "is_waybill": 2,
-                        "status": 1,
+                        "is_waybill": true,
+                        "status": true,
                         "created_at": "2018-07-05 10:49:44",
                         "updated_at": "2018-07-05 10:49:44"
                     }
@@ -3461,9 +3461,9 @@ FORMAT: 1A
     + address: (string, required) - 发货地（地址）
     + gross_profit_rate: (string, required) - 毛利率（%）
     + platform_id: (integer, required) - 平台类型
-    + is_waybill: (integer, optional) - 电子面单
+    + is_waybill: (boolean, optional) - 电子面单
         + Default: 1
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -3497,8 +3497,8 @@ FORMAT: 1A
                     "city": "仓库地（市）1",
                     "district": "仓库地（区）1",
                     "address": "仓库地（地址）1",
-                    "is_default": 1,
-                    "status": 1,
+                    "is_default": true,
+                    "status": true,
                     "created_at": "2018-07-05 10:49:24",
                     "updated_at": "2018-07-05 10:49:24"
                 },
@@ -3515,12 +3515,12 @@ FORMAT: 1A
                 "platform": {
                     "id": 1,
                     "name": "平台类型名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-05 10:49:30",
                     "updated_at": "2018-07-05 10:49:30"
                 },
-                "is_waybill": "2",
-                "status": "1",
+                "is_waybill": true,
+                "status": true,
                 "created_at": "2018-07-05 10:49:44",
                 "updated_at": "2018-07-05 10:49:44",
                 "meta": {
@@ -3553,8 +3553,8 @@ FORMAT: 1A
                     "city": "仓库地（市）4",
                     "district": "仓库地（区）4",
                     "address": "仓库地（地址）4",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-04 10:26:13",
                     "updated_at": "2018-07-04 10:48:23"
                 },
@@ -3571,12 +3571,12 @@ FORMAT: 1A
                 "platform": {
                     "id": 1,
                     "name": "平台名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-04 12:54:52",
                     "updated_at": "2018-07-04 12:54:55"
                 },
-                "is_waybill": 1,
-                "status": 1,
+                "is_waybill": true,
+                "status": true,
                 "created_at": "2018-07-04 12:56:57",
                 "updated_at": "2018-07-04 12:56:57"
             }
@@ -3623,8 +3623,8 @@ FORMAT: 1A
                     "city": "仓库地（市）1",
                     "district": "仓库地（区）1",
                     "address": "仓库地（地址）1",
-                    "is_default": 1,
-                    "status": 1,
+                    "is_default": true,
+                    "status": true,
                     "created_at": "2018-07-05 10:49:24",
                     "updated_at": "2018-07-05 10:49:24"
                 },
@@ -3641,12 +3641,12 @@ FORMAT: 1A
                 "platform": {
                     "id": 1,
                     "name": "平台类型名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-05 10:49:30",
                     "updated_at": "2018-07-05 10:49:30"
                 },
-                "is_waybill": 2,
-                "status": 1,
+                "is_waybill": true,
+                "status": true,
                 "created_at": "2018-07-05 10:49:44",
                 "updated_at": "2018-07-05 10:49:44"
             }
@@ -3705,7 +3705,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 店铺id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -3744,7 +3744,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -3769,9 +3769,9 @@ FORMAT: 1A
                             "mobile": "手机4",
                             "fax": "传真4",
                             "remark": "备注4",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-04 11:11:39",
                             "updated_at": "2018-07-04 11:22:29"
                         },
@@ -3779,7 +3779,7 @@ FORMAT: 1A
                         "name": "系列名称",
                         "description": "系列描述",
                         "remark": "备注",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-04 14:03:49",
                         "updated_at": "2018-07-04 14:03:49"
                     },
@@ -3800,9 +3800,9 @@ FORMAT: 1A
                             "mobile": "手机4",
                             "fax": "传真4",
                             "remark": "备注4",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-04 11:11:39",
                             "updated_at": "2018-07-04 11:22:29"
                         },
@@ -3810,7 +3810,7 @@ FORMAT: 1A
                         "name": "系列名称",
                         "description": "系列描述",
                         "remark": "备注",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-04 14:09:51",
                         "updated_at": "2018-07-04 14:09:51"
                     }
@@ -3836,7 +3836,7 @@ FORMAT: 1A
     + name: (string, required) - 系列名称
     + description: (string, optional) - 系列描述
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -3875,9 +3875,9 @@ FORMAT: 1A
                     "mobile": "手机4",
                     "fax": "传真4",
                     "remark": "备注4",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-04 11:11:39",
                     "updated_at": "2018-07-04 11:22:29"
                 },
@@ -3885,7 +3885,7 @@ FORMAT: 1A
                 "name": "系列名称",
                 "description": "系列描述",
                 "remark": "备注",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 14:03:49",
                 "updated_at": "2018-07-04 14:03:49",
                 "meta": {
@@ -3924,9 +3924,9 @@ FORMAT: 1A
                     "mobile": "手机4",
                     "fax": "传真4",
                     "remark": "备注4",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-04 11:11:39",
                     "updated_at": "2018-07-04 11:22:29"
                 },
@@ -3934,7 +3934,7 @@ FORMAT: 1A
                 "name": "系列名称",
                 "description": "系列描述",
                 "remark": "备注",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-04 14:03:49",
                 "updated_at": "2018-07-04 14:03:49"
             }
@@ -3989,9 +3989,9 @@ FORMAT: 1A
                     "mobile": "手机4",
                     "fax": "传真4",
                     "remark": "备注4",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-04 11:11:39",
                     "updated_at": "2018-07-04 11:22:29"
                 },
@@ -3999,7 +3999,7 @@ FORMAT: 1A
                 "name": "系列名称10",
                 "description": "系列描述10",
                 "remark": "备注10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 14:03:49",
                 "updated_at": "2018-07-04 14:13:21"
             }
@@ -4058,7 +4058,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 系列id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -4097,7 +4097,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -4110,7 +4110,7 @@ FORMAT: 1A
                         "file": "报表文件",
                         "name": "报表名称",
                         "paper_format": "报表格式",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-03 17:50:46",
                         "updated_at": "2018-07-03 17:50:49"
                     },
@@ -4119,7 +4119,7 @@ FORMAT: 1A
                         "file": "报表文件",
                         "name": "报表名称",
                         "paper_format": "报表格式",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-04 14:27:11",
                         "updated_at": "2018-07-04 14:27:11"
                     }
@@ -4143,7 +4143,7 @@ FORMAT: 1A
     + file: (string, required) - 报表文件
     + name: (string, required) - 报表名称
     + paper_format: (string, required) - 报表格式
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -4176,7 +4176,7 @@ FORMAT: 1A
                 "file": "报表文件",
                 "name": "报表名称",
                 "paper_format": "报表格式",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 14:27:11",
                 "updated_at": "2018-07-04 14:27:11",
                 "meta": {
@@ -4203,7 +4203,7 @@ FORMAT: 1A
                 "file": "报表文件",
                 "name": "报表名称",
                 "paper_format": "报表格式",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-03 17:50:46",
                 "updated_at": "2018-07-03 17:50:49"
             }
@@ -4246,7 +4246,7 @@ FORMAT: 1A
                 "file": "报表文件10",
                 "name": "报表名称10",
                 "paper_format": "报表格式10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-03 17:50:46",
                 "updated_at": "2018-07-04 14:31:34"
             }
@@ -4305,7 +4305,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 打印报表id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -4344,7 +4344,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -4355,7 +4355,7 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "平台名称1",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-04 12:54:52",
                         "updated_at": "2018-07-04 12:54:55"
                     }
@@ -4377,7 +4377,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 平台类型名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -4402,7 +4402,7 @@ FORMAT: 1A
             {
                 "id": 2,
                 "name": "平台类型名称",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 14:44:39",
                 "updated_at": "2018-07-04 14:44:39",
                 "meta": {
@@ -4427,7 +4427,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "平台名称1",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-04 12:54:52",
                 "updated_at": "2018-07-04 12:54:55"
             }
@@ -4465,7 +4465,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "平台类型名称10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-04 12:54:52",
                 "updated_at": "2018-07-04 14:51:08"
             }
@@ -4524,7 +4524,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 平台类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -4563,7 +4563,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -4577,8 +4577,8 @@ FORMAT: 1A
                         "name": "部门名称",
                         "p_dept": 0,
                         "remark": "备注",
-                        "is_verify": 1,
-                        "status": 1,
+                        "is_verify": true,
+                        "status": true,
                         "created_at": "2018-07-05 17:37:17",
                         "updated_at": "2018-07-05 17:37:17"
                     },
@@ -4588,8 +4588,8 @@ FORMAT: 1A
                         "name": "部门名称",
                         "p_dept": 1,
                         "remark": "备注",
-                        "is_verify": 1,
-                        "status": 1,
+                        "is_verify": true,
+                        "status": true,
                         "created_at": "2018-07-05 17:39:24",
                         "updated_at": "2018-07-05 17:39:24"
                     },
@@ -4599,8 +4599,8 @@ FORMAT: 1A
                         "name": "部门名称3",
                         "p_dept": 0,
                         "remark": "备注",
-                        "is_verify": 1,
-                        "status": 1,
+                        "is_verify": true,
+                        "status": true,
                         "created_at": "2018-07-05 17:42:06",
                         "updated_at": "2018-07-05 17:42:06"
                     }
@@ -4625,9 +4625,9 @@ FORMAT: 1A
     + name: (string, required) - 部门名称
     + p_dept: (integer, required) - 所属主部门
     + remark: (string, optional) - 备注
-    + is_verify: (integer, optional) - 是否已经验证
+    + is_verify: (boolean, optional) - 是否已经验证
         + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -4655,8 +4655,8 @@ FORMAT: 1A
                 "name": "部门名称",
                 "p_dept": "0",
                 "remark": "备注",
-                "is_verify": "1",
-                "status": "1",
+                "is_verify": true,
+                "status": true,
                 "created_at": "2018-07-05 17:42:06",
                 "updated_at": "2018-07-05 17:42:06",
                 "meta": {
@@ -4684,8 +4684,8 @@ FORMAT: 1A
                 "name": "部门名称",
                 "p_dept": 0,
                 "remark": "备注",
-                "is_verify": 1,
-                "status": 1,
+                "is_verify": true,
+                "status": true,
                 "created_at": "2018-07-05 17:37:17",
                 "updated_at": "2018-07-05 17:37:17"
             }
@@ -4726,8 +4726,8 @@ FORMAT: 1A
                 "name": "部门名称",
                 "p_dept": 0,
                 "remark": "备注",
-                "is_verify": 1,
-                "status": 1,
+                "is_verify": true,
+                "status": true,
                 "created_at": "2018-07-05 17:37:17",
                 "updated_at": "2018-07-05 17:37:17"
             }
@@ -4786,7 +4786,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 部门id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -4825,7 +4825,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -4857,9 +4857,9 @@ FORMAT: 1A
                             "fax": "传真",
                             "email": "935661686@qq.com",
                             "remark": "备注",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-07 15:05:24",
                             "updated_at": "2018-07-07 15:05:24"
                         },
@@ -4869,7 +4869,7 @@ FORMAT: 1A
                             "name": "商品类别名",
                             "description": "详情",
                             "remark": "备注",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-07 15:05:38",
                             "updated_at": "2018-07-07 15:05:38"
                         },
@@ -4877,8 +4877,8 @@ FORMAT: 1A
                         "title": "商品标题",
                         "img": "商品图片",
                         "url": "https://www.taobao.com/",
-                        "status": "1",
-                        "is_stop_pro": "1",
+                        "status": true,
+                        "is_stop_pro": true,
                         "productspecs": [
                             {
                                 "id": 2,
@@ -4918,8 +4918,8 @@ FORMAT: 1A
                                 "volume": 10,
                                 "weight": 10,
                                 "remark": "备注",
-                                "finished_pro": 1,
-                                "is_stop_pro": 0,
+                                "finished_pro": true,
+                                "is_stop_pro": false,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
                                 "deleted_at": null,
@@ -4929,7 +4929,7 @@ FORMAT: 1A
                                         "product_specs_id": 2,
                                         "com_pro_specs_id": 1,
                                         "count": 1,
-                                        "status": 1,
+                                        "status": true,
                                         "created_at": "2018-07-09 18:01:34",
                                         "updated_at": "2018-07-09 18:01:34",
                                         "deleted_at": null,
@@ -4971,8 +4971,8 @@ FORMAT: 1A
                                             "volume": 10,
                                             "weight": 10,
                                             "remark": "备注",
-                                            "finished_pro": 1,
-                                            "is_stop_pro": 0,
+                                            "finished_pro": true,
+                                            "is_stop_pro": false,
                                             "created_at": "2018-07-09 11:07:53",
                                             "updated_at": "2018-07-09 11:07:53",
                                             "deleted_at": null
@@ -4983,7 +4983,7 @@ FORMAT: 1A
                                         "product_specs_id": 2,
                                         "com_pro_specs_id": 1,
                                         "count": 1,
-                                        "status": 1,
+                                        "status": true,
                                         "created_at": "2018-07-09 18:01:34",
                                         "updated_at": "2018-07-09 18:01:34",
                                         "deleted_at": null,
@@ -5025,8 +5025,8 @@ FORMAT: 1A
                                             "volume": 10,
                                             "weight": 10,
                                             "remark": "备注",
-                                            "finished_pro": 1,
-                                            "is_stop_pro": 0,
+                                            "finished_pro": true,
+                                            "is_stop_pro": false,
                                             "created_at": "2018-07-09 11:07:53",
                                             "updated_at": "2018-07-09 11:07:53",
                                             "deleted_at": null
@@ -5049,7 +5049,7 @@ FORMAT: 1A
                                 "assembly_price": "10.00",
                                 "discount": "1.00",
                                 "commission": "1.00",
-                                "is_combination": 0,
+                                "is_combination": false,
                                 "package_quantity": 10,
                                 "package_costs": "10.00",
                                 "wooden_frame_costs": "10.00",
@@ -5072,9 +5072,9 @@ FORMAT: 1A
                                 "volume": 10,
                                 "weight": 10,
                                 "remark": "备注",
-                                "finished_pro": 1,
-                                "is_stop_pro": 0,
-                                "status": 1,
+                                "finished_pro": true,
+                                "is_stop_pro": false,
+                                "status": true,
                                 "created_at": "2018-07-09 18:01:35",
                                 "updated_at": "2018-07-09 18:01:35",
                                 "deleted_at": null,
@@ -5116,9 +5116,9 @@ FORMAT: 1A
     + title: (string, required) - 商品标题
     + img: (string, required) - 商品图片
     + url: (url, required) - 商品网址
-    + is_stop_pro: (integer, optional) - 是否停产 默认 0 = 不停产  1 = 停产
-        + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + is_stop_pro: (boolean, optional) - 是否停产 默认 0 = 不停产  1 = 停产
+        + Default: 
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
     + productspecs[0][spec_code]: (string, required) - 规格编码
     + productspecs[0][jd_specs_code]: (string, optional) - 京东规格编码
@@ -5156,7 +5156,7 @@ FORMAT: 1A
     + productspecs[0][weight]: (numeric, optional) - 重量
     + productspecs[0][remark]: (string, optional) - 备注
     + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (integer, optional) - 是否停产 0 不是 1 是
+    + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
     + productspecs[0][combinations][0][com_pro_specs_id]: (integer, required) - 组合产品规格id
     + productspecs[0][combinations][0][count]: (integer, required) - 组合件数
 
@@ -5176,7 +5176,7 @@ FORMAT: 1A
                 "title": "商品标题",
                 "img": "商品图片",
                 "url": "https://www.taobao.com/",
-                "status": 1,
+                "status": true,
                 "nis_stop_proick": 1,
                 "productspecs[0][spec_code]": "规格编码1",
                 "productspecs[0][jd_specs_code]": "京东规格编码",
@@ -5213,7 +5213,7 @@ FORMAT: 1A
                 "productspecs[0][weight]": "10",
                 "productspecs[0][remark]": "备注",
                 "productspecs[0][finished_pro]": "1",
-                "productspecs[0][is_stop_pro]": "0",
+                "productspecs[0][is_stop_pro]": false,
                 "productspecs[0][combinations][0][com_pro_specs_id]": "1",
                 "productspecs[0][combinations][0][count]": "10"
             }
@@ -5267,9 +5267,9 @@ FORMAT: 1A
                     "fax": "1",
                     "email": "132@re.cn",
                     "remark": "1",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-17 17:54:01",
                     "updated_at": "2018-07-17 17:54:01"
                 },
@@ -5279,7 +5279,7 @@ FORMAT: 1A
                     "name": "1",
                     "description": "1",
                     "remark": "1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-17 17:54:34",
                     "updated_at": "2018-07-17 17:54:34"
                 },
@@ -5287,8 +5287,8 @@ FORMAT: 1A
                 "title": "商品标题",
                 "img": "https://www.taobao.com/img",
                 "url": "https://www.taobao.com/",
-                "status": "1",
-                "is_stop_pro": "0",
+                "status": true,
+                "is_stop_pro": false,
                 "productspecs": [
                     {
                         "id": 7,
@@ -5328,8 +5328,8 @@ FORMAT: 1A
                         "volume": 10,
                         "weight": 10,
                         "remark": "备注",
-                        "finished_pro": 1,
-                        "is_stop_pro": 0,
+                        "finished_pro": true,
+                        "is_stop_pro": false,
                         "created_at": "2018-07-25 15:06:12",
                         "updated_at": "2018-07-25 15:06:12",
                         "combinations": [
@@ -5355,7 +5355,7 @@ FORMAT: 1A
                                     "assembly_price": "1.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 0,
+                                    "is_combination": false,
                                     "package_quantity": 1,
                                     "package_costs": "1.00",
                                     "wooden_frame_costs": "1.00",
@@ -5378,8 +5378,8 @@ FORMAT: 1A
                                     "volume": 1,
                                     "weight": 1,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
                                     "created_at": "2018-07-25 11:01:45",
                                     "updated_at": "2018-07-25 11:01:48"
                                 }
@@ -5432,9 +5432,9 @@ FORMAT: 1A
                     "fax": "1",
                     "email": "132@re.cn",
                     "remark": "1",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-17 17:54:01",
                     "updated_at": "2018-07-17 17:54:01"
                 },
@@ -5444,7 +5444,7 @@ FORMAT: 1A
                     "name": "1",
                     "description": "1",
                     "remark": "1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-17 17:54:34",
                     "updated_at": "2018-07-17 17:54:34"
                 },
@@ -5452,8 +5452,8 @@ FORMAT: 1A
                 "title": "商品标题",
                 "img": "https://www.taobao.com/img",
                 "url": "https://www.taobao.com/",
-                "status": "1",
-                "is_stop_pro": "0",
+                "status": true,
+                "is_stop_pro": false,
                 "productspecs": [
                     {
                         "id": 7,
@@ -5493,8 +5493,8 @@ FORMAT: 1A
                         "volume": 10,
                         "weight": 10,
                         "remark": "备注",
-                        "finished_pro": 1,
-                        "is_stop_pro": 0,
+                        "finished_pro": true,
+                        "is_stop_pro": false,
                         "created_at": "2018-07-25 15:06:12",
                         "updated_at": "2018-07-25 15:06:12",
                         "combinations": [
@@ -5520,7 +5520,7 @@ FORMAT: 1A
                                     "assembly_price": "1.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 0,
+                                    "is_combination": false,
                                     "package_quantity": 1,
                                     "package_costs": "1.00",
                                     "wooden_frame_costs": "1.00",
@@ -5543,8 +5543,8 @@ FORMAT: 1A
                                     "volume": 1,
                                     "weight": 1,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
                                     "created_at": "2018-07-25 11:01:45",
                                     "updated_at": "2018-07-25 11:01:48"
                                 }
@@ -5572,9 +5572,9 @@ FORMAT: 1A
     + title: (string, optional) - 商品标题
     + img: (string, optional) - 商品图片
     + url: (url, optional) - 商品网址
-    + is_stop_pro: (integer, optional) - 是否停产 默认 0 = 不停产  1 = 停产
-        + Default: 0
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + is_stop_pro: (boolean, optional) - 是否停产 默认 0 = 不停产  1 = 停产
+        + Default: 
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
     + productspecs[0][id]: (integer, optional) - 规格id ( 存在 id 视为更新，不存在视为插入 )
     + productspecs[0][spec_code]: (string, optional) - 规格编码
@@ -5613,7 +5613,7 @@ FORMAT: 1A
     + productspecs[0][weight]: (numeric, optional) - 重量
     + productspecs[0][remark]: (string, optional) - 备注
     + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (integer, optional) - 是否停产 0 不是 1 是
+    + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
     + productspecs[0][combinations][0][id]: (integer, optional) - 组合id ( 存在 id 视为更新，不存在视为插入 )
     + productspecs[0][combinations][0][com_pro_specs_id]: (integer, optional) - 组合产品规格id
     + productspecs[0][combinations][0][count]: (integer, optional) - 组合件数
@@ -5634,7 +5634,7 @@ FORMAT: 1A
                 "title": "商品标题",
                 "img": "商品图片",
                 "url": "https://www.taobao.com/",
-                "status": 1,
+                "status": true,
                 "nis_stop_proick": 1,
                 "productspecs[0][id]": "2",
                 "productspecs[0][spec_code]": "规格编码1",
@@ -5672,7 +5672,7 @@ FORMAT: 1A
                 "productspecs[0][weight]": "10",
                 "productspecs[0][remark]": "备注",
                 "productspecs[0][finished_pro]": "1",
-                "productspecs[0][is_stop_pro]": "0",
+                "productspecs[0][is_stop_pro]": false,
                 "productspecs[0][combinations][0][id]": "2",
                 "productspecs[0][combinations][0][com_pro_specs_id]": "1",
                 "productspecs[0][combinations][0][count]": "10"
@@ -5732,9 +5732,9 @@ FORMAT: 1A
                     "fax": "传真",
                     "email": "935661686@qq.com",
                     "remark": "备注",
-                    "is_scan": 1,
-                    "status": 1,
-                    "auto_valuation": 1,
+                    "is_scan": true,
+                    "status": true,
+                    "auto_valuation": true,
                     "created_at": "2018-07-07 09:57:48",
                     "updated_at": "2018-07-07 09:57:48"
                 },
@@ -5744,7 +5744,7 @@ FORMAT: 1A
                     "name": "商品类别名",
                     "description": "详情",
                     "remark": "备注",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-07 09:58:22",
                     "updated_at": "2018-07-07 09:58:22"
                 },
@@ -5752,8 +5752,8 @@ FORMAT: 1A
                 "title": "商品标题1",
                 "img": "商品图片1",
                 "url": "https://www.taobao.com/",
-                "status": "1",
-                "is_stop_pro": "1",
+                "status": true,
+                "is_stop_pro": true,
                 "productspecs": [
                     {
                         "id": 2,
@@ -5793,9 +5793,9 @@ FORMAT: 1A
                         "volume": 10,
                         "weight": 10,
                         "remark": "备注",
-                        "finished_pro": 1,
-                        "is_stop_pro": 0,
-                        "status": 1,
+                        "finished_pro": true,
+                        "is_stop_pro": false,
+                        "status": true,
                         "created_at": "2018-07-09 18:01:34",
                         "updated_at": "2018-07-09 18:01:34",
                         "deleted_at": null,
@@ -5805,7 +5805,7 @@ FORMAT: 1A
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
                                 "count": 1,
-                                "status": 1,
+                                "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
                                 "deleted_at": null,
@@ -5847,9 +5847,9 @@ FORMAT: 1A
                                     "volume": 10,
                                     "weight": 10,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
-                                    "status": 1,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
+                                    "status": true,
                                     "created_at": "2018-07-09 11:07:53",
                                     "updated_at": "2018-07-09 11:07:53",
                                     "deleted_at": null
@@ -5860,7 +5860,7 @@ FORMAT: 1A
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
                                 "count": 1,
-                                "status": 1,
+                                "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
                                 "deleted_at": null,
@@ -5902,9 +5902,9 @@ FORMAT: 1A
                                     "volume": 10,
                                     "weight": 10,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
-                                    "status": 1,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
+                                    "status": true,
                                     "created_at": "2018-07-09 11:07:53",
                                     "updated_at": "2018-07-09 11:07:53",
                                     "deleted_at": null
@@ -5915,7 +5915,7 @@ FORMAT: 1A
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
                                 "count": 1,
-                                "status": 1,
+                                "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
                                 "deleted_at": null,
@@ -5957,9 +5957,9 @@ FORMAT: 1A
                                     "volume": 10,
                                     "weight": 10,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
-                                    "status": 1,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
+                                    "status": true,
                                     "created_at": "2018-07-09 11:07:53",
                                     "updated_at": "2018-07-09 11:07:53",
                                     "deleted_at": null
@@ -5982,7 +5982,7 @@ FORMAT: 1A
                         "assembly_price": "10.00",
                         "discount": "1.00",
                         "commission": "1.00",
-                        "is_combination": 0,
+                        "is_combination": false,
                         "package_quantity": 10,
                         "package_costs": "10.00",
                         "wooden_frame_costs": "10.00",
@@ -6005,9 +6005,9 @@ FORMAT: 1A
                         "volume": 10,
                         "weight": 10,
                         "remark": "备注",
-                        "finished_pro": 1,
-                        "is_stop_pro": 0,
-                        "status": 1,
+                        "finished_pro": true,
+                        "is_stop_pro": false,
+                        "status": true,
                         "created_at": "2018-07-09 18:01:35",
                         "updated_at": "2018-07-09 18:01:35",
                         "deleted_at": null,
@@ -6063,7 +6063,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 商品id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -6102,7 +6102,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -6126,8 +6126,8 @@ FORMAT: 1A
                             "title": "商品标题",
                             "img": "商品图片",
                             "url": "https://www.taobao.com/",
-                            "status": 1,
-                            "is_stop_pro": 1,
+                            "status": true,
+                            "is_stop_pro": true,
                             "created_at": "2018-07-07 09:59:36",
                             "updated_at": "2018-07-07 10:06:01",
                             "deleted_at": null
@@ -6144,7 +6144,7 @@ FORMAT: 1A
                         "assembly_price": "10.00",
                         "discount": "1.00",
                         "commission": "1.00",
-                        "is_combination": 0,
+                        "is_combination": false,
                         "package_quantity": 10,
                         "package_costs": "10.00",
                         "wooden_frame_costs": "10.00",
@@ -6155,7 +6155,7 @@ FORMAT: 1A
                         "distribution_method": {
                             "id": 1,
                             "name": "配送方式",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-07 10:40:40",
                             "updated_at": "2018-07-07 10:40:40"
                         },
@@ -6173,9 +6173,9 @@ FORMAT: 1A
                         "volume": 10,
                         "weight": 10,
                         "remark": "备注",
-                        "finished_pro": 1,
-                        "is_stop_pro": 0,
-                        "status": 1,
+                        "finished_pro": true,
+                        "is_stop_pro": false,
+                        "status": true,
                         "created_at": "2018-07-07 10:41:02",
                         "updated_at": "2018-07-07 10:51:12"
                     }
@@ -6225,8 +6225,8 @@ FORMAT: 1A
                     "title": "商品标题1",
                     "img": "商品图片1",
                     "url": "https://www.taobao.com/",
-                    "status": 1,
-                    "is_stop_pro": 1,
+                    "status": true,
+                    "is_stop_pro": true,
                     "created_at": "2018-07-07 09:59:36",
                     "updated_at": "2018-07-07 10:06:01",
                     "deleted_at": null
@@ -6243,7 +6243,7 @@ FORMAT: 1A
                 "assembly_price": "10.00",
                 "discount": "1.00",
                 "commission": "1.00",
-                "is_combination": 0,
+                "is_combination": false,
                 "package_quantity": 10,
                 "package_costs": "10.00",
                 "wooden_frame_costs": "10.00",
@@ -6254,7 +6254,7 @@ FORMAT: 1A
                 "distribution_method": {
                     "id": 1,
                     "name": "配送方式",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-07 10:40:40",
                     "updated_at": "2018-07-07 10:40:40"
                 },
@@ -6272,9 +6272,9 @@ FORMAT: 1A
                 "volume": 10,
                 "weight": 10,
                 "remark": "备注",
-                "finished_pro": 1,
-                "is_stop_pro": 0,
-                "status": 1,
+                "finished_pro": true,
+                "is_stop_pro": false,
+                "status": true,
                 "created_at": "2018-07-07 10:41:02",
                 "updated_at": "2018-07-07 10:51:12"
             }
@@ -6333,7 +6333,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 产品规格id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -6372,7 +6372,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -6397,7 +6397,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -6420,9 +6420,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-07 10:41:02",
                             "updated_at": "2018-07-07 10:51:12",
                             "deleted_at": null
@@ -6442,7 +6442,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -6465,15 +6465,15 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-07 11:29:49",
                             "updated_at": "2018-07-07 11:29:49",
                             "deleted_at": null
                         },
                         "count": 1,
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-06 16:59:20",
                         "updated_at": "2018-07-06 16:59:20"
                     }
@@ -6524,7 +6524,7 @@ FORMAT: 1A
                     "assembly_price": "10.00",
                     "discount": "1.00",
                     "commission": "1.00",
-                    "is_combination": 0,
+                    "is_combination": false,
                     "package_quantity": 10,
                     "package_costs": "10.00",
                     "wooden_frame_costs": "10.00",
@@ -6547,9 +6547,9 @@ FORMAT: 1A
                     "volume": 10,
                     "weight": 10,
                     "remark": "备注",
-                    "finished_pro": 1,
-                    "is_stop_pro": 0,
-                    "status": 1,
+                    "finished_pro": true,
+                    "is_stop_pro": false,
+                    "status": true,
                     "created_at": "2018-07-07 10:41:02",
                     "updated_at": "2018-07-07 10:51:12",
                     "deleted_at": null
@@ -6569,7 +6569,7 @@ FORMAT: 1A
                     "assembly_price": "10.00",
                     "discount": "1.00",
                     "commission": "1.00",
-                    "is_combination": 0,
+                    "is_combination": false,
                     "package_quantity": 10,
                     "package_costs": "10.00",
                     "wooden_frame_costs": "10.00",
@@ -6592,15 +6592,15 @@ FORMAT: 1A
                     "volume": 10,
                     "weight": 10,
                     "remark": "备注",
-                    "finished_pro": 1,
-                    "is_stop_pro": 0,
-                    "status": 1,
+                    "finished_pro": true,
+                    "is_stop_pro": false,
+                    "status": true,
                     "created_at": "2018-07-07 11:29:49",
                     "updated_at": "2018-07-07 11:29:49",
                     "deleted_at": null
                 },
                 "count": 1,
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-06 16:59:20",
                 "updated_at": "2018-07-06 16:59:20"
             }
@@ -6710,7 +6710,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
     + status: (warehouse_id, optional) - 获取的仓库id
 
@@ -6728,8 +6728,8 @@ FORMAT: 1A
                             "city": "仓库地（市）1",
                             "district": "仓库地（区）1sfd",
                             "address": "仓库地（地址）1fdf",
-                            "is_default": 0,
-                            "status": 1,
+                            "is_default": false,
+                            "status": true,
                             "created_at": "2018-07-07 15:44:00",
                             "updated_at": "2018-07-07 18:29:12"
                         },
@@ -6747,8 +6747,8 @@ FORMAT: 1A
                             "title": "商品标题",
                             "img": "商品图片",
                             "url": "https://www.taobao.com/",
-                            "status": 1,
-                            "is_stop_pro": 1,
+                            "status": true,
+                            "is_stop_pro": true,
                             "created_at": "2018-07-13 18:48:47",
                             "updated_at": "2018-07-13 18:48:47",
                             "deleted_at": null
@@ -6768,7 +6768,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -6791,15 +6791,15 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-16 11:53:01",
                             "updated_at": "2018-07-16 11:53:01",
                             "deleted_at": null
                         },
                         "quantity": 10,
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-07-16 17:08:11",
                         "updated_at": "2018-07-16 17:08:11"
                     }
@@ -6852,8 +6852,8 @@ FORMAT: 1A
                     "city": "仓库地（市）1",
                     "district": "仓库地（区）1sfd",
                     "address": "仓库地（地址）1fdf",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-07 15:44:00",
                     "updated_at": "2018-07-07 18:29:12"
                 },
@@ -6871,8 +6871,8 @@ FORMAT: 1A
                     "title": "商品标题",
                     "img": "商品图片",
                     "url": "https://www.taobao.com/",
-                    "status": 1,
-                    "is_stop_pro": 1,
+                    "status": true,
+                    "is_stop_pro": true,
                     "created_at": "2018-07-13 18:48:47",
                     "updated_at": "2018-07-13 18:48:47",
                     "deleted_at": null
@@ -6892,7 +6892,7 @@ FORMAT: 1A
                     "assembly_price": "10.00",
                     "discount": "1.00",
                     "commission": "1.00",
-                    "is_combination": 0,
+                    "is_combination": false,
                     "package_quantity": 10,
                     "package_costs": "10.00",
                     "wooden_frame_costs": "10.00",
@@ -6915,15 +6915,15 @@ FORMAT: 1A
                     "volume": 10,
                     "weight": 10,
                     "remark": "备注",
-                    "finished_pro": 1,
-                    "is_stop_pro": 0,
-                    "status": 1,
+                    "finished_pro": true,
+                    "is_stop_pro": false,
+                    "status": true,
                     "created_at": "2018-07-16 11:53:20",
                     "updated_at": "2018-07-16 11:53:20",
                     "deleted_at": null
                 },
                 "quantity": "10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-07-16 17:18:36",
                 "updated_at": "2018-07-16 17:18:36",
                 "meta": {
@@ -6954,8 +6954,8 @@ FORMAT: 1A
                     "city": "仓库地（市）1",
                     "district": "仓库地（区）1sfd",
                     "address": "仓库地（地址）1fdf",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-07 15:44:00",
                     "updated_at": "2018-07-07 18:29:12"
                 },
@@ -6973,8 +6973,8 @@ FORMAT: 1A
                     "title": "商品标题",
                     "img": "商品图片",
                     "url": "https://www.taobao.com/",
-                    "status": 1,
-                    "is_stop_pro": 1,
+                    "status": true,
+                    "is_stop_pro": true,
                     "created_at": "2018-07-13 18:48:47",
                     "updated_at": "2018-07-13 18:48:47",
                     "deleted_at": null
@@ -6994,7 +6994,7 @@ FORMAT: 1A
                     "assembly_price": "10.00",
                     "discount": "1.00",
                     "commission": "1.00",
-                    "is_combination": 0,
+                    "is_combination": false,
                     "package_quantity": 10,
                     "package_costs": "10.00",
                     "wooden_frame_costs": "10.00",
@@ -7017,15 +7017,15 @@ FORMAT: 1A
                     "volume": 10,
                     "weight": 10,
                     "remark": "备注",
-                    "finished_pro": 1,
-                    "is_stop_pro": 0,
-                    "status": 1,
+                    "finished_pro": true,
+                    "is_stop_pro": false,
+                    "status": true,
                     "created_at": "2018-07-16 11:53:01",
                     "updated_at": "2018-07-16 11:53:01",
                     "deleted_at": null
                 },
                 "quantity": 10,
-                "status": 1,
+                "status": true,
                 "created_at": "2018-07-16 17:08:11",
                 "updated_at": "2018-07-16 17:08:11"
             }
@@ -7084,7 +7084,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 库存id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -7169,7 +7169,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
     + purchase_status: (string, optional) - 采购状态 状态分别是(new,section,finish)
         + Default: all
@@ -7195,12 +7195,12 @@ FORMAT: 1A
                         "client_name": "",
                         "buyer_nick": "",
                         "order_address": "",
-                        "is_submit": 0,
-                        "is_print": 0,
-                        "is_audit": 0,
-                        "is_change": 0,
+                        "is_submit": false,
+                        "is_print": false,
+                        "is_audit": false,
+                        "is_change": false,
                         "remark": "备注5",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-08-02 09:52:20"
                     },
                     {
@@ -7219,12 +7219,12 @@ FORMAT: 1A
                         "client_name": "",
                         "buyer_nick": "",
                         "order_address": "",
-                        "is_submit": 0,
-                        "is_print": 0,
-                        "is_audit": 0,
-                        "is_change": 0,
+                        "is_submit": false,
+                        "is_print": false,
+                        "is_audit": false,
+                        "is_change": false,
                         "remark": "备注5",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-08-02 09:56:18"
                     }
                 ],
@@ -7248,10 +7248,11 @@ FORMAT: 1A
     + receiver_address: (string, required) - 收货地址
     + warehouse_id: (integer, required) - 仓库id
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(false:停用,true:启用)
         + Default: 1
     + purchase_lists[0][product_specs_id]: (integer, required) - 产品规格id
     + purchase_lists[0][purchase_quantity]: (integer, required) - 采购数
+    + purchase_lists[0][commodity_code]: (string, required) - 商品编码
     + purchase_lists[0][shops_id]: (integer, required) - 采购店铺id
     + purchase_lists[0][suppliers_id]: (integer, required) - 供应商id
     + purchase_lists[0][purchase_cost]: (numeric, required) - 采购成本
@@ -7284,9 +7285,10 @@ FORMAT: 1A
                     "receiver_address": "收货地址",
                     "warehouse_id": "1",
                     "remark": "备注",
-                    "status": "1",
+                    "status": true,
                     "purchase_lists[0][product_specs_id]": 9,
                     "purchase_lists[0][purchase_quantity]": 10,
+                    "purchase_lists[0][commodity_code]": "商品编码1",
                     "purchase_lists[0][shops_id]": 1,
                     "purchase_lists[0][suppliers_id]": 1,
                     "purchase_lists[0][purchase_cost]": 10,
@@ -7344,12 +7346,12 @@ FORMAT: 1A
                 "client_name": null,
                 "buyer_nick": null,
                 "order_address": null,
-                "is_submit": null,
-                "is_print": null,
-                "is_audit": null,
-                "is_change": null,
+                "is_submit": false,
+                "is_print": false,
+                "is_audit": false,
+                "is_change": false,
                 "remark": "备注5",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-08-02 16:02:59",
                 "purchase_lists": [
                     {
@@ -7359,6 +7361,7 @@ FORMAT: 1A
                         "product_specs_spec": "32gsdgsa",
                         "goods_short_name": "商品简称",
                         "goods_commodity_code": "商品编码1",
+                        "stock_in_count": 0,
                         "suppliers_id": 1,
                         "suppliers_name": "供应商1",
                         "shops_id": 1,
@@ -7453,12 +7456,12 @@ FORMAT: 1A
                 "client_name": "",
                 "buyer_nick": "",
                 "order_address": "",
-                "is_submit": 0,
-                "is_print": 0,
-                "is_audit": 0,
-                "is_change": 0,
+                "is_submit": false,
+                "is_print": false,
+                "is_audit": false,
+                "is_change": false,
                 "remark": "备注5",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-08-02 16:02:59",
                 "purchase_lists": [
                     {
@@ -7467,6 +7470,7 @@ FORMAT: 1A
                         "product_specs_spec_code": "321",
                         "product_specs_spec": "32gsdgsa",
                         "goods_short_name": "商品简称",
+                        "stock_in_count": 0,
                         "goods_commodity_code": "商品编码1",
                         "suppliers_id": 1,
                         "suppliers_name": "供应商1",
@@ -7537,11 +7541,12 @@ FORMAT: 1A
     + receiver_address: (string, optional) - 收货地址
     + warehouse_id: (integer, optional) - 仓库id
     + remark: (string, optional) - 备注
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(false:停用,true:启用)
         + Default: 1
     + purchase_lists[0][id]: (integer, optional) - 采购清单id
     + purchase_lists[0][product_specs_id]: (integer, optional) - 产品规格id
     + purchase_lists[0][purchase_quantity]: (integer, optional) - 采购数
+    + purchase_lists[0][commodity_code]: (string, optional) - 商品编码
     + purchase_lists[0][shops_id]: (integer, optional) - 采购店铺id
     + purchase_lists[0][suppliers_id]: (integer, optional) - 供应商id
     + purchase_lists[0][purchase_cost]: (numeric, optional) - 采购成本
@@ -7575,9 +7580,10 @@ FORMAT: 1A
                     "receiver_address": "收货地址",
                     "warehouse_id": "1",
                     "remark": "备注",
-                    "status": "1",
+                    "status": true,
                     "purchase_lists[0][product_specs_id]": 9,
                     "purchase_lists[0][purchase_quantity]": 10,
+                    "purchase_lists[0][commodity_code]": "商品编码1",
                     "purchase_lists[0][shops_id]": 1,
                     "purchase_lists[0][suppliers_id]": 1,
                     "purchase_lists[0][purchase_cost]": 10,
@@ -7649,12 +7655,12 @@ FORMAT: 1A
                 "client_name": "",
                 "buyer_nick": "",
                 "order_address": "",
-                "is_submit": 0,
-                "is_print": 0,
-                "is_audit": 0,
-                "is_change": 0,
+                "is_submit": false,
+                "is_print": false,
+                "is_audit": false,
+                "is_change": false,
                 "remark": "备注5",
-                "status": 1,
+                "status": true,
                 "purchase_lists": [
                     {
                         "product_specs_id": 9,
@@ -7662,6 +7668,7 @@ FORMAT: 1A
                         "product_specs_spec": "产品规格",
                         "goods_short_name": "商品简称",
                         "goods_commodity_code": "商品编码1",
+                        "stock_in_count": 0,
                         "suppliers_name": "供应商1",
                         "shop_title": "店铺标题",
                         "purchase_lists_purchase_cost": "10.00",
@@ -7767,7 +7774,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 采购单id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用,1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -7803,7 +7810,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + is_submit: (integer, required) - 是否提交
+    + is_submit: (boolean, required) - 是否提交
 
 + Response 422 (application/json)
     + Body
@@ -7827,7 +7834,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + is_print: (integer, required) - 是否打印
+    + is_print: (boolean, required) - 是否打印
 
 + Response 422 (application/json)
     + Body
@@ -7851,7 +7858,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + is_audit: (integer, required) - 是否审核
+    + is_audit: (boolean, required) - 是否审核
 
 + Response 422 (application/json)
     + Body
@@ -7982,7 +7989,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -7993,14 +8000,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "入库类型",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-14 16:55:32",
                         "updated_at": "2018-06-14 16:55:32"
                     },
                     {
                         "id": 2,
                         "name": "入库类型2",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-14 16:55:36",
                         "updated_at": "2018-06-14 16:55:36"
                     }
@@ -8025,7 +8032,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 入库类型名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -8047,7 +8054,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "入库类型",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 16:55:40",
                 "updated_at": "2018-06-14 16:55:40",
                 "meta": {
@@ -8072,7 +8079,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "入库类型",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:55:32"
             }
@@ -8107,7 +8114,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "入库类型10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:58:55"
             }
@@ -8166,7 +8173,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 入库类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -8205,7 +8212,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -8223,15 +8230,15 @@ FORMAT: 1A
                             "city": "仓库地（市）",
                             "district": "仓库地（区）",
                             "address": "测试",
-                            "is_default": 0,
-                            "status": 1,
+                            "is_default": false,
+                            "status": true,
                             "created_at": "2018-07-17 17:39:54",
                             "updated_at": "2018-07-19 14:13:27"
                         },
                         "stock_in_type": {
                             "id": 1,
                             "name": "入库类型名称1",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-19 17:51:13",
                             "updated_at": "2018-07-19 17:58:07"
                         },
@@ -8242,10 +8249,10 @@ FORMAT: 1A
                         "audit_at": null,
                         "warehouer": null,
                         "stock_in_at": null,
-                        "is_submit": null,
-                        "is_audit": null,
-                        "is_stock_in": null,
-                        "status": "0",
+                        "is_submit": false,
+                        "is_audit": false,
+                        "is_stock_in": true,
+                        "status": false,
                         "stock_in_details": [
                             {
                                 "id": 9,
@@ -8293,7 +8300,7 @@ FORMAT: 1A
                                     "assembly_price": "10.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 0,
+                                    "is_combination": false,
                                     "package_quantity": 10,
                                     "package_costs": "10.00",
                                     "wooden_frame_costs": "10.00",
@@ -8316,9 +8323,9 @@ FORMAT: 1A
                                     "volume": 10,
                                     "weight": 10,
                                     "remark": "备注",
-                                    "finished_pro": 1,
-                                    "is_stop_pro": 0,
-                                    "status": 1,
+                                    "finished_pro": true,
+                                    "is_stop_pro": false,
+                                    "status": true,
                                     "created_at": "2018-07-18 17:42:36",
                                     "updated_at": "2018-07-18 17:42:36"
                                 }
@@ -8349,11 +8356,12 @@ FORMAT: 1A
 + Parameters
     + warehouse_id: (integer, required) - 仓库id
     + stock_in_types_id: (integer, required) - 入库类型id
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + stock_in_details[0][purchase_details_id]: (integer, required) - 采购单详情id
+    + stock_in_details[0][purchase_lists_id]: (integer, required) - 采购单详情id
     + stock_in_details[0][product_specs_id]: (integer, required) - 产品规格id
     + stock_in_details[0][stock_in_quantity]: (integer, required) - 入库数量
+    + stock_in_details[0][total_fee]: (number, required) - 总额
     + stock_in_details[0][remark]: (string, optional) - 备注
 
 + Request (application/json)
@@ -8363,8 +8371,8 @@ FORMAT: 1A
                 {
                     "warehouse_id": 1,
                     "stock_in_types_id": 1,
-                    "status": 1,
-                    "stock_in_details[0][purchase_details_id]": 1,
+                    "status": true,
+                    "stock_in_details[0][purchase_lists_id]": 1,
                     "stock_in_details[0][product_specs_id]": 1,
                     "stock_in_details[0][stock_in_quantity]": 10,
                     "stock_in_details[0][remark]": "备注"
@@ -8400,15 +8408,15 @@ FORMAT: 1A
                     "city": "仓库地（市）",
                     "district": "仓库地（区）",
                     "address": "测试",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-17 17:39:54",
                     "updated_at": "2018-07-19 14:13:27"
                 },
                 "stock_in_type": {
                     "id": 1,
                     "name": "入库类型名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-19 17:51:13",
                     "updated_at": "2018-07-19 17:58:07"
                 },
@@ -8419,10 +8427,10 @@ FORMAT: 1A
                 "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
-                "is_submit": null,
-                "is_audit": null,
-                "is_stock_in": null,
-                "status": "0",
+                "is_submit": false,
+                "is_audit": false,
+                "is_stock_in": true,
+                "status": false,
                 "stock_in_details": [
                     {
                         "id": 9,
@@ -8470,7 +8478,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -8493,9 +8501,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-18 17:42:36",
                             "updated_at": "2018-07-18 17:42:36"
                         }
@@ -8532,15 +8540,15 @@ FORMAT: 1A
                     "city": "仓库地（市）",
                     "district": "仓库地（区）",
                     "address": "测试",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-17 17:39:54",
                     "updated_at": "2018-07-19 14:13:27"
                 },
                 "stock_in_type": {
                     "id": 1,
                     "name": "入库类型名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-19 17:51:13",
                     "updated_at": "2018-07-19 17:58:07"
                 },
@@ -8551,10 +8559,10 @@ FORMAT: 1A
                 "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
-                "is_submit": null,
-                "is_audit": null,
-                "is_stock_in": null,
-                "status": "0",
+                "is_submit": false,
+                "is_audit": false,
+                "is_stock_in": true,
+                "status": false,
                 "stock_in_details": [
                     {
                         "id": 9,
@@ -8602,7 +8610,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -8625,9 +8633,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-18 17:42:36",
                             "updated_at": "2018-07-18 17:42:36"
                         }
@@ -8643,12 +8651,13 @@ FORMAT: 1A
 + Parameters
     + warehouse_id: (integer, optional) - 仓库id
     + stock_in_types_id: (integer, optional) - 入库类型id
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
     + stock_in_details[0][id]: (integer, optional) - 入库单详情id (存在则视为更新 不存在视为插入)
-    + stock_in_details[0][purchase_details_id]: (integer, optional) - 采购单详情id
+    + stock_in_details[0][purchase_lists_id]: (integer, optional) - 采购单详情id
     + stock_in_details[0][product_specs_id]: (integer, optional) - 产品规格id
     + stock_in_details[0][stock_in_quantity]: (integer, optional) - 入库数量
+    + stock_in_details[0][total_fee]: (number, optional) - 总额
     + stock_in_details[0][remark]: (string, optional) - 备注
 
 + Request (application/json)
@@ -8658,9 +8667,9 @@ FORMAT: 1A
                 {
                     "warehouse_id": 1,
                     "stock_in_types_id": 1,
-                    "status": 1,
+                    "status": true,
                     "stock_in_details[0][id]": 1,
-                    "stock_in_details[0][purchase_details_id]": 1,
+                    "stock_in_details[0][purchase_lists_id]": 1,
                     "stock_in_details[0][product_specs_id]": 1,
                     "stock_in_details[0][stock_in_quantity]": 10,
                     "stock_in_details[0][remark]": "备注"
@@ -8704,15 +8713,15 @@ FORMAT: 1A
                     "city": "仓库地（市）",
                     "district": "仓库地（区）",
                     "address": "测试",
-                    "is_default": 0,
-                    "status": 1,
+                    "is_default": false,
+                    "status": true,
                     "created_at": "2018-07-17 17:39:54",
                     "updated_at": "2018-07-19 14:13:27"
                 },
                 "stock_in_type": {
                     "id": 1,
                     "name": "入库类型名称1",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-19 17:51:13",
                     "updated_at": "2018-07-19 17:58:07"
                 },
@@ -8723,10 +8732,10 @@ FORMAT: 1A
                 "audit_at": null,
                 "warehouer": null,
                 "stock_in_at": null,
-                "is_submit": null,
-                "is_audit": null,
-                "is_stock_in": null,
-                "status": "0",
+                "is_submit": false,
+                "is_audit": false,
+                "is_stock_in": true,
+                "status": false,
                 "stock_in_details": [
                     {
                         "id": 9,
@@ -8774,7 +8783,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -8797,9 +8806,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-18 17:42:36",
                             "updated_at": "2018-07-18 17:42:36"
                         }
@@ -8863,7 +8872,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 入库单id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -8971,7 +8980,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -8993,10 +9002,10 @@ FORMAT: 1A
                             "audit_at": null,
                             "warehouer": "",
                             "stock_in_at": null,
-                            "is_submit": 0,
-                            "is_audit": 0,
+                            "is_submit": false,
+                            "is_audit": false,
                             "is_stock_in": 0,
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-20 13:06:52",
                             "updated_at": "2018-07-20 13:06:52"
                         },
@@ -9037,7 +9046,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -9060,9 +9069,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-18 17:42:36",
                             "updated_at": "2018-07-18 17:42:36"
                         },
@@ -9142,7 +9151,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -9169,19 +9178,19 @@ FORMAT: 1A
                             "client_name": "",
                             "buyer_nick": "",
                             "order_address": "",
-                            "is_submit": 0,
-                            "is_print": 0,
-                            "is_audit": 0,
-                            "is_change": 1,
+                            "is_submit": false,
+                            "is_print": false,
+                            "is_audit": false,
+                            "is_change": true,
                             "remark": "备注5",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-21 16:22:05",
                             "updated_at": "2018-07-23 16:26:19"
                         },
                         "creator": "admin",
                         "submitter": null,
                         "submit_at": null,
-                        "is_submit": null,
+                        "is_submit": false,
                         "cancel_purchase_details": [
                             {
                                 "id": 14,
@@ -9322,19 +9331,19 @@ FORMAT: 1A
                     "client_name": "",
                     "buyer_nick": "",
                     "order_address": "",
-                    "is_submit": 0,
-                    "is_print": 0,
-                    "is_audit": 0,
-                    "is_change": 1,
+                    "is_submit": false,
+                    "is_print": false,
+                    "is_audit": false,
+                    "is_change": true,
                     "remark": "备注5",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-21 16:22:05",
                     "updated_at": "2018-07-23 16:26:19"
                 },
                 "creator": "admin",
                 "submitter": null,
                 "submit_at": null,
-                "is_submit": null,
+                "is_submit": false,
                 "cancel_purchase_details": [
                     {
                         "id": 14,
@@ -9437,19 +9446,19 @@ FORMAT: 1A
                     "client_name": "",
                     "buyer_nick": "",
                     "order_address": "",
-                    "is_submit": 0,
-                    "is_print": 0,
-                    "is_audit": 0,
-                    "is_change": 1,
+                    "is_submit": false,
+                    "is_print": false,
+                    "is_audit": false,
+                    "is_change": true,
                     "remark": "备注5",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-21 16:22:05",
                     "updated_at": "2018-07-23 16:26:19"
                 },
                 "creator": "admin",
                 "submitter": null,
                 "submit_at": null,
-                "is_submit": null,
+                "is_submit": false,
                 "cancel_purchase_details": [
                     {
                         "id": 14,
@@ -9588,19 +9597,19 @@ FORMAT: 1A
                     "client_name": "",
                     "buyer_nick": "",
                     "order_address": "",
-                    "is_submit": 0,
-                    "is_print": 0,
-                    "is_audit": 0,
-                    "is_change": 1,
+                    "is_submit": false,
+                    "is_print": false,
+                    "is_audit": false,
+                    "is_change": true,
                     "remark": "备注5",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-21 16:22:05",
                     "updated_at": "2018-07-23 16:26:19"
                 },
                 "creator": "admin",
                 "submitter": null,
                 "submit_at": null,
-                "is_submit": null,
+                "is_submit": false,
                 "cancel_purchase_details": [
                     {
                         "id": 14,
@@ -9751,7 +9760,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 取消采购id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -9811,7 +9820,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -9833,10 +9842,10 @@ FORMAT: 1A
                             "audit_at": null,
                             "warehouer": "",
                             "stock_in_at": null,
-                            "is_submit": 0,
-                            "is_audit": 0,
+                            "is_submit": false,
+                            "is_audit": false,
                             "is_stock_in": 0,
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-20 13:06:52",
                             "updated_at": "2018-07-20 13:06:52"
                         },
@@ -9877,7 +9886,7 @@ FORMAT: 1A
                             "assembly_price": "10.00",
                             "discount": "1.00",
                             "commission": "1.00",
-                            "is_combination": 0,
+                            "is_combination": false,
                             "package_quantity": 10,
                             "package_costs": "10.00",
                             "wooden_frame_costs": "10.00",
@@ -9900,9 +9909,9 @@ FORMAT: 1A
                             "volume": 10,
                             "weight": 10,
                             "remark": "备注",
-                            "finished_pro": 1,
-                            "is_stop_pro": 0,
-                            "status": 1,
+                            "finished_pro": true,
+                            "is_stop_pro": false,
+                            "status": true,
                             "created_at": "2018-07-18 17:42:36",
                             "updated_at": "2018-07-18 17:42:36"
                         },
@@ -9982,7 +9991,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -9994,15 +10003,15 @@ FORMAT: 1A
                         "id": 1,
                         "purchase_return_no": "RG2018072411440706967",
                         "creator": "admin",
-                        "is_submit": 0,
+                        "is_submit": false,
                         "submitter": "",
                         "submit_at": null,
-                        "is_audit": 0,
+                        "is_audit": false,
                         "auditor": "",
                         "audit_at": null,
-                        "is_print": 0,
+                        "is_print": false,
                         "remark": "采购退货单备注",
-                        "status": 1,
+                        "status": true,
                         "purchase_return_details": [
                             {
                                 "id": 1,
@@ -10020,7 +10029,7 @@ FORMAT: 1A
                                     "goods_id": 1,
                                     "pro_specs_id": 1,
                                     "quantity": 20,
-                                    "status": 1,
+                                    "status": true,
                                     "created_at": "2018-07-21 18:20:53",
                                     "updated_at": "2018-07-21 18:27:38"
                                 },
@@ -10040,16 +10049,16 @@ FORMAT: 1A
                                     "fax": "1",
                                     "email": "132@re.cn",
                                     "remark": "1",
-                                    "is_scan": 1,
-                                    "status": 1,
-                                    "auto_valuation": 1,
+                                    "is_scan": true,
+                                    "status": true,
+                                    "auto_valuation": true,
                                     "created_at": "2018-07-17 17:54:01",
                                     "updated_at": "2018-07-17 17:54:01"
                                 },
                                 "purchase_return_types": {
                                     "id": 1,
                                     "name": "采购退货类型名称",
-                                    "status": 1,
+                                    "status": true,
                                     "created_at": "2018-07-24 10:24:13",
                                     "updated_at": "2018-07-24 10:24:13"
                                 }
@@ -10122,15 +10131,15 @@ FORMAT: 1A
                 "id": 1,
                 "purchase_return_no": "RG2018072411440706967",
                 "creator": "admin",
-                "is_submit": null,
+                "is_submit": false,
                 "submitter": null,
                 "submit_at": null,
-                "is_audit": null,
+                "is_audit": false,
                 "auditor": null,
                 "audit_at": null,
-                "is_print": null,
+                "is_print": false,
                 "remark": "采购退货单备注",
-                "status": 1,
+                "status": true,
                 "purchase_return_details": [
                     {
                         "id": 1,
@@ -10148,7 +10157,7 @@ FORMAT: 1A
                             "goods_id": 1,
                             "pro_specs_id": 1,
                             "quantity": 20,
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-21 18:20:53",
                             "updated_at": "2018-07-21 18:27:38"
                         },
@@ -10168,16 +10177,16 @@ FORMAT: 1A
                             "fax": "1",
                             "email": "132@re.cn",
                             "remark": "1",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-17 17:54:01",
                             "updated_at": "2018-07-17 17:54:01"
                         },
                         "purchase_return_types": {
                             "id": 1,
                             "name": "采购退货类型名称",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-24 10:24:13",
                             "updated_at": "2018-07-24 10:24:13"
                         }
@@ -10208,15 +10217,15 @@ FORMAT: 1A
                 "id": 1,
                 "purchase_return_no": "RG2018072411440706967",
                 "creator": "admin",
-                "is_submit": 0,
+                "is_submit": false,
                 "submitter": "",
                 "submit_at": null,
-                "is_audit": 0,
+                "is_audit": false,
                 "auditor": "",
                 "audit_at": null,
-                "is_print": 0,
+                "is_print": false,
                 "remark": "采购退货单备注",
-                "status": 1,
+                "status": true,
                 "purchase_return_details": [
                     {
                         "id": 1,
@@ -10234,7 +10243,7 @@ FORMAT: 1A
                             "goods_id": 1,
                             "pro_specs_id": 1,
                             "quantity": 20,
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-21 18:20:53",
                             "updated_at": "2018-07-21 18:27:38"
                         },
@@ -10254,16 +10263,16 @@ FORMAT: 1A
                             "fax": "1",
                             "email": "132@re.cn",
                             "remark": "1",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-17 17:54:01",
                             "updated_at": "2018-07-17 17:54:01"
                         },
                         "purchase_return_types": {
                             "id": 1,
                             "name": "采购退货类型名称",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-24 10:24:13",
                             "updated_at": "2018-07-24 10:24:13"
                         }
@@ -10345,19 +10354,19 @@ FORMAT: 1A
                     "client_name": "",
                     "buyer_nick": "",
                     "order_address": "",
-                    "is_submit": 0,
-                    "is_print": 0,
-                    "is_audit": 0,
-                    "is_change": 1,
+                    "is_submit": false,
+                    "is_print": false,
+                    "is_audit": false,
+                    "is_change": true,
                     "remark": "备注5",
-                    "status": 1,
+                    "status": true,
                     "created_at": "2018-07-21 16:22:05",
                     "updated_at": "2018-07-23 16:26:19"
                 },
                 "creator": "admin",
                 "submitter": null,
                 "submit_at": null,
-                "is_submit": null,
+                "is_submit": false,
                 "cancel_purchase_details": [
                     {
                         "id": 14,
@@ -10508,7 +10517,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 采购退货id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -10616,7 +10625,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -10627,14 +10636,14 @@ FORMAT: 1A
                     {
                         "id": 1,
                         "name": "采购退货类型",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-14 16:55:32",
                         "updated_at": "2018-06-14 16:55:32"
                     },
                     {
                         "id": 2,
                         "name": "采购退货类型2",
-                        "status": 1,
+                        "status": true,
                         "created_at": "2018-06-14 16:55:36",
                         "updated_at": "2018-06-14 16:55:36"
                     }
@@ -10659,7 +10668,7 @@ FORMAT: 1A
 
 + Parameters
     + name: (string, required) - 采购退货类型名称
-    + status: (integer, optional) - 状态(0:停用，1:启用)
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
 
 + Response 422 (application/json)
@@ -10681,7 +10690,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "采购退货类型",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 16:55:40",
                 "updated_at": "2018-06-14 16:55:40",
                 "meta": {
@@ -10706,7 +10715,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "采购退货类型",
-                "status": 1,
+                "status": true,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:55:32"
             }
@@ -10741,7 +10750,7 @@ FORMAT: 1A
             {
                 "id": 1,
                 "name": "采购退货类型10",
-                "status": "1",
+                "status": true,
                 "created_at": "2018-06-14 16:55:32",
                 "updated_at": "2018-06-14 16:58:55"
             }
@@ -10800,7 +10809,7 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 采购退货类型id组 格式: 1,2,3,4 
-    + status: (integer, required) - 状态(0:停用，1:启用)
+    + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)
     + Body
@@ -10839,7 +10848,7 @@ FORMAT: 1A
 
 
 + Parameters
-    + status: (integer, optional) - 获取的状态
+    + status: (boolean, optional) - 获取的状态
         + Default: all
 
 + Response 200 (application/json)
@@ -10861,7 +10870,7 @@ FORMAT: 1A
                             "audit_at": "2018-07-24 15:00:53",
                             "is_print": 1,
                             "remark": "采购退货单备注1",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-24 11:44:07",
                             "updated_at": "2018-07-24 15:00:53"
                         },
@@ -10871,7 +10880,7 @@ FORMAT: 1A
                             "goods_id": 1,
                             "pro_specs_id": 1,
                             "quantity": 8,
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-21 18:20:53",
                             "updated_at": "2018-07-24 15:00:53"
                         },
@@ -10892,9 +10901,9 @@ FORMAT: 1A
                             "fax": "1",
                             "email": "132@re.cn",
                             "remark": "1",
-                            "is_scan": 1,
-                            "status": 1,
-                            "auto_valuation": 1,
+                            "is_scan": true,
+                            "status": true,
+                            "auto_valuation": true,
                             "created_at": "2018-07-17 17:54:01",
                             "updated_at": "2018-07-17 17:54:01"
                         },
@@ -10902,7 +10911,7 @@ FORMAT: 1A
                         "purchase_return_type": {
                             "id": 1,
                             "name": "采购退货类型名称",
-                            "status": 1,
+                            "status": true,
                             "created_at": "2018-07-24 10:24:13",
                             "updated_at": "2018-07-24 10:24:13"
                         },

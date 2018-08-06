@@ -16,7 +16,7 @@ class ProductSpecRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -33,7 +33,7 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.assembly_price' => 'numeric',
                     'productspecs.*.discount' => 'numeric',
                     'productspecs.*.commission' => 'numeric',
-                    'productspecs.*.is_combination' => 'integer',
+                    'productspecs.*.is_combination' => 'boolean',
                     'productspecs.*.package_quantity' => 'integer',
                     'productspecs.*.package_costs' => 'numeric',
                     'productspecs.*.wooden_frame_costs' => 'numeric',
@@ -61,8 +61,8 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.volume' => 'numeric',
                     'productspecs.*.weight' => 'numeric',
                     'productspecs.*.remark' => 'string|nullable|max:255',
-                    'productspecs.*.finished_pro' => 'integer',
-                    'productspecs.*.is_stop_pro' => 'integer',
+                    'productspecs.*.finished_pro' => 'boolean',
+                    'productspecs.*.is_stop_pro' => 'boolean',
                     // 'productspecs.*.status' => 'integer'
                 ];
                 break;
@@ -74,7 +74,17 @@ class ProductSpecRequest extends FormRequest
                     ],
                     'productspecs.*.spec_code' => [
                         'string', 'max:255',
-                        Rule::unique('product_specs')->ignore($this->productspecs[0]['id']),
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //判断是否存在productspecs.*.id
+                            if ($id = $this->productspecs[$ex[1]]['id'] ?? null){
+                                //如果存在这条数据就忽略 或者 不存在这条数据 并且 spec_code 不存在 则返回 true
+                                if(\App\Models\ProductSpec::findOrfail($id)->where('spec_code',$value)->count()
+                                    || !\App\Models\ProductSpec::where('spec_code',$value)->count())
+                                return true;
+                            }
+                            return $fail('规格编码不能重复');
+                        },
                     ],
                     'productspecs.*.jd_specs_code' => 'string|max:255',
                     'productspecs.*.vips_specs_code' => 'string|max:255',
@@ -87,7 +97,7 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.assembly_price' => 'numeric',
                     'productspecs.*.discount' => 'numeric',
                     'productspecs.*.commission' => 'numeric',
-                    'productspecs.*.is_combination' => 'integer',
+                    'productspecs.*.is_combination' => 'boolean',
                     'productspecs.*.package_quantity' => 'integer',
                     'productspecs.*.package_costs' => 'numeric',
                     'productspecs.*.wooden_frame_costs' => 'numeric',
@@ -115,8 +125,8 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.volume' => 'numeric',
                     'productspecs.*.weight' => 'numeric',
                     'productspecs.*.remark' => 'string|nullable|max:255',
-                    'productspecs.*.finished_pro' => 'integer',
-                    'productspecs.*.is_stop_pro' => 'integer',
+                    'productspecs.*.finished_pro' => 'boolean',
+                    'productspecs.*.is_stop_pro' => 'boolean',
                     // 'productspecs.*.status' => 'integer'
                 ];
                 break;
@@ -164,7 +174,7 @@ class ProductSpecRequest extends FormRequest
 
             'productspecs.*.commission.numeric' => '佣金点必须是数字',
 
-            'productspecs.*.is_combination.integer' => '是否组合必须int类型',
+            'productspecs.*.is_combination.boolean' => '是否组合必须int类型',
 
             'productspecs.*.package_quantity.integer' => '包件数量必须int类型',
 
@@ -221,16 +231,16 @@ class ProductSpecRequest extends FormRequest
 
             'productspecs.*.weight.numeric' => '重量必须是数字',
 
-            'productspecs.*.finished_pro.integer' => '是否成品 0=不是 1=是必须int类型',
+            'productspecs.*.finished_pro.boolean' => '是否成品 0=不是 1 是',
 
-            'productspecs.*.is_stop_pro.integer' => '是否停产 0 不是 1 是必须int类型',
+            'productspecs.*.is_stop_pro.boolean' => '是否停产 0 不是 1 是',
 
             'productspecs.*.remark.string' => '备注必须string类型',
             'productspecs.*.remark.nullable' => '备注可为null',
             'productspecs.*.remark.max' => '备注最大长度为255',
 
-            'productspecs.*.status.integer' => '状态必须int类型',
-            'productspecs.*.status.required' => '状态必填'
+            // 'productspecs.*.status.integer' => '状态必须int类型',
+            // 'productspecs.*.status.required' => '状态必填'
         ];
     }
 

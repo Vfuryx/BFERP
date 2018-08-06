@@ -30,8 +30,8 @@ class CreateShopsTable extends Migration
             $table->string('address')->default('')->comment('发货地（地址）');
             $table->decimal('gross_profit_rate',10,2)->default(0.00)->comment('毛利率（%）');
             $table->integer('platform_id')->default(0)->comment('平台类型');
-            $table->tinyInteger('is_waybill')->default(1)->comment('电子面单');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('is_waybill')->default(true)->comment('电子面单');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

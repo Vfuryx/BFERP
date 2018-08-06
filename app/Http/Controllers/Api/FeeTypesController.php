@@ -26,7 +26,7 @@ class FeeTypesController extends Controller
      * @Get("/feetypes{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -35,14 +35,14 @@ class FeeTypesController extends Controller
      *             "fee_category": {
      *                  "id": 1,
      *                  "name": "费用类别",
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-06-25 10:45:30",
      *                  "updated_at": "2018-06-25 10:45:30"
      *              },
      *             "name": "费用类型",
      *             "code": "费用类型代码",
-     *             "is_default": 1,
-     *             "status": 1,
+     *             "is_default": true,
+     *             "status": true,
      *             "remark": "费用类型代码备注",
      *             "created_at": "2018-06-14 15:28:13",
      *             "updated_at": "2018-06-14 15:28:13"
@@ -52,14 +52,14 @@ class FeeTypesController extends Controller
      *             "fee_category": {
      *                  "id": 2,
      *                  "name": "费用类别2",
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-06-25 10:45:32",
      *                  "updated_at": "2018-06-25 10:45:32"
      *              },
      *             "name": "费用类型2",
      *             "code": "费用类型代码2",
-     *             "is_default": 1,
-     *             "status": 1,
+     *             "is_default": true,
+     *             "status": true,
      *             "remark": "费用类型代码2备注",
      *             "created_at": "2018-06-14 15:31:33",
      *             "updated_at": "2018-06-14 15:31:33"
@@ -92,8 +92,8 @@ class FeeTypesController extends Controller
      *      @Parameter("name", description="费用名称", required=true),
      *      @Parameter("code", description="费用代码", required=true),
      *      @Parameter("remark", description="费用类别备注", required=false),
-     *      @Parameter("is_default",type="integer", description="是否默认", required=false,default=0),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_default",type="boolean", description="是否默认", required=false, default=0),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -113,8 +113,8 @@ class FeeTypesController extends Controller
      *          "fee_category_id": "1",
      *          "name": "费用类型",
      *          "code": "费用类型代码",
-     *          "is_default": "1",
-     *          "status": "1",
+     *          "is_default": true,
+     *          "status": true,
      *          "remark": "费用类型代码备注",
      *          "created_at": "2018-06-14 15:31:33",
      *          "updated_at": "2018-06-14 15:31:33",
@@ -149,8 +149,8 @@ class FeeTypesController extends Controller
      *          "fee_category_id": 1,
      *          "name": "费用类型",
      *          "code": "费用类型代码",
-     *          "is_default": 1,
-     *          "status": 1,
+     *          "is_default": true,
+     *          "status": true,
      *          "remark": "费用类型代码备注",
      *          "created_at": "2018-06-14 15:28:13",
      *          "updated_at": "2018-06-14 15:28:13"
@@ -186,8 +186,8 @@ class FeeTypesController extends Controller
      *          "fee_category_id": "1",
      *          "name": "费用类型1",
      *          "code": "费用类型代码1",
-     *          "is_default": "1",
-     *          "status": "1",
+     *          "is_default": true,
+     *          "status": true,
      *          "remark": "费用类型代码1备注",
      *          "created_at": "2018-06-14 15:28:13",
      *          "updated_at": "2018-06-14 15:46:06"
@@ -260,7 +260,7 @@ class FeeTypesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="费用类型id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

@@ -19,18 +19,18 @@ class CreateStockInsTable extends Migration
             $table->unsignedInteger('warehouse_id')->default(0)->comment('仓库id');
             $table->unsignedInteger('stock_in_types_id')->default(0)->comment('入库类型id');
             $table->string('creator')->comment('创建人');
-            $table->tinyInteger('is_submit')->default(0)->comment('是否提交');
+            $table->boolean('is_submit')->default(false)->comment('是否提交');
             $table->string('submitter')->default('')->comment('提交人');
             $table->timestamp('submit_at')->nullable()->comment('提交时间');
-            $table->tinyInteger('is_print')->default(0)->comment('是否打印');
+            $table->boolean('is_print')->default(false)->comment('是否打印');
             $table->timestamp('print_at')->nullable()->comment('打印时间');
-            $table->tinyInteger('is_audit')->default(0)->comment('是否审核');
+            $table->boolean('is_audit')->default(false)->comment('是否审核');
             $table->string('auditor')->default('')->comment('审核人');
             $table->timestamp('audit_at')->nullable()->comment('审核时间');
-            $table->tinyInteger('is_stock_in')->default(0)->comment('是否入库');
+            $table->boolean('is_stock_in')->default(false)->comment('是否入库');
             $table->string('warehouer')->default('')->comment('入库人');
             $table->timestamp('stock_in_at')->nullable()->comment('入库时间');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

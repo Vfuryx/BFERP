@@ -25,7 +25,7 @@ class PurchaseReturnDetailsController extends Controller
      * @Get("/purchasereturndetails{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -43,7 +43,7 @@ class PurchaseReturnDetailsController extends Controller
      *                  "audit_at": "2018-07-24 15:00:53",
      *                  "is_print": 1,
      *                  "remark": "采购退货单备注1",
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-07-24 11:44:07",
      *                  "updated_at": "2018-07-24 15:00:53"
      *              },
@@ -53,7 +53,7 @@ class PurchaseReturnDetailsController extends Controller
      *                  "goods_id": 1,
      *                  "pro_specs_id": 1,
      *                  "quantity": 8,
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-07-21 18:20:53",
      *                  "updated_at": "2018-07-24 15:00:53"
      *              },
@@ -74,9 +74,9 @@ class PurchaseReturnDetailsController extends Controller
      *                  "fax": "1",
      *                  "email": "132@re.cn",
      *                  "remark": "1",
-     *                  "is_scan": 1,
-     *                  "status": 1,
-     *                  "auto_valuation": 1,
+     *                  "is_scan": true,
+     *                  "status": true,
+     *                  "auto_valuation": true,
      *                  "created_at": "2018-07-17 17:54:01",
      *                  "updated_at": "2018-07-17 17:54:01"
      *              },
@@ -84,7 +84,7 @@ class PurchaseReturnDetailsController extends Controller
      *              "purchase_return_type": {
      *                  "id": 1,
      *                  "name": "采购退货类型名称",
-     *                  "status": 1,
+     *                  "status": true,
      *                  "created_at": "2018-07-24 10:24:13",
      *                  "updated_at": "2018-07-24 10:24:13"
      *              },

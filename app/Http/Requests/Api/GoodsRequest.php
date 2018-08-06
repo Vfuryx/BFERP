@@ -16,7 +16,7 @@ class GoodsRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -43,8 +43,8 @@ class GoodsRequest extends FormRequest
                     'title' => 'required|string|max:255',
                     'img' => 'required|url|max:255',
                     'url' => 'required|url|max:255',
-                    'status' => 'integer',
-                    'is_stop_pro' => 'integer',
+                    'status' => 'boolean',
+                    'is_stop_pro' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -74,8 +74,8 @@ class GoodsRequest extends FormRequest
                     'title' => 'string|max:255',
                     'img' => 'url|max:255',
                     'url' => 'url|max:255',
-                    'status' => 'integer',
-                    'is_stop_pro' => 'integer',
+                    'status' => 'boolean',
+                    'is_stop_pro' => 'boolean',
                 ];
                 break;
         }
@@ -134,9 +134,9 @@ class GoodsRequest extends FormRequest
             'url.url' => '商品网址必须有效的url',
             'url.max' => '商品网址最大长度为255',
 
-            'is_stop_pro.integer' => '是否停产 默认 0 = 不停产  1 = 停产',
+            'is_stop_pro.boolean' => '是否停产布尔必须布尔类型 默认 0 = 不停产  1 = 停产',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
 
         ];

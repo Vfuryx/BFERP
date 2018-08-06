@@ -12,6 +12,10 @@ class PurchaseReturn extends Model
         'remark','status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 
     protected static function boot()
     {

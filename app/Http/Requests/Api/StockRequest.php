@@ -17,7 +17,7 @@ class StockRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer',
+                    'status' => 'boolean',
                     'warehouse_id' => 'integer'
                 ];
                 break;
@@ -49,7 +49,7 @@ class StockRequest extends FormRequest
                         },
                     ],
                     'stocks.*.quantity' => 'required|integer',
-                    'stocks.*.status' => 'integer'
+                    'stocks.*.status' => 'boolean'
                 ];
                 break;
         }

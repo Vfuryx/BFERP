@@ -14,7 +14,7 @@ class PrintReportRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -22,7 +22,7 @@ class PrintReportRequest extends FormRequest
                     'file' => 'required|string|max:255',
                     'name' => 'required|string|max:255',
                     'paper_format' => 'required|string|max:255',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -30,7 +30,7 @@ class PrintReportRequest extends FormRequest
                     'file' => 'string|max:255',
                     'name' => 'string|max:255',
                     'paper_format' => 'string|max:255',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -51,7 +51,7 @@ class PrintReportRequest extends FormRequest
             'paper_format.string' => '报表格式必须string类型',
             'paper_format.max' => '报表格式最大长度为255',
 
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填'
         ];
     }

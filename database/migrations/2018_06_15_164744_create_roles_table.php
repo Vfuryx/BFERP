@@ -19,7 +19,7 @@ class CreateRolesTable extends Migration
             $table->increments('id');
             $table->string('name')->default('')->unique()->comment('分组名');
             $table->string('description')->default('')->comment('分组描述');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });
@@ -30,7 +30,7 @@ class CreateRolesTable extends Migration
                 ->onUpdate('cascade')->onDelete('set null');
             $table->string('name')->default('')->comment('角色名');
             $table->string('description')->default('')->comment('角色描述');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });

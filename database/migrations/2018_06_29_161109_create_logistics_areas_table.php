@@ -17,7 +17,7 @@ class CreateLogisticsAreasTable extends Migration
             $table->increments('id');
             $table->string('code')->default('')->comment('区域代码');
             $table->string('name')->default('')->comment('区域名称');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

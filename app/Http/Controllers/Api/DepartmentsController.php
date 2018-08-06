@@ -27,7 +27,7 @@ class DepartmentsController extends Controller
      * @Get("/departments{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -37,8 +37,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称",
      *          "p_dept": 0,
      *          "remark": "备注",
-     *          "is_verify": 1,
-     *          "status": 1,
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:37:17",
      *          "updated_at": "2018-07-05 17:37:17"
      *      },
@@ -48,8 +48,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称",
      *          "p_dept": 1,
      *          "remark": "备注",
-     *          "is_verify": 1,
-     *          "status": 1,
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:39:24",
      *          "updated_at": "2018-07-05 17:39:24"
      *      },
@@ -59,8 +59,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称3",
      *          "p_dept": 0,
      *          "remark": "备注",
-     *          "is_verify": 1,
-     *          "status": 1,
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:42:06",
      *          "updated_at": "2018-07-05 17:42:06"
      *      }
@@ -92,8 +92,8 @@ class DepartmentsController extends Controller
      *      @Parameter("name", description="部门名称", required=true),
      *      @Parameter("p_dept", type="integer", description="所属主部门", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("is_verify",type="integer", description="是否已经验证", required=false,default=0),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("is_verify",type="boolean", description="是否已经验证", required=false,default=0),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -114,8 +114,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称",
      *          "p_dept": "0",
      *          "remark": "备注",
-     *          "is_verify": "1",
-     *          "status": "1",
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:42:06",
      *          "updated_at": "2018-07-05 17:42:06",
      *          "meta": {
@@ -145,8 +145,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称",
      *          "p_dept": 0,
      *          "remark": "备注",
-     *          "is_verify": 1,
-     *          "status": 1,
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:37:17",
      *          "updated_at": "2018-07-05 17:37:17"
      *      })
@@ -185,8 +185,8 @@ class DepartmentsController extends Controller
      *          "name": "部门名称",
      *          "p_dept": 0,
      *          "remark": "备注",
-     *          "is_verify": 1,
-     *          "status": 1,
+     *          "is_verify": true,
+     *          "status": true,
      *          "created_at": "2018-07-05 17:37:17",
      *          "updated_at": "2018-07-05 17:37:17"
      *      })
@@ -253,7 +253,7 @@ class DepartmentsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="部门id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

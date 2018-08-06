@@ -17,6 +17,21 @@ class DlOrderList extends Model
         'seller_rate', 'estimate_con_time'
     ];
 
+    protected $dates = [
+        'timeout_action_time',
+        'modified',
+        'end_time',
+        'consign_time',
+    ];
+
+    //设置类型
+    protected $casts = [
+        'is_sh_ship' => 'boolean',
+        'buyer_rate' => 'boolean',
+        'is_oversold' => 'boolean',
+        'seller_rate' => 'boolean',
+    ];
+
     public function orderDownloads()
     {
         return $this->belongsTo(OrderDownload::class);

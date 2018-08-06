@@ -26,7 +26,7 @@ class LogisticsController extends Controller
      * @Get("/logistics{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -39,7 +39,7 @@ class LogisticsController extends Controller
      *              "file": "报表文件",
      *              "name": "报表名称",
      *              "paper_format": "报表格式",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
      *          },
@@ -49,13 +49,13 @@ class LogisticsController extends Controller
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
-     *              "status": 1,
-     *              "is_default": 1,
+     *              "status": true,
+     *              "is_default": true,
      *              "created_at": "2018-07-03 17:51:25",
      *              "updated_at": "2018-07-03 17:51:25"
      *          },
      *          "remark": "备注",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 17:52:28",
      *          "updated_at": "2018-07-03 17:52:28"
      *      }
@@ -91,7 +91,7 @@ class LogisticsController extends Controller
      *      @Parameter("address", description="物流地址", required=true),
      *      @Parameter("freight_type_id",type="integer", description="运费类型id", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -118,7 +118,7 @@ class LogisticsController extends Controller
      *              "file": "报表文件",
      *              "name": "报表名称",
      *              "paper_format": "报表格式",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
      *          },
@@ -128,13 +128,13 @@ class LogisticsController extends Controller
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
-     *              "status": 1,
-     *              "is_default": 1,
+     *              "status": true,
+     *              "is_default": true,
      *              "created_at": "2018-07-03 17:51:25",
      *              "updated_at": "2018-07-03 17:51:25"
      *          },
      *          "remark": "备注",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-03 17:52:28",
      *          "updated_at": "2018-07-03 17:52:28",
      *          "meta": {
@@ -167,7 +167,7 @@ class LogisticsController extends Controller
      *              "file": "报表文件",
      *              "name": "报表名称",
      *              "paper_format": "报表格式",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
      *          },
@@ -177,13 +177,13 @@ class LogisticsController extends Controller
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
-     *              "status": 1,
-     *              "is_default": 1,
+     *              "status": true,
+     *              "is_default": true,
      *              "created_at": "2018-07-03 17:51:25",
      *              "updated_at": "2018-07-03 17:51:25"
      *          },
      *          "remark": "备注",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-03 17:52:28",
      *          "updated_at": "2018-07-03 17:52:28"
      *      })
@@ -228,7 +228,7 @@ class LogisticsController extends Controller
      *              "file": "报表文件",
      *              "name": "报表名称",
      *              "paper_format": "报表格式",
-     *              "status": 1,
+     *              "status": true,
      *              "created_at": "2018-07-03 17:50:46",
      *              "updated_at": "2018-07-03 17:50:49"
      *          },
@@ -238,13 +238,13 @@ class LogisticsController extends Controller
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
-     *              "status": 1,
-     *              "is_default": 1,
+     *              "status": true,
+     *              "is_default": true,
      *              "created_at": "2018-07-03 17:51:25",
      *              "updated_at": "2018-07-03 17:51:25"
      *          },
      *          "remark": "备注",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-03 17:52:28",
      *          "updated_at": "2018-07-03 18:30:59"
      *      })
@@ -311,7 +311,7 @@ class LogisticsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="物流id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

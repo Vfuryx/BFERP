@@ -18,7 +18,7 @@ class CreatePrintReportsTable extends Migration
             $table->string('file')->default('')->comment('报表文件');
             $table->string('name')->default('')->comment('报表名称');
             $table->string('paper_format')->default('')->comment('报表格式');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

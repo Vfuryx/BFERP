@@ -8,6 +8,11 @@ class DistributionMethod extends Model
 
     protected $fillable = ['name', 'status'];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function productSpecs()
     {
         return $this->hasMany(ProductSpec::class);

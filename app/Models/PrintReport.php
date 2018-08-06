@@ -10,6 +10,11 @@ class PrintReport extends Model
         'file', 'name', 'paper_format', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function logistics()
     {
         return $this->hasMany(Logistics::class);

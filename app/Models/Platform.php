@@ -10,6 +10,11 @@ class Platform extends Model
         'name', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
     public function shop()
     {
         return $this->hasMany(Shop::class);

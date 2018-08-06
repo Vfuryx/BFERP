@@ -26,7 +26,7 @@ class SeriesController extends Controller
      * @Get("/series{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
@@ -47,9 +47,9 @@ class SeriesController extends Controller
      *              "mobile": "手机4",
      *              "fax": "传真4",
      *              "remark": "备注4",
-     *              "is_scan": 1,
-     *              "status": 1,
-     *              "auto_valuation": 1,
+     *              "is_scan": true,
+     *              "status": true,
+     *              "auto_valuation": true,
      *              "created_at": "2018-07-04 11:11:39",
      *              "updated_at": "2018-07-04 11:22:29"
      *          },
@@ -57,7 +57,7 @@ class SeriesController extends Controller
      *          "name": "系列名称",
      *          "description": "系列描述",
      *          "remark": "备注",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-04 14:03:49",
      *          "updated_at": "2018-07-04 14:03:49"
      *      },
@@ -78,9 +78,9 @@ class SeriesController extends Controller
      *              "mobile": "手机4",
      *              "fax": "传真4",
      *              "remark": "备注4",
-     *              "is_scan": 1,
-     *              "status": 1,
-     *              "auto_valuation": 1,
+     *              "is_scan": true,
+     *              "status": true,
+     *              "auto_valuation": true,
      *              "created_at": "2018-07-04 11:11:39",
      *              "updated_at": "2018-07-04 11:22:29"
      *          },
@@ -88,7 +88,7 @@ class SeriesController extends Controller
      *          "name": "系列名称",
      *          "description": "系列描述",
      *          "remark": "备注",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-04 14:09:51",
      *          "updated_at": "2018-07-04 14:09:51"
      *      }
@@ -121,7 +121,7 @@ class SeriesController extends Controller
      *      @Parameter("name", description="系列名称", required=true),
      *      @Parameter("description", description="系列描述", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -153,9 +153,9 @@ class SeriesController extends Controller
      *              "mobile": "手机4",
      *              "fax": "传真4",
      *              "remark": "备注4",
-     *              "is_scan": 1,
-     *              "status": 1,
-     *              "auto_valuation": 1,
+     *              "is_scan": true,
+     *              "status": true,
+     *              "auto_valuation": true,
      *              "created_at": "2018-07-04 11:11:39",
      *              "updated_at": "2018-07-04 11:22:29"
      *          },
@@ -163,7 +163,7 @@ class SeriesController extends Controller
      *          "name": "系列名称",
      *          "description": "系列描述",
      *          "remark": "备注",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-04 14:03:49",
      *          "updated_at": "2018-07-04 14:03:49",
      *          "meta": {
@@ -204,9 +204,9 @@ class SeriesController extends Controller
      *              "mobile": "手机4",
      *              "fax": "传真4",
      *              "remark": "备注4",
-     *              "is_scan": 1,
-     *              "status": 1,
-     *              "auto_valuation": 1,
+     *              "is_scan": true,
+     *              "status": true,
+     *              "auto_valuation": true,
      *              "created_at": "2018-07-04 11:11:39",
      *              "updated_at": "2018-07-04 11:22:29"
      *          },
@@ -214,7 +214,7 @@ class SeriesController extends Controller
      *          "name": "系列名称",
      *          "description": "系列描述",
      *          "remark": "备注",
-     *          "status": 1,
+     *          "status": true,
      *          "created_at": "2018-07-04 14:03:49",
      *          "updated_at": "2018-07-04 14:03:49"
      *      })
@@ -267,9 +267,9 @@ class SeriesController extends Controller
      *              "mobile": "手机4",
      *              "fax": "传真4",
      *              "remark": "备注4",
-     *              "is_scan": 1,
-     *              "status": 1,
-     *              "auto_valuation": 1,
+     *              "is_scan": true,
+     *              "status": true,
+     *              "auto_valuation": true,
      *              "created_at": "2018-07-04 11:11:39",
      *              "updated_at": "2018-07-04 11:22:29"
      *          },
@@ -277,7 +277,7 @@ class SeriesController extends Controller
      *          "name": "系列名称10",
      *          "description": "系列描述10",
      *          "remark": "备注10",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-07-04 14:03:49",
      *          "updated_at": "2018-07-04 14:13:21"
      *      })
@@ -344,7 +344,7 @@ class SeriesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="系列id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

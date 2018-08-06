@@ -21,7 +21,7 @@ class CreateDamagedGoodsTable extends Migration
             $table->integer('quantity')->default(0)->comment('损坏数量');
             $table->decimal('money',10,2)->default(0.00)->comment('损坏金额');
             $table->string('remark')->default('')->comment('备注');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

@@ -17,19 +17,19 @@ class FeeCategoryRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -40,7 +40,7 @@ class FeeCategoryRequest extends FormRequest
         return [
             'name.required' => '费用类别名称必填',
             'name.string' => '费用类别名称必须string类型',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
         ];
     }

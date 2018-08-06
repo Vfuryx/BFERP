@@ -10,6 +10,11 @@ class LogisticsArea extends Model
         'code', 'name', 'status'
     ];
 
+    //设置类型
+    protected $casts = [
+        'status' => 'boolean'
+    ];
+
     public function logistics()
     {
         return $this->hasMany(Logistics::class);

@@ -17,11 +17,12 @@ class PurchaseRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer',
+                    'status' => 'boolean',
                     'purchase_status' => Rule::in([
                         \App\Models\Purchase::PURCHASE_STATUS_NEW,
                         \App\Models\Purchase::PURCHASE_STATUS_SECTION,
-                        \App\Models\Purchase::PURCHASE_STATUS_FINISH]),
+                        \App\Models\Purchase::PURCHASE_STATUS_FINISH
+                    ]),
                 ];
                 break;
             case 'POST':
@@ -35,7 +36,7 @@ class PurchaseRequest extends FormRequest
                         }),
                     ],
                     'remark' => 'string|nullable|max:255',
-                    'status' => 'integer',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -49,7 +50,7 @@ class PurchaseRequest extends FormRequest
                         })
                     ],
                     'remark' => ['string', 'nullable', 'max:255'],
-                    'status' => ['integer' ],
+                    'status' => ['boolean'],
                 ];
                 break;
         }
@@ -77,9 +78,7 @@ class PurchaseRequest extends FormRequest
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
 
-            'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
-
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

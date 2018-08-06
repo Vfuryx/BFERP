@@ -18,7 +18,7 @@ class CreateCombinationsTable extends Migration
             $table->unsignedInteger('product_specs_id')->comment('产品规格id');
             $table->unsignedInteger('com_pro_specs_id')->comment('组合产品规格id');
             $table->integer('count')->default(0)->comment('组合件数');
-            // $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            // $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

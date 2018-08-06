@@ -26,21 +26,21 @@ class DistributionMethodsController extends Controller
      * @Get("/distmets{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="integer", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
      *         {
      *              "id": 1,
      *              "name": "配送方式",
-     *              "status": "1",
+     *              "status": true,
      *              "created_at": "2018-06-14 14:39:45",
      *              "updated_at": "2018-06-14 14:39:45"
      *         },
      *         {
      *             "id": 2,
      *             "name": "配送方式2",
-     *             "status": "1",
+     *             "status": true,
      *             "created_at": "2018-06-14 14:42:23",
      *             "updated_at": "2018-06-14 14:42:23"
      *         }
@@ -73,7 +73,7 @@ class DistributionMethodsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("name", description="配送方式名", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=false,default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -88,7 +88,7 @@ class DistributionMethodsController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "配送方式",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:39:45",
      *          "meta": {
@@ -115,7 +115,7 @@ class DistributionMethodsController extends Controller
      *      @Response(200, body={
      *          "id": 1,
      *          "name": "配送方式",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:45:14"
      *      })
@@ -148,7 +148,7 @@ class DistributionMethodsController extends Controller
      *      @Response(201, body={
      *          "id": 1,
      *          "name": "配送方式1",
-     *          "status": "1",
+     *          "status": true,
      *          "created_at": "2018-06-14 14:39:45",
      *          "updated_at": "2018-06-14 14:40:45",
      *      })
@@ -215,7 +215,7 @@ class DistributionMethodsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="配送方式id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="integer", description="状态(0:停用，1:启用)", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
      *      @Response(500, body={

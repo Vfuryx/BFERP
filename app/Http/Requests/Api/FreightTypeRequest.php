@@ -17,21 +17,21 @@ class FreightTypeRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'is_default' => 'integer',
-                    'status' => 'integer'
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'is_default' => 'integer',
-                    'status' => 'integer'
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -40,11 +40,11 @@ class FreightTypeRequest extends FormRequest
     public function messages()
     {
         return [
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
             'name.required' => '运费名称必填',
             'name.string' => '运费名称必须string类型',
-            'is_default.boolean' => '是否默认必须int类型',
+            'is_default.boolean' => '是否默认必须布尔类型',
         ];
     }
 

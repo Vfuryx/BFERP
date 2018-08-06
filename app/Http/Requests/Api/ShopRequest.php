@@ -16,7 +16,7 @@ class ShopRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'integer'
+                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -46,8 +46,8 @@ class ShopRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'is_waybill' => 'integer',
-                    'status' => 'integer'
+                    'is_waybill' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
@@ -77,8 +77,8 @@ class ShopRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'is_waybill' => 'integer',
-                    'status' => 'integer'
+                    'is_waybill' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -145,11 +145,11 @@ class ShopRequest extends FormRequest
             'platform_id.integer' => '平台类型id必须int类型',
             'platform_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'status.required' => '电子面单必填',
-            'status.integer' => '电子面单必须int类型',
+            'is_waybill.required' => '电子面单必填',
+            'is_waybill.integer' => '电子面单必须布尔类型',
 
             'status.required' => '状态必填',
-            'status.integer' => '状态必须int类型',
+            'status.boolean' => '状态必须布尔类型',
         ];
     }
 

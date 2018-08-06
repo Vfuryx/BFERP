@@ -19,7 +19,7 @@ class CreateMarkColorsTable extends Migration
             $table->string('markname')->default('')->comment('标记名称');
             $table->string('color')->default('')->comment('颜色');
             $table->string('description')->default('')->comment('描述');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

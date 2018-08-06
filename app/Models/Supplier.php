@@ -15,6 +15,13 @@ class Supplier extends Model
         'remark', 'is_scan', 'status', 'auto_valuation',
     ];
 
+    //设置类型
+    protected $casts = [
+        'is_scan' => 'boolean',
+        'status' => 'boolean',
+        'auto_valuation' => 'boolean'
+    ];
+
     public function series()
     {
         return $this->hasMany(Series::class);

@@ -20,7 +20,7 @@ class CreateSeriesTable extends Migration
             $table->string('name')->default('')->comment('系列名称');
             $table->string('description')->default('')->comment('系列描述');
             $table->string('remark')->default('')->comment('备注');
-            $table->tinyInteger('status')->default(1)->comment('状态：0=停用，1=启用');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }
