@@ -11,6 +11,7 @@ use App\Models\Combination;
 use App\Http\Requests\Api\GoodsRequest;
 use App\Http\Requests\Api\ProductSpecRequest;
 use App\Http\Requests\Api\CombinationRequest;
+use App\Http\Requests\Api\SearchGoodsRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
@@ -29,6 +30,46 @@ class GoodsController extends Controller
 
     const TRANSFORMER = GoodsTransformer::class;
     const MODEL = Goods::class;
+    const PerPage = 8;
+
+    /**
+     * 获取所有商品
+     *
+     * @Get("/goods/search{?commodity_code}")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("commodity_code", description="商品编码", required=false, default="all"),
+     *      @Parameter("shops_id", type="integer", description="店铺id", required=false, default="all"),
+     *      @Parameter("spec_code", description="规格编码", required=false, default="all"),
+     * })
+     *
+     * */
+    public function searchGoods(SearchGoodsRequest $request)
+    {
+        $commodity_code = $shops_id = $spec_code = '';
+
+        extract($request->validated());
+
+        $goods = Goods::query()
+            ->when($commodity_code, function($query) use ($commodity_code) {
+
+                return $query->where('commodity_code', 'like', '%' . $commodity_code . '%');
+
+            })->when($shops_id, function($query) use ($shops_id) {
+
+                return $query->where('shops_id', '=', $shops_id);
+
+            })->whereHas('productSpecs', function($query) use ($spec_code) {
+
+                $query->when($spec_code, function($query) use ($spec_code) {
+
+                    return $query->where('spec_code', 'like', '%' . $spec_code . '%');
+
+                });
+            })->with('productSpecs');
+
+        return $this->response->paginator($goods->paginate(self::PerPage), new GoodsTransformer());
+    }
 
     /**
      * 获取所有商品
@@ -47,7 +88,8 @@ class GoodsController extends Controller
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
      *          "short_name": "商品简称",
-     *          "nick": "卖家昵称",
+     *          "shops_id": "店铺id",
+     *          "shop_nick": "卖家昵称",
      *          "supplier": {
      *              "id": 1,
      *              "name": "供应商名称",
@@ -101,7 +143,7 @@ class GoodsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 1,
+     *                  "is_combination": true,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -125,6 +167,7 @@ class GoodsController extends Controller
      *                  "weight": 10,
      *                  "remark": "备注",
      *                  "finished_pro":  true,
+     *                  "finished_pro":  true,
      *                  "is_stop_pro": false,
      *                  "created_at": "2018-07-09 18:01:34",
      *                  "updated_at": "2018-07-09 18:01:34",
@@ -133,7 +176,6 @@ class GoodsController extends Controller
      *                          "id": 1,
      *                          "product_specs_id": 2,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 1,
      *                          "status": true,
      *                          "created_at": "2018-07-09 18:01:34",
      *                          "updated_at": "2018-07-09 18:01:34",
@@ -153,7 +195,7 @@ class GoodsController extends Controller
      *                              "assembly_price": "10.00",
      *                              "discount": "1.00",
      *                              "commission": "1.00",
-     *                              "is_combination": 1,
+     *                              "is_combination": true,
      *                              "package_quantity": 10,
      *                              "package_costs": "10.00",
      *                              "wooden_frame_costs": "10.00",
@@ -187,7 +229,6 @@ class GoodsController extends Controller
      *                          "id": 2,
      *                          "product_specs_id": 2,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 1,
      *                          "status": true,
      *                          "created_at": "2018-07-09 18:01:34",
      *                          "updated_at": "2018-07-09 18:01:34",
@@ -207,7 +248,7 @@ class GoodsController extends Controller
      *                              "assembly_price": "10.00",
      *                              "discount": "1.00",
      *                              "commission": "1.00",
-     *                              "is_combination": 1,
+     *                              "is_combination": true,
      *                              "package_quantity": 10,
      *                              "package_costs": "10.00",
      *                              "wooden_frame_costs": "10.00",
@@ -318,17 +359,18 @@ class GoodsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("commodity_code", description="商品编码", required=true),
-     *      @Parameter("jd_sn", description="京东编码", required=true),
-     *      @Parameter("vips_sn", description="唯品会编码", required=true),
-     *      @Parameter("factory_model", description="工厂型号", required=true),
+     *      @Parameter("jd_sn", description="京东编码", required=false),
+     *      @Parameter("vips_sn", description="唯品会编码", required=false),
+     *      @Parameter("factory_model", description="工厂型号", required=false),
      *      @Parameter("short_name", description="商品简称", required=true),
-     *      @Parameter("nick", description="卖家昵称（店铺昵称）", required=true),
+     *      @Parameter("shops_id", type="integer", description="店铺id", required=true),
+     *      @Parameter("shop_nick", description="卖家昵称（店铺昵称）", required=true),
      *      @Parameter("supplier_id",type="integer", description="供应商id", required=true),
      *      @Parameter("category_id",type="integer", description="产品类别id", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("title", description="商品标题", required=true),
-     *      @Parameter("img", description="商品图片", required=true),
-     *      @Parameter("url",type="url", description="商品网址", required=true),
+     *      @Parameter("img", description="商品图片", required=false),
+     *      @Parameter("url",type="url", description="商品网址", required=false),
      *      @Parameter("is_stop_pro",type="boolean", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=false),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
      *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=true),
@@ -343,7 +385,7 @@ class GoodsController extends Controller
      *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
      *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
      *      @Parameter("productspecs[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("productspecs[0][is_combination]", type="integer", description="是否组合", required=true),
+     *      @Parameter("productspecs[0][is_combination]", type="boolean", description="是否组合", required=true),
      *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
      *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
      *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
@@ -369,7 +411,6 @@ class GoodsController extends Controller
      *      @Parameter("productspecs[0][finished_pro]", type="integer", description="是否成品 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][is_stop_pro]", type="boolean", description="是否停产 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=true),
-     *      @Parameter("productspecs[0][combinations][0][count]", type="integer", description="组合件数", required=true),
      * })
      * @Request({
      *      "commodity_code": "商品编码",
@@ -377,7 +418,8 @@ class GoodsController extends Controller
      *      "vips_sn": "唯品会编码",
      *      "factory_model": "工厂型号",
      *      "short_name": "商品简称",
-     *      "nick": "卖家昵称",
+     *      "shops_id": 1,
+     *      "shop_nick": "卖家昵称",
      *      "supplier_id": 1,
      *      "category_id": 1,
      *      "remark": "备注",
@@ -397,7 +439,7 @@ class GoodsController extends Controller
      *      "productspecs[0][assembly_price]":"10",
      *      "productspecs[0][discount]":"1",
      *      "productspecs[0][commission]":"1",
-     *      "productspecs[0][is_combination]":"1",
+     *      "productspecs[0][is_combination]": true,
      *      "productspecs[0][package_quantity]":"10",
      *      "productspecs[0][package_costs]":"10",
      *      "productspecs[0][wooden_frame_costs]":"10",
@@ -420,10 +462,9 @@ class GoodsController extends Controller
      *      "productspecs[0][volume]":"10",
      *      "productspecs[0][weight]":"10",
      *      "productspecs[0][remark]":"备注",
-     *      "productspecs[0][finished_pro]":"1",
+     *      "productspecs[0][finished_pro]": true,
      *      "productspecs[0][is_stop_pro]": false,
      *      "productspecs[0][combinations][0][com_pro_specs_id]":"1",
-     *      "productspecs[0][combinations][0][count]":"10",
      *})
      * @Transaction({
      *      @Response(422, body={
@@ -454,7 +495,8 @@ class GoodsController extends Controller
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
      *          "short_name": "商品简称",
-     *          "nick": "卖家昵称",
+     *          "shops_id": "店铺id",
+     *          "shop_nick": "卖家昵称",
      *          "supplier": {
      *              "id": 1,
      *              "name": "1",
@@ -509,7 +551,7 @@ class GoodsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 1,
+     *                  "is_combination": true,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -541,7 +583,6 @@ class GoodsController extends Controller
      *                          "id": 8,
      *                          "product_specs_id": 7,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 10,
      *                          "created_at": "2018-07-25 15:06:13",
      *                          "updated_at": "2018-07-25 15:06:13",
      *                          "com_pro_spec": {
@@ -605,10 +646,12 @@ class GoodsController extends Controller
                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $goods = DB::transaction(function () use ($goodsRequest,
-                                                  $productSpecRequest,
-                                                  $combinationRequest,
-                                                  $validatedHandler) {
+        $goods = DB::transaction(function() use (
+            $goodsRequest,
+            $productSpecRequest,
+            $combinationRequest,
+            $validatedHandler
+        ) {
 
             $goods = Goods::create($goodsRequest->validated());
 
@@ -657,7 +700,8 @@ class GoodsController extends Controller
      *          "vips_sn": "唯品会编码",
      *          "factory_model": "工厂型号",
      *          "short_name": "商品简称",
-     *          "nick": "卖家昵称",
+     *          "shops_id": 1,
+     *          "shop_nick": "卖家昵称",
      *          "supplier": {
      *              "id": 1,
      *              "name": "1",
@@ -712,7 +756,7 @@ class GoodsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 1,
+     *                  "is_combination": true,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -744,7 +788,6 @@ class GoodsController extends Controller
      *                          "id": 8,
      *                          "product_specs_id": 7,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 10,
      *                          "created_at": "2018-07-25 15:06:13",
      *                          "updated_at": "2018-07-25 15:06:13",
      *                          "com_pro_spec": {
@@ -814,7 +857,8 @@ class GoodsController extends Controller
      *      @Parameter("vips_sn", description="唯品会编码", required=false),
      *      @Parameter("factory_model", description="工厂型号", required=false),
      *      @Parameter("short_name", description="商品简称", required=false),
-     *      @Parameter("nick", description="卖家昵称（店铺昵称）", required=false),
+     *      @Parameter("shops_id", description="店铺id", required=false),
+     *      @Parameter("shop_nick", description="卖家昵称（店铺昵称）", required=false),
      *      @Parameter("supplier_id",type="integer", description="供应商id", required=false),
      *      @Parameter("category_id",type="integer", description="产品类别id", required=false),
      *      @Parameter("remark", description="备注", required=false),
@@ -836,7 +880,7 @@ class GoodsController extends Controller
      *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
      *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
      *      @Parameter("productspecs[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("productspecs[0][is_combination]", type="integer", description="是否组合", required=false),
+     *      @Parameter("productspecs[0][is_combination]", type="boolean", description="是否组合", required=false),
      *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
      *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
      *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
@@ -859,11 +903,10 @@ class GoodsController extends Controller
      *      @Parameter("productspecs[0][volume]", type="numeric", description="体积(m²)", required=false),
      *      @Parameter("productspecs[0][weight]", type="numeric", description="重量", required=false),
      *      @Parameter("productspecs[0][remark]", description="备注", required=false),
-     *      @Parameter("productspecs[0][finished_pro]", type="integer", description="是否成品 0 不是 1 是", required=false),
+     *      @Parameter("productspecs[0][finished_pro]", type="boolean", description="是否成品 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][is_stop_pro]", type="boolean", description="是否停产 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][combinations][0][id]", type="integer", description="组合id ( 存在 id 视为更新，不存在视为插入 )", required=false),
      *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=false),
-     *      @Parameter("productspecs[0][combinations][0][count]", type="integer", description="组合件数", required=false),
      * })
      * @Request({
      *      "commodity_code": "商品编码",
@@ -871,7 +914,8 @@ class GoodsController extends Controller
      *      "vips_sn": "唯品会编码",
      *      "factory_model": "工厂型号",
      *      "short_name": "商品简称",
-     *      "nick": "卖家昵称",
+     *      "shops_id": "店铺id",
+     *      "shop_nick": "卖家昵称",
      *      "supplier_id": 1,
      *      "category_id": 1,
      *      "remark": "备注",
@@ -892,7 +936,7 @@ class GoodsController extends Controller
      *      "productspecs[0][assembly_price]":"10",
      *      "productspecs[0][discount]":"1",
      *      "productspecs[0][commission]":"1",
-     *      "productspecs[0][is_combination]":"1",
+     *      "productspecs[0][is_combination]": true,
      *      "productspecs[0][package_quantity]":"10",
      *      "productspecs[0][package_costs]":"10",
      *      "productspecs[0][wooden_frame_costs]":"10",
@@ -915,11 +959,10 @@ class GoodsController extends Controller
      *      "productspecs[0][volume]":"10",
      *      "productspecs[0][weight]":"10",
      *      "productspecs[0][remark]":"备注",
-     *      "productspecs[0][finished_pro]":"1",
+     *      "productspecs[0][finished_pro]":true,
      *      "productspecs[0][is_stop_pro]": false,
      *      "productspecs[0][combinations][0][id]":"2",
      *      "productspecs[0][combinations][0][com_pro_specs_id]":"1",
-     *      "productspecs[0][combinations][0][count]":"10",
      *})
      * @Transaction({
      *      @Response(404, body={
@@ -951,7 +994,8 @@ class GoodsController extends Controller
      *          "vips_sn": "唯品会编码1",
      *          "factory_model": "工厂型号1",
      *          "short_name": "商品简称1",
-     *          "nick": "卖家昵称1",
+     *          "shops_id": "商品简称",
+     *          "shop_nick": "店铺id",
      *          "supplier": {
      *              "id": 1,
      *              "name": "供应商名称",
@@ -1005,7 +1049,7 @@ class GoodsController extends Controller
      *                  "assembly_price": "10.00",
      *                  "discount": "1.00",
      *                  "commission": "1.00",
-     *                  "is_combination": 1,
+     *                  "is_combination": true,
      *                  "package_quantity": 10,
      *                  "package_costs": "10.00",
      *                  "wooden_frame_costs": "10.00",
@@ -1038,7 +1082,6 @@ class GoodsController extends Controller
      *                          "id": 1,
      *                          "product_specs_id": 2,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 1,
      *                          "status": true,
      *                          "created_at": "2018-07-09 18:01:34",
      *                          "updated_at": "2018-07-09 18:01:34",
@@ -1058,7 +1101,7 @@ class GoodsController extends Controller
      *                              "assembly_price": "10.00",
      *                              "discount": "1.00",
      *                              "commission": "1.00",
-     *                              "is_combination": 1,
+     *                              "is_combination": true,
      *                              "package_quantity": 10,
      *                              "package_costs": "10.00",
      *                              "wooden_frame_costs": "10.00",
@@ -1093,7 +1136,6 @@ class GoodsController extends Controller
      *                          "id": 2,
      *                          "product_specs_id": 2,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 1,
      *                          "status": true,
      *                          "created_at": "2018-07-09 18:01:34",
      *                          "updated_at": "2018-07-09 18:01:34",
@@ -1113,7 +1155,7 @@ class GoodsController extends Controller
      *                              "assembly_price": "10.00",
      *                              "discount": "1.00",
      *                              "commission": "1.00",
-     *                              "is_combination": 1,
+     *                              "is_combination": true,
      *                              "package_quantity": 10,
      *                              "package_costs": "10.00",
      *                              "wooden_frame_costs": "10.00",
@@ -1148,7 +1190,6 @@ class GoodsController extends Controller
      *                          "id": 3,
      *                          "product_specs_id": 2,
      *                          "com_pro_specs_id": 1,
-     *                          "count": 1,
      *                          "status": true,
      *                          "created_at": "2018-07-09 18:01:34",
      *                          "updated_at": "2018-07-09 18:01:34",
@@ -1168,7 +1209,7 @@ class GoodsController extends Controller
      *                              "assembly_price": "10.00",
      *                              "discount": "1.00",
      *                              "commission": "1.00",
-     *                              "is_combination": 1,
+     *                              "is_combination": true,
      *                              "package_quantity": 10,
      *                              "package_costs": "10.00",
      *                              "wooden_frame_costs": "10.00",
@@ -1260,11 +1301,13 @@ class GoodsController extends Controller
                            \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $goods = DB::transaction(function () use ($goodsRequest,
-                                                  $productSpecRequest,
-                                                  $combinationRequest,
-                                                  $goods,
-                                                  $validatedHandler) {
+        $goods = DB::transaction(function() use (
+            $goodsRequest,
+            $productSpecRequest,
+            $combinationRequest,
+            $goods,
+            $validatedHandler
+        ) {
 
             $goods->update($goodsRequest->validated());
 
@@ -1272,7 +1315,7 @@ class GoodsController extends Controller
 
                 foreach ($productSpecs as $productSpec) {
                     //计算要通过的字段
-                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(),$productSpec);
+                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec);
 
                     //存在id则更新，否则插入
                     if (isset($productSpec['id'])) {
@@ -1289,11 +1332,11 @@ class GoodsController extends Controller
                                 //存在id则更新，否则插入
                                 if (isset($combination['id'])) {
                                     $goods->productSpecs()->findOrFail($productSpec['id'])
-                                          ->combinations()->findOrFail($combination['id'])
-                                          ->update($combinationData);
+                                        ->combinations()->findOrFail($combination['id'])
+                                        ->update($combinationData);
                                 } else {
                                     $goods->productSpecs()->findOrFail($productSpec['id'])
-                                          ->combinations()->create($combinationData);
+                                        ->combinations()->create($combinationData);
                                 }
                             }
                         }
@@ -1335,7 +1378,7 @@ class GoodsController extends Controller
      */
     public function destroy(Goods $goods)
     {
-        DB::transaction(function () use ($goods) {
+        DB::transaction(function() use ($goods) {
             //删除组合
             $productSpecs = $goods->productSpecs();
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
@@ -1379,7 +1422,7 @@ class GoodsController extends Controller
     {
         $ids = explode(',', $request->input('ids'));
 
-        DB::transaction(function () use ($ids) {
+        DB::transaction(function() use ($ids) {
             //删除组合
             $productSpecs = ProductSpec::whereIn('goods_id', $ids);
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();

@@ -18,6 +18,8 @@ class StockInRequest extends FormRequest
             case 'GET':
                 return [
                     'status' => 'boolean',
+                    'is_submit' => 'boolean',
+                    'is_stock_in' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -38,24 +40,20 @@ class StockInRequest extends FormRequest
                 ];
                 break;
             case 'PATCH':
-
-                $publicRule = $this->publicRule($this->stockin->status == 1 && $this->stockin->is_submit == 0);
                 return [
                     'warehouse_id' => [
                         'integer',
                         Rule::exists('warehouses', 'id')->where(function ($query) {
                             $query->where('status', 1);
-                        }),
-                        $publicRule
+                        })
                     ],
                     'stock_in_types_id' => [
                         'integer',
                         Rule::exists('stock_in_types', 'id')->where(function ($query) {
                             $query->where('status', 1);
-                        }),
-                        $publicRule
+                        })
                     ],
-                    'status' => ['boolean', $publicRule],
+                    'status' => ['boolean'],
                 ];
                 break;
         }
@@ -71,6 +69,11 @@ class StockInRequest extends FormRequest
             'stock_in_types_id.required' => '入库类型id必填',
             'stock_in_types_id.integer' => '入库类型id必须int类型',
             'stock_in_types_id.exists' => '需要添加的id在数据库中未找到或未启用',
+
+            'is_submit.boolean' => '是否提交必须布尔类型',
+
+            'is_stock_in.boolean' => '是否入库必须布尔类型',
+
 
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
@@ -96,22 +99,6 @@ class StockInRequest extends FormRequest
             'status' => '状态：0=停用，1=启用',
             'stock_in_details' => '入库单详情'
         ];
-    }
-
-    /**
-     * 通用规则
-     * @param bool $condition   判断的条件
-     * @param string $text      返回的信息
-     * @return \Closure         闭包
-     */
-    public function publicRule($condition = true, $text = '需要更改错误确认数据的准确性，例如数据是否已启用、不可修改')
-    {
-        return function ($attribute, $value, $fail) use ($condition, $text) {
-            if ($condition) {
-                return true;
-            }
-            return $fail($text);
-        };
     }
 
 }

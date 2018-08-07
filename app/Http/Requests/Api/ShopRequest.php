@@ -146,7 +146,7 @@ class ShopRequest extends FormRequest
             'platform_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'is_waybill.required' => '电子面单必填',
-            'is_waybill.integer' => '电子面单必须布尔类型',
+            'is_waybill.boolean' => '电子面单必须布尔类型',
 
             'status.required' => '状态必填',
             'status.boolean' => '状态必须布尔类型',

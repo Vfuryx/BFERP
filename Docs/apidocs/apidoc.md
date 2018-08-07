@@ -4821,6 +4821,17 @@ FORMAT: 1A
 # goods [/api]
 商品资源
 
+## 获取所有商品 [GET /api/goods/search{?commodity_code}]
+
+
++ Parameters
+    + commodity_code: (string, optional) - 商品编码
+        + Default: all
+    + shops_id: (integer, optional) - 店铺id
+        + Default: all
+    + spec_code: (string, optional) - 规格编码
+        + Default: all
+
 ## 获取所有商品 [GET /api/goods{?status}]
 
 
@@ -4840,7 +4851,8 @@ FORMAT: 1A
                         "vips_sn": "唯品会编码",
                         "factory_model": "工厂型号",
                         "short_name": "商品简称",
-                        "nick": "卖家昵称",
+                        "shops_id": "店铺id",
+                        "shop_nick": "卖家昵称",
                         "supplier": {
                             "id": 1,
                             "name": "供应商名称",
@@ -4895,7 +4907,7 @@ FORMAT: 1A
                                 "assembly_price": "10.00",
                                 "discount": "1.00",
                                 "commission": "1.00",
-                                "is_combination": 1,
+                                "is_combination": true,
                                 "package_quantity": 10,
                                 "package_costs": "10.00",
                                 "wooden_frame_costs": "10.00",
@@ -4928,7 +4940,6 @@ FORMAT: 1A
                                         "id": 1,
                                         "product_specs_id": 2,
                                         "com_pro_specs_id": 1,
-                                        "count": 1,
                                         "status": true,
                                         "created_at": "2018-07-09 18:01:34",
                                         "updated_at": "2018-07-09 18:01:34",
@@ -4948,7 +4959,7 @@ FORMAT: 1A
                                             "assembly_price": "10.00",
                                             "discount": "1.00",
                                             "commission": "1.00",
-                                            "is_combination": 1,
+                                            "is_combination": true,
                                             "package_quantity": 10,
                                             "package_costs": "10.00",
                                             "wooden_frame_costs": "10.00",
@@ -4982,7 +4993,6 @@ FORMAT: 1A
                                         "id": 2,
                                         "product_specs_id": 2,
                                         "com_pro_specs_id": 1,
-                                        "count": 1,
                                         "status": true,
                                         "created_at": "2018-07-09 18:01:34",
                                         "updated_at": "2018-07-09 18:01:34",
@@ -5002,7 +5012,7 @@ FORMAT: 1A
                                             "assembly_price": "10.00",
                                             "discount": "1.00",
                                             "commission": "1.00",
-                                            "is_combination": 1,
+                                            "is_combination": true,
                                             "package_quantity": 10,
                                             "package_costs": "10.00",
                                             "wooden_frame_costs": "10.00",
@@ -5105,17 +5115,18 @@ FORMAT: 1A
 
 + Parameters
     + commodity_code: (string, required) - 商品编码
-    + jd_sn: (string, required) - 京东编码
-    + vips_sn: (string, required) - 唯品会编码
-    + factory_model: (string, required) - 工厂型号
+    + jd_sn: (string, optional) - 京东编码
+    + vips_sn: (string, optional) - 唯品会编码
+    + factory_model: (string, optional) - 工厂型号
     + short_name: (string, required) - 商品简称
-    + nick: (string, required) - 卖家昵称（店铺昵称）
+    + shops_id: (integer, required) - 店铺id
+    + shop_nick: (string, required) - 卖家昵称（店铺昵称）
     + supplier_id: (integer, required) - 供应商id
     + category_id: (integer, required) - 产品类别id
     + remark: (string, optional) - 备注
     + title: (string, required) - 商品标题
-    + img: (string, required) - 商品图片
-    + url: (url, required) - 商品网址
+    + img: (string, optional) - 商品图片
+    + url: (url, optional) - 商品网址
     + is_stop_pro: (boolean, optional) - 是否停产 默认 0 = 不停产  1 = 停产
         + Default: 
     + status: (boolean, optional) - 状态(0:停用，1:启用)
@@ -5132,7 +5143,7 @@ FORMAT: 1A
     + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
     + productspecs[0][discount]: (numeric, optional) - 折扣
     + productspecs[0][commission]: (numeric, optional) - 佣金点
-    + productspecs[0][is_combination]: (integer, required) - 是否组合
+    + productspecs[0][is_combination]: (boolean, required) - 是否组合
     + productspecs[0][package_quantity]: (integer, optional) - 包件数量
     + productspecs[0][package_costs]: (numeric, optional) - 打包费用
     + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
@@ -5158,7 +5169,6 @@ FORMAT: 1A
     + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
     + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
     + productspecs[0][combinations][0][com_pro_specs_id]: (integer, required) - 组合产品规格id
-    + productspecs[0][combinations][0][count]: (integer, required) - 组合件数
 
 + Request (application/json)
     + Body
@@ -5169,7 +5179,8 @@ FORMAT: 1A
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
                 "short_name": "商品简称",
-                "nick": "卖家昵称",
+                "shops_id": 1,
+                "shop_nick": "卖家昵称",
                 "supplier_id": 1,
                 "category_id": 1,
                 "remark": "备注",
@@ -5189,7 +5200,7 @@ FORMAT: 1A
                 "productspecs[0][assembly_price]": "10",
                 "productspecs[0][discount]": "1",
                 "productspecs[0][commission]": "1",
-                "productspecs[0][is_combination]": "1",
+                "productspecs[0][is_combination]": true,
                 "productspecs[0][package_quantity]": "10",
                 "productspecs[0][package_costs]": "10",
                 "productspecs[0][wooden_frame_costs]": "10",
@@ -5212,10 +5223,9 @@ FORMAT: 1A
                 "productspecs[0][volume]": "10",
                 "productspecs[0][weight]": "10",
                 "productspecs[0][remark]": "备注",
-                "productspecs[0][finished_pro]": "1",
+                "productspecs[0][finished_pro]": true,
                 "productspecs[0][is_stop_pro]": false,
-                "productspecs[0][combinations][0][com_pro_specs_id]": "1",
-                "productspecs[0][combinations][0][count]": "10"
+                "productspecs[0][combinations][0][com_pro_specs_id]": "1"
             }
 
 + Response 422 (application/json)
@@ -5250,7 +5260,8 @@ FORMAT: 1A
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
                 "short_name": "商品简称",
-                "nick": "卖家昵称",
+                "shops_id": "店铺id",
+                "shop_nick": "卖家昵称",
                 "supplier": {
                     "id": 1,
                     "name": "1",
@@ -5305,7 +5316,7 @@ FORMAT: 1A
                         "assembly_price": "10.00",
                         "discount": "1.00",
                         "commission": "1.00",
-                        "is_combination": 1,
+                        "is_combination": true,
                         "package_quantity": 10,
                         "package_costs": "10.00",
                         "wooden_frame_costs": "10.00",
@@ -5337,7 +5348,6 @@ FORMAT: 1A
                                 "id": 8,
                                 "product_specs_id": 7,
                                 "com_pro_specs_id": 1,
-                                "count": 10,
                                 "created_at": "2018-07-25 15:06:13",
                                 "updated_at": "2018-07-25 15:06:13",
                                 "com_pro_spec": {
@@ -5415,7 +5425,8 @@ FORMAT: 1A
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
                 "short_name": "商品简称",
-                "nick": "卖家昵称",
+                "shops_id": 1,
+                "shop_nick": "卖家昵称",
                 "supplier": {
                     "id": 1,
                     "name": "1",
@@ -5470,7 +5481,7 @@ FORMAT: 1A
                         "assembly_price": "10.00",
                         "discount": "1.00",
                         "commission": "1.00",
-                        "is_combination": 1,
+                        "is_combination": true,
                         "package_quantity": 10,
                         "package_costs": "10.00",
                         "wooden_frame_costs": "10.00",
@@ -5502,7 +5513,6 @@ FORMAT: 1A
                                 "id": 8,
                                 "product_specs_id": 7,
                                 "com_pro_specs_id": 1,
-                                "count": 10,
                                 "created_at": "2018-07-25 15:06:13",
                                 "updated_at": "2018-07-25 15:06:13",
                                 "com_pro_spec": {
@@ -5565,7 +5575,8 @@ FORMAT: 1A
     + vips_sn: (string, optional) - 唯品会编码
     + factory_model: (string, optional) - 工厂型号
     + short_name: (string, optional) - 商品简称
-    + nick: (string, optional) - 卖家昵称（店铺昵称）
+    + shops_id: (string, optional) - 店铺id
+    + shop_nick: (string, optional) - 卖家昵称（店铺昵称）
     + supplier_id: (integer, optional) - 供应商id
     + category_id: (integer, optional) - 产品类别id
     + remark: (string, optional) - 备注
@@ -5589,7 +5600,7 @@ FORMAT: 1A
     + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
     + productspecs[0][discount]: (numeric, optional) - 折扣
     + productspecs[0][commission]: (numeric, optional) - 佣金点
-    + productspecs[0][is_combination]: (integer, optional) - 是否组合
+    + productspecs[0][is_combination]: (boolean, optional) - 是否组合
     + productspecs[0][package_quantity]: (integer, optional) - 包件数量
     + productspecs[0][package_costs]: (numeric, optional) - 打包费用
     + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
@@ -5612,11 +5623,10 @@ FORMAT: 1A
     + productspecs[0][volume]: (numeric, optional) - 体积(m²)
     + productspecs[0][weight]: (numeric, optional) - 重量
     + productspecs[0][remark]: (string, optional) - 备注
-    + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
+    + productspecs[0][finished_pro]: (boolean, optional) - 是否成品 0 不是 1 是
     + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
     + productspecs[0][combinations][0][id]: (integer, optional) - 组合id ( 存在 id 视为更新，不存在视为插入 )
     + productspecs[0][combinations][0][com_pro_specs_id]: (integer, optional) - 组合产品规格id
-    + productspecs[0][combinations][0][count]: (integer, optional) - 组合件数
 
 + Request (application/json)
     + Body
@@ -5627,7 +5637,8 @@ FORMAT: 1A
                 "vips_sn": "唯品会编码",
                 "factory_model": "工厂型号",
                 "short_name": "商品简称",
-                "nick": "卖家昵称",
+                "shops_id": "店铺id",
+                "shop_nick": "卖家昵称",
                 "supplier_id": 1,
                 "category_id": 1,
                 "remark": "备注",
@@ -5648,7 +5659,7 @@ FORMAT: 1A
                 "productspecs[0][assembly_price]": "10",
                 "productspecs[0][discount]": "1",
                 "productspecs[0][commission]": "1",
-                "productspecs[0][is_combination]": "1",
+                "productspecs[0][is_combination]": true,
                 "productspecs[0][package_quantity]": "10",
                 "productspecs[0][package_costs]": "10",
                 "productspecs[0][wooden_frame_costs]": "10",
@@ -5671,11 +5682,10 @@ FORMAT: 1A
                 "productspecs[0][volume]": "10",
                 "productspecs[0][weight]": "10",
                 "productspecs[0][remark]": "备注",
-                "productspecs[0][finished_pro]": "1",
+                "productspecs[0][finished_pro]": true,
                 "productspecs[0][is_stop_pro]": false,
                 "productspecs[0][combinations][0][id]": "2",
-                "productspecs[0][combinations][0][com_pro_specs_id]": "1",
-                "productspecs[0][combinations][0][count]": "10"
+                "productspecs[0][combinations][0][com_pro_specs_id]": "1"
             }
 
 + Response 404 (application/json)
@@ -5715,7 +5725,8 @@ FORMAT: 1A
                 "vips_sn": "唯品会编码1",
                 "factory_model": "工厂型号1",
                 "short_name": "商品简称1",
-                "nick": "卖家昵称1",
+                "shops_id": "商品简称",
+                "shop_nick": "店铺id",
                 "supplier": {
                     "id": 1,
                     "name": "供应商名称",
@@ -5770,7 +5781,7 @@ FORMAT: 1A
                         "assembly_price": "10.00",
                         "discount": "1.00",
                         "commission": "1.00",
-                        "is_combination": 1,
+                        "is_combination": true,
                         "package_quantity": 10,
                         "package_costs": "10.00",
                         "wooden_frame_costs": "10.00",
@@ -5804,7 +5815,6 @@ FORMAT: 1A
                                 "id": 1,
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
-                                "count": 1,
                                 "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
@@ -5824,7 +5834,7 @@ FORMAT: 1A
                                     "assembly_price": "10.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 1,
+                                    "is_combination": true,
                                     "package_quantity": 10,
                                     "package_costs": "10.00",
                                     "wooden_frame_costs": "10.00",
@@ -5859,7 +5869,6 @@ FORMAT: 1A
                                 "id": 2,
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
-                                "count": 1,
                                 "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
@@ -5879,7 +5888,7 @@ FORMAT: 1A
                                     "assembly_price": "10.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 1,
+                                    "is_combination": true,
                                     "package_quantity": 10,
                                     "package_costs": "10.00",
                                     "wooden_frame_costs": "10.00",
@@ -5914,7 +5923,6 @@ FORMAT: 1A
                                 "id": 3,
                                 "product_specs_id": 2,
                                 "com_pro_specs_id": 1,
-                                "count": 1,
                                 "status": true,
                                 "created_at": "2018-07-09 18:01:34",
                                 "updated_at": "2018-07-09 18:01:34",
@@ -5934,7 +5942,7 @@ FORMAT: 1A
                                     "assembly_price": "10.00",
                                     "discount": "1.00",
                                     "commission": "1.00",
-                                    "is_combination": 1,
+                                    "is_combination": true,
                                     "package_quantity": 10,
                                     "package_costs": "10.00",
                                     "wooden_frame_costs": "10.00",
@@ -6098,11 +6106,11 @@ FORMAT: 1A
 # productspecs [/api]
 产品规格资源
 
-## 获取所有产品规格 [GET /api/productspecs{?status}]
+## 获取所有产品规格 [GET /api/productspecs{?is_combination}]
 
 
 + Parameters
-    + status: (boolean, optional) - 获取的状态
+    + is_combination: (boolean, optional) - 是否组合
         + Default: all
 
 + Response 200 (application/json)
@@ -6472,7 +6480,6 @@ FORMAT: 1A
                             "updated_at": "2018-07-07 11:29:49",
                             "deleted_at": null
                         },
-                        "count": 1,
                         "status": true,
                         "created_at": "2018-07-06 16:59:20",
                         "updated_at": "2018-07-06 16:59:20"
@@ -6599,7 +6606,6 @@ FORMAT: 1A
                     "updated_at": "2018-07-07 11:29:49",
                     "deleted_at": null
                 },
-                "count": 1,
                 "status": true,
                 "created_at": "2018-07-06 16:59:20",
                 "updated_at": "2018-07-06 16:59:20"
@@ -8214,6 +8220,8 @@ FORMAT: 1A
 + Parameters
     + status: (boolean, optional) - 获取的状态
         + Default: all
+    + is_submit: (boolean, optional) - 是否提交
+    + is_stock_in: (boolean, optional) - 是否入库
 
 + Response 200 (application/json)
     + Body

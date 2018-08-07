@@ -75,7 +75,7 @@ class CreateOrdersTable extends Migration
             $table->string('receiver_district')->default('')->comment('收货人的所在地区');
             $table->string('receiver_address')->default('')->comment('收货人的详细地址');
             $table->timestamp('created')->nullable()->comment('(下单时间)交易创建时间');
-            $table->timestamp('audit_at')->nullable()->comment('(付款时间)付款时间');
+//            $table->timestamp('audit_at')->nullable()->comment('(付款时间)付款时间');冲突字段
             $table->timestamp('est_con_time')->nullable()->comment('(商家的预计发货时间)');
             $table->decimal('payment',10,2)->comment('实付金额');
             $table->decimal('total_fee',10,2)->comment('商品金额（商品价格乘以数量的总金额）');

@@ -13,7 +13,6 @@ class CombinationTransformer extends TransformerAbstract
             'id' => $combination->id,
             'product_specs' => $combination->productSpec,
             'com_pro_specs' => $combination->comProSpec,
-            'count' => $combination->count,
             'status' => $combination->status,
             'created_at' => $combination->created_at
                                     ->toDateTimeString(),

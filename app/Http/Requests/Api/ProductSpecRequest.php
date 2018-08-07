@@ -16,7 +16,7 @@ class ProductSpecRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'boolean',
+                    'is_combination' => 'boolean'
                 ];
                 break;
             case 'POST':
@@ -174,7 +174,7 @@ class ProductSpecRequest extends FormRequest
 
             'productspecs.*.commission.numeric' => '佣金点必须是数字',
 
-            'productspecs.*.is_combination.boolean' => '是否组合必须int类型',
+            'productspecs.*.is_combination.boolean' => '是否组合必须布尔类型',
 
             'productspecs.*.package_quantity.integer' => '包件数量必须int类型',
 
@@ -231,9 +231,9 @@ class ProductSpecRequest extends FormRequest
 
             'productspecs.*.weight.numeric' => '重量必须是数字',
 
-            'productspecs.*.finished_pro.boolean' => '是否成品 0=不是 1 是',
+            'productspecs.*.finished_pro.boolean' => '是否成品（0=不是 1是） 必须布尔类型',
 
-            'productspecs.*.is_stop_pro.boolean' => '是否停产 0 不是 1 是',
+            'productspecs.*.is_stop_pro.boolean' => '是否停产（0 不是 1是）必须布尔类型',
 
             'productspecs.*.remark.string' => '备注必须string类型',
             'productspecs.*.remark.nullable' => '备注可为null',

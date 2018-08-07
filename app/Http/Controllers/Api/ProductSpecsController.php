@@ -29,10 +29,10 @@ class ProductSpecsController extends Controller
     /**
      * 获取所有产品规格
      *
-     * @Get("/productspecs{?status}")
+     * @Get("/productspecs{?is_combination}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("is_combination", type="boolean", description="是否组合", required=false, default="all")
      * })
      * @Response(200, body={
      *       "data": {

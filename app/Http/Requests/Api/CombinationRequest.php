@@ -23,23 +23,24 @@ class CombinationRequest extends FormRequest
                 return [
                     'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'required', 'integer',
-                        Rule::exists('product_specs', 'id')
-                    ],
-                    'productspecs.*.combinations.*.count' => 'required|integer',
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('is_combination', '<>', [1]);
+                        }),
+                    ]
                 ];
                 break;
             case 'PATCH':
                 return [
                     'productspecs.*.combinations.*.id' => [
                         'integer',
-                        Rule::exists('combinations', 'id')
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('is_combination', '<>', [1]);
+                        }),
                     ],
                     'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'integer',
                         Rule::exists('product_specs', 'id')
-                    ],
-                    'productspecs.*.combinations.*.count' => 'integer',
-
+                    ]
                 ];
                 break;
         }
@@ -53,16 +54,13 @@ class CombinationRequest extends FormRequest
             'productspecs.*.combinations.*.id.integer' => '组合id必须int类型',
             'productspecs.*.combinations.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'productspecs.*.combinations.*.product_specs_id.required' => '产品规格id必填',
-            'productspecs.*.combinations.*.product_specs_id.integer' => '产品规格id必须int类型',
-            'productspecs.*.combinations.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+//            'productspecs.*.combinations.*.product_specs_id.required' => '产品规格id必填',
+//            'productspecs.*.combinations.*.product_specs_id.integer' => '产品规格id必须int类型',
+//            'productspecs.*.combinations.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'productspecs.*.combinations.*.com_pro_specs_id.required' => '组合产品规格id必填',
             'productspecs.*.combinations.*.com_pro_specs_id.integer' => '组合产品规格id必须int类型',
-            'productspecs.*.combinations.*.com_pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
-
-            'productspecs.*.combinations.*.count.required' => '组合件数必填',
-            'productspecs.*.combinations.*.count.integer' => '组合件数必须int类型',
+            'productspecs.*.combinations.*.com_pro_specs_id.exists' => '需要添加的id在数据库中未找到或是组合',
 
         ];
     }
@@ -72,7 +70,6 @@ class CombinationRequest extends FormRequest
         return [
             'product_specs_id' => '产品规格id',
             'com_pro_specs_id' => '组合产品规格id',
-            'count' => '组合件数',
         ];
     }
 

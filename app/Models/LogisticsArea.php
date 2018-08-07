@@ -11,9 +11,9 @@ class LogisticsArea extends Model
     ];
 
     //设置类型
-    protected $casts = [
-        'status' => 'boolean'
-    ];
+   protected $casts = [
+       'status' => 'boolean'
+   ];
 
     public function logistics()
     {

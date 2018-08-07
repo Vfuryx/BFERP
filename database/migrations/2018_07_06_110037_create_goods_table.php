@@ -20,7 +20,8 @@ class CreateGoodsTable extends Migration
             $table->string('vips_sn')->default('')->comment('唯品会编码');
             $table->string('factory_model')->default('')->comment('工厂型号');
             $table->string('short_name')->default('')->comment('商品简称');
-            $table->string('nick')->default('')->comment('卖家昵称（店铺昵称）');
+            $table->string('shops_id')->default('')->comment('店铺id');
+            $table->string('shop_nick')->default('')->comment('卖家昵称（店铺昵称）');
             $table->unsignedInteger('supplier_id')->comment('供应商id');
             $table->unsignedInteger('category_id')->comment('产品类别id');
             // $table->unsignedInteger('series_id')->comment('产品系列');////暂时不开启

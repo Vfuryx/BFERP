@@ -10,7 +10,7 @@ class Goods extends Model
 
     protected $fillable = [
         'commodity_code', 'jd_sn', 'vips_sn', 'factory_model', 'short_name',
-        'nick', 'supplier_id', 'category_id', 'remark', 'title',
+        'shop_nick', 'shops_id', 'supplier_id', 'category_id', 'remark', 'title',
         'img', 'url', 'status', 'is_stop_pro'
     ];
 

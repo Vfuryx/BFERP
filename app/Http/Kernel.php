@@ -60,5 +60,6 @@ class Kernel extends HttpKernel
         'jwt.auth' => 'Tymon\JWTAuth\Middleware\GetUserFromToken',
         'jwt.refresh' => 'Tymon\JWTAuth\Middleware\RefreshToken',
         'token.canrefresh' => \App\Http\Middleware\RefreshToken::class,
+        'stringtoboolean' => \App\Http\Middleware\ConvertStringBooleans::class
     ];
 }

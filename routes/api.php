@@ -21,7 +21,11 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         ->name('api.captchas.store');
     //页面请求
     $api->group([
-        'middleware' => ['api.throttle','token.canrefresh'],
+        'middleware' => [
+            'api.throttle',
+            'token.canrefresh',
+            'stringtoboolean'//将字符串的“true”或“false”转为布尔类型
+        ],
         'limit' => config('api.rate_limits.access.limit'),
         'expires' => config('api.rate_limits.access.expires'),
     ], function ($api) {
@@ -137,8 +141,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.goodscates.destroybyids');
         $api->put('goodscates/editstatus', 'GoodsCategoriesController@editStatusByIds')
             ->name('api.goodscates.editstatusbyids');
-    
-//
+
 //        //入库类型
 //        $api->get('storagetypes', 'StorageTypesController@index')
 //            ->name('api.storagetypes.index');
@@ -334,6 +337,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
          //商品资源
         $api->get('goods', 'GoodsController@index')
             ->name('api.goods.index');
+        $api->get('goods/search', 'GoodsController@searchGoods')
+            ->name('api.goods.searchgoods');
         $api->get('goods/{goods}', 'GoodsController@show')
             ->name('api.goods.show');
         $api->post('goods', 'GoodsController@store')

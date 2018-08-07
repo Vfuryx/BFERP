@@ -10,7 +10,7 @@ class Combination extends Model
 
 
     protected $fillable = [
-        'product_specs_id', 'com_pro_specs_id', 'count',
+        'product_specs_id', 'com_pro_specs_id',
     ];
 
     //获取属于的产品规格

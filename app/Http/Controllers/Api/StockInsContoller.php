@@ -18,7 +18,7 @@ use App\Http\Controllers\Traits\CURDTrait;
 use App\Http\Controllers\Traits\ProcedureTrait;
 
 use Dingo\Api\Exception\DeleteResourceFailedException;
-
+use Dingo\Api\Exception\UpdateResourceFailedException;
 
 /**
  * 入库单资源
@@ -38,7 +38,9 @@ class StockInsContoller extends Controller
      * @Get("/stockins{?status}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("is_submit", type="boolean", description="是否提交", required=false),
+     *      @Parameter("is_stock_in", type="boolean", description="是否入库", required=false),
      * })
      * @Response(200, body={
      * "data": {
@@ -656,6 +658,10 @@ class StockInsContoller extends Controller
                            StockIn $stockin,
                            \App\Handlers\ValidatedHandler $validatedHandler)
     {
+        //判断是否提交
+        if ($stockin->is_submit)
+            throw new UpdateResourceFailedException('已提交无法修改');
+
         $stockin = DB::transaction(function() use ($stockInRequest, $stockInDetailRequest, $stockin, $validatedHandler) {
 
             $stockin->update($stockInRequest->validated());

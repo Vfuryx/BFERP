@@ -22,11 +22,17 @@ class GoodsRequest extends FormRequest
             case 'POST':
                 return [
                     'commodity_code' => 'required|string|max:255|unique:goods',
-                    'jd_sn' => 'required|string|max:255',
-                    'vips_sn' => 'required|string|max:255',
-                    'factory_model' => 'required|string|max:255',
+                    'jd_sn' => 'string|max:255',
+                    'vips_sn' => 'string|max:255',
+                    'factory_model' => 'string|max:255',
                     'short_name' => 'required|string|max:255',
-                    'nick' => 'required|string|max:255',
+                    'shops_id' => [
+                        'required', 'integer',
+                        Rule::exists('shops', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'shop_nick' => 'required|string|max:255',
                     'supplier_id' => [
                         'required', 'integer',
                         Rule::exists('suppliers', 'id')->where(function ($query) {
@@ -39,10 +45,10 @@ class GoodsRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'remark' => 'required|string|max:255',
+                    'remark' => 'string|max:255',
                     'title' => 'required|string|max:255',
-                    'img' => 'required|url|max:255',
-                    'url' => 'required|url|max:255',
+                    'img' => 'url|max:255',
+                    'url' => 'url|max:255',
                     'status' => 'boolean',
                     'is_stop_pro' => 'boolean',
                 ];
@@ -57,7 +63,13 @@ class GoodsRequest extends FormRequest
                     'vips_sn' => 'string|max:255',
                     'factory_model' => 'string|max:255',
                     'short_name' => 'string|max:255',
-                    'nick' => 'string|max:255',
+                    'shops_id' => [
+                        'integer',
+                        Rule::exists('shops', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'shop_nick' => 'string|max:255',
                     'supplier_id' => [
                         'integer',
                         Rule::exists('suppliers', 'id')->where(function ($query) {
@@ -106,9 +118,13 @@ class GoodsRequest extends FormRequest
             'short_name.string' => '商品简称必须string类型',
             'short_name.max' => '商品简称最大长度为255',
 
-            'nick.required' => '卖家昵称必填',
-            'nick.string' => '卖家昵称必须string类型',
-            'nick.max' => '卖家昵称最大长度为255',
+            'shops_id.required' => '店铺id必填',
+            'shops_id.integer' => '店铺id必须int类型',
+            'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
+
+            'shop_nick.required' => '卖家昵称必填',
+            'shop_nick.string' => '卖家昵称必须string类型',
+            'shop_nick.max' => '卖家昵称最大长度为255',
 
             'supplier_id.required' => '供应商id必填',
             'supplier_id.integer' => '供应商id必须int类型',
@@ -150,7 +166,8 @@ class GoodsRequest extends FormRequest
             'vips_sn' => '唯品会编码',
             'factory_model' => '工厂型号',
             'short_name' => '商品简称',
-            'nick' => '卖家昵称（店铺昵称）',
+            'shops_id' => '店铺id',
+            'shop_nick' => '卖家昵称（店铺昵称）',
             'supplier_id' => '供应商id',
             'category_id' => '产品类别id',
             'remark' => '备注',

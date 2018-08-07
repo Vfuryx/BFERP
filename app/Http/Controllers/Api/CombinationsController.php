@@ -122,7 +122,6 @@ class CombinationsController extends Controller
      *                  "updated_at": "2018-07-07 11:29:49",
      *                  "deleted_at": null
      *              },
-     *              "count": 1,
      *              "status": true,
      *              "created_at": "2018-07-06 16:59:20",
      *              "updated_at": "2018-07-06 16:59:20"
@@ -250,7 +249,6 @@ class CombinationsController extends Controller
      *              "updated_at": "2018-07-07 11:29:49",
      *              "deleted_at": null
      *          },
-     *          "count": 1,
      *          "status": true,
      *          "created_at": "2018-07-06 16:59:20",
      *          "updated_at": "2018-07-06 16:59:20"
