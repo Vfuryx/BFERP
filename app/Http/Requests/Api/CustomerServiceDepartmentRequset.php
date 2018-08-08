@@ -27,13 +27,34 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'member_nick' => '会员昵称',
-                    'logistics_id' => '物流id',
-                    'billing_way' => '计费方式',
-                    'promise_ship_time' => '承诺发货时间',
-                    'freight_types_id' => '运费类型id',
-                    'expected_freight' => '预计运费',
-                    'distributions_id' => '配送id',
+                    'member_nick' => 'string|max:255',
+                    'logistics_id' => [
+                        'required', 'integer',
+                        Rule::exists('logistics', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'billing_way' =>  [
+                        'required',
+                        Rule::in([
+                                \App\Models\Order::ORDER_BILLING_WAY_WEIGHT,
+                                \App\Models\Order::ORDER_BILLING_WAY_VOLUME
+                            ]),
+                    ],
+                    'promise_ship_time' => 'date',
+                    'freight_types_id' =>  [
+                        'required', 'integer',
+                        Rule::exists('freight_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'expected_freight' => 'numeric',
+                    'distributions_id' => [
+                        'required', 'integer',
+                        Rule::exists('freight_types', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
                     'distribution_methods_id' => '配送方式id',
                     'deliver_goods_fee' => '送货费用',
                     'move_upstairs_fee' => '搬楼费用',

@@ -238,6 +238,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('warehouses/editstatus', 'WarehousesController@editStatusByIds')
             ->name('api.warehouses.editstatusbyids');
 
+        //配送资源
+        $api->get('distributions', 'DistributionsController@index')
+            ->name('api.distributions.index');
+        $api->get('distributions/{distribution}', 'DistributionsController@show')
+            ->name('api.distributions.show');
+        $api->post('distributions', 'DistributionsController@store')
+            ->name('api.distributions.store');
+        $api->patch('distributions/{distribution}', 'DistributionsController@update')
+            ->name('api.distributions.update');
+        $api->delete('distributions/{distribution}', 'DistributionsController@destroy')
+            ->name('api.distributions.destroy');
+        $api->delete('distributions', 'DistributionsController@destroybyids')
+            ->name('api.distributions.destroybyids');
+        $api->put('distributions/editstatus', 'DistributionsController@editStatusByIds')
+            ->name('api.distributions.editstatusbyids');
+
         //供应商资源
         $api->get('suppliers', 'SuppliersController@index')
             ->name('api.suppliers.index');

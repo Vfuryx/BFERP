@@ -38,7 +38,6 @@ trait CURDTrait
             return $this->response->collection($model->get(), new $transformer);
         }
 
-
         //分页响应返回
         $ref = $model->paginate($perPage);
         return $this->response->paginator($ref, new $transformer);
