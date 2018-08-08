@@ -33,7 +33,7 @@ class CombinationRequest extends FormRequest
                 return [
                     'productspecs.*.combinations.*.id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')
+                        Rule::exists('combinations', 'id')
                     ],
                     'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'integer',
