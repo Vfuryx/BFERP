@@ -25,7 +25,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedInteger('freight_types_id')->comment('运费类型id');
             $table->decimal('expected_freight', 10 ,2)->default(0.00)->comment('预计运费');
             $table->unsignedInteger('distributions_id')->default(0)->comment('配送id');
-            $table->unsignedInteger('distribution_methods_id')->comment('配送方式');
+            $table->unsignedInteger('distribution_methods_id')->comment('配送方式id');
             $table->decimal('deliver_goods_fee', 10 ,2)->default(0.00)->comment('送货费用');
             $table->decimal('move_upstairs_fee', 10 ,2)->default(0.00)->comment('搬楼费用');
             $table->decimal('installation_fee', 10 ,2)->default(0.00)->comment('安装费');

@@ -100,10 +100,10 @@ class Order extends Model
         'distribution_phone', 'distribution_no', 'distribution_types_id', 'service_car_info',
         'get_goods_fee', 'get_goods_ways_id', 'express_fee', 'service_car_fee', 'cancel_after_verification_code',
         'wooden_frame_costs', 'preferential_cashback', 'favorable_cashback', 'customer_types_id',
-        'is_invoice','invoice_express_fee','express_invoice_title','contract_no','payment_methods_id',
-        'deposit','document_title','warehouses_id','payment_date','interest_concessions','is_notice',
-        'is_cancel_after_verification','accept_order_user','tax_number','receipt','logistics_remark',
-        'seller_remark','customer_service_remark','buyer_message'
+        'is_invoice', 'invoice_express_fee', 'express_invoice_title', 'contract_no', 'payment_methods_id',
+        'deposit', 'document_title', 'warehouses_id', 'payment_date', 'interest_concessions', 'is_notice',
+        'is_cancel_after_verification', 'accept_order_user', 'tax_number', 'receipt', 'logistics_remark',
+        'seller_remark', 'customer_service_remark', 'buyer_message'
     ];
 
     protected $dates = [

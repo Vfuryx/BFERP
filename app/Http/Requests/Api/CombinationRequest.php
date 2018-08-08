@@ -24,7 +24,7 @@ class CombinationRequest extends FormRequest
                     'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'required', 'integer',
                         Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('is_combination', '<>', [1]);
+                            $query->where('is_combination', '<>', 1);
                         }),
                     ]
                 ];
@@ -33,13 +33,13 @@ class CombinationRequest extends FormRequest
                 return [
                     'productspecs.*.combinations.*.id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')->where(function ($query) {
-                            $query->where('is_combination', '<>', [1]);
-                        }),
+                        Rule::exists('product_specs', 'id')
                     ],
                     'productspecs.*.combinations.*.com_pro_specs_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')
+                        Rule::exists('product_specs', 'id')->where(function ($query) {
+                            $query->where('is_combination', '<>', 1);
+                        }),
                     ]
                 ];
                 break;

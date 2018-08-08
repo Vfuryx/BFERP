@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Order;
 
 use App\Http\Requests\Api\CustomerServiceDepartmentRequset;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
+
 use App\Transformers\CustomerServiceDepartmentTransformer;
 
 use App\Http\Controllers\Traits\CURDTrait;
@@ -15,7 +18,7 @@ use Dingo\Api\Exception\DeleteResourceFailedException;
 
 /**
  * 商品资源
- * @Resource("goods",uri="/api")
+ * @Resource("customerservicedepts",uri="/api")
  */
 class CustomerServiceDepartmentsController extends Controller
 {
@@ -28,7 +31,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 获取所有商品
      *
-     * @Get("/goods{?status}")
+     * @Get("/customerservicedepts{?status}")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
@@ -38,16 +41,16 @@ class CustomerServiceDepartmentsController extends Controller
      *       }
      * })
      */
-    public function index(GoodsRequest $request)
+    public function index(CustomerServiceDepartmentRequset $requset)
     {
-        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
+        return $this->allOrPage($requset, self::MODEL, self::TRANSFORMER, self::PerPage);
     }
 
 
     /**
      * 新增商品
      *
-     * @Post("/goods")
+     * @Post("/customerservicedepts")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("commodity_code", description="商品编码", required=true),
@@ -184,45 +187,45 @@ class CustomerServiceDepartmentsController extends Controller
      *      })
      * })
      */
-    public function store(GoodsRequest $goodsRequest,
-                          ProductSpecRequest $productSpecRequest,
-                          CombinationRequest $combinationRequest,
+    public function store(CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
+//                          ProductSpecRequest $productSpecRequest,
+//                          CombinationRequest $combinationRequest,
                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $goods = DB::transaction(function() use (
-            $goodsRequest,
-            $productSpecRequest,
-            $combinationRequest,
+        $order = DB::transaction(function() use (
+            $customerServiceDepartmentRequset,
+//            $productSpecRequest,
+//            $combinationRequest,
             $validatedHandler
         ) {
 
-            $goods = Goods::create($goodsRequest->validated());
+            $order = Order::create($customerServiceDepartmentRequset->validated());
 
-            if ($productSpecs = $goodsRequest->input('productspecs')) {
-
-                foreach ($productSpecs as $productSpec) {
-
-                    $proSpec = $goods->productSpecs()->create(
-                        $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec)
-                    );
-
-                    if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-
-                        foreach ($productSpec['combinations'] as $combination) {
-
-                            $proSpec->combinations()->create(
-                                $validatedHandler->getValidatedData($combinationRequest->rules(), $combination)
-                            );
-                        }
-                    }
-                }
-            }
-            return $goods;
+//            if ($productSpecs = $customerServiceDepartmentRequset->input('productspecs')) {
+//
+//                foreach ($productSpecs as $productSpec) {
+//
+//                    $proSpec = $order->productSpecs()->create(
+//                        $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec)
+//                    );
+//
+//                    if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+//
+//                        foreach ($productSpec['combinations'] as $combination) {
+//
+//                            $proSpec->combinations()->create(
+//                                $validatedHandler->getValidatedData($combinationRequest->rules(), $combination)
+//                            );
+//                        }
+//                    }
+//                }
+//            }
+            return $order;
         });
 
         return $this->response
-            ->item($goods, new CustomerServiceDepartmentTransformer())
+            ->item($order, new CustomerServiceDepartmentTransformer())
             ->setStatusCode(201)
             ->addMeta('status_code', '201');
     }
@@ -230,7 +233,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 显示单条商品
      *
-     * @Get("/goods/:id")
+     * @Get("/customerservicedepts/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -248,7 +251,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 修改商品
      *
-     * @Patch("/goods/:id")
+     * @Patch("/customerservicedepts/:id")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("commodity_code", description="商品编码", required=false),
@@ -390,71 +393,71 @@ class CustomerServiceDepartmentsController extends Controller
      *      })
      * })
      */
-    public function update(GoodsRequest $goodsRequest,
-                           ProductSpecRequest $productSpecRequest,
-                           CombinationRequest $combinationRequest,
-                           Goods $goods,
+    public function update(CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
+//                           ProductSpecRequest $productSpecRequest,
+//                           CombinationRequest $combinationRequest,
+                           Order $order,
                            \App\Handlers\ValidatedHandler $validatedHandler)
     {
 
-        $goods = DB::transaction(function() use (
-            $goodsRequest,
-            $productSpecRequest,
-            $combinationRequest,
-            $goods,
+        $order = DB::transaction(function() use (
+            $customerServiceDepartmentRequset,
+//            $productSpecRequest,
+//            $combinationRequest,
+            $order,
             $validatedHandler
         ) {
 
-            $goods->update($goodsRequest->validated());
+            $order->update($customerServiceDepartmentRequset->validated());
 
-            if ($productSpecs = $goodsRequest->input('productspecs')) {
-
-                foreach ($productSpecs as $productSpec) {
-                    //计算要通过的字段
-                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec);
-
-                    //存在id则更新，否则插入
-                    if (isset($productSpec['id'])) {
-
-                        $goods->productSpecs()->findOrFail($productSpec['id'])->update($data);
-
-                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-
-                            foreach ($productSpec['combinations'] as $combination) {
-
-                                $combinationData = $validatedHandler->getValidatedData(
-                                    $combinationRequest->rules(), $combination
-                                );
-                                //存在id则更新，否则插入
-                                if (isset($combination['id'])) {
-                                    $goods->productSpecs()->findOrFail($productSpec['id'])
-                                        ->combinations()->findOrFail($combination['id'])
-                                        ->update($combinationData);
-                                } else {
-                                    $goods->productSpecs()->findOrFail($productSpec['id'])
-                                        ->combinations()->create($combinationData);
-                                }
-                            }
-                        }
-                    } else {
-                        $proSpec = $goods->productSpecs()->create($data);
-
-                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-
-                            foreach ($productSpec['combinations'] as $combination) {
-                                $proSpec->combinations()->create($validatedHandler->getValidatedData(
-                                    $combinationRequest->rules(), $combination
-                                ));
-                            }
-                        }
-                    }
-                }
-            }
-            return $goods;
+//            if ($productSpecs = $customerServiceDepartmentRequset->input('productspecs')) {
+//
+//                foreach ($productSpecs as $productSpec) {
+//                    //计算要通过的字段
+//                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec);
+//
+//                    //存在id则更新，否则插入
+//                    if (isset($productSpec['id'])) {
+//
+//                        $order->productSpecs()->findOrFail($productSpec['id'])->update($data);
+//
+//                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+//
+//                            foreach ($productSpec['combinations'] as $combination) {
+//
+//                                $combinationData = $validatedHandler->getValidatedData(
+//                                    $combinationRequest->rules(), $combination
+//                                );
+//                                //存在id则更新，否则插入
+//                                if (isset($combination['id'])) {
+//                                    $order->productSpecs()->findOrFail($productSpec['id'])
+//                                        ->combinations()->findOrFail($combination['id'])
+//                                        ->update($combinationData);
+//                                } else {
+//                                    $order->productSpecs()->findOrFail($productSpec['id'])
+//                                        ->combinations()->create($combinationData);
+//                                }
+//                            }
+//                        }
+//                    } else {
+//                        $proSpec = $order->productSpecs()->create($data);
+//
+//                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
+//
+//                            foreach ($productSpec['combinations'] as $combination) {
+//                                $proSpec->combinations()->create($validatedHandler->getValidatedData(
+//                                    $combinationRequest->rules(), $combination
+//                                ));
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+            return $order;
         });
 
         return $this->response
-            ->item($goods, new CustomerServiceDepartmentTransformer())
+            ->item($order, new CustomerServiceDepartmentTransformer())
             ->setStatusCode(201);
     }
 
@@ -462,7 +465,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 删除商品
      *
-     * @Delete("/goods/:id")
+     * @Delete("/customerservicedepts/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -472,18 +475,18 @@ class CustomerServiceDepartmentsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(Goods $goods)
+    public function destroy(Order $order)
     {
-        DB::transaction(function() use ($goods) {
+        DB::transaction(function() use ($order) {
             //删除组合
-            $productSpecs = $goods->productSpecs();
+            $productSpecs = $order->productSpecs();
             $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
             //删除规格
             $delPro = $productSpecs->delete();
 
             //删除产品
-            $delGoods = $goods->delete();
+            $delGoods = $order->delete();
 
             if ($delCom === false || $delPro === false || $delGoods === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
@@ -496,7 +499,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 删除一组商品
      *
-     * @Delete("/goods")
+     * @Delete("/customerservicedepts")
      * @Versions({"v1"})
      * @Parameters({
      * @Parameter("ids", description="商品id组 格式: 1,2,3,4 ", required=true)
@@ -527,7 +530,7 @@ class CustomerServiceDepartmentsController extends Controller
             $delPro = $productSpecs->delete();
 
             //删除产品
-            $delGoods = Goods::destroy($ids);
+            $delGoods = Order::destroy($ids);
 
             if ($delCom === false || $delPro === false || $delGoods === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
@@ -540,7 +543,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 更改一组商品状态
      *
-     * @PUT("/goods/editstatus")
+     * @PUT("/customerservicedepts/editstatus")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("ids", description="商品id组 格式: 1,2,3,4 ", required=true),
