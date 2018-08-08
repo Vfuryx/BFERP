@@ -23,4 +23,8 @@ class FeeType extends Model
         return $this->belongsTo(FeeCategory::class);
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class,'freight_types_id');
+    }
+
 }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class AccountingType extends Model
+class DistributionType extends Model
 {
-    protected $table = 'accounting_types';
+    protected $table = 'distribution_types';
 
     protected $fillable = ['name', 'status'];
 
@@ -12,5 +12,4 @@ class AccountingType extends Model
     protected $casts = [
         'status' => 'boolean'
     ];
-
 }

@@ -42,4 +42,8 @@ class Shop extends Model
     {
         return $this->hasMany(PurchaseList::class);
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class,'shops_id');
+    }
 }

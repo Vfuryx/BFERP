@@ -18,4 +18,8 @@ class DistributionMethod extends Model
         return $this->hasMany(ProductSpec::class);
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class,'distribution_methods_id');
+    }
+
 }

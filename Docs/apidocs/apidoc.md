@@ -3072,6 +3072,450 @@ FORMAT: 1A
 
             []
 
+# distributions [/api]
+配送资源
+
+## 获取所有配送 [GET /api/distributions{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "配送公司名称",
+                        "phone": "配送公司电话",
+                        "address": "配送公司地址",
+                        "remark": "备注",
+                        "status": true,
+                        "created_at": "2018-08-08 16:15:57",
+                        "updated_at": "2018-08-08 16:15:57"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 新增配送 [POST /api/distributions]
+
+
++ Parameters
+    + name: (string, required) - 配送公司名称
+    + phone: (string, required) - 配送公司电话
+    + address: (string, required) - 配送公司地址
+    + remark: (string, optional) - 备注
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "address": [
+                        "配送公司地址必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送公司名称",
+                "phone": "配送公司电话",
+                "address": "配送公司地址",
+                "remark": "备注",
+                "status": true,
+                "created_at": "2018-08-08 16:15:57",
+                "updated_at": "2018-08-08 16:15:57",
+                "meta": {
+                    "status_code": 201
+                }
+            }
+
+## 显示单条配送 [GET /api/distributions/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送公司名称",
+                "phone": "配送公司电话",
+                "address": "配送公司地址",
+                "remark": "备注",
+                "status": true,
+                "created_at": "2018-08-08 16:15:57",
+                "updated_at": "2018-08-08 16:15:57"
+            }
+
+## 修改配送 [PATCH /api/distributions/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "address": [
+                        "配送公司地址必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送公司名称1",
+                "phone": "配送公司电话",
+                "address": "配送公司地址",
+                "remark": "备注",
+                "status": true,
+                "created_at": "2018-08-08 16:15:57",
+                "updated_at": "2018-08-08 16:18:37"
+            }
+
+## 删除配送 [DELETE /api/distributions/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组配送 [DELETE /api/distributions]
+
+
++ Parameters
+    + ids: (string, required) - 配送id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组配送状态 [PUT /api/distributions/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 配送id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# distributiontypes [/api]
+入库类型资源
+
+## 获取所有入库类型 [GET /api/distributiontypes{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "配送类型名称",
+                        "status": true,
+                        "created_at": "2018-08-08 18:14:22",
+                        "updated_at": "2018-08-08 18:14:22"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/distributiontypes?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增入库类型 [POST /api/distributiontypes]
+
+
++ Parameters
+    + name: (string, required) - 入库类型名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "入库类型名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送类型名称",
+                "status": true,
+                "created_at": "2018-08-08 18:14:22",
+                "updated_at": "2018-08-08 18:14:22",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条配送类型 [GET /api/distributiontypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送类型名称",
+                "status": true,
+                "created_at": "2018-08-08 18:14:22",
+                "updated_at": "2018-08-08 18:14:22"
+            }
+
+## 修改配送类型 [PATCH /api/distributiontypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "配送类型名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "配送类型名称",
+                "status": true,
+                "created_at": "2018-08-08 18:14:22",
+                "updated_at": "2018-08-08 18:14:22"
+            }
+
+## 删除配送类型 [DELETE /api/distributiontypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组配送类型 [DELETE /api/distributiontypes]
+
+
++ Parameters
+    + ids: (string, required) - 配送类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组配送类型状态 [PUT /api/distributiontypes/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 配送类型id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # suppliers [/api]
 供应商资源
 

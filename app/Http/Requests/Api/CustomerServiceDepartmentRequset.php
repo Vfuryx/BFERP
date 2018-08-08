@@ -51,18 +51,47 @@ class CustomerServiceDepartmentRequset extends FormRequest
                     'expected_freight' => 'numeric',
                     'distributions_id' => [
                         'required', 'integer',
-                        Rule::exists('freight_types', 'id')->where(function ($query) {
+                        Rule::exists('distributions', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'distribution_methods_id' => '配送方式id',
-                    'deliver_goods_fee' => '送货费用',
-                    'move_upstairs_fee' => '搬楼费用',
-                    'installation_fee' => '安装费',
-                    'total_distribution_fee' => '配送总计(送货费用 + 搬楼费用 + 安装费)',
-                    'distribution_phone' => '配送电话',
-                    'distribution_no' => '配送单号',
-                    'distribution_types_id' => '配送类型id',
+                    'distribution_methods_id' => [
+                        'required', 'integer',
+                        Rule::exists('distribution_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'deliver_goods_fee' => 'numeric',
+                    'move_upstairs_fee' => 'numeric',
+                    'installation_fee' => 'numeric',
+                    'total_distribution_fee' => [
+                        'numeric',
+                        function($attribute, $value, $fail) {
+                            //设置位数
+                            bcscale(2);
+                            //判断是否相等
+                            if (
+                                bccomp(
+                                    bcadd(
+                                        bcadd($this->deliver_goods_fee,
+                                            $this->move_upstairs_fee),
+                                        $this->installation_fee),
+                                    $value
+                                ) == 0
+                            ){
+                                return true;
+                            }
+                            return $fail('配送总计不正确');
+                        },
+                    ],
+                    'distribution_phone' => 'string|max:255',
+                    'distribution_no' => 'string|max:255',
+                    'distribution_types_id' => [
+                        'required', 'integer',
+                        Rule::exists('distribution_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
                     'service_car_info' => '服务车信息（配送信息）',
                     'get_goods_fee' => '提货费用',
                     'get_goods_ways_id' => '提货方式',

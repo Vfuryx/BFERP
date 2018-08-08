@@ -254,6 +254,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('distributions/editstatus', 'DistributionsController@editStatusByIds')
             ->name('api.distributions.editstatusbyids');
 
+        //配送类型资源
+        $api->get('distributiontypes', 'DistributionTypesController@index')
+            ->name('api.distributiontypes.index');
+        $api->get('distributiontypes/{distributiontype}', 'DistributionTypesController@show')
+            ->name('api.distributiontypes.show');
+        $api->post('distributiontypes', 'DistributionTypesController@store')
+            ->name('api.distributiontypes.store');
+        $api->patch('distributiontypes/{distributiontype}', 'DistributionTypesController@update')
+            ->name('api.distributiontypes.update');
+        $api->delete('distributiontypes/{distributiontype}', 'DistributionTypesController@destroy')
+            ->name('api.distributiontypes.destroy');
+        $api->delete('distributiontypes', 'DistributionTypesController@destroybyids')
+            ->name('api.distributiontypes.destroybyids');
+        $api->put('distributiontypes/editstatus', 'DistributionTypesController@editStatusByIds')
+            ->name('api.distributiontypes.editstatusbyids');
+
         //供应商资源
         $api->get('suppliers', 'SuppliersController@index')
             ->name('api.suppliers.index');

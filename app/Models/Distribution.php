@@ -14,4 +14,8 @@ class Distribution extends Model
     protected $casts = [
         'status' => 'boolean',
     ];
+
+    public function orders(){
+        return $this->hasMany(Order::class,'distributions_id');
+    }
 }

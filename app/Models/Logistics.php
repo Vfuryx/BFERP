@@ -38,4 +38,9 @@ class Logistics extends Model
         return $this->belongsTo(FreightType::class);
     }
 
+    public function orders(){
+        return $this->hasMany(Order::class,'logistics_id');
+    }
+
+
 }

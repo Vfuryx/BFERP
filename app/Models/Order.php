@@ -123,4 +123,25 @@ class Order extends Model
         'is_association' => 'boolean',
     ];
 
+    public function shop(){
+        return $this->belongsTo(Shop::class,'shops_id');
+    }
+
+    public function logistic(){
+        return $this->belongsTo(Logistics::class,'logistics_id');
+    }
+
+    public function feeType(){
+        return $this->belongsTo(FeeType::class,'freight_types_id');
+    }
+
+    public function distribution(){
+        return $this->belongsTo(Distribution::class,'distributions_id');
+    }
+
+    public function distributionMethod(){
+        return $this->belongsTo(DistributionMethod::class,'distribution_methods_id');
+    }
+
+
 }

@@ -2,44 +2,41 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Distribution;
-use App\Http\Requests\Api\DistributionRequest;
+use App\Models\DistributionType;
+use App\Http\Requests\Api\DistributionTypeRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
-use App\Transformers\DistributionTransformer;
+use App\Transformers\DistributionTypeTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
 /**
- * 配送资源
- * @Resource("distributions",uri="/api")
+ * 入库类型资源
+ * @Resource("distributiontypes",uri="/api")
  */
-class DistributionsController extends Controller
+class DistributionTypesController extends Controller
 {
     use CURDTrait;
 
-    const TRANSFORMER = DistributionTransformer::class;
-    const MODEL = Distribution::class;
+    const TRANSFORMER = DistributionTypeTransformer::class;
+    const MODEL = DistributionType::class;
 
     /**
-     * 获取所有配送
+     * 获取所有入库类型
      *
-     * @Get("/distributions{?status}")
+     * @Get("/distributiontypes{?status}")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
      * })
      * @Response(200, body={
      * "data": {
-     *      {
-     *          "id": 1,
-     *          "name": "配送公司名称",
-     *          "phone": "配送公司电话",
-     *          "address": "配送公司地址",
-     *          "remark": "备注",
-     *          "status": true,
-     *          "created_at": "2018-08-08 16:15:57",
-     *          "updated_at": "2018-08-08 16:15:57"
-     *      }
+     *         {
+     *              "id": 1,
+     *              "name": "配送类型名称",
+     *              "status": true,
+     *              "created_at": "2018-08-08 18:14:22",
+     *              "updated_at": "2018-08-08 18:14:22",
+     *         },
      *     },
      *     "meta": {
      *         "pagination": {
@@ -48,62 +45,60 @@ class DistributionsController extends Controller
      *             "per_page": 10,
      *             "current_page": 1,
      *             "total_pages": 1,
-     *             "links": null
+     *             "links": {
+     *                 "previous": null,
+     *                 "next": "{{host}}/api/distributiontypes?page=1"
+     *             }
      *         }
      *     }
      * })
      */
-    public function index(DistributionRequest $request)
+    public function index(DistributionTypeRequest $request)
     {
         return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
+
     /**
-     * 新增配送
+     * 新增入库类型
      *
-     * @Post("/distributions")
+     * @Post("/distributiontypes")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("name", description="配送公司名称", required=true),
-     *      @Parameter("phone", description="配送公司电话", required=true),
-     *      @Parameter("address", description="配送公司地址", required=true),
-     *      @Parameter("remark", description="备注", required=false),
+     *      @Parameter("name", description="入库类型名称", required=true),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "address": {
-     *                  "配送公司地址必须string类型"
-     *              },
+     *              "name": {
+     *                  "入库类型名称必填"
+     *              }
      *           },
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "配送公司名称",
-     *          "phone": "配送公司电话",
-     *          "address": "配送公司地址",
-     *          "remark": "备注",
+     *          "name": "配送类型名称",
      *          "status": true,
-     *          "created_at": "2018-08-08 16:15:57",
-     *          "updated_at": "2018-08-08 16:15:57",
+     *          "created_at": "2018-08-08 18:14:22",
+     *          "updated_at": "2018-08-08 18:14:22",
      *          "meta": {
-     *              "status_code": 201
+     *              "status_code": "201"
      *          }
      *      })
      * })
      */
-    public function store(DistributionRequest $request)
+    public function store(DistributionTypeRequest $request)
     {
         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**
-     * 显示单条配送
+     * 显示单条配送类型
      *
-     * @Get("/distributions/:id")
+     * @Get("/distributiontypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -112,13 +107,10 @@ class DistributionsController extends Controller
      *      }),
      *      @Response(200, body={
      *          "id": 1,
-     *          "name": "配送公司名称",
-     *          "phone": "配送公司电话",
-     *          "address": "配送公司地址",
-     *          "remark": "备注",
+     *          "name": "配送类型名称",
      *          "status": true,
-     *          "created_at": "2018-08-08 16:15:57",
-     *          "updated_at": "2018-08-08 16:15:57"
+     *          "created_at": "2018-08-08 18:14:22",
+     *          "updated_at": "2018-08-08 18:14:22",
      *      })
      * })
      */
@@ -127,10 +119,11 @@ class DistributionsController extends Controller
         return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
     }
 
+
     /**
-     * 修改配送
+     * 修改配送类型
      *
-     * @Patch("/distributions/:id")
+     * @Patch("/distributiontypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -140,33 +133,30 @@ class DistributionsController extends Controller
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "address": {
-     *                  "配送公司地址必须string类型"
-     *               },
+     *              "name": {
+     *                  "配送类型名称必须string类型"
+     *               }
      *           },
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "配送公司名称1",
-     *          "phone": "配送公司电话",
-     *          "address": "配送公司地址",
-     *          "remark": "备注",
+     *          "name": "配送类型名称",
      *          "status": true,
-     *          "created_at": "2018-08-08 16:15:57",
-     *          "updated_at": "2018-08-08 16:18:37"
+     *          "created_at": "2018-08-08 18:14:22",
+     *          "updated_at": "2018-08-08 18:14:22",
      *      })
      * })
      */
-    public function update(DistributionRequest $request, Distribution $distribution)
+    public function update(DistributionTypeRequest $request, DistributionType $distributiontype)
     {
-        return $this->traitUpdate($request, $distribution, self::TRANSFORMER);
+        return $this->traitUpdate($request, $distributiontype, self::TRANSFORMER);
     }
 
     /**
-     * 删除配送
+     * 删除配送类型
      *
-     * @Delete("/distributions/:id")
+     * @Delete("/distributiontypes/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -176,18 +166,18 @@ class DistributionsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(Distribution $distribution)
+    public function destroy(DistributionType $distributiontype)
     {
-        return $this->traitDestroy($distribution);
+        return $this->traitDestroy($distributiontype);
     }
 
     /**
-     * 删除一组配送
+     * 删除一组配送类型
      *
-     * @Delete("/distributions")
+     * @Delete("/distributiontypes")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="配送id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="配送类型id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(500, body={
@@ -213,12 +203,12 @@ class DistributionsController extends Controller
     }
 
     /**
-     * 更改一组配送状态
+     * 更改一组配送类型状态
      *
-     * @PUT("/distributions/editstatus")
+     * @PUT("/distributiontypes/editstatus")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("ids", description="配送id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("ids", description="配送类型id组 格式: 1,2,3,4 ", required=true),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
@@ -246,5 +236,4 @@ class DistributionsController extends Controller
     {
         return $this->traitEditStatusByIds($request, self::MODEL);
     }
-
 }
