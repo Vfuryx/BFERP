@@ -32,7 +32,9 @@ class ProductSpecsController extends Controller
      * @Get("/productspecs{?is_combination}")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("is_combination", type="boolean", description="是否组合", required=false, default="all")
+     *      @Parameter("is_combination", type="boolean", description="是否组合", required=false, default="all"),
+     *      @Parameter("except_id", type="integer", description="排除id（添加组合的时候如果数据库存在则需要排除）", required=false, default="all"),
+     *      @Parameter("spec_code", description="产品规格", required=false, default="all"),
      * })
      * @Response(200, body={
      *       "data": {
@@ -106,24 +108,30 @@ class ProductSpecsController extends Controller
      *              "updated_at": "2018-07-07 10:51:12",
      *           }
      *       },
-     *       "meta": {
-     *           "pagination": {
-     *               "total": 1,
-     *               "count": 1,
-     *               "per_page": 10,
-     *               "current_page": 1,
-     *               "total_pages": 1,
-     *               "links": {
-     *                   "previous": null,
-     *                   "next": "http://127.0.0.1:8000/api/productspecs?page=1"
-     *               }
-     *           }
-     *       }
      * })
      */
     public function index(ProductSpecRequest $request)
     {
-        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10,0);
+        $is_combination = $except_id = $spec_code = '';
+
+        extract($request->validated());
+
+        $goods = ProductSpec::query()
+            ->when($is_combination !== '', function($query) use ($is_combination) {
+
+                return $query->where('is_combination', $is_combination);
+
+            })->when($except_id, function($query) use ($except_id) {
+
+                return $query->where('id','<>', intval($except_id));
+
+            })->when($spec_code, function($query) use ($spec_code) {
+
+                return $query->where('spec_code', 'like', '%' . $spec_code . '%');
+
+            })->with('goods','distributionMethod');
+
+        return $this->response->collection($goods->get(), new ProductSpecTransformer());
     }
 
 

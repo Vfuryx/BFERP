@@ -6112,6 +6112,10 @@ FORMAT: 1A
 + Parameters
     + is_combination: (boolean, optional) - 是否组合
         + Default: all
+    + except_id: (integer, optional) - 排除id（添加组合的时候如果数据库存在则需要排除）
+        + Default: all
+    + spec_code: (string, optional) - 产品规格
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -6187,20 +6191,7 @@ FORMAT: 1A
                         "created_at": "2018-07-07 10:41:02",
                         "updated_at": "2018-07-07 10:51:12"
                     }
-                ],
-                "meta": {
-                    "pagination": {
-                        "total": 1,
-                        "count": 1,
-                        "per_page": 10,
-                        "current_page": 1,
-                        "total_pages": 1,
-                        "links": {
-                            "previous": null,
-                            "next": "http://127.0.0.1:8000/api/productspecs?page=1"
-                        }
-                    }
-                }
+                ]
             }
 
 ## 显示单条产品规格 [GET /api/productspecs/:id]

@@ -21,7 +21,12 @@ class CustomerServiceDepartmentRequset extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'shops_id' => '店铺id',
+                    'shops_id' => [
+                        'required', 'integer',
+                        Rule::exists('shops', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
                     'member_nick' => '会员昵称',
                     'logistics_id' => '物流id',
                     'billing_way' => '计费方式',

@@ -22,8 +22,8 @@ class SearchGoodsRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'spec_code' => 'string|max:255',
-                    'commodity_code' => 'string|max:255',
+                    'spec_code' => 'nullable|string|max:255',
+                    'commodity_code' => 'nullable|string|max:255',
                 ];
                 break;
         }

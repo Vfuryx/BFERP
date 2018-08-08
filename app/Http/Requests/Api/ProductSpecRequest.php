@@ -16,7 +16,9 @@ class ProductSpecRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'is_combination' => 'boolean'
+                    'is_combination' => 'boolean',
+                    'except_id' => 'integer',
+                    'spec_code' => 'nullable|string|max:255',
                 ];
                 break;
             case 'POST':
@@ -136,6 +138,13 @@ class ProductSpecRequest extends FormRequest
     public function messages()
     {
         return [
+            'is_combination.boolean' => '是否组合必须布尔类型',
+
+            'except_id.integer' => '规格id必须int类型',
+
+            'spec_code.string' => '规格编码必须string类型',
+            'spec_code.max' => '规格编码最大长度为255',
+
             'productspecs.*.id.required' => '规格id必填',
             'productspecs.*.id.integer' => '规格id必须int类型',
             'productspecs.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
