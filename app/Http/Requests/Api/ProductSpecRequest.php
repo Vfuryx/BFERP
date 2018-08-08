@@ -55,7 +55,7 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.function' => 'string|max:255',
                     'productspecs.*.special' => 'string|max:255',
                     'productspecs.*.other' => 'string|max:255',
-                    'productspecs.*.length' => 'numeric',
+                    'productspecs.*.longness' => 'numeric',
                     'productspecs.*.width' => 'numeric',
                     'productspecs.*.height' => 'numeric',
                     'productspecs.*.volume' => 'numeric',
@@ -119,7 +119,7 @@ class ProductSpecRequest extends FormRequest
                     'productspecs.*.function' => 'string|max:255',
                     'productspecs.*.special' => 'string|max:255',
                     'productspecs.*.other' => 'string|max:255',
-                    'productspecs.*.length' => 'numeric',
+                    'productspecs.*.longness' => 'numeric',
                     'productspecs.*.width' => 'numeric',
                     'productspecs.*.height' => 'numeric',
                     'productspecs.*.volume' => 'numeric',
@@ -221,7 +221,7 @@ class ProductSpecRequest extends FormRequest
             'productspecs.*.other.max' => '其他最大长度为255',
             'productspecs.*.other.string' => '其他必须string类型',
 
-            'productspecs.*.length.numeric' => '长度（mm）必须是数字',
+            'productspecs.*.longness.numeric' => '长度（mm）必须是数字',
 
             'productspecs.*.width.numeric' => '宽度（mm）必须是数字',
 
@@ -277,7 +277,7 @@ class ProductSpecRequest extends FormRequest
             'function' => '功能',
             'special' => '特殊',
             'other' => '其他',
-            'length' => '长度（mm）',
+            'longness' => '长度（mm）',
             'width' => '宽度（mm）',
             'height' => '高度（mm）',
             'volume' => '体积(m²)',

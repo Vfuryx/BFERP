@@ -45,7 +45,7 @@ class CreateProductSpecsTable extends Migration
             $table->string('function')->default('')->comment('功能');
             $table->string('special')->default('')->comment('特殊');
             $table->string('other')->default('')->comment('其他');
-            $table->double('length',10,2)->default(0.00)->comment('长度（mm）');
+            $table->double('longness',10,2)->default(0.00)->comment('长度（mm）');
             $table->double('width',10,2)->default(0.00)->comment('宽度（mm）');
             $table->double('height',10,2)->default(0.00)->comment('高度（mm）');
             $table->double('volume',10,2)->default(0.00)->comment('体积(m²)');

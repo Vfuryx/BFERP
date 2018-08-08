@@ -105,7 +105,7 @@ class StockInDetailsController extends Controller
      *                  "function": "功能",
      *                  "special": "特殊",
      *                  "other": "其他",
-     *                  "length": 10,
+     *                  "longness": 10,
      *                  "width": 10,
      *                  "height": 10,
      *                  "volume": 10,

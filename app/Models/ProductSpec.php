@@ -16,7 +16,7 @@ class ProductSpec extends Model
         'wooden_frame_costs', 'purchase_freight', 'inventory_warning',
         'purchase_days_warning', 'available_warning', 'distribution_method_id',
         'bar_code', 'img_url', 'spec', 'color', 'materials', 'function',
-        'special', 'other', 'length', 'width', 'height', 'volume', 'weight',
+        'special', 'other', 'longness', 'width', 'height', 'volume', 'weight',
         'remark', 'finished_pro', 'is_stop_pro', 'status'
     ];
 

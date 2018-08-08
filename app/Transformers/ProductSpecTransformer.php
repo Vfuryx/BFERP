@@ -41,7 +41,7 @@ class ProductSpecTransformer extends TransformerAbstract
             'function' => $productspec->function,
             'special' => $productspec->special,
             'other' => $productspec->other,
-            'length' => $productspec->length,
+            'longness' => $productspec->longness,
             'width' => $productspec->width,
             'height' => $productspec->height,
             'volume' => $productspec->volume,

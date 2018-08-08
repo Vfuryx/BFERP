@@ -15,10 +15,10 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('system_order_no')->comment('系统单号');
             $table->unsignedInteger('order_status')->default(1)->comment('订单状态');
             $table->string('order_source')->comment('订单来源');
-            $table->string('system_order_no')->comment('系统订单号');
-            $table->string('member_nick')->comment('会员昵称（对应淘宝买家昵称一类）');
+            $table->unsignedInteger('shops_id')->comment('店铺id');
             $table->unsignedInteger('logistics_id')->comment('物流id');
             $table->unsignedInteger('billing_way')->comment('计费方式(按重量计算：weight ，按体积计算 volume)');
             $table->date('promise_ship_time')->nullable()->comment('承诺发货时间（订单生成）');
@@ -59,33 +59,38 @@ class CreateOrdersTable extends Migration
             $table->string('tax_number')->default('')->comment('税号');
             $table->string('receipt')->default('')->comment('收据');
             $table->string('logistics_remark')->default('')->comment('物流备注');
-            $table->string('buyer_message')->default('')->comment('买家留言');
             $table->string('seller_remark')->default('')->comment('卖家备注');
             $table->string('customer_service_remark')->default('')->comment('客服备注');
 
             //淘宝订单信息
             $table->unsignedBigInteger('taobao_oid')->default(0)->comment('淘宝单号');
             $table->unsignedBigInteger('taobao_tid')->default(0)->comment('交易号（获取淘宝的交易编号）');
+            $table->string('member_nick')->comment('会员昵称（对应淘宝买家昵称一类）');
             $table->string('shop_name')->default('')->comment('店铺名称');
             $table->string('seller_name')->default('')->comment('卖家昵称');
             $table->tinyInteger('seller_flag')->default(0)->comment('卖家备注旗帜（与淘宝网上订单的卖家备注旗帜对应，只有卖家才能查看该字段）红、黄、绿、蓝、紫 分别对应 1、2、3、4、5');
-            $table->string('receiver_name')->default('')->comment('收货人');
-            $table->string('receiver_state')->default('')->comment('收货人的所在省份');
-            $table->string('receiver_city')->default('')->comment('收货人的所在城市');
-            $table->string('receiver_district')->default('')->comment('收货人的所在地区');
-            $table->string('receiver_address')->default('')->comment('收货人的详细地址');
             $table->timestamp('created')->nullable()->comment('(下单时间)交易创建时间');
-//            $table->timestamp('audit_at')->nullable()->comment('(付款时间)付款时间');冲突字段
+            $table->timestamp('pay_time')->nullable()->comment('付款时间');
             $table->timestamp('est_con_time')->nullable()->comment('(商家的预计发货时间)');
             $table->decimal('payment',10,2)->comment('实付金额');
             $table->decimal('total_fee',10,2)->comment('商品金额（商品价格乘以数量的总金额）');
             $table->decimal('discount_fee',10,2)->comment('优惠金额');
+            $table->string('buyer_message')->default('')->comment('买家留言');
+
+            //收货详情
+            $table->string('receiver_name')->default('')->comment('收货人');
+            $table->string('receiver_phone')->default('')->comment('收货人固定电话');
+            $table->string('receiver_mobile')->default('')->comment('收货人手机');
+            $table->string('receiver_state')->default('')->comment('收货人的所在省份');
+            $table->string('receiver_city')->default('')->comment('收货人的所在城市');
+            $table->string('receiver_district')->default('')->comment('收货人的所在地区');
+            $table->string('receiver_address')->default('')->comment('收货人的详细地址');
+            $table->string('receiver_zip')->default('')->comment('收货邮编');
 
             //不知名字段
             $table->string('refund_info')->default('无退款')->comment('退款信息');
 
             //要记录的字段
-            $table->unsignedInteger('shops_id')->comment('店铺id');
             $table->string('business_personnel_name')->comment('业务员名称 (解锁后这里要清除)');
             $table->string('business_personnel_account')->comment('业务员账号 (解锁后这里要清除)');
             $table->string('locker_name')->comment('锁定人名称 (解锁后这里要清除)');
@@ -98,8 +103,6 @@ class CreateOrdersTable extends Migration
             $table->boolean('is_merge')->default(false)->comment('是否合并');
             $table->boolean('is_split')->default(false)->comment('是否拆分');
             $table->boolean('is_association')->default(false)->comment('是否关联订单');
-
-            //客审
 
             $table->timestamps();
         });
