@@ -39,7 +39,7 @@
                     withoutAnimation: this.sidebar.withoutAnimation,
                     mobile: this.device === 'mobile'
                 }
-            }
+            },
       },
       methods: {
         handleClickOutside() {

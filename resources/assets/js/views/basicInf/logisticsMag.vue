@@ -20,24 +20,18 @@
                              @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
                              @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
             </el-tab-pane>
-         <!--   <el-tab-pane label="报表格式" name="3">
-                <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
-                             :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
-                             @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
-                             @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
-            </el-tab-pane>-->
         </el-tabs>
         <!--新增-->
-        <add-new :visible-add="showMaskArr[this.activeName].show" :title="title[this.activeName]"
-                 :rule-form="ruleForm[this.activeName]" :rules="rules[this.activeName]" :add-arr="addArr[activeName]"
+        <add-new :visible-add="showMaskArr[activeName].show" :title="title[activeName]"
+                 :rule-form="ruleForm[activeName]" :rules="rules[activeName]" :add-arr="addArr[activeName]"
                  :url="url[activeName]" @submitEvent="submitForm" :new-ref="refArr[activeName]" @CB-dialog="CB_dialog"
-                 :halfForm="halfForm[activeName].show" :selects="sonArr"></add-new>
+                 :halfForm="halfForm[activeName].show"></add-new>
         <!--修改-->
-        <add-new :visible-add="editMask[this.activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]"
+        <add-new :visible-add="editMask[activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]"
                  :new-ref="refArr[activeName]"
                  :rule-form="editData" :add-arr="addArr[activeName]"
                  :url="url[activeName]" @submitEvent="editForm" @CB-dialog="CB_dialog"
-                 :halfForm="halfForm[activeName].show" :selects="sonArr" :leftTab="leftTab"></add-new>
+                 :halfForm="halfForm[activeName].show" :leftTab="leftTab"></add-new>
         <!--删除-->
         <el-popover
                 placement="top"
@@ -62,22 +56,12 @@
         <div ref='tip'></div>
         <input type="file" style="visibility: hidden;" multiple="multiple" ref="upload" @change="handleOk()"
                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"/>
-       <!-- &lt;!&ndash; 上传文件对话框 &ndash;&gt;
-        <el-dialog title="上传文件" :visible.sync="uploadShow">
-            <el-upload :action="uploadUrl" :on-success="uploadSuccess">
-                <el-button type="primary" icon="el-icon-upload">上传</el-button>
-            </el-upload>
-            <span slot="footer">
-                <el-button type="danger" icon="el-icon-close" @click="uploadShow=false">关闭</el-button>
-            </span>
-        </el-dialog>-->
     </div>
 </template>
 <script>
   import FileSaver from 'file-saver'
   import XLSX from 'xlsx'
-  import axios from 'axios'
-
+  import { mapGetters } from 'vuex'
   export default {
     data() {
       return {
@@ -121,7 +105,6 @@
           }
         ],
         activeName: '0',
-        /* []*/
         getsInfo: [[], [], []],
         tableHead: [
           [
@@ -386,42 +369,11 @@
               type: 'text',
               beAble: true
             }
-          ],
-          /*[
-            {
-              label: '报表文件',
-              width: '220',
-              prop: "file",
-              holder: '请输入报表文件',
-              type: 'text'
-            },
-            {
-              label: '报表名称',
-              width: '220',
-              prop: "name",
-              holder: '请输入报表名称',
-              type: 'text'
-            },
-            {
-              label: '报表格式',
-              width: '200',
-              prop: "paper_format",
-              holder: '请输入报表格式',
-              type: 'text'
-            },
-            {
-              label: '状态',
-              width: '220',
-              prop: "status",
-              holder: '请选择是否启用',
-              type: 'select_stu'
-            }
-          ]*/
+          ]
         ],
         loading: true,
         currentIndex: '',
         url: ['/logistics', '/cityinfos', '/damagedgoods'],
-        /*'/printreports'  '添加报表格式' , {show: false} 'ruleReports'  true {show: false}*/
         showMaskArr: [{show: false}, {show: false}, {show: false}],
         title: ['新增物流公司', '新增城市信息', '添加损坏商品'],
         ruleForm: [
@@ -429,7 +381,6 @@
             code: '',
             name: '',
             report_id: '',
-            // logistics_area_id: '',
             expected_days: '',
             phone: '',
             address: '',
@@ -459,13 +410,7 @@
             money: '',
             remark: '',
             status: '1',
-          },
-        /*  {
-            file: '',
-            name: '',
-            paper_format: '',
-            status: '1'
-          }*/
+          }
         ],
         rules: [
           {
@@ -536,18 +481,7 @@
             money: [
               {required: true, message: '请输入损坏金额', trigger: 'blur'},
             ],
-          },
-         /* {
-            file: [
-              {required: true, message: '请输入文件', trigger: 'blur'},
-            ],
-            name: [
-              {required: true, message: '请输入报表名', trigger: 'blur'},
-            ],
-            paper_format: [
-              {required: true, message: '请输入报表格式', trigger: 'blur'},
-            ],
-          }*/
+          }
         ],
         addArr: [
           [
@@ -568,7 +502,8 @@
               prop: 'report_id',
               holder: '请选择报表格式',
               type: 'select',
-              val: this.sonArr
+              val:'printreports',
+              indexNum:'printIndex'
             },
             /* {
                label:'物流区域',
@@ -581,7 +516,8 @@
               prop: 'freight_type_id',
               holder: '请输入运费类型',
               type: 'select',
-              val: this.sonArr
+              val: 'freighttypes',
+              indexNum:'freigIndex',
             },
             {
               label: '预计天数',
@@ -733,32 +669,6 @@
               type: 'select_stu'
             }
           ],
-         /* [
-            {
-              label: '报表文件',
-              prop: 'file',
-              holder: '请输入报表文件',
-              type: 'text'
-            },
-            {
-              label: '报表名称',
-              prop: 'name',
-              holder: '请输入报表名称',
-              type: 'text'
-            },
-            {
-              label: '报表格式',
-              prop: 'paper_format',
-              holder: '请输入报表格式',
-              type: 'text'
-            },
-            {
-              label: '状态',
-              prop: 'status',
-              holder: '请选择状态',
-              type: 'select_stu'
-            }
-          ],*/
         ],
         halfForm: [{show: true}, {show: true}, {show: false}],
         refArr: ['ruleLogistics', 'ruleCity', 'ruleDamage'],
@@ -779,39 +689,18 @@
         editMask: [{show: false}, {show: false}, {show: false}],
         editId: '',
         editData: {},
-        // editList: {},
         leftTab: '修改',
         uploadShow: false,
         uploadUrl: 'https://jsonplaceholder.typicode.com/posts/',
 
       }
     },
-    computed: {
-      /* selects: {
-         get: function () {
-           return this.$store.state.SonData.reports;
-         },
-         set: function () {
-         }
-       },
-       reportType: {
-         get: function () {
-           return this.$store.state.SonData.reports;
-         },
-         set: function () {
-         }
-       },
-       freightsType: {
-         get: function () {
-           return this.$store.state.SonData.freights
-         },
-         set: function () {
-         }
-       },*/
-      /* uploadUrl() {
-         // return `${axios.defaults.baseURL}todos/upload`
-       }*/
+    watch:{},
+    created(){
+      this.$store.dispatch('printreports','/printreports');
+      this.$store.dispatch('freighttypes','/freighttypes');
     },
+    computed:{},
     methods: {
       test() {
         console.log(1);
@@ -949,7 +838,6 @@
         this.currentIndex = '';
       },
       editSave(row) {
-        console.log(row);
         let newData = {};
         if (this.activeName == '0') {
           newData = {
@@ -986,16 +874,8 @@
             quantity: row.quantity,
             money: row.money,
             remark: row.remark
-            // status: row.status
           }
-        } /*else if (this.activeName == '3') {
-          newData = {
-            file: row.file,
-            name: row.name,
-            paper_format: row.paper_format,
-            status: row.status
-          }
-        }*/
+        }
         if (this.inputChange) {
           this.$patch(this.url[this.activeName] + '/' + row.id, newData)
             .then(() => {
@@ -1357,8 +1237,6 @@
     },
     mounted() {
       this.getInfo(this.url[0]);
-      this.getSonData('/printreports', '2');
-      this.getSonData('/freighttypes', '3');
       this.$store.dispatch('setOpt', this.newOpt);
       let that = this;
       $(window).resize(() => {

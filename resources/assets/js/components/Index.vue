@@ -288,6 +288,8 @@
 </script>
 
 -->
+<!--expend-->
+<!--
 <template>
     <el-table
             :data="tableData5"
@@ -434,6 +436,213 @@
         const property = column['property'];
         return row[property] === value;
       }
+    }
+  }
+</script>-->
+<!--打印-->
+<!--<template>
+    <div>
+        <div class="dialogCare" id="subOutputRank-print">
+            <el-table
+                    :data="tableData"
+                    style="width: 100%" @row-click="rowClick">
+                <el-table-column
+                        prop="date"
+                        label="日期"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="name"
+                        label="姓名"
+                        width="180">
+                </el-table-column>
+                <el-table-column
+                        prop="address"
+                        label="地址">
+                </el-table-column>
+                <el-table-column
+                        label="组合">
+                    <template slot-scope="scope">
+                        <span v-if="getCheck==1">
+                           <el-checkbox :checked="true"></el-checkbox>
+                        </span>
+                        <span v-else>
+                            <el-checkbox :checked="false"></el-checkbox>
+                        </span>
+                    </template>
+                </el-table-column>
+            </el-table>
+        </div>
+        <button  @click="printBtn">打 印</button>
+    </div>
+</template>
+<script>
+    export default {
+      data() {
+        return {
+          getCheck: 0,
+          tableData: [
+            {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }],
+          testMsg:[],
+          hkey_path:"HKEY_CURRENT_USER\\Software\\Microsoft\\Internet Explorer\\PageSetup\\"
+        }
+      },
+      methods: {
+        printBtn() {
+          this.remove_ie_header_and_footer();
+          let subOutputRankPrint = document.getElementById('subOutputRank-print');
+          let newContent =subOutputRankPrint.innerHTML;
+          let oldContent = document.body.innerHTML;
+          document.body.innerHTML = newContent;
+          window.print();
+          window.location.reload();//解决打印之后按钮失效的问题
+          document.body.innerHTML = oldContent;
+          return false;
+        },
+        remove_ie_header_and_footer() {
+          try {
+            let RegWsh = new ActiveXObject("WScript.Shell");
+            RegWsh.RegWrite(this.hkey_path + "header", "");
+            RegWsh.RegWrite(this.hkey_path + "footer", "");
+          } catch (e) {
+          }
+        },
+        rowClick(row){
+          Object.assign(this.$data.testMsg[row.index],row);
+        }
+      },
+      mounted(){ }
+    }
+</script>-->
+<template>
+    <div>
+        <el-checkbox :checked="tt==1?true:false" disabled></el-checkbox>
+        <el-table :data="data"  @row-click="rowClick" :row-class-name="rowName" @current-change="curChg">
+            <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index">
+                <template slot-scope="scope">
+                    <span v-if="item.type=='checkbox'">
+                        <span v-if="scope.$index==0">
+                           <el-checkbox v-model="doSelect" @change="selectComb"></el-checkbox>
+                       </span>
+                        <span v-else>
+                            <span v-if="scope.row.is_comb==1">
+                                <el-checkbox :checked="true" disabled>{{scope.row.is_comb}}</el-checkbox>
+                            </span>
+                            <span v-else>
+                                <el-checkbox :checked="false" disabled>{{scope.row.is_comb}}</el-checkbox>
+                            </span>
+                        </span>
+                    </span>
+                    <span v-else>
+                        <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="valChg"></el-input>
+                    </span>
+                </template>
+            </el-table-column>
+        </el-table>
+    </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        tableData: [
+          {
+            date: '2016-05-02',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1518 弄'
+          }, {
+            date: '2016-05-04',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1517 弄'
+          }, {
+            date: '2016-05-01',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1519 弄'
+          }, {
+            date: '2016-05-03',
+            name: '王小虎',
+            address: '上海市普陀区金沙江路 1516 弄'
+          }],
+        data:[{},{color: '1',length: '100',is_comb:1},{color: '2',length: '200',is_comb:1},{color: '3',length: '40',is_comb:0},{color: '4',length: '40',is_comb:0}],
+        tableHead:[
+          {
+            label: '组合',
+            prop:'is_comb',
+            type: 'checkbox'
+          },
+          {
+            label:'颜色',
+            prop: 'color'
+          },
+          {
+            label: '长度',
+            prop: 'length'
+          }
+        ],
+        chg: false,
+        doSelect: false,
+        tt:'0',
+
+      }
+    },
+    methods: {
+      rowName({row,rowIndex}){row.index = rowIndex},
+      rowClick(row){
+        // console.log(row);
+        if(row.is_comb==1){
+          row.index
+        }
+        /*点击新一行时重置*/
+        // this.chg = false;
+        if(this.chg){
+          // alert(1);
+          Object.assign(this.$data.data[row.index],row);
+        }
+      },
+      valChg(val){
+        // console.log(index);
+        // console.log(val);
+        // this.chg = true;
+        console.log(val);
+      },
+      selectComb(){
+        /*如果是确定*/
+        if(this.doSelect){
+          this.data.map((item,index)=>{
+            if(item.is_comb==0){
+              this.data.splice(index,1)
+            }
+          })
+        }else{
+          Object.assign(this.$data.data, this.$options.data().data);
+        }
+      },
+      curChg(currentRow,oldCurrentRow){
+        console.log(currentRow);
+        console.log(oldCurrentRow);
+      },
+      updateCount(){
+
+      }
+    },
+    mounted(){
+
     }
   }
 </script>

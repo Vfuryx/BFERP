@@ -4,7 +4,7 @@
             <el-tab-pane label="订单列表" name="order_list">
                 <div>
                     <div class="search_box" ref="searchValue">
-                        <div class="box">
+                        <div class="searchBox">
                             <span><label>会员名称</label><el-input v-model="searchBox.vip_name" clearable></el-input></span>
                             <span><label>订单编号</label><el-input v-model="searchBox.order_num"
                                                                clearable></el-input></span>
@@ -20,7 +20,7 @@
                                 </span>
                             </span>
                         </div>
-                        <div class="box" v-show="filterBox">
+                        <div class="searchBox" v-show="filterBox">
                             <span><label>收货地址</label><el-input v-model="searchBox.order_address"
                                                                clearable></el-input></span>
                             <span>
@@ -39,7 +39,7 @@
                             <span><label>业务员</label><el-input v-model="searchBox.order_staff"
                                                               clearable></el-input></span>
                         </div>
-                        <div class="box" v-show="filterBox">
+                        <div class="searchBox" v-show="filterBox">
                             <span><label>卖家备注</label><el-input v-model="searchBox.order_mark"
                                                                clearable></el-input></span>
                             <span>
@@ -76,7 +76,7 @@
                                  </el-select>
                             </span>
                         </div>
-                        <div class="box" v-show="filterBox">
+                        <div class="searchBox" v-show="filterBox">
                             <span>
                                 <label>承诺日期</label>
                                  <el-date-picker
@@ -234,6 +234,7 @@
                 订单明细
             </el-tab-pane>
         </el-tabs>
+
     </div>
 </template>
 <script>
@@ -525,11 +526,11 @@
   }
 </script>
 <style lang="scss" scoped>
-    .search_btn {
+    /*.search_btn {
         margin-bottom: 15px;
-    }
+    }*/
 
-    .box {
+  /*  .box {
         display: flex;
         width: 100%;
         margin-bottom: 10px;
@@ -565,5 +566,5 @@
             }
 
         }
-    }
+    }*/
 </style>

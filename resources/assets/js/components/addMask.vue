@@ -27,11 +27,13 @@
                     <span v-else-if="item.type=='tel'">
                          <el-input type="tel" v-model="ruleForm[item.prop]" :placehode="item.holder"></el-input>
                     </span>
-                    <span v-else-if="item.type=='new_casca'">
+                    <span v-else-if="item.type=='cascader'">
                          <el-cascader
+                                 size="large"
                                  :options="options"
-                                 v-model="selectedOptions" clearable>
-  </el-cascader>
+                                 v-model="selectedOptions"
+                                 @change="handleArea">
+                         </el-cascader>
                     </span>
                 </el-form-item>
             </el-form>
@@ -45,37 +47,14 @@
 <script>
     import axios from 'axios'
     import qs from 'qs'
+    import { regionDataPlus,CodeToText } from 'element-china-area-data'
   export default {
     props: ['title', 'ruleForm', 'rules', 'addArr','submitData','url','halfForm'],
     data() {
       return {
         newForm:[],
-        selectedOptions: [],
-        options: [
-          /*一级*/
-          {
-          value: 'zhinan',
-          label: '指南',
-          children: [
-            /*二级*/
-            {
-            value: 'shejiyuanze',
-            label: '设计原则',
-            children: [
-              /*三级*/
-              {
-              value: 'yizhi',
-              label: '一致'
-            },
-              {
-              value: 'fankui',
-              label: '反馈'
-            }
-            ]
-          },
-          ]
-        },
-        ],
+        options: regionDataPlus,
+        selectedOptions: []
       }
     },
     computed:{
@@ -126,6 +105,9 @@
 
       closeDialog(){
         this.$store.dispatch('setShowAdd',false);
+      },
+      handleArea (value) {
+        this.$emit('handleArea',value)
       }
     },
     mounted(){}

@@ -1,14 +1,14 @@
 webpackJsonp([88],{
 
-/***/ 500:
+/***/ 522:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(714)
+var __vue_script__ = __webpack_require__(755)
 /* template */
-var __vue_template__ = __webpack_require__(715)
+var __vue_template__ = __webpack_require__(756)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\warehouseMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\verificationConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3a269c48", Component.options)
+    hotAPI.createRecord("data-v-dcdfd6aa", Component.options)
   } else {
-    hotAPI.reload("data-v-3a269c48", Component.options)
+    hotAPI.reload("data-v-dcdfd6aa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,29 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 714:
+/***/ 755:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -65,164 +83,202 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
-        ent: this.addNew
+        ent: this.test
+      }, {
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.test
       }, {
         cnt: '删除',
         icon: 'bf-del',
-        ent: this.doDelMore
+        ent: this.test
+      }, {
+        cnt: '导入',
+        icon: 'bf-in',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '合并',
+        icon: 'bf-merge',
+        ent: this.test
       }, {
         cnt: '刷新',
         icon: 'bf-refresh',
-        ent: this.refresh
+        ent: this.test
       }],
-      tableKey: [[{
-        label: '仓库名称',
-        width: '180',
-        prop: "name",
-        holder: '请输入标记名称',
-        type: 'text'
-      }, {
-        label: '仓库地址',
-        width: '260',
-        prop: "address",
-        holder: '请输入仓库地址',
-        type: 'text',
-        lists: 'more_prop'
-      }, {
-        label: '是否默认仓库',
-        width: '160',
-        prop: "is_default",
-        holder: '描述',
-        type: 'select_def'
-      }, {
-        label: '是否可用',
-        width: '160',
-        prop: "status",
-        holder: '状态',
-        type: 'select_stu',
-        doSort: true
-      }]],
-      url: ['/warehouses'],
-      title: ['新建仓库'],
-      ruleForm: [{
-        name: '',
-        province: '',
-        city: '',
-        district: '',
-        address: '',
-        is_default: '0',
-        status: '1'
-      }],
-      rules: [{
-        name: [{ required: true, message: '请输入仓库名称', trigger: 'blur' }],
-        province: [{ required: true, message: '请输入仓库地址(省)', trigger: 'blur' }],
-        city: [{ required: true, message: '请输入仓库地址(市)', trigger: 'blur' }],
-        district: [{ required: true, message: '请输入仓库地址(区)', trigger: 'blur' }],
-        address: [{ required: true, message: '请输入仓库地址(县)', trigger: 'blur' }]
-
-      }],
-      addArr: [[{
-        label: '仓库名称',
-        prop: 'name',
-        holder: '请输入仓库名称',
-        type: 'text'
-      }, {
-        label: '地址(省)',
-        prop: 'province',
-        holder: '请输入仓库地址(省)',
-        type: 'text'
-      }, {
-        label: '地址(市)',
-        prop: 'city',
-        holder: '请输入仓库地址(市)',
-        type: 'text'
-      }, {
-        label: '地址(区)',
-        prop: 'district',
-        holder: '请输入仓库地址(区)',
-        type: 'text'
-      }, {
-        label: '地址(县)',
-        prop: 'address',
-        holder: '请输入县及以下地址',
-        type: 'text'
-      }, {
-        label: '是否默认',
-        prop: 'is_default',
-        holder: '请选择是否默认',
-        type: 'select_def'
-      }, {
-        label: '是否可用',
-        prop: 'status',
-        holder: '请选择是否可用',
-        type: 'select_stu'
-      }]]
+      searchBox: {
+        buyNick: '',
+        shopTitle: ''
+      },
+      currentPage: true
     };
   },
 
   methods: {
-    addNew: function addNew() {
-      this.$store.dispatch('setShowAdd', true);
+    test: function test() {
+      console.log(1);
     },
-    edit: function edit(row) {
-      var obj = {
-        id: row.id,
-        name: row.name,
-        province: row.province,
-        city: row.city,
-        district: row.district,
-        address: row.address,
-        is_default: row.is_default,
-        status: row.status
-      };
-      this.$store.dispatch('setRow', row);
-      this.$store.dispatch('setUrl', this.url[0] + "/");
-      this.$store.dispatch('doEdit', obj);
-    },
-    doDelMore: function doDelMore() {
-      this.$refs.tabs.$emit('delMore');
-    },
-    refresh: function refresh() {
-      this.$store.dispatch('refresh');
+    getData: function getData() {
+      alert(this.searchBox);
+      console.log(this.searchBox);
     }
   },
   mounted: function mounted() {
-    this.$store.dispatch('setTabs', false);
-    this.$store.dispatch('setOpt', this.newOpt);
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
     var that = this;
     $(window).resize(function () {
-      that.$store.dispatch('setOpt', that.newOpt);
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
     });
   }
 });
 
 /***/ }),
 
-/***/ 715:
+/***/ 756:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("v-tabs", {
-        ref: "tabs",
-        attrs: {
-          "table-key": _vm.tableKey,
-          url: _vm.url,
-          title: _vm.title,
-          "rule-form": _vm.ruleForm,
-          rules: _vm.rules,
-          "add-arr": _vm.addArr
-        },
-        on: { edit: _vm.edit }
-      })
-    ],
-    1
-  )
+  return _c("div", [
+    _vm.currentPage
+      ? _c("div", { staticClass: "searchBox" }, [
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("省")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("市")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("区")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("适用平台")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _c("h2", [_vm._v("核销配置")])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -230,7 +286,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-3a269c48", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-dcdfd6aa", module.exports)
   }
 }
 

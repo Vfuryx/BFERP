@@ -10,6 +10,8 @@ import table from './modules/table.js'
 import addMask from './modules/addMask.js'
 import LightTable from './modules/lightTable.js'
 import SonData from './modules/sonData.js'
+import responseData from './modules/responseData.js'
+import urls from './modules/urls.js'
 
 Vue.use(Vuex)
 
@@ -23,9 +25,11 @@ const store = new Vuex.Store({
     table,
     addMask,
     LightTable,
-    SonData
+    SonData,
+    responseData,
+    urls
   },
   getters
-})
+});
 
 export default store

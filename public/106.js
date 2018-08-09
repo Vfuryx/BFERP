@@ -1,14 +1,14 @@
 webpackJsonp([106],{
 
-/***/ 505:
+/***/ 516:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(724)
+var __vue_script__ = __webpack_require__(743)
 /* template */
-var __vue_template__ = __webpack_require__(725)
+var __vue_template__ = __webpack_require__(744)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\logisticsArea.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\invoiceConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-2a2e12b8", Component.options)
+    hotAPI.createRecord("data-v-303ba3d5", Component.options)
   } else {
-    hotAPI.reload("data-v-2a2e12b8", Component.options)
+    hotAPI.reload("data-v-303ba3d5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 724:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76,64 +76,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       tableKey: [[{
-        label: '区域编码',
-        width: '',
-        prop: "code",
-        holder: '请输入区域编码',
+        label: '报表文件',
+        width: '220',
+        prop: "file",
+        holder: '请输入报表文件',
         type: 'text'
       }, {
-        label: '区域名称',
-        width: '',
+        label: '报表名称',
+        width: '220',
         prop: "name",
-        holder: '请输入区域名称',
+        holder: '请输入报表名称',
         type: 'text'
       }, {
-        label: '启用',
-        width: '',
+        label: '报表格式',
+        width: '200',
+        prop: "paper_format",
+        holder: '请输入报表格式',
+        type: 'text'
+      }, {
+        label: '状态',
+        width: '220',
         prop: "status",
         holder: '请选择是否启用',
-        type: 'select_def',
-        doSort: true
+        type: 'select_stu'
       }]],
-      url: ['/logisticsareas'],
-      title: ['新增区域'],
+      url: ['/printreports'],
+      title: ['添加报表格式'],
       ruleForm: [{
-        code: '',
+        file: '',
         name: '',
+        paper_format: '',
         status: '1'
       }],
       rules: [{
-        code: [{ required: true, message: '请输入区域编码', trigger: 'blur' }],
-        name: [{ required: true, message: '请输入区域名称', trigger: 'blur' }]
+        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
+        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
       }],
       addArr: [[{
-        label: '区域代码',
-        prop: 'code',
-        holder: '请输入区域代码',
+        label: '报表文件',
+        prop: 'file',
+        holder: '请输入报表文件',
         type: 'text'
       }, {
-        label: '区域名称',
+        label: '报表名称',
         prop: 'name',
-        holder: '请输入区域名称',
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        prop: 'paper_format',
+        holder: '请输入报表格式',
         type: 'text'
       }, {
         label: '状态',
         prop: 'status',
-        holder: '请选择是否启用',
-        type: 'select_def'
+        holder: '请选择状态',
+        type: 'select_stu'
       }]]
     };
   },
 
   methods: {
+    //新增
     addNew: function addNew() {
       this.$store.dispatch('setShowAdd', true);
     },
     edit: function edit(row) {
       var obj = {
-        id: row.id,
-        code: row.markcode,
-        name: row.markname,
+        file: row.file,
+        name: row.name,
+        paper_format: row.paper_format,
         status: row.status
       };
       this.$store.dispatch('setRow', row);
@@ -159,7 +172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 725:
+/***/ 744:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -191,7 +204,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-2a2e12b8", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-303ba3d5", module.exports)
   }
 }
 

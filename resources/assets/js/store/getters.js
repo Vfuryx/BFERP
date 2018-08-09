@@ -20,6 +20,15 @@ const getters = {
   current_page: state => state.table.current_page,
   per_page: state => state.table.per_page,
   page_total: state => state.table.page_total,
+  warehouses: state => state.responseData.warehouses,
+  platForm: state => state.responseData.platForm,
+  printreports: state => state.responseData.printreports,
+  freighttypes: state => state.responseData.freighttypes,
+  suppliers: state => state.responseData.suppliers,
+  goodscates: state => state.responseData.goodscates,
+  distmets: state => state.responseData.distmets,
+  shops: state => state.responseData.shops,
+  stockintypes: state => state.responseData.stockintypes,
 
 };
 

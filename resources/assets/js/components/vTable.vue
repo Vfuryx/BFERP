@@ -56,9 +56,6 @@
                             <span v-else-if="item.type=='select_def'">
                                  {{scope.row[item.prop]==0?'否':'是'}}
                             </span>
-                        <!-- <span v-else-if="item.innerProp"  v-for="list in item.innerProp">
-                              {{scope.row[item.prop][list]}}
-                         </span>-->
                             <span v-else>
                                  {{scope.row[item.prop]}}
                             </span>

@@ -1,14 +1,14 @@
 webpackJsonp([1],{
 
-/***/ 499:
+/***/ 502:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(703)
+var __vue_script__ = __webpack_require__(706)
 /* template */
-var __vue_template__ = __webpack_require__(713)
+var __vue_template__ = __webpack_require__(716)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 579:
+/***/ 582:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -62,9 +62,9 @@ module.exports = Component.exports
 
 
 
-var base64 = __webpack_require__(707)
-var ieee754 = __webpack_require__(708)
-var isArray = __webpack_require__(709)
+var base64 = __webpack_require__(710)
+var ieee754 = __webpack_require__(711)
+var isArray = __webpack_require__(712)
 
 exports.Buffer = Buffer
 exports.SlowBuffer = SlowBuffer
@@ -1842,11 +1842,11 @@ function isnan (val) {
   return val !== val // eslint-disable-line no-self-compare
 }
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 580:
+/***/ 583:
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
@@ -1856,7 +1856,7 @@ module.exports = __webpack_amd_options__;
 
 /***/ }),
 
-/***/ 581:
+/***/ 584:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer) {/* cpexcel.js (C) 2013-present SheetJS -- http://sheetjs.com */
@@ -3363,28 +3363,27 @@ if (typeof module !== 'undefined' && module.exports && typeof DO_NOT_EXPORT_CODE
   return cpt;
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(579).Buffer))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(582).Buffer))
 
 /***/ }),
 
-/***/ 582:
+/***/ 585:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 703:
+/***/ 706:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver__ = __webpack_require__(704);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver__ = __webpack_require__(707);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_file_saver___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_file_saver__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx__ = __webpack_require__(706);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx__ = __webpack_require__(709);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_xlsx___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_xlsx__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__(15);
 //
 //
 //
@@ -3445,22 +3444,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -3500,7 +3483,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       activeName: '0',
-      /* []*/
       getsInfo: [[], [], []],
       tableHead: [[{
         label: '物流代码',
@@ -3739,14 +3721,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       loading: true,
       currentIndex: '',
       url: ['/logistics', '/cityinfos', '/damagedgoods'],
-      /*'/printreports'  '添加报表格式' , {show: false} 'ruleReports'  true {show: false}*/
       showMaskArr: [{ show: false }, { show: false }, { show: false }],
       title: ['新增物流公司', '新增城市信息', '添加损坏商品'],
       ruleForm: [{
         code: '',
         name: '',
         report_id: '',
-        // logistics_area_id: '',
         expected_days: '',
         phone: '',
         address: '',
@@ -3815,7 +3795,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: 'report_id',
         holder: '请选择报表格式',
         type: 'select',
-        val: this.sonArr
+        val: 'printreports',
+        indexNum: 'printIndex'
       },
       /* {
          label:'物流区域',
@@ -3828,7 +3809,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         prop: 'freight_type_id',
         holder: '请输入运费类型',
         type: 'select',
-        val: this.sonArr
+        val: 'freighttypes',
+        indexNum: 'freigIndex'
       }, {
         label: '预计天数',
         prop: 'expected_days',
@@ -3970,7 +3952,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       editMask: [{ show: false }, { show: false }, { show: false }],
       editId: '',
       editData: {},
-      // editList: {},
       leftTab: '修改',
       uploadShow: false,
       uploadUrl: 'https://jsonplaceholder.typicode.com/posts/'
@@ -3978,32 +3959,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  computed: {
-    /* selects: {
-       get: function () {
-         return this.$store.state.SonData.reports;
-       },
-       set: function () {
-       }
-     },
-     reportType: {
-       get: function () {
-         return this.$store.state.SonData.reports;
-       },
-       set: function () {
-       }
-     },
-     freightsType: {
-       get: function () {
-         return this.$store.state.SonData.freights
-       },
-       set: function () {
-       }
-     },*/
-    /* uploadUrl() {
-       // return `${axios.defaults.baseURL}todos/upload`
-     }*/
+  watch: {},
+  created: function created() {
+    this.$store.dispatch('printreports', '/printreports');
+    this.$store.dispatch('freighttypes', '/freighttypes');
   },
+
+  computed: {},
   methods: {
     test: function test() {
       console.log(1);
@@ -4147,7 +4109,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     editSave: function editSave(row) {
       var _this4 = this;
 
-      console.log(row);
       var newData = {};
       if (this.activeName == '0') {
         newData = {
@@ -4184,16 +4145,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           quantity: row.quantity,
           money: row.money,
           remark: row.remark
-          // status: row.status
         };
-      } /*else if (this.activeName == '3') {
-        newData = {
-          file: row.file,
-          name: row.name,
-          paper_format: row.paper_format,
-          status: row.status
-        }
-        }*/
+      }
       if (this.inputChange) {
         this.$patch(this.url[this.activeName] + '/' + row.id, newData).then(function () {
           _this4.$message({
@@ -4563,8 +4516,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     this.getInfo(this.url[0]);
-    this.getSonData('/printreports', '2');
-    this.getSonData('/freighttypes', '3');
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -4575,7 +4526,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 704:
+/***/ 707:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_RESULT__;/* FileSaver.js
@@ -4761,7 +4712,7 @@ var saveAs = saveAs || (function(view) {
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports.saveAs = saveAs;
-} else if (("function" !== "undefined" && __webpack_require__(705) !== null) && (__webpack_require__(580) !== null)) {
+} else if (("function" !== "undefined" && __webpack_require__(708) !== null) && (__webpack_require__(583) !== null)) {
   !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
     return saveAs;
   }).call(exports, __webpack_require__, exports, module),
@@ -4771,7 +4722,7 @@ if (typeof module !== "undefined" && module.exports) {
 
 /***/ }),
 
-/***/ 705:
+/***/ 708:
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -4781,7 +4732,7 @@ module.exports = function() {
 
 /***/ }),
 
-/***/ 706:
+/***/ 709:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global, Buffer, process) {/*! xlsx.js (C) 2013-present SheetJS -- http://sheetjs.com */
@@ -4795,8 +4746,8 @@ var current_codepage = 1200, current_ansi = 1252;
 /*global cptable:true, window */
 if(true) {
 	if(typeof cptable === 'undefined') {
-		if(typeof global !== 'undefined') global.cptable = __webpack_require__(581);
-		else if(typeof window !== 'undefined') window.cptable = __webpack_require__(581);
+		if(typeof global !== 'undefined') global.cptable = __webpack_require__(584);
+		else if(typeof window !== 'undefined') window.cptable = __webpack_require__(584);
 	}
 }
 
@@ -5941,7 +5892,7 @@ function filename(p) {
 	return (c === -1) ? p : p.slice(c+1);
 }
 var fs;
-function get_fs() { return fs || (fs = __webpack_require__(582)); }
+function get_fs() { return fs || (fs = __webpack_require__(585)); }
 function parse(file, options) {
 if(file.length < 512) throw new Error("CFB file size " + file.length + " < 512");
 var mver = 3;
@@ -6629,7 +6580,7 @@ return exports;
 
 if("function" !== 'undefined' && typeof module !== 'undefined' && typeof DO_NOT_EXPORT_CFB === 'undefined') { module.exports = CFB; }
 var _fs;
-if(true) try { _fs = __webpack_require__(582); } catch(e) {}
+if(true) try { _fs = __webpack_require__(585); } catch(e) {}
 
 /* normalize data for blob ctor */
 function blobify(data) {
@@ -6890,7 +6841,7 @@ var jszip;
 if(typeof JSZipSync !== 'undefined') jszip = JSZipSync;
 if(true) {
 	if(typeof module !== 'undefined' && module.exports) {
-		if(typeof jszip === 'undefined') jszip = __webpack_require__(710);
+		if(typeof jszip === 'undefined') jszip = __webpack_require__(713);
 	}
 }
 
@@ -7507,7 +7458,7 @@ var make_offcrypto = function(O, _crypto) {
 	var crypto;
 	if(typeof _crypto !== 'undefined') crypto = _crypto;
 	else if(true) {
-		try { crypto = __webpack_require__(711); }
+		try { crypto = __webpack_require__(714); }
 		catch(e) { crypto = null; }
 	}
 
@@ -24865,7 +24816,7 @@ return utils;
 })(utils);
 
 if(has_buf && "function" != 'undefined') (function() {
-	var Readable = __webpack_require__(712).Readable;
+	var Readable = __webpack_require__(715).Readable;
 
 	var write_csv_stream = function(sheet, opts) {
 		var stream = Readable();
@@ -24955,11 +24906,11 @@ else make_xlsx_lib(XLSX);
 /*exported XLS, ODS */
 var XLS = XLSX, ODS = XLSX;
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12), __webpack_require__(579).Buffer, __webpack_require__(66)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13), __webpack_require__(582).Buffer, __webpack_require__(67)))
 
 /***/ }),
 
-/***/ 707:
+/***/ 710:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -25118,7 +25069,7 @@ function fromByteArray (uint8) {
 
 /***/ }),
 
-/***/ 708:
+/***/ 711:
 /***/ (function(module, exports) {
 
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
@@ -25209,7 +25160,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 
 /***/ }),
 
-/***/ 709:
+/***/ 712:
 /***/ (function(module, exports) {
 
 var toString = {}.toString;
@@ -25221,7 +25172,7 @@ module.exports = Array.isArray || function (arr) {
 
 /***/ }),
 
-/***/ 710:
+/***/ 713:
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(Buffer, global) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;var require;var require;/*
@@ -25240,7 +25191,7 @@ Note: since JSZip 3 removed critical functionality, this version assigns to the
 */
 (function(e){
 	if("object"==typeof exports&&"undefined"!=typeof module&&"undefined"==typeof DO_NOT_EXPORT_JSZIP)module.exports=e();
-	else if("function"=="function"&&__webpack_require__(580)&&"undefined"==typeof DO_NOT_EXPORT_JSZIP){JSZipSync=e();!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
+	else if("function"=="function"&&__webpack_require__(583)&&"undefined"==typeof DO_NOT_EXPORT_JSZIP){JSZipSync=e();!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_FACTORY__ = (e),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));}
@@ -34225,25 +34176,25 @@ module.exports = ZStream;
 (9)
 }));
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(579).Buffer, __webpack_require__(12)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(582).Buffer, __webpack_require__(13)))
 
 /***/ }),
 
-/***/ 711:
+/***/ 714:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 712:
+/***/ 715:
 /***/ (function(module, exports) {
 
 /* (ignored) */
 
 /***/ }),
 
-/***/ 713:
+/***/ 716:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -34350,22 +34301,21 @@ var render = function() {
       _vm._v(" "),
       _c("add-new", {
         attrs: {
-          "visible-add": _vm.showMaskArr[this.activeName].show,
-          title: _vm.title[this.activeName],
-          "rule-form": _vm.ruleForm[this.activeName],
-          rules: _vm.rules[this.activeName],
+          "visible-add": _vm.showMaskArr[_vm.activeName].show,
+          title: _vm.title[_vm.activeName],
+          "rule-form": _vm.ruleForm[_vm.activeName],
+          rules: _vm.rules[_vm.activeName],
           "add-arr": _vm.addArr[_vm.activeName],
           url: _vm.url[_vm.activeName],
           "new-ref": _vm.refArr[_vm.activeName],
-          halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.sonArr
+          halfForm: _vm.halfForm[_vm.activeName].show
         },
         on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
       }),
       _vm._v(" "),
       _c("add-new", {
         attrs: {
-          "visible-add": _vm.editMask[this.activeName].show,
+          "visible-add": _vm.editMask[_vm.activeName].show,
           title: _vm.editTitle[_vm.activeName],
           rules: _vm.rules[_vm.activeName],
           "new-ref": _vm.refArr[_vm.activeName],
@@ -34373,7 +34323,6 @@ var render = function() {
           "add-arr": _vm.addArr[_vm.activeName],
           url: _vm.url[_vm.activeName],
           halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.sonArr,
           leftTab: _vm.leftTab
         },
         on: { submitEvent: _vm.editForm, "CB-dialog": _vm.CB_dialog }
