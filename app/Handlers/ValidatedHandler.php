@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Handlers;
 /**
  * 处理验证数据
