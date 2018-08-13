@@ -19,6 +19,11 @@ class Shop extends Model
         'status' => 'boolean'
     ];
 
+    public function products()
+    {
+        return $this->hasMany(Product::class,'shops_id');
+    }
+
     public function warehouse()
     {
         return $this->belongsTo(Warehouse::class);

@@ -105,9 +105,9 @@ class PurchaseDetail extends Model
         return $this->belongsTo(PurchaseList::class, 'purchase_lists_id');
     }
 
-    public function productSpec()
+    public function productComponent()
     {
-        return $this->belongsTo(ProductSpec::class,'product_specs_id');
+        return $this->belongsTo(ProductComponent::class,'product_components_id');
     }
 
     public function shop()

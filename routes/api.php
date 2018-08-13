@@ -385,36 +385,42 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
 //            ->name('api.goods.editstatusbyids');
 
          //商品资源
-        // $api->get('products', 'ProductsController@index')
-        //     ->name('api.products.index');
-        // $api->get('products/search', 'ProductsController@searchGoods')
-        //     ->name('api.products.searchgoods');
-        // $api->get('products/{product}', 'ProductsController@show')
-        //     ->name('api.products.show');
-        // $api->post('products', 'ProductsController@store')
-        //     ->name('api.products.store');
-        // $api->patch('products/{product}', 'ProductsController@update')
-        //     ->name('api.products.update');
-        // $api->delete('products/{product}', 'ProductsController@destroy')
-        //     ->name('api.products.destroy');
-        // $api->delete('products', 'ProductsController@destroybyids')
-        //     ->name('api.products.destroybyids');
-        // $api->put('products/editstatus', 'ProductsController@editStatusByIds')
-        //     ->name('api.products.editstatusbyids');
+         $api->get('products', 'ProductsController@index')
+             ->name('api.products.index');
+         $api->get('products/search', 'ProductsController@searchProducts')
+             ->name('api.products.searchproducts');
+         $api->get('products/{product}', 'ProductsController@show')
+             ->name('api.products.show');
+         $api->post('products', 'ProductsController@store')
+             ->name('api.products.store');
+         $api->patch('products/{product}', 'ProductsController@update')
+             ->name('api.products.update');
+         $api->delete('products/{product}', 'ProductsController@destroy')
+             ->name('api.products.destroy');
+         $api->delete('products', 'ProductsController@destroybyids')
+             ->name('api.products.destroybyids');
+         $api->put('products/editstatus', 'ProductsController@editStatusByIds')
+             ->name('api.products.editstatusbyids');
         
-        //产品规格资源
-        // $api->get('productcomponents', 'ProductComponentsController@index')
-        //     ->name('api.productcomponents.index');
-        // $api->get('productcomponents/{productcomponent}', 'ProductComponentsController@show')
-        //     ->name('api.productcomponents.show');
-        // $api->delete('productcomponents/{productcomponent}', 'ProductComponentsController@destroy')
-        //     ->name('api.productcomponents.destroy');
-        // $api->delete('productcomponents', 'ProductComponentsController@destroybyids')
-        //     ->name('api.goproductcomponentsods.destroybyids');
-        // $api->put('productcomponents/editstatus', 'ProductComponentsController@editStatusByIds')
-        //     ->name('api.productcomponents.editstatusbyids');
+        //产品子件资源
+         $api->get('productcomponents', 'ProductComponentsController@index')
+             ->name('api.productcomponents.index');
+         $api->get('productcomponents/{productcomponent}', 'ProductComponentsController@show')
+             ->name('api.productcomponents.show');
+         $api->delete('productcomponents/{productcomponent}', 'ProductComponentsController@destroy')
+             ->name('api.productcomponents.destroy');
+         $api->delete('productcomponents', 'ProductComponentsController@destroybyids')
+             ->name('api.goproductcomponentsods.destroybyids');
 
         //组合资源
+        $api->get('combinations', 'CombinationsController@index')
+            ->name('api.combinations.index');
+        $api->get('combinations/{combination}', 'CombinationsController@show')
+            ->name('api.combinations.show');
+        $api->post('combinations', 'CombinationsController@store')
+            ->name('api.combinations.store');
+        $api->patch('combinations/{combination}', 'CombinationsController@update')
+            ->name('api.combinations.update');
         $api->delete('combinations/{combination}', 'CombinationsController@destroy')
             ->name('api.combinations.destroy');
         $api->delete('combinations', 'CombinationsController@destroybyids')

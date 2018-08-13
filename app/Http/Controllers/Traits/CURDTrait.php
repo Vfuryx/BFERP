@@ -12,11 +12,11 @@ trait CURDTrait
     /**
      * 获取全部数据或者分页获取
      *
-     * @param [type] $request       请求
-     * @param [type] $model         模型
-     * @param [type] $transformer   转换器
-     * @param integer $page         每页元素
-     * @param [type] $is_status     是否存在status
+     * @param [type]    $request        请求
+     * @param [type]    $model          模型
+     * @param [type]    $transformer    转换器
+     * @param [integer] $page           每页元素
+     * @param [type]    $is_status      是否存在status
      * @return array
      */
     public function allOrPage($request, $model, $transformer, $perPage = 0, $is_status = 1)
@@ -29,7 +29,7 @@ trait CURDTrait
         }
 
         //拼接特定条件的查询
-        if($field = $request->except('status')){
+        if ($field = $request->except('status')) {
             $model->where($request->validated());
         }
 
@@ -60,8 +60,38 @@ trait CURDTrait
             ->item($ref, $transformer)
             ->setStatusCode(201)
             ->addMeta('status_code', '201');
-
     }
+
+
+    /**
+     * 两表关联插入(适合一对一或一对多关系)
+     *
+     * @param [array]       $data          数据
+     * @param [string]      $with          关联表
+     * @param [object]      $rule          规则
+     * @param [model]       $model         模型
+     * @param [transformer] $transformer   转换器
+     * @return array
+     */
+    public function traitJoint2Store($data, $with, $rule, $model, $transformer)
+    {
+        $id = DB::transaction(function () use ($data, $with, $rule, $model) {
+            $validatedHandler = new \App\Handlers\ValidatedHandler();
+            $model = $model::create($data[0]);
+            if ($data[1]) {
+                foreach ($data[1] as $item) {
+                    $model->$with()->create($validatedHandler->getValidatedData($rule, $item));
+                }
+            }
+            return $model->id;
+        });
+
+        return $this->response
+            ->item($model::find($id), $transformer)
+            ->setStatusCode(201)
+            ->addMeta('status_code', '201');
+    }
+
 
     /**
      * 显示一条数据
@@ -94,6 +124,44 @@ trait CURDTrait
     }
 
     /**
+     * 两表关联更新(适合一对一或一对多关系)
+     *
+     * @param [array]       $data          数据
+     * @param [string]      $with          关联表
+     * @param [object]      $rule          规则
+     * @param [model]       $model         模型
+     * @param [transformer] $transformer   转换器
+     * @return array
+     */
+    public function traitJoint2Update($data, $with, $rule, $model, $transformer)
+    {
+        $model = DB::transaction(function () use ($data, $with, $rule, $model) {
+            $validatedHandler = new \App\Handlers\ValidatedHandler();
+
+            $model->update($data[0]);
+
+            if ($data[1]) {
+                foreach ($data[1] as $item) {
+                    //计算要通过的字段
+                    $data = $validatedHandler->getValidatedData($rule, $item);
+
+                    //存在id则更新，否则插入
+                    if (isset($item['id'])) {
+                        $model->$with()->findOrFail($item['id'])->update($data);
+                    } else {
+                        $model->$with()->create($data);
+                    }
+                }
+            }
+            return $model;
+        });
+
+        return $this->response
+            ->item($model, $transformer)
+            ->setStatusCode(201);
+    }
+
+    /**
      * 删除数据
      *
      * @param [type] $model     模型
@@ -106,19 +174,19 @@ trait CURDTrait
     }
 
     /**
-     * 两表关联删除
+     * 两表关联删除(适合一对一或一对多关系)
      *
      * @param [model] $model    模型
      * @param [string] $load    关联的表
      * @return void
      */
-    public function traitJoint2Destroy($model,$load)
+    public function traitJoint2Destroy($model, $load)
     {
-        DB::transaction(function () use ($model,$load) {
+        DB::transaction(function () use ($model, $load) {
 
             $model = $model->load($load);
 
-            $item = $model->purchaseDetails()->delete();
+            $item = $model->$load()->delete();
 
             $model = $model->delete();
 
@@ -151,23 +219,23 @@ trait CURDTrait
 
 
     /**
-     * 批量两表关联删除
+     * 批量两表关联删除(适合一对一或一对多关系)
      *
      * @param [string] $ids      要删除的ids
      * @param [string] $with     关联的表
      * @param [string] $model    模型
      * @return mix
      */
-    public function traitJoint2DestroybyIds($ids,$with,$model)
+    public function traitJoint2DestroybyIds($ids, $with, $model)
     {
         $ids = explode(',', $ids);
 
-        DB::transaction(function () use ($ids,$with,$model) {
+        DB::transaction(function () use ($ids, $with, $model) {
 
-            $model = $model::query()->whereIn('id',$ids)->with($with);
+            $model = $model::query()->whereIn('id', $ids)->with($with);
 
-            $model->get()->map(function($item) use ($with){
-                if(!$item->$with()->delete()){
+            $model->get()->map(function ($item) use ($with) {
+                if (!$item->$with()->delete()) {
                     throw new DeleteResourceFailedException('The given data was invalid.');
                 }
             });
@@ -179,7 +247,6 @@ trait CURDTrait
 
         return $this->errorResponse(204);
     }
-
 
 
     /**

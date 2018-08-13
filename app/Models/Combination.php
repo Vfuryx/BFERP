@@ -8,21 +8,18 @@ class Combination extends Model
 {
     protected $table = 'combinations';
 
-
     protected $fillable = [
-        'product_specs_id', 'com_pro_specs_id',
+        'pid', 'name',
     ];
 
-    //获取属于的产品规格
-    public function productSpec()
+    public function productComponents()
     {
-        return $this->belongsTo(ProductSpec::class, 'product_specs_id');
+        return $this->belongsToMany(ProductComponent::class, 'combination_product_components', 'combinations_id', 'product_components_id');
     }
 
-    //获取组合对应的产品规格
-    public function comProSpec()
+    public function product()
     {
-        return $this->belongsTo(ProductSpec::class, 'com_pro_specs_id');
+        return $this->belongsTo(Product::class, 'pid');
     }
 
 }

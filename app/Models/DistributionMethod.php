@@ -13,10 +13,11 @@ class DistributionMethod extends Model
         'status' => 'boolean'
     ];
 
-    public function productSpecs()
+    public function productComponents()
     {
-        return $this->hasMany(ProductSpec::class);
+        return $this->hasMany(ProductComponent::class,'distribution_method_id');
     }
+
 
     public function orders(){
         return $this->hasMany(Order::class,'distribution_methods_id');

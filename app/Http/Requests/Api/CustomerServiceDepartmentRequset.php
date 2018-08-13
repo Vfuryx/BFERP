@@ -88,76 +88,55 @@ class CustomerServiceDepartmentRequset extends FormRequest
                     'distribution_no' => 'string|max:255',
                     'distribution_types_id' => [
                         'required', 'integer',
-                        Rule::exists('distribution_methods', 'id')->where(function ($query) {
+                        Rule::exists('distribution_types', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'service_car_info' => '服务车信息（配送信息）',
-                    'get_goods_fee' => '提货费用',
+                    'service_car_info' => 'string|max:255',
+                    'get_goods_fee' => 'numeric',
+
                     'get_goods_ways_id' => '提货方式',
-                    'express_fee' => '快递费用',
-                    'service_car_fee' => '服务车金额（家装服务）',
-                    'cancel_after_verification_code' => '核销码',
-                    'wooden_frame_costs' => '木架费',
-                    'preferential_cashback' => '优惠返现',
-                    'favorable_cashback' => '好评返现',
+
+                    'express_fee' => 'numeric',
+                    'service_car_fee' => 'numeric',
+                    'cancel_after_verification_code' => 'string|max:255',
+                    'wooden_frame_costs' => 'numeric',
+                    'preferential_cashback' => 'numeric',
+                    'favorable_cashback' => 'numeric',
+
                     'customer_types_id' => '客户类型',
-                    'is_invoice' => '是否要发票',
-                    'invoice_express_fee' => '发票快递费',
-                    'express_invoice_title' => '快递发票抬头',
-                    'contract_no' => '合同单号',
+
+                    'is_invoice' => 'boolean',
+                    'invoice_express_fee' => 'numeric',
+                    'express_invoice_title' => 'string|max:255',
+                    'contract_no' => 'string|max:255',
+
                     'payment_methods_id' => '付款方式',
-                    'deposit' => '订金',
-                    'document_title' => '单据头',
-                    'warehouses_id' => '发货仓库id',
-                    'payment_date' => '支付日期',
-                    'interest_concessions' => '让利',
-                    'is_notice' => '等通知发货 0 否 1 是',
-                    'is_cancel_after_verification' => '是否核销 0 否 1 是',
-                    'accept_order_user' => '接单用户',
-                    'tax_number' => '税号',
-                    'receipt' => '收据',
-                    'logistics_remark' => '物流备注',
-                    'seller_remark' => '卖家备注',
-                    'customer_service_remark' => '客服备注',
-                    'buyer_message' => '买家留言',
+
+                    'deposit' => 'numeric',
+                    'document_title' => 'string|max:255',
+                    'warehouses_id' => [
+                        'required', 'integer',
+                        Rule::exists('warehouses', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'payment_date' => 'date',
+                    'interest_concessions' => 'numeric',
+                    'is_notice' => 'boolean',
+                    'is_cancel_after_verification' => 'boolean',
+                    'accept_order_user' => 'string|max:255',
+                    'tax_number' => 'string|max:255',
+                    'receipt' => 'string|max:255',
+                    'logistics_remark' => 'string|max:255',
+                    'seller_remark' => 'string|max:255',
+                    'customer_service_remark' => 'string|max:255',
+                    'buyer_message' => 'string|max:255',
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'commodity_code' => [
-                        'string', 'max:255',
-                        Rule::unique('goods')->ignore($this->goods->id),
-                    ],
-                    'jd_sn' => 'string|max:255',
-                    'vips_sn' => 'string|max:255',
-                    'factory_model' => 'string|max:255',
-                    'short_name' => 'string|max:255',
-                    'shops_id' => [
-                        'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'shop_nick' => 'string|max:255',
-                    'supplier_id' => [
-                        'integer',
-                        Rule::exists('suppliers', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'category_id' => [
-                        'integer',
-                        Rule::exists('goods_categories', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'remark' => 'string|max:255',
-                    'title' => 'string|max:255',
-                    'img' => 'url|max:255',
-                    'url' => 'url|max:255',
-                    'status' => 'boolean',
-                    'is_stop_pro' => 'boolean',
+
                 ];
                 break;
         }
@@ -166,9 +145,14 @@ class CustomerServiceDepartmentRequset extends FormRequest
     public function messages()
     {
         return [
+            'shops_id.*.id.required' => '店铺id必填',
+            'shops_id.*.id.integer' => '店铺id必须int类型',
+            'shops_id.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'shops_id' => '店铺id',
-            'member_nick' => '会员昵称',
+            'member_nick.required' => '会员昵称必填',
+            'member_nick.string' => '会员昵称必须string类型',
+            'member_nick.max' => '会员昵称最大长度为255',
+
             'logistics_id' => '物流id',
             'billing_way' => '计费方式',
             'promise_ship_time' => '承诺发货时间',

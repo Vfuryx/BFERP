@@ -64,14 +64,14 @@ class Stock extends Model
         return $this->belongsTo(Warehouse::class);
     }
 
-    public function goods()
+    public function product()
     {
-        return $this->belongsTo(Goods::class);
+        return $this->belongsTo(Product::class,'supplier_id');
     }
 
-    public function productSpec()
+    public function productComponent()
     {
-        return $this->belongsTo(ProductSpec::class, 'pro_specs_id');
+        return $this->belongsTo(ProductComponent::class,'product_components_id');
     }
 
     public function suppliersReports()

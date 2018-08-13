@@ -9,15 +9,16 @@ class CombinationTransformer extends TransformerAbstract
 {
     public function transform(Combination $combination)
     {
+        $combination = $combination->load('product', 'productComponents');
         return [
             'id' => $combination->id,
-            'product_specs' => $combination->productSpec,
-            'com_pro_specs' => $combination->comProSpec,
-            'status' => $combination->status,
+            'product' => $combination->product,
+            'name' => $combination->name,
+            'product_components' => $combination->productComponents,
             'created_at' => $combination->created_at
-                                    ->toDateTimeString(),
+                ->toDateTimeString(),
             'updated_at' => $combination->updated_at
-                                    ->toDateTimeString()
+                ->toDateTimeString()
         ];
     }
 }

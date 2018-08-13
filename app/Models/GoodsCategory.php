@@ -15,9 +15,9 @@ class GoodsCategory extends Model
         'status' => 'boolean'
     ];
 
-    public function goods()
+    public function products()
     {
-        return $this->hasMany(Goods::class);
+        return $this->hasMany(Product::class,'supplier_id');
     }
 
 }

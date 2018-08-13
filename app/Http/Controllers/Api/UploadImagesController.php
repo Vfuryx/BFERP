@@ -42,7 +42,7 @@ class UploadImagesController extends Controller
      */
     public function store(UploadImageRequest $request, ImageFileHandler $imageFileHandler)
     {
-        $imagePath = $imageFileHandler->save($request->validated()['image'],'temp',\Auth::user()?\Auth::user()->id:0);
+        $imagePath = $imageFileHandler->save($request->validated()['image'],'uploads',\Auth::user()?\Auth::user()->id:0);
 
         $imagePath['meta'] = ['status_code' => 201];
 

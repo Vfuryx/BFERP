@@ -16,7 +16,7 @@ class UploadImageRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
-                    'image' => 'mimes:jpeg,png,gif|max:5120',
+                    'image' => 'required|mimes:jpeg,png,gif|max:5120',
                 ];
                 break;
         }
@@ -25,6 +25,7 @@ class UploadImageRequest extends FormRequest
     public function messages()
     {
         return [
+            'image.required' => '图片不存在',
             'image.mimes' => '图片类型限定为jpeg、png、gif',
             'image.max' => '图片大小不能超过5M',
         ];
