@@ -22,7 +22,6 @@ class StockRequest extends FormRequest
                 ];
                 break;
             case 'POST':
-//                dd($this->stocks);
                 return [
                     'stocks.*.warehouse_id' => [
                         'required', 'integer',
@@ -30,23 +29,29 @@ class StockRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'stocks.*.goods_id' => [
+                    'stocks.*.products_id' => [
                         'required', 'integer',
-                        Rule::exists('goods', 'id')->where(function($query) {
+                        Rule::exists('products', 'id')->where(function($query) {
                             $query->where('status', 1);
                         }),
                     ],
-                    'stocks.*.pro_specs_id' => [
+                    'stocks.*.product_components_id' => [
                         'required', 'integer',
+                        Rule::exists('product_components', 'id'),
                         function($attribute, $value, $fail) {
-                            $ProductSpec = \App\Models\Stock::query()
-                                ->where('warehouse_id', $this->stocks[explode('.', $attribute)[1]]['warehouse_id'])
-                                ->where('pro_specs_id', $value);
-                            if (!$ProductSpec->count()) {
-                                return true;
-                            }
-                            return $fail('产品规格id在同一个仓库不能重复');
+                            $stockExist = (new \App\Models\Stock())->stockExist(
+                                $this->stocks[explode('.', $attribute)[1]]['warehouse_id'], $value
+                            );
+
+                            return (!$stockExist) ?: $fail('子件id在同一个仓库不能重复');
                         },
+                        function($attribute, $value, $fail) {
+                            $productComponentExist = (new \App\Models\ProductComponent())->productComponentExist(
+                                $this->stocks[explode('.', $attribute)[1]]['products_id'], $value
+                            );
+
+                            return $productComponentExist ?: $fail('子件不属于这个产品');
+                        }
                     ],
                     'stocks.*.quantity' => 'required|integer',
                     'stocks.*.status' => 'boolean'
@@ -63,13 +68,13 @@ class StockRequest extends FormRequest
             'stocks.*.warehouse_id.integer' => '仓库id必须int类型',
             'stocks.*.warehouse_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'stocks.*.goods_id.required' => '默认商品id必填',
-            'stocks.*.goods_id.integer' => '默认商品id必须int类型',
-            'stocks.*.goods_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stocks.*.products_id.required' => '产品id必填',
+            'stocks.*.products_id.integer' => '产品id必须int类型',
+            'stocks.*.products_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'stocks.*.pro_specs_id.required' => '产品规格id必填',
-            'stocks.*.pro_specs_id.integer' => '产品规格id必须int类型',
-            'stocks.*.pro_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stocks.*.product_components_id.required' => '子件id必填',
+            'stocks.*.product_components_id.integer' => '子件id必须int类型',
+            'stocks.*.product_components_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'stocks.*.quantity.required' => '库存数必填',
             'stocks.*.quantity.integer' => '库存数必须int类型',
@@ -83,8 +88,8 @@ class StockRequest extends FormRequest
     {
         return [
             'warehouse_id' => '仓库id',
-            'goods_id' => '商品id',
-            'pro_specs_id' => '产品规格id',
+            'products_id' => '产品id',
+            'product_components_id' => '子件id',
             'quantity' => '库存数',
             'status' => '记账类型状态'
         ];

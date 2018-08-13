@@ -92,6 +92,25 @@ class ProductComponent extends Model
 //        return $this->load('combinations.comProSpec')->combinations->pluck('comProSpec');
     }
 
+    /**
+     * 子件是否存在
+     *
+     * @param $warehouseId      仓库id
+     * @param $componentsId     子件id
+     * @return bool
+     */
+    public function productComponentExist($pid, $id)
+    {
+        $count = $this->newQuery()
+            ->where('id', $id)
+            ->where('pid', $pid)
+            ->count();
+
+        if ($count) return true;
+
+        return false;
+    }
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'pid');

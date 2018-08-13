@@ -10,9 +10,9 @@ class Stock extends Model
     protected $table = 'stocks';
 
     protected $fillable = [
-        'warehouse_id', 'goods_id', 'pro_specs_id', 'quantity', 'status'
+        'warehouse_id', 'products_id', 'product_components_id', 'quantity', 'status'
     ];
-    
+
     //设置类型
     protected $casts = [
         'status' => 'boolean'
@@ -24,9 +24,8 @@ class Stock extends Model
      */
     public function addQuantity($amount)
     {
-        if ($amount < 0) {
-            throw new UpdateResourceFailedException('加库存不可小于0');
-        }
+        if ($amount < 0) throw new UpdateResourceFailedException('加库存不可小于0');
+
         $this->increment('quantity', $amount);
     }
 
@@ -37,11 +36,12 @@ class Stock extends Model
      */
     public function decreaseQuantity($amount)
     {
-        if ($amount < 0) {
-            throw new InternalException('减库存不可小于0');
-        }
+        if ($amount < 0) throw new InternalException('减库存不可小于0');
 
-        return $this->newQuery()->where('id', $this->id)->where('quantity', '>=', $amount)->decrement('quantity', $amount);
+        return $this->newQuery()
+            ->where('id', $this->id)
+            ->where('quantity', '>=', $amount)
+            ->decrement('quantity', $amount);
     }
 
     /**
@@ -50,8 +50,28 @@ class Stock extends Model
      * @param array $columns
      * @return mixed
      */
-    public function getStcokByWarehouseId($id ,Array $columns = ['*']){
+    public function getStcokByWarehouseId($id, Array $columns = ['*'])
+    {
         return $this->newQuery()->whereWarehouseId($id)->select($columns)->get();
+    }
+
+    /**
+     * 库存是否存在
+     *
+     * @param $warehouseId      仓库id
+     * @param $componentsId     子件id
+     * @return bool
+     */
+    public function stockExist($warehouseId, $componentsId)
+    {
+        $count = $this->newQuery()
+            ->where('warehouse_id', $warehouseId)
+            ->where('product_components_id', $componentsId)
+            ->count();
+
+        if ($count) return true;
+
+        return false;
     }
 
     public function stockDelLogs()
@@ -66,12 +86,12 @@ class Stock extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class,'supplier_id');
+        return $this->belongsTo(Product::class, 'products_id');
     }
 
     public function productComponent()
     {
-        return $this->belongsTo(ProductComponent::class,'product_components_id');
+        return $this->belongsTo(ProductComponent::class, 'product_components_id');
     }
 
     public function suppliersReports()
@@ -81,6 +101,6 @@ class Stock extends Model
 
     public function purchaseReturnDetails()
     {
-        return $this->hasMany(PurchaseReturnDetail::class,'stocks_id');
+        return $this->hasMany(PurchaseReturnDetail::class, 'stocks_id');
     }
 }
