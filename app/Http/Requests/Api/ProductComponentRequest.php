@@ -50,7 +50,7 @@ class ProductComponentRequest extends FormRequest
                         }),
                     ],
                     'product_components.*.bar_code' => 'string|max:255',
-                    'product_components.*.img_url' => 'url|max:255',
+                    'product_components.*.img_url' => 'string|max:255',
                     'product_components.*.spec' => 'required|string|max:255',
                     'product_components.*.color' => 'string|max:255',
                     'product_components.*.materials' => 'string|max:255',
@@ -124,7 +124,7 @@ class ProductComponentRequest extends FormRequest
                         }),
                     ],
                     'product_components.*.bar_code' => 'string|max:255',
-                    'product_components.*.img_url' => 'url|max:255',
+                    'product_components.*.img_url' => 'string|max:255',
                     'product_components.*.spec' => 'string|max:255',
                     'product_components.*.color' => 'string|max:255',
                     'product_components.*.materials' => 'string|max:255',
@@ -219,7 +219,7 @@ class ProductComponentRequest extends FormRequest
             'product_components.*.bar_code.string' => '条形码必须string类型',
 
             'product_components.*.img_url.max' => '图片地址最大长度为255',
-            'product_components.*.img_url.url' => '图片地址必须有效的url',
+            'product_components.*.img_url.string' => '图片地址必须string类型',
 
             'product_components.*.spec.max' => '规格最大长度为255',
             'product_components.*.spec.string' => '规格必须string类型',

@@ -47,7 +47,7 @@ class ProductRequest extends FormRequest
                     ],
                     'remark' => 'string|max:255',
                     'title' => 'required|string|max:255',
-                    'img' => 'url|max:255',
+                    'img' => 'string|max:255',
                     'url' => 'url|max:255',
                     'status' => 'boolean',
                     'is_stop_pro' => 'boolean',
@@ -84,7 +84,7 @@ class ProductRequest extends FormRequest
                     ],
                     'remark' => 'string|max:255',
                     'title' => 'string|max:255',
-                    'img' => 'url|max:255',
+                    'img' => 'string|max:255',
                     'url' => 'url|max:255',
                     'status' => 'boolean',
                     'is_stop_pro' => 'boolean',
@@ -143,7 +143,7 @@ class ProductRequest extends FormRequest
             'title.max' => '商品标题最大长度为255',
 
             'img.required' => '商品图片必填',
-            'img.url' => '商品图片必须有效的url',
+            'img.string' => '商品图片必须string类型',
             'img.max' => '商品图片最大长度为255',
 
             'url.required' => '商品网址必填',
