@@ -5324,43 +5324,43 @@ FORMAT: 1A
         + Default: 
     + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
-    + productspecs[0][component_code]: (string, required) - 子件编码
-    + productspecs[0][jd_component_code]: (string, optional) - 京东子件编码
-    + productspecs[0][vips_component_code]: (string, optional) - 唯品会子件编码
-    + productspecs[0][tb_price]: (numeric, required) - 淘宝价格
-    + productspecs[0][cost]: (numeric, required) - 成本价格
-    + productspecs[0][price]: (numeric, required) - 售价
-    + productspecs[0][highest_price]: (numeric, required) - 最高售价
-    + productspecs[0][lowest_price]: (numeric, required) - 最低售价
-    + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
-    + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
-    + productspecs[0][discount]: (numeric, optional) - 折扣
-    + productspecs[0][commission]: (numeric, optional) - 佣金点
-    + productspecs[0][is_common]: (boolean, required) - 是否通用子件
-    + productspecs[0][package_quantity]: (integer, optional) - 包件数量
-    + productspecs[0][package_costs]: (numeric, optional) - 打包费用
-    + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
-    + productspecs[0][purchase_freight]: (numeric, optional) - 采购运费
-    + productspecs[0][inventory_warning]: (integer, required) - 库存预警(数量)
-    + productspecs[0][purchase_days_warning]: (integer, required) - 采购预警天数
-    + productspecs[0][available_warning]: (integer, required) - 可售数预警
-    + productspecs[0][distribution_method_id]: (integer, required) - 配送类别
-    + productspecs[0][bar_code]: (string, optional) - 条形码
-    + productspecs[0][img_url]: (url, optional) - 图片地址
-    + productspecs[0][spec]: (string, required) - 规格
-    + productspecs[0][color]: (string, optional) - 颜色
-    + productspecs[0][materials]: (string, optional) - 材质
-    + productspecs[0][function]: (string, optional) - 功能
-    + productspecs[0][special]: (string, optional) - 特殊
-    + productspecs[0][other]: (string, optional) - 其他
-    + productspecs[0][longness]: (numeric, optional) - 长度（mm）
-    + productspecs[0][width]: (numeric, optional) - 宽度（mm）
-    + productspecs[0][height]: (numeric, optional) - 高度（mm）
-    + productspecs[0][volume]: (numeric, optional) - 体积(m²)
-    + productspecs[0][weight]: (numeric, optional) - 重量
-    + productspecs[0][remark]: (string, optional) - 备注
-    + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
+    + product_components[0][component_code]: (string, required) - 子件编码
+    + product_components[0][jd_component_code]: (string, optional) - 京东子件编码
+    + product_components[0][vips_component_code]: (string, optional) - 唯品会子件编码
+    + product_components[0][tb_price]: (numeric, required) - 淘宝价格
+    + product_components[0][cost]: (numeric, required) - 成本价格
+    + product_components[0][price]: (numeric, required) - 售价
+    + product_components[0][highest_price]: (numeric, required) - 最高售价
+    + product_components[0][lowest_price]: (numeric, required) - 最低售价
+    + product_components[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + product_components[0][assembly_price]: (numeric, optional) - 装配价格
+    + product_components[0][discount]: (numeric, optional) - 折扣
+    + product_components[0][commission]: (numeric, optional) - 佣金点
+    + product_components[0][is_common]: (boolean, required) - 是否通用子件
+    + product_components[0][package_quantity]: (integer, optional) - 包件数量
+    + product_components[0][package_costs]: (numeric, optional) - 打包费用
+    + product_components[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + product_components[0][purchase_freight]: (numeric, optional) - 采购运费
+    + product_components[0][inventory_warning]: (integer, required) - 库存预警(数量)
+    + product_components[0][purchase_days_warning]: (integer, required) - 采购预警天数
+    + product_components[0][available_warning]: (integer, required) - 可售数预警
+    + product_components[0][distribution_method_id]: (integer, required) - 配送类别
+    + product_components[0][bar_code]: (string, optional) - 条形码
+    + product_components[0][img_url]: (url, optional) - 图片地址
+    + product_components[0][spec]: (string, required) - 规格
+    + product_components[0][color]: (string, optional) - 颜色
+    + product_components[0][materials]: (string, optional) - 材质
+    + product_components[0][function]: (string, optional) - 功能
+    + product_components[0][special]: (string, optional) - 特殊
+    + product_components[0][other]: (string, optional) - 其他
+    + product_components[0][longness]: (numeric, optional) - 长度（mm）
+    + product_components[0][width]: (numeric, optional) - 宽度（mm）
+    + product_components[0][height]: (numeric, optional) - 高度（mm）
+    + product_components[0][volume]: (numeric, optional) - 体积(m²)
+    + product_components[0][weight]: (numeric, optional) - 重量
+    + product_components[0][remark]: (string, optional) - 备注
+    + product_components[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
+    + product_components[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
 
 + Request (application/json)
     + Body
@@ -5381,42 +5381,42 @@ FORMAT: 1A
                 "url": "https://www.taobao.com/",
                 "status": true,
                 "nis_stop_proick": 1,
-                "productspecs[0][component_code]": "子件编码1",
-                "productspecs[0][jd_component_code]": "京东子件编码",
-                "productspecs[0][vips_component_code]": "唯品会子件编码",
-                "productspecs[0][tb_price]": "10",
-                "productspecs[0][highest_price]": "10",
-                "productspecs[0][price]": "10",
-                "productspecs[0][lowest_price]": "10",
-                "productspecs[0][warehouse_cost]": "10",
-                "productspecs[0][assembly_price]": "10",
-                "productspecs[0][discount]": "1",
-                "productspecs[0][commission]": "1",
-                "productspecs[0][is_common]": true,
-                "productspecs[0][package_quantity]": "10",
-                "productspecs[0][package_costs]": "10",
-                "productspecs[0][wooden_frame_costs]": "10",
-                "productspecs[0][purchase_freight]": "10",
-                "productspecs[0][inventory_warning]": "10",
-                "productspecs[0][purchase_days_warning]": "10",
-                "productspecs[0][available_warning]": "10",
-                "productspecs[0][distribution_method_id]": "1",
-                "productspecs[0][bar_code]": "条形码",
-                "productspecs[0][img_url]": "http://image.img.com/image",
-                "productspecs[0][spec]": "规格",
-                "productspecs[0][color]": "颜色",
-                "productspecs[0][materials]": "材质",
-                "productspecs[0][function]": "功能",
-                "productspecs[0][special]": "特殊",
-                "productspecs[0][other]": "其他",
-                "productspecs[0][longness]": "10",
-                "productspecs[0][width]": "10",
-                "productspecs[0][height]": "10",
-                "productspecs[0][volume]": "10",
-                "productspecs[0][weight]": "10",
-                "productspecs[0][remark]": "备注",
-                "productspecs[0][finished_pro]": true,
-                "productspecs[0][is_stop_pro]": false
+                "product_components[0][component_code]": "子件编码1",
+                "product_components[0][jd_component_code]": "京东子件编码",
+                "product_components[0][vips_component_code]": "唯品会子件编码",
+                "product_components[0][tb_price]": "10",
+                "product_components[0][highest_price]": "10",
+                "product_components[0][price]": "10",
+                "product_components[0][lowest_price]": "10",
+                "product_components[0][warehouse_cost]": "10",
+                "product_components[0][assembly_price]": "10",
+                "product_components[0][discount]": "1",
+                "product_components[0][commission]": "1",
+                "product_components[0][is_common]": true,
+                "product_components[0][package_quantity]": "10",
+                "product_components[0][package_costs]": "10",
+                "product_components[0][wooden_frame_costs]": "10",
+                "product_components[0][purchase_freight]": "10",
+                "product_components[0][inventory_warning]": "10",
+                "product_components[0][purchase_days_warning]": "10",
+                "product_components[0][available_warning]": "10",
+                "product_components[0][distribution_method_id]": "1",
+                "product_components[0][bar_code]": "条形码",
+                "product_components[0][img_url]": "http://image.img.com/image",
+                "product_components[0][spec]": "规格",
+                "product_components[0][color]": "颜色",
+                "product_components[0][materials]": "材质",
+                "product_components[0][function]": "功能",
+                "product_components[0][special]": "特殊",
+                "product_components[0][other]": "其他",
+                "product_components[0][longness]": "10",
+                "product_components[0][width]": "10",
+                "product_components[0][height]": "10",
+                "product_components[0][volume]": "10",
+                "product_components[0][weight]": "10",
+                "product_components[0][remark]": "备注",
+                "product_components[0][finished_pro]": true,
+                "product_components[0][is_stop_pro]": false
             }
 
 + Response 422 (application/json)
@@ -5673,43 +5673,43 @@ FORMAT: 1A
         + Default: 
     + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 
-    + productspecs[0][component_code]: (string, optional) - 子件编码
-    + productspecs[0][jd_component_code]: (string, optional) - 京东子件编码
-    + productspecs[0][vips_component_code]: (string, optional) - 唯品会子件编码
-    + productspecs[0][tb_price]: (numeric, optional) - 淘宝价格
-    + productspecs[0][cost]: (numeric, optional) - 成本价格
-    + productspecs[0][price]: (numeric, optional) - 售价
-    + productspecs[0][highest_price]: (numeric, optional) - 最高售价
-    + productspecs[0][lowest_price]: (numeric, optional) - 最低售价
-    + productspecs[0][warehouse_cost]: (numeric, optional) - 仓库成本
-    + productspecs[0][assembly_price]: (numeric, optional) - 装配价格
-    + productspecs[0][discount]: (numeric, optional) - 折扣
-    + productspecs[0][commission]: (numeric, optional) - 佣金点
-    + productspecs[0][is_common]: (boolean, optional) - 是否通用子件
-    + productspecs[0][package_quantity]: (integer, optional) - 包件数量
-    + productspecs[0][package_costs]: (numeric, optional) - 打包费用
-    + productspecs[0][wooden_frame_costs]: (numeric, optional) - 木架费
-    + productspecs[0][purchase_freight]: (numeric, optional) - 采购运费
-    + productspecs[0][inventory_warning]: (integer, optional) - 库存预警(数量)
-    + productspecs[0][purchase_days_warning]: (integer, optional) - 采购预警天数
-    + productspecs[0][available_warning]: (integer, optional) - 可售数预警
-    + productspecs[0][distribution_method_id]: (integer, optional) - 配送类别
-    + productspecs[0][bar_code]: (string, optional) - 条形码
-    + productspecs[0][img_url]: (url, optional) - 图片地址
-    + productspecs[0][spec]: (string, optional) - 规格
-    + productspecs[0][color]: (string, optional) - 颜色
-    + productspecs[0][materials]: (string, optional) - 材质
-    + productspecs[0][function]: (string, optional) - 功能
-    + productspecs[0][special]: (string, optional) - 特殊
-    + productspecs[0][other]: (string, optional) - 其他
-    + productspecs[0][longness]: (numeric, optional) - 长度（mm）
-    + productspecs[0][width]: (numeric, optional) - 宽度（mm）
-    + productspecs[0][height]: (numeric, optional) - 高度（mm）
-    + productspecs[0][volume]: (numeric, optional) - 体积(m²)
-    + productspecs[0][weight]: (numeric, optional) - 重量
-    + productspecs[0][remark]: (string, optional) - 备注
-    + productspecs[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
-    + productspecs[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
+    + product_components[0][component_code]: (string, optional) - 子件编码
+    + product_components[0][jd_component_code]: (string, optional) - 京东子件编码
+    + product_components[0][vips_component_code]: (string, optional) - 唯品会子件编码
+    + product_components[0][tb_price]: (numeric, optional) - 淘宝价格
+    + product_components[0][cost]: (numeric, optional) - 成本价格
+    + product_components[0][price]: (numeric, optional) - 售价
+    + product_components[0][highest_price]: (numeric, optional) - 最高售价
+    + product_components[0][lowest_price]: (numeric, optional) - 最低售价
+    + product_components[0][warehouse_cost]: (numeric, optional) - 仓库成本
+    + product_components[0][assembly_price]: (numeric, optional) - 装配价格
+    + product_components[0][discount]: (numeric, optional) - 折扣
+    + product_components[0][commission]: (numeric, optional) - 佣金点
+    + product_components[0][is_common]: (boolean, optional) - 是否通用子件
+    + product_components[0][package_quantity]: (integer, optional) - 包件数量
+    + product_components[0][package_costs]: (numeric, optional) - 打包费用
+    + product_components[0][wooden_frame_costs]: (numeric, optional) - 木架费
+    + product_components[0][purchase_freight]: (numeric, optional) - 采购运费
+    + product_components[0][inventory_warning]: (integer, optional) - 库存预警(数量)
+    + product_components[0][purchase_days_warning]: (integer, optional) - 采购预警天数
+    + product_components[0][available_warning]: (integer, optional) - 可售数预警
+    + product_components[0][distribution_method_id]: (integer, optional) - 配送类别
+    + product_components[0][bar_code]: (string, optional) - 条形码
+    + product_components[0][img_url]: (url, optional) - 图片地址
+    + product_components[0][spec]: (string, optional) - 规格
+    + product_components[0][color]: (string, optional) - 颜色
+    + product_components[0][materials]: (string, optional) - 材质
+    + product_components[0][function]: (string, optional) - 功能
+    + product_components[0][special]: (string, optional) - 特殊
+    + product_components[0][other]: (string, optional) - 其他
+    + product_components[0][longness]: (numeric, optional) - 长度（mm）
+    + product_components[0][width]: (numeric, optional) - 宽度（mm）
+    + product_components[0][height]: (numeric, optional) - 高度（mm）
+    + product_components[0][volume]: (numeric, optional) - 体积(m²)
+    + product_components[0][weight]: (numeric, optional) - 重量
+    + product_components[0][remark]: (string, optional) - 备注
+    + product_components[0][finished_pro]: (integer, optional) - 是否成品 0 不是 1 是
+    + product_components[0][is_stop_pro]: (boolean, optional) - 是否停产 0 不是 1 是
 
 + Request (application/json)
     + Body
@@ -5730,45 +5730,43 @@ FORMAT: 1A
                 "url": "https://www.taobao.com/",
                 "status": true,
                 "nis_stop_proick": 1,
-                "productspecs[0][id]": "2",
-                "productspecs[0][spec_code]": "规格编码1",
-                "productspecs[0][jd_specs_code]": "京东规格编码",
-                "productspecs[0][vips_specs_code]": "唯品会规格编码",
-                "productspecs[0][tb_price]": "10",
-                "productspecs[0][highest_price]": "10",
-                "productspecs[0][price]": "10",
-                "productspecs[0][lowest_price]": "10",
-                "productspecs[0][warehouse_cost]": "10",
-                "productspecs[0][assembly_price]": "10",
-                "productspecs[0][discount]": "1",
-                "productspecs[0][commission]": "1",
-                "productspecs[0][is_combination]": true,
-                "productspecs[0][package_quantity]": "10",
-                "productspecs[0][package_costs]": "10",
-                "productspecs[0][wooden_frame_costs]": "10",
-                "productspecs[0][purchase_freight]": "10",
-                "productspecs[0][inventory_warning]": "10",
-                "productspecs[0][purchase_days_warning]": "10",
-                "productspecs[0][available_warning]": "10",
-                "productspecs[0][distribution_method_id]": "1",
-                "productspecs[0][bar_code]": "条形码",
-                "productspecs[0][img_url]": "http://image.img.com/image",
-                "productspecs[0][spec]": "规格",
-                "productspecs[0][color]": "颜色",
-                "productspecs[0][materials]": "材质",
-                "productspecs[0][function]": "功能",
-                "productspecs[0][special]": "特殊",
-                "productspecs[0][other]": "其他",
-                "productspecs[0][longness]": "10",
-                "productspecs[0][width]": "10",
-                "productspecs[0][height]": "10",
-                "productspecs[0][volume]": "10",
-                "productspecs[0][weight]": "10",
-                "productspecs[0][remark]": "备注",
-                "productspecs[0][finished_pro]": true,
-                "productspecs[0][is_stop_pro]": false,
-                "productspecs[0][combinations][0][id]": "2",
-                "productspecs[0][combinations][0][com_pro_specs_id]": "1"
+                "product_components[0][id]": "2",
+                "product_components[0][spec_code]": "子件编码",
+                "product_components[0][jd_specs_code]": "京东子件编码",
+                "product_components[0][vips_specs_code]": "唯品会子件编码",
+                "product_components[0][tb_price]": "10",
+                "product_components[0][highest_price]": "10",
+                "product_components[0][price]": "10",
+                "product_components[0][lowest_price]": "10",
+                "product_components[0][warehouse_cost]": "10",
+                "product_components[0][assembly_price]": "10",
+                "product_components[0][discount]": "1",
+                "product_components[0][commission]": "1",
+                "product_components[0][is_common]": true,
+                "product_components[0][package_quantity]": "10",
+                "product_components[0][package_costs]": "10",
+                "product_components[0][wooden_frame_costs]": "10",
+                "product_components[0][purchase_freight]": "10",
+                "product_components[0][inventory_warning]": "10",
+                "product_components[0][purchase_days_warning]": "10",
+                "product_components[0][available_warning]": "10",
+                "product_components[0][distribution_method_id]": "1",
+                "product_components[0][bar_code]": "条形码",
+                "product_components[0][img_url]": "http://image.img.com/image",
+                "product_components[0][spec]": "规格",
+                "product_components[0][color]": "颜色",
+                "product_components[0][materials]": "材质",
+                "product_components[0][function]": "功能",
+                "product_components[0][special]": "特殊",
+                "product_components[0][other]": "其他",
+                "product_components[0][longness]": "10",
+                "product_components[0][width]": "10",
+                "product_components[0][height]": "10",
+                "product_components[0][volume]": "10",
+                "product_components[0][weight]": "10",
+                "product_components[0][remark]": "备注",
+                "product_components[0][finished_pro]": true,
+                "product_components[0][is_stop_pro]": false
             }
 
 + Response 404 (application/json)
