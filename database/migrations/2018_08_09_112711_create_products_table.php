@@ -8,7 +8,7 @@ class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 产品表
      * @return void
      */
     public function up()

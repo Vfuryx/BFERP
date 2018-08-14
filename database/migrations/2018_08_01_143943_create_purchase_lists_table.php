@@ -16,19 +16,7 @@ class CreatePurchaseListsTable extends Migration
         Schema::create('purchase_lists', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('purchases_id')->comment('采购id');
-            $table->unsignedInteger('product_specs_id')->comment("产品规格id");
-            $table->unsignedInteger('purchase_quantity')->comment("采购数");
-            $table->string('commodity_code')->default('')->comment('商品编码');//
-            $table->unsignedInteger('stock_in_count')->default(0)->comment("已入库数");//
-            $table->unsignedInteger('shops_id')->default(0)->comment("采购店铺id");
-            $table->unsignedInteger('suppliers_id')->default(0)->comment("供应商id");
-            $table->decimal('purchase_cost',10,2)->default(0.00)->comment("采购成本");
-            $table->decimal('purchase_freight',10,2)->default(0.00)->comment("采购运费");
-            $table->decimal('warehouse_cost',10,2)->default(0.00)->comment("仓库成本");
-            $table->decimal('commission',10,2)->default(0.00)->comment('佣金点');
-            $table->decimal('discount',10,2)->default(0.00)->comment('折扣');
-            $table->decimal('wooden_frame_costs',10,2)->default(0.00)->comment('木架费');
-            $table->timestamp('arrival_time')->nullable()->comment('到货时间');
+            $table->unsignedInteger('combinations_id')->comment("组合id");
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();
         });

@@ -22,42 +22,17 @@ class PurchaseListRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'purchase_lists.*.product_specs_id' => [
+                    'purchase_lists.*.combinations_id' => [
                         'required', 'integer',
-                        Rule::exists('product_specs', 'id')
-                    ],
-                    'purchase_lists.*.purchase_quantity' => 'required|integer|min:1',
-                    'purchase_lists.*.commodity_code' => [
-                        'required', 'string',
+                        Rule::exists('combinations', 'id'),
                         function($attribute, $value, $fail) {
-                            $ex = explode('.', $attribute);
-                            //判断是否属于这个规格的商品编码
-                            if (\App\Models\ProductSpec::findOrfail($this->purchase_lists[$ex[1]]['product_specs_id'])
-                                ->goods->where('commodity_code',$value)->count() == 1) {
+                            //list里面是否存在重复的sku
+                            if(!(collect($this->purchase_lists)->where('combinations_id',$value)->count()>1)){
                                 return true;
                             }
-                            return $fail('规格不属于这个商品');
-                        },
+                            return $fail('存在重复的组合数据');
+                        }
                     ],
-                    'purchase_lists.*.shops_id' => [
-                        'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'purchase_lists.*.suppliers_id' => [
-                        'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'purchase_lists.*.purchase_cost' => 'numeric',
-                    'purchase_lists.*.purchase_freight' => 'numeric',
-                    'purchase_lists.*.warehouse_cost' => 'numeric',
-                    'purchase_lists.*.commission' => 'numeric',
-                    'purchase_lists.*.discount' => 'numeric',
-                    'purchase_lists.*.wooden_frame_costs' => 'numeric',
-                    'purchase_lists.*.arrival_time' => 'date',
                     'purchase_lists.*.remark' => 'string|nullable|max:255'
                 ];
                 break;
@@ -67,53 +42,33 @@ class PurchaseListRequest extends FormRequest
                         'integer',
                         Rule::exists('purchase_lists', 'id')
                     ],
-                    'purchase_lists.*.product_specs_id' => [
+                    'purchase_lists.*.combinations_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id'),
+                        Rule::exists('combinations', 'id'),
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
-                            //如果存在 id 跳过插入判断
-                            if (!isset($this->purchase_lists[$ex[1]]['id'])) {
-                                foreach ($this->purchase->purchaseLists as $purchaseList) {
-                                    if ($purchaseList->where('product_specs_id', $value)->count())
-                                        return $fail('不能重复插入规格');
+                            //判断是否存在purchase_lists.*.id   //数据是否匹配
+                            if ($id = $this->purchase_lists[$ex[1]]['id'] ?? null){
+                                if (\App\Models\PurchaseList::findOrfail($id)->combinations_id == $value){
+                                    return true;
                                 }
                             }
-                            return true;
-                        }
-                    ],
-                    'purchase_lists.*.purchase_quantity' => ['integer', 'min:1'],
-                    'purchase_lists.*.commodity_code' =>   [
-                        'string',
-                        function($attribute, $value, $fail) {
-                            $ex = explode('.', $attribute);
-                            //判断是否属于这个规格的商品编码
-                            if (\App\Models\ProductSpec::findOrfail($this->purchase_lists[$ex[1]]['product_specs_id'])
-                                    ->goods->where('commodity_code',$value)->count() == 1) {
-                                return true;
+
+                            //模型里面是否存在这个sku
+                            if(!$this->purchase->purchaseLists->where('combinations_id',$value)->count()){
+                                //list里面是否存在重复的sku
+                                if(
+                                    !(collect($this->purchase_lists)
+                                        ->where('combinations_id',$value)
+                                        ->count()>1)
+                                ){
+                                    return true;
+                                }
                             }
-                            return $fail('规格不属于这个商品');
+
+                            return $fail('存在重复的组合数据');
                         }
                     ],
-                    'purchase_lists.*.shops_id' => [
-                        'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'purchase_lists.*.suppliers_id' => [
-                        'integer',
-                        Rule::exists('shops', 'id')->where(function($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'purchase_lists.*.purchase_cost' => ['numeric'],
-                    'purchase_lists.*.purchase_freight' => ['numeric'],
-                    'purchase_lists.*.warehouse_cost' => ['numeric'],
-                    'purchase_lists.*.commission' => ['numeric'],
-                    'purchase_lists.*.discount' => ['numeric'],
-                    'purchase_lists.*.wooden_frame_costs' => ['numeric'],
-                    'purchase_lists.*.arrival_time' => ['date'],
                     'purchase_lists.*.remark' => ['string', 'nullable', 'max:255'],
                 ];
                 break;
@@ -128,41 +83,13 @@ class PurchaseListRequest extends FormRequest
             'purchase_lists.*.id.integer' => '采购详情id必须int类型',
             'purchase_lists.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'purchase_lists.*.product_specs_id.required' => '产品规格id必填',
-            'purchase_lists.*.product_specs_id.integer' => '产品规格id必须int类型',
-            'purchase_lists.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
-
-            'purchase_lists.*.purchase_quantity.required' => '采购数必填',
-            'purchase_lists.*.purchase_quantity.integer' => '采购数必须int类型',
-            'purchase_lists.*.purchase_quantity.min' => '采购数不少于1',
-
-            'purchase_lists.*.commodity_code.required' => '商品编码必填',
-            'purchase_lists.*.commodity_code.string' => '商品编码必须字符串类型',
-
-            'purchase_lists.*.shops_id.integer' => '采购店铺id必须int类型',
-            'purchase_lists.*.shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
-
-            'purchase_lists.*.suppliers_id.integer' => '供应商id必须int类型',
-            'purchase_lists.*.suppliers_id.exists' => '需要添加的id在数据库中未找到或未启用',
-
-            'purchase_lists.*.purchase_cost.numeric' => '采购成本必须是数字',
-
-            'purchase_lists.*.purchase_freight.numeric' => '采购运费必须是数字',
-
-            'purchase_lists.*.warehouse_cost.numeric' => '仓库成本必须是数字',
-
-            'purchase_lists.*.commission.numeric' => '佣金点必须是数字',
-
-            'purchase_lists.*.discount.numeric' => '折扣必须是数字',
-
-            'purchase_lists.*.wooden_frame_costs.numeric' => '木架费',
-
-            'purchase_lists.*.arrival_time.date' => '到货时间必须data类型',
+            'purchase_lists.*.combinations_id.required' => '组合id必填',
+            'purchase_lists.*.combinations_id.integer' => '组合id必须int类型',
+            'purchase_lists.*.combinations_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'purchase_lists.*.remark.string' => '备注必须string类型',
             'purchase_lists.*.remark.nullable' => '备注可为null',
             'purchase_lists.*.remark.max' => '备注最大长度为255',
-
         ];
     }
 
@@ -170,18 +97,7 @@ class PurchaseListRequest extends FormRequest
     function attributes()
     {
         return [
-            'purchases_id' => '采购id',
-            'product_specs_id' => '产品规格id',
-            'purchase_quantity' => '采购数',
-            'shops_id' => '采购店铺id',
-            'suppliers_id' => '供应商id',
-            'purchase_cost' => '采购成本',
-            'purchase_freight' => '采购运费',
-            'warehouse_cost' => '仓库成本',
-            'commission' => '佣金点',
-            'discount' => '折扣',
-            'wooden_frame_costs' => '木架费',
-            'arrival_time' => '到货时间',
+            'combinations_id' => '组合id',
             'remark' => '备注',
         ];
     }

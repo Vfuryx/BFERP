@@ -44,66 +44,76 @@ class PurchasesController extends Controller
      *      @Parameter("purchase_status", description="采购状态 状态分别是(new,section,finish)", required=false, default="all")
      * })
      * @Response(200, body={
-     * "data": {
-     *      {
-     *          "id": 49,
-     *          "purchase_order_no": "PO2018080209522019409",
-     *          "purchase_status": "新建",
-     *          "order_no": "",
-     *          "user_id": 1,
-     *          "print_at": null,
-     *          "receiver": "收货人3",
-     *          "receiver_address": "收货地址3",
-     *          "warehouse_id": 1,
-     *          "promise_ship_time": null,
-     *          "business_personnel": "",
-     *          "source": "",
-     *          "client_name": "",
-     *          "buyer_nick": "",
-     *          "order_address": "",
-     *          "is_submit": false,
-     *          "is_print": false,
-     *          "is_audit": false,
-     *          "is_change": false,
-     *          "remark": "备注5",
-     *          "status": true,
-     *          "created_at": "2018-08-02 09:52:20"
+     *       "data": {
+     *          {
+     *              "id": 10,
+     *              "purchase_order_no": "PO2018081414495669619",
+     *              "purchase_status": "新建",
+     *              "order_no": "",
+     *              "user_id": 1,
+     *              "print_at": null,
+     *              "receiver": "收货人3",
+     *              "receiver_address": "收货地址3",
+     *              "warehouse_id": 1,
+     *              "promise_ship_time": null,
+     *              "business_personnel": "",
+     *              "source": "",
+     *              "client_name": "",
+     *              "buyer_nick": "",
+     *              "order_address": "",
+     *              "is_submit": false,
+     *              "is_print": false,
+     *              "is_audit": false,
+     *              "is_change": false,
+     *              "remark": "备注5",
+     *              "status": true,
+     *              "purchase_lists": {
+     *                  {
+     *                      "id": 7,
+     *                      "purchases_id": 10,
+     *                      "combinations_id": 7,
+     *                      "remark": "备注",
+     *                      "created_at": "2018-08-14 14:49:56",
+     *                      "updated_at": "2018-08-14 14:49:56",
+     *                      "purchase_details": {
+     *                          {
+     *                              "id": 6,
+     *                              "purchase_lists_id": 7,
+     *                              "purchase_item_status": "新建",
+     *                              "product_components_id": 10,
+     *                              "purchase_quantity": 10,
+     *                              "stock_in_count": 0,
+     *                              "shops_id": 1,
+     *                              "suppliers_id": 1,
+     *                              "purchase_cost": "10.00",
+     *                              "purchase_freight": "10.00",
+     *                              "warehouse_cost": "10.00",
+     *                              "commission": "10.00",
+     *                              "discount": "10.00",
+     *                              "wooden_frame_costs": "1.00",
+     *                              "arrival_time": "2018-06-10 00:00:00",
+     *                              "remark": "备注",
+     *                              "created_at": "2018-08-14 14:49:56",
+     *                              "updated_at": "2018-08-14 14:49:56"
+     *                          }
+     *                      }
+     *                  }
+     *              },
+     *          }
      *      },
-     *      {
-     *          "id": 50,
-     *          "purchase_order_no": "PO2018080209561891369",
-     *          "purchase_status": "新建",
-     *          "order_no": "",
-     *          "user_id": 1,
-     *          "print_at": null,
-     *          "receiver": "收货人3",
-     *          "receiver_address": "收货地址3",
-     *          "warehouse_id": 1,
-     *          "promise_ship_time": null,
-     *          "business_personnel": "",
-     *          "source": "",
-     *          "client_name": "",
-     *          "buyer_nick": "",
-     *          "order_address": "",
-     *          "is_submit": false,
-     *          "is_print": false,
-     *          "is_audit": false,
-     *          "is_change": false,
-     *          "remark": "备注5",
-     *          "status": true,
-     *          "created_at": "2018-08-02 09:56:18"
+     *      "meta": {
+     *          "pagination": {
+     *              "total": 1,
+     *              "count": 1,
+     *              "per_page": 10,
+     *              "current_page": 1,
+     *              "total_pages": 1,
+     *              "links": {
+     *                  "previous": null,
+     *                  "next": "http://127.0.0.1:8000/api/purchases?page=1"
+     *              }
+     *          }
      *      }
-     *     },
-     *     "meta": {
-     *         "pagination": {
-     *             "total": 1,
-     *             "count": 1,
-     *             "per_page": 10,
-     *             "current_page": 1,
-     *             "total_pages": 1,
-     *             "links": null
-     *         }
-     *     }
      * })
      */
     public function index(PurchaseRequest $request)
@@ -122,20 +132,9 @@ class PurchasesController extends Controller
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=true),
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("status", type="boolean", description="状态(false:停用,true:启用)", required=false,default=true),
-     *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=true),
-     *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=true),
-     *      @Parameter("purchase_lists[0][commodity_code]", description="商品编码", required=true),
-     *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=true),
-     *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=true),
-     *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=true),
-     *      @Parameter("purchase_lists[0][purchase_freight]", type="numeric", description="采购运费", required=true),
-     *      @Parameter("purchase_lists[0][warehouse_cost]", type="numeric", description="仓库成本", required=true),
-     *      @Parameter("purchase_lists[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("purchase_lists[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("purchase_lists[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("purchase_lists[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("purchase_lists[0][combinations_id]", type="integer", description="组合id", required=true),
      *      @Parameter("purchase_lists[0][remark]", description="备注", required=false),
-     *      @Parameter("purchase_lists[0][purchase_details][0][product_specs_id]", type="integer", description="产品规格id", required=true),
+     *      @Parameter("purchase_lists[0][purchase_details][0][product_components_id]", type="integer", description="子件id", required=true),
      *      @Parameter("purchase_lists[0][purchase_details][0][purchase_quantity]", type="integer", description="采购数", required=true),
      *      @Parameter("purchase_lists[0][purchase_details][0][shops_id]", type="integer", description="采购店铺id", required=true),
      *      @Parameter("purchase_lists[0][purchase_details][0][suppliers_id]", type="integer", description="供应商id", required=true),
@@ -155,20 +154,9 @@ class PurchasesController extends Controller
      *          "warehouse_id": "1",
      *          "remark": "备注",
      *          "status": true,
-     *          "purchase_lists[0][product_specs_id]":9,
-     *          "purchase_lists[0][purchase_quantity]":10,
-     *          "purchase_lists[0][commodity_code]":"商品编码1",
-     *          "purchase_lists[0][shops_id]":1,
-     *          "purchase_lists[0][suppliers_id]":1,
-     *          "purchase_lists[0][purchase_cost]":10,
-     *          "purchase_lists[0][purchase_freight]":10,
-     *          "purchase_lists[0][warehouse_cost]":10,
-     *          "purchase_lists[0][commission]":10,
-     *          "purchase_lists[0][discount]":10,
-     *          "purchase_lists[0][wooden_frame_costs]":10,
-     *          "purchase_lists[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][combinations_id]":9,
      *          "purchase_lists[0][remark]":"备注",
-     *          "purchase_lists[0][purchase_details][0][product_specs_id]":10,
+     *          "purchase_lists[0][purchase_details][0][product_components_id]":10,
      *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
      *          "purchase_lists[0][purchase_details][0][shops_id]":1,
      *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
@@ -180,7 +168,7 @@ class PurchasesController extends Controller
      *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
      *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
      *          "purchase_lists[0][purchase_details][0][remark]":"备注",
-     *          "purchase_lists[0][purchase_details][0][product_specs_id]":11,
+     *          "purchase_lists[0][purchase_details][0][product_components_id]":11,
      *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
      *          "purchase_lists[0][purchase_details][0][shops_id]":1,
      *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
@@ -205,63 +193,45 @@ class PurchasesController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 66,
-     *          "purchase_order_no": "PO2018080216025968866",
+     *          "id": 10,
+     *          "purchase_order_no": "PO2018081414495669619",
      *          "purchase_status": "新建",
-     *          "order_no": null,
+     *          "order_no": "",
      *          "user_id": 1,
      *          "print_at": null,
      *          "receiver": "收货人3",
      *          "receiver_address": "收货地址3",
-     *          "warehouse_id": "1",
+     *          "warehouse_id": 1,
      *          "promise_ship_time": null,
-     *          "business_personnel": null,
-     *          "source": null,
-     *          "client_name": null,
-     *          "buyer_nick": null,
-     *          "order_address": null,
+     *          "business_personnel": "",
+     *          "source": "",
+     *          "client_name": "",
+     *          "buyer_nick": "",
+     *          "order_address": "",
      *          "is_submit": false,
      *          "is_print": false,
      *          "is_audit": false,
      *          "is_change": false,
      *          "remark": "备注5",
      *          "status": true,
-     *          "created_at": "2018-08-02 16:02:59",
      *          "purchase_lists": {
      *              {
-     *                  "id": 64,
-     *                  "product_specs_id": 9,
-     *                  "product_specs_spec_code": "321",
-     *                  "product_specs_spec": "32gsdgsa",
-     *                  "goods_short_name": "商品简称",
-     *                  "goods_commodity_code": "商品编码1",
-     *                  "stock_in_count": 0,
-     *                  "suppliers_id": 1,
-     *                  "suppliers_name": "供应商1",
-     *                  "shops_id": 1,
-     *                  "shop_title": "店铺标题",
-     *                  "purchase_quantity": 10,
-     *                  "purchase_cost": "10.00",
-     *                  "purchase_freight": "10.00",
-     *                  "warehouse_cost": "10.00",
-     *                  "commission": "10.00",
-     *                  "discount": "10.00",
-     *                  "wooden_frame_costs": "1.00",
-     *                  "arrival_time": "2018-06-10 00:00:00",
+     *                  "id": 7,
+     *                  "purchases_id": 10,
+     *                  "combinations_id": 7,
      *                  "remark": "备注",
+     *                  "created_at": "2018-08-14 14:49:56",
+     *                  "updated_at": "2018-08-14 14:49:56",
      *                  "purchase_details": {
      *                      {
-     *                          "id": 73,
-     *                          "product_specs_id": 10,
-     *                          "product_specs_spec_code": "1ca",
-     *                          "product_specs_spec": "32",
-     *                          "goods_short_name": "商品简称",
-     *                          "goods_commodity_code": "商品编码10",
-     *                          "suppliers_id": 1,
-     *                          "suppliers_name": "供应商1",
-     *                          "shops_id": 1,
-     *                          "shop_title": "店铺标题",
+     *                          "id": 6,
+     *                          "purchase_lists_id": 7,
+     *                          "purchase_item_status": "新建",
+     *                          "product_components_id": 10,
      *                          "purchase_quantity": 10,
+     *                          "stock_in_count": 0,
+     *                          "shops_id": 1,
+     *                          "suppliers_id": 1,
      *                          "purchase_cost": "10.00",
      *                          "purchase_freight": "10.00",
      *                          "warehouse_cost": "10.00",
@@ -269,28 +239,9 @@ class PurchasesController extends Controller
      *                          "discount": "10.00",
      *                          "wooden_frame_costs": "1.00",
      *                          "arrival_time": "2018-06-10 00:00:00",
-     *                          "remark": "备注"
-     *                      },
-     *                      {
-     *                          "id": 74,
-     *                          "product_specs_id": 11,
-     *                          "product_specs_spec_code": "cccc",
-     *                          "product_specs_spec": "32",
-     *                          "goods_short_name": "321",
-     *                          "goods_commodity_code": "21",
-     *                          "suppliers_id": 1,
-     *                          "suppliers_name": "供应商1",
-     *                          "shops_id": 1,
-     *                          "shop_title": "店铺标题",
-     *                          "purchase_quantity": 10,
-     *                          "purchase_cost": "10.00",
-     *                          "purchase_freight": "10.00",
-     *                          "warehouse_cost": "10.00",
-     *                          "commission": "10.00",
-     *                          "discount": "10.00",
-     *                          "wooden_frame_costs": "1.00",
-     *                          "arrival_time": "2018-06-10 00:00:00",
-     *                          "remark": "备注"
+     *                          "remark": "备注",
+     *                          "created_at": "2018-08-14 14:49:56",
+     *                          "updated_at": "2018-08-14 14:49:56"
      *                      }
      *                  }
      *              }
@@ -313,6 +264,7 @@ class PurchasesController extends Controller
             if ($purchaseLists = $purchaseRequest->input('purchase_lists')) {
 
                 foreach ($purchaseLists as $purchaseList) {
+
                     $purchaseListModel = $purchase->purchaseLists()->create(
                         $validatedHandler->getValidatedData($purchaseListRequest->rules(), $purchaseList)
                     );
@@ -330,7 +282,8 @@ class PurchasesController extends Controller
             return $purchase->id;
         });
         //从新获取存入的数据去除有些的null数据，方便前端判断
-        $purchase = self::find($purchase);
+        $purchase = Purchase::find($purchase);
+
         return $this->response
             ->item($purchase, new PurchaseTransformer())
             ->setStatusCode(201)
@@ -348,8 +301,8 @@ class PurchasesController extends Controller
      *          "status_code": 404,
      *      }),
      *      @Response(200, body={
-     *          "id": 66,
-     *          "purchase_order_no": "PO2018080216025968866",
+     *          "id": 10,
+     *          "purchase_order_no": "PO2018081414495669619",
      *          "purchase_status": "新建",
      *          "order_no": "",
      *          "user_id": 1,
@@ -369,42 +322,24 @@ class PurchasesController extends Controller
      *          "is_change": false,
      *          "remark": "备注5",
      *          "status": true,
-     *          "created_at": "2018-08-02 16:02:59",
      *          "purchase_lists": {
      *              {
-     *                  "id": 64,
-     *                  "product_specs_id": 9,
-     *                  "product_specs_spec_code": "321",
-     *                  "product_specs_spec": "32gsdgsa",
-     *                  "goods_short_name": "商品简称",
-     *                  "stock_in_count": 0,
-     *                  "goods_commodity_code": "商品编码1",
-     *                  "suppliers_id": 1,
-     *                  "suppliers_name": "供应商1",
-     *                  "shops_id": 1,
-     *                  "shop_title": "店铺标题",
-     *                  "purchase_quantity": 10,
-     *                  "purchase_cost": "10.00",
-     *                  "purchase_freight": "10.00",
-     *                  "warehouse_cost": "10.00",
-     *                  "commission": "10.00",
-     *                  "discount": "10.00",
-     *                  "wooden_frame_costs": "1.00",
-     *                  "arrival_time": "2018-06-10 00:00:00",
+     *                  "id": 7,
+     *                  "purchases_id": 10,
+     *                  "combinations_id": 7,
      *                  "remark": "备注",
+     *                  "created_at": "2018-08-14 14:49:56",
+     *                  "updated_at": "2018-08-14 14:49:56",
      *                  "purchase_details": {
      *                      {
-     *                          "id": 73,
-     *                          "product_specs_id": 10,
-     *                          "product_specs_spec_code": "1ca",
-     *                          "product_specs_spec": "32",
-     *                          "goods_short_name": "商品简称",
-     *                          "goods_commodity_code": "商品编码10",
-     *                          "suppliers_id": 1,
-     *                          "suppliers_name": "供应商1",
-     *                          "shops_id": 1,
-     *                          "shop_title": "店铺标题",
+     *                          "id": 6,
+     *                          "purchase_lists_id": 7,
+     *                          "purchase_item_status": "新建",
+     *                          "product_components_id": 10,
      *                          "purchase_quantity": 10,
+     *                          "stock_in_count": 0,
+     *                          "shops_id": 1,
+     *                          "suppliers_id": 1,
      *                          "purchase_cost": "10.00",
      *                          "purchase_freight": "10.00",
      *                          "warehouse_cost": "10.00",
@@ -412,32 +347,13 @@ class PurchasesController extends Controller
      *                          "discount": "10.00",
      *                          "wooden_frame_costs": "1.00",
      *                          "arrival_time": "2018-06-10 00:00:00",
-     *                          "remark": "备注"
-     *                      },
-     *                      {
-     *                          "id": 74,
-     *                          "product_specs_id": 11,
-     *                          "product_specs_spec_code": "cccc",
-     *                          "product_specs_spec": "32",
-     *                          "goods_short_name": "321",
-     *                          "goods_commodity_code": "21",
-     *                          "suppliers_id": 1,
-     *                          "suppliers_name": "供应商1",
-     *                          "shops_id": 1,
-     *                          "shop_title": "店铺标题",
-     *                          "purchase_quantity": 10,
-     *                          "purchase_cost": "10.00",
-     *                          "purchase_freight": "10.00",
-     *                          "warehouse_cost": "10.00",
-     *                          "commission": "10.00",
-     *                          "discount": "10.00",
-     *                          "wooden_frame_costs": "1.00",
-     *                          "arrival_time": "2018-06-10 00:00:00",
-     *                          "remark": "备注"
+     *                          "remark": "备注",
+     *                          "created_at": "2018-08-14 14:49:56",
+     *                          "updated_at": "2018-08-14 14:49:56"
      *                      }
      *                  }
      *              }
-     *          }
+     *          },
      *      })
      * })
      */
@@ -456,23 +372,10 @@ class PurchasesController extends Controller
      *      @Parameter("receiver_address", description="收货地址", required=false),
      *      @Parameter("warehouse_id",type="integer", description="仓库id", required=false),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status", type="boolean", description="状态(false:停用,true:启用)", required=false,default=true),
-     *      @Parameter("purchase_lists[0][id]", type="integer", description="采购清单id", required=false),
-     *      @Parameter("purchase_lists[0][product_specs_id]", type="integer", description="产品规格id", required=false),
-     *      @Parameter("purchase_lists[0][purchase_quantity]", type="integer", description="采购数", required=false),
-     *      @Parameter("purchase_lists[0][commodity_code]", description="商品编码", required=false),
-     *      @Parameter("purchase_lists[0][shops_id]", type="integer", description="采购店铺id", required=false),
-     *      @Parameter("purchase_lists[0][suppliers_id]", type="integer", description="供应商id", required=false),
-     *      @Parameter("purchase_lists[0][purchase_cost]", type="numeric", description="采购成本", required=false),
-     *      @Parameter("purchase_lists[0][purchase_freight]", type="numeric", description="采购运费", required=false),
-     *      @Parameter("purchase_lists[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
-     *      @Parameter("purchase_lists[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("purchase_lists[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("purchase_lists[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("purchase_lists[0][arrival_time]", type="dateTime", description="到货时间", required=false),
+     *      @Parameter("status", type="boolean", description="状态(false:停用,true:启用)", required=false,default=false),
+     *      @Parameter("purchase_lists[0][combinations_id]", type="integer", description="组合id", required=false),
      *      @Parameter("purchase_lists[0][remark]", description="备注", required=false),
-     *      @Parameter("purchase_lists[0][purchase_details][0][id]", type="integer", description="采购明细id", required=false),
-     *      @Parameter("purchase_lists[0][purchase_details][0][product_specs_id]", type="integer", description="产品规格id", required=false),
+     *      @Parameter("purchase_lists[0][purchase_details][0][product_components_id]", type="integer", description="子件id", required=false),
      *      @Parameter("purchase_lists[0][purchase_details][0][purchase_quantity]", type="integer", description="采购数", required=false),
      *      @Parameter("purchase_lists[0][purchase_details][0][shops_id]", type="integer", description="采购店铺id", required=false),
      *      @Parameter("purchase_lists[0][purchase_details][0][suppliers_id]", type="integer", description="供应商id", required=false),
@@ -492,20 +395,9 @@ class PurchasesController extends Controller
      *          "warehouse_id": "1",
      *          "remark": "备注",
      *          "status": true,
-     *          "purchase_lists[0][product_specs_id]":9,
-     *          "purchase_lists[0][purchase_quantity]":10,
-     *          "purchase_lists[0][commodity_code]":"商品编码1",
-     *          "purchase_lists[0][shops_id]":1,
-     *          "purchase_lists[0][suppliers_id]":1,
-     *          "purchase_lists[0][purchase_cost]":10,
-     *          "purchase_lists[0][purchase_freight]":10,
-     *          "purchase_lists[0][warehouse_cost]":10,
-     *          "purchase_lists[0][commission]":10,
-     *          "purchase_lists[0][discount]":10,
-     *          "purchase_lists[0][wooden_frame_costs]":10,
-     *          "purchase_lists[0][arrival_time]":"2018-6-10 00:00:00",
+     *          "purchase_lists[0][combinations_id]":9,
      *          "purchase_lists[0][remark]":"备注",
-     *          "purchase_lists[0][purchase_details][0][product_specs_id]":10,
+     *          "purchase_lists[0][purchase_details][0][product_components_id]":10,
      *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
      *          "purchase_lists[0][purchase_details][0][shops_id]":1,
      *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
@@ -517,7 +409,7 @@ class PurchasesController extends Controller
      *          "purchase_lists[0][purchase_details][0][wooden_frame_costs]":10,
      *          "purchase_lists[0][purchase_details][0][arrival_time]":"2018-6-10 00:00:00",
      *          "purchase_lists[0][purchase_details][0][remark]":"备注",
-     *          "purchase_lists[0][purchase_details][0][product_specs_id]":11,
+     *          "purchase_lists[0][purchase_details][0][product_components_id]":11,
      *          "purchase_lists[0][purchase_details][0][purchase_quantity]":10,
      *          "purchase_lists[0][purchase_details][0][shops_id]":1,
      *          "purchase_lists[0][purchase_details][0][suppliers_id]":1,
@@ -552,8 +444,8 @@ class PurchasesController extends Controller
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
-     *          "id": 49,
-     *          "purchase_order_no": "PO2018080209522019409",
+     *          "id": 10,
+     *          "purchase_order_no": "PO2018081414495669619",
      *          "purchase_status": "新建",
      *          "order_no": "",
      *          "user_id": 1,
@@ -575,61 +467,36 @@ class PurchasesController extends Controller
      *          "status": true,
      *          "purchase_lists": {
      *              {
-     *                  "product_specs_id": 9,
-     *                  "product_specs_spec_code": "规格编码",
-     *                  "product_specs_spec": "产品规格",
-     *                  "goods_short_name": "商品简称",
-     *                  "goods_commodity_code": "商品编码1",
-     *                  "stock_in_count": 0,
-     *                  "suppliers_name": "供应商1",
-     *                  "shop_title": "店铺标题",
-     *                  "purchase_lists_purchase_cost": "10.00",
-     *                  "purchase_lists_purchase_freight": "10.00",
-     *                  "purchase_lists_warehouse_cost": "10.00",
-     *                  "purchase_lists_commission": "10.00",
-     *                  "purchase_lists_discount": "10.00",
-     *                  "purchase_lists_wooden_frame_costs": "1.00",
-     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
-     *                  "purchase_lists_remark": "备注"
+     *                  "id": 7,
+     *                  "purchases_id": 10,
+     *                  "combinations_id": 7,
+     *                  "remark": "备注",
+     *                  "created_at": "2018-08-14 14:49:56",
+     *                  "updated_at": "2018-08-14 14:49:56",
+     *                  "purchase_details": {
+     *                      {
+     *                          "id": 6,
+     *                          "purchase_lists_id": 7,
+     *                          "purchase_item_status": "新建",
+     *                          "product_components_id": 10,
+     *                          "purchase_quantity": 10,
+     *                          "stock_in_count": 0,
+     *                          "shops_id": 1,
+     *                          "suppliers_id": 1,
+     *                          "purchase_cost": "10.00",
+     *                          "purchase_freight": "10.00",
+     *                          "warehouse_cost": "10.00",
+     *                          "commission": "10.00",
+     *                          "discount": "10.00",
+     *                          "wooden_frame_costs": "1.00",
+     *                          "arrival_time": "2018-06-10 00:00:00",
+     *                          "remark": "备注",
+     *                          "created_at": "2018-08-14 14:49:56",
+     *                          "updated_at": "2018-08-14 14:49:56"
+     *                      }
+     *                  }
      *              }
      *          },
-     *          "purchase_details": {
-     *              {
-     *                  "product_specs_id": 10,
-     *                  "product_specs_spec_code": "规格编码2",
-     *                  "product_specs_spec": "产品规格2",
-     *                  "goods_short_name": "商品简称2",
-     *                  "goods_commodity_code": "商品编码10",
-     *                  "suppliers_name": "供应商1",
-     *                  "shop_title": "店铺标题",
-     *                  "purchase_lists_purchase_cost": "10.00",
-     *                  "purchase_lists_purchase_freight": "10.00",
-     *                  "purchase_lists_warehouse_cost": "10.00",
-     *                  "purchase_lists_commission": "10.00",
-     *                  "purchase_lists_discount": "10.00",
-     *                  "purchase_lists_wooden_frame_costs": "1.00",
-     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
-     *                  "purchase_lists_remark": "备注"
-     *              },
-     *              {
-     *                  "product_specs_id": 11,
-     *                  "product_specs_spec_code": "规格编码3",
-     *                  "product_specs_spec": "产品规格3",
-     *                  "goods_short_name": "商品简称3",
-     *                  "goods_commodity_code": "商品编码12",
-     *                  "suppliers_name": "供应商1",
-     *                  "shop_title": "店铺标题",
-     *                  "purchase_lists_purchase_cost": "10.00",
-     *                  "purchase_lists_purchase_freight": "10.00",
-     *                  "purchase_lists_warehouse_cost": "10.00",
-     *                  "purchase_lists_commission": "10.00",
-     *                  "purchase_lists_discount": "10.00",
-     *                  "purchase_lists_wooden_frame_costs": "1.00",
-     *                  "purchase_lists_arrival_time": "2018-06-10 00:00:00",
-     *                  "purchase_lists_remark": "备注"
-     *              }
-     *          },
-     *          "created_at": "2018-08-02 09:52:20",
      *      })
      * })
      */
@@ -689,7 +556,6 @@ class PurchasesController extends Controller
                     }
                 }
             }
-
             return $purchase;
         });
 

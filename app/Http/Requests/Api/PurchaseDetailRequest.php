@@ -22,9 +22,25 @@ class PurchaseDetailRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'purchase_lists.*.purchase_details.*.product_specs_id' => [
+                    'purchase_lists.*.purchase_details.*.product_components_id' => [
                         'required', 'integer',
-                        Rule::exists('product_specs', 'id')
+                        Rule::exists('product_components', 'id'),
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            $purchaseLists = $this->purchase_lists[$ex[1]];
+                            //list里面是否存在重复的sku 或 子件是否属于sku
+                            if (
+                                !(collect($this->purchase_lists[$ex[1]]['purchase_details'])
+                                    ->where('product_components_id', $value)->count()>1)
+                                &&
+                                \App\Models\CombinationProductComponent::query()
+                                    ->where('combinations_id', $purchaseLists['combinations_id'])
+                                    ->where('product_components_id', $value)->count()
+                            ) {
+                                return true;
+                            }
+                            return $fail('存在重复的子件数据');
+                        }
                     ],
                     'purchase_lists.*.purchase_details.*.purchase_quantity' => 'required|integer|min:1',
                     'purchase_lists.*.purchase_details.*.shops_id' => [
@@ -55,19 +71,46 @@ class PurchaseDetailRequest extends FormRequest
                         'integer',
                         Rule::exists('purchase_details', 'id')
                     ],
-                    'purchase_lists.*.purchase_details.*.product_specs_id' => [
+                    'purchase_lists.*.purchase_details.*.product_components_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id'),
+                        Rule::exists('product_components', 'id'),
                         function($attribute, $value, $fail) {
+
                             $ex = explode('.', $attribute);
-                            //如果存在 id 跳过插入判断
-                            if (!isset($this->purchase_lists[$ex[1]]['purchase_details'][$ex[3]]['id'])) {
-                                foreach ($this->purchase->purchaseLists as $purchaseList) {
-                                    if ($purchaseList->purchaseDetails->where('product_specs_id', $value)->count())
-                                        return $fail('不能重复插入规格');
+
+                            $purchaseLists = $this->purchase_lists[$ex[1]];
+                            //details 是否存在重复数据 或 子件属于这个sku
+                            if (
+                                collect($this->purchase_lists[$ex[1]]['purchase_details'])
+                                ->where('product_components_id', $value)
+                                ->count()>1
+                                ||
+                                !\App\Models\CombinationProductComponent::query()
+                                    ->where('combinations_id', $purchaseLists['combinations_id'])
+                                    ->where('product_components_id', $value)->count()
+                            ) {
+                                return $fail('子件数据不能重复且子件属于上传sku');
+                            }
+
+                            //判断是否存在purchase_details.*.id
+                            if ($id = $purchaseLists['purchase_details'][$ex[3]]['id'] ?? null)
+                                //purchase_details表里是否同一条数据
+                                if (\App\Models\PurchaseDetail::findOrfail($id)->product_components_id == $value)
+                                    return true;
+
+                            //判断上一层是否存在id
+                            if ($id = $purchaseLists['id'] ?? null) {
+                                //模型没有重复数据
+                                if (
+                                    !\App\Models\PurchaseDetail::where('purchase_lists_id', $id)
+                                        ->where('product_components_id', $value)
+                                        ->count()
+                                ) {
+                                    return true;
                                 }
                             }
-                            return true;
+
+                            return $fail('存在重复的子件数据');
                         }
                     ],
                     'purchase_lists.*.purchase_details.*.purchase_quantity' => ['integer', 'min:1'],
@@ -104,9 +147,9 @@ class PurchaseDetailRequest extends FormRequest
             'purchase_lists.*.purchase_details.*.id.integer' => '采购详情id必须int类型',
             'purchase_lists.*.purchase_details.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'purchase_lists.*.purchase_details.*.product_specs_id.required' => '产品规格id必填',
-            'purchase_lists.*.purchase_details.*.product_specs_id.integer' => '产品规格id必须int类型',
-            'purchase_lists.*.purchase_details.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'purchase_lists.*.purchase_details.*.product_components_id.required' => '产品规格id必填',
+            'purchase_lists.*.purchase_details.*.product_components_id.integer' => '产品规格id必须int类型',
+            'purchase_lists.*.purchase_details.*.product_components_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'purchase_lists.*.purchase_details.*.purchase_quantity.required' => '采购数必填',
             'purchase_lists.*.purchase_details.*.purchase_quantity.integer' => '采购数必须int类型',
@@ -144,7 +187,7 @@ class PurchaseDetailRequest extends FormRequest
     {
         return [
             'purchases_id' => '采购id',
-            'product_specs_id' => '产品规格id',
+            'product_components_id' => '子件id',
             'purchase_quantity' => '采购数',
             'shops_id' => '采购店铺id',
             'suppliers_id' => '供应商id',
@@ -152,6 +195,7 @@ class PurchaseDetailRequest extends FormRequest
             'purchase_freight' => '采购运费',
             'warehouse_cost' => '仓库成本',
             'commission' => '佣金点',
+            'discount' => '折扣',
             'paint' => '油漆',
             'wooden_frame_costs' => '木架费',
             'arrival_time' => '到货时间',

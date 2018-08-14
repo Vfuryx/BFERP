@@ -17,7 +17,7 @@ class CreatePurchaseDetailsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('purchase_lists_id')->comment('采购列表id');
             $table->string('purchase_item_status')->default(\App\Models\Purchase::PURCHASE_STATUS_NEW)->comment('采购子单状态:新建、部分完成、已完成');
-            $table->unsignedInteger('product_specs_id')->comment("产品规格id");
+            $table->unsignedInteger('product_components_id')->comment("产品子件id");
             $table->unsignedInteger('purchase_quantity')->comment("采购数");
             $table->unsignedInteger('stock_in_count')->default(0)->comment("已入库数");
             $table->unsignedInteger('shops_id')->default(0)->comment("采购店铺id");

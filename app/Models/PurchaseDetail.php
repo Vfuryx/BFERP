@@ -9,7 +9,7 @@ class PurchaseDetail extends Model
     protected $table = "purchase_details";
 
     protected $fillable = [
-        'product_specs_id', 'purchase_quantity', 'shops_id',
+        'product_components_id', 'purchase_quantity', 'shops_id',
         'suppliers_id', 'purchase_cost', 'purchase_freight', 'warehouse_cost',
         'commission', 'discount', 'arrival_time', 'remark',
         'wooden_frame_costs'

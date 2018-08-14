@@ -27,8 +27,8 @@ class Purchase extends Model
     protected $fillable = [
         'purchase_order_no', 'receiver', 'receiver_address',
         'remark', 'warehouse_id', 'order_no', 'user_id', 'promise_ship_time',
-        'business_personnel', 'source', 'client_name', 'buyer_nick', 'is_submit', 'is_print',
-        'status', 'print_at'
+        'business_personnel', 'source', 'client_name', 'buyer_nick',
+        'status',
     ];
 
     protected $dates = [
@@ -202,11 +202,6 @@ class Purchase extends Model
     {
         return $this->hasMany(PurchaseList::class, 'purchases_id');
     }
-
-//    public function purchaseDetails()
-//    {
-//        return $this->hasMany(PurchaseDetail::class, 'purchases_id');
-//    }
 
     public function cancelPurchases()
     {

@@ -8,7 +8,7 @@ class CreateCombinationProductComponentsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * sku关联子件表
      * @return void
      */
     public function up()
