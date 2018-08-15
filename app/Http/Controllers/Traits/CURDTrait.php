@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Traits;
 
 use Illuminate\Support\Facades\DB;
 
+use Dingo\Api\Exception\DeleteResourceFailedException;
+
 /**
  * 基础增删改查方法复用
  */

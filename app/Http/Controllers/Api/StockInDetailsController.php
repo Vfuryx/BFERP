@@ -10,7 +10,7 @@ use App\Http\Controllers\Traits\CURDTrait;
 
 
 /**
- * 入库单资源
+ * 入库单详情资源
  * @Resource("stockindetails",uri="/api")
  */
 class StockInDetailsController extends Controller
@@ -21,106 +21,43 @@ class StockInDetailsController extends Controller
     const MODEL = StockInDetail::class;
 
     /**
-     * 获取所有入库单
+     * 获取所有入库单详情
      *
-     * @Get("/stockindetails{?status}")
+     * @Get("/stockindetails{}")
      * @Versions({"v1"})
-     * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
-     * })
      * @Response(200, body={
-     * "data": {
+     *     "data": {
      *         {
      *              "id": 1,
      *              "stock_in": {
      *                  "id": 1,
-     *                  "stock_in_no": "IS2018072013065251993",
+     *                  "stock_in_no": "IS2018081513063587085",
      *                  "warehouse_id": 1,
-     *                  "stock_in_types_id": 1,
-     *                  "creator": "1",
-     *                  "submitter": "",
-     *                  "submit_at": null,
-     *                  "auditor": "",
-     *                  "audit_at": null,
-     *                  "warehouer": "",
-     *                  "stock_in_at": null,
-     *                  "is_submit": false,
-     *                  "is_audit": false,
-     *                  "is_stock_in": 0,
+     *                  "stock_in_types_id": 3,
+     *                  "creator": "admin",
+     *                  "is_submit": true,
+     *                  "submitter": "admin",
+     *                  "submit_at": "2018-08-15 14:14:09",
+     *                  "is_print": true,
+     *                  "print_at": "2018-08-15 14:17:29",
+     *                  "is_audit": true,
+     *                  "auditor": "admin",
+     *                  "audit_at": "2018-08-15 14:17:03",
+     *                  "is_stock_in": true,
+     *                  "warehouer": "admin",
+     *                  "stock_in_at": "2018-08-15 16:25:24",
      *                  "status": true,
-     *                  "created_at": "2018-07-20 13:06:52",
-     *                  "updated_at": "2018-07-20 13:06:52"
+     *                  "created_at": "2018-08-15 13:06:35",
+     *                  "updated_at": "2018-08-15 16:25:24"
      *              },
-     *              "purchase_details_id": {
-     *                  "id": 1,
-     *                  "purchases_id": 13,
-     *                  "purchase_item_status": "新建",
-     *                  "product_specs_id": 1,
-     *                  "purchase_quantity": 10,
-     *                  "stock_in_count": 0,
-     *                  "shops_id": 1,
-     *                  "suppliers_id": 1,
-     *                  "purchase_cost": "10.00",
-     *                  "purchase_freight": "10.00",
-     *                  "warehouse_cost": "10.00",
-     *                  "commission": "10.00",
-     *                  "discount": "10.00",
-     *                  "colour_num": "色号",
-     *                  "paint": "油漆",
-     *                  "wooden_frame_costs": "0.00",
-     *                  "arrival_time": "2018-06-10 00:00:00",
-     *                  "remark": "备注",
-     *                  "created_at": "2018-07-21 16:22:05",
-     *                  "updated_at": "2018-07-21 16:22:05"
-     *              },
-     *              "product_spec": {
-     *                  "id": 1,
-     *                  "goods_id": 1,
-     *                  "spec_code": "规格编码3",
-     *                  "jd_specs_code": "京东规格编码",
-     *                  "vips_specs_code": "唯品会规格编码",
-     *                  "tb_price": "10.00",
-     *                  "cost": "10.00",
-     *                  "price": "10.00",
-     *                  "highest_price": "10.00",
-     *                  "lowest_price": "10.00",
-     *                  "warehouse_cost": "10.00",
-     *                  "assembly_price": "10.00",
-     *                  "discount": "1.00",
-     *                  "commission": "1.00",
-     *                  "is_combination": false,
-     *                  "package_quantity": 10,
-     *                  "package_costs": "10.00",
-     *                  "wooden_frame_costs": "10.00",
-     *                  "purchase_freight": "10.00",
-     *                  "inventory_warning": 10,
-     *                  "purchase_days_warning": 1,
-     *                  "available_warning": 10,
-     *                  "distribution_method_id": 1,
-     *                  "bar_code": "条形码2",
-     *                  "img_url": "http://image.img.com",
-     *                  "spec": "规格",
-     *                  "color": "颜色",
-     *                  "materials": "材质",
-     *                  "function": "功能",
-     *                  "special": "特殊",
-     *                  "other": "其他",
-     *                  "longness": 10,
-     *                  "width": 10,
-     *                  "height": 10,
-     *                  "volume": 10,
-     *                  "weight": 10,
-     *                  "remark": "备注",
-     *                  "finished_pro":  true,
-     *                  "is_stop_pro": false,
-     *                  "status": true,
-     *                  "created_at": "2018-07-18 17:42:36",
-     *                  "updated_at": "2018-07-18 17:42:36"
-     *              },
-     *              "stock_in_quantity": 10,
-     *              "created_at": "2018-07-20 16:06:32",
-     *              "updated_at": "2018-07-20 16:13:43"
-     *         }
+     *              "purchase_lists_id": null,
+     *              "product_spec": null,
+     *              "stock_in_quantity": 1,
+     *              "total_fee": "10.00",
+     *              "remark": "备注",
+     *              "created_at": "2018-08-15 13:06:35",
+     *              "updated_at": "2018-08-15 13:06:35"
+     *         },
      *     },
      *     "meta": {
      *         "pagination": {
@@ -144,7 +81,7 @@ class StockInDetailsController extends Controller
 
 
     /**
-     * 删除入库单
+     * 删除入库单详情
      *
      * @Delete("/stockindetails/:id")
      * @Versions({"v1"})
@@ -163,12 +100,12 @@ class StockInDetailsController extends Controller
     }
 
     /**
-     * 删除一组入库单
+     * 删除一组入库单详情
      *
      * @Delete("/stockindetails")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="入库单id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="入库单详情id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(500, body={

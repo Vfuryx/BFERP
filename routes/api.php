@@ -532,7 +532,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('stockindetails', 'StockInDetailsController@destroybyids')
             ->name('api.stockindetails.destroybyids');
 
-
         //取消采购
         $api->get('cancelpurchases', 'CancelPurchasesController@index')
             ->name('api.cancelpurchases.index');

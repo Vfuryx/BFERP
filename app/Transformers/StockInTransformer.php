@@ -9,6 +9,7 @@ class StockInTransformer extends TransformerAbstract
 {
     public function transform(StockIn $stockIn)
     {
+        $stockIn = $stockIn->load('warehouse','stockInType','stockInDetails.purchaseDetail.productComponent');
         return [
             'id' => $stockIn->id,
             'stock_in_no' => $stockIn->stock_in_no,
@@ -27,7 +28,7 @@ class StockInTransformer extends TransformerAbstract
             'is_audit' => $stockIn->is_audit,
             'is_stock_in' => $stockIn->is_stock_in,
             'status' => $stockIn->status,
-            'stock_in_details' => $stockIn->stockInDetails()->with('purchaseList','productSpec')->get(),
+            'stock_in_details' => $stockIn->stockInDetails,
             'created_at' => $stockIn->created_at
                                     ->toDateTimeString(),
             'updated_at' => $stockIn->updated_at

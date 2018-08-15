@@ -15,28 +15,73 @@ class StockInDetailRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
-            case 'GET':
-                return [
-                    'status' => 'boolean',
-                ];
-                break;
             case 'POST':
                 return [
-                    'stock_in_details.*.purchase_lists_id' => [
+                    'stock_in_details.*.purchase_details_id' => [
                         'required', 'integer',
-                        Rule::exists('purchase_lists', 'id'),
-                        function ($attribute, $value, $fail) {
-                            if (\App\Models\PurchaseList::query()->findOrFail($value)->purchase->status) {
-                                return true;
-                            }
-                            return $fail('订单没有开启');
+                        Rule::exists('purchase_details', 'id'),
+                        function($attribute, $value, $fail) {
+                            if (!\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->status)
+                                return $fail('采购单没有开启');
+
+                            if (!\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->is_audit)
+                                return $fail('采购单未审核');
+
+                            if (
+                                \App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->getOriginal('purchase_status')
+                                ==
+                                \App\Models\Purchase::PURCHASE_STATUS_FINISH
+                            )
+                                return $fail('采购单已完成');
+
+                            return true;
                         }
                     ],
-                    'stock_in_details.*.product_specs_id' => [
+                    'stock_in_details.*.product_components_id' => [
                         'required', 'integer',
-                        Rule::exists('product_specs', 'id')
+                        Rule::exists('product_components', 'id'),
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //表单数据是否匹配 stock_in_details 是否存在重复数据
+                            if (
+                                collect($this->stock_in_details[$ex[1]])
+                                    ->where('product_components_id', $value)
+                                    ->where('purchase_details_id', $this->stock_in_details[$ex[1]]['purchase_details_id'])
+                                    ->count() > 1
+                            ) {
+                                return $fail('存在重复数据');
+                            }
+
+                            //模型数据是否匹配
+                            //采购详情不存在子件这个 id
+                            if (
+                            !\App\Models\PurchaseDetail::where('id', $this->stock_in_details[$ex[1]]['purchase_details_id'])
+                                ->where('product_components_id', $value)
+                                ->count()
+                            ) {
+                                return $fail('采购详情不存在子件 id');
+                            }
+                            return true;
+                        }
                     ],
-                    'stock_in_details.*.total_fee' => 'required|numeric',
+                    'stock_in_details.*.total_fee' => [
+                        'required', 'numeric',
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //计算总额是否有误
+                            $purchaseCost = \App\Models\PurchaseDetail::query()
+                                ->findOrFail($this->stock_in_details[$ex[1]]['purchase_details_id'])->purchase_cost;
+
+                            $stockInQuantity = $this->stock_in_details[$ex[1]]['stock_in_quantity'];
+
+                            bcscale(2);
+
+                            if (bccomp(bcmul($purchaseCost, $stockInQuantity), $value) === 0)
+                                return true;
+
+                            return $fail('总额计算有误');
+                        }
+                    ],
                     'stock_in_details.*.stock_in_quantity' => 'required|integer|min:1',
                     'stock_in_details.*.remark' => 'string|nullable|max:255',
                 ];
@@ -47,31 +92,91 @@ class StockInDetailRequest extends FormRequest
                         'integer',
                         Rule::exists('stock_in_details', 'id'),
                     ],
-                    'stock_in_details.*.purchase_lists_id' => [
+                    'stock_in_details.*.purchase_details_id' => [
                         'integer',
-                        Rule::exists('purchase_lists', 'id'),
-                        function ($attribute, $value, $fail) {
-                            $ex = explode('.', $attribute);
-                            //如果存在 id 跳过插入判断
-                            if (!isset($this->stock_in_details[$ex[1]]['id'])) {
-                                if ($this->stockin->stockInDetails->where('purchase_lists_id',$value)->count())
-                                    return $fail('不能重复插入规格');
-                            }
+                        Rule::exists('purchase_details', 'id'),
+                        function($attribute, $value, $fail) {
+                            if (!\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->status)
+                                return $fail('采购单没有开启');
 
-                            if (\App\Models\PurchaseList::query()->findOrFail($value)->purchase->status) {
-                                return true;
-                            }
-                            return $fail('订单没有开启');
+                            if (!\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->is_audit)
+                                return $fail('采购单未审核');
+
+                            if (
+                                \App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->getOriginal('purchase_status')
+                                ==
+                                \App\Models\Purchase::PURCHASE_STATUS_FINISH
+                            )
+                                return $fail('采购单已完成');
+
+                            return true;
                         }
                     ],
-                    'stock_in_details.*.product_specs_id' => [
+                    'stock_in_details.*.product_components_id' => [
                         'integer',
-                        Rule::exists('product_specs', 'id')
+                        Rule::exists('product_components', 'id'),
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //表单数据是否匹配 stock_in_details 是否存在重复数据
+                            if (
+                                collect($this->stock_in_details[$ex[1]])
+                                    ->where('product_components_id', $value)
+                                    ->where('purchase_details_id', $this->stock_in_details[$ex[1]]['purchase_details_id'])
+                                    ->count() > 1
+                            ) {
+                                return $fail('存在重复数据');
+                            }
+
+                            //模型数据是否匹配
+                            //采购详情不存在子件这个 id
+                            if (
+                            !\App\Models\PurchaseDetail::where('id', $this->stock_in_details[$ex[1]]['purchase_details_id'])
+                                ->where('product_components_id', $value)
+                                ->count()
+                            ) {
+                                return $fail('采购详情不存在子件 id');
+                            }
+
+                            if (
+                                !(
+                                    //是否存id
+                                    $this->stock_in_details[$ex[1]]['id'] ?? null
+                                    &&
+                                    //存在id  则判断数据是否合法
+                                    $this->stockin->stockInDetails->findOrfail($this->stock_in_details[$ex[1]]['id'])
+                                        ->purchase_details_id == $value
+                                )
+                                ||
+                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
+                                !$this->stockin->stockInDetails->where('product_components_id', $value)->count()
+
+                            ) {
+                                return $fail('模型数据不匹配');
+                            }
+                            return true;
+                        }
                     ],
-                    'stock_in_details.*.total_fee' => 'numeric',
+                    'stock_in_details.*.total_fee' => [
+                        'numeric',
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //计算总额是否有误
+                            $purchaseCost = \App\Models\PurchaseDetail::query()
+                                ->findOrFail($this->stock_in_details[$ex[1]]['purchase_details_id'])->purchase_cost;
+                            $stockInQuantity = $this->stock_in_details[$ex[1]]['stock_in_quantity'];
+                            bcscale(2);
+                            if (bccomp(bcmul($purchaseCost, $stockInQuantity), $value) === 0)
+                                return true;
+
+                            return $fail('总额计算有误');
+                        }
+                    ],
                     'stock_in_details.*.stock_in_quantity' => 'integer|min:1',
                     'stock_in_details.*.remark' => 'string|nullable|max:255',
                 ];
+                break;
+            default:
+                return [];
                 break;
         }
     }
@@ -83,13 +188,13 @@ class StockInDetailRequest extends FormRequest
             'stock_in_details.*.id.integer' => '入库单详情id必须int类型',
             'stock_in_details.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'stock_in_details.*.purchase_lists_id.required' => '采购清单id必填',
-            'stock_in_details.*.purchase_lists_id.integer' => '采购清单id必须int类型',
-            'stock_in_details.*.purchase_lists_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stock_in_details.*.purchase_details_id.required' => '采购详情id必填',
+            'stock_in_details.*.purchase_details_id.integer' => '采购详情id必须int类型',
+            'stock_in_details.*.purchase_details_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'stock_in_details.*.product_specs_id.required' => '产品规格id必填',
-            'stock_in_details.*.product_specs_id.integer' => '产品规格id必须int类型',
-            'stock_in_details.*.product_specs_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'stock_in_details.*.product_components_id.required' => '子件id必填',
+            'stock_in_details.*.product_components_id.integer' => '子件id必须int类型',
+            'stock_in_details.*.product_components_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'stock_in_details.*.stock_in_quantity.required' => '入库数量必填',
             'stock_in_details.*.stock_in_quantity.integer' => '入库数量必须int类型',
@@ -108,8 +213,8 @@ class StockInDetailRequest extends FormRequest
     {
         return [
             'stock_ins_id' => '入库单id',
-            'purchase_lists_id' => '采购清单id',
-            'product_specs_id' => '产品规格id',
+            'purchase_details_id' => '采购详情id',
+            'product_components_id' => '子件id',
             'stock_in_quantity' => '入库数量',
             'remark' => '备注',
         ];

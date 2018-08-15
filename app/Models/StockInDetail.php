@@ -7,7 +7,7 @@ class StockInDetail extends Model
     protected $table = 'stock_in_details';
 
     protected $fillable = [
-        'stock_ins_id', 'purchase_lists_id', 'product_specs_id', 'total_fee',
+        'stock_ins_id', 'purchase_details_id', 'product_components_id', 'total_fee',
         'stock_in_quantity', 'remark'
     ];
 
@@ -16,9 +16,9 @@ class StockInDetail extends Model
         return $this->belongsTo(StockIn::class, 'stock_ins_id');
     }
 
-    public function purchaseList()
+    public function purchaseDetail()
     {
-        return $this->belongsTo(PurchaseList::class, 'purchase_lists_id');
+        return $this->belongsTo(PurchaseDetail::class, 'purchase_details_id');
     }
 
     public function productComponent()

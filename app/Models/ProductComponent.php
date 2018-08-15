@@ -38,43 +38,21 @@ class ProductComponent extends Model
      */
     public function stockInByWarehouseId($warehouseId, $amount)
     {
-//        //判断是否组合
-//        if ($this->is_combination) {
-//            $this->getCombinationsOfALlProductSpec()->map(function($item) use ($warehouseId, $amount) {
-//                $stocks = $item->load(['stocks' => function($query) use ($warehouseId, $amount) {
-//                    $query->where('warehouse_id', $warehouseId);
-//                }])->stocks;
-//                //判断是否存在库存
-//                if($stocks->count()){
-//                    $stocks->first()->addQuantity($amount);
-//                }else{
-//                    //不存在则新建
-//                    \App\Models\Stock::create([
-//                        'warehouse_id'=>$warehouseId,
-//                        'goods_id'=>$this->goods_id,
-//                        'pro_specs_id'=>$this->id,
-//                        'quantity'=>$amount
-//                    ]);
-//                }
-//            });
-//        } else {
-//            //不是组合直接录入
-//            $stocks = $this->load(['stocks' => function($query) use ($warehouseId, $amount) {
-//                $query->where('warehouse_id', $warehouseId);
-//            }])->stocks;
-//            //判断是否存在库存
-//            if($stocks->count()){
-//                $stocks->first()->addQuantity($amount);
-//            }else{
-//                //不存在则新建
-//                \App\Models\Stock::create([
-//                    'warehouse_id'=>$warehouseId,
-//                    'goods_id'=>$this->goods_id,
-//                    'pro_specs_id'=>$this->id,
-//                    'quantity'=>$amount
-//                ]);
-//            }
-//        }
+        $stocks = $this->load(['stocks' => function($query) use ($warehouseId, $amount) {
+            $query->where('warehouse_id', $warehouseId);
+        }])->stocks;
+        //判断是否存在库存
+        if($stocks->count()){
+            $stocks->first()->addQuantity($amount);
+        }else{
+            //不存在则新建
+            \App\Models\Stock::create([
+                'warehouse_id'=>$warehouseId,
+                'products_id'=>$this->pid,
+                'product_components_id'=>$this->id,
+                'quantity'=>$amount
+            ]);
+        }
     }
 
 
