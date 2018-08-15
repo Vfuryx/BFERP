@@ -1,6 +1,17 @@
 <template>
     <div>
-        <h2>采购退货管理</h2>
+        <div class="searchBox">
+            <span>
+                <label>退货单号</label>
+                <el-input v-model.trim="searchBox.returnOrder" clearable @keyup.enter.native="handleQuery"></el-input>
+            </span>
+            <span>
+                <label>退回供应商</label>
+                <el-select v-model="searchBox.supplier" clearable placeholder="请选择" @keyup.enter.native="handleQuery">
+                    <el-option v-for="item in resData.suppliers" :key="item.value" :label="item.name" :value="item.id"></el-option>
+                </el-select>
+            </span>
+        </div>
     </div>
 </template>
 <script>
@@ -53,23 +64,43 @@
             icon: 'bf-refresh',
             ent: this.test
           }
-        ]
+        ],
+        searchBox:{
+          returnOrder:'',
+          supplier:''
+        },
+      }
+    },
+    computed:{
+      resData:{
+        get:function(){
+          return this.$store.state.responseData
+        },
+        set:function(){}
+      },
+      urls:{
+        get:function(){
+          return this.$store.state.urls
+        },
+        set:function(){}
       }
     },
     methods:{
       test(){
         console.log(1);
-      }
+      },
+      handleQuery(){
+        this.$fetch()
+          .then(res=>{},err=>{})
+      },
+
+
     },
     mounted() {
-      this.$store.state.opt.opts = this.newOpt;
-      this.$store.commit('change', this.newOpt);
+      this.$store.dispatch('setOpt', this.newOpt);
       const that = this;
       $(window).resize(() => {
-        return (() => {
-          that.$store.state.opt.opts = that.newOpt;
-          that.$store.commit('change', that.newOpt);
-        })()
+        that.$store.dispatch('setOpt', that.newOpt);
       })
     }
   }

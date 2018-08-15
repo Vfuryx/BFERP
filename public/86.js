@@ -1,14 +1,14 @@
 webpackJsonp([86],{
 
-/***/ 498:
+/***/ 477:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(698)
+var __vue_script__ = __webpack_require__(586)
 /* template */
-var __vue_template__ = __webpack_require__(699)
+var __vue_template__ = __webpack_require__(587)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\dwnCenter\\orderDwn.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\invoiceConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4ccc13b4", Component.options)
+    hotAPI.createRecord("data-v-303ba3d5", Component.options)
   } else {
-    hotAPI.reload("data-v-4ccc13b4", Component.options)
+    hotAPI.reload("data-v-303ba3d5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,81 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 698:
+/***/ 586:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -133,44 +63,116 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       newOpt: [{
-        cnt: '下载',
-        icon: 'bf-dwn',
-        ent: this.test
+        cnt: '新增',
+        icon: 'bf-add',
+        ent: this.addNew
+      }, {
+        cnt: '删除',
+        icon: 'bf-del',
+        ent: this.doDelMore
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.refresh
       }],
-      searchBox: {
-        shop_name: '',
-        dwn_type: '',
-        pro_num: '',
-        order_num: '',
-        shopNames: [{ label: '店铺1', value: 0 }, { label: '店铺2', value: 1 }],
-        work_date: ''
-      },
-      tableData3: [],
-      multipleSelection: []
+      tableKey: [[{
+        label: '报表文件',
+        width: '220',
+        prop: "file",
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
+        width: '220',
+        prop: "name",
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        width: '200',
+        prop: "paper_format",
+        holder: '请输入报表格式',
+        type: 'text'
+      }, {
+        label: '状态',
+        width: '220',
+        prop: "status",
+        holder: '请选择是否启用',
+        type: 'select_stu'
+      }]],
+      url: ['/printreports'],
+      title: ['添加报表格式'],
+      ruleForm: [{
+        file: '',
+        name: '',
+        paper_format: '',
+        status: '1'
+      }],
+      rules: [{
+        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
+        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
+      }],
+      addArr: [[{
+        label: '报表文件',
+        prop: 'file',
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
+        prop: 'name',
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        prop: 'paper_format',
+        holder: '请输入报表格式',
+        type: 'text'
+      }, {
+        label: '状态',
+        prop: 'status',
+        holder: '请选择状态',
+        type: 'select_stu'
+      }]]
     };
   },
 
   methods: {
-    test: function test() {
-      console.log(1);
+    //新增
+    addNew: function addNew() {
+      this.$store.dispatch('setShowAdd', true);
+    },
+    edit: function edit(row) {
+      var obj = {
+        file: row.file,
+        name: row.name,
+        paper_format: row.paper_format,
+        status: row.status
+      };
+      this.$store.dispatch('setRow', row);
+      this.$store.dispatch('setUrl', this.url[0] + "/");
+      this.$store.dispatch('doEdit', obj);
+    },
+    doDelMore: function doDelMore() {
+      this.$refs.tabs.$emit('delMore');
+    },
+    refresh: function refresh() {
+      this.$store.dispatch('refresh');
     }
   },
   mounted: function mounted() {
-    this.$store.state.opt.opts = this.newOpt;
-    this.$store.commit('change', this.newOpt);
+    this.$store.dispatch('setTabs', false);
+    this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
-      return function () {
-        that.$store.state.opt.opts = that.newOpt;
-        that.$store.commit('change', that.newOpt);
-      }();
+      that.$store.dispatch('setOpt', that.newOpt);
     });
   }
 });
 
 /***/ }),
 
-/***/ 699:
+/***/ 587:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -180,145 +182,18 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h2", [_vm._v("订单下载")]),
-      _vm._v(" "),
-      _c("div", { staticClass: "box" }, [
-        _c(
-          "span",
-          [
-            _c("label", [_vm._v("店铺名称")]),
-            _vm._v(" "),
-            _c(
-              "el-select",
-              {
-                attrs: { clearable: "", placeholder: "请选择" },
-                model: {
-                  value: _vm.searchBox.shop_name,
-                  callback: function($$v) {
-                    _vm.$set(_vm.searchBox, "shop_name", $$v)
-                  },
-                  expression: "searchBox.shop_name"
-                }
-              },
-              _vm._l(_vm.searchBox.shopNames, function(item) {
-                return _c("el-option", {
-                  key: item.value,
-                  attrs: { label: item.label, value: item.value }
-                })
-              })
-            )
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          [
-            _c("label", [_vm._v("业务日期")]),
-            _vm._v(" "),
-            _c("el-date-picker", {
-              attrs: {
-                type: "daterange",
-                "range-separator": "至",
-                "start-placeholder": "开始日期",
-                "end-placeholder": "结束日期"
-              },
-              model: {
-                value: _vm.searchBox.work_date,
-                callback: function($$v) {
-                  _vm.$set(_vm.searchBox, "work_date", $$v)
-                },
-                expression: "searchBox.work_date"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          [
-            _c("label", [_vm._v("买家昵称")]),
-            _vm._v(" "),
-            _c("el-input", {
-              attrs: { clearable: "" },
-              model: {
-                value: _vm.searchBox.pro_num,
-                callback: function($$v) {
-                  _vm.$set(_vm.searchBox, "pro_num", $$v)
-                },
-                expression: "searchBox.pro_num"
-              }
-            })
-          ],
-          1
-        ),
-        _vm._v(" "),
-        _c(
-          "span",
-          [
-            _c("label", [_vm._v("订单编号")]),
-            _vm._v(" "),
-            _c("el-input", {
-              attrs: { clearable: "" },
-              model: {
-                value: _vm.searchBox.order_num,
-                callback: function($$v) {
-                  _vm.$set(_vm.searchBox, "order_num", $$v)
-                },
-                expression: "searchBox.order_num"
-              }
-            })
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "el-table",
-        {
-          ref: "multipleTable",
-          staticStyle: { width: "100%" },
-          attrs: { data: _vm.tableData3, "tooltip-effect": "dark" },
-          on: { "selection-change": _vm.handleSelectionChange }
+      _c("v-tabs", {
+        ref: "tabs",
+        attrs: {
+          "table-key": _vm.tableKey,
+          url: _vm.url,
+          title: _vm.title,
+          "rule-form": _vm.ruleForm,
+          rules: _vm.rules,
+          "add-arr": _vm.addArr
         },
-        [
-          _c("el-table-column", { attrs: { type: "selection", width: "55" } }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { label: "订单交易号", width: "120" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "", label: "应付金额", width: "120" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "", label: "实付金额", "show-overflow-tooltip": "" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "", label: "买家昵称", "show-overflow-tooltip": "" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "", label: "创建时间", "show-overflow-tooltip": "" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: { prop: "", label: "订单状态", "show-overflow-tooltip": "" }
-          }),
-          _vm._v(" "),
-          _c("el-table-column", {
-            attrs: {
-              prop: "",
-              label: "分阶段状态",
-              "show-overflow-tooltip": ""
-            }
-          })
-        ],
-        1
-      )
+        on: { edit: _vm.edit }
+      })
     ],
     1
   )
@@ -329,7 +204,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4ccc13b4", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-303ba3d5", module.exports)
   }
 }
 

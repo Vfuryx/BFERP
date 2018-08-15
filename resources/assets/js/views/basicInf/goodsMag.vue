@@ -4,27 +4,25 @@
         <div class="searchBox">
             <span>
                 <label>商品名称</label>
-                <el-input v-model="searchBox.goodsName" clearable @keyup.enter.native="getData"></el-input>
+                <el-input v-model.trim="searchBox.goodsName" clearable @keyup.enter.native="getData"></el-input>
             </span>
             <span>
                 <label>店铺名称</label>
-                <el-select v-model="searchBox.shopNames" clearable placeholder="请选择">
-                    <el-option v-for="item in searchBox.shopNames" :key="item.value" :label="item.label"
-                               :value="item.value"></el-option>
+                <el-select v-model.trim="searchBox.shopNames" clearable placeholder="请选择">
+                    <el-option v-for="item in resData.shops" :key="item.value" :label="item.nick"
+                               :value="item.id"></el-option>
                 </el-select>
             </span>
             <span>
                 <label>供货商</label>
                 <el-select v-model="searchBox.supplier" clearable placeholder="请选择">
-                    <el-option v-for="item in searchBox.supplier" :key="item.value" :label="item.label"
-                               :value="item.value"></el-option>
+                    <el-option v-for="item in resData.suppliers" :key="item.value" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </span>
             <span>
                 <label>类别</label>
                 <el-select v-model="searchBox.kinds" clearable placeholder="请选择">
-                    <el-option v-for="item in searchBox.kinds" :key="item.value" :label="item.label"
-                               :value="item.value"></el-option>
+                    <el-option v-for="item in resData.goodscates" :key="item.value" :label="item.name" :value="item.id"></el-option>
                 </el-select>
             </span>
             <span>
@@ -35,8 +33,58 @@
         </div>
 
         <!--商品信息-->
-        <light-table :listData="goodsInfo" @handleSelect="handleSelectionChange"
-                     :tableHead="goodsHead" @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="goodsLoading" @edit="edit" :currentIndex="currentIndex" @editCancel="editCancel" :height="407" @rowClick="proRowClick" :nEditInRow="true"></light-table>
+        <el-table :data="goodsInfo"  fit ref="multipleTable"
+                  @selection-change="handleSelectionChange"
+                  v-loading="goodsLoading"
+                  height="400"
+                  @row-click="proRowClick" :row-class-name="goodsRowCName">
+            <el-table-column
+                    type="selection"
+                    width="95" align="center"
+                    :checked="checkboxInit" @change="toggleChecked">
+            </el-table-column>
+            <el-table-column v-for="(item,index) in goodsHead" :label="item.label" align="center" :width="item.width" :key="index">
+                <template slot-scope="scope">
+                    <span v-if="item.type=='select'">
+                        <span v-if="scope.row[item.prop]==''"></span>
+                        <span v-else-if="typeof scope.row[item.prop] =='object' && item.nmProp">
+                            {{scope.row[item.prop][item.nmProp]}}
+                        </span>
+                        <span v-else>
+                            <span v-for="(list,index) in resData[item.stateVal]" :key="index">
+                                <span v-if="item.inProp">
+                                    <span v-if="list.id==scope.row[item.prop][item.inProp]">
+                                        {{list.name}}
+                                    </span>
+                                </span>
+                                <span v-else>
+                                    <span v-if="list.id==scope.row[item.prop]">
+                                        {{list.name}}
+                                    </span>
+                                </span>
+                            </span>
+                        </span>
+                    </span>
+                    <span v-else-if="item.type=='checkbox'">
+                        <span v-if="item.inProp">
+                            <el-checkbox v-model="scope.row[item.prop][item.inProp]" disabled></el-checkbox>
+                        </span>
+                        <span v-else>
+                            <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                        </span>
+                    </span>
+                    <span v-else>
+                        {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                    </span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="180" align="center" fixed="right">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="primary" @click="addSku(scope.row)">添加sku</el-button>
+                    <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
+                </template>
+            </el-table-column>
+        </el-table>
 
         <!--页码-->
         <Pagination :page-url="goodsUrl"></Pagination>
@@ -46,18 +94,12 @@
             <el-tab-pane label="淘宝信息" name="0">
                 淘宝信息
             </el-tab-pane>
-            <el-tab-pane label="规格信息" name="1">
-               <!-- <p style="text-align: center">
-                    <el-checkbox v-model="adf">组合</el-checkbox>
-                    <el-checkbox v-model="adf">成品</el-checkbox>
-                    <el-checkbox v-model="adf">停产</el-checkbox>
-                </p>-->
-                <!-- :row-style="chgStyle"-->
-                <el-table :data="goodsSpec" style="width: 100%">
+            <el-tab-pane label="子件列表" name="1">
+                <el-table :data="goodsComp" style="width: 100%">
                     <el-table-column v-for="(item,index) in btmTableHead[this.activeName]" :label="item.label" align="center" :width="item.width" :key="index">
                         <template slot-scope="scope">
                             <span v-if="item.prop">
-                                 <span v-if="item.type=='select'">
+                                <span v-if="item.type=='select'">
                                 <span v-for="(list,index) in resData[item.stateVal]" :key="index">
                                         <span v-if="list.id==scope.row[item.prop]">
                                             {{list.name}}
@@ -65,27 +107,15 @@
                                 </span>
                             </span>
                                 <span v-else-if="item.type=='checkbox'">
-                                <span v-if="scope.$index==0">
-                                    <el-checkbox v-model="goodsSpec[0][item.prop]" @change="chgStatue(scope.row[item.prop])"></el-checkbox>
-                                </span>
-                                <span v-else>
                                     <span v-if="scope.row[item.prop]==1">
                                         <el-checkbox :checked="true" disabled></el-checkbox>
                                     </span>
                                     <span v-else>
                                         <el-checkbox :checked="false" disabled></el-checkbox>
                                     </span>
-                                </span>
                              </span>
                                 <span v-else>
                                  {{scope.row[item.prop]}}
-                                <!--  &lt;!&ndash;读取二级数据&ndash;&gt;
-                                  <span v-if="item.inProp">
-                                       {{scope.row[item.prop][item.inProp]}}
-                                  </span>
-                                  <span v-else>
-                                       {{scope.row[item.prop]}}
-                                  </span>-->
                             </span>
                             </span>
                         </template>
@@ -110,35 +140,72 @@
                     </el-table-column>
                 </el-table>
             </el-tab-pane>
-            <el-tab-pane label="商品网站" name="2">
+            <el-tab-pane label="sku信息" name="2">
+                sku信息
+            </el-tab-pane>
+            <el-tab-pane label="商品网站" name="3">
                 商品网站
             </el-tab-pane>
-            <el-tab-pane label="操作记录" name="3">
+            <el-tab-pane label="操作记录" name="4">
                 操作记录
             </el-tab-pane>
         </el-tabs>
 
         <!--新增商品-->
          <el-dialog :title="title" :visible.sync="showMask" :class="{'more-forms':moreForms}">
-             <add-new :rule-form="ruleForm" :rules="rules" :add-arr="addArr" :son-ref="addInfoRef" :onlyInputs="true" ref="addNew"></add-new>
-             <el-button type="text">规格信息</el-button>
-            <!-- <el-checkbox v-model="pushData.is_combination">组合</el-checkbox>
-             <el-checkbox v-model="pushData.finished_pro">成品</el-checkbox>
-             <el-checkbox v-model="pushData.is_stop_pro">停产</el-checkbox>-->
-             <el-table :data="ruleForm.productspecs" fit highlight-current-row
-                       max-height="300" :row-class-name="tableRowClassName" @row-click="specRowClick">
-                 <!--规格-->
+             <el-form :model="ruleForm" :rules="rules" ref="addNew" label-width="100px" :class="{'half-form':halfForm}">
+                 <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
+                    <span v-if="item.type=='text'">
+                        <span v-if="item.inProp">
+                            <el-input v-model.trim="ruleForm[item.prop][item.inProp]" :placeholder="item.holder"></el-input>
+                        </span>
+                        <span v-else>
+                          <el-input v-model.trim="ruleForm[item.prop]" :placeholder="item.holder"></el-input>
+                        </span>
+                    </span>
+                     <span v-else-if="item.type=='url'">
+                       <el-input type="url" v-model.trim="ruleForm[item.prop]" :placeholder="item.holder"></el-input>
+                    </span>
+                     <span v-else-if="item.type=='select'">
+                        <el-select v-model="ruleForm[item.prop]" :placeholder="item.holder">
+                               <span v-for="list in resData[item.stateVal]" :key="list.id">
+                                    <el-option :label="list.name?list.name:list.nick" :value="list.id"></el-option>
+                               </span>
+                           </el-select>
+                    </span>
+                     <span v-else-if="item.type=='textarea'">
+                         <el-input type="textarea" v-model.trim="ruleForm[item.prop]" :placehoder="item.holder"></el-input>
+                    </span>
+                     <span v-else-if="item.type=='img'">
+                         <span v-if="noUpload">
+                              <el-upload
+                                      class="upload-demo"
+                                      action=""
+                                      :before-upload="beforeUpload"
+                                      :on-preview="handlePreview"
+                                      :on-remove="handleRemove"
+                                     >
+  <el-button size="small" type="primary">点击上传</el-button></el-upload>
+                         </span>
+                         <span v-else>
+                             <img :src="item.imgPath" alt="商品图片">
+                         </span>
+                    </span>
+                 </el-form-item>
+             </el-form>
+             <el-button type="text">子件信息</el-button>
+             <el-table :data="ruleForm.productspecs" fit highlight-current-row height="300" :row-class-name="tableRowClassName" @row-click="specRowClick">
                  <el-table-column v-for="(item,index) in specHead" :label="item.label" align="center" :width="item.width" :key="index">
                      <template slot-scope="scope">
                          <span v-if="newC =='index'+scope.$index">
                             <span v-if="item.type=='number'">
-                                   <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                                   <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
                             <span v-else-if="item.type=='url'">
-                          <el-input size="small" type="url" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                          <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                         </span>
                             <span v-else-if="item.type == 'textarea'">
-                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
+                                  <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]"
                                             :placeholder="item.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="item.type == 'select'">
@@ -151,8 +218,11 @@
                             <span v-else-if="item.type == 'checkbox'">
                                  <el-checkbox v-model="scope.row[item.prop]" :disabled="item.prop=='is_combination'?true:false"></el-checkbox>
                             </span>
+                             <span v-else-if="item.type == 'img'">
+                                 <img :src="item.imgPath" alt="">
+                            </span>
                             <span v-else>
-                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                               <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
                      </span>
                          <span v-else>
@@ -176,7 +246,7 @@
                      </template>
                  </el-table-column>
                  <!-- 子规格 -->
-                 <el-table-column type="expand" fixed="left">
+                <!-- <el-table-column type="expand" fixed="left">
                      <template slot-scope="scope">
                          <span v-if="scope.row.combinations.length>0">
                              <el-table :data="scope.row.combSpecData"  highlight-current-row height="300" fit :header-cell-class-name="setHeadStyle">
@@ -196,7 +266,7 @@
                              </el-table>
                          </span>
                      </template>
-                 </el-table-column>
+                 </el-table-column>-->
                  <el-table-column label="操作" width="136" align="center" fixed="right">
                      <template slot-scope="scope">
                          <!--<span v-if="scope.$index==0"></span>-->
@@ -213,11 +283,11 @@
              </el-table>
              <div slot="footer" class="dialog-footer clearfix">
                  <div style="float: left">
-                     <el-button type="primary" @click="addComb">添加组合</el-button>
+                     <el-button type="primary" @click="addComb">添加子件</el-button>
                  </div>
                  <div style="float: right">
-                     <el-button type="primary" @click="submitForm">添加</el-button>
-                     <el-button @click="resetAddInfo">重置</el-button>
+                     <el-button type="primary" @click="submitForm">确认新增</el-button>
+                     <!--<el-button @click="resetAddInfo">重置</el-button>-->
                      <el-button @click="cancelAdd">取消</el-button>
                  </div>
              </div>
@@ -232,13 +302,13 @@
                     <template slot-scope="scope">
                          <span v-if="editSpecIndex =='index'+scope.$index">
                             <span v-if="item.type=='number'">
-                                   <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                                   <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
                             <span v-else-if="item.type=='url'">
-                          <el-input size="small" type="url" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                          <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                         </span>
                             <span v-else-if="item.type == 'textarea'">
-                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
+                                  <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]"
                                             :placeholder="item.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="item.type == 'select'">
@@ -252,7 +322,7 @@
                                  <el-checkbox v-model="scope.row[item.prop]" :disabled="item.prop=='is_combination'?true:false"></el-checkbox>
                             </span>
                             <span v-else>
-                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
+                               <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.beAble"></el-input>
                             </span>
                      </span>
                         <span v-else>
@@ -348,7 +418,7 @@
                 <el-table-column width="150" align="center" fixed="right" label="组合件数">
                     <template slot-scope="scope">
                         <span v-if="combIndex=='index'+scope.$index">
-                            <el-input size="small" v-model="combCount[scope.$index]" type="number" @blur="handleBlur(scope.row)"></el-input>
+                            <el-input size="small" v-model.trim="combCount[scope.$index]" type="number" @blur="handleBlur(scope.row)"></el-input>
                         </span>
                         <span v-else>
                             {{combCount[scope.$index]?combCount[scope.$index]:0}}
@@ -364,10 +434,49 @@
     </div>
 </template>
 <script>
+    import axios from 'axios'
+    import qs from 'qs'
   export default {
     data() {
+      let validateNum = (rule, value, callback)=>{
+        if (value!=parseFloat(value)) {
+          callback(new Error('只能是数字'));
+        } else if(value<=0){
+          callback(new Error('不能为负数'));
+        }else{
+          callback();
+        }
+      };
+      let validateTel = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('手机号不能为空'));
+        } else {
+          const reg = /^1[3|4|5|7|8|9][0-9]\d{8}$/;
+          if (reg.test(value)) {
+            callback();
+          } else {
+            return callback(new Error('请输入正确的手机号'));
+          }
+        }
+      };
+      let validateUrl = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('网址不能为空'));
+        } else {
+          // const reg = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+          const reg = /^((ht|f)tps?):\/\/([\w\-]+(\.[\w\-]+)*\/)*[\w\-]+(\.[\w\-]+)*\/?(\?([\w\-\.,@?^=%&:\/~\+#]*)+)?/;
+          if (reg.test(value)) {
+            callback();
+          } else {
+            return callback(new Error('请输入正确的网址'));
+          }
+        }
+      };
       return {
+        imgPath: '',
+        fileList2: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}, {name: 'food2.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
         newC:'',
+        fd: [],
         newOpt: [
           {
             cnt: '新增',
@@ -415,6 +524,12 @@
         activeName: '0',
         goodsInfo: [],
         goodsHead: [
+         /* {
+            label: '',
+            width: '90',
+            prop: "checkboxInit",
+            type: 'checkbox'
+          },*/
           {
             label: '产品图片',
             width: '200',
@@ -855,7 +970,8 @@
             {required: true, message: '请输入商品图片', trigger: 'blur'}
           ],
           url: [
-            {required: true, message: '请输入商品网址', trigger: 'blur'}
+            // {required: true, message: '请输入商品网址', trigger: 'blur'}
+            {required: true, validator: validateUrl, trigger: 'blur'}
           ],
           productspecs: [
             {required: true, message: '请选择产品规格', trigger: 'blur'}
@@ -909,6 +1025,18 @@
             stateVal:'suppliers'
           },
           {
+            label: '商品标题',
+            prop: 'title',
+            holder: '请输入商品标题',
+            type: 'text'
+          },
+          {
+            label: '商品网址',
+            prop: 'url',
+            holder: '请选择商品网址',
+            type: 'url'
+          },
+          {
             label: '商品类别',
             prop: 'category_id',
             holder: '请选择产品类别',
@@ -922,25 +1050,15 @@
             type: 'textarea'
           },
           {
-            label: '商品标题',
-            prop: 'title',
-            holder: '请输入商品标题',
-            type: 'text'
-          },
-          {
             label: '商品图片',
             prop: 'img',
             holder: '请输入商品图片',
-            type: 'text'
-          },
-          {
-            label: '商品网址',
-            prop: 'url',
-            holder: '请选择商品网址',
-            type: 'url'
+            type: 'img',
+            imgPath: ''
           }
         ],
-        /*规格信息*/
+        noUpload: true,
+        /*子件信息*/
         specHead:[
           /*{
             label: '商品简称',
@@ -948,6 +1066,13 @@
             prop: "",
             type: 'text',
           },*/
+          {
+            label: '商品图片',
+            width: '120',
+            prop: "img_url",
+            type: 'img',
+            imgPath:'/uploads/images/temp/201808/13/1_1534132543_6yliM4uees.jpg',
+          },
           {
             label: '规格编码',
             width: '160',
@@ -1094,12 +1219,6 @@
             type: 'text'
           },
           {
-            label: '图片地址',
-            width: '120',
-            prop: "img_url",
-            type: 'text'
-          },
-          {
             label: '规格',
             width: '200',
             prop: "spec",
@@ -1196,6 +1315,21 @@
             prop: "is_stop_pro",
             // holder: '请选择是否是停产',
             type: 'checkbox'
+          },
+          {
+            label: '仓库',
+            width: '120',
+            prop: "",
+            holder: '请选择仓库',
+            stateVal: '',
+            type: 'select'
+          },
+          {
+            label: '入库数量',
+            width: '120',
+            prop: "",
+            holder: '请选择入库数量',
+            type: 'number'
           }
         ],
         halfForm: true,
@@ -1248,7 +1382,8 @@
         sonData:[],
         specRowInfo:{},
         /*新数据*/
-        goodsSpec:[{is_combination: false,finished_pro: true,is_stop_pro: false}],
+        // goodsComp:[{is_combination: false,finished_pro: true,is_stop_pro: false}],
+        goodsComp:[],
         selectPro:[
           {
             label: '成品',
@@ -1588,6 +1723,21 @@
       }
     },
     methods: {
+      handleRemove(file, fileList) {
+        console.log(file, fileList);
+      },
+      handlePreview(file) {
+        console.log(file);
+      },
+     /* handleAvatarSuccess(res, file){
+        console.log(res);
+        console.log(file);
+        this.noUpload = false;
+        console.log(this.noUpload);
+      },*/
+      toggleChecked() {
+        this.checkboxInit = !this.checkboxInit;
+      },
       test() {},
       /*点击添加商品*/
       addNew() {
@@ -1604,41 +1754,42 @@
         * 修改规格中的组合字段
         * 如果组合字段长度大于0，默认组合自动开启
         * */
-        let obj = this.ruleForm;
-        obj.productspecs.map((item,index)=>{
-          if(!item.spec_code){
-            /*如果是空的话，删除规格*/
-            obj.productspecs.splice(index,1);
-          }else{
-            obj.productspecs[index].combSpecData=[];
-          }
-        });
-        this.resData.shops.map(item=>{
-          if(item.id==this.ruleForm.shops_id){
-            this.ruleForm.shop_nick = item.nick;
-          }
-        });
-        this.$post(this.goodsUrl,obj)
-          .then(() => {
-            this.$message({
-              message: '添加成功',
-              type: 'success'
-            });
-            this.showMask = false;
-            this.refresh();
-          },err => {
-            if (err.response) {
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
-            }
-          })
+        console.log(this.ruleForm);
+        /* let obj = this.ruleForm;
+         obj.productspecs.map((item,index)=>{
+           if(!item.spec_code){
+             /!*如果是空的话，删除规格*!/
+             obj.productspecs.splice(index,1);
+           }else{
+             obj.productspecs[index].combSpecData=[];
+           }
+         });
+         this.resData.shops.map(item=>{
+           if(item.id==this.ruleForm.shops_id){
+             this.ruleForm.shop_nick = item.nick;
+           }
+         });
+         this.$post(this.goodsUrl,obj)
+           .then(() => {
+             this.$message({
+               message: '添加成功',
+               type: 'success'
+             });
+             this.showMask = false;
+             this.refresh();
+           },err => {
+             if (err.response) {
+               let arr = err.response.data.errors;
+               let arr1 = [];
+               for (let i in arr) {
+                 arr1.push(arr[i]);
+               }
+               let str = arr1.join(',');
+               this.$message.error({
+                 message: str
+               });
+             }
+           })*/
       },
       resetAddInfo(){
         Object.assign(this.$data.ruleForm, this.$options.data().ruleForm)
@@ -1750,14 +1901,16 @@
           .then(res => {
             this.goodsLoading = false;
             this.goodsInfo = res.data;
-            if(res.data[0] && res.data[0].productspecs){
-              if(res.data[0].productspecs.length==0){
-                this.goodsSpec=[];
+            // if(res.data[0] && res.data[0].productspecs){
+            if(res.data[0] && res.data[0].productspecs[0]){
+              this.goodsComp=res.data[0].productspecs[0].combinations;
+             /* if(res.data[0].productspecs.length==0){
+                this.goodsComp=[];
               }else{
                 res.data[0].productspecs.map(item=>{
-                  this.goodsSpec.push(item);
+                  this.goodsComp.push(item);
                 });
-              }
+              }*/
             }
             let pg = res.meta.pagination;
             this.$store.dispatch('currentPage', pg.current_page);
@@ -1783,6 +1936,10 @@
           })
       },
       /*切换tab时只显示id为第一条商品的规格及其他*/
+      /*添加sku*/
+      addSku(row){
+
+      },
       handleTabsClick() {
         this.loading = true;
         // let id = this.goodsInfo[0].id;
@@ -1809,14 +1966,17 @@
       },
       /*在商品中单击时，tab显示为id为当前商品的规格及其他*/
       proRowClick(row) {
-        if(row.productspecs.length==0){
-          this.goodsSpec=[];
+        this.$refs.multipleTable.toggleRowSelection(row);
+        /*单击时拿到子件和sku*/
+        // this.goodsComp=row.productspecs;
+        /*if(row.productspecs.length==0){
+          this.goodsComp=[];
         }else{
-          this.goodsSpec=[{is_combination:'',finished_pro:'',is_stop_pro:''}];
-          row.productspecs.map(item=>{
-            this.goodsSpec.push(item);
-          });
-        }
+          // this.goodsComp=[{is_combination:'',finished_pro:'',is_stop_pro:''}];
+         /!* row.productspecs.map(item=>{
+            this.goodsComp.push(item);
+          });*!/
+        }*/
       },
       /*删除单条*/
       del(row, e) {
@@ -2547,6 +2707,39 @@
       editRowClick(row){
         this.editIndex = row.index;
         this.chgEId = row.id?row.id:'';
+      },
+      goodsRowCName({row, rowIndex}) {
+          if (rowIndex%2 == 1 ) {
+            return 'warning-row';
+          } else if (rowIndex%2==0) {
+            return 'success-row';
+          }
+          return '';
+        },
+      beforeUpload(file){
+        const isJPG = file.type === 'image/jpeg';
+        const isGIF = file.type === 'image/gif';
+        const isPNG = file.type === 'image/png';
+        // const isBMP = file.type === 'image/bmp';
+
+        if (!isJPG && !isGIF && !isPNG) {
+          this.$message.error({
+            message: '上传图片必须是JPG/GIF/PNG 格式!'
+          })
+        }
+        let formData  = new FormData();
+        formData.append('image', file);
+        axios.post(this.urls.uploadimages,formData).then(res=>{
+          let imageInfo = res.data.meta;
+          if(imageInfo.status_code == 201){
+            this.noUpload = false;
+            this.addArr.map(item=>{
+              if(item.type == 'img'){
+                item.imgPath = res.data.path;
+              }
+            })
+          }
+        }).catch(err=>{})
       }
     },
     mounted() {

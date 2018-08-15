@@ -10,6 +10,7 @@ const responseData= {
     distmets:[],
     shops:[],
     stockintypes:[],
+    products:[],
   },
   mutations: {
     GET_WAREHOUSE: (state, arr) => {
@@ -38,6 +39,9 @@ const responseData= {
     },
     STOCKINTYPE:(state, arr)=>{
       state.stockintypes = arr;
+    },
+    PRODUCTS:(state, arr)=>{
+      state.products = arr;
     },
 
   },
@@ -102,6 +106,13 @@ const responseData= {
       axios.get(url)
         .then(res=>{
           commit('STOCKINTYPE', res.data.data);
+          return res.data.data
+        })
+    },
+    products({commit}, url) {
+      axios.get(url)
+        .then(res=>{
+          commit('PRODUCTS', res.data.data);
           return res.data.data
         })
     },

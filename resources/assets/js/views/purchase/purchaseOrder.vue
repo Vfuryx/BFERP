@@ -18,10 +18,10 @@
                     <label>供应商</label>
                    <el-select v-model="searchBox.order_shop" clearable placeholder="请选择">
                                     <el-option
-                                            v-for="item in searchBox.orderShops"
+                                            v-for="item in resData.suppliers"
                                             :key="item.value"
-                                            :label="item.label"
-                                            :value="item.value">
+                                            :label="item.name"
+                                            :value="item.id">
                                     </el-option>
                                 </el-select>
                 </span>
@@ -118,7 +118,6 @@
             <el-button type="text">采购明细</el-button>
             <el-table :data="purchaseDetailVal"  fit highlight-current-row
                       type="index" :height="300">
-                <!--:row-class-name="specRowClassName"-->
                 <el-table-column v-for="(item,index) in purchaseDtlHead" :label="item.label" align="center" :width="item.width" :key="index">
                     <template slot-scope="scope">
                         <span v-if="item.type=='color'">
@@ -133,9 +132,7 @@
                                  {{scope.row[item.prop]==0?'否':'是'}}
                             </span>
                         <span v-else-if="item.type=='select'">
-                            <span v-if="scope.row[item.prop]==''">
-                                {{}}
-                            </span>
+                            <span v-if="scope.row[item.prop]==''"></span>
                             <span v-else-if="typeof scope.row[item.prop] =='object'">
 
                                  {{scope.row[item.prop][item.inProp]}}
@@ -169,10 +166,10 @@
                     <template slot-scope="scope">
                         <span v-if="purDtlIndex =='index'+scope.$index">
                             <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                <el-input size="small" type="number" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                      <el-input type="textarea" size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                             <span v-else-if="each.type == 'select'">
                                     <el-select v-model="specDtlInfo[each.inProp]" :placeholder="each.holder">
@@ -189,7 +186,7 @@
                             </el-date-picker>
                                 </span>
                             <span v-else>
-                                   <el-input size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                   <el-input size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                         </span>
                         <span v-else>
@@ -227,10 +224,9 @@
                     </template>
                 </el-table-column>
             </el-table>
-            <el-button type="text">组合展示列表</el-button>
+            <el-button type="text">sku列表</el-button>
             <el-table :data="purchaseDetailVal"  fit highlight-current-row
                       type="index" :height="160">
-                <!--:row-class-name="specRowClassName"-->
                 <el-table-column v-for="(item,index) in purchaseDtlHead" :label="item.label" align="center" :width="item.width" :key="index">
                     <template slot-scope="scope">
                         <span v-if="item.type=='color'">
@@ -281,10 +277,10 @@
                     <template slot-scope="scope">
                         <span v-if="purDtlIndex =='index'+scope.$index">
                             <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                <el-input size="small" type="number" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                      <el-input type="textarea" size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                             <span v-else-if="each.type == 'select'">
                                     <el-select v-model="specDtlInfo[each.inProp]" :placeholder="each.holder">
@@ -301,7 +297,7 @@
                             </el-date-picker>
                                 </span>
                             <span v-else>
-                                   <el-input size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                   <el-input size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                         </span>
                         <span v-else>
@@ -408,10 +404,10 @@
                     <template slot-scope="scope">
                         <span v-if="purDtlIndex =='index'+scope.$index">
                             <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                <el-input size="small" type="number" v-model.trim="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                      <el-input type="textarea" size="small" v-model.trim="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                             <span v-else-if="each.type == 'select'">
                                     <el-select v-model="scope.row[each.inProp]" :placeholder="each.holder">
@@ -428,7 +424,7 @@
                             </el-date-picker>
                                 </span>
                             <span v-else>
-                                   <el-input size="small" v-model="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                   <el-input size="small" v-model.trim="scope.row[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                         </span>
                         <span v-else>
@@ -485,11 +481,11 @@
             <div class="searchBox">
                 <span>
                     <label>商品编码</label>
-                    <el-input v-model="searchPro.commodity_code" clearable placeholder="请输入商品编码" @keyup.enter.native="searchProClick"></el-input>
+                    <el-input v-model.trim="searchPro.commodity_code" clearable placeholder="请输入商品编码" @keyup.enter.native="searchProClick"></el-input>
                 </span>
                 <span>
                     <label>规格编码</label>
-                    <el-input v-model="searchPro.spec_code" clearable placeholder="请输入规格编码" @keyup.enter.native="searchProClick"></el-input>
+                    <el-input v-model.trim="searchPro.spec_code" clearable placeholder="请输入规格编码" @keyup.enter.native="searchProClick"></el-input>
                 </span>
                 <span>
                      <label>店铺名称</label>
@@ -499,169 +495,60 @@
                 </span>
                 <el-button type="primary" @click="searchProClick">查询</el-button>
             </div>
-            <el-table :data="proDtlData" highlight-current-row type="index" height="160" :row-class-name="rowSpecIndex" @row-click="togglePro">
+            <el-table :data="proDtlData" highlight-current-row type="index" height="160" :row-class-name="rowProCName" @row-click="togglePro">
                 <light-table :tableHead="proHead" :onlyTableColumn="true" :hasSelect="true"></light-table>
             </el-table>
-            <el-button type="text">规格</el-button>
-                <el-table :data="specData"  fit highlight-current-row type="index" height="230" :row-class-name="specRowClassName" @row-click="specRowClick">
-                <!--不可编辑-->
-                <el-table-column v-for="(item,index) in specHead" :label="item.label" align="center" :width="item.width" :key="index">
+            <el-button type="text">子件列表</el-button>
+                <el-table :data="specData" fit height="230" :row-class-name="compRowCName" @row-click="compRowClick">
+                    <el-table-column v-for="(item,index) in specHead" :label="item.label" align="center" :width="item.width" :key="index">
                     <template slot-scope="scope">
-                        <span v-if="item.type=='color'">
-                                 <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
-                         {{scope.row[item.prop]}}
-                            </span>
-                        <span v-else-if="item.type=='select_stu'">
-                                <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
-                                 {{scope.row[item.prop]==0?'停用':'启用'}}
-                            </span>
-                        <span v-else-if="item.type=='select_def'">
-                                 {{scope.row[item.prop]==0?'否':'是'}}
-                            </span>
-                        <span v-else-if="item.type=='select'">
-                            <span v-if="scope.row[item.prop]==''">
-                                {{}}
-                            </span>
-                            <span v-else-if="typeof scope.row[item.prop] =='object' && scope.row[item.nameProp]">
-                                 {{scope.row[item.prop][item.nameProp]}}
-                            </span>
-                            <span v-else>
-                                   <span v-for="(list,index) in resData[item.stateVal]" :key="index">
-                                       <span v-if="item.inProp">
-                                          <span v-if="list.id==scope.row[item.prop][item.inProp]">
-                                          {{list.name?list.name:''}}
-                                          </span>
-                                       </span>
-                                       <span v-else>
-                                          <span v-if="list.id==scope.row[item.prop]">
-                                    {{list.name?list.name:''}}
-                                </span>
-                                       </span>
-                            </span>
-                            </span>
-                        </span>
-                        <span v-else-if="item.type=='checkbox'">
-                             <el-checkbox :checked="scope.row[item.prop][item.inProp]== 1?true:false" disabled>{{scope.row[item.prop][item.inProp]}}</el-checkbox>
-                           <!-- <span v-if="item.inProp">
-                                <span v-if="scope.row[item.prop][item.inProp]==1">
-                                    <el-checkbox :checked="true" disabled></el-checkbox>
-                                </span>
-                                <span v-else>
-                                    <el-checkbox :checked="false" disabled></el-checkbox>
-                                </span>
-                             </span>
-                            <span v-else>
-                                 <span v-if="scope.row[item.prop]==1">
-                                     <el-checkbox :checked="true" disabled></el-checkbox>
-                                 </span>
-                                 <span v-else>
-                                     <el-checkbox :checked="false" disabled></el-checkbox>
-                                 </span>
-                             </span>-->
-                         </span>
-                        <span v-else>
-                            <span v-if="item.inProp">
-                                     {{scope.row[item.prop][item.inProp]}}
-                                </span>
-                                <span v-else>
-                                     {{scope.row[item.prop]}}
-                                </span>
-                        </span>
-                    </template>
-                </el-table-column>
-                <!--可编辑-->
-                <el-table-column v-for="each in specHeadEdit" :label="each.label" align="center" :width="each.width" :key="each.inProp">
-                    <template slot-scope="scope">
-                        <span v-if="specIndex =='index'+scope.$index">
-                            <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="specDtlInfo[scope.$index][each.prop]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                            </span>
-                            <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="specDtlInfo[scope.$index][each.prop]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                                </span>
-                            <span v-else-if="each.type == 'select'">
-                                    <el-select v-model="specDtlInfo[scope.$index][each.prop]" :placeholder="each.holder">
-                                       <span v-for="list in resData[each.stateVal]" :key="list.id">
-                                            <el-option :label="list.name?list.name:list.title" :value="list.id"></el-option>
-                                       </span>
-                                   </el-select>
-                                </span>
-                            <span v-else-if="each.type == 'datepicker'">
-                                   <el-date-picker
-                                           v-model="specDtlInfo[scope.$index][each.prop]"
-                                           type="date"
-                                           placeholder="选择日期"  @change="dateChangebirthday" format="yyyy/MM/dd" value-format="yyyy/MM/dd">
-                            </el-date-picker>
-                                </span>
-                            <span v-else>
-                                   <el-input size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                                </span>
-                            <!-- <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="scope.row[each.prop][each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                            </span>
-                            <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="scope.row[each.prop][each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                                </span>
-                            <span v-else-if="each.type == 'select'">
-                                    <el-select v-model="scope.row[each.prop][each.inProp]" :placeholder="each.holder">
-                                       <span v-for="list in resData[each.stateVal]" :key="list.id">
-                                            <el-option :label="list.name?list.name:list.title" :value="list.id"></el-option>
-                                       </span>
-                                   </el-select>
-                                </span>
-                            <span v-else-if="each.type == 'datepicker'">
-                                   <el-date-picker
-                                           v-model="scope.row[each.prop][each.inProp]"
-                                           type="date"
-                                           placeholder="选择日期"  @change="dateChangebirthday" format="yyyy/MM/dd" value-format="yyyy/MM/dd">
-                            </el-date-picker>
-                                </span>
-                            <span v-else>
-                                   <el-input size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
-                                </span>-->
-                        </span>
-                        <span v-else>
-                            <!--如果需要读取返回的数据并可以修改-->
-                           <!-- <span v-if="each.readBefore">
-                                 {{scope.row[each.prop][each.inProp]}}
-                               &lt;!&ndash; <span v-if="each.type=='select'">
-                                     <span v-for="list in resData[each.stateVal]" :key="list.id">
-                                           <span v-if="each.inProp">
-                                              <span v-if="list.id==specDtlInfo[each.inProp]">
-                                              {{list.name}}
-                                              </span>
-                                           </span>
-                            </span>
-                        </span>&ndash;&gt;
-                                &lt;!&ndash;<span v-else>&ndash;&gt;
-                                   &lt;!&ndash; <span v-if="item.inProp">
-                                        {{scope.row[item.prop][item.inProp]}}
+                        <span v-if="item.editAble">
+                            <span v-if="compIndex == 'index'+scope.$index">
+                                <span v-if="item.type=='number'">
+                                        <el-input size="small" type="number" v-model.trim="scope.row[item.editAble][item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
                                     </span>
-                                    <span v-else>
-                                        {{scope.row[item.prop]}}
-                                    </span>&ndash;&gt;
-                             &lt;!&ndash;</span>&ndash;&gt;
+                                <span v-else-if="item.type == 'textarea'">
+                                          <el-input type="textarea" size="small" v-model.trim="scope.row[item.editAble][item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                                    </span>
+                                <span v-else-if="item.type == 'select'">
+                                        <el-select v-model="scope.row[item.editAble][item.prop]" :placeholder="item.holder">
+                                           <span v-for="list in resData[item.stateVal]" :key="list.id">
+                                                <el-option :label="list.name?list.name:list.title" :value="list.id"></el-option>
+                                           </span>
+                                       </el-select>
+                                    </span>
+                                <span v-else-if="item.type == 'datepicker'">
+                                   <el-date-picker
+                                           v-model="scope.row[item.editAble][item.prop]"  type="date" placeholder="选择日期"  format="yyyy/MM/dd" value-format="yyyy/MM/dd">
+                            </el-date-picker>
+                                </span>
                             </span>
                             <span v-else>
-                                <span v-if="each.type=='select'">
-                                <span v-for="list in resData[each.stateVal]" :key="list.id">
-                                           <span v-if="each.inProp">
-                                              <span v-if="list.id==specDtlInfo[each.inProp]">
-                                              {{list.name}}
-                                              </span>
-                                           </span>
+                                <span v-if="item.type=='select'">
+                                <span v-for="list in resData[item.stateVal]" :key="list.id">
+                                    <span v-if="list.id==scope.row[item.editAble][item.prop]">
+                                        {{list.name?list.name:list.title}}
+                                    </span>
+                                </span>
+                            </span>
+                                <span v-else>
+                                    {{scope.row[item.editAble][item.prop]}}
+                                </span>
                             </span>
                         </span>
-                                <span v-else>
-                                 {{specDtlInfo[each.inProp]}}
-                             </span>
-                            </span>-->
+                        <span v-else>
+                            <span v-if="item.type=='checkbox'">
+                             <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                         </span>
+                            <span v-else>
+                             {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                        </span>
                         </span>
                     </template>
                 </el-table-column>
-            </el-table>
-            <el-button type="text">组合商品信息</el-button>
-                <el-table :data="combData" fit highlight-current-row height="160"
+                </el-table>
+            <el-button type="text">sku信息</el-button>
+            <el-table :data="combData" fit highlight-current-row height="160"
                       :row-class-name="sonSpecRowClassName" @row-click="sonSpecRowClick">
                 <el-table-column v-for="(item,index) in combProHead" :label="item.label" align="center" :width="item.width" :key="index">
                     <template slot-scope="scope">
@@ -695,10 +582,10 @@
                     <template slot-scope="scope">
                         <span v-if="combEdit =='index'+scope.$index">
                             <span v-if="each.type=='number'">
-                                <el-input size="small" type="number" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                <el-input size="small" type="number" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="each.type == 'textarea'">
-                                      <el-input type="textarea" size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                      <el-input type="textarea" size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                             <span v-else-if="each.type == 'select'">
                                     <el-select v-model="specDtlInfo[each.inProp]" :placeholder="each.holder">
@@ -715,7 +602,7 @@
                             </el-date-picker>
                                 </span>
                             <span v-else>
-                                   <el-input size="small" v-model="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
+                                   <el-input size="small" v-model.trim="specDtlInfo[each.inProp]" :placeholder="each.holder" @change="handleEdit"></el-input>
                                 </span>
                         </span>
                         <span v-else>
@@ -1378,35 +1265,19 @@
             width: '120',
             prop: "wooden_frame_costs",
             type: 'number'
-          }
-        ],
-        goodsUrl:'/goods',
-        specUrl: '/productspecs',
-        warehouseUrl:'/stocks',
-        specDtlInfo:[],
-      /*  specDtlInfo:{
-          purchase_quantity: '',
-          shops_id: '',
-          suppliers_id:'',
-          arrival_time:'',
-          remark:''
-        },*/
-        specDtlArr:[],
-        specInfoArr:[],
-        /*手动输入值*/
-        specHeadEdit:[
+          },
           {
             label: '采购数',
             width: '120',
-            // prop: 'specDtlInfo',
+            editAble: 'compDtl',
             prop: "purchase_quantity",
             holder: '请输入采购数',
-            type: 'number'
+            type: 'number',
           },
           {
             label: '采购店铺',
             width: '120',
-            // prop: 'specDtlInfo',
+            editAble: 'compDtl',
             prop: "shops_id",
             holder: '请输入采购店铺',
             stateVal: 'shops',
@@ -1415,7 +1286,7 @@
           {
             label: '供应商',
             width: '120',
-            // prop: 'specDtlInfo',
+            editAble: 'compDtl',
             prop: "suppliers_id",
             holder: '请选择供应商',
             stateVal:'suppliers',
@@ -1424,7 +1295,7 @@
           {
             label: '到货时间',
             width: '155',
-            // prop: 'specDtlInfo',
+            editAble: 'compDtl',
             prop: "arrival_time",
             holder: '请输入到货时间',
             type: 'datepicker'
@@ -1432,13 +1303,33 @@
           {
             label: '备注',
             width: '120',
-            prop: 'specDtlInfo',
-            inProp: "remark",
+            editAble: 'compDtl',
+            prop: "remark",
             holder: '请输入备注',
             type: 'textarea'
           }
         ],
-        specIndex:'',
+        goodsUrl:'/goods',
+        specUrl: '/productspecs',
+        warehouseUrl:'/stocks',
+        specDtlInfo:[],
+        specDtlArr:[
+          {
+            purchase_quantity: '1',
+            shops_id: '1',
+            suppliers_id:'1',
+            arrival_time:'2001/01/01',
+            remark:'1'
+          },
+          {
+            purchase_quantity: '2',
+            shops_id: '2',
+            suppliers_id:'2',
+            arrival_time:'2001/01/01',
+            remark:'2'
+          }
+        ],
+        compIndex:'',
         patchData:[],
         idArr:[],
         purDtlIndex:[],
@@ -1580,6 +1471,11 @@
         set:function(){}
       }
     },
+   /* watch:{
+      specDtlInfo:function(val){
+        this.specDtlInfo = val;
+      }
+    },*/
     methods:{
       test(){
         console.log(1);
@@ -1731,45 +1627,47 @@
       addPurchaseDetail(){
         /*初始化*/
         // this.proDtlSpec = [];
-        this.specDtlArr= [];
+        this.specDtlInfo= [];
         this.wareHousesId ='';
-        this.specIndex = '';
+        this.compIndex = '';
         this.addPurchaseDetailMask = true;
         this.$store.dispatch('suppliers','/suppliers');
         this.$store.dispatch('warehouses','/warehouses');
         this.$store.dispatch('shops','/shops');
       },
-      rowSpecIndex({row,rowIndex}){
+      rowProCName({row,rowIndex}){
         row.index = rowIndex;
       },
      /*商品行点击*/
       togglePro(row){
+        this.compIndex = '';
+        row.productspecs.map(item=>{
+          item['compDtl'] = {
+            purchase_quantity: '',
+            shops_id: '',
+            suppliers_id:'',
+            arrival_time:'',
+            remark:''
+          }
+        });
         this.specData = row.productspecs;
         this.combData = row.productspecs[0].combinations;
-       /* let specDtlInfo = {
-          purchase_quantity: '',
-          shops_id: '',
-          suppliers_id:'',
-          arrival_time:'',
-          remark:''
-        }*/
 
         /*输入采购信息初始化*/
         // this.specDtlArr[row.index] = specDtlInfo;
-
       },
-      specRowClassName({row, rowIndex}){
+      compRowCName({row, rowIndex}){
         row.index = rowIndex;
       },
-      /*规格行点击*/
-      specRowClick(row){
+      /*子件行点击*/
+      compRowClick(row){
         this.combData = row.combinations;
-        this.specIndex = 'index'+row.index;
+        this.compIndex = 'index'+row.index;
         /*
         * 规格只能编辑不能删除及其他
         * 子规格的采购数、采购店铺、供应商、仓库成本、佣金点、折扣、色号、油漆、木架费、到货时间与父规格保持一致
         * */
-        this.currentRowSpec = row;
+        // this.currentRowSpec = row;
         /*直接拼接当前行*/
         // this.currentRowSpec.pur_inputs=this.specDtlInfo;
         // console.log(this.currentRowSpec);
@@ -1827,6 +1725,7 @@
       },
       /*确定增加明细*/
       confirmAddPDetail(){
+        this.specDtlInfo = [];
         /*点击确定，不取消面板，把有数据传送给新增采购单页面*/
         // this.purchaseDetailVal = this.patchData;
         /*如果当前有两条数据*/
@@ -2042,27 +1941,28 @@
       /*增加明细*/
       cancelAddPDetail(){
         this.addPurchaseDetailMask = false;
+        // this.specDtlInfo = [];
         this.$message({
           message: '取消添加商品明细',
           type:'info'
-        })
+        });
         this.purchaseDetailVal = []
       },
       /*点击编辑按钮*/
-      editSpec(row){
+    /*  editSpec(row){
         this.specIndex = 'index'+row.index;
       },
       specCancel(){
         this.specIndex = '';
-      },
+      },*/
       /*保存编辑的商品明细*/
-      specSave(row){
+     /* specSave(row){
         console.log(row);
-        /*点击保存，当前信息更新
+        /!*点击保存，当前信息更新
         * 点击确定，才会把所有的
-        * 点击哪行哪一行打开哪一行的编辑模式*/
-        /*如果编辑过就需要进行添加
-        * 规格id唯一，根据规格进行判断*/
+        * 点击哪行哪一行打开哪一行的编辑模式*!/
+        /!*如果编辑过就需要进行添加
+        * 规格id唯一，根据规格进行判断*!/
         let index = row.index;
         let id = row.id;
         // this.specInfoArr[index]=this.specDtlInfo;
@@ -2077,9 +1977,9 @@
           this.idArr.push(obj.specInfo.id);
         }else{
           this.patchData.map(item=>{
-            /*遍历每一项，是否有id存在，存在的话，删除当前项，然后push,否则直接push*/
+            /!*遍历每一项，是否有id存在，存在的话，删除当前项，然后push,否则直接push*!/
             if(this.idArr.indexOf(obj.specInfo.id>=0)){
-              /*如果id存在,替换掉*/
+              /!*如果id存在,替换掉*!/
               this.patchData.splice(this.idArr.indexOf(obj.specInfo.id),1);
               this.patchData.push(obj);
             }else{
@@ -2089,7 +1989,7 @@
           })
         }
 
-      },
+      },*/
 
       /*商品明细行点击*/
 
@@ -2264,8 +2164,16 @@
       searchProClick(){
         this.$fetch(this.urls.goods,this.searchPro)
           .then(res => {
-            // console.log(res);
             this.proDtlData = res.data;
+            res.data[0].productspecs.map(item=>{
+              item['compDtl'] = {
+                purchase_quantity: '',
+                shops_id: '',
+                suppliers_id:'',
+                arrival_time:'',
+                remark:''
+              }
+            });
             this.specData = res.data[0].productspecs;
             this.combData = res.data[0].productspecs[0].combinations;
           }, err => {

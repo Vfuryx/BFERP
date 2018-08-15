@@ -9,28 +9,28 @@
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
                             </span>
                             <span v-else-if="item.type=='tel'">
-                                   <el-input size="small" type="tel" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                                   <el-input size="small" type="tel" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                             <span v-else-if="item.type=='number'">
-                                   <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                                   <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                             <span v-else-if="item.type=='url'">
-                          <el-input size="small" type="url" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                          <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                         </span>
                             <span v-else-if="item.type == 'select_stu'">
-                                     <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
+                                     <el-select v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
                                          <el-option label="0-停用" value="0"></el-option>
                                          <el-option label="1-启用" value="1"></el-option>
                                      </el-select>
                                 </span>
                             <span v-else-if="item.type == 'select_def'">
-                                     <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
+                                     <el-select v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
                                          <el-option label="0-否" value="0"></el-option>
                                          <el-option label="1-是" value="1"></el-option>
                                      </el-select>
                                 </span>
                             <span v-else-if="item.type == 'textarea'">
-                                  <el-input type="textarea" size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                                  <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
                             </span>
                             <span v-else-if="item.type == 'select'">
                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" :disabled="item.chgAble">
@@ -57,7 +57,7 @@
 
                             </span>
                             <span v-else>
-                                   <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                                   <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                         <!--</span>-->
                      </span>
@@ -140,6 +140,8 @@
                       :height="height"
                       @row-click="rowClick"
                       style="width: 100%"
+                      :row-class-name="tableRowClassName"
+                      ref="multipleTable"
             >
                 <el-table-column
                         type="selection"
@@ -154,13 +156,13 @@
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
                             </span>
                         <span v-else-if="item.type=='tel'">
-                               <el-input size="small" type="tel" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                               <el-input size="small" type="tel" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                         </span>
                         <span v-else-if="item.type=='number'">
-                               <el-input size="small" type="number" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                               <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                         </span>
                         <span v-else-if="item.type=='url'">
-                      <el-input size="small" type="url" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                      <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                     </span>
                         <span v-else-if="item.type == 'select_stu'">
                                  <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
@@ -175,7 +177,7 @@
                                  </el-select>
                             </span>
                         <span v-else-if="item.type == 'textarea'">
-                              <el-input type="textarea" size="small" v-model="scope.row[item.prop]"
+                              <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]"
                                         :placeholder="item.holder" @change="handleEdit"></el-input>
                         </span>
                         <span v-else-if="item.type == 'select'">
@@ -202,7 +204,7 @@
                                 </span>
                             </span>
                         <span v-else>
-                               <el-input size="small" v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                               <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                      </span>
                      <span v-else>
@@ -329,7 +331,6 @@
     </div>
 </template>
 <script>
-  // import { mapGetters } from 'vuex'
   export default {
     props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects','doChange','height','inRowAdd','editInRow','onlyTableColumn','nEditInRow','hasSelect','editSign'],
     data() {
@@ -378,23 +379,18 @@
         this.$emit('dbClick', row);
       },
       rowClick(row) {
+        this.$refs.multipleTable.toggleRowSelection(row);
         this.$emit('rowClick', row);
       },
-     /* changeVal(val,indexNum){
-        this.sonArr={};
-        this.sonArr[indexNum] = this.$store.state.responseData[val];
-      },*/
+      tableRowClassName({row, rowIndex}) {
+        if (rowIndex%2 == 1 ) {
+          return 'warning-row';
+        } else if (rowIndex%2==0) {
+          return 'success-row';
+        }
+        return '';
+      }
     },
-    mounted() {
-      /*如果有select,再map*/
-     /* if(this.hasSelect){
-        this.tableHead.map(item=>{
-          if(item.type=='select'){
-            this.changeVal(item.val,item.indexNum);
-          }
-        })
-
-      }*/
-    }
+    mounted() {}
   }
 </script>

@@ -1,3 +1,4 @@
+<!--
 <template>
     <div>
     <p>
@@ -34,7 +35,7 @@
         <el-button type="primary" @click="importData">导入</el-button>
         <el-button type="primary" @click="outportData">导出</el-button>
     </p>
-    <!-- 导入 -->
+    &lt;!&ndash; 导入 &ndash;&gt;
     <el-dialog title="导入" :visible.sync="dialogImportVisible" :modal-append-to-body="false" :close-on-click-modal="false" class="dialog-import">
         <p :class="{'import-content': importFlag === 1, 'hide-dialog': importFlag !== 1}">
             <el-upload class="upload-demo"
@@ -48,15 +49,15 @@
                        :on-success="uploadSuccess"
                        :file-list="fileList"
                        :with-credentials="withCredentials"></el-upload></p>
-                <!-- 是否支持发送cookie信息 -->
+                &lt;!&ndash; 是否支持发送cookie信息 &ndash;&gt;
                 <el-button size="small" type="primary" :disabled="processing">{{uploadTip}}</el-button>
         <p slot="tip" class="el-uploadtip">只能上传excel文件</p>
-        <!--</el-upload>-->
+        &lt;!&ndash;</el-upload>&ndash;&gt;
         <p class="download-template">
             <a class="btn-download" @click="download">
                 <i class="icon-download"></i>下载模板</a>
         </p>
-        <!--</p>-->
+        &lt;!&ndash;</p>&ndash;&gt;
         <p :class="{'import-failure': importFlag === 2, 'hide-dialog': importFlag !== 2}" ></p>
         <p class="failure-tips">
             <i class="el-icon-warning"></i>导入失败</p>
@@ -207,4 +208,151 @@
     .hide-dialog{
         display:none;
     }
+</style>-->
+<!--这个组件主要用来研究upload这个elementui的上传插件组件-->
+
+<!--<template>
+    <el-upload class="upload-demo" action="" ref="upload" :auto-upload='false' :on-change='changeUpload' accept="image/jpeg,image/gif,image/png,image/bmp">
+        <div size="small" class="upload_btn"><div style="height:40px"></div><i class="iconfont icon-jiahao"></i><p style="line-height:0">点击上传</p></div>
+    </el-upload>
+</template>
+<script>
+  export default {
+    name: 'regShopImg',
+    data () {
+      return {
+        imageUrl: '',
+        imgthing: {}
+      }
+    },
+    props: ['imgN', 'nameN'],
+    methods: {
+      changeUpload (file, fileList) {
+        console.log(file)
+        // 判断图片大小
+        if (fileList[0].size < 1100000) {
+          // 判断图片格式是否为jpg,png,jepg,gif
+          var fileName=fileList[0].name
+          // var suffixIndex=fileName.lastIndexOf(".")
+          // var suffix=fileName.substring(suffixIndex+1).toUpperCase()
+          var suffix = fileName.substring(fileName.lastIndexOf(".")+1).toUpperCase()
+          if (suffix=="BMP"||suffix=="JPG"||suffix=="JPEG"||suffix=="PNG"||suffix=="GIF") {
+            this.fileList = fileList
+            this.$nextTick(
+              () => {
+                var i = this.imgN
+                let uploadLists = document.getElementsByClassName('el-upload-list')
+                let uploadListsN = uploadLists[i]
+                let uploadListLi = uploadListsN.children
+                uploadListsN.setAttribute('style', 'position: absolute;height: 160px;margin-top: 0;margin-left: 300px;width: 260px;overflow: hidden')
+                let liA = uploadListLi[0]
+                // 试着获取bolb里面的数据&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;S
+                //获取图片的Blob值
+                function getImageBlob(url, cb) {
+                  var xhr          = new XMLHttpRequest()
+                  xhr.open("get", url, true)
+                  xhr.responseType = "blob"
+                  xhr.onload       = function() {
+                    if (this.status == 200) {
+                      if(cb) cb(this.response)
+                    }
+                  }
+                  xhr.send()
+                }
+                function preView(url){
+                  let reader    = new FileReader()
+                  getImageBlob(url, function(blob){
+                    reader.readAsDataURL(blob)
+                  })
+                  reader.onload = function(e) {
+                    // 获取bolb里面数据时,生成预览
+                    var img = document.createElement("img")
+                    img.src = e.target.result
+                    // 获取bolb里面数据时,生成预览
+                    let imgElement = document.createElement('img')
+                    imgElement.setAttribute('src', fileList[0].url)
+                    imgElement.setAttribute('style', 'max-width:100%;padding-left:0')
+                    if (liA.lastElementChild.nodeName !== 'IMG') {
+                      liA.appendChild(imgElement)
+                    }
+                    // 把base64的信息放到imgthing的file里
+                    file.base64 = e.target.result
+                  }
+                }
+                preView(fileList[0].url)
+                // 试着获取bolb里面的数据-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;E
+                // 不获取bolb里面数据时,生成预览
+                // let imgElement = document.createElement('img')
+                // imgElement.setAttribute('src', fileList[0].url)
+                // imgElement.setAttribute('style', 'max-width:100%;padding-left:0')
+                // if (liA.lastElementChild.nodeName !== 'IMG') {
+                //   liA.appendChild(imgElement)
+                // }
+              }
+            )
+            // 修改nameN名字对应的数据,在一个页面使用多个不同字段图片上传，为了复用组件
+            if (this.nameN === 'identityCard_Z') {
+              this.imgthing.identityCard_Z = file
+            }
+            if (this.nameN === 'identityCard_F') {
+              this.imgthing.identityCard_F = file
+            }
+            if (this.nameN === 'identityCard_S') {
+              this.imgthing.identityCard_S = file
+            }
+            this.$emit('imgthing', this.imgthing)
+          } else {
+            this.$message.error('文件类型不正确,请重新上传！')
+          }
+        } else {
+          this.$message.error('图片大小超过1M,请重新上传')
+        }
+      }
+    }
+  }
+</script>
+
+<style scoped lang="scss">
+    // 上传
+    .upload-demo{width:260px;height:160px;
+        .upload_btn{width:260px;height:160px;background:#f2f2f2}
+        .el-upload__tip{margin:0;float:left}
+    }
 </style>
+-->
+<template>
+    <el-transfer
+            filterable
+            :filter-method="filterMethod"
+            filter-placeholder="请输入城市拼音"
+            v-model="value2"
+            :data="data2">
+    </el-transfer>
+</template>
+
+<script>
+  export default {
+    data() {
+      const generateData2 = _ => {
+        const data = [];
+        const cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
+        const pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
+        cities.forEach((city, index) => {
+          data.push({
+            label: city,
+            key: index,
+            pinyin: pinyin[index]
+          });
+        });
+        return data;
+      };
+      return {
+        data2: generateData2(),
+        value2: [],
+        filterMethod(query, item) {
+          return item.pinyin.indexOf(query) > -1;
+        }
+      };
+    }
+  };
+</script>

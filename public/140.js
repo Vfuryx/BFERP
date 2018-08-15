@@ -1,25 +1,24 @@
 webpackJsonp([140],{
 
-/***/ 443:
+/***/ 581:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(584)
-  __webpack_require__(586)
+  __webpack_require__(877)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(588)
+var __vue_script__ = __webpack_require__(879)
 /* template */
-var __vue_template__ = __webpack_require__(589)
+var __vue_template__ = __webpack_require__(881)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-094c7742"
+var __vue_scopeId__ = "data-v-dc63952e"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -30,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\login\\index.vue"
+Component.options.__file = "resources\\assets\\js\\components\\test.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -39,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-094c7742", Component.options)
+    hotAPI.createRecord("data-v-dc63952e", Component.options)
   } else {
-    hotAPI.reload("data-v-094c7742", Component.options)
+    hotAPI.reload("data-v-dc63952e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -53,23 +52,23 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 584:
+/***/ 877:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(585);
+var content = __webpack_require__(878);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(6)("cb2e752a", content, false, {});
+var update = __webpack_require__(6)("385b3067", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-094c7742\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-094c7742\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+   module.hot.accept("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc63952e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./test.vue", function() {
+     var newContent = require("!!../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-dc63952e\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./test.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -80,7 +79,7 @@ if(false) {
 
 /***/ }),
 
-/***/ 585:
+/***/ 878:
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(4)(false);
@@ -88,61 +87,52 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input {\n  display: inline-block;\n  height: 47px;\n  width: 85%;\n}\n.login-container .el-input input {\n    background: transparent;\n    border: 0px;\n    -webkit-appearance: none;\n    border-radius: 0px;\n    padding: 12px 5px 12px 15px;\n    color: #eee;\n    height: 47px;\n}\n.login-container .el-input input:-webkit-autofill {\n      -webkit-box-shadow: 0 0 0px 1000px #2d3a4b inset !important;\n      -webkit-text-fill-color: #fff !important;\n}\n.login-container .el-form-item {\n  border: 1px solid rgba(255, 255, 255, 0.1);\n  background: rgba(0, 0, 0, 0.1);\n  border-radius: 5px;\n  color: #454545;\n}\n", ""]);
+exports.push([module.i, "\n.hide-dialog[data-v-dc63952e]{\n    display:none;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 586:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(587);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("6ee0f457", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-094c7742\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=1!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-094c7742\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=1!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 587:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  background-color: #2d3a4b;\n}\n.login-container .login-form[data-v-094c7742] {\n    position: absolute;\n    left: 0;\n    right: 0;\n    width: 520px;\n    padding: 35px 35px 15px 35px;\n    margin: 120px auto;\n}\n.login-container .tips[data-v-094c7742] {\n    font-size: 14px;\n    color: #fff;\n    margin-bottom: 10px;\n}\n.login-container .tips span[data-v-094c7742]:first-of-type {\n      margin-right: 16px;\n}\n.login-container .svg-container[data-v-094c7742] {\n    padding: 6px 5px 6px 15px;\n    color: #889aa4;\n    vertical-align: middle;\n    width: 30px;\n    display: inline-block;\n}\n.login-container .svg-container_login[data-v-094c7742] {\n      font-size: 20px;\n}\n.login-container .title[data-v-094c7742] {\n    font-size: 26px;\n    font-weight: 400;\n    color: #eee;\n    margin: 0px auto 40px auto;\n    text-align: center;\n    font-weight: bold;\n}\n.login-container .show-pwd[data-v-094c7742] {\n    position: absolute;\n    right: 10px;\n    top: 7px;\n    font-size: 16px;\n    color: #889aa4;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.login-container .yzc[data-v-094c7742] {\n    right: 0;\n    top: 5px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 588:
+/***/ 879:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__api_schedule_js__ = __webpack_require__(880);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -185,92 +175,164 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'login',
   data: function data() {
     return {
-      loginForm: {
-        username: '',
-        password: '',
-        code: '',
-        key: ''
+      tableData3: [{
+        date: "2016-05-03",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-02",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-04",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-01",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-08",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-06",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }, {
+        date: "2016-05-07",
+        name: "王小虎",
+        address: "上海市普陀区金沙江路 1518 弄"
+      }],
+      multipleSelection: [],
+      importUrl: 'www.baidu.com', //后台接口config.admin_url+'rest/schedule/import/'
+      importHeaders: {
+        enctype: 'multipart/form-data',
+        cityCode: ''
       },
-      loginRules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
-      },
-      loading: false,
-      pwdType: 'password',
-      src: ''
+      name: 'import',
+      fileList: [],
+      withCredentials: true,
+      processing: false,
+      uploadTip: '点击上传',
+      importFlag: 1,
+      dialogImportVisible: false,
+      errorResults: []
     };
   },
 
   methods: {
-    //  显示密码
-    showPwd: function showPwd() {
-      if (this.pwdType === 'password') {
-        this.pwdType = '';
+    toggleSelection: function toggleSelection(rows) {
+      var _this = this;
+
+      if (rows) {
+        rows.forEach(function (row) {
+          _this.$refs.multipleTable.toggleRowSelection(row);
+        });
       } else {
-        this.pwdType = 'password';
+        this.$refs.multipleTable.clearSelection();
+      }
+    },
+    handleSelectionChange: function handleSelectionChange(val) {
+      //复选框选择回填函数,val返回一整行的数据
+      this.multipleSelection = val;
+    },
+    importData: function importData() {
+      this.importFlag = 1;
+      this.fileList = [];
+      this.uploadTip = '点击上传';
+      this.processing = false;
+      this.dialogImportVisible = true;
+    },
+    outportData: function outportData() {
+      __WEBPACK_IMPORTED_MODULE_0__api_schedule_js__["a" /* downloadTemplate */]();
+    },
+    handlePreview: function handlePreview(file) {
+      //可以通过 file.response 拿到服务端返回数据
+    },
+    handleRemove: function handleRemove(file, fileList) {
+      //文件移除
+    },
+    beforeUpload: function beforeUpload(file) {
+      //上传前配置
+      this.importHeaders.cityCode = '上海'; //可以配置请求头
+      var excelfileExtend = ".xls,.xlsx"; //设置文件格式
+      var fileExtend = file.name.substring(file.name.lastIndexOf('.')).toLowerCase();
+      if (excelfileExtend.indexOf(fileExtend) <= -1) {
+        this.$message.error('文件格式错误');
+        return false;
+      }
+      this.uploadTip = '正在处理中...';
+      this.processing = true;
+    },
+
+    //上传错误
+    uploadFail: function uploadFail(err, file, fileList) {
+      this.uploadTip = '点击上传';
+      this.processing = false;
+      this.$message.error(err);
+    },
+
+    //上传成功
+    uploadSuccess: function uploadSuccess(response, file, fileList) {
+      this.uploadTip = '点击上传';
+      this.processing = false;
+      if (response.status === -1) {
+        this.errorResults = response.data;
+        if (this.errorResults) {
+          this.importFlag = 2;
+        } else {
+          this.dialogImportVisible = false;
+          this.$message.error(response.errorMsg);
+        }
+      } else {
+        this.importFlag = 3;
+        this.dialogImportVisible = false;
+        this.$message.info('导入成功');
+        this.doSearch();
       }
     },
 
-    getCode: function getCode() {
-      var _this = this;
-
-      this.$post('/captchas').then(function (res) {
-        _this.src = res.captcha_image_content;
-        _this.loginForm.key = res.captcha_key;
-        _this.loginForm.code = '';
-        $('#yzCode').focus();
-      });
-    },
-    submitForm: function submitForm(formName) {
-      var _this2 = this;
-
-      this.$refs[formName].validate(function (valid) {
-        if (valid) {
-          var data = {
-            username: _this2.loginForm.username,
-            password: _this2.loginForm.password,
-            captcha_key: _this2.loginForm.key,
-            captcha_code: _this2.loginForm.code
-          };
-          _this2.$store.dispatch('Login', data).then(function () {
-            _this2.$message({
-              message: '登录成功',
-              type: 'success'
-            });
-            _this2.$store.dispatch('Profile');
-            __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].push({
-              path: "/",
-              query: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
-            });
-          }).catch(function (error) {
-            if (error.response) {
-              var msg = error.response.data.message;
-              _this2.$message.error({
-                message: msg
-              });
-              _this2.getCode();
-              _this2.loginForm.code = '';
-            }
-          });
-        } else {
-          console.log('error submit!!');
-          return false;
-        }
-      });
+    //下载模板
+    download: function download() {
+      //调用后台模板方法,和导出类似
+      __WEBPACK_IMPORTED_MODULE_0__api_schedule_js__["a" /* downloadTemplate */]();
     }
-  },
-  mounted: function mounted() {
-    this.getCode();
   }
 });
 
 /***/ }),
 
-/***/ 589:
+/***/ 880:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return downloadTemplate; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+
+// 下载模板
+var downloadTemplate = function downloadTemplate(scheduleType) {
+  __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get('/rest/schedule/template', {
+    params: {
+      "scheduleType": scheduleType
+    },
+    responseType: 'arraybuffer'
+  }).then(function (response) {
+    //创建一个blob对象,file的一种
+    var blob = new Blob([response.data], { type: 'application/x-xls' });
+    var link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = fileNames[scheduleType] + '_' + response.headers.datestr + '.xls';
+    link.click();
+  });
+};
+
+/***/ }),
+
+/***/ 881:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -279,47 +341,138 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "login-container" },
     [
       _c(
-        "el-form",
+        "p",
+        [
+          _c(
+            "el-table",
+            {
+              ref: "multipleTable",
+              staticStyle: { width: "80%" },
+              attrs: {
+                data: _vm.tableData3,
+                "tooltip-effect": "dark",
+                border: ""
+              },
+              on: { "selection-change": _vm.handleSelectionChange }
+            },
+            [
+              _c("el-table-column", {
+                attrs: { type: "selection", width: "55" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { label: "日期", width: "120" },
+                scopedSlots: _vm._u([
+                  {
+                    key: "default",
+                    fn: function(scope) {
+                      return [_vm._v(_vm._s(scope.row.date))]
+                    }
+                  }
+                ])
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: { prop: "name", label: "姓名", width: "120" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
+                attrs: {
+                  prop: "address",
+                  label: "地址",
+                  "show-overflow-tooltip": ""
+                }
+              })
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _c(
+        "p",
+        { staticStyle: { "margin-top": "20px" } },
+        [
+          _c(
+            "el-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.toggleSelection([_vm.tableData3[1], _vm.tableData3[2]])
+                }
+              }
+            },
+            [_vm._v("切换第二、第三行的选中状态")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.toggleSelection()
+                }
+              }
+            },
+            [_vm._v("取消选择")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            { attrs: { type: "primary" }, on: { click: _vm.importData } },
+            [_vm._v("导入")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-button",
+            { attrs: { type: "primary" }, on: { click: _vm.outportData } },
+            [_vm._v("导出")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
         {
-          ref: "loginForm",
-          staticClass: "login-form",
+          staticClass: "dialog-import",
           attrs: {
-            autoComplete: "on",
-            model: _vm.loginForm,
-            rules: _vm.loginRules,
-            "label-position": "left"
+            title: "导入",
+            visible: _vm.dialogImportVisible,
+            "modal-append-to-body": false,
+            "close-on-click-modal": false
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.dialogImportVisible = $event
+            }
           }
         },
         [
-          _c("h3", { staticClass: "title" }, [_vm._v("博飞ERP系统")]),
-          _vm._v(" "),
           _c(
-            "el-form-item",
-            { attrs: { prop: "username" } },
+            "p",
+            {
+              class: {
+                "import-content": _vm.importFlag === 1,
+                "hide-dialog": _vm.importFlag !== 1
+              }
+            },
             [
-              _c(
-                "span",
-                { staticClass: "svg-container svg-container_login" },
-                [_c("svg-icon", { attrs: { "icon-class": "user" } })],
-                1
-              ),
-              _vm._v(" "),
-              _c("el-input", {
+              _c("el-upload", {
+                staticClass: "upload-demo",
                 attrs: {
-                  name: "username",
-                  type: "text",
-                  autoComplete: "on",
-                  placeholder: "请输入用户名"
-                },
-                model: {
-                  value: _vm.loginForm.username,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "username", $$v)
-                  },
-                  expression: "loginForm.username"
+                  action: _vm.importUrl,
+                  name: _vm.name,
+                  headers: _vm.importHeaders,
+                  "on-preview": _vm.handlePreview,
+                  "on-remove": _vm.handleRemove,
+                  "before-upload": _vm.beforeUpload,
+                  "on-error": _vm.uploadFail,
+                  "on-success": _vm.uploadSuccess,
+                  "file-list": _vm.fileList,
+                  "with-credentials": _vm.withCredentials
                 }
               })
             ],
@@ -327,96 +480,74 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "el-form-item",
-            { attrs: { prop: "password" } },
-            [
-              _c(
-                "span",
-                { staticClass: "svg-container" },
-                [_c("svg-icon", { attrs: { "icon-class": "password" } })],
-                1
-              ),
-              _vm._v(" "),
-              _c("el-input", {
-                attrs: {
-                  name: "password",
-                  type: _vm.pwdType,
-                  placeholder: "请输入密码"
-                },
-                model: {
-                  value: _vm.loginForm.password,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "password", $$v)
-                  },
-                  expression: "loginForm.password"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "show-pwd", on: { click: _vm.showPwd } },
-                [_c("svg-icon", { attrs: { "icon-class": "eye" } })],
-                1
-              )
-            ],
-            1
+            "el-button",
+            {
+              attrs: {
+                size: "small",
+                type: "primary",
+                disabled: _vm.processing
+              }
+            },
+            [_vm._v(_vm._s(_vm.uploadTip))]
           ),
           _vm._v(" "),
           _c(
-            "el-form-item",
-            { attrs: { prop: "code" } },
-            [
-              _c("span", { staticClass: "svg-container" }, [
-                _c("i", { staticClass: "iconfont bf-yzm" })
-              ]),
-              _vm._v(" "),
-              _c("el-input", {
-                attrs: {
-                  name: "yzCode",
-                  type: "text",
-                  placeholder: "请输入验证码",
-                  id: "yzCode"
-                },
-                model: {
-                  value: _vm.loginForm.code,
-                  callback: function($$v) {
-                    _vm.$set(_vm.loginForm, "code", $$v)
-                  },
-                  expression: "loginForm.code"
-                }
-              }),
-              _vm._v(" "),
-              _c(
-                "span",
-                { staticClass: "show-pwd yzc", on: { click: this.getCode } },
-                [_c("img", { attrs: { src: _vm.src, alt: "" } })]
-              )
-            ],
-            1
+            "p",
+            {
+              staticClass: "el-uploadtip",
+              attrs: { slot: "tip" },
+              slot: "tip"
+            },
+            [_vm._v("只能上传excel文件")]
           ),
           _vm._v(" "),
+          _c("p", { staticClass: "download-template" }, [
+            _c(
+              "a",
+              { staticClass: "btn-download", on: { click: _vm.download } },
+              [_c("i", { staticClass: "icon-download" }), _vm._v("下载模板")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("p", {
+            class: {
+              "import-failure": _vm.importFlag === 2,
+              "hide-dialog": _vm.importFlag !== 2
+            }
+          }),
+          _vm._v(" "),
+          _c("p", { staticClass: "failure-tips" }, [
+            _c("i", { staticClass: "el-icon-warning" }),
+            _vm._v("导入失败")
+          ]),
+          _vm._v(" "),
+          _c("p", { staticClass: "failure-reason" }),
+          _c("h4", [_vm._v("失败原因")]),
+          _vm._v(" "),
           _c(
-            "el-form-item",
-            [
-              _c(
-                "el-button",
-                {
-                  staticStyle: { width: "100%" },
-                  attrs: { type: "primary", loading: _vm.loading },
-                  on: {
-                    click: function($event) {
-                      _vm.submitForm("loginForm")
-                    }
-                  }
-                },
-                [_vm._v("\n                登录\n            ")]
-              )
-            ],
-            1
+            "ul",
+            _vm._l(_vm.errorResults, function(error, index) {
+              return _c("li", { key: index }, [
+                _vm._v(
+                  "第" +
+                    _vm._s(error.rowIdx + 1) +
+                    "行，错误：" +
+                    _vm._s(error.column) +
+                    "," +
+                    _vm._s(error.value) +
+                    "," +
+                    _vm._s(error.errorInfo)
+                )
+              ])
+            })
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("h2", [_vm._v(_vm._s(this.$store.state.SonData.reports))]),
+      _vm._v(" "),
+      _c("h2", [_vm._v(_vm._s(this.$store.state.SonData.freights))])
     ],
     1
   )
@@ -427,7 +558,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-094c7742", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
   }
 }
 

@@ -14,25 +14,30 @@ axios.interceptors.request.use(
     if(store.getters.token){
       config.headers.Authorization =`Bearer ${store.getters.token}`;
     }
+    // console.log('config',config);
     return config
   },
   error => {
     if(error.response){
-      Message.error({
-        message: '加载超时'
+      Message({
+        message: "加载超时",
+        type: 'error'
       });
       return Promise.reject(error)
     }
   }
 );
 
-// http response 拦截器
+/* http response 拦截器 */
 axios.interceptors.response.use(
   response => {
-    // console.log(response);
-    let token = response.headers.authorization;
+    let token;
+    if(response.headers.authorization){
+      token = response.headers.authorization;
+    }
     if(token){
-      store.dispatch('refreshToken',token)
+      // store.dispatch('refreshToken',token)
+      this.$store.dispatch('refreshToken',token)
     }
     return response
   },
@@ -59,17 +64,17 @@ axios.interceptors.response.use(
     }else{
       return Promise.reject(error)
     }*/
-    console.log(error.response);
+    // console.log(error.response);
     if(error.response){
       if(error.response.data.message == "The token has been blacklisted"){
-        store.dispatch('DelToken');
-        router.replace({
+        // store.dispatch('DelToken');
+        this.$store.dispatch('DelToken');
+        /*router.replace({
           path: '/login',
           query: {redirect: router.currentRoute.fullPath}
-        });
-        Message.error({
-          message: '身份验证已过期，请重新登录'
-        });
+        });*/
+        router.replace("/login");
+        Message.error('身份验证已过期，请重新登录');
         return
       }else{
         return Promise.reject(error)

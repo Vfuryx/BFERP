@@ -1,14 +1,14 @@
 webpackJsonp([225],{
 
-/***/ 498:
+/***/ 516:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(706)
+var __vue_script__ = __webpack_require__(743)
 /* template */
-var __vue_template__ = __webpack_require__(707)
+var __vue_template__ = __webpack_require__(744)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\warehouseMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\invoiceConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-3a269c48", Component.options)
+    hotAPI.createRecord("data-v-303ba3d5", Component.options)
   } else {
-    hotAPI.reload("data-v-3a269c48", Component.options)
+    hotAPI.reload("data-v-303ba3d5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 706:
+/***/ 743:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -76,103 +76,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         ent: this.refresh
       }],
       tableKey: [[{
-        label: '仓库名称',
-        width: '180',
-        prop: "name",
-        holder: '请输入标记名称',
+        label: '报表文件',
+        width: '220',
+        prop: "file",
+        holder: '请输入报表文件',
         type: 'text'
       }, {
-        label: '仓库地址',
-        width: '260',
-        prop: "address",
-        holder: '请输入仓库地址',
-        type: 'text',
-        lists: 'more_prop'
+        label: '报表名称',
+        width: '220',
+        prop: "name",
+        holder: '请输入报表名称',
+        type: 'text'
       }, {
-        label: '是否默认仓库',
-        width: '160',
-        prop: "is_default",
-        holder: '描述',
-        type: 'select_def'
+        label: '报表格式',
+        width: '200',
+        prop: "paper_format",
+        holder: '请输入报表格式',
+        type: 'text'
       }, {
-        label: '是否可用',
-        width: '160',
+        label: '状态',
+        width: '220',
         prop: "status",
-        holder: '状态',
-        type: 'select_stu',
-        doSort: true
+        holder: '请选择是否启用',
+        type: 'select_stu'
       }]],
-      url: ['/warehouses'],
-      title: ['新建仓库'],
+      url: ['/printreports'],
+      title: ['添加报表格式'],
       ruleForm: [{
+        file: '',
         name: '',
-        province: '',
-        city: '',
-        district: '',
-        address: '',
-        is_default: '0',
+        paper_format: '',
         status: '1'
       }],
       rules: [{
-        name: [{ required: true, message: '请输入仓库名称', trigger: 'blur' }],
-        province: [{ required: true, message: '请输入仓库地址(省)', trigger: 'blur' }],
-        city: [{ required: true, message: '请输入仓库地址(市)', trigger: 'blur' }],
-        district: [{ required: true, message: '请输入仓库地址(区)', trigger: 'blur' }],
-        address: [{ required: true, message: '请输入仓库地址(县)', trigger: 'blur' }]
-
+        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
+        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
       }],
       addArr: [[{
-        label: '仓库名称',
+        label: '报表文件',
+        prop: 'file',
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
         prop: 'name',
-        holder: '请输入仓库名称',
+        holder: '请输入报表名称',
         type: 'text'
       }, {
-        label: '地址(省)',
-        prop: 'province',
-        holder: '请输入仓库地址(省)',
+        label: '报表格式',
+        prop: 'paper_format',
+        holder: '请输入报表格式',
         type: 'text'
       }, {
-        label: '地址(市)',
-        prop: 'city',
-        holder: '请输入仓库地址(市)',
-        type: 'text'
-      }, {
-        label: '地址(区)',
-        prop: 'district',
-        holder: '请输入仓库地址(区)',
-        type: 'text'
-      }, {
-        label: '地址(县)',
-        prop: 'address',
-        holder: '请输入县及以下地址',
-        type: 'text'
-      }, {
-        label: '是否默认',
-        prop: 'is_default',
-        holder: '请选择是否默认',
-        type: 'select_def'
-      }, {
-        label: '是否可用',
+        label: '状态',
         prop: 'status',
-        holder: '请选择是否可用',
+        holder: '请选择状态',
         type: 'select_stu'
       }]]
     };
   },
 
   methods: {
+    //新增
     addNew: function addNew() {
       this.$store.dispatch('setShowAdd', true);
     },
     edit: function edit(row) {
       var obj = {
-        id: row.id,
+        file: row.file,
         name: row.name,
-        province: row.province,
-        city: row.city,
-        district: row.district,
-        address: row.address,
-        is_default: row.is_default,
+        paper_format: row.paper_format,
         status: row.status
       };
       this.$store.dispatch('setRow', row);
@@ -198,7 +172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 707:
+/***/ 744:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -230,7 +204,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-3a269c48", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-303ba3d5", module.exports)
   }
 }
 

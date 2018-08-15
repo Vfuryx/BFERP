@@ -71,25 +71,31 @@
 
         i.bf-forbid {
           color: #d0211d;
+
+          span.text{
+            color: #d0211d;
+          }
         }
 
-        &.active {
+      /*  &.active {
           i.optIcon {
-            background-color: #4a99fa;
+            //background-color: #4a99fa;
+            background-color: #fff;
 
             &.bf-forbid {
               background-color: #d0211d;
+              //background-color: #fff;
             }
 
             &:before {
-              color: #fff;
+              color: #666;
             }
 
             span {
-              color: #fff;
+              color: #666;
             }
           }
-        }
+        }*/
 
         i {
           display: flex;
@@ -100,6 +106,10 @@
 
             &.bf-forbid {
               background-color: #d0211d;
+
+              span.text{
+                color: #fff;
+              }
             }
 
             &:before {
@@ -110,6 +120,10 @@
               color: #fff;
             }
           }
+
+          &:focus{
+            outline:none!important;
+          }
         }
 
         span.text {
@@ -117,12 +131,20 @@
           color: #666;
           text-align: left;
           margin-left: 5px;
+
+          &:focus{
+            outline: none;
+          }
         }
 
         &:hover {
           & > p {
             color: #4a99fa;
           }
+        }
+
+        &:focus{
+          outline:none!important;
         }
       }
 
@@ -683,22 +705,49 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+
+    &>div{
+      &>div{
+        max-height: 54px;
+        &>span{
+          width: 100%;
+          display: inline-block;
+          position: relative;
+
+          img{
+            height: 54px;
+            max-width: 85%;
+          }
+
+          div.chgDiv{
+            position: absolute;
+            right: 0;
+            bottom: 6px;
+            max-width: 100%;
+
+            .el-button--mini.chg{
+              padding: 4px 6px;
+            }
+          }
+        }
+      }
+    }
   }
 }
 
 .threeParts{
-  .el-dialog__body{
-    padding: 0 20px;
-  }
-  .el-button--medium{
-    margin-top: 2px;
-  }
+.el-dialog__body{
+padding: 0 20px;
+}
+.el-button--medium{
+margin-top: 2px;
+}
 }
 .el-menu--vertical {
-  .el-menu--popup {
-    max-height: 500px;
-    overflow: auto;
-  }
+.el-menu--popup {
+max-height: 500px;
+overflow: auto;
+}
 }
 
 

@@ -1,14 +1,14 @@
 webpackJsonp([229],{
 
-/***/ 501:
+/***/ 507:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(712)
+var __vue_script__ = __webpack_require__(725)
 /* template */
-var __vue_template__ = __webpack_require__(713)
+var __vue_template__ = __webpack_require__(726)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\supplierMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\expenseTypeMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-82f1fe6a", Component.options)
+    hotAPI.createRecord("data-v-0fb355e6", Component.options)
   } else {
-    hotAPI.reload("data-v-82f1fe6a", Component.options)
+    hotAPI.reload("data-v-0fb355e6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,13 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 712:
+/***/ 725:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 //
 //
 //
@@ -333,153 +331,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -487,409 +338,85 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
-        ent: this.addNew
+        ent: this.addExpense
       }, {
         cnt: '删除',
         icon: 'bf-del',
         ent: this.delMore
       }, {
-        cnt: '导入',
-        icon: 'bf-in',
-        ent: this.test
-      }, {
-        cnt: '导出',
-        icon: 'bf-out',
-        ent: this.test
-      }, {
-        cnt: '合并',
-        icon: 'bf-merge',
-        ent: this.test
-      }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.refresh
       }],
-      activeName: '0',
-      getsInfo: [[], []],
-      tableHead: [[{
-        label: '名称',
-        width: '180',
-        prop: "name",
-        holder: '请输入名称',
-        type: 'text'
-      }, {
-        label: '公司',
-        width: '180',
-        prop: "company",
-        holder: '请输入公司',
-        type: 'text'
-      }, {
-        label: '公司代码',
-        width: '180',
-        prop: "code",
-        holder: '请输入公司代码',
-        type: 'text'
-      }, {
-        label: '省',
-        width: '180',
-        prop: "province",
-        holder: '请输入省'
-      }, {
-        label: '市',
-        width: '180',
-        prop: "city",
-        holder: '请输入市',
-        type: 'text'
-      }, {
-        label: '区',
-        width: '180',
-        prop: "district",
-        holder: '请输入区',
-        type: 'text'
-      }, {
-        label: '地址',
-        width: '220',
-        prop: "address",
-        holder: '请输入地址',
-        type: 'text'
-      }, {
-        label: '邮编',
-        width: '180',
-        prop: "zipcode",
-        holder: '请输入邮编',
-        type: 'text'
-      }, {
-        label: '联系人',
-        width: '200',
-        prop: "contacts",
-        holder: '请输入联系人',
-        type: 'text'
-      }, {
-        label: '联系电话',
-        width: '180',
-        prop: "phone",
-        holder: '请输入联系电话',
-        type: 'text'
-      }, {
-        label: '手机',
-        width: '180',
-        prop: "mobile",
-        holder: '请输入手机',
-        type: 'text'
-      }, {
-        label: '传真',
-        width: '180',
-        prop: "fax",
-        holder: '请输入传真',
-        type: 'text'
-      }, {
-        label: '邮箱',
-        width: '200',
-        prop: "email",
-        holder: '请输入邮箱',
-        type: 'text'
-      }, {
-        label: '备注',
-        width: '180',
-        prop: "remark",
-        holder: '请输入备注',
-        type: 'textarea'
-      }, {
-        label: '启用扫描',
-        width: '160',
-        prop: "is_scan",
-        holder: '请选择是否启用',
-        type: 'select_def'
-      }, {
-        label: '采购自动计价',
-        width: '160',
-        prop: "auto_valuation",
-        holder: '是否启用',
-        type: 'select_def'
-      }, {
-        label: '状态',
-        width: '160',
-        prop: "status",
-        holder: '请选择状态',
-        type: 'select_stu'
-      }], [{
-        label: '供应商名称',
-        width: '',
-        prop: "suppliers",
-        holder: '请选择供应商名称',
-        type: 'select'
-      }, {
-        label: '系列代码',
-        width: '',
-        prop: "code",
-        holder: '请输入系列代码',
-        type: 'text'
-      }, {
-        label: '系列名称',
-        width: '',
-        prop: "name",
-        holder: '请输入系列名称',
-        type: 'text'
-      }, {
-        label: '系列描述',
-        width: '',
-        prop: "description",
-        holder: '请输入系列描述',
-        type: 'textarea'
-      }, {
-        label: '备注',
-        width: '',
-        prop: "remark",
-        holder: '请输入名称',
-        type: 'textarea'
-      }, {
-        label: '状态',
-        width: '',
-        prop: "status",
-        holder: '请选择状态',
-        type: 'select_stu'
-      }]],
-      loading: true,
-      currentIndex: '',
-      url: ['/suppliers', '/series'],
-      showMaskArr: [{ show: false }, { show: false }],
-      title: ['新增供应商', '新增产品系列'],
-      ruleForm: [{
-        name: '',
-        company: '',
-        code: '',
-        province: '',
-        city: '',
-        district: '',
-        address: '',
-        phone: '',
-        mobile: '',
-        fax: '',
-        email: '',
-        remark: '',
-        is_scan: '1',
-        auto_valuation: '1',
-        status: '1'
-      }, {
-        suppliers_id: '',
-        code: '',
-        name: '',
-        description: '',
-        remark: '',
-        status: '1'
-      }],
-      rules: [{
-        name: [{ required: true, message: '请输入供应商名称', trigger: 'blur' }],
-        company: [{ required: true, message: '请输入供应商公司', trigger: 'blur' }],
-        code: [{ required: true, message: '请输入公司代码', trigger: 'blur' }],
-        province: [{ required: true, message: '请输入所在省', trigger: 'blur' }],
-        city: [{ required: true, message: '请输入所在市', trigger: 'blur' }],
-        district: [{ required: true, message: '请输入所在区', trigger: 'blur' }],
-        address: [{ required: true, message: '请输入详细地址', trigger: 'blur' }],
-        zipcode: [{ required: true, message: '请输入邮编', trigger: 'blur' }],
-        phone: [{ required: true, message: '请输入电话', trigger: 'blur' }],
-        mobile: [{ required: true, message: '请输入手机', trigger: 'blur' }],
-        fax: [{ required: true, message: '请输入传真号', trigger: 'blur' }],
-        email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }]
-      }, {
-        suppliers_id: [{ required: true, message: '请输入供应商id', trigger: 'blur' }],
-        code: [{ required: true, message: '请输入系列代码', trigger: 'blur' }],
-        name: [{ required: true, message: '请输入系列名称', trigger: 'blur' }]
-      }],
-      addArr: [[{
-        label: '供应商名',
-        prop: 'name',
-        holder: '请输入供应商名称',
-        type: 'text'
-      }, {
-        label: '供应公司',
-        prop: 'company',
-        holder: '请输入供应商公司',
-        type: 'text'
-      }, {
-        label: '公司代码',
-        prop: 'code',
-        holder: '请输入公司代码',
-        type: 'text'
-      }, {
-        label: '省',
-        prop: 'province',
-        holder: '请输入所在省',
-        type: 'text'
-      }, {
-        label: '市',
-        prop: 'city',
-        holder: '请输入所在市',
-        type: 'text'
-      }, {
-        label: '区',
-        prop: 'district',
-        holder: '请输入所在区',
-        type: 'text'
-      }, {
-        label: '地址',
-        prop: 'address',
-        holder: '请输入详细地址',
-        type: 'text'
-      }, {
-        label: '邮编',
-        prop: 'zipcode',
-        holder: '请输入邮编',
-        type: 'text'
-      }, {
-        label: '联系人',
-        prop: 'contacts',
-        holder: '请输入联系人',
-        type: 'text'
-      }, {
-        label: '电话号码',
-        prop: 'phone',
-        holder: '请输入电话号码',
-        type: 'tel'
-      }, {
-        label: '手机号码',
-        prop: 'mobile',
-        holder: '请输入手机号码',
-        type: 'tel'
-      }, {
-        label: '传真',
-        prop: 'fax',
-        holder: '请输入传真',
-        type: 'text'
-      }, {
-        label: '邮箱',
-        prop: 'email',
-        holder: '请输入邮箱',
-        type: 'text'
-      }, {
-        label: '备注',
-        prop: 'remark',
-        holder: '请输入备注',
-        type: 'textarea'
-      }, {
-        label: '启用扫描',
-        prop: 'is_scan',
-        holder: '请选择是或否',
-        type: 'select_def'
-      }, {
-        label: '采购自动计价',
-        prop: 'auto_valuation',
-        holder: '请选择是或否',
-        type: 'select_def'
-      }, {
-        label: '状态',
-        prop: 'status',
-        holder: '请选择',
-        type: 'select_stu'
-      }], [{
-        label: '供应商名',
-        prop: 'suppliers_id',
-        holder: '请输入供应商名称',
-        type: 'select'
-      }, {
-        label: '系列代码',
-        prop: 'code',
-        holder: '请输入系列代码',
-        type: 'text'
-      }, {
-        label: '系列名称',
-        prop: 'name',
-        holder: '请输入系列名称',
-        type: 'text'
-      }, {
-        label: '系列描述',
-        prop: 'description',
-        holder: '请输入系列描述',
-        type: 'textarea'
-      }, {
-        label: '备注',
-        prop: 'remark',
-        holder: '请输入备注',
-        type: 'textarea'
-      }, {
-        label: '状态',
-        prop: 'status',
-        holder: '请选择',
-        type: 'select_stu'
-      }]],
-      halfForm: [{ show: true }, { show: false }],
-      refArr: ['ruleSuppliers', 'ruleSeries'],
-      showDel: false,
-      delId: '',
+      expenseType: [],
+      checkboxInit: false,
       inputChange: false,
+      changeIndex: '',
       multipleSelection: [],
-      delArr: [],
+      loading: true,
+      showAdd: false,
+      ruleForm: {
+        type: '',
+        name: '',
+        code: '',
+        default: '0',
+        mark: '',
+        status: '1'
+      },
+      rules: {
+        type: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
+        code: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
+        mark: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
+      },
       pagination: {
         current_page: 1,
-        per_page: 0,
-        page_total: 0
+        total: 0,
+        per_page: 0
       },
-      resetValue: this.ruleForm,
-      showPage: true
+      showDel: false,
+      delId: '',
+      delArr: [],
+      defArr: [{
+        value: '0',
+        label: '0-否'
+      }, {
+        value: '1',
+        label: '1-是'
+      }],
+      status: [{
+        value: '0',
+        label: '0-停用'
+      }, {
+        value: '1',
+        label: '1-启用'
+      }],
+      feeCage: [],
+      activeName: 'type',
+      expenseCage: [],
+      showCage: false,
+      ruleForm2: {
+        name: '',
+        status: '1'
+      },
+      rules2: {
+        name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
+      },
+      showDel2: false
     };
   },
 
-  computed: {
-    suppliersId: {
-      get: function get() {
-        return this.$store.state.SonData.suppliers;
-      },
-      set: function set() {}
-    }
-  },
   methods: {
-    test: function test() {},
-    handleTabsClick: function handleTabsClick() {
-      this.loading = true;
-      this.getInfo(this.url[this.activeName]);
-    },
-    addNew: function addNew() {
-      this.showMaskArr[this.activeName].show = true;
-    },
-    CB_dialog: function CB_dialog(val) {
-      this.showMaskArr[this.activeName].show = val;
-    },
-    submitForm: function submitForm() {
+    getExpenseType: function getExpenseType() {
       var _this = this;
 
-      var addObj = {};
-      if (this.activeName == '0') {
-        addObj = {
-          name: this.ruleForm[0].name,
-          company: this.ruleForm[0].company,
-          code: this.ruleForm[0].code,
-          province: this.ruleForm[0].province,
-          city: this.ruleForm[0].city,
-          district: this.ruleForm[0].district,
-          address: this.ruleForm[0].address,
-          zipcode: this.ruleForm[0].zipcode,
-          contacts: this.ruleForm[0].contacts,
-          phone: this.ruleForm[0].phone,
-          mobile: this.ruleForm[0].mobile,
-          fax: this.ruleForm[0].fax,
-          email: this.ruleForm[0].email,
-          remark: this.ruleForm[0].remark,
-          is_scan: this.ruleForm[0].is_scan,
-          status: this.ruleForm[0].status,
-          auto_valuationy: this.ruleForm[0].auto_valuationy
-        };
-      } else if (this.activeName == '1') {
-        addObj = {
-          suppliers_id: this.ruleForm[1].suppliers_id,
-          code: this.ruleForm[1].code,
-          name: this.ruleForm[1].name,
-          description: this.ruleForm[1].description,
-          remark: this.ruleForm[1].remark,
-          status: this.ruleForm[1].status
-        };
-      }
-      this.$post(this.url[this.activeName], addObj).then(function () {
-        _this.$message({
-          message: '添加成功',
-          type: 'success'
-        });
-        _this.showMaskArr[_this.activeName].show = false;
-        _this.refresh();
+      this.$fetch('/feetypes').then(function (res) {
+        _this.expenseType = res.data;
+        _this.loading = false;
+        var pg = res.meta.pagination;
+        _this.pagination.current_page = pg.current_page;
+        _this.pagination.total = pg.total;
+        _this.pagination.per_page = pg.per_page;
       }, function (err) {
         if (err.response) {
           var arr = err.response.data.errors;
@@ -904,39 +431,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
-
-    /*处理批量删除*/
-    handleSelectionChange: function handleSelectionChange(val) {
-      console.log(1);
-      this.multipleSelection = val;
-      console.log(this.multipleSelection);
-      var del = [];
-      this.multipleSelection.forEach(function (selectedItem) {
-        del.push(selectedItem.id);
-      });
-      this.delArr = del.join(',');
-      console.log(this.delArr);
+    addExpense: function addExpense() {
+      this.showAdd = true;
     },
-    delMore: function delMore() {
+    submitForm: function submitForm(formName) {
       var _this2 = this;
 
-      if (this.delArr.length === 0) {
-        this.$message({
-          message: '没有选中数据',
-          type: 'warning'
-        });
-      } else {
-        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(function () {
-          _this2.$del(_this2.url[_this2.activeName], { ids: _this2.delArr }).then(function () {
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          var data = {
+            fee_category_id: _this2.ruleForm.type,
+            name: _this2.ruleForm.name,
+            code: _this2.ruleForm.code,
+            remark: _this2.ruleForm.mark,
+            is_default: _this2.ruleForm.default,
+            status: _this2.ruleForm.status
+          };
+          _this2.$post('/feetypes', data).then(function () {
             _this2.$message({
-              message: '删除成功',
+              message: '添加成功',
               type: 'success'
             });
-            _this2.refresh();
+            _this2.showAdd = false;
+            _this2.resetForm('ruleForm');
+            _this2.getExpenseType();
           }, function (err) {
             if (err.response) {
               var arr = err.response.data.errors;
@@ -950,69 +468,57 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               });
             }
           });
-        }).catch(function () {
-          _this2.$message({
-            type: 'info',
-            message: '已取消删除'
-          });
-        });
-      }
-    },
-
-    /*修改保存*/
-    edit: function edit(index) {
-      this.currentIndex = 'index' + index;
-    },
-    editCancel: function editCancel() {
-      this.$message({
-        message: '取消修改',
-        type: 'info'
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
       });
-      this.currentIndex = '';
     },
-    editSave: function editSave(row) {
+    resetForm: function resetForm(formName) {
+      this.$refs[formName].resetFields();
+    },
+    toggleChecked: function toggleChecked() {
+      this.checkboxInit = !this.checkboxInit;
+    },
+    handleSelectionChange: function handleSelectionChange(val) {
+      this.multipleSelection = val;
+      var del = [];
+      this.multipleSelection.forEach(function (selectedItem) {
+        del.push(selectedItem.id);
+      });
+      this.delArr = del.join(',');
+    },
+    handleEdit: function handleEdit() {
+      this.inputChange = true;
+    },
+    editType: function editType(row, index) {
+      this.changeIndex = 'index' + index;
+    },
+    editSave: function editSave(index, row) {
       var _this3 = this;
 
-      var newData = {};
-      if (this.activeName == '0') {
-        newData = {
-          name: row.name,
-          company: row.company,
-          code: row.code,
-          province: row.province,
-          city: row.city,
-          district: row.district,
-          address: row.address,
-          zipcode: row.zipcode,
-          contacts: row.contacts,
-          phone: row.phone,
-          mobile: row.mobile,
-          fax: row.fax,
-          email: row.email,
-          remark: row.remark,
-          is_scan: row.is_scan,
-          status: row.status,
-          auto_valuation: row.auto_valuation
-        };
-      } else if (this.activeName == '1') {
-        newData = {
-          suppliers_id: row.suppliers.id,
-          code: row.code,
-          name: row.name,
-          description: row.description,
-          remark: row.remark,
-          status: row.status
-        };
-      }
+      var newData = {
+        id: row.id,
+        fee_category_id: row.fee_category.id,
+        name: row.name,
+        code: row.code,
+        is_default: row.is_default,
+        status: row.status,
+        remark: row.remark
+      };
       if (this.inputChange) {
-        this.$patch(this.url[this.activeName] + '/' + row.id, newData).then(function () {
-          _this3.$message({
-            message: '修改成功',
-            type: 'success'
-          });
-          _this3.getInfo(_this3.url[_this3.activeName]);
-          _this3.currentIndex = '';
-          _this3.inputChange = false;
+        this.$patch('/feetypes/' + row.id, newData).then(function () {
+          _this3.loading = true;
+          _this3.getExpenseType();
+          setTimeout(function () {
+            _this3.loading = false;
+            _this3.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+            _this3.changeIndex = '';
+            _this3.inputChange = false;
+          }, 2000);
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -1033,129 +539,334 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    handleEdit: function handleEdit() {
-      this.inputChange = true;
-    },
-    getInfo: function getInfo(url) {
-      var _this4 = this;
-
-      this.showPage = true;
-      this.$fetch(url).then(function (res) {
-        _this4.getsInfo[_this4.activeName] = res.data;
-        _this4.loading = false;
-        var pg = res.meta.pagination;
-        _this4.$store.dispatch('currentPage', pg.current_page);
-        _this4.$store.commit('PER_PAGE', pg.per_page);
-        _this4.$store.commit('PAGE_TOTAL', pg.total);
-        if (url == _this4.url[0]) {
-          _this4.$store.dispatch('setSuppliers', res.data);
-        } else if (url == _this4.url[1]) {
-          _this4.$store.dispatch('setSeries', res.data);
-        }
-      }, function (err) {
-        if (err.response) {
-          var arr = err.response.data.errors;
-          var arr1 = [];
-          for (var i in arr) {
-            arr1.push(arr[i]);
-          }
-          var str = arr1.join(',');
-          _this4.$message.error({
-            message: str
-          });
-        }
-      });
-    },
-    del: function del(row, e) {
-      // alert(1);
+    delClick: function delClick(row, e) {
       this.showDel = true;
       $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
       this.delId = row.id;
     },
+    editCancel: function editCancel() {
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+      this.changeIndex = '';
+    },
+    refresh: function refresh() {
+      var _this4 = this;
+
+      this.loading = true;
+      this.getExpenseType();
+      setTimeout(function () {
+        _this4.loading = false;
+      }, 2000);
+    },
+    handleCurrentChange: function handleCurrentChange(val) {
+      var _this5 = this;
+
+      this.$fetch('/feetypes?page=' + val).then(function (res) {
+        _this5.expenseType = res.data;
+        var pg = res.meta.pagination;
+        _this5.pagination.current_page = pg.current_page;
+      }, function (err) {
+        _this5.$message.error({
+          message: err.message
+        });
+      });
+    },
     cancelD: function cancelD() {
       this.showDel = false;
+      this.showDel2 = false;
       this.$message({
         message: '取消删除',
         type: 'info'
       });
     },
     confirmD: function confirmD(id) {
-      var _this5 = this;
+      var _this6 = this;
 
-      this.$del(this.url[this.activeName] + '/' + id).then(function () {
-        _this5.$message({
+      this.$del('/feetypes/' + id).then(function () {
+        _this6.$message({
           message: '删除成功',
           type: 'success'
         });
-        _this5.showDel = false;
-        _this5.refresh();
+        _this6.showDel = false;
+        _this6.getExpenseType();
       }, function (err) {
         if (err.response) {
-          _this5.showDel = false;
+          _this6.showDel = false;
           var arr = err.response.data.errors;
           var arr1 = [];
           for (var i in arr) {
             arr1.push(arr[i]);
           }
           var str = arr1.join(',');
-          _this5.$message.error({
+          _this6.$message.error({
             message: str
           });
         }
       });
     },
-    refresh: function refresh() {
-      var _this6 = this;
-
-      this.loading = true;
-      this.getInfo(this.url[this.activeName]);
-      setTimeout(function () {
-        _this6.loading = false;
-      }, 2000);
-    },
-    dbClick: function dbClick(row) {
+    delMore: function delMore() {
       var _this7 = this;
 
-      var id = row.id;
-      this.activeName = '1';
-      this.loading = true;
-      this.showPage = false;
-      this.$fetch(this.url[1] + '/' + id).then(function (res) {
-        if (res) {
-          var arr = [];
-          arr.push(res);
-          _this7.getsInfo[_this7.activeName] = arr;
-          _this7.loading = false;
-        } else {
-          _this7.$message({
-            message: '没有查询到相关数据',
-            type: 'info'
-          });
-          _this7.getsInfo[_this7.activeName] = [];
-        }
-      }, function (err) {
-        console.log(err);
-        _this7.$message.error({
-          message: '查询失败'
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
         });
-        _this7.loading = false;
-        _this7.getsInfo[_this7.activeName] = [];
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this7.$del("/feetypes", { ids: _this7.delArr }).then(function () {
+            _this7.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this7.getExpenseType();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this7.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this7.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+
+    //  获取费用类别
+    getExpenseCage: function getExpenseCage() {
+      var _this8 = this;
+
+      this.$fetch('/feecates').then(function (res) {
+        _this8.feeCage = res.data;
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this8.$message.error({
+            message: str
+          });
+        }
       });
+    },
+    handleClick: function handleClick() {
+      if ($('#tab-type').hasClass('is-active')) {
+        this.newOpt[0].ent = this.addExpenseCage;
+        this.newOpt[1].ent = this.delMoreCage;
+        this.newOpt[2].ent = this.refreshCage;
+        $('#page').hide();
+      } else {
+        this.newOpt[0].ent = this.addExpense;
+        this.newOpt[1].ent = this.delMore;
+        this.newOpt[2].ent = this.refresh;
+        $('#page').show();
+      }
+    },
+
+    //  新增
+    addExpenseCage: function addExpenseCage() {
+      this.showCage = true;
+      this.ruleForm2.name = '';
+    },
+    submitForm2: function submitForm2(formName) {
+      var _this9 = this;
+
+      this.$refs[formName].validate(function (valid) {
+        if (valid) {
+          var data = {
+            name: _this9.ruleForm2.name,
+            status: _this9.ruleForm2.status
+          };
+          _this9.$post('/feecates', data).then(function () {
+            _this9.$message({
+              message: '添加成功',
+              type: 'success'
+            });
+            _this9.showCage = false;
+            _this9.getExpenseCage();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this9.$message.error({
+                message: str
+              });
+            }
+          });
+        } else {
+          console.log('error submit!!');
+          return false;
+        }
+      });
+    },
+
+    //  删除
+    delMoreCage: function delMoreCage() {
+      var _this10 = this;
+
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
+        });
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this10.$del("/feecates", { ids: _this10.delArr }).then(function () {
+            _this10.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this10.getExpenseCage();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this10.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this10.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+    refreshCage: function refreshCage() {
+      var _this11 = this;
+
+      this.loading = true;
+      this.getExpenseCage();
+      setTimeout(function () {
+        _this11.loading = false;
+      }, 2000);
+    },
+    delClick2: function delClick2(row, e) {
+      this.showDel2 = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    confirmD2: function confirmD2(id) {
+      var _this12 = this;
+
+      this.$del('/feecates/' + id).then(function () {
+        _this12.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this12.showDel2 = false;
+        _this12.getExpenseCage();
+      }, function (err) {
+        if (err.response) {
+          _this12.showDel2 = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this12.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    editSave2: function editSave2(index, row) {
+      var _this13 = this;
+
+      var newData = {
+        id: row.id,
+        name: row.name,
+        status: row.status
+      };
+      if (this.inputChange) {
+        this.$patch('/feecates/' + row.id, newData).then(function () {
+          _this13.loading = true;
+          _this13.getExpenseCage();
+          _this13.loading = false;
+          _this13.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this13.changeIndex = '';
+          _this13.inputChange = false;
+          /* setTimeout(()=>{
+             this.loading = false;
+             this.$message({
+               message: '修改成功',
+               type: 'success'
+             });
+             this.changeIndex ='';
+             this.inputChange = false;
+           },2000)*/
+        }, function (err) {
+          if (err.response) {
+            var arr = err.response.data.errors;
+            var arr1 = [];
+            for (var i in arr) {
+              arr1.push(arr[i]);
+            }
+            var str = arr1.join(',');
+            _this13.$message.error({
+              message: str
+            });
+          }
+        });
+      } else {
+        this.$message({
+          message: '数据未改动',
+          type: 'info'
+        });
+      }
     }
   },
   mounted: function mounted() {
-    this.getInfo(this.url[0]);
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
       that.$store.dispatch('setOpt', that.newOpt);
     });
+    this.getExpenseType();
+    this.getExpenseCage();
   }
 });
 
 /***/ }),
 
-/***/ 713:
+/***/ 726:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -1168,7 +879,7 @@ var render = function() {
       _c(
         "el-tabs",
         {
-          on: { "tab-click": _vm.handleTabsClick },
+          on: { "tab-click": _vm.handleClick },
           model: {
             value: _vm.activeName,
             callback: function($$v) {
@@ -1180,50 +891,646 @@ var render = function() {
         [
           _c(
             "el-tab-pane",
-            { attrs: { label: "供应商信息", name: "0" } },
+            { attrs: { label: "费用类型管理", name: "type" } },
             [
-              _c("light-table", {
-                attrs: {
-                  listData: _vm.getsInfo[this.activeName],
-                  tableHead: _vm.tableHead[this.activeName],
-                  loading: _vm.loading,
-                  currentIndex: _vm.currentIndex
+              _c(
+                "el-table",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading",
+                      value: _vm.loading,
+                      expression: "loading"
+                    }
+                  ],
+                  attrs: {
+                    data: _vm.expenseType,
+                    fit: "",
+                    "highlight-current-row": "",
+                    type: "index",
+                    "element-loading-text": "拼命加载中",
+                    "element-loading-spinner": "el-icon-loading",
+                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
+                  },
+                  on: { "selection-change": _vm.handleSelectionChange }
                 },
-                on: {
-                  handleSelect: _vm.handleSelectionChange,
-                  editSave: _vm.editSave,
-                  handleEdit: _vm.handleEdit,
-                  del: _vm.del,
-                  dbClick: _vm.dbClick,
-                  edit: _vm.edit,
-                  editCancel: _vm.editCancel
-                }
-              })
+                [
+                  _c("el-table-column", {
+                    attrs: {
+                      type: "selection",
+                      width: "95",
+                      align: "center",
+                      checked: _vm.checkboxInit
+                    },
+                    on: { change: _vm.toggleChecked }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "类别", align: "center", width: "180" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: {
+                                          size: "small",
+                                          placeholder: "请选择类型"
+                                        },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.fee_category.id,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              scope.row.fee_category,
+                                              "id",
+                                              $$v
+                                            )
+                                          },
+                                          expression:
+                                            "scope.row.fee_category.id"
+                                        }
+                                      },
+                                      _vm._l(_vm.feeCage, function(item) {
+                                        return _c("el-option", {
+                                          key: item.id,
+                                          attrs: {
+                                            label: item.name,
+                                            value: item.id
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.fee_category.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "类型名称", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入名称"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.name,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "name", $$v)
+                                        },
+                                        expression: "scope.row.name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "代码", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入代码"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.code,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "code", $$v)
+                                        },
+                                        expression: "scope.row.code"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.code) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "默认", align: "center", width: "180" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "是否默认" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.is_default,
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              scope.row,
+                                              "is_default",
+                                              $$v
+                                            )
+                                          },
+                                          expression: "scope.row.is_default"
+                                        }
+                                      },
+                                      _vm._l(_vm.defArr, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.is_default == 0 ? "否" : "是"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "状态", align: "center", width: "200" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "状态" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.status,
+                                          callback: function($$v) {
+                                            _vm.$set(scope.row, "status", $$v)
+                                          },
+                                          expression: "scope.row.status"
+                                        }
+                                      },
+                                      _vm._l(_vm.status, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _c("i", {
+                                    staticClass: "showStatus",
+                                    class: {
+                                      statusActive:
+                                        scope.row.status == 0 ? false : true
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.status == 0 ? "停用" : "启用"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "备注", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入备注"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.remark,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "remark", $$v)
+                                        },
+                                        expression: "scope.row.remark"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.remark) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "操作", width: "220", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editSave(
+                                              scope.$index,
+                                              scope.row
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("保存")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: { click: _vm.editCancel }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "取消\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editType(
+                                              scope.row,
+                                              scope.$index
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("编辑")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.delClick(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除\n                            ")]
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
             ],
             1
           ),
           _vm._v(" "),
           _c(
             "el-tab-pane",
-            { attrs: { label: "产品系列", name: "1" } },
+            { attrs: { label: "费用类别管理", name: "cage" } },
             [
-              _c("light-table", {
-                attrs: {
-                  listData: _vm.getsInfo[this.activeName],
-                  tableHead: _vm.tableHead[this.activeName],
-                  loading: _vm.loading,
-                  currentIndex: _vm.currentIndex,
-                  selects: _vm.suppliersId
+              _c(
+                "el-table",
+                {
+                  directives: [
+                    {
+                      name: "loading",
+                      rawName: "v-loading",
+                      value: _vm.loading,
+                      expression: "loading"
+                    }
+                  ],
+                  attrs: {
+                    data: _vm.feeCage,
+                    fit: "",
+                    "highlight-current-row": "",
+                    type: "index",
+                    "element-loading-text": "拼命加载中",
+                    "element-loading-spinner": "el-icon-loading",
+                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
+                  },
+                  on: { "selection-change": _vm.handleSelectionChange }
                 },
-                on: {
-                  handleSelect: _vm.handleSelectionChange,
-                  editSave: _vm.editSave,
-                  handleEdit: _vm.handleEdit,
-                  del: _vm.del,
-                  edit: _vm.edit,
-                  editCancel: _vm.editCancel
-                }
-              })
+                [
+                  _c("el-table-column", {
+                    attrs: {
+                      type: "selection",
+                      width: "95",
+                      align: "center",
+                      checked: _vm.checkboxInit
+                    },
+                    on: { change: _vm.toggleChecked }
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "名称", align: "center", width: "260" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-input", {
+                                      attrs: {
+                                        size: "small",
+                                        placeholder: "输入名称"
+                                      },
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row.name,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "name", $$v)
+                                        },
+                                        expression: "scope.row.name"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(scope.row.name) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "状态", align: "center", width: "260" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-select",
+                                      {
+                                        attrs: { placeholder: "状态" },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row.status,
+                                          callback: function($$v) {
+                                            _vm.$set(scope.row, "status", $$v)
+                                          },
+                                          expression: "scope.row.status"
+                                        }
+                                      },
+                                      _vm._l(_vm.status, function(item) {
+                                        return _c("el-option", {
+                                          key: item.value,
+                                          attrs: {
+                                            label: item.label,
+                                            value: item.value
+                                          }
+                                        })
+                                      })
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _c("i", {
+                                    staticClass: "showStatus",
+                                    class: {
+                                      statusActive:
+                                        scope.row.status == 0 ? false : true
+                                    }
+                                  }),
+                                  _vm._v(
+                                    "\n                            " +
+                                      _vm._s(
+                                        scope.row.status == 0 ? "停用" : "启用"
+                                      ) +
+                                      "\n                        "
+                                  )
+                                ])
+                          ]
+                        }
+                      }
+                    ])
+                  }),
+                  _vm._v(" "),
+                  _c("el-table-column", {
+                    attrs: { label: "操作", align: "center" },
+                    scopedSlots: _vm._u([
+                      {
+                        key: "default",
+                        fn: function(scope) {
+                          return [
+                            _vm.changeIndex == "index" + scope.$index
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editSave2(
+                                              scope.$index,
+                                              scope.row
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("保存")]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: { click: _vm.editCancel }
+                                      },
+                                      [
+                                        _vm._v(
+                                          "取消\n                            "
+                                        )
+                                      ]
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _c(
+                                  "span",
+                                  [
+                                    _c(
+                                      "el-button",
+                                      {
+                                        attrs: { size: "mini" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.editType(
+                                              scope.row,
+                                              scope.$index
+                                            )
+                                          }
+                                        }
+                                      },
+                                      [_vm._v("编辑")]
+                                    )
+                                  ],
+                                  1
+                                ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.delClick2(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除\n                            ")]
+                            )
+                          ]
+                        }
+                      }
+                    ])
+                  })
+                ],
+                1
+              )
             ],
             1
           )
@@ -1231,20 +1538,332 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("add-new", {
-        attrs: {
-          "visible-add": _vm.showMaskArr[_vm.activeName].show,
-          title: _vm.title[_vm.activeName],
-          "rule-form": _vm.ruleForm[_vm.activeName],
-          rules: _vm.rules[_vm.activeName],
-          "add-arr": _vm.addArr[_vm.activeName],
-          url: _vm.url[_vm.activeName],
-          "new-ref": _vm.refArr[_vm.activeName],
-          halfForm: _vm.halfForm[_vm.activeName].show,
-          selects: _vm.suppliersId
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "新增费用类型", visible: _vm.showAdd },
+          on: {
+            "update:visible": function($event) {
+              _vm.showAdd = $event
+            }
+          }
         },
-        on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
-      }),
+        [
+          _c(
+            "el-form",
+            {
+              ref: "ruleForm",
+              staticClass: "demo-ruleForm",
+              attrs: {
+                model: _vm.ruleForm,
+                rules: _vm.rules,
+                "label-width": "100px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "费用类别", prop: "type" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm.type,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "type", $$v)
+                        },
+                        expression: "ruleForm.type"
+                      }
+                    },
+                    _vm._l(_vm.feeCage, function(item) {
+                      return _c("el-option", {
+                        key: item.id,
+                        attrs: { label: item.name, value: item.id }
+                      })
+                    })
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "费用名称\n", prop: "name" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "name", $$v)
+                      },
+                      expression: "ruleForm.name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "费用代码\n", prop: "code" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm.code,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "code", $$v)
+                      },
+                      expression: "ruleForm.code"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "是否默认\n", prop: "default" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择是或否" },
+                      model: {
+                        value: _vm.ruleForm.default,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "default", $$v)
+                        },
+                        expression: "ruleForm.default"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "否", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "是", value: "1" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "类别备注\n", prop: "mark" } },
+                [
+                  _c("el-input", {
+                    attrs: { type: "textarea", placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm.mark,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "mark", $$v)
+                      },
+                      expression: "ruleForm.mark"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态", prop: "status" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm.status,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm, "status", $$v)
+                        },
+                        expression: "ruleForm.status"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "停用", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "启用", value: "1" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitForm("ruleForm")
+                    }
+                  }
+                },
+                [_vm._v("添加")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.resetForm("ruleForm")
+                    }
+                  }
+                },
+                [_vm._v("重置")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: { title: "新增费用类别", visible: _vm.showCage },
+          on: {
+            "update:visible": function($event) {
+              _vm.showCage = $event
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "ruleForm2",
+              staticClass: "demo-ruleForm",
+              attrs: {
+                model: _vm.ruleForm2,
+                rules: _vm.rules2,
+                "label-width": "100px"
+              }
+            },
+            [
+              _c(
+                "el-form-item",
+                { attrs: { label: "费用名称\n", prop: "name" } },
+                [
+                  _c("el-input", {
+                    attrs: { placehold: "请输入标记名称" },
+                    model: {
+                      value: _vm.ruleForm2.name,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm2, "name", $$v)
+                      },
+                      expression: "ruleForm2.name"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { placeholder: "请选择状态" },
+                      model: {
+                        value: _vm.ruleForm2.status,
+                        callback: function($$v) {
+                          _vm.$set(_vm.ruleForm2, "status", $$v)
+                        },
+                        expression: "ruleForm2.status"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { label: "停用", value: "0" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { label: "启用", value: "1" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitForm2("ruleForm2")
+                    }
+                  }
+                },
+                [_vm._v("添加")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.resetForm("ruleForm2")
+                    }
+                  }
+                },
+                [_vm._v("重置")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { ref: "pagination", attrs: { id: "page" } },
+        [
+          _c("el-pagination", {
+            attrs: {
+              "current-page": _vm.pagination.current_page,
+              "page-size": _vm.pagination.per_page,
+              layout: "total, prev, pager, next, jumper",
+              total: _vm.pagination.total
+            },
+            on: { "current-change": _vm.handleCurrentChange }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "el-popover",
@@ -1293,17 +1912,52 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.showPage
-        ? _c(
+      _c(
+        "el-popover",
+        {
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.showDel2,
+            callback: function($$v) {
+              _vm.showDel2 = $$v
+            },
+            expression: "showDel2"
+          }
+        },
+        [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
+          _c(
             "div",
+            { staticStyle: { "text-align": "right", margin: "0" } },
             [
-              _c("Pagination", {
-                attrs: { "page-url": _vm.url[_vm.activeName] }
-              })
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD2(_vm.delId)
+                    }
+                  }
+                },
+                [_vm._v("确定")]
+              )
             ],
             1
           )
-        : _c("div")
+        ]
+      )
     ],
     1
   )
@@ -1314,7 +1968,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-82f1fe6a", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-0fb355e6", module.exports)
   }
 }
 

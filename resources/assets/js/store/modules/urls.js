@@ -1,5 +1,6 @@
 const urls= {
   state: {
+    testUrl: 'http://bferp.test/#/api',
     captchas:'/captchas',
     markcolors:'/markcolors',
     acctypes:'/acctypes',
@@ -19,8 +20,8 @@ const urls= {
     printreports:'/printreports',
     platforms:'/platforms',
     departments:'/departments',
-    goods:'/goods',
-    productspecs:'/productspecs',
+    products:'/products',
+    productcomponents:'/productcomponents',
     combinations:'/combinations',
     goodsdownloads:'/goodsdownloads',
     orderdownloads:'/orderdownloads',
@@ -40,6 +41,8 @@ const urls= {
     authorizations:'/authorizations',
     me:'/me',
     current:'/current',
+    uploadimages:'/uploadimages',
+
   }
 };
 
