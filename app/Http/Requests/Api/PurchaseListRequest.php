@@ -47,26 +47,31 @@ class PurchaseListRequest extends FormRequest
                         Rule::exists('combinations', 'id'),
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
-                            //判断是否存在purchase_lists.*.id   //数据是否匹配
-                            if ($id = $this->purchase_lists[$ex[1]]['id'] ?? null){
-                                if (\App\Models\PurchaseList::findOrfail($id)->combinations_id == $value){
-                                    return true;
-                                }
+
+                            //表单数据是否匹配 list里面是否存在重复的sku
+                            if (collect($this->purchase_lists)->where('combinations_id',$value)->count() > 1) {
+                                return $fail('存在重复数据');
                             }
 
-                            //模型里面是否存在这个sku
-                            if(!$this->purchase->purchaseLists->where('combinations_id',$value)->count()){
-                                //list里面是否存在重复的sku
-                                if(
-                                    !(collect($this->purchase_lists)
-                                        ->where('combinations_id',$value)
-                                        ->count()>1)
-                                ){
-                                    return true;
-                                }
+                            //模型数据是否匹配
+                            if (
+                                !(
+                                    //是否存id
+                                    $this->purchase_lists[$ex[1]]['id'] ?? null
+                                    &&
+                                    //存在id则判断数据是否合法
+                                    $this->purchase->purchaseLists->findOrfail($this->purchase_lists[$ex[1]]['id'])
+                                        ->combinations_id == $value
+                                )
+                                ||
+                                //前一个条件不合法 则 判断 purchaseLists 模型里面 是否已经存在 sku
+                                ! $this->purchase->purchaseLists->where('combinations_id',$value)->count()
+
+                            ){
+                                return $fail('模型数据不匹配');
                             }
 
-                            return $fail('存在重复的组合数据');
+                            return true;
                         }
                     ],
                     'purchase_lists.*.remark' => ['string', 'nullable', 'max:255'],

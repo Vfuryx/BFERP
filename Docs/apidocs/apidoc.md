@@ -7473,15 +7473,14 @@ FORMAT: 1A
             {
                 "data": [
                     {
-                        "id": 10,
-                        "purchase_order_no": "PO2018081414495669619",
+                        "id": 12,
+                        "purchase_order_no": "PO2018081515073602909",
                         "purchase_status": "新建",
                         "order_no": "",
                         "user_id": 1,
                         "print_at": null,
                         "receiver": "收货人3",
                         "receiver_address": "收货地址3",
-                        "warehouse_id": 1,
                         "promise_ship_time": null,
                         "business_personnel": "",
                         "source": "",
@@ -7496,18 +7495,25 @@ FORMAT: 1A
                         "status": true,
                         "purchase_lists": [
                             {
-                                "id": 7,
-                                "purchases_id": 10,
+                                "id": 10,
+                                "purchases_id": 12,
                                 "combinations_id": 7,
                                 "remark": "备注",
-                                "created_at": "2018-08-14 14:49:56",
-                                "updated_at": "2018-08-14 14:49:56",
+                                "created_at": "2018-08-15 15:07:36",
+                                "updated_at": "2018-08-15 15:07:36",
+                                "combinations": {
+                                    "id": 7,
+                                    "pid": 28,
+                                    "name": "skuName1",
+                                    "created_at": "2018-08-14 14:28:30",
+                                    "updated_at": "2018-08-14 14:28:30"
+                                },
                                 "purchase_details": [
                                     {
-                                        "id": 6,
-                                        "purchase_lists_id": 7,
+                                        "id": 13,
+                                        "purchase_lists_id": 10,
                                         "purchase_item_status": "新建",
-                                        "product_components_id": 10,
+                                        "product_components_id": 11,
                                         "purchase_quantity": 10,
                                         "stock_in_count": 0,
                                         "shops_id": 1,
@@ -7519,9 +7525,52 @@ FORMAT: 1A
                                         "discount": "10.00",
                                         "wooden_frame_costs": "1.00",
                                         "arrival_time": "2018-06-10 00:00:00",
-                                        "remark": "备注",
-                                        "created_at": "2018-08-14 14:49:56",
-                                        "updated_at": "2018-08-14 14:49:56"
+                                        "remark": "备注10",
+                                        "created_at": "2018-08-15 15:07:37",
+                                        "updated_at": "2018-08-15 15:07:37",
+                                        "product_component": {
+                                            "id": 11,
+                                            "pid": 29,
+                                            "component_code": "子件编码4",
+                                            "jd_component_code": "京东子件编码",
+                                            "vips_component_code": "唯品会子件编码",
+                                            "tb_price": "10.00",
+                                            "cost": "10.00",
+                                            "price": "10.00",
+                                            "highest_price": "10.00",
+                                            "lowest_price": "10.00",
+                                            "warehouse_cost": "10.00",
+                                            "assembly_price": "10.00",
+                                            "discount": "1.00",
+                                            "commission": "1.00",
+                                            "is_common": true,
+                                            "package_quantity": 10,
+                                            "package_costs": "10.00",
+                                            "wooden_frame_costs": "10.00",
+                                            "purchase_freight": "10.00",
+                                            "inventory_warning": 10,
+                                            "purchase_days_warning": 10,
+                                            "available_warning": 10,
+                                            "distribution_method_id": 12,
+                                            "bar_code": "1010",
+                                            "img_url": "/images/uploads/201808/15/1_1534304380_nWo7tqoZ2T.jpg",
+                                            "spec": "规格",
+                                            "color": "颜色",
+                                            "materials": "材质",
+                                            "function": "功能",
+                                            "special": "特殊",
+                                            "other": "其他",
+                                            "longness": 10,
+                                            "width": 10,
+                                            "height": 10,
+                                            "volume": 10,
+                                            "weight": 10,
+                                            "remark": "备注",
+                                            "finished_pro": true,
+                                            "is_stop_pro": true,
+                                            "created_at": "2018-08-14 15:08:54",
+                                            "updated_at": "2018-08-15 11:39:45"
+                                        }
                                     }
                                 ]
                             }
@@ -7549,7 +7598,6 @@ FORMAT: 1A
 + Parameters
     + receiver: (string, required) - 收货人
     + receiver_address: (string, required) - 收货地址
-    + warehouse_id: (integer, required) - 仓库id
     + remark: (string, optional) - 备注
     + status: (boolean, optional) - 状态(false:停用,true:启用)
         + Default: 1
@@ -7575,7 +7623,6 @@ FORMAT: 1A
                 {
                     "receiver": "收货人",
                     "receiver_address": "收货地址",
-                    "warehouse_id": "1",
                     "remark": "备注",
                     "status": true,
                     "purchase_lists[0][combinations_id]": 9,
@@ -7612,15 +7659,14 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 10,
-                "purchase_order_no": "PO2018081414495669619",
+                "id": 12,
+                "purchase_order_no": "PO2018081515073602909",
                 "purchase_status": "新建",
                 "order_no": "",
                 "user_id": 1,
                 "print_at": null,
                 "receiver": "收货人3",
                 "receiver_address": "收货地址3",
-                "warehouse_id": 1,
                 "promise_ship_time": null,
                 "business_personnel": "",
                 "source": "",
@@ -7635,18 +7681,25 @@ FORMAT: 1A
                 "status": true,
                 "purchase_lists": [
                     {
-                        "id": 7,
-                        "purchases_id": 10,
+                        "id": 10,
+                        "purchases_id": 12,
                         "combinations_id": 7,
                         "remark": "备注",
-                        "created_at": "2018-08-14 14:49:56",
-                        "updated_at": "2018-08-14 14:49:56",
+                        "created_at": "2018-08-15 15:07:36",
+                        "updated_at": "2018-08-15 15:07:36",
+                        "combinations": {
+                            "id": 7,
+                            "pid": 28,
+                            "name": "skuName1",
+                            "created_at": "2018-08-14 14:28:30",
+                            "updated_at": "2018-08-14 14:28:30"
+                        },
                         "purchase_details": [
                             {
-                                "id": 6,
-                                "purchase_lists_id": 7,
+                                "id": 13,
+                                "purchase_lists_id": 10,
                                 "purchase_item_status": "新建",
-                                "product_components_id": 10,
+                                "product_components_id": 11,
                                 "purchase_quantity": 10,
                                 "stock_in_count": 0,
                                 "shops_id": 1,
@@ -7658,9 +7711,52 @@ FORMAT: 1A
                                 "discount": "10.00",
                                 "wooden_frame_costs": "1.00",
                                 "arrival_time": "2018-06-10 00:00:00",
-                                "remark": "备注",
-                                "created_at": "2018-08-14 14:49:56",
-                                "updated_at": "2018-08-14 14:49:56"
+                                "remark": "备注10",
+                                "created_at": "2018-08-15 15:07:37",
+                                "updated_at": "2018-08-15 15:07:37",
+                                "product_component": {
+                                    "id": 11,
+                                    "pid": 29,
+                                    "component_code": "子件编码4",
+                                    "jd_component_code": "京东子件编码",
+                                    "vips_component_code": "唯品会子件编码",
+                                    "tb_price": "10.00",
+                                    "cost": "10.00",
+                                    "price": "10.00",
+                                    "highest_price": "10.00",
+                                    "lowest_price": "10.00",
+                                    "warehouse_cost": "10.00",
+                                    "assembly_price": "10.00",
+                                    "discount": "1.00",
+                                    "commission": "1.00",
+                                    "is_common": true,
+                                    "package_quantity": 10,
+                                    "package_costs": "10.00",
+                                    "wooden_frame_costs": "10.00",
+                                    "purchase_freight": "10.00",
+                                    "inventory_warning": 10,
+                                    "purchase_days_warning": 10,
+                                    "available_warning": 10,
+                                    "distribution_method_id": 12,
+                                    "bar_code": "1010",
+                                    "img_url": "/images/uploads/201808/15/1_1534304380_nWo7tqoZ2T.jpg",
+                                    "spec": "规格",
+                                    "color": "颜色",
+                                    "materials": "材质",
+                                    "function": "功能",
+                                    "special": "特殊",
+                                    "other": "其他",
+                                    "longness": 10,
+                                    "width": 10,
+                                    "height": 10,
+                                    "volume": 10,
+                                    "weight": 10,
+                                    "remark": "备注",
+                                    "finished_pro": true,
+                                    "is_stop_pro": true,
+                                    "created_at": "2018-08-14 15:08:54",
+                                    "updated_at": "2018-08-15 11:39:45"
+                                }
                             }
                         ]
                     }
@@ -7685,15 +7781,14 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 10,
-                "purchase_order_no": "PO2018081414495669619",
+                "id": 12,
+                "purchase_order_no": "PO2018081515073602909",
                 "purchase_status": "新建",
                 "order_no": "",
                 "user_id": 1,
                 "print_at": null,
                 "receiver": "收货人3",
                 "receiver_address": "收货地址3",
-                "warehouse_id": 1,
                 "promise_ship_time": null,
                 "business_personnel": "",
                 "source": "",
@@ -7708,18 +7803,25 @@ FORMAT: 1A
                 "status": true,
                 "purchase_lists": [
                     {
-                        "id": 7,
-                        "purchases_id": 10,
+                        "id": 10,
+                        "purchases_id": 12,
                         "combinations_id": 7,
                         "remark": "备注",
-                        "created_at": "2018-08-14 14:49:56",
-                        "updated_at": "2018-08-14 14:49:56",
+                        "created_at": "2018-08-15 15:07:36",
+                        "updated_at": "2018-08-15 15:07:36",
+                        "combinations": {
+                            "id": 7,
+                            "pid": 28,
+                            "name": "skuName1",
+                            "created_at": "2018-08-14 14:28:30",
+                            "updated_at": "2018-08-14 14:28:30"
+                        },
                         "purchase_details": [
                             {
-                                "id": 6,
-                                "purchase_lists_id": 7,
+                                "id": 13,
+                                "purchase_lists_id": 10,
                                 "purchase_item_status": "新建",
-                                "product_components_id": 10,
+                                "product_components_id": 11,
                                 "purchase_quantity": 10,
                                 "stock_in_count": 0,
                                 "shops_id": 1,
@@ -7731,9 +7833,52 @@ FORMAT: 1A
                                 "discount": "10.00",
                                 "wooden_frame_costs": "1.00",
                                 "arrival_time": "2018-06-10 00:00:00",
-                                "remark": "备注",
-                                "created_at": "2018-08-14 14:49:56",
-                                "updated_at": "2018-08-14 14:49:56"
+                                "remark": "备注10",
+                                "created_at": "2018-08-15 15:07:37",
+                                "updated_at": "2018-08-15 15:07:37",
+                                "product_component": {
+                                    "id": 11,
+                                    "pid": 29,
+                                    "component_code": "子件编码4",
+                                    "jd_component_code": "京东子件编码",
+                                    "vips_component_code": "唯品会子件编码",
+                                    "tb_price": "10.00",
+                                    "cost": "10.00",
+                                    "price": "10.00",
+                                    "highest_price": "10.00",
+                                    "lowest_price": "10.00",
+                                    "warehouse_cost": "10.00",
+                                    "assembly_price": "10.00",
+                                    "discount": "1.00",
+                                    "commission": "1.00",
+                                    "is_common": true,
+                                    "package_quantity": 10,
+                                    "package_costs": "10.00",
+                                    "wooden_frame_costs": "10.00",
+                                    "purchase_freight": "10.00",
+                                    "inventory_warning": 10,
+                                    "purchase_days_warning": 10,
+                                    "available_warning": 10,
+                                    "distribution_method_id": 12,
+                                    "bar_code": "1010",
+                                    "img_url": "/images/uploads/201808/15/1_1534304380_nWo7tqoZ2T.jpg",
+                                    "spec": "规格",
+                                    "color": "颜色",
+                                    "materials": "材质",
+                                    "function": "功能",
+                                    "special": "特殊",
+                                    "other": "其他",
+                                    "longness": 10,
+                                    "width": 10,
+                                    "height": 10,
+                                    "volume": 10,
+                                    "weight": 10,
+                                    "remark": "备注",
+                                    "finished_pro": true,
+                                    "is_stop_pro": true,
+                                    "created_at": "2018-08-14 15:08:54",
+                                    "updated_at": "2018-08-15 11:39:45"
+                                }
                             }
                         ]
                     }
@@ -7746,7 +7891,6 @@ FORMAT: 1A
 + Parameters
     + receiver: (string, optional) - 收货人
     + receiver_address: (string, optional) - 收货地址
-    + warehouse_id: (integer, optional) - 仓库id
     + remark: (string, optional) - 备注
     + status: (boolean, optional) - 状态(false:停用,true:启用)
         + Default: 
@@ -7772,7 +7916,6 @@ FORMAT: 1A
                 {
                     "receiver": "收货人",
                     "receiver_address": "收货地址",
-                    "warehouse_id": "1",
                     "remark": "备注",
                     "status": true,
                     "purchase_lists[0][combinations_id]": 9,
@@ -7811,9 +7954,6 @@ FORMAT: 1A
                     ],
                     "receiver_address": [
                         "收货地址必填"
-                    ],
-                    "warehouse_id": [
-                        "仓库id必须int类型"
                     ]
                 },
                 "status_code": 422
@@ -7823,15 +7963,14 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 10,
-                "purchase_order_no": "PO2018081414495669619",
+                "id": 12,
+                "purchase_order_no": "PO2018081515073602909",
                 "purchase_status": "新建",
                 "order_no": "",
                 "user_id": 1,
                 "print_at": null,
                 "receiver": "收货人3",
                 "receiver_address": "收货地址3",
-                "warehouse_id": 1,
                 "promise_ship_time": null,
                 "business_personnel": "",
                 "source": "",
@@ -7846,18 +7985,25 @@ FORMAT: 1A
                 "status": true,
                 "purchase_lists": [
                     {
-                        "id": 7,
-                        "purchases_id": 10,
+                        "id": 10,
+                        "purchases_id": 12,
                         "combinations_id": 7,
                         "remark": "备注",
-                        "created_at": "2018-08-14 14:49:56",
-                        "updated_at": "2018-08-14 14:49:56",
+                        "created_at": "2018-08-15 15:07:36",
+                        "updated_at": "2018-08-15 15:07:36",
+                        "combinations": {
+                            "id": 7,
+                            "pid": 28,
+                            "name": "skuName1",
+                            "created_at": "2018-08-14 14:28:30",
+                            "updated_at": "2018-08-14 14:28:30"
+                        },
                         "purchase_details": [
                             {
-                                "id": 6,
-                                "purchase_lists_id": 7,
+                                "id": 13,
+                                "purchase_lists_id": 10,
                                 "purchase_item_status": "新建",
-                                "product_components_id": 10,
+                                "product_components_id": 11,
                                 "purchase_quantity": 10,
                                 "stock_in_count": 0,
                                 "shops_id": 1,
@@ -7869,9 +8015,52 @@ FORMAT: 1A
                                 "discount": "10.00",
                                 "wooden_frame_costs": "1.00",
                                 "arrival_time": "2018-06-10 00:00:00",
-                                "remark": "备注",
-                                "created_at": "2018-08-14 14:49:56",
-                                "updated_at": "2018-08-14 14:49:56"
+                                "remark": "备注10",
+                                "created_at": "2018-08-15 15:07:37",
+                                "updated_at": "2018-08-15 15:07:37",
+                                "product_component": {
+                                    "id": 11,
+                                    "pid": 29,
+                                    "component_code": "子件编码4",
+                                    "jd_component_code": "京东子件编码",
+                                    "vips_component_code": "唯品会子件编码",
+                                    "tb_price": "10.00",
+                                    "cost": "10.00",
+                                    "price": "10.00",
+                                    "highest_price": "10.00",
+                                    "lowest_price": "10.00",
+                                    "warehouse_cost": "10.00",
+                                    "assembly_price": "10.00",
+                                    "discount": "1.00",
+                                    "commission": "1.00",
+                                    "is_common": true,
+                                    "package_quantity": 10,
+                                    "package_costs": "10.00",
+                                    "wooden_frame_costs": "10.00",
+                                    "purchase_freight": "10.00",
+                                    "inventory_warning": 10,
+                                    "purchase_days_warning": 10,
+                                    "available_warning": 10,
+                                    "distribution_method_id": 12,
+                                    "bar_code": "1010",
+                                    "img_url": "/images/uploads/201808/15/1_1534304380_nWo7tqoZ2T.jpg",
+                                    "spec": "规格",
+                                    "color": "颜色",
+                                    "materials": "材质",
+                                    "function": "功能",
+                                    "special": "特殊",
+                                    "other": "其他",
+                                    "longness": 10,
+                                    "width": 10,
+                                    "height": 10,
+                                    "volume": 10,
+                                    "weight": 10,
+                                    "remark": "备注",
+                                    "finished_pro": true,
+                                    "is_stop_pro": true,
+                                    "created_at": "2018-08-14 15:08:54",
+                                    "updated_at": "2018-08-15 11:39:45"
+                                }
                             }
                         ]
                     }

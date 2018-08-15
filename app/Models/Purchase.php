@@ -26,7 +26,7 @@ class Purchase extends Model
 
     protected $fillable = [
         'purchase_order_no', 'receiver', 'receiver_address',
-        'remark', 'warehouse_id', 'order_no', 'user_id', 'promise_ship_time',
+        'remark', 'order_no', 'user_id', 'promise_ship_time',
         'business_personnel', 'source', 'client_name', 'buyer_nick',
         'status',
     ];

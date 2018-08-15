@@ -29,12 +29,6 @@ class PurchaseRequest extends FormRequest
                 return [
                     'receiver' => 'required|string|max:255',
                     'receiver_address' => 'required|string|max:255',
-                    'warehouse_id' => [
-                        'required', 'integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
                     'remark' => 'string|nullable|max:255',
                     'status' => 'boolean',
                 ];
@@ -43,12 +37,6 @@ class PurchaseRequest extends FormRequest
                 return [
                     'receiver' => ['string', 'max:255', ],
                     'receiver_address' => ['string', 'max:255'],
-                    'warehouse_id' => [
-                        'integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        })
-                    ],
                     'remark' => ['string', 'nullable', 'max:255'],
                     'status' => ['boolean'],
                 ];
