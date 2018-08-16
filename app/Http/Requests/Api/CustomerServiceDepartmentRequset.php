@@ -72,10 +72,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             //判断是否相等
                             if (
                                 bccomp(
-                                    bcadd(
-                                        bcadd($this->deliver_goods_fee,
-                                            $this->move_upstairs_fee),
-                                        $this->installation_fee),
+                                    bcadd(bcadd($this->deliver_goods_fee, $this->move_upstairs_fee), $this->installation_fee),
                                     $value
                                 ) == 0
                             ){
@@ -93,9 +90,9 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'service_car_info' => 'string|max:255',
-                    'get_goods_fee' => 'numeric',
+                    'take_delivery_goods_fee' => 'numeric',
 
-                    'get_goods_ways_id' => '提货方式',
+                    'take_delivery_goods_ways_id' => '提货方式',
 
                     'express_fee' => 'numeric',
                     'service_car_fee' => 'numeric',
@@ -132,6 +129,28 @@ class CustomerServiceDepartmentRequset extends FormRequest
                     'seller_remark' => 'string|max:255',
                     'customer_service_remark' => 'string|max:255',
                     'buyer_message' => 'string|max:255',
+                    'order_items.*.products_id' =>  [
+                        'required', 'integer',
+                        Rule::exists('products', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'order_items.*.combinations_id' =>  [
+                        'required', 'integer',
+                        Rule::exists('combinations', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
+                    'order_items.*.quantity' => 'required|numeric',
+                    'order_items.*.total_volume' => 'numeric',
+                    'order_items.*.paint' => 'string|max:255',
+                    'order_items.*.is_printing' => 'boolean',
+                    'order_items.*.printing_fee' => 'numeric',
+                    'order_items.*.is_spot_goods' => 'boolean',
+                    'order_items.*.under_line_univalent' => 'numeric',
+                    'order_items.*.under_line_total_amount' => 'numeric',
+                    'order_items.*.under_line_preferential' => 'numeric',
+                    'order_items.*.under_line_payment' => 'numeric',
                 ];
                 break;
             case 'PATCH':
@@ -168,8 +187,8 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'distribution_no' => '配送单号',
             'distribution_types_id' => '配送类型id',
             'service_car_info' => '服务车信息（配送信息）',
-            'get_goods_fee' => '提货费用',
-            'get_goods_ways_id' => '提货方式',
+            'take_delivery_goods_fee' => '提货费用',
+            'take_delivery_goods_ways_id' => '提货方式',
             'express_fee' => '快递费用',
             'service_car_fee' => '服务车金额（家装服务）',
             'cancel_after_verification_code' => '核销码',
@@ -219,8 +238,8 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'distribution_no' => '配送单号',
             'distribution_types_id' => '配送类型id',
             'service_car_info' => '服务车信息（配送信息）',
-            'get_goods_fee' => '提货费用',
-            'get_goods_ways_id' => '提货方式',
+            'take_delivery_goods_fee' => '提货费用',
+            'take_delivery_goods_ways_id' => '提货方式',
             'express_fee' => '快递费用',
             'service_car_fee' => '服务车金额（家装服务）',
             'cancel_after_verification_code' => '核销码',

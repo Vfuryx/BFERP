@@ -59,7 +59,6 @@ class Order extends Model
         self::ORDER_RETURN_FD_AUDIT => '退回财审',
         self::ORDER_RETURN_CARGO_AUDIT => '退回货审',
         self::ORDER_RETURN_STOCK_OUT_TO_CS => '打印退回客审',
-
     ];
 
     //订单操作详情
@@ -98,7 +97,7 @@ class Order extends Model
         'freight_types_id', 'expected_freight', 'distributions_id', 'distribution_methods_id',
         'deliver_goods_fee', 'move_upstairs_fee', 'installation_fee', 'total_distribution_fee',
         'distribution_phone', 'distribution_no', 'distribution_types_id', 'service_car_info',
-        'get_goods_fee', 'get_goods_ways_id', 'express_fee', 'service_car_fee', 'cancel_after_verification_code',
+        'take_delivery_goods_fee', 'take_delivery_goods_ways_id', 'express_fee', 'service_car_fee', 'cancel_after_verification_code',
         'wooden_frame_costs', 'preferential_cashback', 'favorable_cashback', 'customer_types_id',
         'is_invoice', 'invoice_express_fee', 'express_invoice_title', 'contract_no', 'payment_methods_id',
         'deposit', 'document_title', 'warehouses_id', 'payment_date', 'interest_concessions', 'is_notice',
@@ -143,5 +142,9 @@ class Order extends Model
         return $this->belongsTo(DistributionMethod::class,'distribution_methods_id');
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'orders_id');
+    }
 
 }

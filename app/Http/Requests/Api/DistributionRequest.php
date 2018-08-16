@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use Illuminate\Validation\Rule;
-
 class DistributionRequest extends FormRequest
 {
     /**

@@ -16,11 +16,11 @@ class CreateOrderItemsTable extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('orders_id')->comment('订单id');
-            $table->unsignedInteger('goods_id')->comment('商品id');
-            $table->unsignedInteger('product_specs_id')->comment('产品规格id');
+            $table->unsignedInteger('products_id')->comment('产品id');
+            $table->unsignedInteger('combinations_id')->comment('组合id');
             $table->integer('quantity')->default(0)->comment("数量");
-            $table->float('total_volume')->comment('总体积');
-            $table->string('paint')->comment("油漆");
+            $table->float('total_volume')->default(0.00)->comment('总体积');
+            $table->string('paint')->default('')->comment("油漆");
             $table->boolean('is_printing')->default(false)->comment('是否需要印刷');
             $table->decimal('printing_fee')->default(0.00)->comment('印刷费用');
             $table->boolean('is_spot_goods')->default(false)->comment('是否现货');

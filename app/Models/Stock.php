@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Dingo\Api\Exception\UpdateResourceFailedException;
-use phpDocumentor\Reflection\Types\Integer;
 
 class Stock extends Model
 {

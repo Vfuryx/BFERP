@@ -606,6 +606,23 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('purchasereturndetails', 'PurchaseReturnDetailsController@destroybyids')
             ->name('api.purchasereturndetails.destroybyids');
 
+        //提货方式类型
+        $api->get('takedeliverygoodsways', 'TakeDeliveryGoodsWaysController@index')
+            ->name('api.takedeliverygoodsways.index');
+        $api->get('takedeliverygoodsways/{takedeliverygoodsway}', 'TakeDeliveryGoodsWaysController@show')
+            ->name('api.takedeliverygoodsways.show');
+        $api->post('takedeliverygoodsways', 'TakeDeliveryGoodsWaysController@store')
+            ->name('api.takedeliverygoodsways.store');
+        $api->patch('takedeliverygoodsways/{takedeliverygoodsway}', 'TakeDeliveryGoodsWaysController@update')
+            ->name('api.takedeliverygoodsways.update');
+        $api->delete('takedeliverygoodsways/{takedeliverygoodsway}', 'TakeDeliveryGoodsWaysController@destroy')
+            ->name('api.takedeliverygoodsways.destroy');
+        $api->delete('takedeliverygoodsways', 'TakeDeliveryGoodsWaysController@destroybyids')
+            ->name('api.takedeliverygoodsways.destroybyids');
+        $api->put('takedeliverygoodsways/editstatus', 'TakeDeliveryGoodsWaysController@editStatusByIds')
+            ->name('api.takedeliverygoodsways.editstatusbyids');
+
+
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')
             ->name('api.uploadimages.store');

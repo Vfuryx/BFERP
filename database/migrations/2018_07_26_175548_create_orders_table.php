@@ -34,8 +34,8 @@ class CreateOrdersTable extends Migration
             $table->string('distribution_no')->default('')->comment('配送单号');
             $table->unsignedInteger('distribution_types_id')->comment('配送类型id');
             $table->string('service_car_info')->default('')->comment('服务车信息（配送信息）');
-            $table->decimal('get_goods_fee', 10 ,2)->default(0.00)->comment('提货费用');
-            $table->unsignedInteger('get_goods_ways_id')->default(0)->comment('提货方式');
+            $table->decimal('take_delivery_goods_fee', 10 ,2)->default(0.00)->comment('提货费用');
+            $table->unsignedInteger('take_delivery_goods_ways_id')->default(0)->comment('提货方式');
             $table->decimal('express_fee', 10 ,2)->default(0.00)->comment('快递费用');
             $table->decimal('service_car_fee', 10 ,2)->default(0.00)->comment('服务车金额（家装服务）');
             $table->string('cancel_after_verification_code')->default('')->comment('核销码');

@@ -38,15 +38,15 @@ class StockInTypeRequest extends FormRequest
         return [
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
-            'name.required' => '入库类型名称必填',
-            'name.string' => '入库类型名称必须string类型',
+            'name.required' => '提货方式名称必填',
+            'name.string' => '提货方式名称必须string类型',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '入库类型名称',
+            'name' => '提货方式名称',
             'status' => '状态'
         ];
     }

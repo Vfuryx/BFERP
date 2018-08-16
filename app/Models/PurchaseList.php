@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Dingo\Api\Exception\UpdateResourceFailedException;
-
 class PurchaseList extends Model
 {
     protected $table = "purchase_lists";

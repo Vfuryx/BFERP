@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Models\ProductSpec;
 use Illuminate\Validation\Rule;
 
 class StockRequest extends FormRequest

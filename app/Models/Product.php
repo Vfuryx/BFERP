@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Product extends Model
 {
     protected $table = 'products';
@@ -48,5 +46,10 @@ class Product extends Model
     public function stock()
     {
         return $this->hasMany(Stock::class, 'products_id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'products_id');
     }
 }

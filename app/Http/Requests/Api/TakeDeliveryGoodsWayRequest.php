@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\Api;
 
-class FreightTypeRequest extends FormRequest
+class TakeDeliveryGoodsWayRequest extends FormRequest
 {
-
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,14 +21,12 @@ class FreightTypeRequest extends FormRequest
             case 'POST':
                 return [
                     'name' => 'required|string',
-                    'is_default' => 'boolean',
                     'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
                     'name' => 'string',
-                    'is_default' => 'boolean',
                     'status' => 'boolean',
                 ];
                 break;
@@ -41,18 +38,16 @@ class FreightTypeRequest extends FormRequest
         return [
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
-            'name.required' => '运费名称必填',
-            'name.string' => '运费名称必须string类型',
-            'is_default.boolean' => '是否默认必须布尔类型',
+            'name.required' => '入库类型名称必填',
+            'name.string' => '入库类型名称必须string类型',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '运费名称',
-            'is_default' => '是否默认',
-            'status' => '记账类型状态'
+            'name' => '入库类型名称',
+            'status' => '状态'
         ];
     }
 }

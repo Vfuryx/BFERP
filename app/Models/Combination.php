@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class Combination extends Model
 {
     protected $table = 'combinations';
@@ -20,6 +18,11 @@ class Combination extends Model
     public function product()
     {
         return $this->belongsTo(Product::class, 'pid');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'combinations_id');
     }
 
 }
