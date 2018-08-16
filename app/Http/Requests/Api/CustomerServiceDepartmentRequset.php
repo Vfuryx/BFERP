@@ -92,8 +92,12 @@ class CustomerServiceDepartmentRequset extends FormRequest
                     'service_car_info' => 'string|max:255',
                     'take_delivery_goods_fee' => 'numeric',
 
-                    'take_delivery_goods_ways_id' => '提货方式',
-
+                    'take_delivery_goods_ways_id' => [
+                        'required', 'integer',
+                        Rule::exists('take_delivery_goods_ways', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
                     'express_fee' => 'numeric',
                     'service_car_fee' => 'numeric',
                     'cancel_after_verification_code' => 'string|max:255',

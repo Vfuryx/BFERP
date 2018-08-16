@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-class TakeDeliveryGoodsWay extends Model
+class PaymentMethod extends Model
 {
-    protected $table = 'take_delivery_goods_ways';
+    protected $table = 'payment_methods';
 
     protected $fillable = [
         'name', 'status'

@@ -606,7 +606,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('purchasereturndetails', 'PurchaseReturnDetailsController@destroybyids')
             ->name('api.purchasereturndetails.destroybyids');
 
-        //提货方式类型
+        //提货方式
         $api->get('takedeliverygoodsways', 'TakeDeliveryGoodsWaysController@index')
             ->name('api.takedeliverygoodsways.index');
         $api->get('takedeliverygoodsways/{takedeliverygoodsway}', 'TakeDeliveryGoodsWaysController@show')
@@ -621,6 +621,38 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.takedeliverygoodsways.destroybyids');
         $api->put('takedeliverygoodsways/editstatus', 'TakeDeliveryGoodsWaysController@editStatusByIds')
             ->name('api.takedeliverygoodsways.editstatusbyids');
+
+        //付款方式
+        $api->get('paymentmethods', 'PaymentMethodsController@index')
+            ->name('api.paymentmethods.index');
+        $api->get('paymentmethods/{paymentmethod}', 'PaymentMethodsController@show')
+            ->name('api.paymentmethods.show');
+        $api->post('paymentmethods', 'PaymentMethodsController@store')
+            ->name('api.paymentmethods.store');
+        $api->patch('paymentmethods/{paymentmethod}', 'PaymentMethodsController@update')
+            ->name('api.paymentmethods.update');
+        $api->delete('paymentmethods/{paymentmethod}', 'PaymentMethodsController@destroy')
+            ->name('api.paymentmethods.destroy');
+        $api->delete('paymentmethods', 'PaymentMethodsController@destroybyids')
+            ->name('api.paymentmethods.destroybyids');
+        $api->put('paymentmethods/editstatus', 'PaymentMethodsController@editStatusByIds')
+            ->name('api.paymentmethods.editstatusbyids');
+
+        //客户类型
+        $api->get('customertypes', 'CustomerTypesController@index')
+            ->name('api.customertypes.index');
+        $api->get('customertypes/{customertype}', 'CustomerTypesController@show')
+            ->name('api.customertypes.show');
+        $api->post('customertypes', 'CustomerTypesController@store')
+            ->name('api.customertypes.store');
+        $api->patch('customertypes/{customertype}', 'CustomerTypesController@update')
+            ->name('api.customertypes.update');
+        $api->delete('customertypes/{customertype}', 'CustomerTypesController@destroy')
+            ->name('api.customertypes.destroy');
+        $api->delete('customertypes', 'CustomerTypesController@destroybyids')
+            ->name('api.customertypes.destroybyids');
+        $api->put('customertypes/editstatus', 'CustomerTypesController@editStatusByIds')
+            ->name('api.customertypes.editstatusbyids');
 
 
         //上传图片
