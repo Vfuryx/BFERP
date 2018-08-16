@@ -579,8 +579,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchasereturns.isAudit');
         $api->put('purchasereturns/{purchasereturn}/print', 'PurchaseReturnsController@isPrint')
             ->name('api.purchasereturns.isprint');
-        $api->put('purchasereturns/{purchasereturn}/auditfaild', 'PurchaseReturnsController@isAuditFaild')
-            ->name('api.purchasereturns.isretrial');
+//        $api->put('purchasereturns/{purchasereturn}/auditfaild', 'PurchaseReturnsController@isAuditFaild')
+//            ->name('api.purchasereturns.isretrial');
 
         //采购退货类型
         $api->get('purchasereturntypes', 'PurchaseReturnTypesController@index')

@@ -9,6 +9,7 @@ class PurchaseReturnTransformer extends TransformerAbstract
 {
     public function transform(PurchaseReturn $purchaseReturn)
     {
+        $purchaseReturn = $purchaseReturn->load('purchaseReturnDetails.stock', 'purchaseReturnDetails.supplier', 'purchaseReturnDetails.purchaseReturnType');
         return [
             'id' => $purchaseReturn->id,
             'purchase_return_no' => $purchaseReturn->purchase_return_no,
@@ -22,7 +23,7 @@ class PurchaseReturnTransformer extends TransformerAbstract
             'is_print' => $purchaseReturn->is_print,
             'remark' => $purchaseReturn->remark,
             'status' => $purchaseReturn->status,
-            'purchase_return_details' => $purchaseReturn->purchaseReturnDetails()->with('stock','supplier','purchaseReturnType')->get(),
+            'purchase_return_details' => $purchaseReturn->purchaseReturnDetails,
             'created_at' => $purchaseReturn->created_at
                                     ->toDateTimeString(),
             'updated_at' => $purchaseReturn->updated_at

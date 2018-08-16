@@ -9,7 +9,7 @@ use App\Transformers\PurchaseReturnDetailTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
 /**
- * 取消采购单详情资源
+ * 采购退货单详情资源
  * @Resource("purchasereturndetails",uri="/api")
  */
 class PurchaseReturnDetailsController extends Controller
@@ -20,7 +20,7 @@ class PurchaseReturnDetailsController extends Controller
     const MODEL = PurchaseReturnDetail::class;
 
     /**
-     * 获取所有取消采购单详情
+     * 获取所有采购退货单详情
      *
      * @Get("/purchasereturndetails{?status}")
      * @Versions({"v1"})
@@ -114,7 +114,7 @@ class PurchaseReturnDetailsController extends Controller
 
 
     /**
-     * 删除取消采购单详情
+     * 删除采购退货单详情
      *
      * @Delete("/purchasereturndetails/:id")
      * @Versions({"v1"})
@@ -132,12 +132,12 @@ class PurchaseReturnDetailsController extends Controller
     }
 
     /**
-     * 删除一组取消采购单详情
+     * 删除一组采购退货单详情
      *
      * @Delete("/purchasereturndetails")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="取消采购单详情id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="采购退货单详情id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(500, body={

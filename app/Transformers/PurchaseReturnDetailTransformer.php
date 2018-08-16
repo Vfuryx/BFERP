@@ -9,6 +9,7 @@ class PurchaseReturnDetailTransformer extends TransformerAbstract
 {
     public function transform(PurchaseReturnDetail $purchaseReturnDetail)
     {
+        $purchaseReturnDetail = $purchaseReturnDetail->load('purchaseReturn', 'stock', 'supplier', 'purchaseReturnType');
         return [
             'id' => $purchaseReturnDetail->id,
             'purchase_return' => $purchaseReturnDetail->purchaseReturn,

@@ -243,26 +243,15 @@ class PurchaseReturnsController extends Controller
                           PurchaseReturnDetailRequest $purchaseReturnDetailRequest,
                           \App\Handlers\ValidatedHandler $validatedHandler)
     {
-        $purchaseReturn = DB::transaction(function () use ($purchaseReturnRequest, $purchaseReturnDetailRequest, $validatedHandler) {
-
-            $purchaseReturn = PurchaseReturn::create($purchaseReturnRequest->validated());
-
-            if ($purchaseReturnDetails = $purchaseReturnDetailRequest->input('purchase_return_details')) {
-
-                foreach ($purchaseReturnDetails as $purchaseReturnDetail) {
-
-                    $purchaseReturn->purchaseReturnDetails()->create(
-                        $validatedHandler->getValidatedData($purchaseReturnDetailRequest->rules(), $purchaseReturnDetail)
-                    );
-                }
-            }
-            return $purchaseReturn;
-        });
-
-        return $this->response
-            ->item($purchaseReturn, new PurchaseReturnTransformer())
-            ->setStatusCode(201)
-            ->addMeta('status_code', '201');
+        $data[] = $purchaseReturnRequest->validated();
+        $data[] = $purchaseReturnDetailRequest->input('purchase_return_details');
+        return $this->traitJoint2Store(
+            $data,
+            'purchaseReturnDetails',
+            $purchaseReturnDetailRequest->rules(),
+            self::MODEL,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -523,40 +512,21 @@ class PurchaseReturnsController extends Controller
      */
     public function update(PurchaseReturnRequest $purchaseReturnRequest,
                            PurchaseReturnDetailRequest $purchaseReturnDetailRequest,
-                           PurchaseReturn $purchasereturn,
-                           \App\Handlers\ValidatedHandler $validatedHandler)
+                           PurchaseReturn $purchasereturn)
     {
         //判断是否提交
         if ($purchasereturn->is_submit)
             throw new UpdateResourceFailedException('已提交无法修改');
 
-        $purchasereturn = DB::transaction(function () use ($purchaseReturnRequest,
-                                                           $purchaseReturnDetailRequest,
-                                                           $purchasereturn,
-                                                           $validatedHandler) {
-
-            $purchasereturn->update($purchaseReturnRequest->validated());
-
-            if ($purchaseReturnDetails = $purchaseReturnDetailRequest->input('purchase_return_details')) {
-
-                foreach ($purchaseReturnDetails as $purchaseReturnDetail) {
-                    //过滤出经过验证的数据
-                    $data = $validatedHandler->getValidatedData($purchaseReturnDetailRequest->rules(), $purchaseReturnDetail);
-                    //存在id则更新，否则插入
-                    if (isset($purchaseReturnDetail['id'])) {
-                        $purchasereturn->purchaseReturnDetails()->findOrFail($data);
-                    } else {
-                        $purchasereturn->purchaseReturnDetails()->create($data);
-                    }
-                }
-            }
-            return $purchasereturn;
-        });
-
-        return $this->response
-            ->item($purchasereturn, new PurchaseReturnTransformer())
-            ->setStatusCode(201);
-
+        $data[] = $purchaseReturnRequest->validated();
+        $data[] = $purchaseReturnDetailRequest->input('purchase_return_details');
+        return $this->traitJoint2Update(
+            $data,
+            'purchaseReturnDetails',
+            $purchaseReturnDetailRequest->rules(),
+            $purchasereturn,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -574,18 +544,7 @@ class PurchaseReturnsController extends Controller
      */
     public function destroy(PurchaseReturn $purchasereturn)
     {
-        DB::transaction(function () use ($purchasereturn) {
-
-            $delitem = $purchasereturn->purchaseReturnDetails()->delete();
-
-            $del = $purchasereturn->delete();
-
-            if ($del === false || $delitem === false) {
-                throw new DeleteResourceFailedException('The given data was invalid.');
-            }
-        });
-
-        return $this->noContent();
+       return $this->traitJoint2Destroy($purchasereturn,'purchaseReturnDetails');
     }
 
     /**
@@ -616,19 +575,11 @@ class PurchaseReturnsController extends Controller
      */
     public function destroybyIds(DestroyRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-
-        DB::transaction(function () use ($ids) {
-            $delitem = \App\Models\PurchaseReturnDetail::whereIn('purchase_returns_id', $ids)->delete();
-
-            $del = PurchaseReturn::destroy($ids);
-
-            if ($delitem === false || $del === false) {
-                throw new DeleteResourceFailedException('The given data was invalid.');
-            }
-        });
-
-        return $this->errorResponse(204);
+        return $this->traitJoint2DestroybyIds(
+            $request->input('ids'),
+            'purchaseReturnDetails',
+            self::MODEL
+        );
     }
 
     /**
@@ -700,29 +651,29 @@ class PurchaseReturnsController extends Controller
     }
 
 
-    /**
-     * 退审
-     *
-     * @PUT("/purchasereturns/:id/auditfaild")
-     * @Versions({"v1"})
-     * @Transaction({
-     *      @Response(422, body={
-     *          "message": "无法退审",
-     *          "status_code": 422,
-     *      }),
-     *      @Response(204, body={})
-     * })
-     */
-    public function isAuditFaild(PurchaseReturn $purchasereturn)
-    {
-
-        return $this->traitAction($purchasereturn,
-            !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_audit,
-            '无法退审',
-            'auditFaild'
-        );
-
-    }
+//    /**
+//     * 退审
+//     *
+//     * @PUT("/purchasereturns/:id/auditfaild")
+//     * @Versions({"v1"})
+//     * @Transaction({
+//     *      @Response(422, body={
+//     *          "message": "无法退审",
+//     *          "status_code": 422,
+//     *      }),
+//     *      @Response(204, body={})
+//     * })
+//     */
+//    public function isAuditFaild(PurchaseReturn $purchasereturn)
+//    {
+//
+//        return $this->traitAction($purchasereturn,
+//            !$purchasereturn->status || !$purchasereturn->is_submit || $purchasereturn->is_audit,
+//            '无法退审',
+//            'auditFaild'
+//        );
+//
+//    }
 
     /**
      * 审核

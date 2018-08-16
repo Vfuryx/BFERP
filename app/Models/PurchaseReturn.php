@@ -71,16 +71,16 @@ class PurchaseReturn extends Model
         $this->save();
     }
 
-    /**
-     * 退审
-     */
-    public function auditFaild()
-    {
-        $this->is_submit = 0;
-        $this->submitter = '';
-        $this->submit_at = null;
-        $this->save();
-    }
+//    /**
+//     * 退审
+//     */
+//    public function auditFaild()
+//    {
+//        $this->is_submit = 0;
+//        $this->submitter = '';
+//        $this->submit_at = null;
+//        $this->save();
+//    }
 
     /**
      * 审核
