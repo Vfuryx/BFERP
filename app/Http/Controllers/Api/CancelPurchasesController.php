@@ -296,31 +296,11 @@ class CancelPurchasesController extends Controller
      * })
      */
     public function store(CancelPurchaseRequest $cancelPurchaseRequest,
-                          CancelPurchaseDetailRequest $cancelPurchaseDetailRequest,
-                          \App\Handlers\ValidatedHandler $validatedHandler)
+                          CancelPurchaseDetailRequest $cancelPurchaseDetailRequest)
     {
-        $cancelPurchase = DB::transaction(function () use ($cancelPurchaseRequest, $cancelPurchaseDetailRequest, $validatedHandler) {
-
-            $cancelPurchase = CancelPurchase::create($cancelPurchaseRequest->validated());
-
-            if ($cancelPurchaseDetails = $cancelPurchaseDetailRequest->input('cancel_purchase_details')) {
-
-                foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
-
-                    $cancelPurchase->cancelPurchaseDetails()->create(
-                        $validatedHandler->getValidatedData(
-                            $cancelPurchaseDetailRequest->rules(),
-                            $cancelPurchaseDetail)
-                    );
-                }
-            }
-            return $cancelPurchase;
-        });
-
-        return $this->response
-            ->item($cancelPurchase, new CancelPurchaseTransformer())
-            ->setStatusCode(201)
-            ->addMeta('status_code', '201');
+        $data[] = $cancelPurchaseRequest->validated();
+        $data[] = $cancelPurchaseDetailRequest->input('cancel_purchase_details');
+        return $this->traitJoint2Store($data,'cancelPurchaseDetails',$cancelPurchaseDetailRequest->rules(),self::MODEL,self::TRANSFORMER);
     }
 
     /**
@@ -610,41 +590,17 @@ class CancelPurchasesController extends Controller
      */
     public function update(CancelPurchaseRequest $cancelPurchaseRequest,
                            CancelPurchaseDetailRequest $cancelPurchaseDetailRequest,
-                           CancelPurchase $cancelpurchase,
-                           \App\Handlers\ValidatedHandler $validatedHandler)
+                           CancelPurchase $cancelpurchase)
     {
         //判断是否提交
         if ($cancelpurchase->is_submit)
             throw new UpdateResourceFailedException('已提交无法修改');
 
-        $cancelpurchase = DB::transaction(function () use ($cancelPurchaseRequest,
-                                                           $cancelPurchaseDetailRequest,
-                                                           $cancelpurchase,
-                                                           $validatedHandler) {
+        $data[] = $cancelPurchaseRequest->validated();
+        $data[] = $cancelPurchaseDetailRequest->input('cancel_purchase_details');
 
-            $cancelpurchase->update($cancelPurchaseRequest->validated());
+        return $this->traitJoint2Update($data,'cancelPurchaseDetails',$cancelPurchaseDetailRequest->rules(),$cancelpurchase,self::TRANSFORMER);
 
-            if ($cancelPurchaseDetails = $cancelPurchaseDetailRequest->input('cancel_purchase_details')) {
-
-                foreach ($cancelPurchaseDetails as $cancelPurchaseDetail) {
-
-                    $data = $validatedHandler->getValidatedData($cancelPurchaseDetailRequest->rules(), $cancelPurchaseDetail);
-
-                    //存在id则更新，否则插入
-                    if (isset($cancelPurchaseDetail['id'])) {
-
-                        $cancelpurchase->cancelPurchaseDetails()->findOrFail($cancelPurchaseDetail['id'])->update($data);
-                    } else {
-                        $cancelpurchase->cancelPurchaseDetails()->create($data);
-                    }
-                }
-            }
-            return $cancelpurchase;
-        });
-
-        return $this->response
-            ->item($cancelpurchase, new CancelPurchaseTransformer())
-            ->setStatusCode(201);
     }
 
     /**
@@ -662,18 +618,7 @@ class CancelPurchasesController extends Controller
      */
     public function destroy(CancelPurchase $cancelpurchase)
     {
-        DB::transaction(function () use ($cancelpurchase) {
-
-            $delStoDet = $cancelpurchase->cancelPurchaseDetails()->delete();
-
-            $delSto = $cancelpurchase->delete();
-
-            if ($delStoDet === false || $delSto === false) {
-                throw new DeleteResourceFailedException('The given data was invalid.');
-            }
-        });
-
-        return $this->noContent();
+        return $this->traitJoint2Destroy($cancelpurchase,'cancelPurchaseDetails');
     }
 
     /**
@@ -704,19 +649,7 @@ class CancelPurchasesController extends Controller
      */
     public function destroybyIds(DestroyRequest $request)
     {
-        $ids = explode(',', $request->input('ids'));
-
-        DB::transaction(function () use ($ids) {
-            $delitem = \App\Models\CancelPurchaseDetail::whereIn('cancel_purchases_id', $ids)->delete();
-
-            $del = CancelPurchase::destroy($ids);
-
-            if ($delitem === false || $del === false) {
-                throw new DeleteResourceFailedException('The given data was invalid.');
-            }
-        });
-
-        return $this->errorResponse(204);
+        return $this->traitJoint2DestroybyIds($request->input('ids'),'cancelPurchaseDetails',self::MODEL);
     }
 
     /**
@@ -787,6 +720,9 @@ class CancelPurchasesController extends Controller
             foreach ($cancelpurchase->cancelPurchaseDetails as $item) {
                 $item->purchaseDetail->decreasePurchaseQuantity($item->cancel_purchase_quantity);
             }
+
+            //设置父订单状态
+            $cancelpurchase->purchase->checkAndChangePurchaseStatus();
         });
 
         return $this->noContent();

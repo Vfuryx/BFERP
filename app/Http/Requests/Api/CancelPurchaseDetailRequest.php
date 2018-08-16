@@ -30,6 +30,15 @@ class CancelPurchaseDetailRequest extends FormRequest
                                 \App\Models\Purchase::PURCHASE_STATUS_NEW
                             ]);
                         }),
+                        function($attribute, $value, $fail) {
+                            if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->id != $this->purchases_id)
+                                return $fail('采购详情id不属于这个采购单');
+
+                            if(!\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->is_audit)
+                                return $fail('采购单未审核');
+
+                            return true;
+                        }
                     ],
                     'cancel_purchase_details.*.cancel_purchase_quantity' => [
                         'required', 'integer','min:1'
@@ -50,6 +59,43 @@ class CancelPurchaseDetailRequest extends FormRequest
                                 \App\Models\Purchase::PURCHASE_STATUS_NEW
                             ]);
                         }),
+                        function($attribute, $value, $fail) {
+                            $ex = explode('.', $attribute);
+                            //表单数据是否匹配 cancel_purchase_details 是否存在重复数据
+                            if (
+                                collect($this->cancel_purchase_details[$ex[1]])
+                                    ->where('purchase_details_id', $value)
+                                    ->count() > 1
+                            ) {
+                                return $fail('存在重复数据');
+                            }
+
+                            //模型数据是否匹配
+                            if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->id != $this->purchases_id)
+                                return $fail('采购详情id不属于这个采购单');
+
+                            if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->is_audit)
+                                return $fail('采购单未审核');
+
+                            if (
+                                !(
+                                    //是否存id
+                                    $this->cancel_purchase_details[$ex[1]]['id'] ?? null
+                                    &&
+                                    //存在id  则判断数据是否合法
+                                    $this->cancelpurchase->cancelPurchaseDetails->findOrfail($this->cancel_purchase_details[$ex[1]]['id'])
+                                        ->purchase_details_id == $value
+                                )
+                                ||
+                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
+                                !$this->cancelpurchase->cancelPurchaseDetails->where('product_components_id', $value)->count()
+
+                            ) {
+                                return $fail('模型数据不匹配');
+                            }
+
+                            return true;
+                        }
                     ],
                     'cancel_purchase_details.*.cancel_purchase_quantity' => [
                         'integer','min:1'

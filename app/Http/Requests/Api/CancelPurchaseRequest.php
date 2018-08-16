@@ -28,7 +28,7 @@ class CancelPurchaseRequest extends FormRequest
                             $query->where('status', 1)->whereIn('purchase_status', [
                                 \App\Models\Purchase::PURCHASE_STATUS_SECTION,
                                 \App\Models\Purchase::PURCHASE_STATUS_NEW
-                            ]);
+                            ])->where('is_audit',1);
                         }),
                     ],
                 ];
@@ -41,7 +41,7 @@ class CancelPurchaseRequest extends FormRequest
                             $query->where('status', 1)->whereIn('purchase_status', [
                                 \App\Models\Purchase::PURCHASE_STATUS_SECTION,
                                 \App\Models\Purchase::PURCHASE_STATUS_NEW
-                            ]);
+                            ])->where('is_audit',1);
                         }),
                     ],
                 ];
@@ -54,7 +54,7 @@ class CancelPurchaseRequest extends FormRequest
         return [
             'purchases_id.required' => '采购单id必填',
             'purchases_id.integer' => '采购单id必须int类型',
-            'purchases_id.exists' => '需要添加的id在数据库中未找到或未启用或已完成',
+            'purchases_id.exists' => '需要添加的id在数据库有可能未找到、未启用、已完成、未审核',
 
             'status.boolean' => '状态必须布尔类型',
         ];

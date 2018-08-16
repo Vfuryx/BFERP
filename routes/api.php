@@ -222,7 +222,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('logistics/editstatus', 'LogisticsController@editStatusByIds')
             ->name('api.logistics.editstatusbyids');
 
-        //物流资源
+        //仓库资源
         $api->get('warehouses', 'WarehousesController@index')
             ->name('api.warehouses.index');
         $api->get('warehouses/{warehouse}', 'WarehousesController@show')

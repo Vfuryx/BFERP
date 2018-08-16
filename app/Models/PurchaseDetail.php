@@ -70,31 +70,10 @@ class PurchaseDetail extends Model
 
         $this->decrement('purchase_quantity', $amount);
 
-        if($this->stock_in_count){
-            //设置子订单状态
-            if ($this->stock_in_count == $this->purchase_quantity) {
-                $this->purchase_item_status = \App\Models\Purchase::PURCHASE_STATUS_FINISH;
-            } else {
-                $this->purchase_item_status = \App\Models\Purchase::PURCHASE_STATUS_SECTION;
-            }
-
+        //判断是否需要改变状态
+        if($this->stock_in_count == $this->purchase_quantity){
+            $this->purchase_item_status = \App\Models\Purchase::PURCHASE_STATUS_FINISH;
             $this->save();
-
-            //设置父订单状态
-            $itemFinishCount = $this->where('purchases_id', $this->purchases_id)->where('purchase_item_status', \App\Models\Purchase::PURCHASE_STATUS_FINISH)->count();
-            $itemCount = $this->where('purchases_id', $this->purchases_id)->count();
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_NEW && $itemCount == $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_FINISH);
-            }
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_NEW && $itemCount != $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_SECTION);
-            }
-
-            if ($this->purchases->getOriginal('purchase_status') == \App\Models\Purchase::PURCHASE_STATUS_SECTION && $itemCount == $itemFinishCount) {
-                $this->purchases->setPurchaseStatus(\App\Models\Purchase::PURCHASE_STATUS_FINISH);
-            }
         }
 
     }
