@@ -77,20 +77,19 @@ class CancelPurchaseDetailRequest extends FormRequest
                             if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->is_audit)
                                 return $fail('采购单未审核');
 
-                            if (
-                                !(
-                                    //是否存id
-                                    $this->cancel_purchase_details[$ex[1]]['id'] ?? null
-                                    &&
-                                    //存在id  则判断数据是否合法
-                                    $this->cancelpurchase->cancelPurchaseDetails->findOrfail($this->cancel_purchase_details[$ex[1]]['id'])
-                                        ->purchase_details_id == $value
-                                )
-                                ||
-                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
-                                !$this->cancelpurchase->cancelPurchaseDetails->where('product_components_id', $value)->count()
+                            //模型数据是否匹配
+                            if (//是否存id
+                                $this->cancel_purchase_details[$ex[1]]['id']
+                                ??
+                                //存在id  则判断数据是否合法
+                                $this->cancelpurchase->cancelPurchaseDetails->find($this->cancel_purchase_details[$ex[1]]['id'])
+                                    ->purchase_details_id == $value
+                            ){
+                                return true;
+                            }
 
-                            ) {
+                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
+                            if(!$this->cancelpurchase->cancelPurchaseDetails->where('product_components_id', $value)->count()) {
                                 return $fail('模型数据不匹配');
                             }
 

@@ -137,22 +137,22 @@ class StockInDetailRequest extends FormRequest
                                 return $fail('采购详情不存在子件 id');
                             }
 
-                            if (
-                                !(
-                                    //是否存id
-                                    $this->stock_in_details[$ex[1]]['id'] ?? null
-                                    &&
-                                    //存在id  则判断数据是否合法
-                                    $this->stockin->stockInDetails->findOrfail($this->stock_in_details[$ex[1]]['id'])
-                                        ->purchase_details_id == $value
-                                )
-                                ||
-                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
-                                !$this->stockin->stockInDetails->where('product_components_id', $value)->count()
+                            //模型数据是否匹配
+                            if (//是否存id
+                                $this->stock_in_details[$ex[1]]['id']
+                                ??
+                                //存在id  则判断数据是否合法
+                                $this->stockin->stockInDetails->find($this->stock_in_details[$ex[1]]['id'])
+                                    ->purchase_details_id == $value
+                            ){
+                                return true;
+                            }
 
-                            ) {
+                            //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
+                            if($this->stockin->stockInDetails->where('product_components_id', $value)->count()) {
                                 return $fail('模型数据不匹配');
                             }
+
                             return true;
                         }
                     ],
