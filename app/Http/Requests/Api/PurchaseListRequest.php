@@ -54,14 +54,11 @@ class PurchaseListRequest extends FormRequest
                             }
 
                             //模型数据是否匹配
-                            if (//是否存id
-                                $this->purchase_lists[$ex[1]]['id']
-                                ??
+                            //是否存id
+                            if ($id = $this->purchase_lists[$ex[1]]['id'] ?? null)
                                 //存在id则判断数据是否合法
-                                $this->purchase->purchaseLists->find($this->purchase_lists[$ex[1]]['id'])->combinations_id == $value
-                            ){
-                                return true;
-                            }
+                                if($this->purchase->purchaseLists->find($this->purchase_lists[$ex[1]]['id'])->combinations_id == $value)
+                                    return true;
 
                             if($this->purchase->purchaseLists->where('combinations_id',$value)->count()){
                                 return $fail('模型数据不配');
