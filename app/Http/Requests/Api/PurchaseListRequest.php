@@ -54,10 +54,9 @@ class PurchaseListRequest extends FormRequest
                             }
 
                             //模型数据是否匹配
-                            if (
-                                !(
-                                    //是否存id
-                                    $this->purchase_lists[$ex[1]]['id'] ?? null
+                            if (//是否存id
+                                (
+                                    $this->purchase_lists[$ex[1]]['id'] ?? false
                                     &&
                                     //存在id则判断数据是否合法
                                     $this->purchase->purchaseLists->findOrfail($this->purchase_lists[$ex[1]]['id'])
@@ -65,7 +64,7 @@ class PurchaseListRequest extends FormRequest
                                 )
                                 ||
                                 //前一个条件不合法 则 判断 purchaseLists 模型里面 是否已经存在 sku
-                                ! $this->purchase->purchaseLists->where('combinations_id',$value)->count()
+                                $this->purchase->purchaseLists->where('combinations_id',$value)->count()
 
                             ){
                                 return $fail('模型数据不匹配');

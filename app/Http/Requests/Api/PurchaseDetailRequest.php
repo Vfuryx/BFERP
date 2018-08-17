@@ -101,16 +101,11 @@ class PurchaseDetailRequest extends FormRequest
                             //判断上一层是否存在id
                             if ($id = $purchaseLists['id'] ?? null) {
                                 //模型没有重复数据
-                                if (
-                                    !\App\Models\PurchaseDetail::where('purchase_lists_id', $id)
-                                        ->where('product_components_id', $value)
-                                        ->count()
-                                ) {
-                                    return true;
+                                if (\App\Models\PurchaseDetail::where('purchase_lists_id', $id)->where('product_components_id', $value)->count()) {
+                                    return $fail('存在重复的子件数据');
                                 }
                             }
-
-                            return $fail('存在重复的子件数据');
+                            return true;
                         }
                     ],
                     'purchase_lists.*.purchase_details.*.purchase_quantity' => ['integer', 'min:1'],

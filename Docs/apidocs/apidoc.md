@@ -7894,8 +7894,10 @@ FORMAT: 1A
     + remark: (string, optional) - 备注
     + status: (boolean, optional) - 状态(false:停用,true:启用)
         + Default: 
+    + purchase_lists[0][id]: (integer, optional) - 采购清单id
     + purchase_lists[0][combinations_id]: (integer, optional) - 组合id
     + purchase_lists[0][remark]: (string, optional) - 备注
+    + purchase_lists[0][purchase_details][0][id]: (integer, optional) - 采购详情id
     + purchase_lists[0][purchase_details][0][product_components_id]: (integer, optional) - 子件id
     + purchase_lists[0][purchase_details][0][purchase_quantity]: (integer, optional) - 采购数
     + purchase_lists[0][purchase_details][0][shops_id]: (integer, optional) - 采购店铺id
@@ -7918,8 +7920,10 @@ FORMAT: 1A
                     "receiver_address": "收货地址",
                     "remark": "备注",
                     "status": true,
+                    "purchase_lists[0][id]": 4,
                     "purchase_lists[0][combinations_id]": 9,
                     "purchase_lists[0][remark]": "备注",
+                    "purchase_lists[0][purchase_details][0][id]": 5,
                     "purchase_lists[0][purchase_details][0][product_components_id]": 11,
                     "purchase_lists[0][purchase_details][0][purchase_quantity]": 10,
                     "purchase_lists[0][purchase_details][0][shops_id]": 1,
@@ -10619,22 +10623,6 @@ FORMAT: 1A
 
             []
 
-## 退审 [PUT /api/purchasereturns/:id/auditfaild]
-
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "无法退审",
-                "status_code": 422
-            }
-
-+ Response 204 (application/json)
-    + Body
-
-            []
-
 ## 审核 [PUT /api/purchasereturns/:id/audit]
 
 
@@ -10891,9 +10879,9 @@ FORMAT: 1A
             []
 
 # purchasereturndetails [/api]
-取消采购单详情资源
+采购退货单详情资源
 
-## 获取所有取消采购单详情 [GET /api/purchasereturndetails{?status}]
+## 获取所有采购退货单详情 [GET /api/purchasereturndetails{?status}]
 
 
 + Parameters
@@ -10983,7 +10971,7 @@ FORMAT: 1A
                 }
             }
 
-## 删除取消采购单详情 [DELETE /api/purchasereturndetails/:id]
+## 删除采购退货单详情 [DELETE /api/purchasereturndetails/:id]
 
 
 + Response 404 (application/json)
@@ -10999,11 +10987,11 @@ FORMAT: 1A
 
             []
 
-## 删除一组取消采购单详情 [DELETE /api/purchasereturndetails]
+## 删除一组采购退货单详情 [DELETE /api/purchasereturndetails]
 
 
 + Parameters
-    + ids: (string, required) - 取消采购单详情id组 格式: 1,2,3,4 
+    + ids: (string, required) - 采购退货单详情id组 格式: 1,2,3,4 
 
 + Response 500 (application/json)
     + Body
@@ -11022,6 +11010,675 @@ FORMAT: 1A
                 "errors": {
                     "ids": [
                         "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# takedeliverygoodsways [/api]
+提货方式资源
+
+## 获取所有提货方式 [GET /api/takedeliverygoodsways{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "提货方式",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "提货方式2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/takedeliverygoodsways?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增提货方式 [POST /api/takedeliverygoodsways]
+
+
++ Parameters
+    + name: (string, required) - 提货方式名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "提货方式名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "提货方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条提货方式 [GET /api/takedeliverygoodsways/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "提货方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改提货方式 [PATCH /api/takedeliverygoodsways/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "提货方式名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "提货方式10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除提货方式 [DELETE /api/takedeliverygoodsways/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组提货方式 [DELETE /api/takedeliverygoodsways]
+
+
++ Parameters
+    + ids: (string, required) - 提货方式id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组提货方式状态 [PUT /api/takedeliverygoodsways/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 提货方式id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# paymentmethods [/api]
+付款方式资源
+
+## 获取所有付款方式 [GET /api/paymentmethods{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "付款方式",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "付款方式2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/paymentmethods?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增付款方式 [POST /api/paymentmethods]
+
+
++ Parameters
+    + name: (string, required) - 付款方式名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "付款方式名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "付款方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条付款方式 [GET /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "付款方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改付款方式 [PATCH /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "付款方式名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "付款方式10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除付款方式 [DELETE /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组付款方式 [DELETE /api/paymentmethods]
+
+
++ Parameters
+    + ids: (string, required) - 付款方式id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组付款方式状态 [PUT /api/paymentmethods/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 付款方式id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# customertypes [/api]
+客户类型资源
+
+## 获取所有客户类型 [GET /api/customertypes{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "客户类型",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "客户类型2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/customertypes?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增客户类型 [POST /api/customertypes]
+
+
++ Parameters
+    + name: (string, required) - 客户类型名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "客户类型名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "客户类型",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条客户类型 [GET /api/customertypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "客户类型",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改客户类型 [PATCH /api/customertypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "客户类型名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "客户类型10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除客户类型 [DELETE /api/customertypes/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组客户类型 [DELETE /api/customertypes]
+
+
++ Parameters
+    + ids: (string, required) - 客户类型id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组客户类型状态 [PUT /api/customertypes/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 客户类型id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
                     ]
                 },
                 "status_code": 422
