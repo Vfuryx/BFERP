@@ -12,4 +12,9 @@ class DistributionType extends Model
     protected $casts = [
         'status' => 'boolean'
     ];
+
+    public function orders(){
+        return $this->hasMany(Order::class,'distribution_types_id');
+    }
+
 }

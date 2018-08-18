@@ -8,7 +8,7 @@ class CreateOrderOperationRecordsTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 订单操作表
      * @return void
      */
     public function up()

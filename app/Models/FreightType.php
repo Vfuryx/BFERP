@@ -18,4 +18,9 @@ class FreightType extends Model
     {
         return $this->hasMany(Logistics::class);
     }
+
+    public function orders(){
+        return $this->hasMany(Order::class,'freight_types_id');
+    }
+
 }

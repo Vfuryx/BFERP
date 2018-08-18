@@ -16,11 +16,11 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->string('system_order_no')->comment('系统单号');
-            $table->unsignedInteger('order_status')->default(1)->comment('订单状态');
+            $table->unsignedInteger('order_status')->comment('订单状态');
             $table->string('order_source')->comment('订单来源');
             $table->unsignedInteger('shops_id')->comment('店铺id');
             $table->unsignedInteger('logistics_id')->comment('物流id');
-            $table->unsignedInteger('billing_way')->comment('计费方式(按重量计算：weight ，按体积计算 volume)');
+            $table->string('billing_way')->comment('计费方式(按重量计算：weight ，按体积计算 volume)');
             $table->date('promise_ship_time')->nullable()->comment('承诺发货时间（订单生成）');
             $table->unsignedInteger('freight_types_id')->comment('运费类型id');
             $table->decimal('expected_freight', 10 ,2)->default(0.00)->comment('预计运费');
@@ -70,11 +70,7 @@ class CreateOrdersTable extends Migration
             $table->string('seller_name')->default('')->comment('卖家昵称');
             $table->tinyInteger('seller_flag')->default(0)->comment('卖家备注旗帜（与淘宝网上订单的卖家备注旗帜对应，只有卖家才能查看该字段）红、黄、绿、蓝、紫 分别对应 1、2、3、4、5');
             $table->timestamp('created')->nullable()->comment('(下单时间)交易创建时间');
-            $table->timestamp('pay_time')->nullable()->comment('付款时间');
             $table->timestamp('est_con_time')->nullable()->comment('(商家的预计发货时间)');
-            $table->decimal('payment',10,2)->comment('实付金额');
-            $table->decimal('total_fee',10,2)->comment('商品金额（商品价格乘以数量的总金额）');
-            $table->decimal('discount_fee',10,2)->comment('优惠金额');
             $table->string('buyer_message')->default('')->comment('买家留言');
 
             //收货详情
@@ -91,10 +87,8 @@ class CreateOrdersTable extends Migration
             $table->string('refund_info')->default('无退款')->comment('退款信息');
 
             //要记录的字段
-            $table->string('business_personnel_name')->comment('业务员名称 (解锁后这里要清除)');
-            $table->string('business_personnel_account')->comment('业务员账号 (解锁后这里要清除)');
-            $table->string('locker_name')->comment('锁定人名称 (解锁后这里要清除)');
-            $table->string('locker_account')->comment('锁定人账号 (解锁后这里要清除)');
+            $table->string('business_personnel_id')->default(0)->comment('业务员id (解锁后这里要清除)');
+            $table->string('locker_id')->default(0)->comment('锁定人id (解锁后这里要清除)');
             $table->timestamp('audit_at')->nullable()->comment('客服审核时间');
 
             //拼接
@@ -104,6 +98,7 @@ class CreateOrdersTable extends Migration
             $table->boolean('is_split')->default(false)->comment('是否拆分');
             $table->boolean('is_association')->default(false)->comment('是否关联订单');
 
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

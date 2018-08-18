@@ -14,4 +14,8 @@ class CustomerType extends Model
     protected $casts = [
         'status' => 'boolean'
     ];
+
+    public function orders(){
+        return $this->hasMany(Order::class,'customer_types_id');
+    }
 }

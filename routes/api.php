@@ -78,7 +78,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('feetypes/editstatus', 'FeeTypesController@editStatusByIds')
             ->name('api.feetypes.editstatusbyids');
 
-        //运输方式
+        //配送方式
         $api->get('distmets', 'DistributionMethodsController@index')
             ->name('api.distmets.index');
         $api->get('distmets/{distmet}', 'DistributionMethodsController@show')
@@ -653,6 +653,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customertypes.destroybyids');
         $api->put('customertypes/editstatus', 'CustomerTypesController@editStatusByIds')
             ->name('api.customertypes.editstatusbyids');
+
+        //客服部
+        $api->get('customerservicedepts', 'CustomerServiceDepartmentsController@index')
+            ->name('api.customerservicedepts.index');
+        $api->get('customerservicedepts/{order}', 'CustomerServiceDepartmentsController@show')
+            ->name('api.customerservicedepts.show');
+        $api->post('customerservicedepts', 'CustomerServiceDepartmentsController@store')
+            ->name('api.customerservicedepts.store');
+        $api->patch('customerservicedepts/{order}', 'CustomerServiceDepartmentsController@update')
+            ->name('api.customerservicedepts.update');
+        $api->delete('customerservicedepts/{order}', 'CustomerServiceDepartmentsController@destroy')
+            ->name('api.customerservicedepts.destroy');
+        $api->delete('customerservicedepts', 'CustomerServiceDepartmentsController@destroybyids')
+            ->name('api.customerservicedepts.destroybyids');
+        $api->put('customerservicedepts/editstatus', 'CustomerServiceDepartmentsController@editStatusByIds')
+            ->name('api.customerservicedepts.editstatusbyids');
 
 
         //上传图片

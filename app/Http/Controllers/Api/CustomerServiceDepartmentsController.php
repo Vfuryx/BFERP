@@ -2,34 +2,36 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Transformers\PaymentMethodTransformer;
 use Illuminate\Support\Facades\DB;
 
 use App\Models\Order;
 
 use App\Http\Requests\Api\CustomerServiceDepartmentRequset;
+use App\Http\Requests\Api\PaymentDetailRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
-use App\Transformers\CustomerServiceDepartmentTransformer;
+use App\Transformers\OrderTransformer;
 
 use App\Http\Controllers\Traits\CURDTrait;
 
 use Dingo\Api\Exception\DeleteResourceFailedException;
 
 /**
- * 商品资源
+ * 客服部资源
  * @Resource("customerservicedepts",uri="/api")
  */
 class CustomerServiceDepartmentsController extends Controller
 {
     use CURDTrait;
 
-    const TRANSFORMER = CustomerServiceDepartmentTransformer::class;
+    const TRANSFORMER = OrderTransformer::class;
     const MODEL = Order::class;
     const PerPage = 8;
 
     /**
-     * 获取所有商品
+     * 获取所有客服部
      *
      * @Get("/customerservicedepts{?status}")
      * @Versions({"v1"})
@@ -48,190 +50,148 @@ class CustomerServiceDepartmentsController extends Controller
 
 
     /**
-     * 新增商品
+     * 新增客服部
      *
      * @Post("/customerservicedepts")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("commodity_code", description="商品编码", required=true),
+     *      @Parameter("commodity_code", description="客服部编码", required=true),
      *      @Parameter("jd_sn", description="京东编码", required=false),
      *      @Parameter("vips_sn", description="唯品会编码", required=false),
      *      @Parameter("factory_model", description="工厂型号", required=false),
-     *      @Parameter("short_name", description="商品简称", required=true),
-     *      @Parameter("shops_id", type="integer", description="店铺id", required=true),
-     *      @Parameter("shop_nick", description="卖家昵称（店铺昵称）", required=true),
-     *      @Parameter("supplier_id",type="integer", description="供应商id", required=true),
-     *      @Parameter("category_id",type="integer", description="产品类别id", required=true),
-     *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("title", description="商品标题", required=true),
-     *      @Parameter("img", description="商品图片", required=false),
-     *      @Parameter("url",type="url", description="商品网址", required=false),
-     *      @Parameter("is_stop_pro",type="boolean", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=false),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
-     *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=true),
-     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=false),
-     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=false),
-     *      @Parameter("productspecs[0][tb_price]", type="numeric", description="淘宝价格", required=true),
-     *      @Parameter("productspecs[0][cost]", type="numeric", description="成本价格", required=true),
-     *      @Parameter("productspecs[0][price]", type="numeric", description="售价", required=true),
-     *      @Parameter("productspecs[0][highest_price]", type="numeric", description="最高售价", required=true),
-     *      @Parameter("productspecs[0][lowest_price]", type="numeric", description="最低售价", required=true),
-     *      @Parameter("productspecs[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
-     *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
-     *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("productspecs[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("productspecs[0][is_combination]", type="boolean", description="是否组合", required=true),
-     *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
-     *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
-     *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("productspecs[0][purchase_freight]", type="numeric", description="采购运费", required=false),
-     *      @Parameter("productspecs[0][inventory_warning]", type="integer", description="库存预警(数量)", required=true),
-     *      @Parameter("productspecs[0][purchase_days_warning]", type="integer", description="采购预警天数", required=true),
-     *      @Parameter("productspecs[0][available_warning]", type="integer", description="可售数预警", required=true),
-     *      @Parameter("productspecs[0][distribution_method_id]", type="integer", description="配送类别", required=true),
-     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=false),
-     *      @Parameter("productspecs[0][img_url]", description="图片地址", type="url", required=false),
-     *      @Parameter("productspecs[0][spec]", description="规格", required=true),
-     *      @Parameter("productspecs[0][color]", description="颜色", required=false),
-     *      @Parameter("productspecs[0][materials]", description="材质", required=false),
-     *      @Parameter("productspecs[0][function]", description="功能", required=false),
-     *      @Parameter("productspecs[0][special]", description="特殊", required=false),
-     *      @Parameter("productspecs[0][other]", description="其他", required=false),
-     *      @Parameter("productspecs[0][longness]", type="numeric", description="长度（mm）", required=false),
-     *      @Parameter("productspecs[0][width]", type="numeric", description="宽度（mm）", required=false),
      *      @Parameter("productspecs[0][height]", type="numeric", description="高度（mm）", required=false),
-     *      @Parameter("productspecs[0][volume]", type="numeric", description="体积(m²)", required=false),
-     *      @Parameter("productspecs[0][weight]", type="numeric", description="重量", required=false),
-     *      @Parameter("productspecs[0][remark]", description="备注", required=false),
-     *      @Parameter("productspecs[0][finished_pro]", type="integer", description="是否成品 0 不是 1 是", required=false),
-     *      @Parameter("productspecs[0][is_stop_pro]", type="boolean", description="是否停产 0 不是 1 是", required=false),
-     *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=true),
      * })
      * @Request({
-     *      "commodity_code": "商品编码",
-     *      "jd_sn": "京东编码",
-     *      "vips_sn": "唯品会编码",
-     *      "factory_model": "工厂型号",
-     *      "short_name": "商品简称",
-     *      "shops_id": 1,
-     *      "shop_nick": "卖家昵称",
-     *      "supplier_id": 1,
-     *      "category_id": 1,
-     *      "remark": "备注",
-     *      "title": "商品标题",
-     *      "img": "商品图片",
-     *      "url": "https://www.taobao.com/",
-     *      "status": true,
-     *      "nis_stop_proick": 1,
-     *      "productspecs[0][spec_code]":"规格编码1",
-     *      "productspecs[0][jd_specs_code]":"京东规格编码",
-     *      "productspecs[0][vips_specs_code]":"唯品会规格编码",
-     *      "productspecs[0][tb_price]":"10",
-     *      "productspecs[0][highest_price]":"10",
-     *      "productspecs[0][price]":"10",
-     *      "productspecs[0][lowest_price]":"10",
-     *      "productspecs[0][warehouse_cost]":"10",
-     *      "productspecs[0][assembly_price]":"10",
-     *      "productspecs[0][discount]":"1",
-     *      "productspecs[0][commission]":"1",
-     *      "productspecs[0][is_combination]": true,
-     *      "productspecs[0][package_quantity]":"10",
-     *      "productspecs[0][package_costs]":"10",
-     *      "productspecs[0][wooden_frame_costs]":"10",
-     *      "productspecs[0][purchase_freight]":"10",
-     *      "productspecs[0][inventory_warning]":"10",
-     *      "productspecs[0][purchase_days_warning]":"10",
-     *      "productspecs[0][available_warning]":"10",
-     *      "productspecs[0][distribution_method_id]":"1",
-     *      "productspecs[0][bar_code]":"条形码",
-     *      "productspecs[0][img_url]":"http://image.img.com/image",
-     *      "productspecs[0][spec]":"规格",
-     *      "productspecs[0][color]":"颜色",
-     *      "productspecs[0][materials]":"材质",
-     *      "productspecs[0][function]":"功能",
-     *      "productspecs[0][special]":"特殊",
-     *      "productspecs[0][other]":"其他",
-     *      "productspecs[0][longness]":"10",
-     *      "productspecs[0][width]":"10",
-     *      "productspecs[0][height]":"10",
-     *      "productspecs[0][volume]":"10",
-     *      "productspecs[0][weight]":"10",
-     *      "productspecs[0][remark]":"备注",
-     *      "productspecs[0][finished_pro]": true,
-     *      "productspecs[0][is_stop_pro]": false,
-     *      "productspecs[0][combinations][0][com_pro_specs_id]":"1",
      *})
      * @Transaction({
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "url": {
-     *                  "商品网址必须有效的url"
-     *              },
-     *              "category_id": {
-     *                      "产品类别id必须int类型"
-     *                  },
-     *              "category_id": {
-     *                      "需要添加的id在数据库中未找到或未启用"
-     *                  },
-     *              "supplier_id": {
-     *                      "供应商id必须int类型"
-     *                  },
-     *             "productspecs": {
-     *                  "产品规格必须是json格式"
-     *              },
+     *              "shops_id": {
+     *                  "店铺id必填"
+     *              }
      *           },
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
+     *          "id": 37,
+     *          "system_order_no": "DD2018081818175193616",
+     *          "order_status": "未处理",
+     *          "order_source": "system",
+     *          "shops_id": 1,
+     *          "logistics_id": 1,
+     *          "billing_way": "weight",
+     *          "promise_ship_time": "2018-08-20",
+     *          "freight_types_id": 1,
+     *          "expected_freight": "10.00",
+     *          "distributions_id": 1,
+     *          "distribution_methods_id": 15,
+     *          "deliver_goods_fee": "10.00",
+     *          "move_upstairs_fee": "10.00",
+     *          "installation_fee": "10.00",
+     *          "total_distribution_fee": "30.00",
+     *          "distribution_phone": "配送电话",
+     *          "distribution_no": "配送单号",
+     *          "distribution_types_id": 1,
+     *          "service_car_info": "服务车信息（配送信息）",
+     *          "take_delivery_goods_fee": "10.00",
+     *          "take_delivery_goods_ways_id": 1,
+     *          "express_fee": "10.00",
+     *          "service_car_fee": "10.00",
+     *          "cancel_after_verification_code": "核销码",
+     *          "wooden_frame_costs": "10.00",
+     *          "preferential_cashback": "2.00",
+     *          "favorable_cashback": "2.00",
+     *          "customer_types_id": 1,
+     *          "is_invoice": false,
+     *          "invoice_express_fee": "5.00",
+     *          "express_invoice_title": "快递发票抬头",
+     *          "contract_no": "合同单号",
+     *          "payment_methods_id": 1,
+     *          "deposit": "10.00",
+     *          "document_title": "单据头",
+     *          "warehouses_id": 1,
+     *          "payment_date": "2018-08-20",
+     *          "interest_concessions": "10.00",
+     *          "is_notice": true,
+     *          "is_cancel_after_verification": false,
+     *          "accept_order_user": "接单用户",
+     *          "tax_number": "税号",
+     *          "receipt": "收据",
+     *          "logistics_remark": "物流备注",
+     *          "seller_remark": "卖家备注",
+     *          "customer_service_remark": "客服备注",
+     *          "taobao_oid": 0,
+     *          "taobao_tid": 0,
+     *          "member_nick": "会员昵称",
+     *          "shop_name": "",
+     *          "seller_name": "",
+     *          "seller_flag": 0,
+     *          "created": null,
+     *          "est_con_time": null,
+     *          "buyer_message": "买家留言",
+     *          "receiver_name": "",
+     *          "receiver_phone": "",
+     *          "receiver_mobile": "",
+     *          "receiver_state": "",
+     *          "receiver_city": "",
+     *          "receiver_district": "",
+     *          "receiver_address": "",
+     *          "receiver_zip": "",
+     *          "refund_info": "无退款",
+     *          "business_personnel_id": 1,
+     *          "locker_id": 0,
+     *          "audit_at": null,
+     *          "association_taobao_oid": "",
+     *          "is_merge": false,
+     *          "is_split": false,
+     *          "is_association": false,
+     *          "created_at": "2018-08-18 18:17:51",
+     *          "updated_at": "2018-08-18 18:17:51",
      *      })
      * })
      */
-    public function store(CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
-//                          ProductSpecRequest $productSpecRequest,
-//                          CombinationRequest $combinationRequest,
-                          \App\Handlers\ValidatedHandler $validatedHandler)
-    {
+    public function store(
+        CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
+        PaymentDetailRequest $paymentDetailRequest,
+        \App\Handlers\ValidatedHandler $validatedHandler
+    ){
+        $data[] = $customerServiceDepartmentRequset->validated();
+        $data[] = $customerServiceDepartmentRequset->input('order_items');
+        $data[] = $paymentDetailRequest->validated()['payment_details'];
 
-        $order = DB::transaction(function() use (
+        $id = DB::transaction(function () use (
+            $data,
             $customerServiceDepartmentRequset,
-//            $productSpecRequest,
-//            $combinationRequest,
+            $paymentDetailRequest,
             $validatedHandler
         ) {
-
-            $order = Order::create($customerServiceDepartmentRequset->validated());
-
-//            if ($productSpecs = $customerServiceDepartmentRequset->input('productspecs')) {
-//
-//                foreach ($productSpecs as $productSpec) {
-//
-//                    $proSpec = $order->productSpecs()->create(
-//                        $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec)
-//                    );
-//
-//                    if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-//
-//                        foreach ($productSpec['combinations'] as $combination) {
-//
-//                            $proSpec->combinations()->create(
-//                                $validatedHandler->getValidatedData($combinationRequest->rules(), $combination)
-//                            );
-//                        }
-//                    }
-//                }
-//            }
-            return $order;
+            $model = Order::create($data[0]);
+            if ($data[1]) {
+                foreach ($data[1] as $item) {
+                    $model->orderItems()->create(
+                        $validatedHandler->getValidatedData($customerServiceDepartmentRequset->rules(), $item)
+                    );
+                }
+            }
+            if($data[2]){
+                foreach ($data[2] as $item) {
+                    $model->paymentDetails()->create(
+                        $validatedHandler->getValidatedData($paymentDetailRequest->rules(), $item)
+                    );
+                }
+            }
+            return $model->id;
         });
 
         return $this->response
-            ->item($order, new CustomerServiceDepartmentTransformer())
+            ->item(Order::find($id), self::TRANSFORMER)
             ->setStatusCode(201)
             ->addMeta('status_code', '201');
     }
 
     /**
-     * 显示单条商品
+     * 显示单条客服部
      *
      * @Get("/customerservicedepts/:id")
      * @Versions({"v1"})
@@ -249,80 +209,28 @@ class CustomerServiceDepartmentsController extends Controller
     }
 
     /**
-     * 修改商品
+     * 修改客服部
      *
      * @Patch("/customerservicedepts/:id")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("commodity_code", description="商品编码", required=false),
+     *      @Parameter("commodity_code", description="客服部编码", required=false),
      *      @Parameter("jd_sn", description="京东编码", required=false),
      *      @Parameter("vips_sn", description="唯品会编码", required=false),
      *      @Parameter("factory_model", description="工厂型号", required=false),
-     *      @Parameter("short_name", description="商品简称", required=false),
-     *      @Parameter("shops_id", description="店铺id", required=false),
-     *      @Parameter("shop_nick", description="卖家昵称（店铺昵称）", required=false),
-     *      @Parameter("supplier_id",type="integer", description="供应商id", required=false),
-     *      @Parameter("category_id",type="integer", description="产品类别id", required=false),
-     *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("title", description="商品标题", required=false),
-     *      @Parameter("img", description="商品图片", required=false),
-     *      @Parameter("url",type="url", description="商品网址", required=false),
-     *      @Parameter("is_stop_pro", type="boolean", description="是否停产 默认 0 = 不停产  1 = 停产", required=false,default=false),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
-     *      @Parameter("productspecs[0][id]",type="integer", description="规格id ( 存在 id 视为更新，不存在视为插入 )", required=false),
-     *      @Parameter("productspecs[0][spec_code]", description="规格编码", required=false),
-     *      @Parameter("productspecs[0][jd_specs_code]", description="京东规格编码", required=false),
-     *      @Parameter("productspecs[0][vips_specs_code]", description="唯品会规格编码", required=false),
-     *      @Parameter("productspecs[0][tb_price]", type="numeric", description="淘宝价格", required=false),
-     *      @Parameter("productspecs[0][cost]", type="numeric", description="成本价格", required=false),
-     *      @Parameter("productspecs[0][price]", type="numeric", description="售价", required=false),
-     *      @Parameter("productspecs[0][highest_price]", type="numeric", description="最高售价", required=false),
-     *      @Parameter("productspecs[0][lowest_price]", type="numeric", description="最低售价", required=false),
-     *      @Parameter("productspecs[0][warehouse_cost]", type="numeric", description="仓库成本", required=false),
-     *      @Parameter("productspecs[0][assembly_price]", type="numeric", description="装配价格", required=false),
-     *      @Parameter("productspecs[0][discount]", type="numeric", description="折扣", required=false),
-     *      @Parameter("productspecs[0][commission]", type="numeric", description="佣金点", required=false),
-     *      @Parameter("productspecs[0][is_combination]", type="boolean", description="是否组合", required=false),
-     *      @Parameter("productspecs[0][package_quantity]", type="integer", description="包件数量", required=false),
-     *      @Parameter("productspecs[0][package_costs]", type="numeric", description="打包费用", required=false),
-     *      @Parameter("productspecs[0][wooden_frame_costs]", type="numeric", description="木架费", required=false),
-     *      @Parameter("productspecs[0][purchase_freight]", type="numeric", description="采购运费", required=false),
-     *      @Parameter("productspecs[0][inventory_warning]", type="integer", description="库存预警(数量)", required=false),
-     *      @Parameter("productspecs[0][purchase_days_warning]", type="integer", description="采购预警天数", required=false),
-     *      @Parameter("productspecs[0][available_warning]", type="integer", description="可售数预警", required=false),
-     *      @Parameter("productspecs[0][distribution_method_id]", type="integer", description="配送类别", required=false),
-     *      @Parameter("productspecs[0][bar_code]", description="条形码", required=false),
-     *      @Parameter("productspecs[0][img_url]", description="图片地址", type="url", required=false),
-     *      @Parameter("productspecs[0][spec]", description="规格", required=false),
-     *      @Parameter("productspecs[0][color]", description="颜色", required=false),
-     *      @Parameter("productspecs[0][materials]", description="材质", required=false),
-     *      @Parameter("productspecs[0][function]", description="功能", required=false),
-     *      @Parameter("productspecs[0][special]", description="特殊", required=false),
-     *      @Parameter("productspecs[0][other]", description="其他", required=false),
-     *      @Parameter("productspecs[0][longness]", type="numeric", description="长度（mm）", required=false),
-     *      @Parameter("productspecs[0][width]", type="numeric", description="宽度（mm）", required=false),
-     *      @Parameter("productspecs[0][height]", type="numeric", description="高度（mm）", required=false),
-     *      @Parameter("productspecs[0][volume]", type="numeric", description="体积(m²)", required=false),
-     *      @Parameter("productspecs[0][weight]", type="numeric", description="重量", required=false),
-     *      @Parameter("productspecs[0][remark]", description="备注", required=false),
+     *      @Parameter("short_name", description="客服部简称", required=false),
      *      @Parameter("productspecs[0][finished_pro]", type="boolean", description="是否成品 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][is_stop_pro]", type="boolean", description="是否停产 0 不是 1 是", required=false),
      *      @Parameter("productspecs[0][combinations][0][id]", type="integer", description="组合id ( 存在 id 视为更新，不存在视为插入 )", required=false),
      *      @Parameter("productspecs[0][combinations][0][com_pro_specs_id]", type="integer", description="组合产品规格id", required=false),
      * })
      * @Request({
-     *      "commodity_code": "商品编码",
+     *      "commodity_code": "客服部编码",
      *      "jd_sn": "京东编码",
-     *      "vips_sn": "唯品会编码",
-     *      "factory_model": "工厂型号",
-     *      "short_name": "商品简称",
-     *      "shops_id": "店铺id",
-     *      "shop_nick": "卖家昵称",
-     *      "supplier_id": 1,
      *      "category_id": 1,
      *      "remark": "备注",
-     *      "title": "商品标题",
-     *      "img": "商品图片",
+     *      "title": "客服部标题",
+     *      "img": "客服部图片",
      *      "url": "https://www.taobao.com/",
      *      "status": true,
      *      "nis_stop_proick": 1,
@@ -330,35 +238,6 @@ class CustomerServiceDepartmentsController extends Controller
      *      "productspecs[0][spec_code]":"规格编码1",
      *      "productspecs[0][jd_specs_code]":"京东规格编码",
      *      "productspecs[0][vips_specs_code]":"唯品会规格编码",
-     *      "productspecs[0][tb_price]":"10",
-     *      "productspecs[0][highest_price]":"10",
-     *      "productspecs[0][price]":"10",
-     *      "productspecs[0][lowest_price]":"10",
-     *      "productspecs[0][warehouse_cost]":"10",
-     *      "productspecs[0][assembly_price]":"10",
-     *      "productspecs[0][discount]":"1",
-     *      "productspecs[0][commission]":"1",
-     *      "productspecs[0][is_combination]": true,
-     *      "productspecs[0][package_quantity]":"10",
-     *      "productspecs[0][package_costs]":"10",
-     *      "productspecs[0][wooden_frame_costs]":"10",
-     *      "productspecs[0][purchase_freight]":"10",
-     *      "productspecs[0][inventory_warning]":"10",
-     *      "productspecs[0][purchase_days_warning]":"10",
-     *      "productspecs[0][available_warning]":"10",
-     *      "productspecs[0][distribution_method_id]":"1",
-     *      "productspecs[0][bar_code]":"条形码",
-     *      "productspecs[0][img_url]":"http://image.img.com/image",
-     *      "productspecs[0][spec]":"规格",
-     *      "productspecs[0][color]":"颜色",
-     *      "productspecs[0][materials]":"材质",
-     *      "productspecs[0][function]":"功能",
-     *      "productspecs[0][special]":"特殊",
-     *      "productspecs[0][other]":"其他",
-     *      "productspecs[0][longness]":"10",
-     *      "productspecs[0][width]":"10",
-     *      "productspecs[0][height]":"10",
-     *      "productspecs[0][volume]":"10",
      *      "productspecs[0][weight]":"10",
      *      "productspecs[0][remark]":"备注",
      *      "productspecs[0][finished_pro]":true,
@@ -375,7 +254,7 @@ class CustomerServiceDepartmentsController extends Controller
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
      *              "url": {
-     *                  "商品网址必须有效的url"
+     *                  "客服部网址必须有效的url"
      *              },
      *              "category_id": {
      *                  "产品类别id必须int类型"
@@ -393,77 +272,61 @@ class CustomerServiceDepartmentsController extends Controller
      *      })
      * })
      */
-    public function update(CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
-//                           ProductSpecRequest $productSpecRequest,
-//                           CombinationRequest $combinationRequest,
-                           Order $order,
-                           \App\Handlers\ValidatedHandler $validatedHandler)
+    public function update(
+        CustomerServiceDepartmentRequset $customerServiceDepartmentRequset,
+        PaymentDetailRequest $paymentDetailRequest,
+        Order $order,
+        \App\Handlers\ValidatedHandler $validatedHandler)
     {
+        $data[] = $customerServiceDepartmentRequset->validated();
+        $data[] = $customerServiceDepartmentRequset->input('order_items');
+        $data[] = $paymentDetailRequest->validated()['payment_details'];
 
         $order = DB::transaction(function() use (
+            $data,
             $customerServiceDepartmentRequset,
-//            $productSpecRequest,
-//            $combinationRequest,
+            $paymentDetailRequest,
             $order,
             $validatedHandler
         ) {
+            $order->update($data[0]);
 
-            $order->update($customerServiceDepartmentRequset->validated());
+            if ($data[1]??null) {
+                foreach ($data[1] as $item) {
+                    //计算要通过的字段
+                    $validatedData = $validatedHandler->getValidatedData($customerServiceDepartmentRequset->rules(), $item);
+                    //存在id则更新，否则插入
+                    if (isset($item['id'])) {
+                        $order->orderItems()->findOrFail($item['id'])->update($validatedData);
+                    } else {
+                        $order->orderItems()->create($validatedData);
+                    }
+                }
+            }
 
-//            if ($productSpecs = $customerServiceDepartmentRequset->input('productspecs')) {
-//
-//                foreach ($productSpecs as $productSpec) {
-//                    //计算要通过的字段
-//                    $data = $validatedHandler->getValidatedData($productSpecRequest->rules(), $productSpec);
-//
-//                    //存在id则更新，否则插入
-//                    if (isset($productSpec['id'])) {
-//
-//                        $order->productSpecs()->findOrFail($productSpec['id'])->update($data);
-//
-//                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-//
-//                            foreach ($productSpec['combinations'] as $combination) {
-//
-//                                $combinationData = $validatedHandler->getValidatedData(
-//                                    $combinationRequest->rules(), $combination
-//                                );
-//                                //存在id则更新，否则插入
-//                                if (isset($combination['id'])) {
-//                                    $order->productSpecs()->findOrFail($productSpec['id'])
-//                                        ->combinations()->findOrFail($combination['id'])
-//                                        ->update($combinationData);
-//                                } else {
-//                                    $order->productSpecs()->findOrFail($productSpec['id'])
-//                                        ->combinations()->create($combinationData);
-//                                }
-//                            }
-//                        }
-//                    } else {
-//                        $proSpec = $order->productSpecs()->create($data);
-//
-//                        if ($productSpec['is_combination'] == 1 && isset($productSpec['combinations'])) {
-//
-//                            foreach ($productSpec['combinations'] as $combination) {
-//                                $proSpec->combinations()->create($validatedHandler->getValidatedData(
-//                                    $combinationRequest->rules(), $combination
-//                                ));
-//                            }
-//                        }
-//                    }
-//                }
-//            }
+            if ($data[2]??null) {
+                foreach ($data[2] as $item) {
+                    //计算要通过的字段
+                    $validatedData = $validatedHandler->getValidatedData($paymentDetailRequest->rules(), $item);
+                    //存在id则更新，否则插入
+                    if (isset($item['id'])) {
+                        $order->paymentDetails()->findOrFail($item['id'])->update($validatedData);
+                    } else {
+                        $order->paymentDetails()->create($validatedData);
+                    }
+                }
+            }
             return $order;
         });
 
         return $this->response
-            ->item($order, new CustomerServiceDepartmentTransformer())
+            ->item($order, new OrderTransformer())
             ->setStatusCode(201);
     }
 
 
     /**
-     * 删除商品
+     * 删除客服部
      *
      * @Delete("/customerservicedepts/:id")
      * @Versions({"v1"})
@@ -478,17 +341,12 @@ class CustomerServiceDepartmentsController extends Controller
     public function destroy(Order $order)
     {
         DB::transaction(function() use ($order) {
-            //删除组合
-            $productSpecs = $order->productSpecs();
-            $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
-            //删除规格
-            $delPro = $productSpecs->delete();
+            $orderItems = $order->orderItems()->delete();
+            $paymentDetails = $order->paymentDetails()->delete();
+            $order = $order->delete();
 
-            //删除产品
-            $delGoods = $order->delete();
-
-            if ($delCom === false || $delPro === false || $delGoods === false) {
+            if ($orderItems === false || $paymentDetails === false || $order === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
@@ -497,12 +355,12 @@ class CustomerServiceDepartmentsController extends Controller
     }
 
     /**
-     * 删除一组商品
+     * 删除一组客服部
      *
      * @Delete("/customerservicedepts")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="商品id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="客服部id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -522,17 +380,12 @@ class CustomerServiceDepartmentsController extends Controller
         $ids = explode(',', $request->input('ids'));
 
         DB::transaction(function() use ($ids) {
-            //删除组合
-            $productSpecs = ProductSpec::whereIn('goods_id', $ids);
-            $delCom = Combination::whereIn('product_specs_id', $productSpecs->pluck('id')->toArray())->delete();
 
-            //删除规格
-            $delPro = $productSpecs->delete();
+            $orderItems = \App\Models\OrderItem::whereIn('orders_id', $ids)->delete();
+            $paymentDetails = \App\Models\PaymentDetail::whereIn('orders_id',$ids)->delete();
+            $order = Order::destroy($ids);
 
-            //删除产品
-            $delGoods = Order::destroy($ids);
-
-            if ($delCom === false || $delPro === false || $delGoods === false) {
+            if ($orderItems === false || $paymentDetails === false || $order === false) {
                 throw new DeleteResourceFailedException('The given data was invalid.');
             }
         });
@@ -541,12 +394,12 @@ class CustomerServiceDepartmentsController extends Controller
     }
 
     /**
-     * 更改一组商品状态
+     * 更改一组客服部状态
      *
      * @PUT("/customerservicedepts/editstatus")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("ids", description="商品id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("ids", description="客服部id组 格式: 1,2,3,4 ", required=true),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({
