@@ -304,7 +304,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                     'preferential_cashback' => 'numeric',
                     'favorable_cashback' => 'numeric',
                     'customer_types_id' => [
-                        'integer',
+                        'required', 'integer',
                         Rule::exists('customer_types', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
@@ -499,8 +499,8 @@ class CustomerServiceDepartmentRequset extends FormRequest
 
             'favorable_cashback.numeric' => '好评返现必须是数字',
 
-            'customer_types_id.required' => '客户类型id必填',
-            'customer_types_id.integer' => '客户类型id必须int类型',
+            'customer_types_id.required' => '客户类型idid必填',
+            'customer_types_id.integer' => '客户类型idid必须int类型',
             'customer_types_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
             'is_invoice.boolean' => '是否要发票必须是布尔类型',
@@ -592,6 +592,9 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'stocks.*.status.required' => '状态必填',
             'stocks.*.status.integer' => '状态必须int类型',
 
+            'order_items.*.id.integer' => '子订单id必须int类型',
+            'order_items.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
+
             'order_items.*.products_id.required' => '产品id必填',
             'order_items.*.products_id.integer' => '产品id必须int类型',
             'order_items.*.products_id.exists' => '需要添加的id在数据库中未找到或未启用',
@@ -652,7 +655,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'wooden_frame_costs' => '木架费',
             'preferential_cashback' => '优惠返现',
             'favorable_cashback' => '好评返现',
-            'customer_types_id' => '客户类型',
+            'customer_types_id' => '客户类型id',
             'is_invoice' => '是否要发票',
             'invoice_express_fee' => '发票快递费',
             'express_invoice_title' => '快递发票抬头',

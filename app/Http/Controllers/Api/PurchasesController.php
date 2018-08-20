@@ -880,16 +880,9 @@ class PurchasesController extends Controller
      *
      * @PUT("/purchases/:id/submit")
      * @Versions({"v1"})
-     * @Parameters({
-     * @Parameter("is_submit", type="boolean", description="是否提交", required=true)})
      * @Transaction({
      *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "is_submit": {
-     *                  "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-     *              }
-     *           },
+     *          "message": "无需重复提交",
      *          "status_code": 422,
      *      }),
      *      @Response(204, body={})
@@ -905,16 +898,9 @@ class PurchasesController extends Controller
      *
      * @PUT("/purchases/:id/print")
      * @Versions({"v1"})
-     * @Parameters({
-     * @Parameter("is_print", type="boolean", description="是否打印", required=true)})
      * @Transaction({
      *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "is_print": {
-     *                  "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-     *              }
-     *           },
+     *          "message": "打印出错，是否未提交未审核或重复打印",
      *          "status_code": 422,
      *      }),
      *      @Response(204, body={})
@@ -930,16 +916,9 @@ class PurchasesController extends Controller
      *
      * @PUT("/purchases/:id/audit")
      * @Versions({"v1"})
-     * @Parameters({
-     * @Parameter("is_audit", type="boolean", description="是否审核", required=true)})
      * @Transaction({
      *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "is_audit": {
-     *                  "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-     *              }
-     *           },
+     *          "message": "审核出错，是否未提交或重复审核",
      *          "status_code": 422,
      *      }),
      *      @Response(204, body={})

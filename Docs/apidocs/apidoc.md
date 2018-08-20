@@ -8160,19 +8160,11 @@ FORMAT: 1A
 ## 提交 [PUT /api/purchases/:id/submit]
 
 
-+ Parameters
-    + is_submit: (boolean, required) - 是否提交
-
 + Response 422 (application/json)
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_submit": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "无需重复提交",
                 "status_code": 422
             }
 
@@ -8184,19 +8176,11 @@ FORMAT: 1A
 ## 打印 [PUT /api/purchases/:id/print]
 
 
-+ Parameters
-    + is_print: (boolean, required) - 是否打印
-
 + Response 422 (application/json)
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_print": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "打印出错，是否未提交未审核或重复打印",
                 "status_code": 422
             }
 
@@ -8208,19 +8192,11 @@ FORMAT: 1A
 ## 审核 [PUT /api/purchases/:id/audit]
 
 
-+ Parameters
-    + is_audit: (boolean, required) - 是否审核
-
 + Response 422 (application/json)
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_audit": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "审核出错，是否未提交或重复审核",
                 "status_code": 422
             }
 
@@ -9028,12 +9004,7 @@ FORMAT: 1A
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_submit": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "无需重复提交",
                 "status_code": 422
             }
 
@@ -9852,12 +9823,7 @@ FORMAT: 1A
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_submit": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "无需重复提交",
                 "status_code": 422
             }
 
@@ -10609,12 +10575,7 @@ FORMAT: 1A
     + Body
 
             {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "is_submit": [
-                        "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-                    ]
-                },
+                "message": "无需重复提交",
                 "status_code": 422
             }
 
@@ -11681,6 +11642,1387 @@ FORMAT: 1A
                         "状态必填"
                     ]
                 },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# customerservicedepts [/api]
+客服部资源
+
+## 获取所有客服部 [GET /api/customerservicedepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "system_order_no": "DD2018082011365716512",
+                        "order_status": "未处理",
+                        "order_source": "system",
+                        "shops_id": 1,
+                        "logistics_id": 1,
+                        "billing_way": "weight",
+                        "promise_ship_time": "2018-08-20",
+                        "freight_types_id": 1,
+                        "expected_freight": "10.00",
+                        "distributions_id": 1,
+                        "distribution_methods_id": 15,
+                        "deliver_goods_fee": "10.00",
+                        "move_upstairs_fee": "10.00",
+                        "installation_fee": "10.00",
+                        "total_distribution_fee": "30.00",
+                        "distribution_phone": "配送电话",
+                        "distribution_no": "配送单号",
+                        "distribution_types_id": 1,
+                        "service_car_info": "服务车信息（配送信息）",
+                        "take_delivery_goods_fee": "10.00",
+                        "take_delivery_goods_ways_id": 1,
+                        "express_fee": "10.00",
+                        "service_car_fee": "10.00",
+                        "cancel_after_verification_code": "核销码",
+                        "wooden_frame_costs": "10.00",
+                        "preferential_cashback": "2.00",
+                        "favorable_cashback": "2.00",
+                        "customer_types_id": 1,
+                        "is_invoice": false,
+                        "invoice_express_fee": "5.00",
+                        "express_invoice_title": "快递发票抬头",
+                        "contract_no": "合同单号",
+                        "payment_methods_id": 1,
+                        "deposit": "10.00",
+                        "document_title": "单据头",
+                        "warehouses_id": 1,
+                        "payment_date": "2018-08-20",
+                        "interest_concessions": "10.00",
+                        "is_notice": true,
+                        "is_cancel_after_verification": false,
+                        "accept_order_user": "接单用户",
+                        "tax_number": "税号",
+                        "receipt": "收据",
+                        "logistics_remark": "物流备注",
+                        "seller_remark": "卖家备注",
+                        "customer_service_remark": "客服备注",
+                        "taobao_oid": 0,
+                        "taobao_tid": 0,
+                        "member_nick": "会员昵称",
+                        "shop_name": "",
+                        "seller_name": "",
+                        "seller_flag": 0,
+                        "created": null,
+                        "est_con_time": null,
+                        "buyer_message": "买家留言",
+                        "receiver_name": "",
+                        "receiver_phone": "",
+                        "receiver_mobile": "",
+                        "receiver_state": "",
+                        "receiver_city": "",
+                        "receiver_district": "",
+                        "receiver_address": "",
+                        "receiver_zip": "",
+                        "refund_info": "无退款",
+                        "business_personnel_id": 0,
+                        "locker_id": 0,
+                        "audit_at": null,
+                        "association_taobao_oid": "",
+                        "is_merge": false,
+                        "is_split": false,
+                        "is_association": false,
+                        "created_at": "2018-08-20 11:36:57",
+                        "updated_at": "2018-08-20 11:36:57"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 新增客服部(可选参数：include) [POST /api/customerservicedepts[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Parameters
+    + shops_id: (integer, required) - 店铺id
+    + member_nick: (string, optional) - 会员昵称
+    + logistics_id: (integer, required) - 物流id
+    + billing_way: (string, required) - 计费方式:weight、volume
+    + promise_ship_time: (date, optional) - 承诺发货时间
+    + freight_types_id: (integer, required) - 运费类型id
+    + expected_freight: (numeric, optional) - 预计运费
+    + distributions_id: (integer, required) - 配送id
+    + distribution_methods_id: (integer, optional) - 配送方式id
+    + deliver_goods_fee: (numeric, optional) - 送货费用
+    + move_upstairs_fee: (numeric, optional) - 搬楼费用
+    + installation_fee: (numeric, optional) - 安装费
+    + total_distribution_fee: (numeric, optional) - 配送总计(送货费用 + 搬楼费用 + 安装费)
+    + distribution_phone: (string, optional) - 配送电话
+    + distribution_no: (string, optional) - 配送单号
+    + distribution_types_id: (integer, optional) - 配送类型id
+    + service_car_info: (string, optional) - 服务车信息（配送信息）
+    + take_delivery_goods_fee: (numeric, required) - 提货费用
+    + take_delivery_goods_ways_id: (integer, optional) - 提货方式id
+    + express_fee: (integer, optional) - 快递费用
+    + service_car_fee: (numeric, optional) - 服务车金额（家装服务）
+    + cancel_after_verification_code: (string, optional) - 核销码
+    + wooden_frame_costs: (numeric, optional) - 木架费
+    + preferential_cashback: (numeric, optional) - 优惠返现
+    + favorable_cashback: (numeric, optional) - 好评返现
+    + customer_types_id: (string, required) - 客户类型id
+    + is_invoice: (boolean, optional) - 是否要发票
+    + invoice_express_fee: (numeric, optional) - 发票快递费
+    + express_invoice_title: (string, optional) - 快递发票抬头
+    + contract_no: (string, optional) - 合同单号
+    + payment_methods_id: (integer, required) - 付款方式id
+    + deposit: (numeric, optional) - 订金
+    + document_title: (string, optional) - 单据头
+    + warehouses_id: (integer, required) - 发货仓库id
+    + payment_date: (date, optional) - 支付日期
+    + interest_concessions: (numeric, optional) - 让利
+    + is_notice: (boolean, optional) - 是否等通知发货
+    + is_cancel_after_verification: (boolean, optional) - 是否核销
+    + accept_order_user: (string, optional) - 接单用户
+    + tax_number: (string, optional) - 税号
+    + receipt: (string, optional) - 收据
+    + logistics_remark: (string, optional) - 物流备注
+    + seller_remark: (string, optional) - 卖家备注
+    + customer_service_remark: (string, optional) - 客服备注
+    + buyer_message: (string, optional) - 买家留言
+    + status: (string, optional) - 订单是否开启
+    + receiver_name: (string, required) - 收货人
+    + receiver_phone: (string, required) - 收货人固定电话
+    + receiver_mobile: (string, required) - 收货人手机
+    + receiver_state: (string, required) - 收货人的所在省份
+    + receiver_city: (string, required) - 收货人的所在城市
+    + receiver_district: (string, required) - 收货人的所在地区
+    + receiver_address: (string, required) - 收货人的详细地址
+    + receiver_zip: (string, required) - 收货邮编
+    + order_items[0][products_id]: (integer, optional) - 产品id
+    + order_items[0][combinations_id]: (integer, optional) - 组合id
+    + order_items[0][total_volume]: (numeric, optional) - 总体积
+    + order_items[0][paint]: (string, optional) - 油漆
+    + order_items[0][is_printing]: (boolean, optional) - 是否需要印刷
+    + order_items[0][printing_fee]: (numeric, optional) - 印刷费用
+    + order_items[0][is_spot_goods]: (boolean, optional) - 是否现货
+    + order_items[0][under_line_univalent]: (numeric, optional) - 线下单价
+    + order_items[0][under_line_total_amount]: (numeric, optional) - 线下金额（数量*单价）
+    + order_items[0][under_line_preferential]: (numeric, optional) - 优惠（线下）
+    + order_items[0][under_line_payment]: (numeric, optional) - 实际支付金额（线下）（线下金额 - 优惠）
+    + payment_details[0][payment]: (numeric, optional) - 支付金额
+    + payment_details[0][taobao_tid]: (string, optional) - 交易号（获取淘宝的交易编号）
+    + payment_details[0][taobao_oid]: (string, optional) - 子订单编号（获取淘宝的订单号）
+    + payment_details[0][pay_time]: (datetime, optional) - 付款时间
+    + payment_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "shops_id": 1,
+                "member_nick": "会员昵称",
+                "logistics_id": 1,
+                "billing_way": "weight",
+                "promise_ship_time": "2018-8-20",
+                "freight_types_id": 1,
+                "expected_freight": 10,
+                "distributions_id": 1,
+                "distribution_methods_id": 15,
+                "deliver_goods_fee": 10,
+                "move_upstairs_fee": 10,
+                "installation_fee": 10,
+                "total_distribution_fee": 30,
+                "distribution_phone": "配送电话",
+                "distribution_no": "配送单号",
+                "distribution_types_id": 1,
+                "service_car_info": "服务车信息（配送信息）",
+                "take_delivery_goods_fee": 10,
+                "take_delivery_goods_ways_id": 1,
+                "express_fee": 10,
+                "service_car_fee": 10,
+                "cancel_after_verification_code": "核销码",
+                "wooden_frame_costs": 10,
+                "preferential_cashback": 2,
+                "favorable_cashback": 2,
+                "customer_types_id": 1,
+                "is_invoice": false,
+                "invoice_express_fee": 5,
+                "express_invoice_title": "快递发票抬头",
+                "contract_no": "合同单号",
+                "payment_methods_id": 1,
+                "deposit": 10,
+                "document_title": "单据头",
+                "warehouses_id": 1,
+                "payment_date": "2018-8-20",
+                "interest_concessions": 10,
+                "is_notice": true,
+                "is_cancel_after_verification": false,
+                "accept_order_user": "接单用户",
+                "tax_number": "税号",
+                "receipt": "收据",
+                "logistics_remark": "物流备注",
+                "seller_remark": "卖家备注",
+                "customer_service_remark": "客服备注",
+                "buyer_message": "买家留言",
+                "receiver_name": "收货人",
+                "receiver_phone": "收货人固定电话",
+                "receiver_mobile": "收货人手机",
+                "receiver_state": "收货人的所在省份",
+                "receiver_city": "收货人的所在城市",
+                "receiver_district": "收货人的所在地区",
+                "receiver_address": "收货人的详细地址",
+                "receiver_zip": "收货邮编",
+                "status": true,
+                "order_items[0][products_id]": 29,
+                "order_items[0][combinations_id]": 14,
+                "order_items[0][quantity]": 10,
+                "order_items[0][total_volume]": 100,
+                "order_items[0][paint]": "油漆",
+                "order_items[0][is_printing]": false,
+                "order_items[0][printing_fee]": 1,
+                "order_items[0][is_spot_goods]": false,
+                "order_items[0][under_line_univalent]": 10,
+                "order_items[0][under_line_total_amount]": 100,
+                "order_items[0][under_line_preferential]": 10,
+                "order_items[0][under_line_payment]": 90,
+                "payment_details[0][payment]": 100,
+                "payment_details[0][taobao_tid]": "123456",
+                "payment_details[0][taobao_oid]": "123456",
+                "payment_details[0][pay_time]": "2018-8-18",
+                "payment_details[0][remark]": "备注"
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "shops_id": [
+                        "店铺id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "system_order_no": "DD2018082011365716512",
+                "order_status": "未处理",
+                "order_source": "system",
+                "shops_id": 1,
+                "logistics_id": 1,
+                "billing_way": "weight",
+                "promise_ship_time": "2018-08-20",
+                "freight_types_id": 1,
+                "expected_freight": "10.00",
+                "distributions_id": 1,
+                "distribution_methods_id": 15,
+                "deliver_goods_fee": "10.00",
+                "move_upstairs_fee": "10.00",
+                "installation_fee": "10.00",
+                "total_distribution_fee": "30.00",
+                "distribution_phone": "配送电话",
+                "distribution_no": "配送单号",
+                "distribution_types_id": 1,
+                "service_car_info": "服务车信息（配送信息）",
+                "take_delivery_goods_fee": "10.00",
+                "take_delivery_goods_ways_id": 1,
+                "express_fee": "10.00",
+                "service_car_fee": "10.00",
+                "cancel_after_verification_code": "核销码",
+                "wooden_frame_costs": "10.00",
+                "preferential_cashback": "2.00",
+                "favorable_cashback": "2.00",
+                "customer_types_id": 1,
+                "is_invoice": false,
+                "invoice_express_fee": "5.00",
+                "express_invoice_title": "快递发票抬头",
+                "contract_no": "合同单号",
+                "payment_methods_id": 1,
+                "deposit": "10.00",
+                "document_title": "单据头",
+                "warehouses_id": 1,
+                "payment_date": "2018-08-20",
+                "interest_concessions": "10.00",
+                "is_notice": true,
+                "is_cancel_after_verification": false,
+                "accept_order_user": "接单用户",
+                "tax_number": "税号",
+                "receipt": "收据",
+                "logistics_remark": "物流备注",
+                "seller_remark": "卖家备注",
+                "customer_service_remark": "客服备注",
+                "taobao_oid": 0,
+                "taobao_tid": 0,
+                "member_nick": "会员昵称",
+                "shop_name": "",
+                "seller_name": "",
+                "seller_flag": 0,
+                "created": null,
+                "est_con_time": null,
+                "buyer_message": "买家留言",
+                "receiver_name": "",
+                "receiver_phone": "",
+                "receiver_mobile": "",
+                "receiver_state": "",
+                "receiver_city": "",
+                "receiver_district": "",
+                "receiver_address": "",
+                "receiver_zip": "",
+                "refund_info": "无退款",
+                "business_personnel_id": 0,
+                "locker_id": 0,
+                "audit_at": null,
+                "association_taobao_oid": "",
+                "is_merge": false,
+                "is_split": false,
+                "is_association": false,
+                "created_at": "2018-08-20 11:36:57",
+                "updated_at": "2018-08-20 11:36:57",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条客服部 [GET /api/customerservicedepts/:id[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "system_order_no": "DD2018082011365716512",
+                "order_status": "未处理",
+                "order_source": "system",
+                "shops_id": 1,
+                "logistics_id": 1,
+                "billing_way": "weight",
+                "promise_ship_time": "2018-08-20",
+                "freight_types_id": 1,
+                "expected_freight": "10.00",
+                "distributions_id": 1,
+                "distribution_methods_id": 15,
+                "deliver_goods_fee": "10.00",
+                "move_upstairs_fee": "10.00",
+                "installation_fee": "10.00",
+                "total_distribution_fee": "30.00",
+                "distribution_phone": "配送电话",
+                "distribution_no": "配送单号",
+                "distribution_types_id": 1,
+                "service_car_info": "服务车信息（配送信息）",
+                "take_delivery_goods_fee": "10.00",
+                "take_delivery_goods_ways_id": 1,
+                "express_fee": "10.00",
+                "service_car_fee": "10.00",
+                "cancel_after_verification_code": "核销码",
+                "wooden_frame_costs": "10.00",
+                "preferential_cashback": "2.00",
+                "favorable_cashback": "2.00",
+                "customer_types_id": 1,
+                "is_invoice": false,
+                "invoice_express_fee": "5.00",
+                "express_invoice_title": "快递发票抬头",
+                "contract_no": "合同单号",
+                "payment_methods_id": 1,
+                "deposit": "10.00",
+                "document_title": "单据头",
+                "warehouses_id": 1,
+                "payment_date": "2018-08-20",
+                "interest_concessions": "10.00",
+                "is_notice": true,
+                "is_cancel_after_verification": false,
+                "accept_order_user": "接单用户",
+                "tax_number": "税号",
+                "receipt": "收据",
+                "logistics_remark": "物流备注",
+                "seller_remark": "卖家备注",
+                "customer_service_remark": "客服备注",
+                "taobao_oid": 0,
+                "taobao_tid": 0,
+                "member_nick": "会员昵称",
+                "shop_name": "",
+                "seller_name": "",
+                "seller_flag": 0,
+                "created": null,
+                "est_con_time": null,
+                "buyer_message": "买家留言",
+                "receiver_name": "",
+                "receiver_phone": "",
+                "receiver_mobile": "",
+                "receiver_state": "",
+                "receiver_city": "",
+                "receiver_district": "",
+                "receiver_address": "",
+                "receiver_zip": "",
+                "refund_info": "无退款",
+                "business_personnel_id": 0,
+                "locker_id": 0,
+                "audit_at": null,
+                "association_taobao_oid": "",
+                "is_merge": false,
+                "is_split": false,
+                "is_association": false,
+                "created_at": "2018-08-20 11:36:57",
+                "updated_at": "2018-08-20 11:36:57"
+            }
+
+## 修改客服部 [PATCH /api/customerservicedepts/:id[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Parameters
+    + shops_id: (integer, required) - 店铺id
+    + member_nick: (string, optional) - 会员昵称
+    + logistics_id: (integer, required) - 物流id
+    + billing_way: (string, required) - 计费方式:weight、volume
+    + promise_ship_time: (date, optional) - 承诺发货时间
+    + freight_types_id: (integer, required) - 运费类型id
+    + expected_freight: (numeric, optional) - 预计运费
+    + distributions_id: (integer, required) - 配送id
+    + distribution_methods_id: (integer, optional) - 配送方式id
+    + deliver_goods_fee: (numeric, optional) - 送货费用
+    + move_upstairs_fee: (numeric, optional) - 搬楼费用
+    + installation_fee: (numeric, optional) - 安装费
+    + total_distribution_fee: (numeric, optional) - 配送总计(送货费用 + 搬楼费用 + 安装费)
+    + distribution_phone: (string, optional) - 配送电话
+    + distribution_no: (string, optional) - 配送单号
+    + distribution_types_id: (integer, optional) - 配送类型id
+    + service_car_info: (string, optional) - 服务车信息（配送信息）
+    + take_delivery_goods_fee: (numeric, required) - 提货费用
+    + take_delivery_goods_ways_id: (integer, optional) - 提货方式id
+    + express_fee: (integer, optional) - 快递费用
+    + service_car_fee: (numeric, optional) - 服务车金额（家装服务）
+    + cancel_after_verification_code: (string, optional) - 核销码
+    + wooden_frame_costs: (numeric, optional) - 木架费
+    + preferential_cashback: (numeric, optional) - 优惠返现
+    + favorable_cashback: (numeric, optional) - 好评返现
+    + customer_types_id: (string, required) - 客户类型id
+    + is_invoice: (boolean, optional) - 是否要发票
+    + invoice_express_fee: (numeric, optional) - 发票快递费
+    + express_invoice_title: (string, optional) - 快递发票抬头
+    + contract_no: (string, optional) - 合同单号
+    + payment_methods_id: (integer, required) - 付款方式id
+    + deposit: (numeric, optional) - 订金
+    + document_title: (string, optional) - 单据头
+    + warehouses_id: (integer, required) - 发货仓库id
+    + payment_date: (date, optional) - 支付日期
+    + interest_concessions: (numeric, optional) - 让利
+    + is_notice: (boolean, optional) - 是否等通知发货
+    + is_cancel_after_verification: (boolean, optional) - 是否核销
+    + accept_order_user: (string, optional) - 接单用户
+    + tax_number: (string, optional) - 税号
+    + receipt: (string, optional) - 收据
+    + logistics_remark: (string, optional) - 物流备注
+    + seller_remark: (string, optional) - 卖家备注
+    + customer_service_remark: (string, optional) - 客服备注
+    + buyer_message: (string, optional) - 买家留言
+    + status: (string, optional) - 订单是否开启
+    + receiver_name: (string, required) - 收货人
+    + receiver_phone: (string, required) - 收货人固定电话
+    + receiver_mobile: (string, required) - 收货人手机
+    + receiver_state: (string, required) - 收货人的所在省份
+    + receiver_city: (string, required) - 收货人的所在城市
+    + receiver_district: (string, required) - 收货人的所在地区
+    + receiver_address: (string, required) - 收货人的详细地址
+    + receiver_zip: (string, required) - 收货邮编
+    + order_items[0][id]: (integer, optional) - 子订单id
+    + order_items[0][products_id]: (integer, optional) - 产品id
+    + order_items[0][combinations_id]: (integer, optional) - 组合id
+    + order_items[0][total_volume]: (numeric, optional) - 总体积
+    + order_items[0][paint]: (string, optional) - 油漆
+    + order_items[0][is_printing]: (boolean, optional) - 是否需要印刷
+    + order_items[0][printing_fee]: (numeric, optional) - 印刷费用
+    + order_items[0][is_spot_goods]: (boolean, optional) - 是否现货
+    + order_items[0][under_line_univalent]: (numeric, optional) - 线下单价
+    + order_items[0][under_line_total_amount]: (numeric, optional) - 线下金额（数量*单价）
+    + order_items[0][under_line_preferential]: (numeric, optional) - 优惠（线下）
+    + order_items[0][under_line_payment]: (numeric, optional) - 实际支付金额（线下）（线下金额 - 优惠）
+    + payment_details[0][id]: (integer, optional) - 支付明细id
+    + payment_details[0][payment]: (numeric, optional) - 支付金额
+    + payment_details[0][taobao_tid]: (string, optional) - 交易号（获取淘宝的交易编号）
+    + payment_details[0][taobao_oid]: (string, optional) - 子订单编号（获取淘宝的订单号）
+    + payment_details[0][pay_time]: (datetime, optional) - 付款时间
+    + payment_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "shops_id": 1,
+                "member_nick": "会员昵称",
+                "logistics_id": 1,
+                "billing_way": "weight",
+                "promise_ship_time": "2018-8-20",
+                "freight_types_id": 1,
+                "expected_freight": 10,
+                "distributions_id": 1,
+                "distribution_methods_id": 15,
+                "deliver_goods_fee": 10,
+                "move_upstairs_fee": 10,
+                "installation_fee": 10,
+                "total_distribution_fee": 30,
+                "distribution_phone": "配送电话",
+                "distribution_no": "配送单号",
+                "distribution_types_id": 1,
+                "service_car_info": "服务车信息（配送信息）",
+                "take_delivery_goods_fee": 10,
+                "take_delivery_goods_ways_id": 1,
+                "express_fee": 10,
+                "service_car_fee": 10,
+                "cancel_after_verification_code": "核销码",
+                "wooden_frame_costs": 10,
+                "preferential_cashback": 2,
+                "favorable_cashback": 2,
+                "customer_types_id": 1,
+                "is_invoice": false,
+                "invoice_express_fee": 5,
+                "express_invoice_title": "快递发票抬头",
+                "contract_no": "合同单号",
+                "payment_methods_id": 1,
+                "deposit": 10,
+                "document_title": "单据头",
+                "warehouses_id": 1,
+                "payment_date": "2018-8-20",
+                "interest_concessions": 10,
+                "is_notice": true,
+                "is_cancel_after_verification": false,
+                "accept_order_user": "接单用户",
+                "tax_number": "税号",
+                "receipt": "收据",
+                "logistics_remark": "物流备注",
+                "seller_remark": "卖家备注",
+                "customer_service_remark": "客服备注",
+                "buyer_message": "买家留言",
+                "receiver_name": "收货人",
+                "receiver_phone": "收货人固定电话",
+                "receiver_mobile": "收货人手机",
+                "receiver_state": "收货人的所在省份",
+                "receiver_city": "收货人的所在城市",
+                "receiver_district": "收货人的所在地区",
+                "receiver_address": "收货人的详细地址",
+                "receiver_zip": "收货邮编",
+                "status": true,
+                "order_items[0][id]": 1,
+                "order_items[0][products_id]": 29,
+                "order_items[0][combinations_id]": 14,
+                "order_items[0][quantity]": 10,
+                "order_items[0][total_volume]": 100,
+                "order_items[0][paint]": "油漆",
+                "order_items[0][is_printing]": false,
+                "order_items[0][printing_fee]": 1,
+                "order_items[0][is_spot_goods]": false,
+                "order_items[0][under_line_univalent]": 10,
+                "order_items[0][under_line_total_amount]": 100,
+                "order_items[0][under_line_preferential]": 10,
+                "order_items[0][under_line_payment]": 90,
+                "payment_details[0][id]": 1,
+                "payment_details[0][payment]": 100,
+                "payment_details[0][taobao_tid]": "123456",
+                "payment_details[0][taobao_oid]": "123456",
+                "payment_details[0][pay_time]": "2018-8-18",
+                "payment_details[0][remark]": "备注"
+            }
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "还未锁定无法修改",
+                "errors": {
+                    "shops_id": [
+                        "店铺id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            [
+                {
+                    "identifier": "shops_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "店铺id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "member_nick",
+                    "type": "string",
+                    "required": false,
+                    "description": "会员昵称",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "logistics_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "物流id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "billing_way",
+                    "type": "string",
+                    "required": true,
+                    "description": "计费方式:weight、volume",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "promise_ship_time",
+                    "type": "date",
+                    "required": false,
+                    "description": "承诺发货时间",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "freight_types_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "运费类型id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "expected_freight",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "预计运费",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "distributions_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "配送id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "distribution_methods_id",
+                    "type": "integer",
+                    "required": false,
+                    "description": "配送方式id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "deliver_goods_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "送货费用",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "move_upstairs_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "搬楼费用",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "installation_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "安装费",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "total_distribution_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "配送总计(送货费用 + 搬楼费用 + 安装费)",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "distribution_phone",
+                    "type": "string",
+                    "required": false,
+                    "description": "配送电话",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "distribution_no",
+                    "type": "string",
+                    "required": false,
+                    "description": "配送单号",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "distribution_types_id",
+                    "type": "integer",
+                    "required": false,
+                    "description": "配送类型id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "service_car_info",
+                    "type": "string",
+                    "required": false,
+                    "description": "服务车信息（配送信息）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "take_delivery_goods_fee",
+                    "type": "numeric",
+                    "required": true,
+                    "description": "提货费用",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "take_delivery_goods_ways_id",
+                    "type": "integer",
+                    "required": false,
+                    "description": "提货方式id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "express_fee",
+                    "type": "integer",
+                    "required": false,
+                    "description": "快递费用",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "service_car_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "服务车金额（家装服务）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "cancel_after_verification_code",
+                    "type": "string",
+                    "required": false,
+                    "description": "核销码",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "wooden_frame_costs",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "木架费",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "preferential_cashback",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "优惠返现",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "favorable_cashback",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "好评返现",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "customer_types_id",
+                    "type": "string",
+                    "required": true,
+                    "description": "客户类型id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "is_invoice",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "是否要发票",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "invoice_express_fee",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "发票快递费",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "express_invoice_title",
+                    "type": "string",
+                    "required": false,
+                    "description": "快递发票抬头",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "contract_no",
+                    "type": "string",
+                    "required": false,
+                    "description": "合同单号",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_methods_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "付款方式id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "deposit",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "订金",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "document_title",
+                    "type": "string",
+                    "required": false,
+                    "description": "单据头",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "warehouses_id",
+                    "type": "integer",
+                    "required": true,
+                    "description": "发货仓库id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_date",
+                    "type": "date",
+                    "required": false,
+                    "description": "支付日期",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "interest_concessions",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "让利",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "is_notice",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "是否等通知发货",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "is_cancel_after_verification",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "是否核销",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "accept_order_user",
+                    "type": "string",
+                    "required": false,
+                    "description": "接单用户",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "tax_number",
+                    "type": "string",
+                    "required": false,
+                    "description": "税号",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receipt",
+                    "type": "string",
+                    "required": false,
+                    "description": "收据",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "logistics_remark",
+                    "type": "string",
+                    "required": false,
+                    "description": "物流备注",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "seller_remark",
+                    "type": "string",
+                    "required": false,
+                    "description": "卖家备注",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "customer_service_remark",
+                    "type": "string",
+                    "required": false,
+                    "description": "客服备注",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "buyer_message",
+                    "type": "string",
+                    "required": false,
+                    "description": "买家留言",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "status",
+                    "type": "string",
+                    "required": false,
+                    "description": "订单是否开启",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_name",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_phone",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人固定电话",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_mobile",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人手机",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_state",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人的所在省份",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_city",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人的所在城市",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_district",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人的所在地区",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_address",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货人的详细地址",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "receiver_zip",
+                    "type": "string",
+                    "required": true,
+                    "description": "收货邮编",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][products_id]",
+                    "type": "integer",
+                    "required": false,
+                    "description": "产品id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][combinations_id]",
+                    "type": "integer",
+                    "required": false,
+                    "description": "组合id",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][total_volume]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "总体积",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][paint]",
+                    "type": "string",
+                    "required": false,
+                    "description": "油漆",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][is_printing]",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "是否需要印刷",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][printing_fee]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "印刷费用",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][is_spot_goods]",
+                    "type": "boolean",
+                    "required": false,
+                    "description": "是否现货",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][under_line_univalent]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "线下单价",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][under_line_total_amount]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "线下金额（数量*单价）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][under_line_preferential]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "优惠（线下）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "order_items[0][under_line_payment]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "实际支付金额（线下）（线下金额 - 优惠）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_details[0][payment]",
+                    "type": "numeric",
+                    "required": false,
+                    "description": "支付金额",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_details[0][taobao_tid]",
+                    "type": "string",
+                    "required": false,
+                    "description": "交易号（获取淘宝的交易编号）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_details[0][taobao_oid]",
+                    "type": "string",
+                    "required": false,
+                    "description": "子订单编号（获取淘宝的订单号）",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_details[0][pay_time]",
+                    "type": "datetime",
+                    "required": false,
+                    "description": "付款时间",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                },
+                {
+                    "identifier": "payment_details[0][remark]",
+                    "type": "string",
+                    "required": false,
+                    "description": "备注",
+                    "default": null,
+                    "example": null,
+                    "members": null
+                }
+            ]
+
+## 删除客服部 [DELETE /api/customerservicedepts/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组客服部 [DELETE /api/customerservicedepts]
+
+
++ Parameters
+    + ids: (string, required) - 客服部id组 格式: 1,2,3,4 
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组客服部状态 [PUT /api/customerservicedepts/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 客服部id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用,1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 锁定或释放 [PUT /api/customerservicedepts/:id/lockorunlock]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法锁定",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 客审 [PUT /api/customerservicedepts/:id/audit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "客审出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 退审 [PUT /api/customerservicedepts/:id/unaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "退审出错",
                 "status_code": 422
             }
 

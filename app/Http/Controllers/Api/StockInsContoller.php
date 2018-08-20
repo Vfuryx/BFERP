@@ -516,12 +516,7 @@ class StockInsContoller extends Controller
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "is_submit": {
-     *                  "需要更改错误确认数据的准确性，例如数据是否已启用、不可修改"
-     *              }
-     *           },
+     *          "message": "无需重复提交",
      *          "status_code": 422,
      *      }),
      *      @Response(204, body={})

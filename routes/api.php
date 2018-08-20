@@ -669,6 +669,12 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicedepts.destroybyids');
         $api->put('customerservicedepts/editstatus', 'CustomerServiceDepartmentsController@editStatusByIds')
             ->name('api.customerservicedepts.editstatusbyids');
+        $api->put('customerservicedepts/{order}/lockorunlock', 'CustomerServiceDepartmentsController@isLockOrUnlock')
+            ->name('api.customerservicedepts.islockorunlock');
+        $api->put('customerservicedepts/{order}/audit', 'CustomerServiceDepartmentsController@isAudit')
+            ->name('api.customerservicedepts.isaudit');
+        $api->put('customerservicedepts/{order}/unaudit', 'CustomerServiceDepartmentsController@isUnAudit')
+            ->name('api.customerservicedepts.isunaudit');
 
 
         //上传图片

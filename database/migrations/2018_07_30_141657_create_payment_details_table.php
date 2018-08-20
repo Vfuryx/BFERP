@@ -8,7 +8,7 @@ class CreatePaymentDetailsTable extends Migration
 {
     /**
      * Run the migrations.
-     * 支付明细
+     * 支付明细表
      * @return void
      */
     public function up()

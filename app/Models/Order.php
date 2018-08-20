@@ -165,14 +165,14 @@ class Order extends Model
                 }
             }
 
-            // 如果模型的 business_personnel_name 字段为空
-            if (!$model->business_personnel_id) {
-                $model->business_personnel_id = Auth::guard('api')->id();
-                // 如果生成失败，则终止创建订单
-                if (!$model->business_personnel_id) {
-                    return false;
-                }
-            }
+//            // 如果模型的 business_personnel_name 字段为空
+//            if (!$model->business_personnel_id) {
+//                $model->business_personnel_id = Auth::guard('api')->id();
+//                // 如果生成失败，则终止创建订单
+//                if (!$model->business_personnel_id) {
+//                    return false;
+//                }
+//            }
 
         });
     }
@@ -199,6 +199,56 @@ class Order extends Model
         return $no;
     }
 
+    /**
+     * 订单未锁定
+     * @return bool
+     */
+    public function unlock()
+    {
+        return $this->getOriginal('order_status') != self::ORDER_STATUS_LOCK;
+    }
+
+    /**
+     * 订单锁定或释放
+     * @return bool
+     */
+    public function lockOrUnlock()
+    {
+        if($this->unlock()){
+            $this->business_personnel_id = Auth::guard('api')->id();
+            $this->locker_id = Auth::guard('api')->id();
+            $this->order_status = self::ORDER_STATUS_LOCK;
+        }else{
+            $this->business_personnel_id = 0;
+            $this->locker_id = 0;
+            $this->order_status = self::ORDER_STATUS_NEW;
+        }
+
+        $this->save();
+    }
+
+    /**
+     * 客审
+     * @return bool
+     */
+    public function audit()
+    {
+        $this->locker_id = 0;
+        $this->order_status = self::ORDER_STATUS_CS_AUDIT;
+        $this->save();
+    }
+
+    /**
+     * 退审
+     * @return bool
+     */
+    public function unAudit()
+    {
+        $this->business_personnel_id = 0;
+        $this->locker_id = 0;
+        $this->order_status = self::ORDER_STATUS_NEW;
+        $this->save();
+    }
 
 
     public function shop()

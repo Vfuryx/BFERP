@@ -42,6 +42,9 @@ class PaymentDetailRequest extends FormRequest
     public function messages()
     {
         return [
+            'payment_details.*.payment.integer' => '支付明细id必须int类型',
+            'payment_details.*.payment.exists' => '需要添加的id在数据库中未找到或未启用',
+
             'payment_details.*.payment.numeric' => '支付金额必须是数字',
 
             'payment_details.*.taobao_tid.string' => '交易号必须string类型',
