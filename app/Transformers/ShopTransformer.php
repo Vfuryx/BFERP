@@ -7,6 +7,10 @@ use League\Fractal\TransformerAbstract;
 
 class ShopTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'warehouse', 'platform'
+    ];
+
     public function transform(Shop $shop)
     {
         return [
@@ -14,7 +18,7 @@ class ShopTransformer extends TransformerAbstract
             'nick' => $shop->nick,
             'title' => $shop->title,
             'session_key' => $shop->session_key,
-            'warehouse' => $shop->warehouse,
+            'warehouse_id' => $shop->warehouse_id,
             'shop_account' => $shop->shop_account,
             'shop_passwd' => $shop->shop_passwd,
             'rebate' => $shop->rebate,
@@ -25,7 +29,7 @@ class ShopTransformer extends TransformerAbstract
             'district' => $shop->district,
             'address' => $shop->address,
             'gross_profit_rate' => $shop->gross_profit_rate,
-            'platform' => $shop->platform,
+            'platform_id' => $shop->platform_id,
             'is_waybill' => $shop->is_waybill,
             'status' => $shop->status,
             'created_at' => $shop->created_at
@@ -34,4 +38,15 @@ class ShopTransformer extends TransformerAbstract
                                     ->toDateTimeString(),
         ];
     }
+
+    public function includeWarehouse(Shop $shop)
+    {
+        return $this->item($shop->warehouse, new WarehouseTransformer());
+    }
+
+    public function includePlatform(Shop $shop)
+    {
+        return $this->item($shop->platform, new PlatformTransformer());
+    }
+
 }

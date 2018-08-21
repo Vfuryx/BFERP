@@ -8,14 +8,9 @@ class CancelPurchase extends Model
 {
     protected $table = 'cancel_purchases';
 
-    protected $fillable = [
-        'purchases_id'
-    ];
+    protected $fillable = ['purchases_id'];
 
-    protected $dates = [
-        'submit_at'
-    ];
-
+    protected $dates = ['submit_at'];
 
     //设置类型
     protected $casts = [

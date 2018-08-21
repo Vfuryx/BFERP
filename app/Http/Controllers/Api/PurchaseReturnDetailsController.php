@@ -22,74 +22,78 @@ class PurchaseReturnDetailsController extends Controller
     /**
      * 获取所有采购退货单详情
      *
-     * @Get("/purchasereturndetails{?status}")
+     * @Get("/purchasereturndetails[?include=purchaseReturnType,purchaseReturn,stock,supplier]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      * "data": {
      *          {
-     *              "id": 1,
-     *              "purchase_return": {
-     *                  "id": 1,
-     *                  "purchase_return_no": "RG2018072411440706967",
+     *              "id": 3,
+     *              "purchase_returns_id": 3,
+     *              "stocks_id": 18,
+     *              "purchase_return_quantity": 12,
+     *              "suppliers_id": 1,
+     *              "price_differences": "0.00",
+     *              "purchase_return_types_id": 2,
+     *              "created_at": "2018-08-21 17:04:22",
+     *              "updated_at": "2018-08-21 17:04:22",
+     *              "purchaseReturnType": {
+     *                  "id": 2,
+     *                  "name": "采购退货类型名称",
+     *                  "status": true,
+     *                  "created_at": "2018-08-21 17:04:08",
+     *                  "updated_at": "2018-08-21 17:04:08"
+     *              },
+     *              "purchaseReturn": {
+     *                  "id": 3,
+     *                  "purchase_return_no": "RG2018082117042268516",
      *                  "creator": "admin",
-     *                  "is_submit": 1,
+     *                  "is_submit": false,
      *                  "submitter": "",
      *                  "submit_at": null,
-     *                  "is_audit": 1,
-     *                  "auditor": "admin",
-     *                  "audit_at": "2018-07-24 15:00:53",
-     *                  "is_print": 1,
-     *                  "remark": "采购退货单备注1",
+     *                  "is_audit": false,
+     *                  "auditor": "",
+     *                  "audit_at": null,
+     *                  "is_print": false,
+     *                  "remark": "采购退货单备注",
      *                  "status": true,
-     *                  "created_at": "2018-07-24 11:44:07",
-     *                  "updated_at": "2018-07-24 15:00:53"
+     *                  "created_at": "2018-08-21 17:04:22",
+     *                  "updated_at": "2018-08-21 17:04:22"
      *              },
      *              "stock": {
-     *                  "id": 1,
+     *                  "id": 18,
      *                  "warehouse_id": 1,
-     *                  "goods_id": 1,
-     *                  "pro_specs_id": 1,
-     *                  "quantity": 8,
+     *                  "products_id": 30,
+     *                  "product_components_id": 7,
+     *                  "quantity": 10,
      *                  "status": true,
-     *                  "created_at": "2018-07-21 18:20:53",
-     *                  "updated_at": "2018-07-24 15:00:53"
+     *                  "created_at": "2018-08-15 16:25:24",
+     *                  "updated_at": "2018-08-16 11:43:51"
      *              },
-     *              "purchase_return_quantity": 12,
      *              "supplier": {
      *                  "id": 1,
-     *                  "name": "1",
-     *                  "company": "1",
-     *                  "code": "1",
-     *                  "province": "1",
-     *                  "city": "1",
-     *                  "district": "1",
-     *                  "address": "1",
-     *                  "zipcode": "1",
-     *                  "contacts": "1",
-     *                  "phone": "1",
-     *                  "mobile": "132131343242",
-     *                  "fax": "1",
-     *                  "email": "132@re.cn",
-     *                  "remark": "1",
+     *                  "name": "供应商名称",
+     *                  "company": "供应商公司",
+     *                  "code": "公司代码",
+     *                  "province": "省",
+     *                  "city": "市",
+     *                  "district": "区",
+     *                  "address": "地址",
+     *                  "zipcode": "邮编",
+     *                  "contacts": "联系人",
+     *                  "phone": "电话",
+     *                  "mobile": "手机",
+     *                  "fax": "传真",
+     *                  "email": "935661686@qq.com",
+     *                  "remark": "备注",
      *                  "is_scan": true,
      *                  "status": true,
      *                  "auto_valuation": true,
-     *                  "created_at": "2018-07-17 17:54:01",
-     *                  "updated_at": "2018-07-17 17:54:01"
-     *              },
-     *              "price_differences": "1.00",
-     *              "purchase_return_type": {
-     *                  "id": 1,
-     *                  "name": "采购退货类型名称",
-     *                  "status": true,
-     *                  "created_at": "2018-07-24 10:24:13",
-     *                  "updated_at": "2018-07-24 10:24:13"
-     *              },
-     *              "created_at": "2018-07-24 11:44:07",
-     *              "updated_at": "2018-07-24 12:50:25"
+     *                  "created_at": "2018-08-06 16:27:02",
+     *                  "updated_at": "2018-08-06 16:27:02"
+     *              }
      *         }
      *     },
      *     "meta": {

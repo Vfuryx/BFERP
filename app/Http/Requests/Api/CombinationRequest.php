@@ -14,6 +14,11 @@ class CombinationRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+
+                ];
+                break;
             case 'POST':
                 return [
                     'pid' => [

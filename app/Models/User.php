@@ -47,4 +47,10 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->hasMany('App\Models\Role');
     }
+
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class, 'user_id ');
+    }
+
 }

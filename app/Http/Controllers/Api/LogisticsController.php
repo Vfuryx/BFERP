@@ -23,10 +23,11 @@ class LogisticsController extends Controller
     /**
      * 获取所有物流
      *
-     * @Get("/logistics{?status}")
+     * @Get("/logistics[?status=true&include=printReport,freightType]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      * "data": {

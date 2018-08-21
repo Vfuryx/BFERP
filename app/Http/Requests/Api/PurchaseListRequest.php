@@ -17,7 +17,7 @@ class PurchaseListRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'boolean',
+                    'commodity_code' => 'nullable|string|max:255',
                 ];
                 break;
             case 'POST':
@@ -88,6 +88,9 @@ class PurchaseListRequest extends FormRequest
             'purchase_lists.*.remark.string' => '备注必须string类型',
             'purchase_lists.*.remark.nullable' => '备注可为null',
             'purchase_lists.*.remark.max' => '备注最大长度为255',
+
+            'commodity_code.string' => '产品编码必须string类型',
+            'commodity_code.max' => '产品编码最大长度为255',
         ];
     }
 
@@ -97,6 +100,7 @@ class PurchaseListRequest extends FormRequest
         return [
             'combinations_id' => '组合id',
             'remark' => '备注',
+            'commodity_code' => '产品编码',
         ];
     }
 }

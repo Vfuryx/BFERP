@@ -7,13 +7,17 @@ use League\Fractal\TransformerAbstract;
 
 class StockInDetailTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'stockIn', 'purchaseDetail','productComponent'
+    ];
+
     public function transform(StockInDetail $stockInDetail)
     {
         return [
             'id' => $stockInDetail->id,
-            'stock_in' => $stockInDetail->stockIn,
-            'purchase_lists_id' => $stockInDetail->purchase_lists_id,
-            'product_spec' => $stockInDetail->productSpec,
+            'stock_ins_id' => $stockInDetail->stock_ins_id,
+            'purchase_details_id' => $stockInDetail->purchase_details_id,
+            'product_components_id' => $stockInDetail->product_components_id,
             'stock_in_quantity' => $stockInDetail->stock_in_quantity,
             'total_fee' => $stockInDetail->total_fee,
             'remark' => $stockInDetail->remark,
@@ -23,4 +27,22 @@ class StockInDetailTransformer extends TransformerAbstract
                                     ->toDateTimeString(),
         ];
     }
+
+    public function includeStockIn(StockInDetail $stockInDetail)
+    {
+        return $this->item($stockInDetail->stockIn, new StockInTransformer());
+    }
+
+    public function includePurchaseDetail(StockInDetail $stockInDetail)
+    {
+        return $this->item($stockInDetail->purchaseDetail, new PurchaseDetailTransformer());
+    }
+
+    public function includeProductComponent(StockInDetail $stockInDetail)
+    {
+        return $this->item($stockInDetail->productComponent, new ProductComponentTransformer());
+    }
+
+
+
 }

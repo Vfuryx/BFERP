@@ -23,10 +23,11 @@ class SeriesController extends Controller
     /**
      * 获取所有系列
      *
-     * @Get("/series{?status}")
+     * @Get("/series[?status=true&include=suppliers]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      * "data": {

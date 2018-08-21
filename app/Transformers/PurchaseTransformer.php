@@ -7,19 +7,22 @@ use League\Fractal\TransformerAbstract;
 
 class PurchaseTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'user','purchaseLists','cancelPurchases'
+    ];
+
     public function transform(Purchase $purchase)
     {
-        $purchase = $purchase->load('purchaseLists.combinations','purchaseLists.purchaseDetails.productComponent');
         return [
             'id' => $purchase->id,
             'purchase_order_no' => $purchase->purchase_order_no,
             'purchase_status' => $purchase->purchase_status,
             'order_no' => $purchase->order_no,
             'user_id' => $purchase->user_id,
-            'print_at' => $purchase->print_at,
+            'print_at' => optional($purchase->print_at)->toDateTimeString(),
             'receiver' => $purchase->receiver,
             'receiver_address' => $purchase->receiver_address,
-            'promise_ship_time' => $purchase->promise_ship_time,
+            'promise_ship_time' => optional($purchase->promise_ship_time)->toDateString(),
             'business_personnel' => $purchase->business_personnel,
             'source' => $purchase->source,
             'client_name' => $purchase->client_name,
@@ -31,7 +34,22 @@ class PurchaseTransformer extends TransformerAbstract
             'is_change' => $purchase->is_change,
             'remark' => $purchase->remark,
             'status' => $purchase->status,
-            'purchase_lists' => $purchase->purchaseLists
         ];
     }
+
+    public function includeUser(Purchase $purchase)
+    {
+        return $this->item($purchase->user, new UserTransformer());
+    }
+
+    public function includePurchaseLists(Purchase $purchase)
+    {
+        return $this->collection($purchase->purchaseLists, new PurchaseListTransformer());
+    }
+
+    public function includeCancelPurchases(Purchase $purchase)
+    {
+        return $this->collection($purchase->cancelPurchases, new CancelPurchaseTransformer());
+    }
+
 }

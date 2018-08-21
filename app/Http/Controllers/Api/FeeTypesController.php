@@ -23,10 +23,11 @@ class FeeTypesController extends Controller
     /**
      * 获取所有费用类型
      *
-     * @Get("/feetypes{?status}")
+     * @Get("/feetypes[?status=true&include=feeCategory]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      * "data": {

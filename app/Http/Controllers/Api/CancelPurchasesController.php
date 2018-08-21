@@ -16,7 +16,6 @@ use App\Transformers\CancelPurchaseTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 use App\Http\Controllers\Traits\ProcedureTrait;
 
-use Dingo\Api\Exception\DeleteResourceFailedException;
 use Dingo\Api\Exception\UpdateResourceFailedException;
 
 
@@ -35,110 +34,60 @@ class CancelPurchasesController extends Controller
     /**
      * 获取所有取消采购
      *
-     * @Get("/cancelpurchases{?status}")
+     * @Get("/cancelpurchases[?status=true&include=purchase,cancelPurchaseDetails]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
-     * "data": {
-     *     {
-     *          "id": 19,
-     *          "cancel_purchases_no": "CP2018072316423654591",
-     *          "purchase": {
-     *              "id": 13,
-     *              "purchase_order_no": "PO2018072116220517242",
-     *              "purchase_status": "新建",
-     *              "order_no": "",
-     *              "user_id": 1,
-     *              "print_at": null,
-     *              "receiver": "收货人3",
-     *              "receiver_address": "收货地址3",
-     *              "warehouse_id": 1,
-     *              "promise_ship_time": null,
-     *              "business_personnel": "",
-     *              "source": "",
-     *              "client_name": "",
-     *              "buyer_nick": "",
-     *              "order_address": "",
-     *              "is_submit": false,
-     *              "is_print": false,
-     *              "is_audit": false,
-     *              "is_change": true,
-     *              "remark": "备注5",
-     *              "status": true,
-     *              "created_at": "2018-07-21 16:22:05",
-     *              "updated_at": "2018-07-23 16:26:19"
-     *          },
-     *          "creator": "admin",
-     *          "submitter": null,
-     *          "submit_at": null,
-     *          "is_submit": false,
-     *          "cancel_purchase_details": {
-     *              {
-     *                  "id": 14,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 1,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 1,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 15,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
+     *      "data": {
+     *          {
+     *               "id": 3,
+     *               "cancel_purchases_no": "CP2018082018300421223",
+     *               "purchases_id": 16,
+     *               "creator": "admin",
+     *               "submitter": "",
+     *               "submit_at": null,
+     *               "is_submit": false,
+     *               "status": true,
+     *               "created_at": "2018-08-20 18:30:04",
+     *               "updated_at": "2018-08-20 18:30:04",
+     *               "purchase": {
+     *                   "id": 16,
+     *                   "purchase_order_no": "PO2018081713593264379",
+     *                   "purchase_status": "新建",
+     *                   "order_no": "",
+     *                   "user_id": 1,
+     *                   "print_at": null,
+     *                   "receiver": "采购收:",
+     *                   "receiver_address": "采购收货地址2:",
+     *                   "promise_ship_time": null,
+     *                   "business_personnel": "",
+     *                   "source": "",
+     *                   "client_name": "",
+     *                   "buyer_nick": "",
+     *                   "order_address": "",
+     *                   "is_submit": false,
+     *                   "is_print": false,
+     *                   "is_audit": true,
+     *                   "is_change": true,
+     *                   "remark": "采购备注2:",
+     *                   "status": true
+     *               },
+     *               "cancelPurchaseDetails": {
+     *                   "data": {
+     *                       {
+     *                           "id": 3,
+     *                           "cancel_purchases_id": 3,
+     *                           "purchase_details_id": 19,
+     *                           "cancel_purchase_quantity": 1,
+     *                           "created_at": "2018-08-20 18:30:04",
+     *                           "updated_at": "2018-08-20 18:30:04"
+     *                       }
      *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-23 16:42:36",
-     *          "updated_at": "2018-07-23 16:42:36",
-     *         }
+     *          }
      *     },
      *     "meta": {
      *         "pagination": {
@@ -194,18 +143,25 @@ class CancelPurchasesController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 19,
-     *          "cancel_purchases_no": "CP2018072316423654591",
+     *          "id": 3,
+     *          "cancel_purchases_no": "CP2018082018300421223",
+     *          "purchases_id": 16,
+     *          "creator": "admin",
+     *          "submitter": "",
+     *          "submit_at": null,
+     *          "is_submit": false,
+     *          "status": true,
+     *          "created_at": "2018-08-20 18:30:04",
+     *          "updated_at": "2018-08-20 18:30:04",
      *          "purchase": {
-     *              "id": 13,
-     *              "purchase_order_no": "PO2018072116220517242",
+     *              "id": 16,
+     *              "purchase_order_no": "PO2018081713593264379",
      *              "purchase_status": "新建",
      *              "order_no": "",
      *              "user_id": 1,
      *              "print_at": null,
-     *              "receiver": "收货人3",
-     *              "receiver_address": "收货地址3",
-     *              "warehouse_id": 1,
+     *              "receiver": "采购收:",
+     *              "receiver_address": "采购收货地址2:",
      *              "promise_ship_time": null,
      *              "business_personnel": "",
      *              "source": "",
@@ -214,81 +170,23 @@ class CancelPurchasesController extends Controller
      *              "order_address": "",
      *              "is_submit": false,
      *              "is_print": false,
-     *              "is_audit": false,
+     *              "is_audit": true,
      *              "is_change": true,
-     *              "remark": "备注5",
-     *              "status": true,
-     *              "created_at": "2018-07-21 16:22:05",
-     *              "updated_at": "2018-07-23 16:26:19"
+     *              "remark": "采购备注2:",
+     *              "status": true
      *          },
-     *          "creator": "admin",
-     *          "submitter": null,
-     *          "submit_at": null,
-     *          "is_submit": false,
-     *          "cancel_purchase_details": {
-     *              {
-     *                  "id": 14,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 1,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 1,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 15,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
+     *          "cancelPurchaseDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "cancel_purchases_id": 3,
+     *                      "purchase_details_id": 19,
+     *                      "cancel_purchase_quantity": 1,
+     *                      "created_at": "2018-08-20 18:30:04",
+     *                      "updated_at": "2018-08-20 18:30:04"
      *                  }
      *              }
      *          },
-     *          "created_at": "2018-07-23 16:42:36",
-     *          "updated_at": "2018-07-23 16:42:36",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -314,18 +212,25 @@ class CancelPurchasesController extends Controller
      *          "status_code": 404,
      *      }),
      *      @Response(200, body={
-     *          "id": 19,
-     *          "cancel_purchases_no": "CP2018072316423654591",
+     *          "id": 3,
+     *          "cancel_purchases_no": "CP2018082018300421223",
+     *          "purchases_id": 16,
+     *          "creator": "admin",
+     *          "submitter": "",
+     *          "submit_at": null,
+     *          "is_submit": false,
+     *          "status": true,
+     *          "created_at": "2018-08-20 18:30:04",
+     *          "updated_at": "2018-08-20 18:30:04",
      *          "purchase": {
-     *              "id": 13,
-     *              "purchase_order_no": "PO2018072116220517242",
+     *              "id": 16,
+     *              "purchase_order_no": "PO2018081713593264379",
      *              "purchase_status": "新建",
      *              "order_no": "",
      *              "user_id": 1,
      *              "print_at": null,
-     *              "receiver": "收货人3",
-     *              "receiver_address": "收货地址3",
-     *              "warehouse_id": 1,
+     *              "receiver": "采购收:",
+     *              "receiver_address": "采购收货地址2:",
      *              "promise_ship_time": null,
      *              "business_personnel": "",
      *              "source": "",
@@ -334,81 +239,23 @@ class CancelPurchasesController extends Controller
      *              "order_address": "",
      *              "is_submit": false,
      *              "is_print": false,
-     *              "is_audit": false,
+     *              "is_audit": true,
      *              "is_change": true,
-     *              "remark": "备注5",
-     *              "status": true,
-     *              "created_at": "2018-07-21 16:22:05",
-     *              "updated_at": "2018-07-23 16:26:19"
+     *              "remark": "采购备注2:",
+     *              "status": true
      *          },
-     *          "creator": "admin",
-     *          "submitter": null,
-     *          "submit_at": null,
-     *          "is_submit": false,
-     *          "cancel_purchase_details": {
-     *              {
-     *                  "id": 14,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 1,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 1,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 15,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
+     *          "cancelPurchaseDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "cancel_purchases_id": 3,
+     *                      "purchase_details_id": 19,
+     *                      "cancel_purchase_quantity": 1,
+     *                      "created_at": "2018-08-20 18:30:04",
+     *                      "updated_at": "2018-08-20 18:30:04"
      *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-23 16:42:36",
-     *          "updated_at": "2018-07-23 16:42:36",
+     *          }
      *      })
      * })
      */
@@ -460,18 +307,25 @@ class CancelPurchasesController extends Controller
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
-     *          "id": 19,
-     *          "cancel_purchases_no": "CP2018072316423654591",
+     *               *          "id": 3,
+     *          "cancel_purchases_no": "CP2018082018300421223",
+     *          "purchases_id": 16,
+     *          "creator": "admin",
+     *          "submitter": "",
+     *          "submit_at": null,
+     *          "is_submit": false,
+     *          "status": true,
+     *          "created_at": "2018-08-20 18:30:04",
+     *          "updated_at": "2018-08-20 18:30:04",
      *          "purchase": {
-     *              "id": 13,
-     *              "purchase_order_no": "PO2018072116220517242",
+     *              "id": 16,
+     *              "purchase_order_no": "PO2018081713593264379",
      *              "purchase_status": "新建",
      *              "order_no": "",
      *              "user_id": 1,
      *              "print_at": null,
-     *              "receiver": "收货人3",
-     *              "receiver_address": "收货地址3",
-     *              "warehouse_id": 1,
+     *              "receiver": "采购收:",
+     *              "receiver_address": "采购收货地址2:",
      *              "promise_ship_time": null,
      *              "business_personnel": "",
      *              "source": "",
@@ -480,111 +334,23 @@ class CancelPurchasesController extends Controller
      *              "order_address": "",
      *              "is_submit": false,
      *              "is_print": false,
-     *              "is_audit": false,
+     *              "is_audit": true,
      *              "is_change": true,
-     *              "remark": "备注5",
-     *              "status": true,
-     *              "created_at": "2018-07-21 16:22:05",
-     *              "updated_at": "2018-07-23 16:26:19"
+     *              "remark": "采购备注2:",
+     *              "status": true
      *          },
-     *          "creator": "admin",
-     *          "submitter": null,
-     *          "submit_at": null,
-     *          "is_submit": false,
-     *          "cancel_purchase_details": {
-     *              {
-     *                  "id": 14,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 1,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 1,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 15,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 16,
-     *                  "cancel_purchases_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 17:01:21",
-     *                  "updated_at": "2018-07-23 17:01:21",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "purchases_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
+     *          "cancelPurchaseDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "cancel_purchases_id": 3,
+     *                      "purchase_details_id": 19,
+     *                      "cancel_purchase_quantity": 1,
+     *                      "created_at": "2018-08-20 18:30:04",
+     *                      "updated_at": "2018-08-20 18:30:04"
      *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-23 16:42:36",
-     *          "updated_at": "2018-07-23 16:42:36",
+     *          }
      *     })
      * })
      */

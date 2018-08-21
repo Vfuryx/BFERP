@@ -7,11 +7,15 @@ use League\Fractal\TransformerAbstract;
 
 class SeriesTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'suppliers'
+    ];
+
     public function transform(Series $series)
     {
         return [
             'id' => $series->id,
-            'suppliers' => $series->suppliers,
+            'suppliers_id' => $series->suppliers_id,
             'code' => $series->code,
             'name' => $series->name,
             'description' => $series->description,
@@ -22,5 +26,10 @@ class SeriesTransformer extends TransformerAbstract
             'updated_at' => $series->updated_at
                                     ->toDateTimeString(),
         ];
+    }
+
+    public function includeSuppliers(Series $series)
+    {
+        return $this->item($series->suppliers, new SupplierTransformer());
     }
 }

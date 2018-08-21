@@ -28,11 +28,12 @@ class StocksController extends Controller
     /**
      * 获取所有库存
      *
-     * @Get("/stocks{?status}")
+     * @Get("/stocks[?status=true&include=warehouse,product,productComponent]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
-     *      @Parameter("status", type="warehouse_id", description="获取的仓库id", required=false)
+     *      @Parameter("warehouse_id", type="integer", description="获取的仓库id", required=false),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      *     "data": {

@@ -15,6 +15,9 @@ class PurchaseReturn extends Model
     //设置类型
     protected $casts = [
         'status' => 'boolean',
+        'is_submit' => 'boolean',
+        'is_audit' => 'boolean',
+        'is_print' => 'boolean',
     ];
 
     protected static function boot()
@@ -93,7 +96,6 @@ class PurchaseReturn extends Model
         $this->save();
     }
 
-
     /**
      * 打印
      */
@@ -103,13 +105,9 @@ class PurchaseReturn extends Model
         $this->save();
     }
 
-
-
     public function purchaseReturnDetails()
     {
         return $this->hasMany(PurchaseReturnDetail::class,'purchase_returns_id');
     }
-
-
 
 }

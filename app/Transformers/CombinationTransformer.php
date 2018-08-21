@@ -7,18 +7,37 @@ use League\Fractal\TransformerAbstract;
 
 class CombinationTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'productComponents','product','orderItems'
+    ];
+
     public function transform(Combination $combination)
     {
-        $combination = $combination->load('product', 'productComponents');
         return [
             'id' => $combination->id,
-            'product' => $combination->product,
+            'pid' => $combination->pid,
             'name' => $combination->name,
-            'product_components' => $combination->productComponents,
             'created_at' => $combination->created_at
                 ->toDateTimeString(),
             'updated_at' => $combination->updated_at
                 ->toDateTimeString()
         ];
     }
+
+    public function includeProductComponents(Combination $combination)
+    {
+        return $this->collection($combination->productComponents, new ProductComponentTransformer());
+    }
+
+    public function includeProduct(Combination $combination)
+    {
+        return $this->item($combination->product, new ProductTransformer());
+    }
+
+    public function includeOrderItems(Combination $combination)
+    {
+        return $this->collection($combination->orderItems, new OrderItemTransformer());
+    }
+
+
 }

@@ -473,6 +473,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.purchases.isAudit');
 
         //采购清单
+        $api->get('purchaselists', 'PurchaseListsController@index')
+            ->name('api.purchaselists.index');
         $api->delete('purchaselists/{purchaselist}', 'PurchaseListsController@destroy')
             ->name('api.purchaselists.destroy');
         $api->delete('purchaselists', 'PurchaseListsController@destroybyids')

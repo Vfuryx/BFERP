@@ -16,7 +16,6 @@ use App\Transformers\PurchaseReturnTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 use App\Http\Controllers\Traits\ProcedureTrait;
 
-use Dingo\Api\Exception\DeleteResourceFailedException;
 use Dingo\Api\Exception\UpdateResourceFailedException;
 
 /**
@@ -34,82 +33,85 @@ class PurchaseReturnsController extends Controller
     /**
      * 获取所有采购退货
      *
-     * @Get("/purchasereturns{?status}")
+     * @Get("/purchasereturns[?status=true&include=purchaseReturnDetails.stock,purchaseReturnDetails.supplier,purchaseReturnDetails.purchaseReturnType]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
-     * "data": {
-     *     {
-     *          "id": 1,
-     *          "purchase_return_no": "RG2018072411440706967",
-     *          "creator": "admin",
-     *          "is_submit": false,
-     *          "submitter": "",
-     *          "submit_at": null,
-     *          "is_audit": false,
-     *          "auditor": "",
-     *          "audit_at": null,
-     *          "is_print": false,
-     *          "remark": "采购退货单备注",
-     *          "status": true,
-     *          "purchase_return_details": {
-     *              {
-     *                  "id": 1,
-     *                  "purchase_returns_id": 1,
-     *                  "stocks_id": 1,
-     *                  "purchase_return_quantity": 10,
-     *                  "suppliers_id": 1,
-     *                  "price_differences": "1.00",
-     *                  "purchase_return_types_id": 1,
-     *                  "created_at": "2018-07-24 11:44:07",
-     *                  "updated_at": "2018-07-24 11:44:07",
-     *                  "stock": {
-     *                      "id": 1,
-     *                      "warehouse_id": 1,
-     *                      "goods_id": 1,
-     *                      "pro_specs_id": 1,
-     *                      "quantity": 20,
-     *                      "status": true,
-     *                      "created_at": "2018-07-21 18:20:53",
-     *                      "updated_at": "2018-07-21 18:27:38"
-     *                  },
-     *                  "supplier": {
-     *                      "id": 1,
-     *                      "name": "1",
-     *                      "company": "1",
-     *                      "code": "1",
-     *                      "province": "1",
-     *                      "city": "1",
-     *                      "district": "1",
-     *                      "address": "1",
-     *                      "zipcode": "1",
-     *                      "contacts": "1",
-     *                      "phone": "1",
-     *                      "mobile": "132131343242",
-     *                      "fax": "1",
-     *                      "email": "132@re.cn",
-     *                      "remark": "1",
-     *                      "is_scan": true,
-     *                      "status": true,
-     *                      "auto_valuation": true,
-     *                      "created_at": "2018-07-17 17:54:01",
-     *                      "updated_at": "2018-07-17 17:54:01"
-     *                  },
-     *                  "purchase_return_types": {
-     *                      "id": 1,
-     *                      "name": "采购退货类型名称",
-     *                      "status": true,
-     *                      "created_at": "2018-07-24 10:24:13",
-     *                      "updated_at": "2018-07-24 10:24:13"
-     *                  }
-     *              }
-     *          },
-     *          "created_at": "2018-07-24 11:44:07",
-     *          "updated_at": "2018-07-24 11:44:07"
-     *         }
-     *     },
+     *      "data": {
+     *          {
+     *              "id": 3,
+     *               "purchase_return_no": "RG2018082117042268516",
+     *               "creator": "admin",
+     *               "is_submit": false,
+     *               "submitter": "",
+     *               "submit_at": null,
+     *               "is_audit": false,
+     *               "auditor": "",
+     *               "audit_at": null,
+     *               "is_print": false,
+     *               "remark": "采购退货单备注",
+     *               "status": true,
+     *               "created_at": "2018-08-21 17:04:22",
+     *               "updated_at": "2018-08-21 17:04:22",
+     *               "purchaseReturnDetails": {
+     *                   "data": {
+     *                       {
+     *                           "id": 3,
+     *                           "purchase_returns_id": 3,
+     *                           "stocks_id": 18,
+     *                           "purchase_return_quantity": 12,
+     *                           "suppliers_id": 1,
+     *                           "price_differences": "0.00",
+     *                           "purchase_return_types_id": 2,
+     *                           "created_at": "2018-08-21 17:04:22",
+     *                           "updated_at": "2018-08-21 17:04:22",
+     *                           "purchaseReturnType": {
+     *                               "id": 2,
+     *                               "name": "采购退货类型名称",
+     *                               "status": true,
+     *                               "created_at": "2018-08-21 17:04:08",
+     *                               "updated_at": "2018-08-21 17:04:08"
+     *                           },
+     *                           "stock": {
+     *                               "id": 18,
+     *                               "warehouse_id": 1,
+     *                               "products_id": 30,
+     *                               "product_components_id": 7,
+     *                               "quantity": 10,
+     *                               "status": true,
+     *                               "created_at": "2018-08-15 16:25:24",
+     *                               "updated_at": "2018-08-16 11:43:51"
+     *                           },
+     *                           "supplier": {
+     *                               "id": 1,
+     *                               "name": "供应商名称",
+     *                               "company": "供应商公司",
+     *                               "code": "公司代码",
+     *                               "province": "省",
+     *                               "city": "市",
+     *                               "district": "区",
+     *                               "address": "地址",
+     *                               "zipcode": "邮编",
+     *                               "contacts": "联系人",
+     *                               "phone": "电话",
+     *                               "mobile": "手机",
+     *                               "fax": "传真",
+     *                               "email": "935661686@qq.com",
+     *                               "remark": "备注",
+     *                               "is_scan": true,
+     *                               "status": true,
+     *                               "auto_valuation": true,
+     *                               "created_at": "2018-08-06 16:27:02",
+     *                               "updated_at": "2018-08-06 16:27:02"
+     *                           }
+     *                       }
+     *                   }
+     *               }
+     *           }
+     *      },
      *     "meta": {
      *         "pagination": {
      *             "total": 2,
@@ -167,72 +169,74 @@ class PurchaseReturnsController extends Controller
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
-     *          "id": 1,
-     *          "purchase_return_no": "RG2018072411440706967",
+     *          "id": 3,
+     *          "purchase_return_no": "RG2018082117042268516",
      *          "creator": "admin",
      *          "is_submit": false,
-     *          "submitter": null,
+     *          "submitter": "",
      *          "submit_at": null,
      *          "is_audit": false,
-     *          "auditor": null,
+     *          "auditor": "",
      *          "audit_at": null,
      *          "is_print": false,
      *          "remark": "采购退货单备注",
      *          "status": true,
-     *          "purchase_return_details": {
-     *              {
-     *                  "id": 1,
-     *                  "purchase_returns_id": 1,
-     *                  "stocks_id": 1,
-     *                  "purchase_return_quantity": 10,
-     *                  "suppliers_id": 1,
-     *                  "price_differences": "1.00",
-     *                  "purchase_return_types_id": 1,
-     *                  "created_at": "2018-07-24 11:44:07",
-     *                  "updated_at": "2018-07-24 11:44:07",
-     *                  "stock": {
-     *                      "id": 1,
-     *                      "warehouse_id": 1,
-     *                      "goods_id": 1,
-     *                      "pro_specs_id": 1,
-     *                      "quantity": 20,
-     *                      "status": true,
-     *                      "created_at": "2018-07-21 18:20:53",
-     *                      "updated_at": "2018-07-21 18:27:38"
-     *                  },
-     *                  "supplier": {
-     *                      "id": 1,
-     *                      "name": "1",
-     *                      "company": "1",
-     *                      "code": "1",
-     *                      "province": "1",
-     *                      "city": "1",
-     *                      "district": "1",
-     *                      "address": "1",
-     *                      "zipcode": "1",
-     *                      "contacts": "1",
-     *                      "phone": "1",
-     *                      "mobile": "132131343242",
-     *                      "fax": "1",
-     *                      "email": "132@re.cn",
-     *                      "remark": "1",
-     *                      "is_scan": true,
-     *                      "status": true,
-     *                      "auto_valuation": true,
-     *                      "created_at": "2018-07-17 17:54:01",
-     *                      "updated_at": "2018-07-17 17:54:01"
-     *                  },
-     *                  "purchase_return_types": {
-     *                      "id": 1,
-     *                      "name": "采购退货类型名称",
-     *                      "status": true,
-     *                      "created_at": "2018-07-24 10:24:13",
-     *                      "updated_at": "2018-07-24 10:24:13"
+     *          "created_at": "2018-08-21 17:04:22",
+     *          "updated_at": "2018-08-21 17:04:22",
+     *          "purchaseReturnDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "purchase_returns_id": 3,
+     *                      "stocks_id": 18,
+     *                      "purchase_return_quantity": 12,
+     *                      "suppliers_id": 1,
+     *                      "price_differences": "0.00",
+     *                      "purchase_return_types_id": 2,
+     *                      "created_at": "2018-08-21 17:04:22",
+     *                      "updated_at": "2018-08-21 17:04:22",
+     *                      "purchaseReturnType": {
+     *                          "id": 2,
+     *                          "name": "采购退货类型名称",
+     *                          "status": true,
+     *                          "created_at": "2018-08-21 17:04:08",
+     *                          "updated_at": "2018-08-21 17:04:08"
+     *                      },
+     *                      "stock": {
+     *                          "id": 18,
+     *                          "warehouse_id": 1,
+     *                          "products_id": 30,
+     *                          "product_components_id": 7,
+     *                          "quantity": 10,
+     *                          "status": true,
+     *                          "created_at": "2018-08-15 16:25:24",
+     *                          "updated_at": "2018-08-16 11:43:51"
+     *                      },
+     *                      "supplier": {
+     *                          "id": 1,
+     *                          "name": "供应商名称",
+     *                          "company": "供应商公司",
+     *                          "code": "公司代码",
+     *                          "province": "省",
+     *                          "city": "市",
+     *                          "district": "区",
+     *                          "address": "地址",
+     *                          "zipcode": "邮编",
+     *                          "contacts": "联系人",
+     *                          "phone": "电话",
+     *                          "mobile": "手机",
+     *                          "fax": "传真",
+     *                          "email": "935661686@qq.com",
+     *                          "remark": "备注",
+     *                          "is_scan": true,
+     *                          "status": true,
+     *                          "auto_valuation": true,
+     *                          "created_at": "2018-08-06 16:27:02",
+     *                          "updated_at": "2018-08-06 16:27:02"
+     *                      }
      *                  }
      *              }
      *          },
-     *          "created_at": "2018-07-24 11:44:07",
-     *          "updated_at": "2018-07-24 11:44:07",
      *          "meta": {
      *              "status_code": "201"
      *          }
@@ -265,8 +269,8 @@ class PurchaseReturnsController extends Controller
      *          "status_code": 404,
      *      }),
      *      @Response(200, body={
-     *          "id": 1,
-     *          "purchase_return_no": "RG2018072411440706967",
+     *          "id": 3,
+     *          "purchase_return_no": "RG2018082117042268516",
      *          "creator": "admin",
      *          "is_submit": false,
      *          "submitter": "",
@@ -277,60 +281,62 @@ class PurchaseReturnsController extends Controller
      *          "is_print": false,
      *          "remark": "采购退货单备注",
      *          "status": true,
-     *          "purchase_return_details": {
-     *              {
-     *                  "id": 1,
-     *                  "purchase_returns_id": 1,
-     *                  "stocks_id": 1,
-     *                  "purchase_return_quantity": 10,
-     *                  "suppliers_id": 1,
-     *                  "price_differences": "1.00",
-     *                  "purchase_return_types_id": 1,
-     *                  "created_at": "2018-07-24 11:44:07",
-     *                  "updated_at": "2018-07-24 11:44:07",
-     *                  "stock": {
-     *                      "id": 1,
-     *                      "warehouse_id": 1,
-     *                      "goods_id": 1,
-     *                      "pro_specs_id": 1,
-     *                      "quantity": 20,
-     *                      "status": true,
-     *                      "created_at": "2018-07-21 18:20:53",
-     *                      "updated_at": "2018-07-21 18:27:38"
-     *                  },
-     *                  "supplier": {
-     *                      "id": 1,
-     *                      "name": "1",
-     *                      "company": "1",
-     *                      "code": "1",
-     *                      "province": "1",
-     *                      "city": "1",
-     *                      "district": "1",
-     *                      "address": "1",
-     *                      "zipcode": "1",
-     *                      "contacts": "1",
-     *                      "phone": "1",
-     *                      "mobile": "132131343242",
-     *                      "fax": "1",
-     *                      "email": "132@re.cn",
-     *                      "remark": "1",
-     *                      "is_scan": true,
-     *                      "status": true,
-     *                      "auto_valuation": true,
-     *                      "created_at": "2018-07-17 17:54:01",
-     *                      "updated_at": "2018-07-17 17:54:01"
-     *                  },
-     *                  "purchase_return_types": {
-     *                      "id": 1,
-     *                      "name": "采购退货类型名称",
-     *                      "status": true,
-     *                      "created_at": "2018-07-24 10:24:13",
-     *                      "updated_at": "2018-07-24 10:24:13"
+     *          "created_at": "2018-08-21 17:04:22",
+     *          "updated_at": "2018-08-21 17:04:22",
+     *          "purchaseReturnDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "purchase_returns_id": 3,
+     *                      "stocks_id": 18,
+     *                      "purchase_return_quantity": 12,
+     *                      "suppliers_id": 1,
+     *                      "price_differences": "0.00",
+     *                      "purchase_return_types_id": 2,
+     *                      "created_at": "2018-08-21 17:04:22",
+     *                      "updated_at": "2018-08-21 17:04:22",
+     *                      "purchaseReturnType": {
+     *                          "id": 2,
+     *                          "name": "采购退货类型名称",
+     *                          "status": true,
+     *                          "created_at": "2018-08-21 17:04:08",
+     *                          "updated_at": "2018-08-21 17:04:08"
+     *                      },
+     *                      "stock": {
+     *                          "id": 18,
+     *                          "warehouse_id": 1,
+     *                          "products_id": 30,
+     *                          "product_components_id": 7,
+     *                          "quantity": 10,
+     *                          "status": true,
+     *                          "created_at": "2018-08-15 16:25:24",
+     *                          "updated_at": "2018-08-16 11:43:51"
+     *                      },
+     *                      "supplier": {
+     *                          "id": 1,
+     *                          "name": "供应商名称",
+     *                          "company": "供应商公司",
+     *                          "code": "公司代码",
+     *                          "province": "省",
+     *                          "city": "市",
+     *                          "district": "区",
+     *                          "address": "地址",
+     *                          "zipcode": "邮编",
+     *                          "contacts": "联系人",
+     *                          "phone": "电话",
+     *                          "mobile": "手机",
+     *                          "fax": "传真",
+     *                          "email": "935661686@qq.com",
+     *                          "remark": "备注",
+     *                          "is_scan": true,
+     *                          "status": true,
+     *                          "auto_valuation": true,
+     *                          "created_at": "2018-08-06 16:27:02",
+     *                          "updated_at": "2018-08-06 16:27:02"
+     *                      }
      *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-24 11:44:07",
-     *          "updated_at": "2018-07-24 11:44:07"
+     *          }
      *      })
      * })
      */
@@ -382,131 +388,74 @@ class PurchaseReturnsController extends Controller
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
-     *          "id": 19,
-     *          "cancel_$purchasereturns_no": "CP2018072316423654591",
-     *          "purchase": {
-     *              "id": 13,
-     *              "purchase_order_no": "PO2018072116220517242",
-     *              "purchase_status": "新建",
-     *              "order_no": "",
-     *              "user_id": 1,
-     *              "print_at": null,
-     *              "receiver": "收货人3",
-     *              "receiver_address": "收货地址3",
-     *              "warehouse_id": 1,
-     *              "promise_ship_time": null,
-     *              "business_personnel": "",
-     *              "source": "",
-     *              "client_name": "",
-     *              "buyer_nick": "",
-     *              "order_address": "",
-     *              "is_submit": false,
-     *              "is_print": false,
-     *              "is_audit": false,
-     *              "is_change": true,
-     *              "remark": "备注5",
-     *              "status": true,
-     *              "created_at": "2018-07-21 16:22:05",
-     *              "updated_at": "2018-07-23 16:26:19"
-     *          },
+     *          "id": 3,
+     *          "purchase_return_no": "RG2018082117042268516",
      *          "creator": "admin",
-     *          "submitter": null,
-     *          "submit_at": null,
      *          "is_submit": false,
-     *          "cancel_purchase_details": {
-     *              {
-     *                  "id": 14,
-     *                  "cancel_$purchasereturns_id": 19,
-     *                  "purchase_details_id": 1,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 1,
-     *                      "$purchasereturns_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
+     *          "submitter": "",
+     *          "submit_at": null,
+     *          "is_audit": false,
+     *          "auditor": "",
+     *          "audit_at": null,
+     *          "is_print": false,
+     *          "remark": "采购退货单备注",
+     *          "status": true,
+     *          "created_at": "2018-08-21 17:04:22",
+     *          "updated_at": "2018-08-21 17:04:22",
+     *          "purchaseReturnDetails": {
+     *              "data": {
+     *                  {
+     *                      "id": 3,
+     *                      "purchase_returns_id": 3,
+     *                      "stocks_id": 18,
+     *                      "purchase_return_quantity": 12,
      *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 15,
-     *                  "cancel_$purchasereturns_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 16:42:37",
-     *                  "updated_at": "2018-07-23 16:42:37",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "$purchasereturns_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
-     *                  }
-     *              },
-     *              {
-     *                  "id": 16,
-     *                  "cancel_$purchasereturns_id": 19,
-     *                  "purchase_details_id": 2,
-     *                  "cancel_purchase_quantity": 1,
-     *                  "created_at": "2018-07-23 17:01:21",
-     *                  "updated_at": "2018-07-23 17:01:21",
-     *                  "purchase_detail": {
-     *                      "id": 2,
-     *                      "$purchasereturns_id": 13,
-     *                      "purchase_item_status": "新建",
-     *                      "product_specs_id": 1,
-     *                      "purchase_quantity": 10,
-     *                      "stock_in_count": 0,
-     *                      "shops_id": 1,
-     *                      "suppliers_id": 1,
-     *                      "purchase_cost": "0.00",
-     *                      "purchase_freight": "10.00",
-     *                      "warehouse_cost": "10.00",
-     *                      "commission": "10.00",
-     *                      "discount": "10.00",
-     *                      "colour_num": "色号",
-     *                      "paint": "油漆",
-     *                      "wooden_frame_costs": "0.00",
-     *                      "arrival_time": "2018-06-10 00:00:00",
-     *                      "remark": "备注",
-     *                      "created_at": "2018-07-21 16:22:05",
-     *                      "updated_at": "2018-07-23 16:26:19"
+     *                      "price_differences": "0.00",
+     *                      "purchase_return_types_id": 2,
+     *                      "created_at": "2018-08-21 17:04:22",
+     *                      "updated_at": "2018-08-21 17:04:22",
+     *                      "purchaseReturnType": {
+     *                          "id": 2,
+     *                          "name": "采购退货类型名称",
+     *                          "status": true,
+     *                          "created_at": "2018-08-21 17:04:08",
+     *                          "updated_at": "2018-08-21 17:04:08"
+     *                      },
+     *                      "stock": {
+     *                          "id": 18,
+     *                          "warehouse_id": 1,
+     *                          "products_id": 30,
+     *                          "product_components_id": 7,
+     *                          "quantity": 10,
+     *                          "status": true,
+     *                          "created_at": "2018-08-15 16:25:24",
+     *                          "updated_at": "2018-08-16 11:43:51"
+     *                      },
+     *                      "supplier": {
+     *                          "id": 1,
+     *                          "name": "供应商名称",
+     *                          "company": "供应商公司",
+     *                          "code": "公司代码",
+     *                          "province": "省",
+     *                          "city": "市",
+     *                          "district": "区",
+     *                          "address": "地址",
+     *                          "zipcode": "邮编",
+     *                          "contacts": "联系人",
+     *                          "phone": "电话",
+     *                          "mobile": "手机",
+     *                          "fax": "传真",
+     *                          "email": "935661686@qq.com",
+     *                          "remark": "备注",
+     *                          "is_scan": true,
+     *                          "status": true,
+     *                          "auto_valuation": true,
+     *                          "created_at": "2018-08-06 16:27:02",
+     *                          "updated_at": "2018-08-06 16:27:02"
+     *                      }
      *                  }
      *              }
-     *          },
-     *          "created_at": "2018-07-23 16:42:36",
-     *          "updated_at": "2018-07-23 16:42:36",
+     *          }
      *     })
      * })
      */

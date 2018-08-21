@@ -17,7 +17,6 @@ class CancelPurchaseDetailRequest extends FormRequest
         switch ($this->method()) {
             case 'GET':
                 return [
-                    'status' => 'boolean',
                 ];
                 break;
             case 'POST':

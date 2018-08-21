@@ -27,11 +27,6 @@ class Warehouse extends Model
         return $this->hasMany(Stock::class);
     }
 
-    public function purchases()
-    {
-        return $this->hasMany(Purchase::class);
-    }
-
     public function stockIns()
     {
         return $this->hasMany(StockIn::class, 'warehouse_id');

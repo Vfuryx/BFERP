@@ -7,12 +7,15 @@ use League\Fractal\TransformerAbstract;
 
 class ProductComponentTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'product','distributionMethod'
+    ];
+
     public function transform(ProductComponent $productComponent)
     {
-        $productComponent = $productComponent->load('product', 'distributionMethod');
         return [
             'id' => $productComponent->id,
-            'product' => $productComponent->product,
+            'pid' => $productComponent->pid,
             'component_code' => $productComponent->component_code,
             'jd_component_code' => $productComponent->jd_component_code,
             'vips_component_code' => $productComponent->vips_component_code,
@@ -33,7 +36,7 @@ class ProductComponentTransformer extends TransformerAbstract
             'inventory_warning' => $productComponent->inventory_warning,
             'purchase_days_warning' => $productComponent->purchase_days_warning,
             'available_warning' => $productComponent->available_warning,
-            'distribution_method' => $productComponent->distributionMethod,
+            'distribution_method_id' => $productComponent->distribution_method_id,
             'bar_code' => $productComponent->bar_code,
             'img_url' => $productComponent->img_url,
             'spec' => $productComponent->spec,
@@ -55,5 +58,15 @@ class ProductComponentTransformer extends TransformerAbstract
             'updated_at' => $productComponent->updated_at
                                     ->toDateTimeString()
         ];
+    }
+
+    public function includeProduct(ProductComponent $productComponent)
+    {
+        return $this->item($productComponent->product, new ProductTransformer());
+    }
+
+    public function includeDistributionMethod(ProductComponent $productComponent)
+    {
+        return $this->item($productComponent->distributionMethod, new DistributionMethodTransformer());
     }
 }

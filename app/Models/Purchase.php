@@ -32,7 +32,7 @@ class Purchase extends Model
     ];
 
     protected $dates = [
-        'print_at'
+        'print_at','promise_ship_time'
     ];
 
     //设置类型
@@ -188,14 +188,9 @@ class Purchase extends Model
         return self::$purchaseStatusMap[$value ? $value : self::PURCHASE_STATUS_NEW];
     }
 
-    public function warehouse()
-    {
-        return $this->belongsTo(Warehouse::class);
-    }
-
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function purchaseLists()

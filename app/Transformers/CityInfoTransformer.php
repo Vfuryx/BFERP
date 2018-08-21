@@ -7,11 +7,15 @@ use League\Fractal\TransformerAbstract;
 
 class CityInfoTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'logistics'
+    ];
+
     public function transform(CityInfo $cityinfo)
     {
         return [
             'id' => $cityinfo->id,
-            'logistics' => $cityinfo->logistics,
+            'logistics_id' => $cityinfo->logistics_id,
             'province' => $cityinfo->province,
             'city' => $cityinfo->city,
             'district' => $cityinfo->district,
@@ -30,4 +34,10 @@ class CityInfoTransformer extends TransformerAbstract
                                     ->toDateTimeString(),
         ];
     }
+
+    public function includeLogistics(CityInfo $cityinfo)
+    {
+        return $this->item($cityinfo->logistics, new LogisticsTransformer());
+    }
+
 }

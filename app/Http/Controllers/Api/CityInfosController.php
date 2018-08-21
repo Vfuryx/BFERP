@@ -23,10 +23,11 @@ class CityInfosController extends Controller
     /**
      * 获取所有城市信息
      *
-     * @Get("/cityinfos{?status}")
+     * @Get("/cityinfos[?status=true&include=logistics]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      * "data": {

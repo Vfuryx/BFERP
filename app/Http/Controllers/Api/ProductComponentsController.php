@@ -25,12 +25,13 @@ class ProductComponentsController extends Controller
     /**
      * 获取所有产品子件
      *
-     * @Get("/productcomponents{?is_common}")
+     * @Get("/productcomponents[?is_common=true&except_id=&component_code=&include=product,distributionMethod]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("is_common", type="integer", description="是否通用子件", required=false, default="all"),
      *      @Parameter("except_id", type="integer", description="排除的id", required=false, default="all"),
      *      @Parameter("component_code", description="子件编码", required=false, default="all"),
+     *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
      *       "data": {
