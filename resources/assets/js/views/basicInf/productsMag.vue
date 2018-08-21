@@ -103,7 +103,6 @@
                        <img :src="scope.row[item.prop]">
     <img slot="reference" :src="scope.row[item.prop]" :alt="scope.row[item.alt]">
    </el-popover>
-                                    <!--<img :src="scope.row[item.prop]" alt="">-->
                                 </span>
                                 <span v-else-if="item.type=='checkbox'">
                                      <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
@@ -467,7 +466,7 @@
     </div>
 </template>
 <script>
-    import axios from 'axios'
+  import axios from 'axios'
   export default{
     data(){
       return {

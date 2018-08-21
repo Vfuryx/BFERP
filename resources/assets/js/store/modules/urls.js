@@ -21,7 +21,7 @@ const urls= {
     platforms:'/platforms',
     departments:'/departments',
     products:'/products',
-    productcomponents:'/productcomponents',
+    productspecs:'/productspecs',
     combinations:'/combinations',
     goodsdownloads:'/goodsdownloads',
     orderdownloads:'/orderdownloads',

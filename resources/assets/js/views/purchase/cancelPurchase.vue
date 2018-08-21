@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--查询-->
         <div class="searchBox">
             <span>
                 <label>取消单号</label>
@@ -14,15 +15,61 @@
                 <el-input v-model="searchBox.goodsName" clearable @keyup.enter.native="getData"></el-input>
             </span>
         </div>
-        <el-tabs v-model="activeName" @tab-click="clickTabs">
-            <el-tab-pane v-for="item in tabs" :label=item.label :name=item.name>
+
+        <!--取消采购-->
+        <el-tabs v-model="topActiveName" @tab-click="topTabsClick">
+            <el-tab-pane label="新建" name="0">
+                <el-table :data="newData" fit
+                          @selection-change="handleSelectionChange"
+                          v-loading="newLoading"
+                          height="300"
+                          @row-click="cancelPRClick"
+                >
+                    <el-table-column
+                            type="selection"
+                            width="95" align="center"
+                            :checked="checkboxInit">
+                    </el-table-column>
+                    <el-table-column v-for="item in tabsHead" :label="item.label" align="center" :width="item.width" :key="item.prop">
+                        <template slot-scope="scope">
+                            <span v-if="item.type=='select'">
+                        <span v-if="scope.row[item.prop]==''"></span>
+                        <span v-else-if="typeof scope.row[item.prop] == 'object' && item.nmProp">
+                            {{scope.row[item.prop][item.nmProp]}}
+                        </span>
+                    </span>
+                            <span v-else-if="item.type=='checkbox'">
+                         <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                    </span>
+                            <span v-else-if="item.type=='img'">
+                                <el-popover
+                                        placement="right"
+                                        trigger="hover"
+                                        popper-class="picture_detail">
+                       <img :src="scope.row[item.prop]">
+    <img slot="reference" :src="scope.row[item.prop]" :alt="scope.row[item.alt]">
+   </el-popover>
+                            </span>
+                            <span v-else>
+                                <span v-if="scope.row[item.prop]">
+                                    {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                                </span>
+                    </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="90" align="center" fixed="right">
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="danger" @click="delPur(scope.row,$event)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
+
                  <light-table :listData="tabsData"
                             :tableHead="tabsHead" @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading[activeName]" @edit="edit" @editCancel="editCancel" :nEditInRow="nEditInRow"></light-table>
             </el-tab-pane>
-           <!-- <el-tab-pane label="已完成" name="1">
-                &lt;!&ndash; <light-table :listData="partData"
-                              :tableHead="topTabsHead" @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading[activeName]" :currentIndex="currentIndex" @edit="edit" @editCancel="editCancel" :nEditInRow="nEditInRow"></light-table>&ndash;&gt;
-            </el-tab-pane>-->
+            <el-tab-pane label="已完成" name="1">
+
+            </el-tab-pane>
         </el-tabs>
 
         <Pagination :page-url="urls['cancelpurchases']"></Pagination>
@@ -158,49 +205,7 @@
           }
         ],
         loading:[true,true],
-        tabsHead:[
-          {
-            label: '取消单号',
-            prop: '',
-            type: 'text',
-          },
-          {
-            label: '采购单号',
-            prop: '',
-            type: 'text',
-          },
-         /* {
-            label: '合同编号',
-            width: '150',
-            prop: '',
-            type: 'text',
-          },*/
-          {
-            label: '类型',
-            prop: '',
-            type: 'text',
-          },
-          {
-            label: '创建人',
-            prop: '',
-            type: 'text',
-          },
-          {
-            label: '提交人',
-            prop: '',
-            type: 'text',
-          },
-          {
-            label: '创建时间',
-            prop: '',
-            type: 'text',
-          },
-          {
-            label: '提交时间',
-            prop: '',
-            type: 'text',
-          },
-        ],
+
         tabsData:[],
         purchase_status:['新建','finish'],
         /*新增*/
@@ -272,6 +277,54 @@
         purVal:[],
         purOrderRow:{},
         addStockVal:[],
+        /*获取*/
+        topActiveName: '0',
+        newData:[],
+        newLoading: false,
+        checkboxInit: false,
+        tabsHead:[
+          {
+            label: '取消单号',
+            prop: '',
+            type: 'text',
+          },
+          {
+            label: '采购单号',
+            prop: '',
+            type: 'text',
+          },
+          /* {
+             label: '合同编号',
+             width: '150',
+             prop: '',
+             type: 'text',
+           },*/
+          {
+            label: '类型',
+            prop: '',
+            type: 'text',
+          },
+          {
+            label: '创建人',
+            prop: '',
+            type: 'text',
+          },
+          {
+            label: '提交人',
+            prop: '',
+            type: 'text',
+          },
+          {
+            label: '创建时间',
+            prop: '',
+            type: 'text',
+          },
+          {
+            label: '提交时间',
+            prop: '',
+            type: 'text',
+          },
+        ],
       }
     },
     computed:{
@@ -280,14 +333,19 @@
           return this.$store.state.urls
         },
         set:function(){}
-      }
+      },
+      resData:{
+        get:function(){
+          return this.$store.state.responseData
+        },
+        set:function(){}
+      },
     },
-    /*采购单只获取新建和部分完成的*/
     methods: {
       test() {
         console.log(1);
       },
-      clickTabs() {
+      topTabsClick() {
         let index = this.activeName - 0;
         switch (index) {
           case 0:
@@ -452,6 +510,7 @@
            })*!/
       },*/
       },
+      cancelPRClick(row){},
       /*新增*/
       addNew(){
         this.cancelPurMask = true;
@@ -519,7 +578,9 @@
       edit(){},
       editCancel(){},
       /*删除*/
-      del(){}
+      del(){},
+      /*批量删除*/
+      handleSelectionChange(val){},
     },
     mounted() {
       // this.getData();
