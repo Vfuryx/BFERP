@@ -202,7 +202,7 @@ class FeeTypesController extends Controller
             $this->tableResetDefault(self::MODEL);
         }
 
-        return $this->traitUpdate($request, $warehouse, self::TRANSFORMER);
+        return $this->traitUpdate($request, $feetype, self::TRANSFORMER);
     }
 
     /**
