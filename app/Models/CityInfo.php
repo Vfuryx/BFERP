@@ -9,13 +9,12 @@ class CityInfo extends Model
     protected $fillable = [
         'logistics_id', 'province', 'city', 'district', 'address',
         'phone', 'price', 'weight_univalent', 'expected_days', 'route',
-        'is_free_shipping', 'remark', 'status'
+        'is_free_shipping', 'remark'
     ];
 
     //设置类型
     protected $casts = [
         'is_free_shipping' => 'boolean',
-        'status' => 'boolean'
     ];
 
     public function logistics()

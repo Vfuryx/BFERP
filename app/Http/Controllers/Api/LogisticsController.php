@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Logistics;
+
 use App\Http\Requests\Api\LogisticsRequest;
+use App\Http\Requests\Api\CityInfoRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
+
 use App\Transformers\LogisticsTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -63,7 +66,6 @@ class LogisticsController extends Controller
      *                      "route": 1,
      *                      "is_free_shipping": true,
      *                      "remark": "备注",
-     *                      "status": true,
      *                      "created_at": "2018-08-21 10:21:07",
      *                      "updated_at": "2018-08-21 10:21:07"
      *                  }
@@ -114,7 +116,18 @@ class LogisticsController extends Controller
      *      @Parameter("address", description="物流地址", required=true),
      *      @Parameter("freight_type_id",type="integer", description="运费类型id", required=true),
      *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
+     *      @Parameter("city_infos[0][province]", description="省", required=true),
+     *      @Parameter("city_infos[0][city]", description="市", required=true),
+     *      @Parameter("city_infos[0][district]", description="区", required=true),
+     *      @Parameter("city_infos[0][address]", description="提货地址", required=true),
+     *      @Parameter("city_infos[0][phone]", description="提货电话", required=true),
+     *      @Parameter("city_infos[0][price]",type="numeric", description="物流费用", required=true),
+     *      @Parameter("city_infos[0][weight_univalent]",type="numeric", description="重量单价", required=true),
+     *      @Parameter("city_infos[0][expected_days]",type="integer", description="城市到达天数", required=true),
+     *      @Parameter("city_infos[0][route]",type="integer", description="中转或直达", required=true),
+     *      @Parameter("city_infos[0][is_free_shipping]",type="boolean", description="是否包邮", required=true),
+     *      @Parameter("city_infos[0][remark]", description="备注", required=true),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -136,61 +149,32 @@ class LogisticsController extends Controller
      *          "id": 1,
      *          "code": "物流代码",
      *          "name": "物流名称",
-     *          "report": {
-     *              "id": 1,
-     *              "file": "报表文件",
-     *              "name": "报表名称",
-     *              "paper_format": "报表格式",
-     *              "status": true,
-     *              "created_at": "2018-07-03 17:50:46",
-     *              "updated_at": "2018-07-03 17:50:49"
-     *          },
-     *          "expected_days": "10",
+     *          "report_id": 1,
+     *          "expected_days": 1,
      *          "phone": "物流电话",
      *          "address": "物流地址",
-     *          "freight_type": {
-     *              "id": 1,
-     *              "name": "运费名称1",
-     *              "status": true,
-     *              "is_default": true,
-     *              "created_at": "2018-07-03 17:51:25",
-     *              "updated_at": "2018-07-03 17:51:25"
-     *          },
-     *          "cityInfos": {
-     *              "data": {
-     *                  {
-     *                      "id": 1,
-     *                      "logistics_id": 1,
-     *                      "province": "省",
-     *                      "city": "市",
-     *                      "district": "区",
-     *                      "address": "提货地址",
-     *                      "phone": "23333333333",
-     *                      "price": "100.00",
-     *                      "weight_univalent": "110.00",
-     *                      "expected_days": 1,
-     *                      "route": 1,
-     *                      "is_free_shipping": true,
-     *                      "remark": "备注",
-     *                      "status": true,
-     *                      "created_at": "2018-08-21 10:21:07",
-     *                      "updated_at": "2018-08-21 10:21:07"
-     *                  }
-     *              }
-     *          },
+     *          "freight_type_id": 1,
      *          "remark": "备注",
      *          "status": true,
-     *          "created_at": "2018-07-03 17:52:28",
-     *          "updated_at": "2018-07-03 17:52:28",
+     *          "created_at": "2018-08-22 13:55:59",
+     *          "updated_at": "2018-08-22 13:55:59",
      *          "meta": {
      *              "status_code": "201"
      *          }
      *      })
      * })
      */
-    public function store(LogisticsRequest $request)
+    public function store(LogisticsRequest $request,CityInfoRequest $cityInfoRequest)
     {
-        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
+        $data[] = $request->validated();
+        $data[] = $cityInfoRequest->input('city_infos');
+        return $this->traitJoint2Store(
+            $data,
+            'cityInfos',
+            $cityInfoRequest->rules(),
+            self::MODEL,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -235,7 +219,6 @@ class LogisticsController extends Controller
      *                      "route": 1,
      *                      "is_free_shipping": true,
      *                      "remark": "备注",
-     *                      "status": true,
      *                      "created_at": "2018-08-21 10:21:07",
      *                      "updated_at": "2018-08-21 10:21:07"
      *                  }
@@ -266,6 +249,29 @@ class LogisticsController extends Controller
      *
      * @Patch("/logistics/:id")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("code", description="物流代码", required=false),
+     *      @Parameter("name", description="物流名称", required=false),
+     *      @Parameter("report_id",type="integer", description="报表格式id", required=false),
+     *      @Parameter("expected_days",type="integer", description="预计天数", required=false),
+     *      @Parameter("phone", description="物流电话", required=false),
+     *      @Parameter("address", description="物流地址", required=false),
+     *      @Parameter("freight_type_id",type="integer", description="运费类型id", required=false),
+     *      @Parameter("remark", description="备注", required=false),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=false),
+     *      @Parameter("city_infos[0][id]", description="城市信息id", required=false),
+     *      @Parameter("city_infos[0][province]", description="省", required=false),
+     *      @Parameter("city_infos[0][city]", description="市", required=false),
+     *      @Parameter("city_infos[0][district]", description="区", required=false),
+     *      @Parameter("city_infos[0][address]", description="提货地址", required=false),
+     *      @Parameter("city_infos[0][phone]", description="提货电话", required=false),
+     *      @Parameter("city_infos[0][price]",type="numeric", description="物流费用", required=false),
+     *      @Parameter("city_infos[0][weight_univalent]",type="numeric", description="重量单价", required=false),
+     *      @Parameter("city_infos[0][expected_days]",type="integer", description="城市到达天数", required=false),
+     *      @Parameter("city_infos[0][route]",type="integer", description="中转或直达", required=false),
+     *      @Parameter("city_infos[0][is_free_shipping]",type="boolean", description="是否包邮", required=false),
+     *      @Parameter("city_infos[0][remark]", description="备注", required=false),
+     * })
      * @Transaction({
      *      @Response(404, body={
      *          "message": "No query results for model ",
@@ -318,7 +324,6 @@ class LogisticsController extends Controller
      *                      "route": 1,
      *                      "is_free_shipping": true,
      *                      "remark": "备注",
-     *                      "status": true,
      *                      "created_at": "2018-08-21 10:21:07",
      *                      "updated_at": "2018-08-21 10:21:07"
      *                  }
@@ -339,9 +344,17 @@ class LogisticsController extends Controller
      *      })
      * })
      */
-    public function update(LogisticsRequest $request, Logistics $logistics)
+    public function update(LogisticsRequest $request,CityInfoRequest $cityInfoRequest, Logistics $logistics)
     {
-        return $this->traitUpdate($request, $logistics, self::TRANSFORMER);
+        $data[] = $request->validated();
+        $data[] = $cityInfoRequest->input('city_infos');
+        return $this->traitJoint2Update(
+            $data,
+            'cityInfos',
+            $cityInfoRequest->rules(),
+            $logistics,
+            self::TRANSFORMER
+        );
     }
 
     /**

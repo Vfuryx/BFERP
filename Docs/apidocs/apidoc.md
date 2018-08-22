@@ -1739,79 +1739,6 @@ FORMAT: 1A
                 }
             }
 
-## 新增城市信息 [POST /api/cityinfos]
-
-
-+ Parameters
-    + logistics_id: (integer, required) - 物流id
-    + province: (string, required) - 省
-    + city: (string, required) - 市
-    + district: (string, required) - 区
-    + address: (string, required) - 提货地址
-    + phone: (string, required) - 提货电话
-    + price: (numeric, required) - 物流费用
-    + weight_univalent: (numeric, required) - 重量单价
-    + expected_days: (integer, required) - 城市到达天数
-    + route: (integer, optional) - 中转或直达：0=中转，1=直达
-        + Default: 1
-    + is_free_shipping: (boolean, optional) - 是否包邮
-        + Default: 0
-    + remark: (string, optional) - 备注
-    + status: (boolean, optional) - 状态(0:停用，1:启用)
-        + Default: 1
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "logistics_id": [
-                        "物流id必填"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "logistics": {
-                    "id": 1,
-                    "code": "物流代码1",
-                    "name": "物流名称1",
-                    "report_id": 1,
-                    "logistics_area_id": 1,
-                    "expected_days": 1,
-                    "phone": "1333333333",
-                    "address": "物流地址",
-                    "freight_type_id": 1,
-                    "remark": "",
-                    "status": true,
-                    "created_at": "2018-07-02 17:40:39",
-                    "updated_at": "2018-07-02 17:40:42"
-                },
-                "province": "省",
-                "city": "市",
-                "district": "区",
-                "address": "提货地址",
-                "phone": "13333333333",
-                "price": "100.00",
-                "weight_univalent": "100.00",
-                "expected_days": "1",
-                "route": "1",
-                "is_free_shipping": true,
-                "remark": "1",
-                "status": true,
-                "created_at": "2018-07-02 17:44:32",
-                "updated_at": "2018-07-02 17:44:32",
-                "meta": {
-                    "status_code": "201"
-                }
-            }
-
 ## 显示单条城市信息 [GET /api/cityinfos/:id]
 
 
@@ -1857,72 +1784,6 @@ FORMAT: 1A
                 "status": true,
                 "created_at": "2018-07-02 17:44:32",
                 "updated_at": "2018-07-02 17:44:32"
-            }
-
-## 修改城市信息 [PATCH /api/cityinfos/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "logistics_id": [
-                        "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "province": [
-                        "省必须string类型"
-                    ],
-                    "price": [
-                        "物流费用必须是数字"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "logistics": {
-                    "id": 1,
-                    "code": "物流代码1",
-                    "name": "物流名称1",
-                    "report_id": 1,
-                    "logistics_area_id": 1,
-                    "expected_days": 1,
-                    "phone": "1333333333",
-                    "address": "物流地址",
-                    "freight_type_id": 1,
-                    "remark": "",
-                    "status": true,
-                    "created_at": "2018-07-02 17:40:39",
-                    "updated_at": "2018-07-02 17:40:42"
-                },
-                "province": "省5",
-                "city": "市5",
-                "district": "区5",
-                "address": "提货地址5",
-                "phone": "13333333333",
-                "price": "100.00",
-                "weight_univalent": "100.00",
-                "expected_days": "1",
-                "route": "1",
-                "is_free_shipping": true,
-                "remark": "1",
-                "status": true,
-                "created_at": "2018-07-02 17:44:32",
-                "updated_at": "2018-07-02 18:06:55"
             }
 
 ## 删除城市信息 [DELETE /api/cityinfos/:id]
@@ -2545,7 +2406,6 @@ FORMAT: 1A
                                     "route": 1,
                                     "is_free_shipping": true,
                                     "remark": "备注",
-                                    "status": true,
                                     "created_at": "2018-08-21 10:21:07",
                                     "updated_at": "2018-08-21 10:21:07"
                                 }
@@ -2591,6 +2451,17 @@ FORMAT: 1A
     + remark: (string, optional) - 备注
     + status: (boolean, optional) - 状态(0:停用，1:启用)
         + Default: 1
+    + city_infos[0][province]: (string, required) - 省
+    + city_infos[0][city]: (string, required) - 市
+    + city_infos[0][district]: (string, required) - 区
+    + city_infos[0][address]: (string, required) - 提货地址
+    + city_infos[0][phone]: (string, required) - 提货电话
+    + city_infos[0][price]: (numeric, required) - 物流费用
+    + city_infos[0][weight_univalent]: (numeric, required) - 重量单价
+    + city_infos[0][expected_days]: (integer, required) - 城市到达天数
+    + city_infos[0][route]: (integer, required) - 中转或直达
+    + city_infos[0][is_free_shipping]: (boolean, required) - 是否包邮
+    + city_infos[0][remark]: (string, required) - 备注
 
 + Response 422 (application/json)
     + Body
@@ -2618,52 +2489,15 @@ FORMAT: 1A
                 "id": 1,
                 "code": "物流代码",
                 "name": "物流名称",
-                "report": {
-                    "id": 1,
-                    "file": "报表文件",
-                    "name": "报表名称",
-                    "paper_format": "报表格式",
-                    "status": true,
-                    "created_at": "2018-07-03 17:50:46",
-                    "updated_at": "2018-07-03 17:50:49"
-                },
-                "expected_days": "10",
+                "report_id": 1,
+                "expected_days": 1,
                 "phone": "物流电话",
                 "address": "物流地址",
-                "freight_type": {
-                    "id": 1,
-                    "name": "运费名称1",
-                    "status": true,
-                    "is_default": true,
-                    "created_at": "2018-07-03 17:51:25",
-                    "updated_at": "2018-07-03 17:51:25"
-                },
-                "cityInfos": {
-                    "data": [
-                        {
-                            "id": 1,
-                            "logistics_id": 1,
-                            "province": "省",
-                            "city": "市",
-                            "district": "区",
-                            "address": "提货地址",
-                            "phone": "23333333333",
-                            "price": "100.00",
-                            "weight_univalent": "110.00",
-                            "expected_days": 1,
-                            "route": 1,
-                            "is_free_shipping": true,
-                            "remark": "备注",
-                            "status": true,
-                            "created_at": "2018-08-21 10:21:07",
-                            "updated_at": "2018-08-21 10:21:07"
-                        }
-                    ]
-                },
+                "freight_type_id": 1,
                 "remark": "备注",
                 "status": true,
-                "created_at": "2018-07-03 17:52:28",
-                "updated_at": "2018-07-03 17:52:28",
+                "created_at": "2018-08-22 13:55:59",
+                "updated_at": "2018-08-22 13:55:59",
                 "meta": {
                     "status_code": "201"
                 }
@@ -2715,7 +2549,6 @@ FORMAT: 1A
                             "route": 1,
                             "is_free_shipping": true,
                             "remark": "备注",
-                            "status": true,
                             "created_at": "2018-08-21 10:21:07",
                             "updated_at": "2018-08-21 10:21:07"
                         }
@@ -2737,6 +2570,30 @@ FORMAT: 1A
 
 ## 修改物流 [PATCH /api/logistics/:id]
 
+
++ Parameters
+    + code: (string, optional) - 物流代码
+    + name: (string, optional) - 物流名称
+    + report_id: (integer, optional) - 报表格式id
+    + expected_days: (integer, optional) - 预计天数
+    + phone: (string, optional) - 物流电话
+    + address: (string, optional) - 物流地址
+    + freight_type_id: (integer, optional) - 运费类型id
+    + remark: (string, optional) - 备注
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 
+    + city_infos[0][id]: (string, optional) - 城市信息id
+    + city_infos[0][province]: (string, optional) - 省
+    + city_infos[0][city]: (string, optional) - 市
+    + city_infos[0][district]: (string, optional) - 区
+    + city_infos[0][address]: (string, optional) - 提货地址
+    + city_infos[0][phone]: (string, optional) - 提货电话
+    + city_infos[0][price]: (numeric, optional) - 物流费用
+    + city_infos[0][weight_univalent]: (numeric, optional) - 重量单价
+    + city_infos[0][expected_days]: (integer, optional) - 城市到达天数
+    + city_infos[0][route]: (integer, optional) - 中转或直达
+    + city_infos[0][is_free_shipping]: (boolean, optional) - 是否包邮
+    + city_infos[0][remark]: (string, optional) - 备注
 
 + Response 404 (application/json)
     + Body
@@ -2800,7 +2657,6 @@ FORMAT: 1A
                             "route": 1,
                             "is_free_shipping": true,
                             "remark": "备注",
-                            "status": true,
                             "created_at": "2018-08-21 10:21:07",
                             "updated_at": "2018-08-21 10:21:07"
                         }

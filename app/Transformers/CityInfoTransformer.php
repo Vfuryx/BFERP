@@ -27,7 +27,6 @@ class CityInfoTransformer extends TransformerAbstract
             'route' => $cityinfo->route,
             'is_free_shipping' => $cityinfo->is_free_shipping,
             'remark' => $cityinfo->remark,
-            'status' => $cityinfo->status,
             'created_at' => $cityinfo->created_at
                                     ->toDateTimeString(),
             'updated_at' => $cityinfo->updated_at

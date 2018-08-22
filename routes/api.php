@@ -163,10 +163,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.cityinfos.index');
         $api->get('cityinfos/{cityinfo}', 'CityInfosController@show')
             ->name('api.cityinfos.show');
-        $api->post('cityinfos', 'CityInfosController@store')
-            ->name('api.cityinfos.store');
-        $api->patch('cityinfos/{cityinfo}', 'CityInfosController@update')
-            ->name('api.cityinfos.update');
         $api->delete('cityinfos/{cityinfo}', 'CityInfosController@destroy')
             ->name('api.cityinfos.destroy');
         $api->delete('cityinfos', 'CityInfosController@destroybyids')

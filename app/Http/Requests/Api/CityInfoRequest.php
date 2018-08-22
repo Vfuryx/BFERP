@@ -21,46 +21,38 @@ class CityInfoRequest extends FormRequest
                 break;
             case 'POST':
                 return [
-                    'logistics_id' => [
-                        'required', 'integer',
-                        Rule::exists('logistics', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                    'province' => 'required|string|max:255',
-                    'city' => 'required|string|max:255',
-                    'district' => 'required|string|max:255',
-                    'address' => 'required|string|max:255',
-                    'phone' => 'required|string|max:255',
-                    'price' => 'required|numeric',
-                    'weight_univalent' => 'required|numeric',
-                    'expected_days' => 'required|integer',
-                    'route' => 'integer',
-                    'is_free_shipping' => 'boolean',
-                    'remark' => 'string|nullable|max:255',
-                    'status' => 'boolean',
+                    'city_infos.*.province' => 'required|string|max:255',
+                    'city_infos.*.city' => 'required|string|max:255',
+                    'city_infos.*.district' => 'required|string|max:255',
+                    'city_infos.*.address' => 'required|string|max:255',
+                    'city_infos.*.phone' => 'required|string|max:255',
+                    'city_infos.*.price' => 'required|numeric',
+                    'city_infos.*.weight_univalent' => 'required|numeric',
+                    'city_infos.*.expected_days' => 'required|integer',
+                    'city_infos.*.route' => 'integer',
+                    'city_infos.*.is_free_shipping' => 'boolean',
+                    'city_infos.*.remark' => 'string|nullable|max:255',
+                    'city_infos.*.status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'logistics_id' => [
+                    'city_infos.*.id' => [
                         'integer',
-                        Rule::exists('logistics', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
+                        Rule::exists('city_infos', 'id'),
                     ],
-                    'province' => 'string|max:255',
-                    'city' => 'string|max:255',
-                    'district' => 'string|max:255',
-                    'address' => 'string|max:255',
-                    'phone' => 'string|max:255',
-                    'price' => 'numeric',
-                    'weight_univalent' => 'numeric',
-                    'expected_days' => 'integer',
-                    'route' => 'integer',
-                    'is_free_shipping' => 'boolean',
-                    'remark' => 'string|nullable|max:255',
-                    'status' => 'boolean',
+                    'city_infos.*.province' => 'string|max:255',
+                    'city_infos.*.city' => 'string|max:255',
+                    'city_infos.*.district' => 'string|max:255',
+                    'city_infos.*.address' => 'string|max:255',
+                    'city_infos.*.phone' => 'string|max:255',
+                    'city_infos.*.price' => 'numeric',
+                    'city_infos.*.weight_univalent' => 'numeric',
+                    'city_infos.*.expected_days' => 'integer',
+                    'city_infos.*.route' => 'integer',
+                    'city_infos.*.is_free_shipping' => 'boolean',
+                    'city_infos.*.remark' => 'string|nullable|max:255',
+                    'city_infos.*.status' => 'boolean',
                 ];
                 break;
         }
@@ -69,39 +61,35 @@ class CityInfoRequest extends FormRequest
     public function messages()
     {
         return [
-            'logistics_id.required' => '物流id必填',
-            'logistics_id.integer' => '物流id必须int类型',
-            'logistics_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'city_infos.*.province.required' => '省必填',
+            'city_infos.*.province.string' => '省必须string类型',
+            'city_infos.*.province.max' => '省最大长度为255',
 
-            'province.required' => '省必填',
-            'province.string' => '省必须string类型',
-            'province.max' => '省最大长度为255',
+            'city_infos.*.city.required' => '市必填',
+            'city_infos.*.city.string' => '市必须string类型',
+            'city_infos.*.city.max' => '市最大长度为255',
+            'city_infos.*.district.required' => '区必填',
+            'city_infos.*.district.string' => '区必须string类型',
+            'city_infos.*.district.max' => '区最大长度为255',
+            'city_infos.*.address.required' => '提货地址必填',
+            'city_infos.*.address.string' => '提货地址必须string类型',
+            'city_infos.*.address.max' => '提货地址最大长度为255',
+            'city_infos.*.phone.required' => '提货电话必填',
+            'city_infos.*.phone.string' => '提货电话必须string类型',
+            'city_infos.*.phone.max' => '提货电话最大长度为255',
 
-            'city.required' => '市必填',
-            'city.string' => '市必须string类型',
-            'city.max' => '市最大长度为255',
-            'district.required' => '区必填',
-            'district.string' => '区必须string类型',
-            'district.max' => '区最大长度为255',
-            'address.required' => '提货地址必填',
-            'address.string' => '提货地址必须string类型',
-            'address.max' => '提货地址最大长度为255',
-            'phone.required' => '提货电话必填',
-            'phone.string' => '提货电话必须string类型',
-            'phone.max' => '提货电话最大长度为255',
+            'city_infos.*.price.required' => '物流费用必填',
+            'city_infos.*.price.numeric' => '物流费用必须是数字',
 
-            'price.required' => '物流费用必填',
-            'price.numeric' => '物流费用必须是数字',
-
-            'weight_univalent.required' => '重量单价必填',
-            'weight_univalent.numeric' => '重量单价必须是数字',
-            'expected_days.required' => '城市到达天数必填',
-            'expected_days.integer' => '城市到达天数必须int类型',
-            'route.integer' => '中转或直达必须int类型',
-            'is_free_shipping.boolean' => '是否包邮必须布尔类型',
-            'remark.string' => '备注必须string类型',
-            'remark.nullable' => '备注可为null',
-            'remark.max' => '备注最大长度为255',
+            'city_infos.*.weight_univalent.required' => '重量单价必填',
+            'city_infos.*.weight_univalent.numeric' => '重量单价必须是数字',
+            'city_infos.*.expected_days.required' => '城市到达天数必填',
+            'city_infos.*.expected_days.integer' => '城市到达天数必须int类型',
+            'city_infos.*.route.integer' => '中转或直达必须int类型',
+            'city_infos.*.is_free_shipping.boolean' => '是否包邮必须布尔类型',
+            'city_infos.*.remark.string' => '备注必须string类型',
+            'city_infos.*.remark.nullable' => '备注可为null',
+            'city_infos.*.remark.max' => '备注最大长度为255',
 
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填'
@@ -111,7 +99,6 @@ class CityInfoRequest extends FormRequest
     public function attributes()
     {
         return [
-            'logistics_id' => '物流id',
             'province' => '省',
             'city' => '市',
             'district' => '区',
@@ -123,7 +110,6 @@ class CityInfoRequest extends FormRequest
             'route' => '中转或直达：0=中转，1=直达',
             'is_free_shipping' => '是否包邮',
             'remark' => '备注',
-            'status' => '状态：0=停用，1=启用'
         ];
     }
 
