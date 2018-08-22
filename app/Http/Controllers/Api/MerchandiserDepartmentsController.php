@@ -9,7 +9,7 @@ use App\Http\Controllers\Traits\ProcedureTrait;
  * 跟单部资源
  * @Resource("merchandiserdepts",uri="/api")
  */
-class MerchandiserDepartmentController extends Controller
+class MerchandiserDepartmentsController extends Controller
 {
     use ProcedureTrait;
 

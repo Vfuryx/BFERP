@@ -675,12 +675,20 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicedepts.isunaudit');
 
         //跟单部
-        $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentController@isUnAudit')
+        $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentsController@isUnAudit')
             ->name('api.merchandiserdepts.isunaudit');
-        $api->put('merchandiserdepts/{order}/oneaudit', 'MerchandiserDepartmentController@isOneAudit')
+        $api->put('merchandiserdepts/{order}/oneaudit', 'MerchandiserDepartmentsController@isOneAudit')
             ->name('api.merchandiserdepts.isoneaudit');
-        $api->put('merchandiserdepts/{order}/unoneaudit', 'MerchandiserDepartmentController@isUnOneAudit')
+        $api->put('merchandiserdepts/{order}/unoneaudit', 'MerchandiserDepartmentsController@isUnOneAudit')
             ->name('api.merchandiserdepts.isunoneaudit');
+
+        //财务部
+        $api->put('financialdepts/{order}/reject', 'FinancialDepartmentsController@isReject')
+            ->name('api.financialdepts.isreject');
+        $api->put('financialdepts/{order}/financialaudit', 'FinancialDepartmentsController@isFinancialAudit')
+            ->name('api.financialdepts.isFinancialAudit');
+        $api->put('financialdepts/{order}/unfinancialaudit', 'FinancialDepartmentsController@isUnFinancialAudit')
+            ->name('api.financialdepts.isunfinancialaudit');
 
 
 

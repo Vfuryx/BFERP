@@ -260,7 +260,7 @@ class Order extends Model
     }
 
     /**
-     * 跟单一审
+     * 退回跟单一审
      * @return bool
      */
     public function unOneAudit()
@@ -268,6 +268,28 @@ class Order extends Model
         $this->order_status = self::ORDER_STATUS_CS_AUDIT;
         $this->save();
     }
+
+    /**
+     * 财审
+     * @return bool
+     */
+    public function financialAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_FD_AUDIT;
+        $this->save();
+    }
+
+    /**
+     * 退回财审
+     * @return bool
+     */
+    public function unFinancialAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_ONE_AUDIT;
+        $this->save();
+    }
+
+
 
 
     public function shop()
