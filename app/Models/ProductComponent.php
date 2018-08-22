@@ -18,10 +18,6 @@ class ProductComponent extends Model
         'remark', 'finished_pro', 'is_stop_pro'
     ];
 
-    protected $dates = [
-        'print_at'
-    ];
-
     //设置类型
     protected $casts = [
         'is_stop_pro' => 'boolean',

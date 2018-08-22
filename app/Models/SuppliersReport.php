@@ -11,6 +11,10 @@ class SuppliersReport extends Model
         'delivery_time', 'fifo',
     ];
 
+    protected $dates = [
+        'delivery_time'
+    ];
+
     public function stock()
     {
         return $this->belongsTo(Stock::class, 'stock_id');

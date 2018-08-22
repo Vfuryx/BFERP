@@ -111,7 +111,6 @@ class Order extends Model
         'created',
         'audit_at',
         'est_con_time',
-        'audit_at',
         'payment_date',
         'promise_ship_time'
     ];

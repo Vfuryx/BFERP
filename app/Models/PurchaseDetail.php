@@ -15,6 +15,11 @@ class PurchaseDetail extends Model
         'wooden_frame_costs'
     ];
 
+    protected $dates = [
+        'arrival_time',
+    ];
+
+
     public function getPurchaseItemStatusAttribute($value)
     {
         return \App\Models\Purchase::$purchaseStatusMap[$value ? $value : \App\Models\Purchase::PURCHASE_STATUS_NEW];

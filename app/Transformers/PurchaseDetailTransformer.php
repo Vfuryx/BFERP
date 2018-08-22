@@ -28,7 +28,7 @@ class PurchaseDetailTransformer extends TransformerAbstract
             'commission' => $purchaseDetail->commission,
             'discount' => $purchaseDetail->discount,
             'wooden_frame_costs' => $purchaseDetail->wooden_frame_costs,
-            'arrival_time' => $purchaseDetail->arrival_time,
+            'arrival_time' => optional($purchaseDetail->arrival_time)->toDateTimeString(),
             'remark' => $purchaseDetail->remark,
             'created_at' => $purchaseDetail->created_at
                                     ->toDateTimeString(),

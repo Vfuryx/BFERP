@@ -32,7 +32,8 @@ class Purchase extends Model
     ];
 
     protected $dates = [
-        'print_at','promise_ship_time'
+        'print_at',
+        'promise_ship_time'
     ];
 
     //设置类型
