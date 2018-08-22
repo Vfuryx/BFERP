@@ -13020,6 +13020,57 @@ FORMAT: 1A
 
             []
 
+# merchandiserdepts [/api]
+跟单部资源
+
+## 跟单驳回 [PUT /api/merchandiserdepts/:id/unaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "跟单驳回出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 跟单一审 [PUT /api/merchandiserdepts/:id/oneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "跟单一审出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 跟单一审退审 [PUT /api/merchandiserdepts/:id/unoneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "跟单一审退审出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # uploadimages [/api]
 图片上传
 

@@ -674,6 +674,16 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('customerservicedepts/{order}/unaudit', 'CustomerServiceDepartmentsController@isUnAudit')
             ->name('api.customerservicedepts.isunaudit');
 
+        //跟单部
+        $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentController@isUnAudit')
+            ->name('api.merchandiserdepts.isunaudit');
+        $api->put('merchandiserdepts/{order}/oneaudit', 'MerchandiserDepartmentController@isOneAudit')
+            ->name('api.merchandiserdepts.isoneaudit');
+        $api->put('merchandiserdepts/{order}/unoneaudit', 'MerchandiserDepartmentController@isUnOneAudit')
+            ->name('api.merchandiserdepts.isunoneaudit');
+
+
+
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

@@ -249,6 +249,26 @@ class Order extends Model
         $this->save();
     }
 
+    /**
+     * 跟单一审
+     * @return bool
+     */
+    public function oneAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_ONE_AUDIT;
+        $this->save();
+    }
+
+    /**
+     * 跟单一审
+     * @return bool
+     */
+    public function unOneAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_CS_AUDIT;
+        $this->save();
+    }
+
 
     public function shop()
     {
