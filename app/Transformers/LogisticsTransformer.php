@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class LogisticsTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
-        'printReport', 'freightType'
+        'cityInfos', 'printReport', 'freightType'
     ];
 
     public function transform(Logistics $logistics)
@@ -30,6 +30,11 @@ class LogisticsTransformer extends TransformerAbstract
             'updated_at' => $logistics->updated_at
                                     ->toDateTimeString(),
         ];
+    }
+
+    public function includeCityInfos(Logistics $logistics)
+    {
+        return $this->collection($logistics->cityInfos, new CityInfoTransformer());
     }
 
     public function includePrintReport(Logistics $logistics)

@@ -20,7 +20,7 @@ class CityInfo extends Model
 
     public function logistics()
     {
-        return $this->belongsTo(Logistics::class);
+        return $this->belongsTo(Logistics::class,'logistics_id');
     }
 
 

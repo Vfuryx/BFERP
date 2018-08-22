@@ -23,7 +23,7 @@ class LogisticsController extends Controller
     /**
      * 获取所有物流
      *
-     * @Get("/logistics[?status=true&include=printReport,freightType]")
+     * @Get("/logistics[?status=true&include=cityInfos,printReport,freightType]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
@@ -47,6 +47,28 @@ class LogisticsController extends Controller
      *          "expected_days": 10,
      *          "phone": "物流电话",
      *          "address": "物流地址",
+     *          "cityInfos": {
+     *              "data": {
+     *                  {
+     *                      "id": 1,
+     *                      "logistics_id": 1,
+     *                      "province": "省",
+     *                      "city": "市",
+     *                      "district": "区",
+     *                      "address": "提货地址",
+     *                      "phone": "23333333333",
+     *                      "price": "100.00",
+     *                      "weight_univalent": "110.00",
+     *                      "expected_days": 1,
+     *                      "route": 1,
+     *                      "is_free_shipping": true,
+     *                      "remark": "备注",
+     *                      "status": true,
+     *                      "created_at": "2018-08-21 10:21:07",
+     *                      "updated_at": "2018-08-21 10:21:07"
+     *                  }
+     *              }
+     *          },
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
@@ -134,6 +156,28 @@ class LogisticsController extends Controller
      *              "created_at": "2018-07-03 17:51:25",
      *              "updated_at": "2018-07-03 17:51:25"
      *          },
+     *          "cityInfos": {
+     *              "data": {
+     *                  {
+     *                      "id": 1,
+     *                      "logistics_id": 1,
+     *                      "province": "省",
+     *                      "city": "市",
+     *                      "district": "区",
+     *                      "address": "提货地址",
+     *                      "phone": "23333333333",
+     *                      "price": "100.00",
+     *                      "weight_univalent": "110.00",
+     *                      "expected_days": 1,
+     *                      "route": 1,
+     *                      "is_free_shipping": true,
+     *                      "remark": "备注",
+     *                      "status": true,
+     *                      "created_at": "2018-08-21 10:21:07",
+     *                      "updated_at": "2018-08-21 10:21:07"
+     *                  }
+     *              }
+     *          },
      *          "remark": "备注",
      *          "status": true,
      *          "created_at": "2018-07-03 17:52:28",
@@ -175,6 +219,28 @@ class LogisticsController extends Controller
      *          "expected_days": 10,
      *          "phone": "物流电话",
      *          "address": "物流地址",
+     *          "cityInfos": {
+     *              "data": {
+     *                  {
+     *                      "id": 1,
+     *                      "logistics_id": 1,
+     *                      "province": "省",
+     *                      "city": "市",
+     *                      "district": "区",
+     *                      "address": "提货地址",
+     *                      "phone": "23333333333",
+     *                      "price": "100.00",
+     *                      "weight_univalent": "110.00",
+     *                      "expected_days": 1,
+     *                      "route": 1,
+     *                      "is_free_shipping": true,
+     *                      "remark": "备注",
+     *                      "status": true,
+     *                      "created_at": "2018-08-21 10:21:07",
+     *                      "updated_at": "2018-08-21 10:21:07"
+     *                  }
+     *              }
+     *          },
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
@@ -236,6 +302,28 @@ class LogisticsController extends Controller
      *          "expected_days": "10",
      *          "phone": "物流电话1",
      *          "address": "物流地址1",
+     *          "cityInfos": {
+     *              "data": {
+     *                  {
+     *                      "id": 1,
+     *                      "logistics_id": 1,
+     *                      "province": "省",
+     *                      "city": "市",
+     *                      "district": "区",
+     *                      "address": "提货地址",
+     *                      "phone": "23333333333",
+     *                      "price": "100.00",
+     *                      "weight_univalent": "110.00",
+     *                      "expected_days": 1,
+     *                      "route": 1,
+     *                      "is_free_shipping": true,
+     *                      "remark": "备注",
+     *                      "status": true,
+     *                      "created_at": "2018-08-21 10:21:07",
+     *                      "updated_at": "2018-08-21 10:21:07"
+     *                  }
+     *              }
+     *          },
      *          "freight_type": {
      *              "id": 1,
      *              "name": "运费名称1",
