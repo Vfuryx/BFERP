@@ -487,9 +487,9 @@ class CombinationsController extends Controller
      *     })
      * })
      */
-    public function show($id)
+    public function show(Combination $combination)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($combination, self::TRANSFORMER);
     }
 
     /**

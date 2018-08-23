@@ -221,9 +221,9 @@ class SeriesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Series $series)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($series, self::TRANSFORMER);
     }
 
     /**

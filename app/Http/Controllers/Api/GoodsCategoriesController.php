@@ -135,9 +135,9 @@ class GoodsCategoriesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(GoodsCategory $goodscate)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($goodscate, self::TRANSFORMER);
     }
 
 

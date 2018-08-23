@@ -157,9 +157,9 @@ class CityInfosController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(CityInfo $cityinfo)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($cityinfo, self::TRANSFORMER);
     }
 
     /**

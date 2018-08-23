@@ -224,9 +224,9 @@ class ShopsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Shop $shop)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($shop, self::TRANSFORMER);
     }
 
     /**

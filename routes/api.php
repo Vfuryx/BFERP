@@ -675,6 +675,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicedepts.isunaudit');
 
         //跟单部
+        $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
+            ->name('api.merchandiserdepts.show');
+        $api->patch('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@update')
+            ->name('api.merchandiserdepts.update');
         $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentsController@isUnAudit')
             ->name('api.merchandiserdepts.isunaudit');
         $api->put('merchandiserdepts/{order}/oneaudit', 'MerchandiserDepartmentsController@isOneAudit')

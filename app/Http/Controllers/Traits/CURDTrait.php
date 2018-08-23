@@ -103,10 +103,9 @@ trait CURDTrait
      * @param [type] $transformer   转换器
      * @return array
      */
-    public function traitShow($id, $model, $transformer)
+    public function traitShow($model, $transformer)
     {
-        $ref = $model::findOrFail($id);
-        return $this->response->item($ref, $transformer);
+        return $this->response->item($model, $transformer);
     }
 
     /**

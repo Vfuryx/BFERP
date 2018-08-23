@@ -121,9 +121,9 @@ class AccountingTypesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(AccType $acctype)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($acctype, self::TRANSFORMER);
     }
 
     /**

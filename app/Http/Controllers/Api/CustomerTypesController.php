@@ -125,9 +125,9 @@ class CustomerTypesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(CustomerType $customertype)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($customertype, self::TRANSFORMER);
     }
 
 

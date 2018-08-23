@@ -530,9 +530,9 @@ class PurchasesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Purchase $purchase)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($purchase, self::TRANSFORMER);
     }
 
     /**

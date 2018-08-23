@@ -122,9 +122,9 @@ class PurchaseReturnTypesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(PurchaseReturnType $purchasereturntype)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($purchasereturntype, self::TRANSFORMER);
     }
 
 

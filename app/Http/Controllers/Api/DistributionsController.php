@@ -122,9 +122,9 @@ class DistributionsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Distribution $distribution)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($distribution, self::TRANSFORMER);
     }
 
     /**

@@ -136,9 +136,9 @@ class PrintReportsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(PrintReport $printreport)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($printreport, self::TRANSFORMER);
     }
 
     /**

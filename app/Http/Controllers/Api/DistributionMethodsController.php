@@ -121,9 +121,9 @@ class DistributionMethodsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(DistributionMethod $distmet)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($distmet, self::TRANSFORMER);
     }
 
     /**

@@ -152,9 +152,9 @@ class DepartmentsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Department $department)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($department, self::TRANSFORMER);
     }
 
     /**

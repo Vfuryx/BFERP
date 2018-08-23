@@ -264,9 +264,9 @@ class StockInsContoller extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(StockIn $stockin)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($stockin, self::TRANSFORMER);
     }
 
 

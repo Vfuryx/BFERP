@@ -122,9 +122,9 @@ class StockInTypesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(StockInType $stockintype)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($stockintype, self::TRANSFORMER);
     }
 
 

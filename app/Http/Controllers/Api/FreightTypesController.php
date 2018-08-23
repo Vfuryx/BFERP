@@ -130,9 +130,9 @@ class FreightTypesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(FreightType $freighttype)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($freighttype, self::TRANSFORMER);
     }
 
     /**

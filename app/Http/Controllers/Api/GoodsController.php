@@ -841,9 +841,9 @@ class GoodsController extends Controller
      *          "updated_at": "2018-07-25 15:06:12",     *      })
      * })
      */
-    public function show($id)
+    public function show(Goods $goods)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($goods, self::TRANSFORMER);
     }
 
     /**

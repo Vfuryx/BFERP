@@ -211,9 +211,9 @@ class ProductComponentsController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(ProductComponent $productcomponent)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($productcomponent, self::TRANSFORMER);
     }
 
     /**

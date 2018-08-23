@@ -289,8 +289,31 @@ class Order extends Model
         $this->save();
     }
 
+    /**
+     * 跟单货审
+     * @return bool
+     */
+    public function cargoAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_CARGO_AUDIT;
+        $this->save();
+    }
 
+    /**
+     * 是否缺货
+     * @return bool
+     */
+    public function isOOS()
+    {
+        //遍历子单商品
+        $orderItems = $this->orderItems();
 
+        $orderItems->map(function($item){
+            return $item;
+        });
+
+        return false;
+    }
 
     public function shop()
     {

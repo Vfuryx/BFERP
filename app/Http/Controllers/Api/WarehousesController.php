@@ -150,9 +150,9 @@ class WarehousesController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Warehouse $warehouse)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($warehouse, self::TRANSFORMER);
     }
 
     /**

@@ -177,9 +177,9 @@ class SuppliersController extends Controller
      *      })
      * })
      */
-    public function show($id)
+    public function show(Supplier $supplier)
     {
-        return $this->traitShow($id, self::MODEL, self::TRANSFORMER);
+        return $this->traitShow($supplier, self::TRANSFORMER);
     }
 
     /**
