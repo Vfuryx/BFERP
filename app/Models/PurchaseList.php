@@ -20,7 +20,7 @@ class PurchaseList extends Model
         return $this->hasMany(PurchaseDetail::class, 'purchase_lists_id');
     }
 
-    public function combinations()
+    public function combination()
     {
         return $this->belongsTo(Combination::class,'combinations_id');
     }

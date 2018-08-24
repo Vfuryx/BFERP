@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class PurchaseListTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
-        'purchase', 'purchaseDetails'
+        'purchase', 'purchaseDetails', 'combination'
     ];
 
     public function transform(PurchaseList $purchaseList)
@@ -28,6 +28,11 @@ class PurchaseListTransformer extends TransformerAbstract
     public function includePurchase(PurchaseList $purchaseList)
     {
         return $this->item($purchaseList->purchase, new PurchaseTransformer());
+    }
+
+    public function includeCombination(PurchaseList $purchaseList)
+    {
+        return $this->item($purchaseList->combination, new CombinationTransformer());
     }
 
     public function includePurchaseDetails(PurchaseList $purchaseList)
