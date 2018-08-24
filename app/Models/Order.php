@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Dingo\Api\Exception\UpdateResourceFailedException;
 use Illuminate\Support\Facades\Auth;
 
 class Order extends Model
@@ -305,15 +306,32 @@ class Order extends Model
      */
     public function isOOS()
     {
-        //遍历子单商品
-        $orderItems = $this->orderItems();
+        $warehouseId = $this->warehouses_id;
 
-        $orderItems->map(function($item){
-            return $item;
+        //遍历子单商品
+        $this->orderItems->map(function($item) use ($warehouseId){
+            $num = $item->combination->productComponents->map(function($item) use ($warehouseId){
+                return optional($item->stocks->where('warehouse_id',$warehouseId)->first())->quantity ?? 0;
+            })->min();
+
+            if($num < $item->quantity)
+                throw new UpdateResourceFailedException('缺货、请及时补充');
         });
 
         return false;
     }
+
+
+    /**
+     * 仓储发货
+     * @return bool
+     */
+    public function stockOut()
+    {
+        $this->order_status = self::ORDER_STATUS_STOCK_OUT;
+        $this->save();
+    }
+
 
     public function shop()
     {

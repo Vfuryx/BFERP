@@ -677,6 +677,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //跟单部
         $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
             ->name('api.merchandiserdepts.show');
+        $api->get('merchandiserdepts/{order}/stock', 'MerchandiserDepartmentsController@getStockByWarehouses')
+            ->name('api.merchandiserdepts.stock');
         $api->patch('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@update')
             ->name('api.merchandiserdepts.update');
         $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentsController@isUnAudit')
@@ -685,6 +687,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.merchandiserdepts.isoneaudit');
         $api->put('merchandiserdepts/{order}/unoneaudit', 'MerchandiserDepartmentsController@isUnOneAudit')
             ->name('api.merchandiserdepts.isunoneaudit');
+        $api->put('merchandiserdepts/{order}/cargoaudit', 'MerchandiserDepartmentsController@isCargoAudit')
+            ->name('api.merchandiserdepts.iscargoaudit');
 
         //财务部
         $api->put('financialdepts/{order}/reject', 'FinancialDepartmentsController@isReject')
@@ -693,6 +697,14 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.financialdepts.isFinancialAudit');
         $api->put('financialdepts/{order}/unfinancialaudit', 'FinancialDepartmentsController@isUnFinancialAudit')
             ->name('api.financialdepts.isunfinancialaudit');
+
+        //仓储部
+        $api->put('warehousingdepts/{order}', 'WarehousingDepartmentsController@show')
+            ->name('api.warehousingdepts.show');
+        $api->patch('warehousingdepts/{order}', 'WarehousingDepartmentsController@update')
+            ->name('api.warehousingdepts.update');
+        $api->put('warehousingdepts/{order}/stockout', 'WarehousingDepartmentsController@isStockOut')
+            ->name('api.warehousingdepts.isstockout');
 
 
 

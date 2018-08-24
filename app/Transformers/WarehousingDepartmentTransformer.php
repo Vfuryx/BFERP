@@ -5,15 +5,8 @@ namespace App\Transformers;
 use App\Models\Order;
 use League\Fractal\TransformerAbstract;
 
-class OrderTransformer extends TransformerAbstract
+class WarehousingDepartmentTransformer extends TransformerAbstract
 {
-    protected $availableIncludes = [
-        'shop', 'logistic', 'freightType', 'distribution',
-        'distributionMethod', 'distributionType', 'takeDeliveryGoodsWay',
-        'customerType', 'paymentMethod', 'warehouses', 'orderItems', 'businessPersonnel',
-        'locker', 'paymentDetails'
-    ];
-
     public function transform(Order $order)
     {
         return [
@@ -95,80 +88,4 @@ class OrderTransformer extends TransformerAbstract
                                   ->toDateTimeString()
         ];
     }
-
-    public function includeShop(Order $order)
-    {
-        return $this->item($order->shop, new ShopTransformer());
-    }
-
-    public function includeLogistic(Order $order)
-    {
-        return $this->item($order->logistic, new LogisticsTransformer());
-    }
-
-    public function includeFreightType(Order $order)
-    {
-        return $this->item($order->freightType, new FreightTypeTransformer());
-    }
-
-    public function includeDistribution(Order $order)
-    {
-        return $this->item($order->distribution, new DistributionTransformer());
-    }
-
-    public function includeDistributionMethod(Order $order)
-    {
-        return $this->item($order->distributionMethod, new DistributionMethodTransformer());
-    }
-
-    public function includeDistributionType(Order $order)
-    {
-        return $this->item($order->distributionType, new DistributionTypeTransformer());
-    }
-
-    public function includeTakeDeliveryGoodsWay(Order $order)
-    {
-        return $this->item($order->takeDeliveryGoodsWay, new TakeDeliveryGoodsWayTransformer());
-    }
-
-    public function includeCustomerType(Order $order)
-    {
-        return $this->item($order->customerType, new CustomerTypeTransformer());
-    }
-
-    public function includePaymentMethod(Order $order)
-    {
-        return $this->item($order->paymentMethod, new PaymentMethodTransformer());
-    }
-
-    public function includeWarehouses(Order $order)
-    {
-        return $this->item($order->warehouses, new WarehouseTransformer());
-    }
-
-    public function includeOrderItems(Order $order)
-    {
-        return $this->collection($order->orderItems, new OrderItemTransformer());
-    }
-
-    public function includePaymentDetails(Order $order)
-    {
-        return $this->collection($order->paymentDetails, new PaymentDetailTransformer());
-    }
-
-    public function includeBusinessPersonnel(Order $order)
-    {
-        if(!$order->locker) return ;
-        return $this->item($order->businessPersonnel, new UserTransformer());
-    }
-
-    public function includeLocker(Order $order)
-    {
-        if(!$order->locker) return ;
-        return $this->item($order->locker, new UserTransformer());
-    }
-
-
-
-
 }
