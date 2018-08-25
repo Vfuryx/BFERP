@@ -14,13 +14,14 @@ trait ProcedureTrait
      * @param $condition    条件
      * @param $fail         错误提示
      * @param $method       方法
+     * @param $data         数据
      * @return mixed
      */
-    public function traitAction($model, $condition, $fail, $method)
+    public function traitAction($model, $condition, $fail, $method, $data = null)
     {
         if ($condition)
             throw new UpdateResourceFailedException($fail);
-        $model->$method();
+        $model->$method($data);
         return $this->noContent();
     }
 

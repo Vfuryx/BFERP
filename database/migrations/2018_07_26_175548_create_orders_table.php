@@ -20,10 +20,12 @@ class CreateOrdersTable extends Migration
             $table->string('order_source')->comment('订单来源');
             $table->unsignedInteger('shops_id')->comment('店铺id');
             $table->unsignedInteger('logistics_id')->comment('物流id');
+            $table->string('logistics_sn')->default('')->comment('物流单号');
             $table->string('billing_way')->comment('计费方式(按重量计算：weight ，按体积计算 volume)');
             $table->date('promise_ship_time')->nullable()->comment('承诺发货时间（订单生成）');
             $table->unsignedInteger('freight_types_id')->comment('运费类型id');
             $table->decimal('expected_freight', 10 ,2)->default(0.00)->comment('预计运费');
+            $table->decimal('actual_freight', 10 ,2)->default(0.00)->comment('实际运费');
             $table->unsignedInteger('distributions_id')->default(0)->comment('配送id');
             $table->unsignedInteger('distribution_methods_id')->comment('配送方式id');
             $table->decimal('deliver_goods_fee', 10 ,2)->default(0.00)->comment('送货费用');

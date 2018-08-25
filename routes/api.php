@@ -673,6 +673,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicedepts.isaudit');
         $api->put('customerservicedepts/{order}/unaudit', 'CustomerServiceDepartmentsController@isUnAudit')
             ->name('api.customerservicedepts.isunaudit');
+        $api->put('customerservicedepts/{order}/splitorder', 'CustomerServiceDepartmentsController@isSplitOrder')
+            ->name('api.customerservicedepts.issplitorder');
 
         //跟单部
         $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
@@ -689,6 +691,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.merchandiserdepts.isunoneaudit');
         $api->put('merchandiserdepts/{order}/cargoaudit', 'MerchandiserDepartmentsController@isCargoAudit')
             ->name('api.merchandiserdepts.iscargoaudit');
+        $api->put('merchandiserdepts/{order}/splitorder', 'MerchandiserDepartmentsController@isSplitOrder')
+            ->name('api.merchandiserdepts.issplitorder');
 
         //财务部
         $api->put('financialdepts/{order}/reject', 'FinancialDepartmentsController@isReject')
@@ -699,7 +703,7 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.financialdepts.isunfinancialaudit');
 
         //仓储部
-        $api->put('warehousingdepts/{order}', 'WarehousingDepartmentsController@show')
+        $api->get('warehousingdepts/{order}', 'WarehousingDepartmentsController@show')
             ->name('api.warehousingdepts.show');
         $api->patch('warehousingdepts/{order}', 'WarehousingDepartmentsController@update')
             ->name('api.warehousingdepts.update');

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Facades\DB;
 use Dingo\Api\Exception\UpdateResourceFailedException;
 use Illuminate\Support\Facades\Auth;
 
@@ -96,16 +97,18 @@ class Order extends Model
     ];
 
     protected $fillable = [
-        'shops_id', 'member_nick', 'logistics_id', 'billing_way', 'promise_ship_time',
-        'freight_types_id', 'expected_freight', 'distributions_id', 'distribution_methods_id',
-        'deliver_goods_fee', 'move_upstairs_fee', 'installation_fee', 'total_distribution_fee',
-        'distribution_phone', 'distribution_no', 'distribution_types_id', 'service_car_info',
-        'take_delivery_goods_fee', 'take_delivery_goods_ways_id', 'express_fee', 'service_car_fee',
-        'cancel_after_verification_code', 'wooden_frame_costs', 'preferential_cashback', 'favorable_cashback',
-        'customer_types_id', 'is_invoice', 'invoice_express_fee', 'express_invoice_title', 'contract_no',
-        'payment_methods_id', 'deposit', 'document_title', 'warehouses_id', 'payment_date', 'interest_concessions',
-        'is_notice', 'is_cancel_after_verification', 'accept_order_user', 'tax_number', 'receipt',
-        'logistics_remark', 'seller_remark', 'customer_service_remark', 'buyer_message','status'
+        'shops_id', 'member_nick', 'logistics_id', 'logistics_sn', 'billing_way', 'promise_ship_time',
+        'freight_types_id', 'expected_freight', 'actual_freight','distributions_id',
+        'distribution_methods_id', 'deliver_goods_fee', 'move_upstairs_fee', 'installation_fee',
+        'total_distribution_fee', 'distribution_phone', 'distribution_no', 'distribution_types_id',
+        'service_car_info', 'take_delivery_goods_fee', 'take_delivery_goods_ways_id', 'express_fee',
+        'service_car_fee', 'cancel_after_verification_code', 'wooden_frame_costs', 'preferential_cashback',
+        'favorable_cashback', 'customer_types_id', 'is_invoice', 'invoice_express_fee', 'express_invoice_title',
+        'contract_no', 'payment_methods_id', 'deposit', 'document_title', 'warehouses_id', 'payment_date',
+        'interest_concessions', 'is_notice', 'is_cancel_after_verification', 'accept_order_user', 'tax_number',
+        'receipt', 'logistics_remark', 'seller_remark', 'customer_service_remark', 'buyer_message','status',
+        'receiver_name', 'receiver_phone', 'receiver_mobile', 'receiver_state', 'receiver_city', 'receiver_district',
+        'receiver_address', 'receiver_zip'
     ];
 
     protected $dates = [
@@ -329,8 +332,100 @@ class Order extends Model
     public function stockOut()
     {
         $this->order_status = self::ORDER_STATUS_STOCK_OUT;
+
+        //获取出库数据
+        $order = $this->load('orderItems.combination.productComponents');
+        //发货---减少库存---新增出库单
+        DB::transaction(function () use ($order) {
+            $warehouseId = $order->warehouses_id;
+            $orderNo = $order->system_order_no;
+            $order->orderItems->map(function($item) use ($warehouseId, $orderNo) {
+                $amount = $item->quantity;
+                $item->combination->productComponents->map(function($item) use ($warehouseId, $amount, $orderNo) {
+                    $item->stockOutByWarehouseId($warehouseId,$amount);
+                    StockOut::create([
+                        'warehouse_id'=>$warehouseId,
+                        'product_components_id'=>$item->id,
+                        'stock_out_quantity'=>$amount,
+                        'remark'=>'订单号:'.$orderNo
+                    ]);
+                });
+            });
+        });
+
         $this->save();
     }
+
+    /**
+     * 拆单
+     * @param $data       数据
+     * @return bool
+     */
+    public function splitOrder($data)
+    {
+        //获取出库数据
+        $order = $this->load('orderItems');
+
+        $orderItemOne = $order->orderItems->map(function($item) use ($data){
+            $orderItem = collect($data)->where('id',$item->id);
+            if($orderItem->count()){
+                $orderItem = $orderItem->first();
+                if ($orderItem['quantity'] > 0 && $item->quantity - $orderItem['quantity'] > 0){
+                    $item->quantity = $item->quantity - $orderItem['quantity'];
+                }elseif ($orderItem['quantity'] > 0 && $item->quantity - $orderItem['quantity'] == 0){
+                    $item = null;
+                }else{
+                    throw new UpdateResourceFailedException('拆分出错');
+                }
+            }
+            return $item;
+        })->toArray();
+
+        $orderItemTwo = $order->orderItems->map(function($item) use ($data){
+            $orderItem = collect($data)->where('id',$item->id);
+            if($orderItem->count()){
+                $item->quantity = $orderItem->first()['quantity'];
+            }else{
+                $item = null;
+            }
+            return $item;
+        })->toArray();
+
+        DB::transaction(function () use ($orderItemOne, $orderItemTwo){
+            //新建订单
+            $newOrderOne = $this->newQuery()->create($this->toArray());
+            $newOrderTwo = $this->newQuery()->create($this->toArray());
+
+            //新增子单
+            collect($orderItemOne)->map(function($item) use ($newOrderOne){
+                $newOrderOne->orderItems()->create($item);
+            });
+
+            collect($orderItemTwo)->map(function($item) use ($newOrderTwo){
+                $newOrderTwo->orderItems()->create($item);
+            });
+
+            //删除旧单
+            $this->paymentDetails()->delete();
+            $this->orderItems()->delete();
+            $this->delete();
+
+            //记录拆分操作
+
+        });
+
+        return true;
+    }
+
+    /**
+     * 合并订单
+     * @return bool
+     */
+    public function mergerOrder()
+    {
+
+    }
+
 
 
     public function shop()

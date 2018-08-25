@@ -8,6 +8,7 @@ use App\Models\Order;
 
 use App\Http\Requests\Api\CustomerServiceDepartmentRequset;
 use App\Http\Requests\Api\PaymentDetailRequest;
+use App\Http\Requests\Api\SplitOrderRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
@@ -978,6 +979,30 @@ class CustomerServiceDepartmentsController extends Controller
             !$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CS_AUDIT,
             '退审出错',
             'unAudit'
+        );
+    }
+
+    /**
+     * 拆单
+     *
+     * @PUT("/customerservicedepts/:id/splitorder")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "拆单",
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function isSplitOrder(SplitOrderRequest $splitOrderRequest, Order $order)
+    {
+        return $this->traitAction(
+            $order,
+            !$order->status || $order->getOriginal('order_status') == $order::ORDER_STATUS_FD_AUDIT,
+            '拆单出错',
+            'splitOrder',
+            $splitOrderRequest->validated()['order_items']
         );
     }
 

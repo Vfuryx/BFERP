@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Dingo\Api\Exception\UpdateResourceFailedException;
+
 class ProductComponent extends Model
 {
     protected $table = 'product_components';
@@ -49,19 +51,22 @@ class ProductComponent extends Model
         }
     }
 
-
     /**
-     * 获取组合里面的所有子规格
-     *
-     * @return mix    object 返回的是组合的子规格对象集 或者 false
+     * 根据仓库 id 定位库存数据进行出库操作
+     * @param $warehouseId      仓库id
+     * @param $amount           出库数
      */
-    public function getCombinationsOfALlProductSpec()
+    public function stockOutByWarehouseId($warehouseId, $amount)
     {
-//        //不是组合规格
-//        if(!$this->is_combination)
-//            return false;
-//
-//        return $this->load('combinations.comProSpec')->combinations->pluck('comProSpec');
+        $stocks = $this->load(['stocks' => function($query) use ($warehouseId, $amount) {
+            $query->where('warehouse_id', $warehouseId);
+        }])->stocks;
+        //判断是否存在库存
+        if(!$stocks->count()){
+            throw new UpdateResourceFailedException('不存在库存');
+        }
+
+        $stocks->first()->decreaseQuantity($amount);
     }
 
     /**

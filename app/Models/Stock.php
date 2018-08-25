@@ -35,7 +35,9 @@ class Stock extends Model
      */
     public function decreaseQuantity($amount)
     {
-        if ($amount < 0) throw new InternalException('减库存不可小于0');
+        if ($amount < 0) throw new UpdateResourceFailedException('减库存不可小于0');
+
+        if ($this->quantity < $amount) throw new UpdateResourceFailedException('库存不足');
 
         return $this->newQuery()
             ->where('id', $this->id)
