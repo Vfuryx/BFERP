@@ -47,11 +47,11 @@ class CancelPurchaseDetailRequest extends FormRequest
             case 'PATCH':
                 return [
                     'cancel_purchase_details.*.id' => [
-                        'integer',
+                        'sometimes','required','integer',
                         Rule::exists('cancel_purchase_details', 'id'),
                     ],
                     'cancel_purchase_details.*.purchase_details_id' => [
-                        'integer',
+                        'sometimes','required','integer',
                         Rule::exists('purchase_details', 'id')->where(function($query) {
                             $query->whereIn('purchase_item_status', [
                                 \App\Models\Purchase::PURCHASE_STATUS_SECTION,
@@ -68,12 +68,11 @@ class CancelPurchaseDetailRequest extends FormRequest
                             ) {
                                 return $fail('存在重复数据');
                             }
-
                             //模型数据是否匹配
-                            if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->id != $this->purchases_id)
+                            if(\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->id != $this->purchases_id)
                                 return $fail('采购详情id不属于这个采购单');
 
-                            if(\App\Models\PurchaseDetail::query()->find($value)->purchaseList->purchase->is_audit)
+                            if(!\App\Models\PurchaseDetail::query()->findOrFail($value)->purchaseList->purchase->is_audit)
                                 return $fail('采购单未审核');
 
                             //模型数据是否匹配
@@ -82,8 +81,7 @@ class CancelPurchaseDetailRequest extends FormRequest
                                 if($this->cancelpurchase->cancelPurchaseDetails->find($this->cancel_purchase_details[$ex[1]]['id'])->purchase_details_id == $value)
                                     return true;
 
-                                //前一个条件不合法 则 判断 stockInDetails 模型里面 是否已经存在
-                            if(!$this->cancelpurchase->cancelPurchaseDetails->where('product_components_id', $value)->count()) {
+                            if($this->cancelpurchase->cancelPurchaseDetails->where('purchase_details_id', $value)->count()) {
                                 return $fail('模型数据不匹配');
                             }
 
