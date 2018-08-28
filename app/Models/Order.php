@@ -419,14 +419,44 @@ class Order extends Model
 
     /**
      * 合并订单
+     * @param $data       数据
      * @return bool
      */
-    public function mergerOrder()
+    public function mergerOrder($data)
     {
+        $orderOneId = $data['order_id_one'];
+        $orderTwoId = $data['order_id_two'];
 
+        $orderOne = $this->newQuery()->findOrFail($orderOneId);
+        $orderTwo = $this->newQuery()->findOrFail($orderTwoId);
+
+        //判断主订单数据是否匹配
+        if(collect($orderOne->toArray())->except(['id', 'system_order_no', 'created_at', 'updated_at'])->diffAssoc($orderTwo->toArray())->count()){
+            throw new UpdateResourceFailedException('主订单数据匹配，无法合并');
+        }
+
+        //提取数据
+        $order = $orderOne->toArray();
+        $orderItem = $orderOne->orderItems->merge($orderTwo->orderItems)->toArray();
+
+        DB::transaction(function () use ($order, $orderItem, $orderOneId, $orderTwoId){
+            //新建订单
+            $newOrder = $this->newQuery()->create($order);
+
+            //新增子单
+            collect($orderItem)->map(function($item) use ($newOrder){
+                $newOrder->orderItems()->create($item);
+            });
+
+            //删除旧单
+            PaymentDetail::query()->whereIn('orders_id', [$orderOneId, $orderTwoId])->delete();
+            OrderItem::query()->whereIn('orders_id', [$orderOneId, $orderTwoId])->delete();
+            Order::destroy($orderOneId, $orderTwoId);
+
+            //记录拆分操作
+
+        });
     }
-
-
 
     public function shop()
     {

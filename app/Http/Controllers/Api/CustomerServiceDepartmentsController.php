@@ -9,6 +9,7 @@ use App\Models\Order;
 use App\Http\Requests\Api\CustomerServiceDepartmentRequset;
 use App\Http\Requests\Api\PaymentDetailRequest;
 use App\Http\Requests\Api\SplitOrderRequest;
+use App\Http\Requests\Api\MergerOrderRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
@@ -999,11 +1000,42 @@ class CustomerServiceDepartmentsController extends Controller
     {
         return $this->traitAction(
             $order,
-            !$order->status || $order->getOriginal('order_status') == $order::ORDER_STATUS_FD_AUDIT,
+            !$order->status || $order->getOriginal('order_status') >= $order::ORDER_STATUS_FD_AUDIT,
             '拆单出错',
             'splitOrder',
             $splitOrderRequest->validated()['order_items']
         );
     }
+
+    /**
+     * 合并订单
+     *
+     * @PUT("/customerservicedepts/:id/mergerorder")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("order_id_one", type="integer", description="订单一", required=true),
+     *      @Parameter("order_id_two", type="integer", description="订单二", required=true),
+     * })
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "合并订单出错",
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function isMergerOrder(MergerOrderRequest $mergerOrderRequest, Order $order)
+    {
+        return $this->traitAction(
+            $order,
+            false,
+            '合并订单出错',
+            'mergerOrder',
+            $mergerOrderRequest->validated()
+        );
+    }
+
+
+
 
 }

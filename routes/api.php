@@ -675,6 +675,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicedepts.isunaudit');
         $api->put('customerservicedepts/{order}/splitorder', 'CustomerServiceDepartmentsController@isSplitOrder')
             ->name('api.customerservicedepts.issplitorder');
+        $api->put('customerservicedepts/mergerorder', 'CustomerServiceDepartmentsController@isMergerOrder')
+            ->name('api.customerservicedepts.ismergerorder');
 
         //跟单部
         $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
@@ -691,8 +693,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.merchandiserdepts.isunoneaudit');
         $api->put('merchandiserdepts/{order}/cargoaudit', 'MerchandiserDepartmentsController@isCargoAudit')
             ->name('api.merchandiserdepts.iscargoaudit');
-        $api->put('merchandiserdepts/{order}/splitorder', 'MerchandiserDepartmentsController@isSplitOrder')
-            ->name('api.merchandiserdepts.issplitorder');
+        // $api->put('merchandiserdepts/{order}/splitorder', 'MerchandiserDepartmentsController@isSplitOrder')
+        //     ->name('api.merchandiserdepts.issplitorder');
+        // $api->put('merchandiserdepts/mergerorder', 'MerchandiserDepartmentsController@isMergerOrder')
+        //     ->name('api.merchandiserdepts.ismergerorder');
 
         //财务部
         $api->put('financialdepts/{order}/reject', 'FinancialDepartmentsController@isReject')

@@ -12482,6 +12482,26 @@ FORMAT: 1A
 
             []
 
+## 合并订单 [PUT /api/customerservicedepts/:id/mergerorder]
+
+
++ Parameters
+    + order_id_one: (integer, required) - 订单一
+    + order_id_two: (integer, required) - 订单二
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "合并订单出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # merchandiserdepts [/api]
 跟单部资源
 

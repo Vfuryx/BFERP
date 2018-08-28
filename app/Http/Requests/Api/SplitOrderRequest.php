@@ -20,7 +20,6 @@ class SplitOrderRequest extends FormRequest
                         'integer',
                         Rule::exists('payment_details', 'id'),
                         function($attribute, $value, $fail) {
-//                             dd($this->order->orderItems->where('id',(int)$value)->count());
                             if ($this->order->orderItems->where('id',(int)$value)->count()){
                                 return true;
                             }
