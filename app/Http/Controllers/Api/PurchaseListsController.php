@@ -151,7 +151,7 @@ class PurchaseListsController extends Controller
         extract($request->validated());
 
         $product = PurchaseList::query()
-            ->whereHas('combinations', function ($query) use ($commodity_code) {
+            ->whereHas('combination', function ($query) use ($commodity_code) {
                 $query->whereHas('product',function ($query) use ($commodity_code) {
                     $query->when($commodity_code, function ($query) use ($commodity_code) {
                         return $query->where('commodity_code', 'like', '%' . $commodity_code . '%');
