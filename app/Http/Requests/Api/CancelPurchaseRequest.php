@@ -18,6 +18,7 @@ class CancelPurchaseRequest extends FormRequest
             case 'GET':
                 return [
                     'status' => 'boolean',
+                    'is_submit' => 'boolean',
                 ];
                 break;
             case 'POST':

@@ -38,6 +38,7 @@ class CancelPurchasesController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("is_submit", type="boolean", description="是否提交", required=false),
      *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
