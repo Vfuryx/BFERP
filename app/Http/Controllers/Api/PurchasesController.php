@@ -40,7 +40,8 @@ class PurchasesController extends Controller
      * @Get("/purchases[?status=true&include=user,purchaseLists,cancelPurchases]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false,default="all"),
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("is_audit", type="boolean", description="是否审核", required=false),
      *      @Parameter("purchase_status", description="采购状态 状态分别是(new,section,finish)", required=false, default="all"),
      *      @Parameter("include",  description="加载关联的数据", required=false),
      * })

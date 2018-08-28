@@ -7579,6 +7579,7 @@ FORMAT: 1A
 + Parameters
     + status: (boolean, optional) - 获取的状态
         + Default: all
+    + is_audit: (boolean, optional) - 是否审核
     + purchase_status: (string, optional) - 采购状态 状态分别是(new,section,finish)
         + Default: all
     + include: (string, optional) - 加载关联的数据

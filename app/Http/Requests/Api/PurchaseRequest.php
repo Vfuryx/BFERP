@@ -18,6 +18,7 @@ class PurchaseRequest extends FormRequest
             case 'GET':
                 return [
                     'status' => 'boolean',
+                    'is_audit' => 'boolean',
                     'purchase_status' => Rule::in([
                         \App\Models\Purchase::PURCHASE_STATUS_NEW,
                         \App\Models\Purchase::PURCHASE_STATUS_SECTION,
