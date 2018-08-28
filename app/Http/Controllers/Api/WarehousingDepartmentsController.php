@@ -156,11 +156,35 @@ class WarehousingDepartmentsController extends Controller
      */
     public function isStockOut(Order $order)
     {
-        //是否已经货审
-        if(!$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CARGO_AUDIT)
-            throw new UpdateResourceFailedException('仓储发货出错');
+        return $this->traitAction(
+            $order,
+            !$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CARGO_AUDIT,
+            '仓储发货出错',
+            'stockOut'
+        );
+    }
 
-        return $this->traitAction($order, false, '仓储发货出错', 'stockOut');
+    /**
+     * 仓储退回客审
+     *
+     * @PUT("/warehousingdepts/:id/stockouttocs")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "仓储发货出错",
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function isStockOutToCS(Order $order)
+    {
+        return $this->traitAction(
+            $order,
+            !$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CARGO_AUDIT,
+            '仓储退回客审出错',
+            'stockOutToCS'
+        );
     }
 
 }

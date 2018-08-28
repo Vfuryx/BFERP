@@ -713,6 +713,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.warehousingdepts.update');
         $api->put('warehousingdepts/{order}/stockout', 'WarehousingDepartmentsController@isStockOut')
             ->name('api.warehousingdepts.isstockout');
+        $api->put('warehousingdepts/{order}/stockouttocs', 'WarehousingDepartmentsController@isStockOutToCS')
+            ->name('api.warehousingdepts.isstockouttocs');
 
 
 

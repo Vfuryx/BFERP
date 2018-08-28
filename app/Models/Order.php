@@ -304,6 +304,16 @@ class Order extends Model
     }
 
     /**
+     * 仓储退回客审
+     * @return bool
+     */
+    public function stockOutToCS()
+    {
+        $this->order_status = self::ORDER_STATUS_NEW;
+        $this->save();
+    }
+
+    /**
      * 是否缺货
      * @return bool
      */

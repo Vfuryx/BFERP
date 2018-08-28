@@ -13199,6 +13199,22 @@ FORMAT: 1A
 
             []
 
+## 仓储退回客审 [PUT /api/warehousingdepts/:id/stockouttocs]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "仓储发货出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # uploadimages [/api]
 图片上传
 
