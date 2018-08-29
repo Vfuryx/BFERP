@@ -16,6 +16,8 @@ class PurchaseReturnRequest extends FormRequest
             case 'GET':
                 return [
                     'status' => 'boolean',
+                    'is_submit' => 'boolean',
+                    'is_audit' => 'boolean',
                 ];
                 break;
             case 'POST':
@@ -36,6 +38,10 @@ class PurchaseReturnRequest extends FormRequest
     public function messages()
     {
         return [
+            'is_submit.boolean' => '是否提交必须布尔类型',
+
+            'is_audit.boolean' => '是否审核必须布尔类型',
+
             'remark.string' => '备注必须string类型',
             'remark.nullable' => '备注可为null',
             'remark.max' => '备注最大长度为255',
@@ -47,6 +53,8 @@ class PurchaseReturnRequest extends FormRequest
     public function attributes()
     {
         return [
+            'is_submit' => '是否提交',
+            'is_audit' => '是否审核',
             'remark' => '采购退货单备注',
             'status' => '状态：0=停用，1=启用'
         ];
