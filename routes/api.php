@@ -717,8 +717,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.warehousingdepts.isstockouttocs');
 
 
-
-
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')
             ->name('api.uploadimages.store');

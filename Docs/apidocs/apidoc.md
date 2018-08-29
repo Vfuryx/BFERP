@@ -8366,6 +8366,7 @@ FORMAT: 1A
 
 + Parameters
     + commodity_code: (string, optional) - 产品编码
+    + is_audit: (string, optional) - 是否审核
     + include: (string, optional) - 加载关联的数据
 
 + Response 200 (application/json)

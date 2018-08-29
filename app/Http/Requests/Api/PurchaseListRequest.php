@@ -18,6 +18,7 @@ class PurchaseListRequest extends FormRequest
             case 'GET':
                 return [
                     'commodity_code' => 'nullable|string|max:255',
+                    'is_audit' => 'nullable|boolean',
                 ];
                 break;
             case 'POST':

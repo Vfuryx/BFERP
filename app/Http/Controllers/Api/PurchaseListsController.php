@@ -30,6 +30,7 @@ class PurchaseListsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("commodity_code", description="产品编码", required=false),
+     *      @Parameter("is_audit", description="是否审核", required=false),
      *      @Parameter("include",  description="加载关联的数据", required=false),
      * })
      * @Response(200, body={
@@ -146,7 +147,7 @@ class PurchaseListsController extends Controller
      */
     public function index(PurchaseListRequest $request)
     {
-        $commodity_code = '';
+        $commodity_code = $is_audit = '';
 
         extract($request->validated());
 
@@ -156,6 +157,10 @@ class PurchaseListsController extends Controller
                     $query->when($commodity_code, function ($query) use ($commodity_code) {
                         return $query->where('commodity_code', 'like', '%' . $commodity_code . '%');
                     });
+                });
+            })->whereHas('purchase', function($query) use ($is_audit) {
+                $query->when(!is_null($is_audit), function($query) use ($is_audit) {
+                    return $query->where('is_audit', $is_audit);
                 });
             });
 
