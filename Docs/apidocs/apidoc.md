@@ -10051,6 +10051,10 @@ FORMAT: 1A
 + Parameters
     + status: (boolean, optional) - 获取的状态
         + Default: all
+    + is_submit: (boolean, optional) - 是否提交
+        + Default: all
+    + is_audit: (boolean, optional) - 是否审核
+        + Default: all
     + include: (string, optional) - 加载关联的数据
 
 + Response 200 (application/json)
@@ -11816,6 +11820,7 @@ FORMAT: 1A
     + order_items[0][under_line_preferential]: (numeric, optional) - 优惠（线下）
     + order_items[0][under_line_payment]: (numeric, optional) - 实际支付金额（线下）（线下金额 - 优惠）
     + payment_details[0][payment]: (numeric, optional) - 支付金额
+    + payment_details[0][payment_methods_id]: (integer, optional) - 支付方式id
     + payment_details[0][taobao_tid]: (string, optional) - 交易号（获取淘宝的交易编号）
     + payment_details[0][taobao_oid]: (string, optional) - 子订单编号（获取淘宝的订单号）
     + payment_details[0][pay_time]: (datetime, optional) - 付款时间
@@ -11892,6 +11897,7 @@ FORMAT: 1A
                 "order_items[0][under_line_preferential]": 10,
                 "order_items[0][under_line_payment]": 90,
                 "payment_details[0][payment]": 100,
+                "payment_details[0][payment_methods_id]": 1,
                 "payment_details[0][taobao_tid]": "123456",
                 "payment_details[0][taobao_oid]": "123456",
                 "payment_details[0][pay_time]": "2018-8-18",
@@ -12157,6 +12163,7 @@ FORMAT: 1A
     + order_items[0][under_line_payment]: (numeric, optional) - 实际支付金额（线下）（线下金额 - 优惠）
     + payment_details[0][id]: (integer, optional) - 支付明细id
     + payment_details[0][payment]: (numeric, optional) - 支付金额
+    + payment_details[0][payment_methods_id]: (integer, optional) - 支付方式id
     + payment_details[0][taobao_tid]: (string, optional) - 交易号（获取淘宝的交易编号）
     + payment_details[0][taobao_oid]: (string, optional) - 子订单编号（获取淘宝的订单号）
     + payment_details[0][pay_time]: (datetime, optional) - 付款时间
@@ -12235,6 +12242,7 @@ FORMAT: 1A
                 "order_items[0][under_line_payment]": 90,
                 "payment_details[0][id]": 1,
                 "payment_details[0][payment]": 100,
+                "payment_details[0][payment_methods_id]": 1,
                 "payment_details[0][taobao_tid]": "123456",
                 "payment_details[0][taobao_oid]": "123456",
                 "payment_details[0][pay_time]": "2018-8-18",
@@ -13068,6 +13076,139 @@ FORMAT: 1A
             {
                 "message": "退回财审出错",
                 "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# financialdepts [/api]
+支付明细资源
+
+## 新增支付明细 [POST /api/paymentdetails[?include=order,paymentMethod]]
+
+
++ Parameters
+    + orders_id: (integer, required) - 订单id
+    + payment_methods_id: (integer, required) - 支付方式id
+    + payment: (numeric, optional) - 支付金额
+    + taobao_tid: (string, optional) - 交易号
+    + taobao_oid: (string, optional) - 子订单编号
+    + pay_time: (datetime, optional) - 付款时间
+    + remark: (string, required) - 备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "orders_id": 1,
+                "payment_methods_id": 1,
+                "payment": 100,
+                "taobao_tid": "123456",
+                "taobao_oid": "123456",
+                "pay_time": "2018-8-18 00:00:00",
+                "remark": "备注"
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "orders_id": [
+                        "支付明细id必须为int类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "orders_id": 1,
+                "payment_methods_id": 1,
+                "payment": "100.00",
+                "taobao_tid": 123456,
+                "taobao_oid": 123456,
+                "pay_time": "2018-08-18",
+                "remark": "备注",
+                "created_at": "2018-08-29 17:19:21",
+                "updated_at": "2018-08-29 17:19:21",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 更新支付明细 [PATCH /api/paymentdetails[?include=order,paymentMethod]]
+
+
++ Parameters
+    + orders_id: (integer, required) - 订单id
+    + payment_methods_id: (integer, required) - 支付方式id
+    + payment: (numeric, required) - 支付金额
+    + taobao_tid: (string, required) - 交易号
+    + taobao_oid: (string, required) - 子订单编号
+    + pay_time: (datetime, required) - 付款时间
+    + remark: (string, required) - 备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "orders_id": 1,
+                "payment_methods_id": 1,
+                "payment": 100,
+                "taobao_tid": "123456",
+                "taobao_oid": "123456",
+                "pay_time": "2018-8-18 00:00:00",
+                "remark": "备注"
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "orders_id": [
+                        "支付明细id必须为int类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "orders_id": 1,
+                "payment_methods_id": 1,
+                "payment": "100.00",
+                "taobao_tid": 123456,
+                "taobao_oid": 123456,
+                "pay_time": "2018-08-18",
+                "remark": "备注",
+                "created_at": "2018-08-29 17:19:21",
+                "updated_at": "2018-08-29 17:19:21",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 删除支付明细 [DELETE /api/paymentdetails/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
             }
 
 + Response 204 (application/json)

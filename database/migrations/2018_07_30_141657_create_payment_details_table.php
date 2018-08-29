@@ -16,6 +16,7 @@ class CreatePaymentDetailsTable extends Migration
         Schema::create('payment_details', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('orders_id')->comment('订单id');
+            $table->unsignedInteger('payment_methods_id')->comment('支付方式');
             $table->decimal('payment',10,2)->default(0.00)->comment('支付金额');
             $table->unsignedBigInteger('taobao_tid')->default(0)->comment('交易号（获取淘宝的交易编号）');
             $table->unsignedBigInteger('taobao_oid')->default(0)->comment('子订单编号（获取淘宝的子订订单号）');

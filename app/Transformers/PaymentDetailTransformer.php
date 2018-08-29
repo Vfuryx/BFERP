@@ -8,12 +8,12 @@ use League\Fractal\TransformerAbstract;
 class PaymentDetailTransformer extends TransformerAbstract
 {
 
-
     public function transform(PaymentDetail $paymentDetail)
     {
         return [
             'id' => $paymentDetail->id,
             'orders_id' => $paymentDetail->orders_id,
+            'payment_methods_id' => $paymentDetail->payment_methods_id,
             'payment' => $paymentDetail->payment,
             'taobao_tid' => $paymentDetail->taobao_tid,
             'taobao_oid' => $paymentDetail->taobao_oid,

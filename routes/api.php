@@ -706,6 +706,14 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('financialdepts/{order}/unfinancialaudit', 'FinancialDepartmentsController@isUnFinancialAudit')
             ->name('api.financialdepts.isunfinancialaudit');
 
+        //支付明细
+        $api->post('paymentdetails', 'PaymentDetailsController@store')
+            ->name('api.paymentdetails.store');
+        $api->patch('paymentdetails/{paymentdetail}', 'PaymentDetailsController@update')
+            ->name('api.paymentdetails.update');
+        $api->delete('paymentdetails/{paymentdetail}', 'PaymentDetailsController@destroy')
+            ->name('api.paymentdetails.destroy');
+
         //仓储部
         $api->get('warehousingdepts/{order}', 'WarehousingDepartmentsController@show')
             ->name('api.warehousingdepts.show');

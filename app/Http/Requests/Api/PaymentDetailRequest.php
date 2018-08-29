@@ -16,6 +16,12 @@ class PaymentDetailRequest extends FormRequest
         switch ($this->method()) {
             case 'POST':
                 return [
+                    'payment_details.*.payment_methods_id' => [
+                        'integer',
+                        Rule::exists('payment_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
+                    ],
                     'payment_details.*.payment' => 'numeric',
                     'payment_details.*.taobao_tid' => 'string|max:255',
                     'payment_details.*.taobao_oid' => 'string|max:255',
@@ -28,6 +34,12 @@ class PaymentDetailRequest extends FormRequest
                     'payment_details.*.id' => [
                         'integer',
                         Rule::exists('payment_details', 'id')
+                    ],
+                    'payment_details.*.payment_methods_id' => [
+                        'integer',
+                        Rule::exists('payment_methods', 'id')->where(function ($query) {
+                            $query->where('status', 1);
+                        }),
                     ],
                     'payment_details.*.payment' => 'numeric',
                     'payment_details.*.taobao_tid' => 'string|max:255',
@@ -42,6 +54,12 @@ class PaymentDetailRequest extends FormRequest
     public function messages()
     {
         return [
+            'payment_details.*.id.integer' => '支付明细id必须为int类型',
+            'payment_details.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
+
+            'payment_details.*.payment_methods_id.integer' => '支付方式id必须为int类型',
+            'payment_details.*.payment_methods_id.exists' => '需要添加的id在数据库中未找到或未启用',
+
             'payment_details.*.payment.integer' => '支付明细id必须int类型',
             'payment_details.*.payment.exists' => '需要添加的id在数据库中未找到或未启用',
 
@@ -65,6 +83,7 @@ class PaymentDetailRequest extends FormRequest
     public function attributes()
     {
         return [
+            'payment_methods_id' => '支付方式id',
             'payment' => '支付金额',
             'taobao_tid' => '交易号（获取淘宝的交易编号）',
             'taobao_oid' => '子订单编号（获取淘宝的订单号）',

@@ -40,7 +40,7 @@ class CustomerServiceDepartmentsController extends Controller
      * @Get("/customerservicedepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
      * })
      * @Response(200, body={
      *       "data": {
@@ -211,6 +211,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      @Parameter("order_items[0][under_line_preferential]", type="numeric", description="优惠（线下）", required=false),
      *      @Parameter("order_items[0][under_line_payment]", type="numeric", description="实际支付金额（线下）（线下金额 - 优惠）", required=false),
      *      @Parameter("payment_details[0][payment]", type="numeric", description="支付金额", required=false),
+     *      @Parameter("payment_details[0][payment_methods_id]", type="integer", description="支付方式id", required=false),
      *      @Parameter("payment_details[0][taobao_tid]", description="交易号（获取淘宝的交易编号）", required=false),
      *      @Parameter("payment_details[0][taobao_oid]", description="子订单编号（获取淘宝的订单号）", required=false),
      *      @Parameter("payment_details[0][pay_time]", type="datetime", description="付款时间", required=false),
@@ -284,6 +285,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      "order_items[0][under_line_preferential]":10,
      *      "order_items[0][under_line_payment]":90,
      *      "payment_details[0][payment]":100,
+     *      "payment_details[0][payment_methods_id]":1,
      *      "payment_details[0][taobao_tid]":"123456",
      *      "payment_details[0][taobao_oid]":"123456",
      *      "payment_details[0][pay_time]":"2018-8-18",
@@ -586,6 +588,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      @Parameter("order_items[0][under_line_payment]", type="numeric", description="实际支付金额（线下）（线下金额 - 优惠）", required=false),
      *      @Parameter("payment_details[0][id]", type="integer", description="支付明细id", required=false),
      *      @Parameter("payment_details[0][payment]", type="numeric", description="支付金额", required=false),
+     *      @Parameter("payment_details[0][payment_methods_id]", type="integer", description="支付方式id", required=false),
      *      @Parameter("payment_details[0][taobao_tid]", description="交易号（获取淘宝的交易编号）", required=false),
      *      @Parameter("payment_details[0][taobao_oid]", description="子订单编号（获取淘宝的订单号）", required=false),
      *      @Parameter("payment_details[0][pay_time]", type="datetime", description="付款时间", required=false),
@@ -661,6 +664,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      "order_items[0][under_line_payment]":90,
      *      "payment_details[0][id]":1,
      *      "payment_details[0][payment]":100,
+     *      "payment_details[0][payment_methods_id]":1,
      *      "payment_details[0][taobao_tid]":"123456",
      *      "payment_details[0][taobao_oid]":"123456",
      *      "payment_details[0][pay_time]":"2018-8-18",

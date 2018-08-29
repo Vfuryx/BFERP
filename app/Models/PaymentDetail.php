@@ -7,8 +7,8 @@ class PaymentDetail extends Model
     protected $table = 'payment_details';
 
     protected $fillable = [
-        'payment', 'taobao_tid', 'taobao_oid', 'pay_time',
-        'remark',
+        'payment_methods_id', 'orders_id', 'payment', 'taobao_tid', 'taobao_oid',
+        'pay_time', 'remark',
     ];
 
 
@@ -16,8 +16,13 @@ class PaymentDetail extends Model
         'pay_time'
     ];
 
-
-    public function orders(){
-        return $this->hasMany(Order::class,'payment_methods_id');
+    public function order(){
+        return $this->belongsTo(Order::class,'orders_id');
     }
+
+    public function paymentMethod(){
+        return $this->belongsTo(PaymentMethod::class,'payment_methods_id');
+    }
+
+
 }
