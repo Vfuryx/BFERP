@@ -1,20 +1,24 @@
 webpackJsonp([53],{
 
-/***/ 499:
+/***/ 449:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(511)
+}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(632)
+var __vue_script__ = __webpack_require__(513)
 /* template */
-var __vue_template__ = __webpack_require__(633)
+var __vue_template__ = __webpack_require__(514)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-37b409a6"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -25,7 +29,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\index.vue"
+Component.options.__file = "resources\\assets\\js\\views\\dashboard\\index.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +38,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7e6399ea", Component.options)
+    hotAPI.createRecord("data-v-37b409a6", Component.options)
   } else {
-    hotAPI.reload("data-v-7e6399ea", Component.options)
+    hotAPI.reload("data-v-37b409a6", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +52,56 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 632:
+/***/ 511:
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(512);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(6)("5dfc1aa3", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37b409a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
+     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37b409a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ 512:
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.dashboard-container[data-v-37b409a6] {\n  margin: 30px;\n}\n.dashboard-text[data-v-37b409a6] {\n  font-size: 30px;\n  line-height: 46px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ 513:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(15);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -84,737 +133,208 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'dashboard',
   data: function data() {
     return {
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }],
-      data: [{}, { color: '1', length: '100', is_comb: 1 }, { color: '2', length: '200', is_comb: 1 }, { color: '3', length: '40', is_comb: 0 }, { color: '4', length: '40', is_comb: 0 }],
-      tableHead: [{
-        label: '组合',
-        prop: 'is_comb',
-        type: 'checkbox'
-      }, {
-        label: '颜色',
-        prop: 'color'
-      }, {
-        label: '长度',
-        prop: 'length'
-      }],
-      chg: false,
-      doSelect: false,
-      tt: '0'
-
+      newOpt: [],
+      title: '新增',
+      formDialog: {
+        title: '测试',
+        dialogFormVisible: false,
+        form: [{
+          label: '名称',
+          type: 'text',
+          formLabelWidth: '120px',
+          name: 'hh'
+        }, {
+          label: '代码',
+          type: 'text',
+          formLabelWidth: '120px',
+          name: 'vv'
+        }, {
+          label: '状态',
+          type: 'select',
+          formLabelWidth: '120px',
+          ps: {
+            s: '1'
+          },
+          status: [{
+            label: '是',
+            value: 1
+          }, {
+            label: '否',
+            value: 0
+          }]
+        }]
+      }
     };
   },
 
-  methods: {
-    rowName: function rowName(_ref) {
-      var row = _ref.row,
-          rowIndex = _ref.rowIndex;
-      row.index = rowIndex;
-    },
-    rowClick: function rowClick(row) {
-      // console.log(row);
-      if (row.is_comb == 1) {
-        row.index;
-      }
-      /*点击新一行时重置*/
-      // this.chg = false;
-      if (this.chg) {
-        // alert(1);
-        Object.assign(this.$data.data[row.index], row);
-      }
-    },
-    valChg: function valChg(val) {
-      // console.log(index);
-      // console.log(val);
-      // this.chg = true;
-      console.log(val);
-    },
-    selectComb: function selectComb() {
-      var _this = this;
-
-      /*如果是确定*/
-      if (this.doSelect) {
-        this.data.map(function (item, index) {
-          if (item.is_comb == 0) {
-            _this.data.splice(index, 1);
-          }
-        });
-      } else {
-        Object.assign(this.$data.data, this.$options.data().data);
-      }
-    },
-    curChg: function curChg(currentRow, oldCurrentRow) {
-      console.log(currentRow);
-      console.log(oldCurrentRow);
-    },
-    updateCount: function updateCount() {}
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['name', 'roles']), {
+    getKey: function getKey() {
+      var arr = this.formDialog.form.ps;
+    }
+  }),
+  components: {
+    // addM
   },
-  mounted: function mounted() {}
+  methods: {
+    toggle: function toggle() {
+      this.formDialog.dialogFormVisible = !this.formDialog.dialogFormVisible;
+    },
+    confirmAdd: function confirmAdd() {
+      console.log(1);
+    },
+    cancelAdd: function cancelAdd() {
+      console.log(2);
+    }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+  }
 });
 
 /***/ }),
 
-/***/ 633:
+/***/ 514:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("el-checkbox", {
-        attrs: { checked: _vm.tt == 1 ? true : false, disabled: "" }
-      }),
-      _vm._v(" "),
-      _c(
-        "el-table",
-        {
-          attrs: { data: _vm.data, "row-class-name": _vm.rowName },
-          on: { "row-click": _vm.rowClick, "current-change": _vm.curChg }
-        },
-        _vm._l(_vm.tableHead, function(item, index) {
-          return _c("el-table-column", {
-            key: index,
-            attrs: { label: item.label, align: "center", width: item.width },
-            scopedSlots: _vm._u([
-              {
-                key: "default",
-                fn: function(scope) {
-                  return [
-                    item.type == "checkbox"
-                      ? _c("span", [
-                          scope.$index == 0
-                            ? _c(
-                                "span",
-                                [
-                                  _c("el-checkbox", {
-                                    on: { change: _vm.selectComb },
-                                    model: {
-                                      value: _vm.doSelect,
-                                      callback: function($$v) {
-                                        _vm.doSelect = $$v
-                                      },
-                                      expression: "doSelect"
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            : _c("span", [
-                                scope.row.is_comb == 1
-                                  ? _c(
-                                      "span",
-                                      [
-                                        _c(
-                                          "el-checkbox",
-                                          {
-                                            attrs: {
-                                              checked: true,
-                                              disabled: ""
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(scope.row.is_comb))]
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  : _c(
-                                      "span",
-                                      [
-                                        _c(
-                                          "el-checkbox",
-                                          {
-                                            attrs: {
-                                              checked: false,
-                                              disabled: ""
-                                            }
-                                          },
-                                          [_vm._v(_vm._s(scope.row.is_comb))]
-                                        )
-                                      ],
-                                      1
-                                    )
-                              ])
-                        ])
-                      : _c(
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "dashboard-container" },
+      [
+        _c("p", { staticClass: "dashboard-text" }, [
+          _vm._v("name:" + _vm._s(_vm.name))
+        ]),
+        _vm._v(" "),
+        _c(
+          "p",
+          { staticClass: "dashboard-text" },
+          [
+            _vm._v("roles:\n            "),
+            _vm._l(_vm.roles, function(role) {
+              return _c("span", { key: role }, [_vm._v(_vm._s(role))])
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("el-button", { on: { click: _vm.toggle } }, [_vm._v("默认按钮")]),
+        _vm._v(" "),
+        _c(
+          "el-dialog",
+          {
+            attrs: {
+              title: _vm.formDialog.title,
+              visible: _vm.formDialog.dialogFormVisible
+            },
+            on: {
+              "update:visible": function($event) {
+                _vm.$set(_vm.formDialog, "dialogFormVisible", $event)
+              }
+            }
+          },
+          [
+            _c(
+              "el-form",
+              _vm._l(_vm.formDialog.form, function(item, index) {
+                return _c(
+                  "el-form-item",
+                  {
+                    key: item.key,
+                    attrs: {
+                      label: item.label,
+                      "label-width": item.formLabelWidth
+                    }
+                  },
+                  [
+                    item.type == "text"
+                      ? _c(
                           "span",
                           [
                             _c("el-input", {
-                              attrs: {
-                                size: "small",
-                                placeholder: item.holder
-                              },
-                              on: { change: _vm.valChg },
+                              attrs: { "auto-complete": "off" },
                               model: {
-                                value: scope.row[item.prop],
+                                value: _vm.name,
                                 callback: function($$v) {
-                                  _vm.$set(scope.row, item.prop, $$v)
+                                  _vm.name = $$v
                                 },
-                                expression: "scope.row[item.prop]"
+                                expression: "name"
                               }
                             })
                           ],
                           1
                         )
+                      : item.type == "select"
+                        ? _c(
+                            "span",
+                            [
+                              _c(
+                                "el-select",
+                                {
+                                  model: {
+                                    value: item.ps,
+                                    callback: function($$v) {
+                                      _vm.$set(item, "ps", $$v)
+                                    },
+                                    expression: "item.ps"
+                                  }
+                                },
+                                _vm._l(item.status, function(list) {
+                                  return _c("el-option", {
+                                    key: list.key,
+                                    attrs: {
+                                      label: list.label,
+                                      value: list.value
+                                    }
+                                  })
+                                })
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e()
                   ]
-                }
-              }
-            ])
-          })
-        })
-      )
-    ],
-    1
-  )
+                )
+              })
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "dialog-footer",
+                attrs: { slot: "footer" },
+                slot: "footer"
+              },
+              [
+                _c("el-button", { on: { click: _vm.cancelAdd } }, [
+                  _vm._v("取 消")
+                ]),
+                _vm._v(" "),
+                _c(
+                  "el-button",
+                  { attrs: { type: "primary" }, on: { click: _vm.confirmAdd } },
+                  [_vm._v("确 定")]
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -822,7 +342,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-7e6399ea", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-37b409a6", module.exports)
   }
 }
 

@@ -1,14 +1,14 @@
 webpackJsonp([88],{
 
-/***/ 485:
+/***/ 464:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(602)
+var __vue_script__ = __webpack_require__(552)
 /* template */
-var __vue_template__ = __webpack_require__(603)
+var __vue_template__ = __webpack_require__(553)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\freightType.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\departmentMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-298d19fe", Component.options)
+    hotAPI.createRecord("data-v-1e12d185", Component.options)
   } else {
-    hotAPI.reload("data-v-298d19fe", Component.options)
+    hotAPI.reload("data-v-1e12d185", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,137 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 602:
+/***/ 552:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -220,20 +94,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }],
       getsInfo: [],
       tableHead: [{
-        label: '名称',
-        width: '250',
+        label: '部门代码',
+        width: '',
+        prop: "dept_no",
+        holder: '请输入部门代码',
+        type: 'text',
+        beAble: true
+      }, {
+        label: '部门名称',
+        width: '',
         prop: "name",
-        holder: '输入名称',
+        holder: '请输入部门名称',
         type: 'text'
       }, {
-        label: '默认',
-        width: '250',
-        prop: "is_default",
-        holder: '默认值',
+        label: '所属部门',
+        width: '',
+        prop: "p_dept",
+        holder: '请输入所属部门',
+        type: 'text'
+      }, {
+        label: '是否验证',
+        width: '',
+        prop: "is_verify",
+        holder: '请选择是否验证',
         type: 'select_def'
       }, {
+        label: '备注',
+        width: '',
+        prop: "remark",
+        holder: '请输入备注',
+        type: 'textarea'
+      }, {
         label: '状态',
-        width: '250',
+        width: '',
         prop: "status",
         holder: '状态',
         type: 'select_stu',
@@ -241,34 +134,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }],
       loading: true,
       currentIndex: '',
-      url: '/freighttypes',
+      url: '/departments',
       showMaskArr: false,
-      title: '新增运费类型',
+      title: '新增部门',
       ruleForm: {
+        dept_no: '',
         name: '',
-        is_default: '0',
+        p_dept: '',
+        is_verify: '0',
+        remark: '',
         status: '1'
       },
       rules: {
-        name: [{ required: true, message: '请输入运费类型', trigger: 'blur' }]
+        dept_no: [{ required: true, message: '请输入部门代码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入部门名称', trigger: 'blur' }],
+        p_dept: [{ required: true, message: '请输入所属部门', trigger: 'blur' }]
       },
       addArr: [{
-        label: '运费类型',
-        prop: 'name',
+        label: '部门代码',
+        prop: 'dept_no',
         holder: '请输入运费类型',
         type: 'text'
       }, {
-        label: '是否默认',
-        prop: 'is_default',
-        holder: '请选择是或否',
+        label: '部门名称',
+        prop: 'name',
+        holder: '请输入部门名称',
+        type: 'text'
+      }, {
+        label: '所属部门',
+        prop: 'p_dept',
+        holder: '请输入所属部门',
+        type: 'text'
+      }, {
+        label: '是否验证',
+        prop: 'is_verify',
+        holder: '请选择是否验证',
         type: 'select_def'
+      }, {
+        label: '备注',
+        prop: 'remark',
+        holder: '请输入备注',
+        type: 'textarea'
       }, {
         label: '状态',
         prop: 'status',
         holder: '请选择状态',
         type: 'select_stu'
       }],
-      refArr: 'ruleForm',
+      refArr: 'ruleDepart',
       showDel: false,
       delId: '',
       inputChange: false,
@@ -278,13 +191,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         current_page: 1,
         per_page: 0,
         page_total: 0
-      },
-      doChange: true
+      }
     };
   },
 
   methods: {
-    test: function test() {},
+    test: function test() {
+      console.log(1);
+    },
     addNew: function addNew() {
       this.ruleForm.name = '';
       this.showMaskArr = true;
@@ -505,7 +419,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 603:
+/***/ 553:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -520,8 +434,7 @@ var render = function() {
           listData: _vm.getsInfo,
           tableHead: _vm.tableHead,
           loading: _vm.loading,
-          currentIndex: _vm.currentIndex,
-          doChange: _vm.doChange
+          currentIndex: _vm.currentIndex
         },
         on: {
           handleSelect: _vm.handleSelectionChange,
@@ -604,7 +517,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-298d19fe", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-1e12d185", module.exports)
   }
 }
 

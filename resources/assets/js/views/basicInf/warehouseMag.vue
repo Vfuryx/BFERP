@@ -1,12 +1,12 @@
 <template>
     <div>
-        <light-table @handleSelect="handleSelectionChange" :listData="getsInfo" :tableHead="tableHead"
-                     @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading" @edit="edit"
-                     :currentIndex="currentIndex" @editCancel="editCancel" :doChange="doChange" :height="400"></light-table>
+        <light-table @handleSelect="handleSelectionChange" :listData="getsInfo" :tableHead="tableHead" @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading" @edit="edit" :currentIndex="currentIndex" @editCancel="editCancel" :height="400"></light-table>
+
         <!--新增-->
         <add-new :visible-add="showMaskArr" :title="title"
                  :rule-form="ruleForm" :rules="rules" :add-arr="addArr"
-                 :url="url" @submitEvent="submitForm" :new-ref="refArr" @CB-dialog="CB_dialog" @handleArea="handleArea"></add-new>
+                 :url="urls.warehouses" @submitEvent="submitForm" :new-ref="refArr" @CB-dialog="CB_dialog" @handleArea="handleArea"></add-new>
+
         <!--删除-->
         <el-popover
                 placement="top"
@@ -18,8 +18,9 @@
                 <el-button type="primary" size="mini" @click="confirmD(delId)">确定</el-button>
             </div>
         </el-popover>
+
         <!--页码-->
-        <Pagination :page-url="url"></Pagination>
+        <Pagination :page-url="urls.warehouses"></Pagination>
     </div>
 </template>
 <script>
@@ -64,21 +65,18 @@
               label: '是否默认仓库',
               width: '160',
               prop: "is_default",
-              holder: '描述',
-              type: 'select_def'
+              type: 'checkbox'
             },
             {
               label: '是否可用',
               width: '160',
               prop: "status",
-              holder: '状态',
-              type: 'select_stu',
+              type: 'checkbox',
               doSort: true
             }
         ],
         loading: true,
         currentIndex: '',
-        url: '/warehouses',
         showMaskArr: false,
         title: '新建仓库',
         getsInfo: [],
@@ -88,8 +86,8 @@
           city: '',
           district: '',
           address: '',
-          is_default: '0',
-          status: '1'
+          is_default: false,
+          status: true
         },
         rules: {
           name: [
@@ -122,13 +120,12 @@
             label: '是否默认',
             prop: 'is_default',
             holder: '请选择是否默认',
-            type: 'select_def'
+            type: 'checkbox'
           },
           {
             label: '是否可用',
             prop: 'status',
-            holder: '请选择是否可用',
-            type: 'select_stu'
+            type: 'checkbox'
           }
         ],
         refArr: 'ruleWare',
@@ -143,7 +140,14 @@
           page_total: 0
         },
         areaArr: [],
-        doChange: true
+      }
+    },
+    computed:{
+      urls:{
+        get:function(){
+          return this.$store.state.urls
+        },
+        set:function(){}
       }
     },
     methods: {
@@ -164,7 +168,7 @@
           is_default: this.ruleForm.is_default,
           status: this.ruleForm.status
         };
-        this.$post(this.url,obj)
+        this.$post(this.urls.warehouses,obj)
           .then(() => {
             this.$message({
               message: '添加成功',
@@ -207,7 +211,7 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.$del(this.url, {ids: this.delArr})
+            this.$del(this.urls.warehouses, {ids: this.delArr})
               .then(() => {
                 this.$message({
                   message: '删除成功',
@@ -254,7 +258,7 @@
           status: row.status
         };
         if (this.inputChange) {
-          this.$patch(this.url + '/' + row.id, obj)
+          this.$patch(this.urls.warehouses + '/' + row.id, obj)
             .then(() => {
               this.$message({
                 message: '修改成功',
@@ -286,9 +290,9 @@
       handleEdit() {
         this.inputChange = true;
       },
-      getInfo(url) {
+      getInfo() {
         this.showPage = true;
-        this.$fetch(url)
+        this.$fetch(this.urls.warehouses)
           .then(res => {
             this.getsInfo = res.data;
             this.$store.dispatch('setFreights', res.data);
@@ -324,7 +328,7 @@
         });
       },
       confirmD(id) {
-        this.$del(this.url + '/' + id)
+        this.$del(this.urls.warehouses + '/' + id)
           .then(() => {
             this.$message({
               message: '删除成功',
@@ -349,7 +353,7 @@
       },
       refresh() {
         this.loading = true;
-        this.getInfo(this.url);
+        this.getInfo();
         setTimeout(() => {
           this.loading = false;
         }, 2000);
@@ -360,7 +364,7 @@
       }
     },
     mounted() {
-      this.getInfo(this.url);
+      this.getInfo();
       this.$store.dispatch('setTabs', false);
       this.$store.dispatch('setOpt', this.newOpt);
       let that = this;

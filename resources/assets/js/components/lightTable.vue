@@ -147,10 +147,9 @@
                             width="95" align="center"
                             :checked="checkboxInit" @change="toggleChecked">
                     </el-table-column>
-
                     <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
                         <template slot-scope="scope">
-                    <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
+                            <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
                         <span v-if="item.type=='color'">
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
                             </span>
@@ -207,11 +206,6 @@
                             </span>
                      </span>
                             <span v-else>
-                        <!-- <span v-if="scope.$index==0 && scope.row.judge">
-                            <span v-if="item.type=='checkbox'">
-                               <el-checkbox v-model="scope.row[item.prop]"></el-checkbox>
-                            </span>
-                        </span>-->
                          <span v-if="item.type=='color'">
                              <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
                      {{scope.row[item.prop]}}
@@ -289,29 +283,20 @@
                     </el-table-column>
                     <el-table-column label="操作" width="nEditInRow?90:160" align="center" fixed="right">
                         <template slot-scope="scope">
-                        <span v-if="currentIndex=='index'+scope.$index">
-                            <el-button size="mini" @click="editSave(scope.row)">保存</el-button>
-                            <el-button size="mini" @click="editCancel">取消
-                            </el-button>
-                        </span>
-                            <span v-else>
-                        <!--<span v-if="doChange || editInRow">
-                             <el-button size="mini" @click="edit(scope.$index)">编辑</el-button>
-                        </span>
-                        <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除
-                    </el-button>-->
-                            <span v-if="doChange || editInRow || nEditInRow">
-                             <!--<el-button size="mini" @click="edit(scope.$index)">编辑</el-button>-->
-                                 <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
-                        </span>
-                            <span v-else>
-                                 <el-button size="mini" @click="edit(scope.$index,scope.row)">编辑</el-button>
-                                <!--</span>-->
-                                 <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
+                            <span v-if="currentIndex=='index'+scope.$index">
+                                <el-button size="mini" @click="editSave(scope.row)">保存</el-button>
+                                <el-button size="mini" @click="editCancel">取消
+                                </el-button>
                             </span>
-                                <!--<el-button size="mini" type="danger" @click="del(scope.row,$event)">删除
-                            </el-button>-->
-                        </span>
+                            <span v-else>
+                                <span v-if="doChange || editInRow || nEditInRow">
+                                    <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
+                                </span>
+                                <span v-else>
+                                    <el-button size="mini" @click="edit(scope.$index,scope.row)">编辑</el-button>
+                                    <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
+                                </span>
+                            </span>
                         </template>
                     </el-table-column>
                 </el-table>

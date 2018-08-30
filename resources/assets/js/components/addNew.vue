@@ -1,7 +1,7 @@
 <template>
     <div class="addNew">
         <div v-if="onlyInputs">
-            <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="100px" :class="{'half-form':halfForm}">
+            <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="120px" :class="{'half-form':halfForm}">
                 <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
                     <span v-if="item.type=='text'">
                         <span v-if="item.inProp">
@@ -67,7 +67,7 @@
         </div>
         <div v-else>
             <el-dialog :title="title" :visible.sync="showAdd" @close="close" :class="{'more-forms':moreForms}">
-                <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="100px" :class="{'half-form':halfForm}">
+                <el-form :model="ruleForm" :rules="rules" :ref="newRef" label-width="120px" :class="{'half-form':halfForm}">
                     <el-form-item v-for="(item,index) in addArr" :key="index" :label="item.label" :prop="item.prop">
                     <span v-if="item.type=='text'">
                          <span v-if="item.inProp">

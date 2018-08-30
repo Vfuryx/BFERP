@@ -444,6 +444,12 @@ const constantRouterMap = [
         meta: {title: '仓库管理', icon: 'store',requireAuth: true}
       },
       {
+        path: 'purchaseReturnTypes',
+        name: 'PurchaseReturnTypes',
+        component: resolve => void(require(['../views/basicInf/purchaseReturnTypes.vue'], resolve)),
+        meta: {title: '采购退货管理', icon: 'purReturn',requireAuth: true}
+      },
+      {
         path: 'shopMag',
         name: 'Shop',
         component: resolve => void(require(['../views/basicInf/shopMag.vue'], resolve)),

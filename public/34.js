@@ -403,7 +403,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this = this;
 
       this.$fetch(this.urls.feetypes, { include: 'feeCategory' }).then(function (res) {
-        console.log(res.data);
         _this.expenseType = res.data;
         _this.loading = false;
         var pg = res.meta.pagination;

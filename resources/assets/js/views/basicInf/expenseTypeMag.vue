@@ -366,7 +366,6 @@
       getExpenseType(){
         this.$fetch(this.urls.feetypes,{include:'feeCategory'})
           .then(res=>{
-            console.log(res.data);
             this.expenseType = res.data;
             this.loading = false;
             let pg = res.meta.pagination;
