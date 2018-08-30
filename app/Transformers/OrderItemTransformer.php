@@ -37,16 +37,16 @@ class OrderItemTransformer extends TransformerAbstract
 
     public function includeOrder(OrderItem $orderItem)
     {
-        return $this->item($orderItem->order(), new ShopTransformer());
+        return $this->item($orderItem->order, new ShopTransformer());
     }
 
     public function includeProduct(OrderItem $orderItem)
     {
-        return $this->item($orderItem->product(), new ProductTransformer());
+        return $this->item($orderItem->product, new ProductTransformer());
     }
 
     public function includeCombination(OrderItem $orderItem)
     {
-        return $this->item($orderItem->combination(), new CombinationTransformer());
+        return $this->item($orderItem->combination, new CombinationTransformer());
     }
 }

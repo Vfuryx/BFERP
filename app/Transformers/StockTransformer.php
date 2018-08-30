@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class StockTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
-        'warehouse','product','productComponent'
+        'warehouse', 'product', 'productComponent'
     ];
 
     public function transform(Stock $stock)

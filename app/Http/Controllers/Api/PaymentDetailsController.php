@@ -71,7 +71,11 @@ class PaymentDetailsController extends Controller
      */
     public function store(FDPaymentDetailRequest $FDPaymentDetailRequest)
     {
-        return $this->traitStore($FDPaymentDetailRequest->validated(), self::MODEL, self::TRANSFORMER);
+        return $this->traitStore(
+            $FDPaymentDetailRequest->validated(),
+            self::MODEL,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -125,7 +129,11 @@ class PaymentDetailsController extends Controller
      */
     public function update(FDPaymentDetailRequest $FDPaymentDetailRequest, PaymentDetail $paymentdetail)
     {
-        return $this->traitUpdate($FDPaymentDetailRequest, $paymentdetail, self::TRANSFORMER);
+        return $this->traitUpdate(
+            $FDPaymentDetailRequest,
+            $paymentdetail,
+            self::TRANSFORMER
+        );
     }
 
     /**

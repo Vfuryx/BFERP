@@ -24,5 +24,4 @@ class PaymentDetail extends Model
         return $this->belongsTo(PaymentMethod::class,'payment_methods_id');
     }
 
-
 }

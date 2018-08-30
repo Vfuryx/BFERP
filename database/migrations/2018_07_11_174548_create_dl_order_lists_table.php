@@ -33,7 +33,7 @@ class CreateDlOrderListsTable extends Migration
             $table->decimal('price',10,2)->comment('商品价格。精确到2位小数;单位:元。如:200.07，表示:200元7分');
             $table->string('item_meal_name')->comment('套餐的值。如：M8原装电池:便携支架:M8专用座充:莫凡保护袋');
             $table->string('pic_path')->comment('商品图片的绝对路径');
-            $table->string('seller_nick')->comment('商品图片的绝对路径');
+            $table->string('seller_nick')->comment('卖家昵称');
             $table->string('buyer_nick')->comment('买家昵称');
             $table->string('shipper')->comment('仓储信息');
             $table->string('status')->comment('订单状态（请关注此状态，如果为TRADE_CLOSED_BY_TAOBAO状态，则不要对此订单进行发货，切记啊！）。可选值:TRADE_NO_CREATE_PAY(没有创建支付宝交易)WAIT_BUYER_PAY(等待买家付款)WAIT_SELLER_SEND_GOODS(等待卖家发货,即:买家已付款)WAIT_BUYER_CONFIRM_GOODS(等待买家确认收货,即:卖家已发货)TRADE_BUYER_SIGNED(买家已签收,货到付款专用)TRADE_FINISHED(交易成功)TRADE_CLOSED(付款以后用户退款成功，交易自动关闭)TRADE_CLOSED_BY_TAOBAO(付款以前，卖家或买家主动关闭交易)PAY_PENDING(国际信用卡支付付款确认中)');

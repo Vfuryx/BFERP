@@ -724,6 +724,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('warehousingdepts/{order}/stockouttocs', 'WarehousingDepartmentsController@isStockOutToCS')
             ->name('api.warehousingdepts.isstockouttocs');
 
+        //退款原因
+        $api->get('returnreasons', 'ReturnReasonsController@index')
+            ->name('api.returnreasons.index');
+        $api->get('returnreasons/{returnreason}', 'ReturnReasonsController@show')
+            ->name('api.returnreasons.show');
+        $api->post('returnreasons', 'ReturnReasonsController@store')
+            ->name('api.returnreasons.store');
+        $api->patch('returnreasons/{returnreason}', 'ReturnReasonsController@update')
+            ->name('api.returnreasons.update');
+        $api->delete('returnreasons/{returnreason}', 'ReturnReasonsController@destroy')
+            ->name('api.returnreasons.destroy');
+        $api->delete('returnreasons', 'ReturnReasonsController@destroybyids')
+            ->name('api.returnreasons.destroybyids');
+        $api->put('returnreasons/editstatus', 'ReturnReasonsController@editStatusByIds')
+            ->name('api.returnreasons.editstatusbyids');
+
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

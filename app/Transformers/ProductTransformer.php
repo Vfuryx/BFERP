@@ -3,7 +3,6 @@
 namespace App\Transformers;
 
 use App\Models\Product;
-use App\Models\Shop;
 use League\Fractal\TransformerAbstract;
 
 class ProductTransformer extends TransformerAbstract
@@ -57,6 +56,7 @@ class ProductTransformer extends TransformerAbstract
     {
         return $this->item($product->goodsCategory, new GoodsCategoryTransformer());
     }
+
     public function includeCombinations(Product $product)
     {
         return $this->collection($product->combinations, new CombinationTransformer());

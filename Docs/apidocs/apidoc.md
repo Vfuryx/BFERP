@@ -13357,6 +13357,229 @@ FORMAT: 1A
 
             []
 
+# returnreasons [/api]
+退款原因资源
+
+## 获取所有退款原因 [GET /api/returnreasons{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "退款原因",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "退款原因2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/returnreasons?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增退款原因 [POST /api/returnreasons]
+
+
++ Parameters
+    + name: (string, required) - 退款原因名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "退款原因名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退款原因",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条退款原因 [GET /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退款原因",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改退款原因 [PATCH /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "退款原因名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退款原因10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除退款原因 [DELETE /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组退款原因 [DELETE /api/returnreasons]
+
+
++ Parameters
+    + ids: (string, required) - 退款原因id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组退款原因状态 [PUT /api/returnreasons/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 退款原因id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # uploadimages [/api]
 图片上传
 
