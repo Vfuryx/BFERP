@@ -76,7 +76,7 @@
         </el-table>
 
         <!--页码-->
-        <Pagination :page-url="this.urls.products"></Pagination>
+        <Pagination :page-url="this.urls.products" @handlePagChg="handlePagChg"></Pagination>
 
         <!--底部tabs-->
         <el-tabs v-model="activeName" @tab-click="handleTabsClick">
@@ -126,7 +126,7 @@
                     <el-table-column v-for="item in btmTableHead[this.activeName]" :label="item.label" align="center" :width="item.width" :key="item.label">
                         <template slot-scope="scope">
                             <span v-if="item.prop">
-                                <span v-if="item.type=='select'">
+                               <!-- <span v-if="item.type=='select'">
                                 <span v-for="(list,index) in resData[item.stateVal]" :key="index">
                                         <span v-if="list.id==scope.row[item.prop]">
                                             {{list.name}}
@@ -135,17 +135,17 @@
                             </span>
                                 <span v-else-if="item.type=='checkbox'">
                                      <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
-                             </span>
-                                <span v-else>
+                             </span>-->
+                                <!--<span v-else>-->
                                     <span v-if="item.inProp">
-                                        <span v-for="skuList in scope.row[item.prop]" :key="skuList.id">
+                                        <span v-for="skuList in scope.row[item.prop]['data']" :key="skuList.id">
                                          <el-tag style="margin-right: 5px">{{`${skuList[item.inProp]}`}}</el-tag>
                                         </span>
                                     </span>
                                     <span v-else>
                                         {{scope.row[item.prop]}}
                                     </span>
-                            </span>
+                            <!--</span>-->
                             </span>
                         </template>
                     </el-table-column>
@@ -424,9 +424,7 @@
                             v-model="skuForm.product_components"
                             :data="compList">
                     </el-transfer>
-
                 </el-form-item>
-
             </el-form>
             <div slot="footer" class="dialog-footer">
                     <el-button type="primary" @click="confirmAddSku">确定</el-button>
@@ -438,7 +436,7 @@
         <el-dialog title="修改Sku" :visible.sync="updateSkuMask">
             <el-form :model="updateSkuForm" :rules="skuRules" label-width="100px">
                 <el-form-item label="所属商品">
-                    <el-select v-model="updateSkuForm.pid">
+                    <el-select v-model="updateSkuForm.pid" disabled>
                                    <span v-for="list in resData.products" :key="list.created_at">
                                         <el-option :label="list.short_name" :value="list.id"></el-option>
                                    </span>
@@ -547,7 +545,7 @@
           {
             label: '产品类别',
             width: '120',
-            prop: "category",
+            prop: "goodsCategory",
             nmProp:'name',
             type: 'select',
           },
@@ -813,7 +811,7 @@
             },
             {
               label: '包含子件',
-              prop: "product_components",
+              prop: "productComponents",
               inProp: 'spec',
               type: 'text'
             },
@@ -1279,14 +1277,16 @@
       handleQuery(){},
       /*获取商品数据*/
       getProducts(){
-        this.$fetch(this.urls.products)
+        this.$fetch(this.urls.products,{include:'productComponents,shop,supplier,goodsCategory,combinations.productComponents'})
           .then(res=>{
             this.productsLoading =false;
             this.productsVal = res.data;
             if(res.data[0]){
               this.proId = res.data[0].id;
-              this.productsCompVal = res.data[0].product_components;
-              this.productsSkuVal = res.data[0].combinations;
+              // this.productsCompVal = res.data[0].product_components;
+              this.productsCompVal = res.data[0]['productComponents'].data;
+              // this.productsSkuVal = res.data[0].combinations;
+              this.productsSkuVal = res.data[0]['combinations'].data;
             }
             let pg = res.meta.pagination;
             this.$store.dispatch('currentPage', pg.current_page);
@@ -1316,9 +1316,9 @@
       },
       proRowClick(row){
         this.proId = row.id;
-        this.productsCompVal = row.product_components;
-        this.productsSkuVal = row.combinations;
-        this.$refs.multipleTable.toggleRowSelection(row);
+        this.productsCompVal = row['productComponents'].data;
+        this.productsSkuVal = row['combinations'].data;
+        // this.$refs.multipleTable.toggleRowSelection(row);
       },
       /*底部tabs*/
       handleTabsClick(){},
@@ -1339,7 +1339,7 @@
         this.skuForm.product_components=[];
         this.proId = row.id;
         let compId = [];
-        row.product_components.map(item=>{
+        row['productComponents']['data'].map(item=>{
           this.allComp.push(item);
         });
         this.allComp.map(item=>{
@@ -1495,7 +1495,7 @@
       cancelAddPro(){
         this.addProMask = false;
       },
-      //子件
+      /*子件*/
       compRowCName({row,rowIndex}){
         row.index = rowIndex;
       },
@@ -1603,7 +1603,8 @@
         else {
           this.updateProMask = true;
           this.updateProIndex = '';
-          this.$fetch(this.urls.products + '/' + this.updateId).then(res => {
+          this.$fetch(this.urls.products + '/' + this.updateId,{include:'productComponents,shop,supplier,goodsCategory,combinations.productComponents'}).then(res => {
+            console.log('res',res);
             this.updateForm = {
               commodity_code: res.commodity_code,
               jd_sn: res.jd_sn,
@@ -1612,12 +1613,12 @@
               short_name: res.short_name,
               shops_id: res.shops_id,
               supplier_id: res.supplier.id,
-              category_id: res.category.id,
+              category_id: res.category_id,
               remark: res.remark,
               title: res.title,
               img: res.img,
               url: res.url,
-              product_components: res.product_components
+              product_components: res['productComponents'].data
             };
            if(this.updateForm.url){
              this.noUpdate = false
@@ -1726,9 +1727,9 @@
         this.updateCompId = [];
         this.updateList = [];
         this.$store.dispatch('products','/products');
-        this.$fetch(this.urls.combinations+'/'+row.id)
+        this.$fetch(this.urls.combinations+'/'+row.id,{include:'productComponents,product,orderItems'})
           .then(res=>{
-            res.product_components.map(item=>{
+            res['productComponents']['data'].map(item=>{
               this.alreadyCompId.push(item.id)
             });
             this.updateSkuForm = {
@@ -1910,6 +1911,13 @@
       refresh(){
         this.productsLoading = true;
         this.getProducts();
+      },
+      /*分页*/
+      handlePagChg(page){
+        this.$fetch(this.urls.products+'?page='+page,{include:'productComponents,shop,supplier,goodsCategory,combinations.productComponents'})
+          .then(res=>{
+            this.logisticsData = res.data;
+          })
       },
       /*其他*/
       test(){},

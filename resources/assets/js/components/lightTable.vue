@@ -1,9 +1,9 @@
 <template>
     <div>
         <div v-if="onlyTableColumn">
-            <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
-                <template slot-scope="scope">
-                    <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
+                <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
+                    <template slot-scope="scope">
+                        <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
                         <!--<span v-if="item.ableEdit">-->
                             <span v-if="item.type=='color'">
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
@@ -61,14 +61,13 @@
                             </span>
                         <!--</span>-->
                      </span>
-                    <span v-else>
-                        <!--第一行 而且是作为判断条件存在的-->
-                        <span v-if="scope.$index==0 && scope.row.judge">
+                        <span v-else>
+                       <!-- <span v-if="scope.$index==0 && scope.row.judge">
                             <span v-if="item.type=='checkbox'">
                                <el-checkbox v-model="scope.row[item.prop]">{{scope.row[item.prop]}}</el-checkbox>
                             </span>
-                        </span>
-                        <span v-else>
+                        </span>-->
+                        <!--<span v-else>-->
                             <span v-if="item.type=='color'">
                                  <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
                          {{scope.row[item.prop]}}
@@ -124,33 +123,33 @@
                                      {{scope.row[item.prop]}}
                                 </span>
                         </span>
-                        </span>
+                        <!--</span>-->
                     </span>
-                </template>
-            </el-table-column>
-        </div>
-        <div v-else>
-            <el-table :data="tabData"  fit highlight-current-row
-                      @selection-change="handleSelectionChange"
-                      element-loading-text="拼命加载中"
-                      v-loading="loading"
-                      element-loading-spinner="el-icon-loading"
-                      element-loading-background="rgba(0, 0, 0, 0.6)"
-                      @row-dblclick="dbClick"
-                      :height="height"
-                      @row-click="rowClick"
-                      style="width: 100%"
-                      ref="multipleTable"
-            >
-                <!--:row-class-name="tableRowClassName"-->
-                <el-table-column
-                        type="selection"
-                        width="95" align="center"
-                        :checked="checkboxInit" @change="toggleChecked">
+                    </template>
                 </el-table-column>
+            </div>
+        <div v-else>
+                <el-table :data="tabData"  fit highlight-current-row
+                          @selection-change="handleSelectionChange"
+                          element-loading-text="拼命加载中"
+                          v-loading="loading"
+                          element-loading-spinner="el-icon-loading"
+                          element-loading-background="rgba(0, 0, 0, 0.6)"
+                          @row-dblclick="dbClick"
+                          :height="height"
+                          @row-click="rowClick"
+                          style="width: 100%"
+                          ref="multipleTable"
+                >
+                    <!--:row-class-name="tableRowClassName"-->
+                    <el-table-column
+                            type="selection"
+                            width="95" align="center"
+                            :checked="checkboxInit" @change="toggleChecked">
+                    </el-table-column>
 
-                <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
-                    <template slot-scope="scope">
+                    <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
+                        <template slot-scope="scope">
                     <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
                         <span v-if="item.type=='color'">
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
@@ -207,7 +206,7 @@
                                <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                      </span>
-                     <span v-else>
+                            <span v-else>
                         <!-- <span v-if="scope.$index==0 && scope.row.judge">
                             <span v-if="item.type=='checkbox'">
                                <el-checkbox v-model="scope.row[item.prop]"></el-checkbox>
@@ -268,34 +267,34 @@
                              </span>
                                  </span>
                              </span>-->
-                           <!-- <span v-if="item.inProp">
-                                 <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                  </span>
-                            <span v-else>
-                                <el-checkbox v-model="scope.row[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                  </span>-->
+                             <!-- <span v-if="item.inProp">
+                                   <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
+                                    </span>
+                              <span v-else>
+                                  <el-checkbox v-model="scope.row[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
+                                    </span>-->
                              <!--如果非编辑模式下 一律不可修改-->
                               <span v-if="item.inProp">
                                  <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="true"></el-checkbox>
                                   </span>
                             <span v-else>
-                                <el-checkbox v-model="scope.row[item.prop]" :disabled="true"></el-checkbox>
+                                <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
                                   </span>
                          </span>
                          <span v-else>
                               {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
                         </span>
                      </span>
-                    </template>
-                </el-table-column>
-                <el-table-column label="操作" width="nEditInRow?90:160" align="center" fixed="right">
-                    <template slot-scope="scope">
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="nEditInRow?90:160" align="center" fixed="right">
+                        <template slot-scope="scope">
                         <span v-if="currentIndex=='index'+scope.$index">
                             <el-button size="mini" @click="editSave(scope.row)">保存</el-button>
                             <el-button size="mini" @click="editCancel">取消
                             </el-button>
                         </span>
-                        <span v-else>
+                            <span v-else>
                         <!--<span v-if="doChange || editInRow">
                              <el-button size="mini" @click="edit(scope.$index)">编辑</el-button>
                         </span>
@@ -307,21 +306,21 @@
                         </span>
                             <span v-else>
                                  <el-button size="mini" @click="edit(scope.$index,scope.row)">编辑</el-button>
-                        <!--</span>-->
+                                <!--</span>-->
                                  <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
                             </span>
-                        <!--<el-button size="mini" type="danger" @click="del(scope.row,$event)">删除
-                    </el-button>-->
+                                <!--<el-button size="mini" type="danger" @click="del(scope.row,$event)">删除
+                            </el-button>-->
                         </span>
-                    </template>
-                </el-table-column>
-            </el-table>
-        </div>
+                        </template>
+                    </el-table-column>
+                </el-table>
+            </div>
     </div>
 </template>
 <script>
   export default {
-    props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects','doChange','height','inRowAdd','editInRow','onlyTableColumn','nEditInRow','hasSelect','editSign'],
+    props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects','doChange','height','inRowAdd','editInRow','onlyTableColumn','nEditInRow','hasSelect','editSign','displayData'],
     data() {
       return {
         checkboxInit: false,

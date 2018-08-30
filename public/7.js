@@ -734,13 +734,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -843,7 +836,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         label: '创建人',
         width: '120',
-        prop: 'user_id',
+        prop: 'user',
+        inProp: 'username',
         type: 'text'
       },
       /* {
@@ -952,9 +946,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       /*采购明细*/
       addPurchaseSkuHead: [{
         label: 'sku名称',
-        // prop: 'combinations',
-        // inProp: "name",
-        prop: "name",
+        prop: 'name',
         type: 'text'
       }],
       addPurCurSkuData: {},
@@ -1145,6 +1137,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       addPurchaseHead: [{
         label: '采购单号',
         prop: 'purchase_order_no',
+        holder: '系统自动生成',
         type: 'text',
         addChgAble: true
       }, {
@@ -1194,7 +1187,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         alt: '商品图片'
       }, {
         label: '店铺',
-        prop: "shop_nick",
+        prop: "shop",
+        inProp: 'nick',
         width: '130',
         type: 'text'
       }, {
@@ -1215,9 +1209,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         label: '供应商',
         prop: 'supplier',
-        nmProp: 'name',
+        inProp: 'name',
         width: '130',
-        type: 'select'
+        type: 'text'
       }],
       proRowIndex: '',
       purRow: {},
@@ -1397,6 +1391,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       proCompIndex: '',
       compStagData: [],
       compStagId: [],
+      updateCompFlag: false,
       /*修改采购*/
       updatePurMask: false,
       updatePurForm: {},
@@ -1406,6 +1401,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       updatePurSkuStagId: [],
       updatePurSkuIndex: '',
       updateSkuRow: [],
+      updateSkuIndex: '',
       /*底部tabs*/
       checkboxInit: false,
       leftActiveName: '0',
@@ -1413,7 +1409,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       purListHead: [{
         label: '采购名称',
         width: '200',
-        prop: "combinations",
+        prop: "combination",
         inProp: "name",
         type: 'text'
       }],
@@ -1423,19 +1419,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       purDetailsHead: [{
         label: '子件图片',
         width: '120',
-        prop: 'product_component',
+        prop: 'productComponent',
         inProp: "img_url",
         type: 'img'
       }, {
         label: '子件编码',
         width: '120',
-        prop: 'product_component',
+        prop: 'productComponent',
         inProp: "component_code",
         type: 'text'
       }, {
         label: '子件名称',
         width: '160',
-        prop: 'product_component',
+        prop: 'productComponent',
         inProp: "spec",
         type: 'text'
       }, {
@@ -1502,7 +1498,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       {
         label: '成本价',
         width: '120',
-        prop: 'product_component',
+        prop: 'productComponent',
         inProp: "cost",
         type: 'number'
       },
@@ -1515,7 +1511,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       {
         label: '体积',
         width: '120',
-        prop: 'product_component',
+        prop: 'productComponent',
         inProp: "volume",
         type: 'number'
       }, {
@@ -1589,7 +1585,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     /*查询*/
-    check: function check() {},
+    handleQuery: function handleQuery() {},
     toggleShow: function toggleShow() {
       this.filterBox = !this.filterBox;
     },
@@ -1610,14 +1606,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           this.newOpt[1].nClick = false;
           this.newOpt[2].nClick = false;
           this.newOpt[3].nClick = false;
-          this.$fetch(this.urls.purchases, { purchase_status: 'new' }).then(function (res) {
+          this.$fetch(this.urls.purchases, { purchase_status: 'new', include: 'user,purchaseLists.purchaseDetails.productComponent,purchaseLists.combination' }).then(function (res) {
             _this.newLoading = false;
             _this.newData = res.data;
             _this.checkboxInit = false;
             var pg = res.meta.pagination;
-            if (res.data[0] && res.data[0].purchase_lists[0]) {
-              _this.purListVal = res.data[0].purchase_lists[0];
-              _this.purDetailsVal = res.data[0].purchase_lists[0].purchase_details;
+            if (res.data[0] && res.data[0]['purchaseLists']['data'][0]) {
+              _this.purListVal = res.data[0]['purchaseLists']['data'][0];
+              _this.purDetailsVal = res.data[0].purchase_lists['data'][0]['purchaseDetails']['data'];
             }
             _this.$store.dispatch('currentPage', pg.current_page);
             _this.$store.commit('PER_PAGE', pg.per_page);
@@ -1642,13 +1638,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           this.newOpt[1].nClick = true;
           this.newOpt[2].nClick = true;
           this.newOpt[3].nClick = false;
-          this.$fetch(this.urls.purchases, { purchase_status: 'section' }).then(function (res) {
+          this.$fetch(this.urls.purchases, { purchase_status: 'section', include: 'user,purchaseLists.purchaseDetails,purchaseLists.combination' }).then(function (res) {
             _this.partLoading = false;
             _this.partData = res.data;
             _this.checkboxInit = false;
-            if (res.data[0] && res.data[0].purchase_lists[0]) {
-              _this.purListVal = res.data[0].purchase_lists[0];
-              _this.purDetailsVal = res.data[0].purchase_lists[0].purchase_details;
+            if (res.data[0] && res.data[0]['purchaseLists']['data'][0]) {
+              _this.purListVal = res.data[0]['purchaseLists']['data'][0];
+              _this.purDetailsVal = res.data[0].purchase_lists['data'][0]['purchaseDetails']['data'];
             }
             var pg = res.meta.pagination;
             _this.$store.dispatch('currentPage', pg.current_page);
@@ -1672,13 +1668,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           this.newOpt[1].nClick = true;
           this.newOpt[2].nClick = true;
           this.newOpt[3].nClick = true;
-          this.$fetch(this.urls.purchases, { purchase_status: 'finish' }).then(function (res) {
+          this.$fetch(this.urls.purchases, { purchase_status: 'finish', include: 'user,purchaseLists.purchaseDetails,purchaseLists.combination' }).then(function (res) {
             _this.finishLoading = false;
             _this.finishData = res.data;
             _this.checkboxInit = false;
-            if (res.data[0] && res.data[0].purchase_lists[0]) {
-              _this.purListVal = res.data[0].purchase_lists[0];
-              _this.purDetailsVal = res.data[0].purchase_lists[0].purchase_details;
+            if (res.data[0] && res.data[0]['purchaseLists']['data'][0]) {
+              _this.purListVal = res.data[0]['purchaseLists']['data'][0];
+              _this.purDetailsVal = res.data[0].purchase_lists['data'][0]['purchaseDetails']['data'];
             }
             var pg = res.meta.pagination;
             _this.$store.dispatch('currentPage', pg.current_page);
@@ -1712,10 +1708,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // this.$refs.newTable.toggleRowSelection(row);
       // this.$refs.partTable.toggleRowSelection(row);
       // this.$refs.finishTable.toggleRowSelection(row);
-      this.purListVal = row.purchase_lists;
+      this.purListVal = row['purchaseLists']['data'];
       this.purIndex = row.index;
-      if (row.purchase_lists[0]) {
-        this.purDetailsVal = row.purchase_lists[0].purchase_details;
+      if (row['purchaseLists']['data'][0]) {
+        this.purDetailsVal = row['purchaseLists']['data'][0]['purchaseDetails']['data'];
       } else {
         this.purDetailsVal = [];
       }
@@ -1726,7 +1722,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       // this.rowStyle({row, rowIndex});
     },
     purListRowClick: function purListRowClick(row) {
-      this.purDetailsVal = row.purchase_details;
+      this.purDetailsVal = row['purchaseDetails']['data'];
     },
     purListDtl: function purListDtl(row, e) {
       this.showDel = true;
@@ -1734,9 +1730,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.delId = row.id;
       if (row.purchase_order_no) {
         this.delUrl = this.urls.purchases;
-      } else if (row.purchases_id) {
+      } else if (row['purchases_id']) {
         this.delUrl = this.urls.purchaselists;
-      } else {
+      } else if (row['purchase_lists_id']) {
         this.delUrl = this.urls.purchasedetails;
       }
     },
@@ -1822,23 +1818,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         item.compData.map(function (list) {
           var comp = {
             product_components_id: list.id,
-            purchase_quantity: list.proPurchaseData.purchase_quantity,
-            shops_id: list.proPurchaseData.shops_id,
-            suppliers_id: list.proPurchaseData.suppliers_id,
-            purchase_cost: list.proPurchaseData.purchase_cost,
-            warehouse_cost: list.proPurchaseData.warehouse_cost,
-            purchase_freight: list.proPurchaseData.purchase_freight,
-            commission: list.proPurchaseData.commission,
-            discount: list.proPurchaseData.discount,
-            wooden_frame_costs: list.proPurchaseData.wooden_frame_costs,
-            arrival_time: list.proPurchaseData.arrival_time,
-            remark: list.proPurchaseData.remark
+            purchase_quantity: list['proPurchaseData'].purchase_quantity,
+            shops_id: list['proPurchaseData'].shops_id,
+            suppliers_id: list['proPurchaseData'].suppliers_id,
+            purchase_cost: list['proPurchaseData'].purchase_cost,
+            warehouse_cost: list['proPurchaseData'].warehouse_cost,
+            purchase_freight: list['proPurchaseData'].purchase_freight,
+            commission: list['proPurchaseData'].commission,
+            discount: list['proPurchaseData'].discount,
+            wooden_frame_costs: list['proPurchaseData'].wooden_frame_costs,
+            arrival_time: list['proPurchaseData'].arrival_time,
+            remark: list['proPurchaseData'].remark
           };
           sku.purchase_details.push(comp);
         });
         _this2.addPurchaseForm.purchase_lists.push(sku);
       });
-      // console.log(this.addPurchaseForm);
       this.$post(this.urls.purchases, this.addPurchaseForm).then(function () {
         _this2.$message({
           message: '新建采购单成功',
@@ -1879,10 +1874,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.proCompIndex = '0';
       this.compStagData = [];
       this.compStagId = [];
-      this.$fetch(this.urls.products + '/search', this.proQuery).then(function (res) {
+      this.$fetch(this.urls.products + '/search', { commodity_code: this.proQuery.commodity_code, shops_id: this.proQuery.shops_id, component_code: this.proQuery.commodity_code, include: 'productComponents,shop,supplier,goodsCategory,combinations.productComponents' }).then(function (res) {
         _this3.proDtlVal = res.data;
-        if (res.data[0] && res.data[0].combinations[0].product_components) {
-          res.data[0].combinations[0].product_components.map(function (item) {
+        if (res.data[0] && res.data[0].combinations['data'][0]['productComponents']['data'].length > 0) {
+          res.data[0].combinations['data'][0]['productComponents']['data'].map(function (item) {
             _this3.$set(item, 'proPurchaseData', {
               purchase_quantity: '',
               shops_id: '',
@@ -1896,23 +1891,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               discount: item.discount,
               wooden_frame_costs: item.wooden_frame_costs
             });
-            /* item['proPurchaseData'] = {
-               purchase_quantity: '',
-               shops_id: '',
-               suppliers_id:'',
-               arrival_time:'',
-               remark:'',
-               purchase_cost: item.purchase_cost,
-               purchase_freight: item.purchase_freight,
-               warehouse_cost: item.warehouse_cost,
-               commission: item.commission,
-               discount: item.discount,
-               wooden_frame_costs: item.wooden_frame_costs
-             }*/
           });
-          _this3.proSkuVal = res.data[0].combinations;
-          _this3.proCurSkuData = res.data[0].combinations[0];
-          _this3.proCompVal = res.data[0].combinations[0].product_components;
+          _this3.proSkuVal = res.data[0].combinations['data'];
+          if (res.data[0].combinations['data'][0]) {
+            _this3.proCurSkuData = res.data[0].combinations['data'][0];
+          }
+          _this3.proCompVal = res.data[0].combinations['data'][0]['productComponents']['data'];
         }
       }, function (err) {
         if (err.response) {
@@ -1944,8 +1928,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.compStagId = [];
       this.combEdit = '';
       this.proCompRowIndex = '';
-      if (row.combinations[0].product_components) {
-        row.combinations[0].product_components.map(function (item) {
+      if (row.combinations['data'][0]['productComponents']['data'].length > 0) {
+        row.combinations['data'][0]['productComponents']['data'].map(function (item) {
           _this4.$set(item, 'proPurchaseData', {
             purchase_quantity: '',
             shops_id: '',
@@ -1958,24 +1942,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             commission: item.commission,
             discount: item.discount,
             wooden_frame_costs: item.wooden_frame_costs });
-          /* item['proPurchaseData'] = {
-             purchase_quantity: '',
-             shops_id: '',
-             suppliers_id:'',
-             arrival_time:'',
-             remark:'',
-             purchase_cost: item.purchase_cost,
-             purchase_freight: item.purchase_freight,
-             warehouse_cost: item.warehouse_cost,
-             commission: item.commission,
-             discount: item.discount,
-             wooden_frame_costs: item.wooden_frame_costs
-           }*/
         });
       }
-      this.proSkuVal = row.combinations;
-      this.proCurSkuData = row.combinations[0];
-      this.proCompVal = row.combinations[0].product_components;
+      this.proSkuVal = row.combinations['data'];
+      this.proCurSkuData = row.combinations['data'][0];
+      this.proCompVal = row.combinations['data'][0]['productComponents']['data'];
     },
     proCompCName: function proCompCName(_ref4) {
       var row = _ref4.row,
@@ -2016,17 +1987,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     confirmAddProDtl: function confirmAddProDtl() {
       var _this6 = this;
 
-      /*看sku id是否存在
-      * 存在的话找该sku的子件id列表
-      * 不存在的话 直接找子件id列表 每次添加的updateStagSku是一条数据*/
       if (this.addPurchaseMask) {
-        this.proCurSkuData.compData.map(function (compItem) {
-          for (var i in compItem.proPurchaseData) {
-            if (compItem.proPurchaseData[i] == '') {
-              _this6.$message.error("数据不完整不能添加");
+        if (this.proCurSkuData.compData.length > 0) {
+          this.proCurSkuData.compData.map(function (compItem) {
+            for (var i in compItem['proPurchaseData']) {
+              if (compItem['proPurchaseData'][i] == '') {
+                _this6.$message.error("数据不完整不能添加");
+              }
             }
-          }
-        });
+          });
+        }
         var stagSku = this.proCurSkuData;
         if (this.addPurchaseSkuVal.length > 0) {
           if (this.addPurSkuStagId.indexOf(stagSku.id) == -1) {
@@ -2050,22 +2020,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           type: 'success'
         });
       } else {
+        /*判断sku和子件是否重复*/
         var updateStagSku = this.proCurSkuData;
-        console.log('confirm-add-pro updateStagSku', updateStagSku);
+        // console.log('this.updatePurSkuVal',this.updatePurSkuVal);
         if (updateStagSku.compData) {
-          /*先判断sku是否存在
-          * 如果存在*/
-          console.log('this.proCurSkuData', this.proCurSkuData);
-          console.log('updateStagSku', updateStagSku);
-          console.log('this.updatePurSkuVal', this.updatePurSkuVal);
-          /*如果当前sku有数据*/
+          /*sku是否重复*/
           if (this.updatePurSkuVal.length > 0) {
             this.updatePurSkuVal.map(function (skuID) {
               _this6.updatePurSkuStagId.push(skuID.combinations_id);
             });
-            console.log('updatePurSkuStagId', this.updatePurSkuStagId);
-            /*如果sku不存在当前项*/
-            console.log('==', this.updatePurSkuStagId.indexOf(updateStagSku.id));
             if (this.updatePurSkuStagId.indexOf(updateStagSku.id) == -1) {
               this.updatePurForm.purchase_lists.push(updateStagSku);
               this.updatePurSkuStagId.push(updateStagSku.id);
@@ -2079,25 +2042,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 message: '添加商品明细成功',
                 type: 'success'
               });
-              console.log('addPro', this.updatePurForm.purchase_lists);
+              this.proCompRowIndex = '';
             } else {
-              /*如果当前sku id已存在*/
-              /*找出当前sku的所有子件id*/
-              // console.log('=0',this.updatePurForm.purchase_lists);
+              /*子件是否重复*/
+              // console.log('this.updatePurForm',this.updatePurForm);
               this.updatePurForm.purchase_lists.map(function (purList) {
                 if (purList.combinations_id == updateStagSku.id) {
-                  /*所有子件id*/
                   var is_existId = [];
-                  console.log(' purList.purchase_details', purList.purchase_details);
-                  purList.purchase_details.map(function (item) {
+                  purList['purchaseDetails']['data'].map(function (item) {
+                    /*遍历子件*/
                     is_existId.push({
                       id: item.id,
                       combId: item.product_components_id
                     });
                   });
-                  console.log('is_existId', is_existId);
-                  /*相同子件id覆盖*/
-                  console.log('updateStagSku', updateStagSku);
+                  /*替换子件id*/
                   updateStagSku.compData.map(function (compItem) {
                     for (var i in is_existId) {
                       if (is_existId[i]['combId'] == compItem.id) {
@@ -2108,19 +2067,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
                   var _loop = function _loop(i) {
                     updateStagSku.compData[i]['is_newAdd'] = true;
-                    /*如果当前子件有重复id*/
+                    /*删除重复的子件*/
                     if (updateStagSku.compData[i]['combId']) {
-                      purList.purchase_details.map(function (item, index) {
+                      purList['purchaseDetails']['data'].map(function (item, index) {
                         if (item.id == updateStagSku.compData[i]['combId']) {
-                          purList.purchase_details.splice(index, 1);
+                          purList['purchaseDetails']['data'].splice(index, 1);
                         }
                       });
                     }
-                    purList.purchase_details.push(updateStagSku.compData[i]);
+                    purList['purchaseDetails']['data'].push(updateStagSku.compData[i]);
                     _this6.$message({
                       message: '添加商品明细成功',
                       type: 'success'
                     });
+                    _this6.proCompRowIndex = '';
                   };
 
                   for (var i in updateStagSku.compData) {
@@ -2130,10 +2090,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               });
             }
           } else {
-            /*判断是否有子件
-            * 如果没有不添加*/
-            /*如果当前sku列表为空*/
-            // if(updateStagSku.compData.length>0){
             updateStagSku.compData.map(function (item) {
               item['is_newAdd'] = true;
             });
@@ -2150,6 +2106,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               message: '添加商品明细成功',
               type: 'success'
             });
+            this.proCompRowIndex = '';
           }
         } else {
           this.$message.error("未添加商品子件");
@@ -2170,52 +2127,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.compStagData = [];
       this.compStagId = [];
       this.proCompRowIndex = '';
-      row.product_components.map(function (item) {
-        _this7.$set(item, 'proPurchaseData', {
-          purchase_quantity: '',
-          shops_id: '',
-          suppliers_id: '',
-          arrival_time: '',
-          remark: '',
-          purchase_cost: item.purchase_cost,
-          purchase_freight: item.purchase_freight,
-          warehouse_cost: item.warehouse_cost,
-          commission: item.commission,
-          discount: item.discount,
-          wooden_frame_costs: item.wooden_frame_costs
+      if (row['productComponents']['data'].length > 0) {
+        row['productComponents']['data'].map(function (item) {
+          _this7.$set(item, 'proPurchaseData', {
+            purchase_quantity: '',
+            shops_id: '',
+            suppliers_id: '',
+            arrival_time: '',
+            remark: '',
+            purchase_cost: item.purchase_cost,
+            purchase_freight: item.purchase_freight,
+            warehouse_cost: item.warehouse_cost,
+            commission: item.commission,
+            discount: item.discount,
+            wooden_frame_costs: item.wooden_frame_costs
+          });
         });
-      });
-      /*  /!* item['proPurchaseData'] = {
-          purchase_quantity: '',
-          shops_id: '',
-          suppliers_id:'',
-          arrival_time:'',
-          remark:'',
-          purchase_cost: item.purchase_cost,
-          purchase_freight: item.purchase_freight,
-          warehouse_cost: item.warehouse_cost,
-          commission: item.commission,
-          discount: item.discount,
-          wooden_frame_costs: item.wooden_frame_costs
-        }*!/
-      this.proCompVal = row.product_components;*/
-      this.proCompVal = Object.assign({}, row.product_components);
-      // this.proCompVal = row.product_components;
-      /* this.proCompVal.map(item=>{
-         this.$set(item,'proPurchaseData',{
-           purchase_quantity: '',
-           shops_id: '',
-           suppliers_id:'',
-           arrival_time:'',
-           remark:'',
-           purchase_cost: item.purchase_cost,
-           purchase_freight: item.purchase_freight,
-           warehouse_cost: item.warehouse_cost,
-           commission: item.commission,
-           discount: item.discount,
-           wooden_frame_costs: item.wooden_frame_costs
-         });
-       });*/
+      }
+      this.proCompVal = row['productComponents']['data'];
+      // this.proCompVal = Object.assign({},row['productComponents']['data']);
       this.proCurSkuData = row;
     },
     cancelAddProDtl: function cancelAddProDtl() {
@@ -2247,32 +2177,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         } else {
           this.updatePurMask = true;
           this.updatePurCompIndex = '0';
-          this.$patch(this.urls.purchases + '/' + this.updateId).then(function (res) {
-            _this8.updatePurForm = {
-              purchase_order_no: res.purchase_order_no,
-              receiver: res.receiver,
-              receiver_address: res.receiver_address,
-              remark: res.remark,
-              purchase_lists: res.purchase_lists
-            };
-            /*this.updatePurSkuVal = this.updatePurForm.purchase_lists;
-            if(this.updatePurForm.purchase_lists[0]){
-              this.updatePurCompVal = this.updatePurForm.purchase_lists[0].purchase_details;
-            }*/
-            res.purchase_lists.map(function (item) {
-              _this8.updatePurSkuVal.push({
-                name: item.combinations['name'],
-                id: item.id,
-                combinations_id: item.combinations_id,
-                purchase_details: item.purchase_details
-              });
-              item.purchase_details.map(function (list) {
-                list['product_component']['compId'] = list.id;
-              });
-            });
-            if (res.purchase_lists[0]) {
-              res.purchase_lists[0].purchase_details.map(function (list) {
-                _this8.$set(list['product_component'], 'proPurchaseData', {
+          this.updateSkuIndex = '0';
+          this.$fetch(this.urls.purchases + '/' + this.updateId, { include: 'user,purchaseLists.purchaseDetails.productComponent,purchaseLists.combination' }).then(function (res) {
+            res['purchaseLists'].data.map(function (item) {
+              item['purchaseDetails'].data.map(function (list) {
+                _this8.$set(list['productComponent'], 'proPurchaseData', {
                   purchase_quantity: list.purchase_quantity,
                   shops_id: list.shops_id,
                   suppliers_id: list.suppliers_id,
@@ -2285,20 +2194,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                   discount: list.discount,
                   wooden_frame_costs: list.wooden_frame_costs
                 });
-                /*  list['product_component']['proPurchaseData'] = {
-                    purchase_quantity: list.purchase_quantity,
-                    shops_id: list.shops_id,
-                    suppliers_id: list.suppliers_id,
-                    arrival_time: list.arrival_time,
-                    remark: list.remark,
-                    purchase_cost: list.purchase_cost,
-                    purchase_freight: list.purchase_freight,
-                    warehouse_cost: list.warehouse_cost,
-                    commission: list.commission,
-                    discount: list.discount,
-                    wooden_frame_costs: list.wooden_frame_costs
-                  };*/
-                _this8.updatePurCompVal.push(list['product_component']);
+              });
+            });
+            _this8.updatePurForm = {
+              purchase_order_no: res.purchase_order_no,
+              receiver: res.receiver,
+              receiver_address: res.receiver_address,
+              remark: res.remark,
+              purchase_lists: res['purchaseLists']['data']
+            };
+            res['purchaseLists']['data'].map(function (item) {
+              _this8.updatePurSkuVal.push({
+                name: item['combination']['name'],
+                id: item.id,
+                combinations_id: item.combinations_id,
+                purchase_details: item['purchaseDetails']['data']
+              });
+              item['purchaseDetails']['data'].map(function (list) {
+                list['productComponent']['compId'] = list.id;
+              });
+            });
+            if (res['purchaseLists']['data'][0] && res['purchaseLists']['data'][0]['purchaseDetails']['data'].length > 0) {
+              res['purchaseLists']['data'][0]['purchaseDetails']['data'].map(function (list) {
+                _this8.$set(list['productComponent'], 'proPurchaseData', {
+                  purchase_quantity: list.purchase_quantity,
+                  shops_id: list.shops_id,
+                  suppliers_id: list.suppliers_id,
+                  arrival_time: list.arrival_time,
+                  remark: list.remark,
+                  purchase_cost: list.purchase_cost,
+                  purchase_freight: list.purchase_freight,
+                  warehouse_cost: list.warehouse_cost,
+                  commission: list.commission,
+                  discount: list.discount,
+                  wooden_frame_costs: list.wooden_frame_costs
+                });
+                _this8.updatePurCompVal.push(list['productComponent']);
               });
             }
           }, function (err) {
@@ -2307,19 +2238,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       }
     },
-
-    // updateRowCName({row, rowIndex}){ row.index = rowIndex;},
+    updateRowCName: function updateRowCName(_ref6) {
+      var row = _ref6.row,
+          rowIndex = _ref6.rowIndex;
+      row.index = rowIndex;
+    },
     updatePurSkuRowClick: function updatePurSkuRowClick(row) {
       var _this9 = this;
 
-      // console.log('skuRowData',row);
-      // console.log('updatePurCompIndex',this.updatePurCompIndex);
-      // console.log('updateSkuRow',this.updateSkuRow);
-      // this.updatePurCompIndex = row.index;
+      /*行点击时，先判断该行是新增的还是数据库存在的*/
+      // console.log('sku行数据',row);
+      // console.log('sku提交的表单数据',this.updatePurForm);
       this.updateSkuRow = row;
-      console.log('this.updatePurForm.purchase_lists', this.updatePurForm.purchase_lists);
-      console.log('row', row);
-      console.log('updatePurCompVal', this.updatePurCompVal);
+      this.updateSkuIndex = row.index;
+      this.updatePurCompIndex = '';
       if (row.is_newAdd) {
         this.updatePurCompVal = row.compData;
       } else {
@@ -2329,9 +2261,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           if (item.is_newAdd) {
             _this9.updatePurCompVal.push(item);
           } else {
-            item['product_component']['compId'] = item.id;
-            // this.someObject = Object.assign({},this.someObject,{a:1,b:2})
-            _this9.$set(item['product_component'], 'proPurchaseData', {
+            item['productComponent']['compId'] = item.id;
+            _this9.$set(item['productComponent'], 'proPurchaseData', {
               purchase_quantity: item.purchase_quantity,
               shops_id: item.shops_id,
               suppliers_id: item.suppliers_id,
@@ -2344,98 +2275,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               discount: item.discount,
               wooden_frame_costs: item.wooden_frame_costs
             });
-            /* item['product_component']['proPurchaseData'] = {
-               purchase_quantity: item.purchase_quantity,
-               shops_id: item.shops_id,
-               suppliers_id:item.suppliers_id,
-               arrival_time:item.arrival_time,
-               remark:item.remark,
-               purchase_cost: item.purchase_cost,
-               purchase_freight: item.purchase_freight,
-               warehouse_cost: item.warehouse_cost,
-               commission: item.commission,
-               discount: item.discount,
-               wooden_frame_costs: item.wooden_frame_costs
-             };*/
-            _this9.updatePurCompVal.push(item['product_component']);
+            _this9.updatePurCompVal.push(item['productComponent']);
           }
         });
-        /*  this.updatePurForm.purchase_lists.map(item=>{
-            if(item.id == row.id){
-              item.purchase_details.map(compItem=>{
-                // console.log('compItem',compItem);
-                // console.log('compItem.id',compItem.id);
-                /!*如果是新增的*!/
-                if(compItem.is_newAdd){
-                  this.updatePurCompVal.push(compItem);
-                }else{
-                  compItem['product_component']['compId'] = compItem.id;
-                  compItem['product_component']['proPurchaseData'] = {
-                    purchase_quantity: compItem.purchase_quantity,
-                    shops_id: compItem.shops_id,
-                    suppliers_id:compItem.suppliers_id,
-                    arrival_time:compItem.arrival_time,
-                    remark:compItem.remark,
-                    purchase_cost: compItem.purchase_cost,
-                    purchase_freight: compItem.purchase_freight,
-                    warehouse_cost: compItem.warehouse_cost,
-                    commission: compItem.commission,
-                    discount: compItem.discount,
-                    wooden_frame_costs: compItem.wooden_frame_costs
-                  };
-                  this.updatePurCompVal.push(compItem['product_component']);
-                }
-              });
-            }
-          })*/
       }
-      /*  console.log('updateSkuRow',this.updateSkuRow);
-        /!*判断是否有id*!/
-        if(row.id){
-          /!*this.updatePurCompVal = row.purchase_details;*!/
-          this.updatePurCompVal = [];
-          this.updatePurForm.purchase_lists.map(item=>{
-            if(item.id == row.id){
-              item.purchase_details.map(compItem=>{
-                // console.log('compItem',compItem);
-                // console.log('compItem.id',compItem.id);
-                /!*如果是新增的*!/
-                if(compItem.is_newAdd){
-                  this.updatePurCompVal.push(compItem);
-                }else{
-                  compItem['product_component']['compId'] = compItem.id;
-                  compItem['product_component']['proPurchaseData'] = {
-                    purchase_quantity: compItem.purchase_quantity,
-                    shops_id: compItem.shops_id,
-                    suppliers_id:compItem.suppliers_id,
-                    arrival_time:compItem.arrival_time,
-                    remark:compItem.remark,
-                    purchase_cost: compItem.purchase_cost,
-                    purchase_freight: compItem.purchase_freight,
-                    warehouse_cost: compItem.warehouse_cost,
-                    commission: compItem.commission,
-                    discount: compItem.discount,
-                    wooden_frame_costs: compItem.wooden_frame_costs
-                  };
-                  this.updatePurCompVal.push(compItem['product_component']);
-                }
-              });
-            }
-          })
-        }else{
-          this.updatePurCompVal = row.compData;
-        }*/
     },
     updatePurSkuDel: function updatePurSkuDel(row, index) {
       var _this10 = this;
 
-      console.log('sku', row);
-      console.log(this.updatePurForm.purchase_lists);
-      /*判断是否是新增*/
+      // console.log(this.updatePurForm.purchase_lists);
       if (row.is_newAdd) {
+        /*新增sku*/
         this.updatePurSkuVal.splice(index, 1);
-        if (this.updatePurSkuVal[index + 1]) {
-          this.updatePurCompVal = this.updatePurSkuVal[index + 1].purchase_details;
+        if (this.updatePurSkuVal[0]) {
+          this.updatePurCompVal = this.updatePurSkuVal[0].purchase_details;
         }
         this.$message({
           message: '删除采购sku成功',
@@ -2446,8 +2299,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this10.updatePurForm.purchase_lists.splice(index, 1);
           }
         });
+        /*从sku id数组中删除*/
+        this.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+          if (skuItem == row.combinations_id) {
+            _this10.updatePurSkuStagId.splice(skuIndex, 1);
+          }
+        });
       } else {
-        // console.log(this.updatePurForm.purchase_lists);
         this.$del(this.urls.purchaselists + '/' + row.id).then(function () {
           _this10.updatePurSkuVal.splice(index, 1);
           _this10.$message({
@@ -2459,12 +2317,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           if (_this10.updatePurSkuVal.length > 0) {
             _this10.updatePurForm.purchase_lists.map(function (item) {
               if (item.id == _this10.updatePurSkuVal[0]['id']) {
-                item.purchase_details.map(function (compItem) {
+                item['purchaseDetails']['data'].map(function (compItem) {
                   /*如果是新增的*/
                   if (compItem.is_newAdd) {
                     _this10.updatePurCompVal.push(compItem);
                   } else {
-                    _this10.$set(compItem['product_component'], 'proPurchaseData', {
+                    _this10.$set(compItem['productComponent'], 'proPurchaseData', {
                       purchase_quantity: compItem.purchase_quantity,
                       shops_id: compItem.shops_id,
                       suppliers_id: compItem.suppliers_id,
@@ -2477,20 +2335,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                       discount: compItem.discount,
                       wooden_frame_costs: compItem.wooden_frame_costs
                     });
-                    /* compItem['product_component']['proPurchaseData'] = {
-                       purchase_quantity: compItem.purchase_quantity,
-                       shops_id: compItem.shops_id,
-                       suppliers_id:compItem.suppliers_id,
-                       arrival_time:compItem.arrival_time,
-                       remark:compItem.remark,
-                       purchase_cost: compItem.purchase_cost,
-                       purchase_freight: compItem.purchase_freight,
-                       warehouse_cost: compItem.warehouse_cost,
-                       commission: compItem.commission,
-                       discount: compItem.discount,
-                       wooden_frame_costs: compItem.wooden_frame_costs
-                     };*/
-                    _this10.updatePurCompVal.push(compItem['product_component']);
+                    _this10.updatePurCompVal.push(compItem['productComponent']);
                   }
                 });
               }
@@ -2499,6 +2344,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           _this10.updatePurForm.purchase_lists.map(function (item, listIndex) {
             if (item.id == row.id) {
               _this10.updatePurForm.purchase_lists.splice(listIndex, 1);
+            }
+          });
+          _this10.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+            if (skuItem == row.id) {
+              _this10.updatePurSkuStagId.splice(skuIndex, 1);
             }
           });
         }, function (err) {
@@ -2516,22 +2366,55 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    updateCompCName: function updateCompCName(_ref6) {
-      var row = _ref6.row,
-          rowIndex = _ref6.rowIndex;
+    updateCompCName: function updateCompCName(_ref7) {
+      var row = _ref7.row,
+          rowIndex = _ref7.rowIndex;
       row.index = rowIndex;
     },
     updateCompRowClick: function updateCompRowClick(row) {
-      this.updatePurCompIndex = 'index' + row.index;
-      console.log('compRowData', row);
-    },
-    updateDelPurComp: function updateDelPurComp(row, index) {
       var _this11 = this;
 
-      console.log('comp', row);
-      console.log(this.updatePurForm.purchase_lists);
-      // console.log('updateSkuRow',this.updateSkuRow);
+      /*替换新增和修改*/
+      // console.log('子件行数据',row);
+      // console.log('子件提交的表单数据',this.updatePurForm);
+      // console.log('子件列表',this.updatePurCompVal);
+      this.updatePurCompIndex = 'index' + row.index;
+      var formData = this.updatePurForm.purchase_lists[this.updateSkuIndex];
+      if (this.updateCompFlag) {
+        if (formData.compData) {
+          /*新增 sku和子件*/
+          formData.compData[row.index] = row;
+          this.updateCompFlag = false;
+        } else {
+          if (formData['purchaseDetails']['data'][row.index].productComponent) {
+            /*修改*/
+            formData['purchaseDetails']['data'][row.index]['productComponent'] = row;
+            this.updateCompFlag = false;
+          } else {
+            /*新增 替换(combId)*/
+            var curRow = row;
+            formData['purchaseDetails']['data'].map(function (item, index) {
+              if (item.id == curRow.id) {
+                formData['purchaseDetails']['data'][index] = curRow;
+                _this11.updateCompFlag = false;
+              }
+            });
+          }
+        }
+      }
+    },
+    updateComp: function updateComp() {
+      this.updateCompFlag = true;
+    },
+    updateDelPurComp: function updateDelPurComp(row, index) {
+      var _this12 = this;
+
       /*原有的还是替换的，都可以通过id删除*/
+      // console.log('row',row);
+      // console.log('updatePurCompVal',this.updatePurCompVal);
+      // console.log('updatePurSkuVal',this.updatePurSkuVal);
+      // console.log('updateSkuRow',this.updateSkuRow);
+      // console.log('updatePurForm',this.updatePurForm.purchase_lists);
       if (this.updateSkuRow.is_newAdd) {
         /*sku新增*/
         this.updatePurCompVal.splice(index, 1);
@@ -2545,40 +2428,104 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             item.compData.splice(index, 1);
           }
         });
+        /*如果当前子件列表为空，sku列表也要界面消失，并且提交数据总消失*/
+        if (this.updatePurCompVal.length == 0) {
+          this.updatePurSkuVal.splice(this.updateSkuIndex, 1);
+          this.updatePurForm.purchase_lists.map(function (list, skuIndex) {
+            if (list.id == _this12.updateSkuRow.combinations_id) {
+              _this12.updatePurForm.purchase_lists.splice(skuIndex, 1);
+            }
+          });
+          this.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+            if (skuItem == row.combinations_id) {
+              _this12.updatePurSkuStagId.splice(skuIndex, 1);
+            }
+          });
+        }
       } else {
-        /*sku已存在*/
-        if (row.is_newAdd) {
-          /*替换comp*/
+        if (row.is_newAdd && row.combId) {
+          /*替换*/
           this.$del(this.urls.purchasedetails + '/' + row.combId).then(function () {
-            _this11.$message({
+            _this12.updatePurCompVal.splice(index, 1);
+            _this12.updatePurForm.purchase_lists.map(function (item) {
+              if (item.id == _this12.updateSkuRow.id) {
+                item['purchaseDetails']['data'].splice(index, 1);
+              }
+            });
+            _this12.$message({
               message: '删除采购子件成功',
               type: 'success'
             });
-            _this11.updatePurCompVal.splice(index, 1);
-            _this11.updatePurForm.purchase_lists.map(function (item) {
-              if (item.id == _this11.updateSkuRow.id) {
-                item.purchase_details.splice(index, 1);
+            if (_this12.updatePurCompVal.length == 0) {
+              _this12.updatePurSkuVal.splice(_this12.updateSkuIndex, 1);
+              _this12.updatePurForm.purchase_lists.map(function (list, skuIndex) {
+                if (list.id == _this12.updateSkuRow.combinations_id) {
+                  _this12.updatePurForm.purchase_lists.splice(skuIndex, 1);
+                }
+              });
+            };
+            _this12.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+              if (skuItem == row.combinations_id) {
+                _this12.updatePurSkuStagId.splice(skuIndex, 1);
               }
             });
           }, function () {
-            _this11.$message.error('未找到该条数据，无法删除');
+            _this12.$message.error('未找到该条数据，无法删除');
+          });
+        } else if (row.is_newAdd && !row.combId) {
+          /*新增*/
+          this.updatePurCompVal.splice(index, 1);
+          this.updatePurForm.purchase_lists.map(function (item) {
+            if (item.id == _this12.updateSkuRow.id) {
+              item['purchaseDetails']['data'].splice(index, 1);
+            }
+          });
+          this.$message({
+            message: '删除采购子件成功',
+            type: 'success'
+          });
+          if (this.updatePurCompVal.length == 0) {
+            this.updatePurSkuVal.splice(this.updateSkuIndex, 1);
+            this.updatePurForm.purchase_lists.map(function (list, skuIndex) {
+              if (list.id == _this12.updateSkuRow.combinations_id) {
+                _this12.updatePurForm.purchase_lists.splice(skuIndex, 1);
+              }
+            });
+          };
+          this.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+            if (skuItem == row.combinations_id) {
+              _this12.updatePurSkuStagId.splice(skuIndex, 1);
+            }
           });
         } else {
-          /*原有comp*/
+          /*删除*/
           this.$del(this.urls.purchasedetails + '/' + row.compId).then(function () {
-            _this11.$message({
+            _this12.updatePurCompVal.splice(index, 1);
+            _this12.updatePurForm.purchase_lists.map(function (item) {
+              if (item.id == _this12.updateSkuRow.id) {
+                item['purchaseDetails']['data'].splice(index, 1);
+                // item['purchaseDetails']['data']['productComponent']=[];
+              }
+            });
+            _this12.$message({
               message: '删除采购子件成功',
               type: 'success'
             });
-            _this11.updatePurCompVal.splice(index, 1);
-            console.log('del', _this11.updatePurForm.purchase_lists);
-            _this11.updatePurForm.purchase_lists.map(function (item) {
-              if (item.id == _this11.updateSkuRow.id) {
-                item.purchase_details.splice(index, 1);
-              }
-            });
+            if (_this12.updatePurCompVal.length == 0) {
+              _this12.updatePurSkuVal.splice(_this12.updateSkuIndex, 1);
+              _this12.updatePurForm.purchase_lists.map(function (list, skuIndex) {
+                if (list.id == _this12.updateSkuRow.combinations_id) {
+                  _this12.updatePurForm.purchase_lists.splice(skuIndex, 1);
+                }
+              });
+              _this12.updatePurSkuStagId.map(function (skuItem, skuIndex) {
+                if (skuItem == row.combinations_id) {
+                  _this12.updatePurSkuStagId.splice(skuIndex, 1);
+                }
+              });
+            }
           }, function () {
-            _this11.$message.error('未找到该条数据，无法删除');
+            _this12.$message.error('未找到该条数据，无法删除');
           });
         }
       }
@@ -2591,12 +2538,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.proCompVal = [];
     },
     confirmUpdatePur: function confirmUpdatePur(id) {
-      var _this12 = this;
+      var _this13 = this;
 
       if (this.updatePurForm.purchase_lists.length == 0) {
         this.$message.error('采购单不能为空');
         return;
       } else {
+        /*完全新增，部分新增，替换，修改*/
         var addSku = {
           receiver: this.updatePurForm.receiver,
           receiver_address: this.updatePurForm.receiver_address,
@@ -2605,6 +2553,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
         this.updatePurForm.purchase_lists.map(function (item) {
           if (item.compData) {
+            // console.log('add updatePurForm',this.updatePurForm.purchase_lists);
+            /*新增 sku和子件*/
             var purList = {
               combinations_id: '',
               purchase_details: []
@@ -2613,17 +2563,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             item.compData.map(function (list) {
               var comp = {
                 product_components_id: list.id,
-                purchase_quantity: list.proPurchaseData.purchase_quantity,
-                shops_id: list.proPurchaseData.shops_id,
-                suppliers_id: list.proPurchaseData.suppliers_id,
-                purchase_cost: list.proPurchaseData.purchase_cost,
-                warehouse_cost: list.proPurchaseData.warehouse_cost,
-                purchase_freight: list.proPurchaseData.purchase_freight,
-                commission: list.proPurchaseData.commission,
-                discount: list.proPurchaseData.discount,
-                wooden_frame_costs: list.proPurchaseData.wooden_frame_costs,
-                arrival_time: list.proPurchaseData.arrival_time,
-                remark: list.proPurchaseData.remark
+                purchase_quantity: list['proPurchaseData'].purchase_quantity,
+                shops_id: list['proPurchaseData'].shops_id,
+                suppliers_id: list['proPurchaseData'].suppliers_id,
+                purchase_cost: list['proPurchaseData'].purchase_cost,
+                warehouse_cost: list['proPurchaseData'].warehouse_cost,
+                purchase_freight: list['proPurchaseData'].purchase_freight,
+                commission: list['proPurchaseData'].commission,
+                discount: list['proPurchaseData'].discount,
+                wooden_frame_costs: list['proPurchaseData'].wooden_frame_costs,
+                arrival_time: list['proPurchaseData'].arrival_time,
+                remark: list['proPurchaseData'].remark
               };
               purList['purchase_details'].push(comp);
             });
@@ -2636,61 +2586,65 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             _purList['id'] = item.id;
             _purList['combinations_id'] = item.combinations_id;
-            console.log('item.purchase_details', item.purchase_details);
-            item.purchase_details.map(function (alreadyList) {
+            item['purchaseDetails']['data'].map(function (alreadyList) {
+              /*有新增或者替换的子件*/
               if (alreadyList.is_newAdd) {
+                /*外层有combId 替换子件*/
                 if (alreadyList.combId) {
                   var newComp = {
                     is_newAdd: true,
                     id: alreadyList.combId,
                     product_components_id: alreadyList.id,
-                    purchase_quantity: alreadyList.proPurchaseData.purchase_quantity,
-                    shops_id: alreadyList.proPurchaseData.shops_id,
-                    suppliers_id: alreadyList.proPurchaseData.suppliers_id,
-                    purchase_cost: alreadyList.proPurchaseData.purchase_cost,
-                    warehouse_cost: alreadyList.proPurchaseData.warehouse_cost,
-                    purchase_freight: alreadyList.proPurchaseData.purchase_freight,
-                    commission: alreadyList.proPurchaseData.commission,
-                    discount: alreadyList.proPurchaseData.discount,
-                    wooden_frame_costs: alreadyList.proPurchaseData.wooden_frame_costs,
-                    arrival_time: alreadyList.proPurchaseData.arrival_time,
-                    remark: alreadyList.proPurchaseData.remark
+                    purchase_quantity: alreadyList['proPurchaseData'].purchase_quantity,
+                    shops_id: alreadyList['proPurchaseData'].shops_id,
+                    suppliers_id: alreadyList['proPurchaseData'].suppliers_id,
+                    purchase_cost: alreadyList['proPurchaseData'].purchase_cost,
+                    warehouse_cost: alreadyList['proPurchaseData'].warehouse_cost,
+                    purchase_freight: alreadyList['proPurchaseData'].purchase_freight,
+                    commission: alreadyList['proPurchaseData'].commission,
+                    discount: alreadyList['proPurchaseData'].discount,
+                    wooden_frame_costs: alreadyList['proPurchaseData'].wooden_frame_costs,
+                    arrival_time: alreadyList['proPurchaseData'].arrival_time,
+                    remark: alreadyList['proPurchaseData'].remark
                   };
                   _purList['purchase_details'].push(newComp);
                 } else {
+                  /*没有id 新增子件*/
                   var _newComp = {
                     is_newAdd: true,
                     product_components_id: alreadyList.id,
-                    purchase_quantity: alreadyList.proPurchaseData.purchase_quantity,
-                    shops_id: alreadyList.proPurchaseData.shops_id,
-                    suppliers_id: alreadyList.proPurchaseData.suppliers_id,
-                    purchase_cost: alreadyList.proPurchaseData.purchase_cost,
-                    warehouse_cost: alreadyList.proPurchaseData.warehouse_cost,
-                    purchase_freight: alreadyList.proPurchaseData.purchase_freight,
-                    commission: alreadyList.proPurchaseData.commission,
-                    discount: alreadyList.proPurchaseData.discount,
-                    wooden_frame_costs: alreadyList.proPurchaseData.wooden_frame_costs,
-                    arrival_time: alreadyList.proPurchaseData.arrival_time,
-                    remark: alreadyList.proPurchaseData.remark
+                    purchase_quantity: alreadyList['proPurchaseData'].purchase_quantity,
+                    shops_id: alreadyList['proPurchaseData'].shops_id,
+                    suppliers_id: alreadyList['proPurchaseData'].suppliers_id,
+                    purchase_cost: alreadyList['proPurchaseData'].purchase_cost,
+                    warehouse_cost: alreadyList['proPurchaseData'].warehouse_cost,
+                    purchase_freight: alreadyList['proPurchaseData'].purchase_freight,
+                    commission: alreadyList['proPurchaseData'].commission,
+                    discount: alreadyList['proPurchaseData'].discount,
+                    wooden_frame_costs: alreadyList['proPurchaseData'].wooden_frame_costs,
+                    arrival_time: alreadyList['proPurchaseData'].arrival_time,
+                    remark: alreadyList['proPurchaseData'].remark
                   };
                   _purList['purchase_details'].push(_newComp);
                 }
               } else {
+                /*修改*/
                 var alreadyComp = {
                   id: alreadyList.id,
                   product_components_id: alreadyList.product_components_id,
-                  purchase_quantity: alreadyList.purchase_quantity,
-                  shops_id: alreadyList.shops_id,
-                  suppliers_id: alreadyList.suppliers_id,
-                  purchase_cost: alreadyList.purchase_cost,
-                  warehouse_cost: alreadyList.warehouse_cost,
-                  purchase_freight: alreadyList.purchase_freight,
-                  commission: alreadyList.commission,
-                  discount: alreadyList.discount,
-                  wooden_frame_costs: alreadyList.wooden_frame_costs,
-                  arrival_time: alreadyList.arrival_time,
-                  remark: alreadyList.remark
+                  purchase_quantity: alreadyList['productComponent']['proPurchaseData'].purchase_quantity,
+                  shops_id: alreadyList['productComponent']['proPurchaseData'].shops_id,
+                  suppliers_id: alreadyList['productComponent']['proPurchaseData'].suppliers_id,
+                  purchase_cost: alreadyList['productComponent']['proPurchaseData'].purchase_cost,
+                  warehouse_cost: alreadyList['productComponent']['proPurchaseData'].warehouse_cost,
+                  purchase_freight: alreadyList['productComponent']['proPurchaseData'].purchase_freight,
+                  commission: alreadyList['productComponent']['proPurchaseData'].commission,
+                  discount: alreadyList['productComponent']['proPurchaseData'].discount,
+                  wooden_frame_costs: alreadyList['productComponent']['proPurchaseData'].wooden_frame_costs,
+                  arrival_time: alreadyList['productComponent']['proPurchaseData'].arrival_time,
+                  remark: alreadyList['productComponent']['proPurchaseData'].remark
                 };
+                // console.log('alreadyComp',alreadyComp);
                 _purList['purchase_details'].push(alreadyComp);
               }
             });
@@ -2698,14 +2652,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           }
         });
         this.$patch(this.urls.purchases + '/' + id, addSku).then(function () {
-          _this12.$message({
+          _this13.$message({
             message: '修改成功',
             type: 'success'
           });
-          _this12.updatePurMask = false;
-          _this12.refresh();
-          _this12.multipleSelection = [];
-          _this12.checkboxInit = false;
+          _this13.updatePurMask = false;
+          _this13.refresh();
+          _this13.multipleSelection = [];
+          _this13.checkboxInit = false;
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -2714,7 +2668,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               arr1.push(arr[i]);
             }
             var str = arr1.join(',');
-            _this12.$message.error({
+            _this13.$message.error({
               message: str
             });
           }
@@ -2736,45 +2690,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.delId = row.id;
       if (row.purchase_order_no) {
         this.delUrl = this.urls.purchases;
-      } else if (row.purchases_id) {
+      } else if (row['purchases_id']) {
         this.delUrl = this.urls.purchaselists;
-      } else {
+      } else if (row['purchase_lists_id']) {
         this.delUrl = this.urls.purchasedetails;
       }
     },
-    rowStyle: function rowStyle(_ref7) {
+    rowStyle: function rowStyle(_ref8) {
       // console.log((this.purIndex) === rowIndex);
       /* if((this.purIndex) === rowIndex){
          return { "background-color": "red" }
        }*/
 
-      var row = _ref7.row,
-          rowIndex = _ref7.rowIndex;
+      var row = _ref8.row,
+          rowIndex = _ref8.rowIndex;
     },
     confirmD: function confirmD(url, id) {
-      var _this13 = this;
+      var _this14 = this;
 
       this.$del(url + '/' + id).then(function () {
-        _this13.$message({
+        _this14.$message({
           message: '删除成功',
           type: 'success'
         });
-        _this13.showDel = false;
-        _this13.refresh();
-        if (_this13.newData[0] && _this13.newData[0].purchase_lists[0]) {
-          _this13.purListVal = _this13.newData[0].purchase_lists[0];
-          _this13.purDetailsVal = _this13.newData[0].purchase_lists[0].purchase_details;
+        _this14.showDel = false;
+        _this14.refresh();
+        if (_this14.newData[0] && _this14.newData[0].purchase_lists[0]) {
+          _this14.purListVal = _this14.newData[0].purchase_lists[0];
+          _this14.purDetailsVal = _this14.newData[0].purchase_lists[0].purchase_details;
         }
       }, function (err) {
         if (err.response) {
-          _this13.showDel = false;
+          _this14.showDel = false;
           var arr = err.response.data.errors;
           var arr1 = [];
           for (var i in arr) {
             arr1.push(arr[i]);
           }
           var str = arr1.join(',');
-          _this13.$message.error({
+          _this14.$message.error({
             message: str
           });
         }
@@ -2793,9 +2747,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.delId = row.id;
       if (row.purchase_order_no) {
         this.delUrl = this.urls.purchases;
-      } else if (row.purchases_id) {
+      } else if (row['purchases_id']) {
         this.delUrl = this.urls.purchaselists;
-      } else {
+      } else if (row['purchase_lists_id']) {
         this.delUrl = this.urls.purchasedetails;
       }
     },
@@ -2816,7 +2770,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.delArr = del.join(',');
     },
     delMore: function delMore() {
-      var _this14 = this;
+      var _this15 = this;
 
       if (this.newOpt[2].nClick) {
         return;
@@ -2832,12 +2786,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             cancelButtonText: '取消',
             type: 'warning'
           }).then(function () {
-            _this14.$del(_this14.urls.purchases, { ids: _this14.delArr }).then(function () {
-              _this14.$message({
+            _this15.$del(_this15.urls.purchases, { ids: _this15.delArr }).then(function () {
+              _this15.$message({
                 message: '删除成功',
                 type: 'success'
               });
-              _this14.refresh();
+              _this15.refresh();
             }, function (err) {
               if (err.response) {
                 var arr = err.response.data.errors;
@@ -2846,13 +2800,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                   arr1.push(arr[i]);
                 }
                 var str = arr1.join(',');
-                _this14.$message.error({
+                _this15.$message.error({
                   message: str
                 });
               }
             });
           }).catch(function () {
-            _this14.$message({
+            _this15.$message({
               type: 'info',
               message: '已取消删除'
             });
@@ -2863,7 +2817,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*提交  提交之后不能修改*/
     doCommit: function doCommit() {
-      var _this15 = this;
+      var _this16 = this;
 
       if (this.newOpt[3].nClick) {
         return;
@@ -2882,13 +2836,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           return;
         } else {
           this.$put(this.urls.purchases + '/' + this.updateId + '/submit').then(function () {
-            _this15.$message({
+            _this16.$message({
               message: '提交成功!',
               type: 'success'
             });
-            _this15.refresh();
+            _this16.refresh();
           }, function (err) {
-            _this15.$message.error(err.response.data.message);
+            _this16.$message.error(err.response.data.message);
           });
         }
       }
@@ -2896,18 +2850,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*打印*/
     doPrinter: function doPrinter() {
-      var _this16 = this;
+      var _this17 = this;
 
       if (!this.newOpt[10].nClick) {
         this.$put(this.urls.purchases + '/' + this.purRow.id + '/print').then(function () {
-          _this16.printBtn();
-          _this16.$message({
+          _this17.printBtn();
+          _this17.$message({
             message: '打印成功!',
             type: 'success'
           });
-          _this16.refresh();
+          _this17.refresh();
         }, function (err) {
-          _this16.$message.error(err.response.data.message);
+          _this17.$message.error(err.response.data.message);
         });
       }
     },
@@ -2932,17 +2886,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     /*审核*/
     doAudit: function doAudit() {
-      var _this17 = this;
+      var _this18 = this;
 
       if (!this.newOpt[4].nClick) {
         this.$put(this.urls.purchases + '/' + this.purRow.id + '/audit').then(function () {
-          _this17.$message({
+          _this18.$message({
             message: '审核成功!',
             type: 'success'
           });
-          _this17.refresh();
+          _this18.refresh();
         }, function (err) {
-          _this17.$message.error(err.response.data.message);
+          _this18.$message.error(err.response.data.message);
         });
       }
     }
@@ -2978,10 +2932,25 @@ var render = function() {
               _vm._v(" "),
               _c("el-input", {
                 attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.handleQuery($event)
+                  }
+                },
                 model: {
                   value: _vm.searchBox.vip_name,
                   callback: function($$v) {
-                    _vm.$set(_vm.searchBox, "vip_name", $$v)
+                    _vm.$set(
+                      _vm.searchBox,
+                      "vip_name",
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                    )
                   },
                   expression: "searchBox.vip_name"
                 }
@@ -2997,10 +2966,25 @@ var render = function() {
               _vm._v(" "),
               _c("el-input", {
                 attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.handleQuery($event)
+                  }
+                },
                 model: {
                   value: _vm.searchBox.order_num,
                   callback: function($$v) {
-                    _vm.$set(_vm.searchBox, "order_num", $$v)
+                    _vm.$set(
+                      _vm.searchBox,
+                      "order_num",
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                    )
                   },
                   expression: "searchBox.order_num"
                 }
@@ -3016,10 +3000,25 @@ var render = function() {
               _vm._v(" "),
               _c("el-input", {
                 attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.handleQuery($event)
+                  }
+                },
                 model: {
                   value: _vm.searchBox.order_man,
                   callback: function($$v) {
-                    _vm.$set(_vm.searchBox, "order_man", $$v)
+                    _vm.$set(
+                      _vm.searchBox,
+                      "order_man",
+                      typeof $$v === "string" ? $$v.trim() : $$v
+                    )
                   },
                   expression: "searchBox.order_man"
                 }
@@ -3038,6 +3037,23 @@ var render = function() {
                     "el-select",
                     {
                       attrs: { clearable: "", placeholder: "请选择" },
+                      nativeOn: {
+                        keyup: function($event) {
+                          if (
+                            !("button" in $event) &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.handleQuery($event)
+                        }
+                      },
                       model: {
                         value: _vm.searchBox.order_shop,
                         callback: function($$v) {
@@ -3061,7 +3077,10 @@ var render = function() {
                 [
                   _c(
                     "el-button",
-                    { attrs: { type: "primary" }, on: { click: _vm.check } },
+                    {
+                      attrs: { type: "primary" },
+                      on: { click: _vm.handleQuery }
+                    },
                     [_vm._v("筛选")]
                   ),
                   _vm._v(" "),
@@ -3637,8 +3656,14 @@ var render = function() {
                                     : _c("span", [
                                         _vm._v(
                                           "\n                     " +
-                                            _vm._s(scope.row[item.prop]) +
-                                            "\n                 "
+                                            _vm._s(
+                                              item.inProp
+                                                ? scope.row[item.prop][
+                                                    item.inProp
+                                                  ]
+                                                : scope.row[item.prop]
+                                            ) +
+                                            "}\n                 "
                                         )
                                       ])
                             ]
@@ -3805,7 +3830,13 @@ var render = function() {
                                     : _c("span", [
                                         _vm._v(
                                           "\n                     " +
-                                            _vm._s(scope.row[item.prop]) +
+                                            _vm._s(
+                                              item.inProp
+                                                ? scope.row[item.prop][
+                                                    item.inProp
+                                                  ]
+                                                : scope.row[item.prop]
+                                            ) +
                                             "\n                 "
                                         )
                                       ])
@@ -4187,7 +4218,7 @@ var render = function() {
                                         ? ""
                                         : scope.row[item.prop]
                                     ) +
-                                    "\n                         "
+                                    "\n                             "
                                 )
                               ]
                             }
@@ -4643,7 +4674,7 @@ var render = function() {
                       attrs: { type: "primary" },
                       on: { click: _vm.addPurchaseDetail }
                     },
-                    [_vm._v("增加明细")]
+                    [_vm._v("增加sku/明细")]
                   )
                 ],
                 1
@@ -4835,7 +4866,6 @@ var render = function() {
               attrs: {
                 data: _vm.proDtlVal,
                 "highlight-current-row": "",
-                type: "index",
                 height: "160",
                 "row-class-name": _vm.proRowCName
               },
@@ -4885,25 +4915,17 @@ var render = function() {
                               ],
                               1
                             )
-                          : item.type == "select"
-                            ? _c("span", [
-                                _vm._v(
-                                  "\n                         " +
-                                    _vm._s(scope.row[item.prop][item.nmProp]) +
-                                    "\n                     "
-                                )
-                              ])
-                            : _c("span", [
-                                _vm._v(
-                                  "\n                          " +
-                                    _vm._s(
-                                      item.inProp
-                                        ? scope.row[item.prop][item.inProp]
-                                        : scope.row[item.prop]
-                                    ) +
-                                    "\n                     "
-                                )
-                              ])
+                          : _c("span", [
+                              _vm._v(
+                                "\n                          " +
+                                  _vm._s(
+                                    item.inProp
+                                      ? scope.row[item.prop][item.inProp]
+                                      : scope.row[item.prop]
+                                  ) +
+                                  "\n                     "
+                              )
+                            ])
                       ]
                     }
                   }
@@ -5342,9 +5364,10 @@ var render = function() {
                                                     attrs: {
                                                       type: "date",
                                                       placeholder: "选择日期",
-                                                      format: "yyyy/MM/dd",
+                                                      format:
+                                                        "yyyy-MM-dd HH:mm:ss",
                                                       "value-format":
-                                                        "yyyy/MM/dd"
+                                                        "yyyy-MM-dd HH:mm:ss"
                                                     },
                                                     model: {
                                                       value:
@@ -5557,7 +5580,8 @@ var render = function() {
                     attrs: {
                       data: _vm.updatePurSkuVal,
                       fit: "",
-                      height: "300"
+                      height: "300",
+                      "row-class-name": _vm.updateRowCName
                     },
                     on: { "row-click": _vm.updatePurSkuRowClick }
                   },
@@ -5665,6 +5689,9 @@ var render = function() {
                                                         type: "number",
                                                         placeholder: item.holder
                                                       },
+                                                      on: {
+                                                        input: _vm.updateComp
+                                                      },
                                                       model: {
                                                         value:
                                                           scope.row[item.prop][
@@ -5702,6 +5729,9 @@ var render = function() {
                                                           placeholder:
                                                             item.holder
                                                         },
+                                                        on: {
+                                                          input: _vm.updateComp
+                                                        },
                                                         model: {
                                                           value:
                                                             scope.row[
@@ -5738,6 +5768,10 @@ var render = function() {
                                                             attrs: {
                                                               placeholder:
                                                                 item.holder
+                                                            },
+                                                            on: {
+                                                              change:
+                                                                _vm.updateComp
                                                             },
                                                             model: {
                                                               value:
@@ -5801,9 +5835,13 @@ var render = function() {
                                                               placeholder:
                                                                 "选择日期",
                                                               format:
-                                                                "yyyy/MM/dd",
+                                                                "yyyy-MM-dd",
                                                               "value-format":
-                                                                "yyyy/MM/dd"
+                                                                "yyyy-MM-dd"
+                                                            },
+                                                            on: {
+                                                              change:
+                                                                _vm.updateComp
                                                             },
                                                             model: {
                                                               value:

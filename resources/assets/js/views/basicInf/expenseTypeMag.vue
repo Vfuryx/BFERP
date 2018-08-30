@@ -2,16 +2,11 @@
     <div>
         <el-tabs v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="费用类型管理" name="type">
-                <!--数据-->
                 <el-table
-                        :data="expenseType" fit highlight-current-row
-                        type="index"
+                        :data="expenseType" fit
+                        height=400
                         @selection-change="handleSelectionChange"
-                        element-loading-text="拼命加载中"
-                        v-loading="loading"
-                        element-loading-spinner="el-icon-loading"
-                        element-loading-background="rgba(0, 0, 0, 0.6)"
-                >
+                        v-loading="loading">
                     <el-table-column
                             type="selection"
                             width="95" align="center"
@@ -20,22 +15,23 @@
                     <el-table-column
                             label="类别"
                             align="center"
-                            width="180">
+                            width="160">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
-                 <el-select size="small" v-model="scope.row.fee_category.id" placeholder="请选择类型" @change="handleEdit">
-                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id" :key="item.id"></el-option>
+                 <el-select size="small" v-model="scope.row.fee_category_id" placeholder="请选择类型" @change="handleEdit">
+                        <el-option v-for="item in resData['feecates']" :label="item.name" :value="item.id" :key="item.id"></el-option>
                     </el-select>
                         </span>
                             <span v-else>
-                            {{scope.row.fee_category.name}}
+                            {{scope.row['feeCategory']
+.name}}
                         </span>
                         </template>
                     </el-table-column>
                     <el-table-column
                             label="类型名称"
                             align="center"
-                            width="200">
+                            width="160">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
                             <el-input size="small" v-model="scope.row.name" placeholder="输入名称" @change="handleEdit"></el-input>
@@ -61,47 +57,43 @@
                     <el-table-column
                             label="默认"
                             align="center"
-                            width="180">
+                            width="120">
                         <template slot-scope="scope">
                     <span v-if="changeIndex=='index'+scope.$index">
-                    <el-select v-model="scope.row.is_default" placeholder="是否默认" @change="handleEdit">
-                        <el-option v-for="item in defArr" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                    </el-select>
+                        <el-checkbox v-model="scope.row.is_default"></el-checkbox>
                     </span>
                             <span v-else>
-                            {{scope.row.is_default==0?'否':'是'}}
+                                 <el-checkbox v-model="scope.row.is_default" disabled></el-checkbox>
                         </span>
                         </template>
                     </el-table-column>
                     <el-table-column
                             label="状态"
                             align="center"
-                            width="200">
+                            width="120">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
-                            <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit">
-                                <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                            </el-select>
+                             <el-checkbox v-model="scope.row.status"></el-checkbox>
                         </span>
                             <span v-else>
-                            <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
-                            {{scope.row.status==0?'停用':'启用'}}
+                                <el-checkbox v-model="scope.row.status" disabled></el-checkbox>
                         </span>
                         </template>
                     </el-table-column>
                     <el-table-column
                             label="备注"
+                            width="160"
                             align="center">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
-                            <el-input size="small" v-model="scope.row.remark" placeholder="输入备注" @change="handleEdit"></el-input>
+                            <el-input size="small" v-model="scope.row.remark" placeholder="输入备注" @change="handleEdit" type="textarea"></el-input>
                         </span>
                             <span v-else>
                             {{scope.row.remark}}
                         </span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="220" align="center">
+                    <el-table-column label="操作" align="center">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
                             <el-button size="mini" @click="editSave(scope.$index,scope.row)">保存</el-button>
@@ -118,15 +110,11 @@
                 </el-table>
             </el-tab-pane>
             <el-tab-pane label="费用类别管理" name="cage">
-                <!--数据-->
                 <el-table
-                        :data="feeCage" fit highlight-current-row
-                        type="index"
+                        :data="feeCage" fit
+                        height=400
                         @selection-change="handleSelectionChange"
-                        element-loading-text="拼命加载中"
                         v-loading="loading"
-                        element-loading-spinner="el-icon-loading"
-                        element-loading-background="rgba(0, 0, 0, 0.6)"
                 >
                     <el-table-column
                             type="selection"
@@ -135,10 +123,9 @@
                     </el-table-column>
                     <el-table-column
                             label="名称"
-                            align="center"
-                            width="260">
+                            align="center">
                         <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
+                        <span v-if="cateIndex=='index'+scope.$index">
                             <el-input size="small" v-model="scope.row.name" placeholder="输入名称" @change="handleEdit"></el-input>
                         </span>
                             <span v-else>
@@ -148,29 +135,25 @@
                     </el-table-column>
                     <el-table-column
                             label="状态"
-                            align="center"
-                            width="260">
+                            align="center">
                         <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
-                            <el-select v-model="scope.row.status" placeholder="状态" @change="handleEdit">
-                                <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
-                            </el-select>
+                        <span v-if="cateIndex=='index'+scope.$index">
+                             <el-checkbox v-model="scope.row.status"></el-checkbox>
                         </span>
                             <span v-else>
-                            <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
-                            {{scope.row.status==0?'停用':'启用'}}
+                                 <el-checkbox v-model="scope.row.status" disabled></el-checkbox>
                         </span>
                         </template>
                     </el-table-column>
                     <el-table-column label="操作" align="center">
                         <template slot-scope="scope">
-                        <span v-if="changeIndex=='index'+scope.$index">
+                        <span v-if="cateIndex=='index'+scope.$index">
                             <el-button size="mini" @click="editSave2(scope.$index,scope.row)">保存</el-button>
-                            <el-button size="mini" @click="editCancel">取消
+                            <el-button size="mini" @click="editCancel2">取消
                             </el-button>
                         </span>
                             <span v-else>
-                           <el-button size="mini" @click="editType(scope.row,scope.$index)">编辑</el-button>
+                           <el-button size="mini" @click="editCate(scope.row,scope.$index)">编辑</el-button>
                         </span>
                             <el-button size="mini" type="danger" @click="delClick2(scope.row,$event)">删除
                             </el-button>
@@ -185,7 +168,7 @@
             <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
                 <el-form-item label="费用类别" prop="type">
                     <el-select v-model="ruleForm.type" placeholder="请选择状态">
-                        <el-option v-for="item in feeCage" :label="item.name" :value="item.id" :key="item.id"></el-option>
+                        <el-option v-for="item in resData['feecates']" :label="item.name" :value="item.id" :key="item.id"></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="费用名称
@@ -196,22 +179,16 @@
 " prop="code">
                     <el-input v-model="ruleForm.code" placehold="请输入标记名称"></el-input>
                 </el-form-item>
-                <el-form-item label="是否默认
-" prop="default">
-                    <el-select v-model="ruleForm.default" placeholder="请选择是或否">
-                        <el-option label="否" value="0"></el-option>
-                        <el-option label="是" value="1"></el-option>
-                    </el-select>
-                </el-form-item>
                 <el-form-item label="类别备注
 " prop="mark">
                     <el-input type="textarea" v-model="ruleForm.mark" placehold="请输入标记名称"></el-input>
                 </el-form-item>
+                <el-form-item label="是否默认
+" prop="default">
+                    <el-checkbox v-model="ruleForm.default"></el-checkbox>
+                </el-form-item>
                 <el-form-item label="状态" prop="status">
-                    <el-select v-model="ruleForm.status" placeholder="请选择状态">
-                        <el-option label="停用" value="0"></el-option>
-                        <el-option label="启用" value="1"></el-option>
-                    </el-select>
+                    <el-checkbox v-model="ruleForm.status"></el-checkbox>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
@@ -308,9 +285,9 @@
           type: '',
           name: '',
           code: '',
-          default:'0',
+          default: false,
           mark:'',
-          status: '1'
+          status: true
         },
         rules:{
           type: [
@@ -367,16 +344,33 @@
             {required: true, message: '请输入标记代码', trigger: 'blur'},
           ]
         },
-        showDel2: false
+        showDel2: false,
+        cateIndex: '',
+      }
+    },
+    computed:{
+      resData:{
+        get:function(){
+          return this.$store.state.responseData
+        },
+        set:function(){}
+      },
+      urls:{
+        get:function(){
+          return this.$store.state.urls
+        },
+        set:function(){}
       }
     },
     methods:{
       getExpenseType(){
-        this.$fetch('/feetypes')
+        this.$fetch(this.urls.feetypes,{include:'feeCategory'})
           .then(res=>{
+            console.log(res.data);
             this.expenseType = res.data;
             this.loading = false;
             let pg = res.meta.pagination;
+            this.$store.dispatch('feecates','/feecates');
             this.pagination.current_page = pg.current_page;
             this.pagination.total = pg.total;
             this.pagination.per_page = pg.per_page;
@@ -400,7 +394,7 @@
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            var data = {
+            let data = {
               fee_category_id: this.ruleForm.type,
               name: this.ruleForm.name,
               code: this.ruleForm.code,
@@ -408,15 +402,15 @@
               is_default: this.ruleForm.default,
               status: this.ruleForm.status
             };
-            this.$post('/feetypes', data)
+            this.$post(this.urls.feetypes, data)
               .then(() => {
+                this.showAdd = false;
+                this.resetForm('ruleForm');
+                this.getExpenseType();
                 this.$message({
                   message: '添加成功',
                   type: 'success'
                 });
-                this.showAdd = false;
-                this.resetForm('ruleForm');
-                this.getExpenseType();
               }, (err) => {
                 if (err.response) {
                   let arr = err.response.data.errors;
@@ -456,49 +450,43 @@
       editType(row,index){
         this.changeIndex = `index${index}`;
       },
+      editCate(row,index){ this.cateIndex = `index${index}`;},
       editSave(index,row){
         let newData = {
           id: row.id,
-          fee_category_id: row.fee_category.id,
+          fee_category_id: row.fee_category_id,
           name: row.name,
           code: row.code,
           is_default: row.is_default,
           status: row.status,
           remark: row.remark
         };
-        if(this.inputChange){
-          this.$patch('/feetypes/'+row.id,newData)
-            .then(()=>{
-              this.loading = true;
-              this.getExpenseType();
-              setTimeout(()=>{
-                this.loading = false;
-                this.$message({
-                  message: '修改成功',
-                  type: 'success'
-                });
-                this.changeIndex ='';
-                this.inputChange = false;
-              },2000)
-            },err=>{
-              if(err.response){
-                let arr = err.response.data.errors;
-                let arr1 = [];
-                for (let i in arr) {
-                  arr1.push(arr[i]);
-                }
-                let str = arr1.join(',');
-                this.$message.error({
-                  message: str
-                })
+        this.$patch(this.urls.feetypes+'/'+row.id,newData)
+          .then(()=>{
+            this.loading = true;
+            this.getExpenseType();
+            setTimeout(()=>{
+              this.loading = false;
+              this.$message({
+                message: '修改成功',
+                type: 'success'
+              });
+              this.changeIndex ='';
+              this.inputChange = false;
+            },2000)
+          },err=>{
+            if(err.response){
+              let arr = err.response.data.errors;
+              let arr1 = [];
+              for (let i in arr) {
+                arr1.push(arr[i]);
               }
-            })
-        }else{
-          this.$message({
-            message: '数据未改动',
-            type: 'info'
-          });
-        }
+              let str = arr1.join(',');
+              this.$message.error({
+                message: str
+              })
+            }
+          })
       },
       delClick(row,e){
         this.showDel = true;
@@ -520,7 +508,7 @@
         },2000);
       },
       handleCurrentChange(val){
-        this.$fetch('/feetypes?page=' + val).then((res) => {
+        this.$fetch(this.urls.feetypes+'?page=' + val).then((res) => {
           this.expenseType = res.data;
           let pg = res.meta.pagination;
           this.pagination.current_page = pg.current_page;
@@ -539,14 +527,14 @@
         });
       },
       confirmD(id){
-        this.$del('/feetypes/'+id)
+        this.$del(this.urls.feetypes+id)
           .then(()=>{
+            this.showDel = false;
+            this.getExpenseType();
             this.$message({
               message: '删除成功',
               type: 'success'
             });
-            this.showDel = false;
-            this.getExpenseType();
           },err=>{
             if (err.response) {
               this.showDel = false;
@@ -574,7 +562,7 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.$del("/feetypes", {ids: this.delArr})
+            this.$del(this.urls.feetypes, {ids: this.delArr})
               .then(() => {
                 this.$message({
                   message: '删除成功',
@@ -604,7 +592,7 @@
       },
     //  获取费用类别
       getExpenseCage(){
-        this.$fetch('/feecates')
+        this.$fetch(this.urls.feecates)
           .then(res=>{
             this.feeCage = res.data;
           },err=>{
@@ -642,18 +630,18 @@
       submitForm2(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            var data = {
+            let data = {
               name: this.ruleForm2.name,
               status: this.ruleForm2.status
             };
-            this.$post('/feecates', data)
+            this.$post(this.urls.feecates, data)
               .then(() => {
+                this.showCage = false;
+                this.getExpenseCage();
                 this.$message({
                   message: '添加成功',
                   type: 'success'
                 });
-                this.showCage = false;
-                this.getExpenseCage();
               }, (err) => {
                 if (err.response) {
                   let arr = err.response.data.errors;
@@ -686,13 +674,13 @@
               cancelButtonText: '取消',
               type: 'warning'
             }).then(() => {
-              this.$del("/feecates", {ids: this.delArr})
+              this.$del(this.urls.feecates, {ids: this.delArr})
                 .then(() => {
+                  this.getExpenseCage();
                   this.$message({
                     message: '删除成功',
                     type: 'success'
                   });
-                  this.getExpenseCage();
                 },err=>{
                   if (err.response) {
                     let arr = err.response.data.errors;
@@ -727,14 +715,14 @@
         this.delId = row.id;
       },
       confirmD2(id){
-        this.$del('/feecates/'+id)
+        this.$del(this.urls.feecates+'/'+id)
           .then(()=>{
+            this.showDel2 = false;
+            this.getExpenseCage();
             this.$message({
               message: '删除成功',
               type: 'success'
             });
-            this.showDel2 = false;
-            this.getExpenseCage();
           },err=>{
             if (err.response) {
               this.showDel2 = false;
@@ -750,52 +738,43 @@
             }
           })
       },
+      editCancel2(){
+        this.cateIndex = '';
+        this.$message({
+          message: '取消修改',
+          type: 'info'
+        });
+      },
       editSave2(index,row){
         let newData = {
           id: row.id,
           name: row.name,
           status: row.status
         };
-        if(this.inputChange){
-          this.$patch('/feecates/'+row.id,newData)
-            .then(()=>{
-              this.loading = true;
-              this.getExpenseCage();
-              this.loading = false;
-              this.$message({
-                message: '修改成功',
-                type: 'success'
-              });
-              this.changeIndex ='';
-              this.inputChange = false;
-             /* setTimeout(()=>{
-                this.loading = false;
-                this.$message({
-                  message: '修改成功',
-                  type: 'success'
-                });
-                this.changeIndex ='';
-                this.inputChange = false;
-              },2000)*/
-            },err=>{
-              if(err.response){
-                let arr = err.response.data.errors;
-                let arr1 = [];
-                for (let i in arr) {
-                  arr1.push(arr[i]);
-                }
-                let str = arr1.join(',');
-                this.$message.error({
-                  message: str
-                })
+        this.$patch(this.urls.feecates+'/'+row.id,newData)
+          .then(()=>{
+            this.loading = true;
+            this.getExpenseCage();
+            this.loading = false;
+            this.cateIndex ='';
+            this.inputChange = false;
+            this.$message({
+              message: '修改成功',
+              type: 'success'
+            });
+          },err=>{
+            if(err.response){
+              let arr = err.response.data.errors;
+              let arr1 = [];
+              for (let i in arr) {
+                arr1.push(arr[i]);
               }
-            })
-        }else{
-          this.$message({
-            message: '数据未改动',
-            type: 'info'
-          });
-        }
+              let str = arr1.join(',');
+              this.$message.error({
+                message: str
+              })
+            }
+          })
       },
     },
     mounted() {
@@ -803,7 +782,7 @@
       const that = this;
       $(window).resize(() => {
         that.$store.dispatch('setOpt',that.newOpt);
-      })
+      });
       this.getExpenseType();
       this.getExpenseCage();
     }

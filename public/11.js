@@ -436,7 +436,8 @@ var render = function() {
           tableHead: _vm.tableHead,
           loading: _vm.loading,
           currentIndex: _vm.currentIndex,
-          doChange: _vm.doChange
+          doChange: _vm.doChange,
+          height: 400
         },
         on: {
           handleSelect: _vm.handleSelectionChange,

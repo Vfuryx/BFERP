@@ -520,8 +520,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -591,7 +589,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         label: '产品类别',
         width: '120',
-        prop: "category",
+        prop: "goodsCategory",
         nmProp: 'name',
         type: 'select'
       }, {
@@ -810,7 +808,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         type: 'text'
       }, {
         label: '包含子件',
-        prop: "product_components",
+        prop: "productComponents",
         inProp: 'spec',
         type: 'text'
       }, {
@@ -1209,13 +1207,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getProducts: function getProducts() {
       var _this = this;
 
-      this.$fetch(this.urls.products).then(function (res) {
+      this.$fetch(this.urls.products, { include: 'productComponents,shop,supplier,goodsCategory,combinations.productComponents' }).then(function (res) {
         _this.productsLoading = false;
         _this.productsVal = res.data;
         if (res.data[0]) {
           _this.proId = res.data[0].id;
-          _this.productsCompVal = res.data[0].product_components;
-          _this.productsSkuVal = res.data[0].combinations;
+          // this.productsCompVal = res.data[0].product_components;
+          _this.productsCompVal = res.data[0]['productComponents'].data;
+          // this.productsSkuVal = res.data[0].combinations;
+          _this.productsSkuVal = res.data[0]['combinations'].data;
         }
         var pg = res.meta.pagination;
         _this.$store.dispatch('currentPage', pg.current_page);
@@ -1248,9 +1248,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     proRowClick: function proRowClick(row) {
       this.proId = row.id;
-      this.productsCompVal = row.product_components;
-      this.productsSkuVal = row.combinations;
-      this.$refs.multipleTable.toggleRowSelection(row);
+      this.productsCompVal = row['productComponents'].data;
+      this.productsSkuVal = row['combinations'].data;
+      // this.$refs.multipleTable.toggleRowSelection(row);
     },
 
     /*底部tabs*/
@@ -1275,7 +1275,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.skuForm.product_components = [];
       this.proId = row.id;
       var compId = [];
-      row.product_components.map(function (item) {
+      row['productComponents']['data'].map(function (item) {
         _this2.allComp.push(item);
       });
       this.allComp.map(function (item) {
@@ -1433,7 +1433,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.addProMask = false;
     },
 
-    //子件
+    /*子件*/
     compRowCName: function compRowCName(_ref2) {
       var row = _ref2.row,
           rowIndex = _ref2.rowIndex;
@@ -1557,7 +1557,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         this.updateProMask = true;
         this.updateProIndex = '';
-        this.$fetch(this.urls.products + '/' + this.updateId).then(function (res) {
+        this.$fetch(this.urls.products + '/' + this.updateId, { include: 'productComponents,shop,supplier,goodsCategory,combinations.productComponents' }).then(function (res) {
+          console.log('res', res);
           _this9.updateForm = {
             commodity_code: res.commodity_code,
             jd_sn: res.jd_sn,
@@ -1566,12 +1567,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             short_name: res.short_name,
             shops_id: res.shops_id,
             supplier_id: res.supplier.id,
-            category_id: res.category.id,
+            category_id: res.category_id,
             remark: res.remark,
             title: res.title,
             img: res.img,
             url: res.url,
-            product_components: res.product_components
+            product_components: res['productComponents'].data
           };
           if (_this9.updateForm.url) {
             _this9.noUpdate = false;
@@ -1685,8 +1686,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.updateCompId = [];
       this.updateList = [];
       this.$store.dispatch('products', '/products');
-      this.$fetch(this.urls.combinations + '/' + row.id).then(function (res) {
-        res.product_components.map(function (item) {
+      this.$fetch(this.urls.combinations + '/' + row.id, { include: 'productComponents,product,orderItems' }).then(function (res) {
+        res['productComponents']['data'].map(function (item) {
           _this12.alreadyCompId.push(item.id);
         });
         _this12.updateSkuForm = {
@@ -1874,6 +1875,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     refresh: function refresh() {
       this.productsLoading = true;
       this.getProducts();
+    },
+
+    /*分页*/
+    handlePagChg: function handlePagChg(page) {
+      var _this16 = this;
+
+      this.$fetch(this.urls.products + '?page=' + page, { include: 'productComponents,shop,supplier,goodsCategory,combinations.productComponents' }).then(function (res) {
+        _this16.logisticsData = res.data;
+      });
     },
 
     /*其他*/
@@ -2306,7 +2316,10 @@ var render = function() {
         2
       ),
       _vm._v(" "),
-      _c("Pagination", { attrs: { "page-url": this.urls.products } }),
+      _c("Pagination", {
+        attrs: { "page-url": this.urls.products },
+        on: { handlePagChg: _vm.handlePagChg }
+      }),
       _vm._v(" "),
       _c(
         "el-tabs",
@@ -2504,100 +2517,45 @@ var render = function() {
                             return [
                               item.prop
                                 ? _c("span", [
-                                    item.type == "select"
+                                    item.inProp
                                       ? _c(
                                           "span",
                                           _vm._l(
-                                            _vm.resData[item.stateVal],
-                                            function(list, index) {
+                                            scope.row[item.prop]["data"],
+                                            function(skuList) {
                                               return _c(
                                                 "span",
-                                                { key: index },
+                                                { key: skuList.id },
                                                 [
-                                                  list.id ==
-                                                  scope.row[item.prop]
-                                                    ? _c("span", [
-                                                        _vm._v(
-                                                          "\n                                          " +
-                                                            _vm._s(list.name) +
-                                                            "\n                                      "
+                                                  _c(
+                                                    "el-tag",
+                                                    {
+                                                      staticStyle: {
+                                                        "margin-right": "5px"
+                                                      }
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(
+                                                          "" +
+                                                            skuList[item.inProp]
                                                         )
-                                                      ])
-                                                    : _vm._e()
-                                                ]
+                                                      )
+                                                    ]
+                                                  )
+                                                ],
+                                                1
                                               )
                                             }
                                           )
                                         )
-                                      : item.type == "checkbox"
-                                        ? _c(
-                                            "span",
-                                            [
-                                              _c("el-checkbox", {
-                                                attrs: { disabled: "" },
-                                                model: {
-                                                  value: scope.row[item.prop],
-                                                  callback: function($$v) {
-                                                    _vm.$set(
-                                                      scope.row,
-                                                      item.prop,
-                                                      $$v
-                                                    )
-                                                  },
-                                                  expression:
-                                                    "scope.row[item.prop]"
-                                                }
-                                              })
-                                            ],
-                                            1
+                                      : _c("span", [
+                                          _vm._v(
+                                            "\n                                      " +
+                                              _vm._s(scope.row[item.prop]) +
+                                              "\n                                  "
                                           )
-                                        : _c("span", [
-                                            item.inProp
-                                              ? _c(
-                                                  "span",
-                                                  _vm._l(
-                                                    scope.row[item.prop],
-                                                    function(skuList) {
-                                                      return _c(
-                                                        "span",
-                                                        { key: skuList.id },
-                                                        [
-                                                          _c(
-                                                            "el-tag",
-                                                            {
-                                                              staticStyle: {
-                                                                "margin-right":
-                                                                  "5px"
-                                                              }
-                                                            },
-                                                            [
-                                                              _vm._v(
-                                                                _vm._s(
-                                                                  "" +
-                                                                    skuList[
-                                                                      item
-                                                                        .inProp
-                                                                    ]
-                                                                )
-                                                              )
-                                                            ]
-                                                          )
-                                                        ],
-                                                        1
-                                                      )
-                                                    }
-                                                  )
-                                                )
-                                              : _c("span", [
-                                                  _vm._v(
-                                                    "\n                                      " +
-                                                      _vm._s(
-                                                        scope.row[item.prop]
-                                                      ) +
-                                                      "\n                                  "
-                                                  )
-                                                ])
-                                          ])
+                                        ])
                                   ])
                                 : _vm._e()
                             ]
@@ -4111,6 +4069,7 @@ var render = function() {
                   _c(
                     "el-select",
                     {
+                      attrs: { disabled: "" },
                       model: {
                         value: _vm.updateSkuForm.pid,
                         callback: function($$v) {

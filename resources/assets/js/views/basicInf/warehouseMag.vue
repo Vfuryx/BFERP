@@ -2,7 +2,7 @@
     <div>
         <light-table @handleSelect="handleSelectionChange" :listData="getsInfo" :tableHead="tableHead"
                      @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading" @edit="edit"
-                     :currentIndex="currentIndex" @editCancel="editCancel" :doChange="doChange"></light-table>
+                     :currentIndex="currentIndex" @editCancel="editCancel" :doChange="doChange" :height="400"></light-table>
         <!--新增-->
         <add-new :visible-add="showMaskArr" :title="title"
                  :rule-form="ruleForm" :rules="rules" :add-arr="addArr"

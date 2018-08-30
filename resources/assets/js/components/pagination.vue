@@ -34,8 +34,10 @@
     },
     methods: {
       handleCurrentChange(val) {
-        this.$store.commit('SET_URL',this.pageUrl);
-        this.$store.dispatch('setPagination',val);
+        // console.log(val);
+        // this.$store.commit('SET_URL',this.pageUrl);
+        // this.$store.dispatch('setPagination',val);
+        this.$emit('handlePagChg',val)
       }
     }
   }

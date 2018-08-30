@@ -2,28 +2,142 @@
     <div>
         <el-tabs v-model="activeName" @tab-click="handleTabsClick">
             <el-tab-pane label="供应商信息" name="0">
-                <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
-                             :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
-                             @del="del" @dbClick="dbClick" :loading="loading" @edit="edit" :currentIndex="currentIndex"
-                             @editCancel="editCancel" :doChange="doChange[this.activeName]"></light-table>
+                <el-table :data="supplierVal" fit
+                          @selection-change="handleSelectionChange"
+                          v-loading="loading"
+                          height="400"
+                          @row-click="supplierRClick">
+                    <el-table-column
+                            type="selection"
+                            width="95" align="center"
+                            :checked="checkboxInit">
+                    </el-table-column>
+                    <el-table-column v-for="item in tableHead[0]" :label="item.label" align="center" :width="item.width" :key="item.prop">
+                        <template slot-scope="scope">
+                            <span v-if="item.type=='checkbox'">
+                           <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                        </span>
+                            <span v-else>
+                            {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                        </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" width="90" align="center">
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </el-tab-pane>
             <el-tab-pane label="产品系列" name="1">
-                <light-table @handleSelect="handleSelectionChange" :listData="getsInfo[this.activeName]"
-                             :tableHead="tableHead[this.activeName]" @editSave="editSave" @handleEdit="handleEdit"
-                             @del="del" :loading="loading" :currentIndex="currentIndex" @edit="edit"
-                             @editCancel="editCancel" :selects="sonArr" :doChange="doChange[this.activeName]"></light-table>
+                <el-table :data="seriesVal" fit
+                          @selection-change="handleSelectionChange"
+                          v-loading="loading"
+                          height="400"
+                          @row-click="seriesRClick">
+                    <el-table-column
+                            type="selection"
+                            width="95" align="center"
+                            :checked="checkboxInit">
+                    </el-table-column>
+                    <el-table-column v-for="item in tableHead[1]" :label="item.label" align="center" :width="item.width" :key="item.prop">
+                        <template slot-scope="scope">
+                            <span v-if="item.type=='checkbox'">
+                           <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                        </span>
+                            <span v-else>
+                            {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                        </span>
+                        </template>
+                    </el-table-column>
+                    <el-table-column label="操作" align="center">
+                        <template slot-scope="scope">
+                            <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
+                        </template>
+                    </el-table-column>
+                </el-table>
             </el-tab-pane>
         </el-tabs>
+
         <!--新增-->
-        <add-new :visible-add="showMaskArr[activeName].show" :title="title[activeName]"
-                 :rule-form="ruleForm[activeName]" :rules="rules[activeName]" :add-arr="addArr[activeName]"
-                 :url="url[activeName]" @submitEvent="submitForm" :new-ref="refArr[activeName]" @CB-dialog="CB_dialog"
-                 :halfForm="halfForm[activeName].show" :selects="sonArr"></add-new>
+        <el-dialog :title="title[activeName]" :visible.sync="addMask[activeName]">
+            <el-form :model="addVal[activeName]" :rules="addRules[activeName]" label-width="100px" :class="{'half-form':halfForm[activeName]}">
+                <el-form-item v-for="(item,index) in addHead[activeName]" :key="index" :label="item.label" :prop="item.prop">
+                    <span v-if="item.type=='text'">
+                          <el-input v-model.trim="addVal[activeName][item.prop]" :placeholder="addVal[activeName][item.holder]"></el-input>
+                    </span>
+                    <span v-else-if="item.type=='select'">
+                        <el-select v-model="addVal[activeName][item.prop]" :placeholder="addVal[activeName][item.holder]">
+                               <span v-for="list in resData[item.stateVal]" :key="list.id">
+                                    <el-option :label="list.name?list.name:list.nick" :value="list.id"></el-option>
+                               </span>
+                           </el-select>
+                    </span>
+                    <span v-else-if="item.type=='textarea'">
+                         <el-input type="textarea" v-model.trim="addVal[activeName][item.prop]" :placehoder="addVal[activeName][item.holder]"></el-input>
+                    </span>
+                    <span v-else-if="item.type == 'cascader'">
+                        <el-cascader
+                                size="middle"
+                                :options="options"
+                                v-model="addVal[activeName][item.prop]">
+                        </el-cascader>
+                    </span>
+                    <span v-else-if="item.type == 'password'">
+                         <el-input type="password" v-model="addVal[activeName][item.prop]" :placehold="addVal[activeName][item.holder]"></el-input>
+                    </span>
+                    <span v-else-if="item.type == 'number'">
+                         <el-input type="number" v-model="addVal[activeName][item.prop]" :placehold="addVal[activeName][item.holder]"></el-input>
+                    </span>
+                    <span v-else-if="item.type == 'checkbox'">
+                         <el-checkbox v-model="addVal[activeName][item.prop]"></el-checkbox>
+                    </span>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="addConfirm">添加</el-button>
+                <el-button @click="addReset">重置</el-button>
+            </div>
+        </el-dialog>
+
         <!--修改-->
-        <add-new :visible-add="editMask[this.activeName].show" :title="editTitle[activeName]" :rules="rules[activeName]" :new-ref="refArr[activeName]"
-                 :rule-form="editData" :add-arr="addArr[activeName]"
-                 :url="url[activeName]" @submitEvent="editForm" @CB-dialog="CB_dialog"
-                 :halfForm="halfForm[activeName].show" :selects="sonArr" :leftTab="leftTab"></add-new>
+        <el-dialog :title="updateTitle[activeName]" :visible.sync="updateMask">
+            <el-form :model="updateVal[activeName]" :rules="addRules[activeName]" label-width="100px" :class="{'half-form':halfForm[activeName]}">
+                <el-form-item v-for="(item,index) in addHead[activeName]" :key="index" :label="item.label" :prop="item.prop">
+                    <span v-if="item.type=='text'">
+                          <el-input v-model.trim="updateVal[activeName][item.prop]"></el-input>
+                    </span>
+                    <span v-else-if="item.type=='select'">
+                        <el-select v-model="updateVal[activeName][item.prop]">
+                               <span v-for="list in resData[item.stateVal]" :key="list.id">
+                                    <el-option :label="list.name?list.name:list.nick" :value="list.id"></el-option>
+                               </span>
+                           </el-select>
+                    </span>
+                    <span v-else-if="item.type=='textarea'">
+                         <el-input type="textarea" v-model.trim="updateVal[activeName][item.prop]"></el-input>
+                    </span>
+                    <span v-else-if="item.type == 'cascader'">
+                        <el-cascader
+                                size="middle"
+                                :options="options"
+                                v-model="updateVal[activeName][item.prop]">
+                        </el-cascader>
+                    </span>
+                    <span v-else-if="item.type == 'number'">
+                         <el-input type="number" v-model="updateVal[activeName][item.prop]"></el-input>
+                    </span>
+                    <span v-else-if="item.type == 'checkbox'">
+                         <el-checkbox v-model="updateVal[activeName][item.prop]"></el-checkbox>
+                    </span>
+                </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="updateConfirm">确认</el-button>
+                <el-button @click="updateCancel">取消</el-button>
+            </div>
+        </el-dialog>
+
         <!--删除-->
         <el-popover
                 placement="top"
@@ -32,17 +146,16 @@
             <p>确定删除该条数据？</p>
             <div style="text-align: right; margin: 0">
                 <el-button size="mini" type="text" @click="cancelD">取消</el-button>
-                <el-button type="primary" size="mini" @click="confirmD(delId)">确定</el-button>
+                <el-button type="primary" size="mini" @click="confirmD(delUrl,delId)">确定</el-button>
             </div>
         </el-popover>
+
         <!--页码-->
-        <div v-if="showPage">
-            <Pagination :page-url="url[activeName]"></Pagination>
-        </div>
-        <div v-else></div>
+        <Pagination :page-url="delBatchUrl" @handlePagChg="handlePagChg"></Pagination>
     </div>
 </template>
 <script>
+  import { regionDataPlus, CodeToText, TextToCode } from 'element-china-area-data'
   export default {
     data() {
       return {
@@ -50,18 +163,18 @@
           {
             cnt: '新增',
             icon: 'bf-add',
-            ent: this.addNew
+            ent: this.addInfo
           },
           {
             cnt: '修改',
             icon: 'bf-change',
-            ent: this.editInfo,
-            nClick: true
+            ent: this.updateInfo,
+            // nClick: true
           },
           {
             cnt: '删除',
             icon: 'bf-del',
-            ent: this.delMore
+            ent: this.delBatch
           },
           {
             cnt: '导入',
@@ -85,185 +198,187 @@
           }
         ],
         activeName: '0',
-        getsInfo: [[],[]],
+        pagination: {
+          current_page: 1,
+          per_page: 0,
+          page_total: 0
+        },
+        /*获取数据*/
+        supplierVal: [],
+        seriesVal: [],
+        checkboxInit: false,
         tableHead: [
           [
             {
               label: '名称',
-              width: '180',
+              width: '120',
               prop: "name",
               holder: '请输入名称',
               type: 'text',
-              beAble: true
+              // beAble: true
             },
             {
               label: '公司',
-              width: '180',
+              width: '120',
               prop: "company",
               holder: '请输入公司',
               type: 'text'
             },
             {
               label: '公司代码',
-              width: '180',
+              width: '130',
               prop: "code",
               holder: '请输入公司代码',
               type: 'text'
             },
             {
               label: '省',
-              width: '180',
+              width: '120',
               prop: "province",
               holder: '请输入省'
             },
             {
               label: '市',
-              width: '180',
+              width: '120',
               prop: "city",
               holder: '请输入市',
               type: 'text'
             },
             {
               label: '区',
-              width: '180',
+              width: '120',
               prop: "district",
               holder: '请输入区',
               type: 'text'
             },
             {
               label: '地址',
-              width: '220',
+              width: '150',
               prop: "address",
               holder: '请输入地址',
               type: 'text'
             },
             {
               label: '邮编',
-              width: '180',
+              width: '120',
               prop: "zipcode",
-              holder: '请输入邮编',
               type: 'text'
             },
             {
               label: '联系人',
-              width: '200',
+              width: '120',
               prop: "contacts",
-              holder: '请输入联系人',
               type: 'text'
             },
             {
               label: '联系电话',
-              width: '180',
+              width: '120',
               prop: "phone",
-              holder: '请输入联系电话',
               type: 'text'
             },
             {
               label: '手机',
-              width: '180',
+              width: '120',
               prop: "mobile",
-              holder: '请输入手机',
               type: 'text'
             },
             {
               label: '传真',
-              width: '180',
+              width: '120',
               prop: "fax",
-              holder: '请输入传真',
               type: 'text'
             },
             {
               label: '邮箱',
-              width: '200',
+              width: '120',
               prop: "email",
-              holder: '请输入邮箱',
               type: 'text'
             },
             {
               label: '备注',
-              width: '180',
+              width: '130',
               prop: "remark",
-              holder: '请输入备注',
               type: 'textarea'
             },
             {
               label: '启用扫描',
-              width: '160',
+              width: '90',
               prop: "is_scan",
-              holder: '请选择是否启用',
-              type: 'select_def'
+              type: 'checkbox'
             },
             {
               label: '采购自动计价',
-              width: '160',
+              width: '90',
               prop: "auto_valuation",
               holder: '是否启用',
-              type: 'select_def'
+              type: 'checkbox'
             },
             {
               label: '状态',
-              width: '160',
+              width: '90',
               prop: "status",
               holder: '请选择状态',
-              type: 'select_stu'
+              type: 'checkbox'
             }
           ],
           [
             {
               label: '供应商名称',
-              width: '',
+              width: '130',
               prop: "suppliers",
+              inProp: 'name',
               holder: '请选择供应商名称',
-              type: 'select',
-              val: this.sonArr
+              type: 'select'
             },
             {
               label: '系列代码',
-              width: '',
+              width: '130',
               prop: "code",
               holder: '请输入系列代码',
               type: 'text'
             },
             {
               label: '系列名称',
-              width: '',
+              width: '130',
               prop: "name",
               holder: '请输入系列名称',
               type: 'text'
             },
             {
               label: '系列描述',
-              width: '',
+              width: '150',
               prop: "description",
               holder: '请输入系列描述',
               type: 'textarea'
             },
             {
               label: '备注',
-              width: '',
+              width: '130',
               prop: "remark",
               holder: '请输入名称',
               type: 'textarea'
             },
             {
               label: '状态',
-              width: '',
+              width: '90',
               prop: "status",
               holder: '请选择状态',
-              type: 'select_stu'
+              type: 'checkbox'
             }
           ]
         ],
+        supplierRow:{},
+        seriesRow: {},
         loading: true,
-        currentIndex: '',
-        url: ['/suppliers', '/series'],
-        showMaskArr: [{show: false}, {show: false}],
+        /*新增*/
         title: ['新增供应商', '新增产品系列'],
-        ruleForm: [
+        addMask: [false,false],
+        addVal: [
           {
             name: '',
             company: '',
             code: '',
+            provinces: [],
             province: '',
             city: '',
             district: '',
@@ -273,9 +388,9 @@
             fax: '',
             email: '',
             remark: '',
-            is_scan: '1',
-            auto_valuation: '1',
-            status: '1'
+            is_scan: true,
+            auto_valuation: true,
+            status: true
           },
           {
             suppliers_id: '',
@@ -283,9 +398,9 @@
             name: '',
             description: '',
             remark: '',
-            status: '1'
+            status: true
           }],
-        rules: [
+        addRules: [
           {
             name: [
               {required: true, message: '请输入供应商名称', trigger: 'blur'},
@@ -336,7 +451,7 @@
             ]
           }
         ],
-        addArr: [
+        addHead: [
           [
             {
               label: '供应商名',
@@ -357,6 +472,12 @@
               type: 'text',
             },
             {
+              label: '省市区',
+              prop: 'provinces',
+              holder: '请选择所在省市区',
+              type: 'cascader'
+            },
+           /* {
               label: '省',
               prop: 'province',
               holder: '请输入所在省',
@@ -373,7 +494,7 @@
               prop: 'district',
               holder: '请输入所在区',
               type: 'text'
-            },
+            },*/
             {
               label: '地址',
               prop: 'address',
@@ -384,7 +505,7 @@
               label: '邮编',
               prop: 'zipcode',
               holder: '请输入邮编',
-              type: 'text'
+              type: 'number'
             },
             {
               label: '联系人',
@@ -396,13 +517,13 @@
               label: '电话号码',
               prop: 'phone',
               holder: '请输入电话号码',
-              type: 'tel'
+              type: 'number'
             },
             {
               label: '手机号码',
               prop: 'mobile',
               holder: '请输入手机号码',
-              type: 'tel'
+              type: 'number'
             },
             {
               label: '传真',
@@ -426,19 +547,19 @@
               label: '启用扫描',
               prop: 'is_scan',
               holder: '请选择是或否',
-              type: 'select_def'
+              type: 'checkbox'
             },
             {
               label: '采购自动计价',
               prop: 'auto_valuation',
               holder: '请选择是或否',
-              type: 'select_def'
+              type: 'checkbox'
             },
             {
               label: '状态',
               prop: 'status',
               holder: '请选择',
-              type: 'select_stu'
+              type: 'checkbox'
             }
           ],
           [
@@ -447,7 +568,7 @@
               prop: 'suppliers_id',
               holder: '请输入供应商名称',
               type: 'select',
-              val: this.sonArr
+              stateVal: 'suppliers'
             },
             {
               label: '系列代码',
@@ -477,131 +598,329 @@
               label: '状态',
               prop: 'status',
               holder: '请选择',
-              type: 'select_stu'
+              type: 'checkbox'
             }
           ]
         ],
-        halfForm: [{show: true}, {show: false}],
-        refArr: ['ruleSuppliers', 'ruleSeries'],
-        showDel: false,
+        halfForm: [true,false],
+        options: regionDataPlus,
+        /*修改*/
+        updateTitle: ['修改供应商','修改产品系列'],
+        updateMask: false,
+        updateVal: [{},{}],
+        currentId: '',
+        delBatchUrl: '',
         delId: '',
-        inputChange: false,
-        multipleSelection: [],
-        delArr: [],
-        pagination: {
-          current_page: 1,
-          per_page: 0,
-          page_total: 0
-        },
-        resetValue: this.ruleForm,
-        showPage: true,
-        doChange: [true, false],
-        sonArr:[],
-        leftTab:'修改',
-        editMask: [{show: false}, {show: false}],
-        editTitle: ['修改产品系列信息'],
-        editId:'',
-        editData: {},
+        showDel: false,
       }
     },
-    computed: {
-     /* suppliersId: {
-        get: function () {
-          return this.$store.state.SonData.suppliers
+    computed:{
+      resData:{
+        get:function(){
+          return this.$store.state.responseData
         },
-        set: function () {
-        }
-      }*/
+        set:function(){}
+      },
+      urls:{
+        get:function(){
+          return this.$store.state.urls
+        },
+        set:function(){}
+      }
     },
     methods: {
-      test() {
-      },
-      handleTabsClick() {
-        this.loading = true;
-        this.getInfo(this.url[this.activeName]);
-        if(this.activeName==1){
-          this.newOpt[1].nClick = false;
-        }else{
-          this.newOpt[1].nClick = true;
+      test() {},
+      /*获取数据*/
+      fetchData() {
+        let index = this.activeName-0;
+        switch(index){
+          case 0:
+            this.$fetch(this.urls.suppliers)
+              .then(res => {
+                this.loading = false;
+                this.supplierVal = res.data;
+                let pg = res.meta.pagination;
+                this.$store.dispatch('currentPage', pg.current_page);
+                this.$store.commit('PER_PAGE', pg.per_page);
+                this.$store.commit('PAGE_TOTAL', pg.total);
+                this.delBatchUrl = this.urls.suppliers;
+              }, err => {
+                if (err.response) {
+                  let arr = err.response.data.errors;
+                  let arr1 = [];
+                  for (let i in arr) {
+                    arr1.push(arr[i]);
+                  }
+                  let str = arr1.join(',');
+                  this.$message.error({
+                    message: str
+                  });
+                }
+              });
+            break;
+          case 1:
+            this.$fetch(this.urls.series,{include:'suppliers'})
+              .then(res => {
+                this.loading = false;
+                this.seriesVal = res.data;
+                let pg = res.meta.pagination;
+                this.$store.dispatch('currentPage', pg.current_page);
+                this.$store.commit('PER_PAGE', pg.per_page);
+                this.$store.commit('PAGE_TOTAL', pg.total);
+                this.$store.dispatch('suppliers','/suppliers');
+              }, err => {
+                if (err.response) {
+                  let arr = err.response.data.errors;
+                  let arr1 = [];
+                  for (let i in arr) {
+                    arr1.push(arr[i]);
+                  }
+                  let str = arr1.join(',');
+                  this.$message.error({
+                    message: str
+                  });
+                }
+              });
+            break;
         }
       },
-      addNew() {
-        this.showMaskArr[this.activeName].show = true;
+      handleTabsClick(){
+        this.loading = true;
+        this.fetchData();
+        Object.assign(this.addVal[this.activeName],this.$options.data().addVal[this.activeName]);
+        this.delBatchUrl = this.activeName =='0'?this.urls.suppliers:this.urls.series;
       },
-      CB_dialog(val) {
-        this.showMaskArr[this.activeName].show = val;
-        this.editMask[this.activeName].show = val;
+      supplierRClick(row){this.supplierRow = row;},
+      seriesRClick(row){ this.seriesRow = row;},
+      /*新增*/
+      addInfo(){
+        this.addMask=[false,false];
+        this.addMask[this.activeName] = true;
+        Object.assign(this.addVal[this.activeName],this.$options.data().addVal[this.activeName])
       },
-      submitForm() {
-       /* let addObj = {};
-        if (this.activeName == '0') {
-          addObj = {
-            name: this.ruleForm[0].name,
-            company: this.ruleForm[0].company,
-            code: this.ruleForm[0].code,
-            province: this.ruleForm[0].province,
-            city: this.ruleForm[0].city,
-            district: this.ruleForm[0].district,
-            address: this.ruleForm[0].address,
-            zipcode: this.ruleForm[0].zipcode,
-            contacts: this.ruleForm[0].contacts,
-            phone: this.ruleForm[0].phone,
-            mobile: this.ruleForm[0].mobile,
-            fax: this.ruleForm[0].fax,
-            email: this.ruleForm[0].email,
-            remark: this.ruleForm[0].remark,
-            is_scan: this.ruleForm[0].is_scan,
-            status: this.ruleForm[0].status,
-            auto_valuationy: this.ruleForm[0].auto_valuationy
-          };
-        } else if (this.activeName == '1') {
-          addObj = {
-            suppliers_id: this.ruleForm[1].suppliers_id,
-            code: this.ruleForm[1].code,
-            name: this.ruleForm[1].name,
-            description: this.ruleForm[1].description,
-            remark: this.ruleForm[1].remark,
-            status: this.ruleForm[1].status
-          };
-        }*/
-        this.$post(this.url[this.activeName], this.ruleForm[this.activeName])
-          .then(() => {
+      addConfirm(){
+        if(this.addMask[0] == true){
+          let data = this.addVal[0];
+          data.province = CodeToText[data.provinces[0]];
+          data.city = CodeToText[data.provinces[1]];
+          data.district = CodeToText[data.provinces[2]];
+          this.$post(this.urls.suppliers,data)
+            .then(()=>{
+              this.addMask = [false,false];
+              // this.addMask[this.activeName] = false;
+              this.$message({
+                message: '添加成功',
+                type: 'success'
+              });
+              this.refresh();
+            },err=>{
+              Object.assign(this.addVal[this.activeName],this.$options.data().addVal[this.activeName]);
+              if (err.response) {
+                let arr = err.response.data.errors;
+                let arr1 = [];
+                for (let i in arr) {
+                  arr1.push(arr[i]);
+                }
+                let str = arr1.join(',');
+                this.$message.error({
+                  message: str
+                });
+              }
+            })
+        }else{
+          let data = this.addVal[1];
+          this.$post(this.urls.series,data)
+            .then(()=>{
+              this.addMask = [false,false];
+              this.$message({
+                message: '添加成功',
+                type: 'success'
+              });
+              this.refresh();
+            },err=>{
+              Object.assign(this.addVal[this.activeName],this.$options.data().addVal[this.activeName]);
+              if (err.response) {
+                let arr = err.response.data.errors;
+                let arr1 = [];
+                for (let i in arr) {
+                  arr1.push(arr[i]);
+                }
+                let str = arr1.join(',');
+                this.$message.error({
+                  message: str
+                });
+              }
+            })
+        }
+      },
+      addReset() {
+        Object.assign(this.addVal[this.activeName],this.$options.data().addVal[this.activeName])
+      },
+      /*修改*/
+      updateInfo(){
+        this.updateMask = true;
+        let id;
+        if(this.activeName=='0'){
+          id=this.currentId?this.currentId:this.supplierRow.id;
+          this.$fetch(this.urls.suppliers+'/'+id)
+            .then(res=>{
+              this.updateVal = [{
+                name: res.name,
+                company: res.company,
+                code: res.code,
+                provinces: [TextToCode[res.province].code, TextToCode[res.province][res.city].code, TextToCode[res.province][res.city][res.district].code],
+                province: res.province,
+                city: res.city,
+                district: res.district,
+                address: res.address,
+                phone: res.phone,
+                mobile: res.mobile,
+                fax: res.fax,
+                zipcode: res.zipcode,
+                contacts: res.contacts,
+                email: res.email,
+                remark: res.remark,
+                is_scan: res.is_scan,
+                auto_valuation: res.auto_valuation,
+                status: res.status,
+              },{}];
+            },err=>{})
+        }else{
+          id=this.currentId?this.currentId:this.seriesRow.id;
+          this.$fetch(this.urls.series+'/'+id,{include:'suppliers'})
+            .then(res=>{
+              this.updateVal = [{},{
+                suppliers_id:  res.suppliers_id,
+                code:  res.code,
+                name:  res.name,
+                description:  res.description,
+                remark:  res.remark,
+                status:  res.status
+              }];
+            },err=>{})
+        }
+      },
+      updateConfirm(){
+        let id;
+        id=this.currentId?this.currentId:this.supplierRow.id;
+        if(this.activeName=='0'){
+          let data = this.updateVal[this.activeName];
+          data.province = CodeToText[data.provinces[0]];
+          data.city = CodeToText[data.provinces[1]];
+          data.district = CodeToText[data.provinces[2]];
+          this.$patch(this.urls.suppliers+'/'+id,this.updateVal[0])
+            .then(()=>{
+              this.updateMask = false;
+              this.refresh();
+              this.$message({
+                message:'修改成功',
+                type:'success'
+              })
+            },err=>{
+              if (err.response) {
+                let arr = err.response.data.errors;
+                let arr1 = [];
+                for (let i in arr) {
+                  arr1.push(arr[i]);
+                }
+                let str = arr1.join(',');
+                this.$message.error(str);
+              }
+            })
+        }else{
+          let id;
+          id=this.currentId?this.currentId:this.seriesRow.id;
+          this.$patch(this.urls.series+'/'+id,this.updateVal[1])
+            .then(()=>{
+              this.updateMask = false;
+              this.refresh();
+              this.$message({
+                message:'修改成功',
+                type:'success'
+              })
+            },err=>{
+              if (err.response) {
+                let arr = err.response.data.errors;
+                let arr1 = [];
+                for (let i in arr) {
+                  arr1.push(arr[i]);
+                }
+                let str = arr1.join(',');
+                this.$message.error(str);
+              }
+            })
+        }
+      },
+      updateCancel(){
+        this.updateMask = false;
+        this.$message({
+          message: '取消修改',
+          type:'info'
+        })
+      },
+      /*分页*/
+      handlePagChg(page){
+        if(this.activeName == '0'){
+          this.$fetch(this.urls.suppliers+'?page='+page)
+            .then(res=>{
+              this.supplierVal = res.data;
+            })
+        }else{
+          this.$fetch(this.urls.series+'?page='+page,{include:'suppliers'})
+            .then(res=>{
+              this.seriesVal = res.data;
+            })
+        }
+      },
+      /*删除*/
+      delSingle(row,e){
+        this.showDel = true;
+        $('.el-popper').css({left: e.x - 100 + 'px', top: e.y - 125 + 'px'});
+        this.delId = row.id;
+        this.delUrl = row.suppliers?this.urls.series:this.urls.suppliers;
+      },
+      cancelD(){
+        this.showDel = false;
+        this.$message({
+          message: '取消删除',
+          type: 'info'
+        });
+      },
+      confirmD(url,id){
+        this.$del(url+'/'+id)
+          .then(()=>{
             this.$message({
-              message: '添加成功',
+              message: '删除成功',
               type: 'success'
             });
-            this.showMaskArr[this.activeName].show = false;
+            this.showDel = false;
             this.refresh();
-          }, (err) => {
+          },err=>{
             if (err.response) {
+              this.showDel = false;
               let arr = err.response.data.errors;
               let arr1 = [];
               for (let i in arr) {
                 arr1.push(arr[i]);
               }
               let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
+              this.$message.error(str);
             }
           })
       },
-      /*处理批量删除*/
-      handleSelectionChange(val) {
-        if (val.length != 0) {
-          this.editId = val[0].id;
-        } else {
-          this.editId = '';
-        }
-        this.multipleSelection = val;
-        let del = [];
-        this.multipleSelection.forEach(selectedItem => {
-          del.push(selectedItem.id);
+      /*批量删除*/
+      handleSelectionChange(val){
+        /*拿到id集合*/
+        let delArr = [];
+        val.forEach(selectedItem => {
+          delArr.push(selectedItem.id);
         });
-        this.delArr = del.join(',');
+        this.ids = delArr.join(',');
+        /*拿到当前id*/
+        this.currentId =val.length>0?val[val.length-1].id:'';
       },
-      delMore() {
-        if (this.delArr.length === 0) {
+      delBatch(){
+        if (this.ids.length === 0) {
           this.$message({
             message: '没有选中数据',
             type: 'warning'
@@ -612,14 +931,14 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            this.$del(this.url[this.activeName], {ids: this.delArr})
+            this.$del(this.delBatchUrl, {ids: this.ids})
               .then(() => {
                 this.$message({
                   message: '删除成功',
                   type: 'success'
                 });
                 this.refresh();
-              }, err => {
+              },err=>{
                 if (err.response) {
                   let arr = err.response.data.errors;
                   let arr1 = [];
@@ -640,256 +959,15 @@
           });
         }
       },
-      /*修改保存*/
-      edit(index) {
-        this.currentIndex = 'index' + index;
-      },
-      editCancel() {
-        this.$message({
-          message: '取消修改',
-          type: 'info'
-        });
-        this.currentIndex = '';
-      },
-      editSave(row) {
-        let newData = {};
-        if (this.activeName == '0') {
-          newData = {
-            name: row.name,
-            company: row.company,
-            code: row.code,
-            province: row.province,
-            city: row.city,
-            district: row.district,
-            address: row.address,
-            zipcode: row.zipcode,
-            contacts: row.contacts,
-            phone: row.phone,
-            mobile: row.mobile,
-            fax: row.fax,
-            email: row.email,
-            remark: row.remark,
-            is_scan: row.is_scan,
-            status: row.status,
-            auto_valuation: row.auto_valuation
-          }
-        } else if (this.activeName == '1') {
-          newData = {
-            suppliers_id: row.suppliers.id,
-            code: row.code,
-            name: row.name,
-            description: row.description,
-            remark: row.remark,
-            status: row.status
-          }
-        }
-        if (this.inputChange) {
-          this.$patch(this.url[this.activeName] + '/' + row.id, newData)
-            .then(() => {
-              this.$message({
-                message: '修改成功',
-                type: 'success'
-              });
-              this.getInfo(this.url[this.activeName]);
-              this.currentIndex = '';
-              this.inputChange = false;
-            }, err => {
-              if (err.response) {
-                let arr = err.response.data.errors;
-                let arr1 = [];
-                for (let i in arr) {
-                  arr1.push(arr[i]);
-                }
-                let str = arr1.join(',');
-                this.$message.error({
-                  message: str
-                })
-              }
-            })
-        } else {
-          this.$message({
-            message: '数据未改动',
-            type: 'info'
-          });
-        }
-      },
-      handleEdit() {
-        this.inputChange = true;
-      },
-      getInfo(url) {
-        this.showPage = true;
-        this.$fetch(url)
-          .then(res => {
-            this.getsInfo[this.activeName] = res.data;
-            this.loading = false;
-            let pg = res.meta.pagination;
-            this.$store.dispatch('currentPage', pg.current_page);
-            this.$store.commit('PER_PAGE', pg.per_page);
-            this.$store.commit('PAGE_TOTAL', pg.total);
-            if (url == this.url[0]) {
-              // this.sonArr.push(res.data);
-              let obj = {};
-              obj["0"] = res.data;
-              this.sonArr.push(obj);
-
-              // this.$store.dispatch('setSuppliers', res.data)
-            } else if (url == this.url[1]) {
-              this.$store.dispatch('setSeries', res.data)
-            }
-          }, err => {
-            if (err.response) {
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
-            }
-          })
-      },
-      del(row, e) {
-        // alert(1);
-        this.showDel = true;
-        $('.el-popper').css({left: e.x - 100 + 'px', top: e.y - 125 + 'px'});
-        this.delId = row.id;
-      },
-      cancelD() {
-        this.showDel = false;
-        this.$message({
-          message: '取消删除',
-          type: 'info'
-        });
-      },
-      confirmD(id) {
-        this.$del(this.url[this.activeName] + '/' + id)
-          .then(() => {
-            this.$message({
-              message: '删除成功',
-              type: 'success'
-            });
-            this.showDel = false;
-            this.refresh();
-          }, err => {
-            if (err.response) {
-              this.showDel = false;
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
-            }
-          })
-      },
-      refresh() {
+      /*刷新*/
+      refresh(){
         this.loading = true;
-        this.getInfo(this.url[this.activeName]);
-        setTimeout(() => {
-          this.loading = false;
-        }, 2000);
-      },
-      dbClick(row) {
-        let id = row.id;
-        this.activeName = '1';
-        this.loading = true;
-        this.showPage = false;
-        this.$fetch(this.url[1] + '/' + id)
-          .then(res => {
-            if(res){
-              let arr = [];
-              arr.push(res);
-              this.getsInfo[this.activeName] = arr;
-              this.loading = false;
-            }else{
-              this.$message({
-                message: '没有查询到相关数据',
-                type: 'info'
-              });
-              this.getsInfo[this.activeName] = [];
-            }
-          }, err => {
-            console.log(err);
-            this.$message.error({
-              message: '查询失败'
-            });
-            this.loading = false;
-            this.getsInfo[this.activeName] = [];
-          })
-      },
-      editForm() {
-        let obj = {
-          suppliers_id: this.editData.suppliers_id,
-          code: this.editData.code,
-          name: this.editData.name,
-          description: this.editData.description,
-          remark: this.editData.remark,
-          status: this.editData.status
-        }
-        this.$patch(this.url[this.activeName] + '/' + this.editId, obj)
-          .then(() => {
-            this.$message({
-              message: '修改成功',
-              type: 'success'
-            });
-            this.editMask[this.activeName].show = false;
-            this.refresh();
-          }, (err) => {
-            if (err.response) {
-              let arr = err.response.data.errors;
-              let arr1 = [];
-              for (let i in arr) {
-                arr1.push(arr[i]);
-              }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
-            }
-          })
-      },
-      editInfo() {
-        if(this.newOpt[1].nClick){
-          return
-        }else{
-          if (this.delArr.length == 0) {
-            this.$message({
-              message: '没有选择要修改的数据',
-              type: 'warning'
-            });
-            return
-          } else if (this.delArr.length >= 2) {
-            this.$message({
-              message: '只能修改单条数据',
-              type: 'warning'
-            });
-            return
-          }
-          else {
-            this.editMask[this.activeName].show = true;
-            this.$fetch(this.url[this.activeName] + '/' + this.editId).then(res => {
-                this.editData = {
-                  suppliers_id: res.suppliers.id,
-                  code: res.code,
-                  name: res.name,
-                  description: res.description,
-                  remark: res.remark,
-                  status: res.status
-                  }
-            }, err => {
-              console.log(err);
-            })
-          }
-        }
+        this.fetchData();
+        this.platRIndex  ='';
       },
     },
     mounted() {
-      this.getInfo(this.url[0]);
+      this.fetchData();
       this.$store.dispatch('setOpt', this.newOpt);
       let that = this;
       $(window).resize(() => {
