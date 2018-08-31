@@ -62,12 +62,6 @@
                         <!--</span>-->
                      </span>
                         <span v-else>
-                       <!-- <span v-if="scope.$index==0 && scope.row.judge">
-                            <span v-if="item.type=='checkbox'">
-                               <el-checkbox v-model="scope.row[item.prop]">{{scope.row[item.prop]}}</el-checkbox>
-                            </span>
-                        </span>-->
-                        <!--<span v-else>-->
                             <span v-if="item.type=='color'">
                                  <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
                          {{scope.row[item.prop]}}
@@ -101,12 +95,6 @@
                                 </span>
                             </span>
                             <span v-else-if="item.type=='checkbox'">
-                                <!--<span v-if="item.inProp">
-                                          <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                      </span>
-                                <span v-else>
-                                          <el-checkbox v-model="scope.row[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                      </span>-->
                                 <!--表格内部复选框，如果是非编辑状态一律不可点击-->
                                 <span v-if="item.inProp">
                                           <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="true"></el-checkbox>
@@ -123,18 +111,18 @@
                                      {{scope.row[item.prop]}}
                                 </span>
                         </span>
-                        <!--</span>-->
                     </span>
                     </template>
                 </el-table-column>
             </div>
         <div v-else>
+            <!-- element-loading-text="拼命加载中"
+             element-loading-spinner="el-icon-loading"
+             element-loading-background="rgba(0, 0, 0, 0.6)"
+            -->
                 <el-table :data="tabData"  fit highlight-current-row
                           @selection-change="handleSelectionChange"
-                          element-loading-text="拼命加载中"
                           v-loading="loading"
-                          element-loading-spinner="el-icon-loading"
-                          element-loading-background="rgba(0, 0, 0, 0.6)"
                           @row-dblclick="dbClick"
                           :height="height"
                           @row-click="rowClick"
@@ -150,42 +138,42 @@
                     <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
                         <template slot-scope="scope">
                             <span v-if="currentIndex =='index'+scope.$index || inRowAdd">
-                        <span v-if="item.type=='color'">
+                                <span v-if="item.type=='color'">
                                  <el-color-picker v-model="scope.row[item.prop]" @change="handleEdit" size="mini"></el-color-picker>
                             </span>
-                        <span v-else-if="item.type=='tel'">
-                               <el-input size="small" type="tel" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
-                        </span>
-                        <span v-else-if="item.type=='number'">
-                               <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
-                        </span>
-                        <span v-else-if="item.type=='url'">
-                      <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
-                    </span>
-                        <span v-else-if="item.type == 'select_stu'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
-                                     <el-option label="0-停用" value="0"></el-option>
-                                     <el-option label="1-启用" value="1"></el-option>
-                                 </el-select>
+                                <span v-else-if="item.type=='tel'">
+                                       <el-input size="small" type="tel" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                                </span>
+                                <span v-else-if="item.type=='number'">
+                                       <el-input size="small" type="number" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
+                                </span>
+                                <span v-else-if="item.type=='url'">
+                              <el-input size="small" type="url" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
-                        <span v-else-if="item.type == 'select_def'">
-                                 <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
-                                     <el-option label="0-否" value="0"></el-option>
-                                     <el-option label="1-是" value="1"></el-option>
-                                 </el-select>
-                            </span>
-                        <span v-else-if="item.type == 'textarea'">
-                              <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]"
-                                        :placeholder="item.holder" @change="handleEdit"></el-input>
-                        </span>
-                        <span v-else-if="item.type == 'select'">
-                             <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" :disabled="item.chgAble">
-                               <span v-for="list in sonArr[item.stateVal]" :key="list.id">
-                                    <el-option :label="list.name" :value="list.id"></el-option>
-                               </span>
-                           </el-select>
-                        </span>
-                        <span v-else-if="item.type == 'checkbox'">
+                                <span v-else-if="item.type == 'select_stu'">
+                                         <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
+                                             <el-option label="0-停用" value="0"></el-option>
+                                             <el-option label="1-启用" value="1"></el-option>
+                                         </el-select>
+                                    </span>
+                                <span v-else-if="item.type == 'select_def'">
+                                         <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble">
+                                             <el-option label="0-否" value="0"></el-option>
+                                             <el-option label="1-是" value="1"></el-option>
+                                         </el-select>
+                                    </span>
+                                <span v-else-if="item.type == 'textarea'">
+                                      <el-input type="textarea" size="small" v-model.trim="scope.row[item.prop]"
+                                                :placeholder="item.holder" @change="handleEdit"></el-input>
+                                </span>
+                                <span v-else-if="item.type == 'select'">
+                                     <el-select v-model="scope.row[item.prop]" :placeholder="item.holder" :disabled="item.chgAble">
+                                       <span v-for="list in sonArr[item.stateVal]" :key="list.id">
+                                            <el-option :label="list.name" :value="list.id"></el-option>
+                                       </span>
+                                   </el-select>
+                                </span>
+                                <span v-else-if="item.type == 'checkbox'">
                                 <!--处于编辑模式时
                                 如果是分开的表格，传递editSign以区分新建和修改
                                 如果是同一个表格的不同状态 编辑模式都可编辑，如果实在不能编辑，抛出在可编辑arrHead之外-->
@@ -201,87 +189,97 @@
                                     <el-checkbox v-model="scope.row[item.prop]"></el-checkbox>
                                 </span>
                             </span>
+                                <span v-else-if="item.type == 'cascader'">
+                                    <el-cascader size="middle" :options="options"
+                                v-model="scope.row[item.prop]">
+                                    </el-cascader>
+                                </span>
                         <span v-else>
                                <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
                      </span>
                             <span v-else>
-                         <span v-if="item.type=='color'">
+                                <span v-if="item.type=='color'">
                              <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>
                      {{scope.row[item.prop]}}
                         </span>
-                         <span v-else-if="item.type=='select_stu'">
-                                <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
-                                 {{scope.row[item.prop]?'启用':'停用'}}
-                            </span>
-                         <span v-else-if="item.type=='select_def'">
-                              {{scope.row[item.prop]?'是':'否'}}
-                            </span>
-                         <span v-else-if="item.type=='select'">
-                            <span v-if="scope.row[item.prop]==''"></span>
-                            <span v-else-if="typeof scope.row[item.prop] == 'object' && item.nmProp">
-                                 {{scope.row[item.prop][item.nmProp]}}
-                            </span>
-                            <span v-else>
-                                <span v-for="(list,index) in sonArr[item.stateVal]" :key="index">
-                                    <span v-if="item.inProp">
-                                        <span v-if="list.id==scope.row[item.prop][item.inProp]">
-                                            {{list.name?list.name:list.nick}}
+                                <span v-else-if="item.type=='select_stu'">
+                                        <i class='showStatus' :class="{'statusActive':scope.row.status==0?false:true}"></i>
+                                         {{scope.row[item.prop]?'启用':'停用'}}
+                                    </span>
+                                <span v-else-if="item.type=='select_def'">
+                                      {{scope.row[item.prop]?'是':'否'}}
+                                    </span>
+                                <span v-else-if="item.type=='select'">
+                                    <span v-if="scope.row[item.prop]==''"></span>
+                                    <span v-else-if="typeof scope.row[item.prop] == 'object' && item.nmProp">
+                                         {{scope.row[item.prop][item.nmProp]}}
+                                    </span>
+                                    <span v-else>
+                                        <span v-for="(list,index) in sonArr[item.stateVal]" :key="index">
+                                            <span v-if="item.inProp">
+                                                <span v-if="list.id==scope.row[item.prop][item.inProp]">
+                                                    {{list.name?list.name:list.nick}}
+                                                </span>
+                                            </span>
+                                            <span v-else>
+                                                <span v-if="list.id==scope.row[item.prop]">
+                                                    {{list.name?list.name:list.nick}}
+                                                </span>
+                                            </span>
                                         </span>
                                     </span>
-                                    <span v-else>
-                                        <span v-if="list.id==scope.row[item.prop]">
-                                            {{list.name?list.name:list.nick}}
+                                 </span>
+                                <span v-else-if="item.type=='checkbox'">
+                                    <!-- <span v-if="item.prop || item.inProp">
+                                         <span v-if="scope.$index==0">
+                                             <el-checkbox :checked="tabData[0][item.prop]"></el-checkbox>
+                                         </span>
+                                         <span v-else>
+                                            <span v-if="scope.row[item.inProp]">
+                                            <span v-if="scope.row[item.prop][item.inProp]==1">
+                                            <el-checkbox :checked="true" disabled></el-checkbox>
                                         </span>
-                                    </span>
-                                </span>
-                            </span>
-                         </span>
-                         <span v-else-if="item.type=='checkbox'">
-                            <!-- <span v-if="item.prop || item.inProp">
-                                 <span v-if="scope.$index==0">
-                                     <el-checkbox :checked="tabData[0][item.prop]"></el-checkbox>
-                                 </span>
-                                 <span v-else>
-                                    <span v-if="scope.row[item.inProp]">
-                                    <span v-if="scope.row[item.prop][item.inProp]==1">
-                                    <el-checkbox :checked="true" disabled></el-checkbox>
-                                </span>
+                                            <span v-else>
+                                            <el-checkbox :checked="false" disabled></el-checkbox>
+                                        </span>
+                                     </span>
+                                            <span v-else>
+                                         <span v-if="scope.row[item.prop]==1">
+                                             <el-checkbox :checked="true" disabled></el-checkbox>
+                                         </span>
+                                         <span v-else>
+                                             <el-checkbox :checked="false" disabled></el-checkbox>
+                                         </span>
+                                     </span>
+                                         </span>
+                                     </span>-->
+                                     <!-- <span v-if="item.inProp">
+                                           <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
+                                            </span>
+                                      <span v-else>
+                                          <el-checkbox v-model="scope.row[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
+                                            </span>-->
+                                     <!--如果非编辑模式下 一律不可修改-->
+                                      <span v-if="item.inProp">
+                                         <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="true"></el-checkbox>
+                                          </span>
                                     <span v-else>
-                                    <el-checkbox :checked="false" disabled></el-checkbox>
+                                        <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                                          </span>
+                                 </span>
+                                 <span v-else-if="item.type == 'cascader'">
+                                    <el-cascader size="middle" :options="options"
+                                                 v-model="scope.row[item.prop]">
+                                    </el-cascader>
                                 </span>
-                             </span>
-                                    <span v-else>
-                                 <span v-if="scope.row[item.prop]==1">
-                                     <el-checkbox :checked="true" disabled></el-checkbox>
-                                 </span>
-                                 <span v-else>
-                                     <el-checkbox :checked="false" disabled></el-checkbox>
-                                 </span>
-                             </span>
-                                 </span>
-                             </span>-->
-                             <!-- <span v-if="item.inProp">
-                                   <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                    </span>
-                              <span v-else>
-                                  <el-checkbox v-model="scope.row[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
-                                    </span>-->
-                             <!--如果非编辑模式下 一律不可修改-->
-                              <span v-if="item.inProp">
-                                 <el-checkbox v-model="scope.row[item.prop][item.inProp]" :disabled="true"></el-checkbox>
-                                  </span>
-                            <span v-else>
-                                <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
-                                  </span>
-                         </span>
-                         <span v-else>
+                                <span v-else>
                               {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
                         </span>
                      </span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" width="nEditInRow?90:160" align="center" fixed="right">
+                    <el-table-column label="操作" width="160" align="center" fixed="right">
                         <template slot-scope="scope">
                             <span v-if="currentIndex=='index'+scope.$index">
                                 <el-button size="mini" @click="editSave(scope.row)">保存</el-button>
@@ -304,12 +302,14 @@
     </div>
 </template>
 <script>
+  import { regionDataPlus, CodeToText, TextToCode } from 'element-china-area-data'
   export default {
     props: ['loading', 'tableHead', 'listData', 'currentIndex', 'selects','doChange','height','inRowAdd','editInRow','onlyTableColumn','nEditInRow','hasSelect','editSign','displayData'],
     data() {
       return {
         checkboxInit: false,
         tabData: this.listData,
+        options: regionDataPlus,
       }
     },
     watch: {

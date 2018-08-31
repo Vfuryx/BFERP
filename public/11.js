@@ -1,14 +1,14 @@
 webpackJsonp([11],{
 
-/***/ 458:
+/***/ 459:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(540)
+var __vue_script__ = __webpack_require__(542)
 /* template */
-var __vue_template__ = __webpack_require__(541)
+var __vue_template__ = __webpack_require__(543)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,13 +48,60 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 540:
+/***/ 542:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__ = __webpack_require__(66);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_china_area_data___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_china_area_data__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -99,45 +146,49 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }],
       tableHead: [{
         label: '仓库名称',
-        width: '180',
         prop: "name",
+        width: '130',
         holder: '请输入标记名称',
         type: 'text'
       }, {
-        label: '仓库地址',
-        width: '260',
-        prop: "address",
-        holder: '请输入仓库地址',
-        type: 'text',
-        lists: 'more_prop'
+        label: '仓库地(省市区)',
+        prop: "provinces",
+        width: '220',
+        holder: '请输入仓库地(省市区)',
+        type: 'cascader'
       }, {
-        label: '是否默认仓库',
-        width: '160',
+        label: '仓库地址',
+        prop: "address",
+        width: '180',
+        holder: '请输入仓库地址',
+        type: 'text'
+      }, {
+        label: '默认仓库',
+        width: '100',
         prop: "is_default",
-        holder: '描述',
-        type: 'select_def'
+        type: 'checkbox'
       }, {
         label: '是否可用',
-        width: '160',
+        width: '130',
         prop: "status",
-        holder: '状态',
-        type: 'select_stu',
+        type: 'checkbox',
         doSort: true
       }],
       loading: true,
       currentIndex: '',
-      url: '/warehouses',
       showMaskArr: false,
+      checkboxInit: false,
       title: '新建仓库',
       getsInfo: [],
       ruleForm: {
         name: '',
+        provinces: [],
         province: '',
         city: '',
         district: '',
         address: '',
-        is_default: '0',
-        status: '1'
+        is_default: false,
+        status: true
       },
       rules: {
         name: [{ required: true, message: '请输入仓库名称', trigger: 'blur' }],
@@ -162,12 +213,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         label: '是否默认',
         prop: 'is_default',
         holder: '请选择是否默认',
-        type: 'select_def'
+        type: 'checkbox'
       }, {
         label: '是否可用',
         prop: 'status',
-        holder: '请选择是否可用',
-        type: 'select_stu'
+        type: 'checkbox'
       }],
       refArr: 'ruleWare',
       showDel: false,
@@ -181,10 +231,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         page_total: 0
       },
       areaArr: [],
-      doChange: true
+      options: __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["regionDataPlus"]
     };
   },
 
+  computed: {
+    urls: {
+      get: function get() {
+        return this.$store.state.urls;
+      },
+      set: function set() {}
+    }
+  },
   methods: {
     addNew: function addNew() {
       this.ruleForm.name = '';
@@ -205,7 +263,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         is_default: this.ruleForm.is_default,
         status: this.ruleForm.status
       };
-      this.$post(this.url, obj).then(function () {
+      this.$post(this.urls.warehouses, obj).then(function () {
         _this.$message({
           message: '添加成功',
           type: 'success'
@@ -219,10 +277,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           for (var i in arr) {
             arr1.push(arr[i]);
           }
-          var str = arr1.join(',');
-          _this.$message.error({
-            message: str
-          });
+          _this.$message.error(arr1.join(','));
         }
       });
     },
@@ -250,7 +305,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          _this2.$del(_this2.url, { ids: _this2.delArr }).then(function () {
+          _this2.$del(_this2.urls.warehouses, { ids: _this2.delArr }).then(function () {
             _this2.$message({
               message: '删除成功',
               type: 'success'
@@ -263,10 +318,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               for (var i in arr) {
                 arr1.push(arr[i]);
               }
-              var str = arr1.join(',');
-              _this2.$message.error({
-                message: str
-              });
+              _this2.$message.error(arr1.join(','));
             }
           });
         }).catch(function () {
@@ -279,8 +331,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     /*修改保存*/
-    edit: function edit(index) {
+    edit: function edit(index, row) {
       this.currentIndex = 'index' + index;
+      this.$set(row, 'provinces', [__WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["TextToCode"][row.province].code, __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["TextToCode"][row.province][row.city].code, __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["TextToCode"][row.province][row.city][row.district].code]);
     },
     editCancel: function editCancel() {
       this.$message({
@@ -295,18 +348,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var obj = {
         name: row.name,
         address: row.address,
+        province: __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["CodeToText"][row.provinces[0]],
+        city: __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["CodeToText"][row.provinces[1]],
+        district: __WEBPACK_IMPORTED_MODULE_0_element_china_area_data__["CodeToText"][row.provinces[2]],
         is_default: row.is_default,
         status: row.status
       };
       if (this.inputChange) {
-        this.$patch(this.url + '/' + row.id, obj).then(function () {
+        this.$patch(this.urls.warehouses + '/' + row.id, obj).then(function () {
+          _this3.refresh();
+          _this3.currentIndex = '';
+          _this3.inputChange = false;
           _this3.$message({
             message: '修改成功',
             type: 'success'
           });
-          _this3.getInfo(_this3.url);
-          _this3.currentIndex = '';
-          _this3.inputChange = false;
         }, function (err) {
           if (err.response) {
             var arr = err.response.data.errors;
@@ -330,13 +386,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleEdit: function handleEdit() {
       this.inputChange = true;
     },
-    getInfo: function getInfo(url) {
+    getInfo: function getInfo() {
       var _this4 = this;
 
-      this.showPage = true;
-      this.$fetch(url).then(function (res) {
+      this.$fetch(this.urls.warehouses).then(function (res) {
+        res.data.map(function (item) {
+          _this4.$set(item, 'provinces', [item.province] + '' + [item.city] + '' + [item.district]);
+        });
         _this4.getsInfo = res.data;
-        _this4.$store.dispatch('setFreights', res.data);
         _this4.loading = false;
         var pg = res.meta.pagination;
         _this4.$store.dispatch('currentPage', pg.current_page);
@@ -350,9 +407,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arr1.push(arr[i]);
           }
           var str = arr1.join(',');
-          _this4.$message.error({
-            message: str
-          });
+          _this4.$message.error(str);
         }
       });
     },
@@ -371,7 +426,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     confirmD: function confirmD(id) {
       var _this5 = this;
 
-      this.$del(this.url + '/' + id).then(function () {
+      this.$del(this.urls.warehouses + '/' + id).then(function () {
         _this5.$message({
           message: '删除成功',
           type: 'success'
@@ -386,10 +441,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           for (var i in arr) {
             arr1.push(arr[i]);
           }
-          var str = arr1.join(',');
-          _this5.$message.error({
-            message: str
-          });
+          _this5.$message.error(arr1.join(','));
         }
       });
     },
@@ -397,19 +449,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var _this6 = this;
 
       this.loading = true;
-      this.getInfo(this.url);
+      this.getInfo();
       setTimeout(function () {
         _this6.loading = false;
       }, 2000);
     },
     handleArea: function handleArea(value) {
       this.areaArr = value;
-      console.log(value);
     }
   },
   mounted: function mounted() {
-    this.getInfo(this.url);
-    this.$store.dispatch('setTabs', false);
+    this.getInfo();
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -420,7 +470,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 541:
+/***/ 543:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -430,24 +480,229 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("light-table", {
-        attrs: {
-          listData: _vm.getsInfo,
-          tableHead: _vm.tableHead,
-          loading: _vm.loading,
-          currentIndex: _vm.currentIndex,
-          doChange: _vm.doChange,
-          height: 400
+      _c(
+        "el-table",
+        {
+          directives: [
+            {
+              name: "loading",
+              rawName: "v-loading",
+              value: _vm.loading,
+              expression: "loading"
+            }
+          ],
+          ref: "multipleTable",
+          attrs: { data: _vm.getsInfo, fit: "", height: "400" },
+          on: { "selection-change": _vm.handleSelectionChange }
         },
-        on: {
-          handleSelect: _vm.handleSelectionChange,
-          editSave: _vm.editSave,
-          handleEdit: _vm.handleEdit,
-          del: _vm.del,
-          edit: _vm.edit,
-          editCancel: _vm.editCancel
-        }
-      }),
+        [
+          _c("el-table-column", {
+            attrs: {
+              type: "selection",
+              width: "95",
+              align: "center",
+              checked: _vm.checkboxInit
+            }
+          }),
+          _vm._v(" "),
+          _vm._l(_vm.tableHead, function(item, index) {
+            return _c("el-table-column", {
+              key: index,
+              attrs: {
+                label: item.label,
+                align: "center",
+                width: item.width,
+                sortable: item.doSort,
+                prop: item.prop
+              },
+              scopedSlots: _vm._u([
+                {
+                  key: "default",
+                  fn: function(scope) {
+                    return [
+                      _vm.currentIndex == "index" + scope.$index
+                        ? _c("span", [
+                            item.type == "checkbox"
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-checkbox", {
+                                      on: { change: _vm.handleEdit },
+                                      model: {
+                                        value: scope.row[item.prop],
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, item.prop, $$v)
+                                        },
+                                        expression: "scope.row[item.prop]"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : item.type == "cascader"
+                                ? _c(
+                                    "span",
+                                    [
+                                      _c("el-cascader", {
+                                        attrs: {
+                                          size: "middle",
+                                          options: _vm.options
+                                        },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row[item.prop],
+                                          callback: function($$v) {
+                                            _vm.$set(scope.row, item.prop, $$v)
+                                          },
+                                          expression: "scope.row[item.prop]"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                                : _c(
+                                    "span",
+                                    [
+                                      _c("el-input", {
+                                        attrs: {
+                                          size: "small",
+                                          placeholder: item.holder
+                                        },
+                                        on: { change: _vm.handleEdit },
+                                        model: {
+                                          value: scope.row[item.prop],
+                                          callback: function($$v) {
+                                            _vm.$set(
+                                              scope.row,
+                                              item.prop,
+                                              typeof $$v === "string"
+                                                ? $$v.trim()
+                                                : $$v
+                                            )
+                                          },
+                                          expression: "scope.row[item.prop]"
+                                        }
+                                      })
+                                    ],
+                                    1
+                                  )
+                          ])
+                        : _c("span", [
+                            item.type == "checkbox"
+                              ? _c(
+                                  "span",
+                                  [
+                                    _c("el-checkbox", {
+                                      attrs: { disabled: "" },
+                                      model: {
+                                        value: scope.row[item.prop],
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, item.prop, $$v)
+                                        },
+                                        expression: "scope.row[item.prop]"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
+                              : _c("span", [
+                                  _vm._v(
+                                    "\n                    " +
+                                      _vm._s(
+                                        item.inProp
+                                          ? scope.row[item.prop][item.inProp]
+                                          : scope.row[item.prop]
+                                      ) +
+                                      "\n        "
+                                  )
+                                ])
+                          ])
+                    ]
+                  }
+                }
+              ])
+            })
+          }),
+          _vm._v(" "),
+          _c("el-table-column", {
+            attrs: {
+              label: "操作",
+              width: "160",
+              align: "center",
+              fixed: "right"
+            },
+            scopedSlots: _vm._u([
+              {
+                key: "default",
+                fn: function(scope) {
+                  return [
+                    _vm.currentIndex == "index" + scope.$index
+                      ? _c(
+                          "span",
+                          [
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.editSave(scope.row)
+                                  }
+                                }
+                              },
+                              [_vm._v("保存")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini" },
+                                on: { click: _vm.editCancel }
+                              },
+                              [_vm._v("取消\n                            ")]
+                            )
+                          ],
+                          1
+                        )
+                      : _c(
+                          "span",
+                          [
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.edit(scope.$index, scope.row)
+                                  }
+                                }
+                              },
+                              [_vm._v("编辑")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "el-button",
+                              {
+                                attrs: { size: "mini", type: "danger" },
+                                on: {
+                                  click: function($event) {
+                                    _vm.del(scope.row, $event)
+                                  }
+                                }
+                              },
+                              [_vm._v("删除")]
+                            )
+                          ],
+                          1
+                        )
+                  ]
+                }
+              }
+            ])
+          })
+        ],
+        2
+      ),
       _vm._v(" "),
       _c("add-new", {
         attrs: {
@@ -456,7 +711,7 @@ var render = function() {
           "rule-form": _vm.ruleForm,
           rules: _vm.rules,
           "add-arr": _vm.addArr,
-          url: _vm.url,
+          url: _vm.urls.purchasereturntypes,
           "new-ref": _vm.refArr
         },
         on: {
@@ -513,7 +768,7 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("Pagination", { attrs: { "page-url": _vm.url } })
+      _c("Pagination", { attrs: { "page-url": _vm.urls.purchasereturntypes } })
     ],
     1
   )

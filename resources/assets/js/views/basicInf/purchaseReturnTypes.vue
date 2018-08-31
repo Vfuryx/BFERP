@@ -26,7 +26,6 @@
     </div>
 </template>
 <script>
-  import { CodeToText } from 'element-china-area-data'
   export default {
     data() {
       return {

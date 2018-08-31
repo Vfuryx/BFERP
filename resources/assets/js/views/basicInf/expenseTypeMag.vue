@@ -93,7 +93,7 @@
                         </span>
                         </template>
                     </el-table-column>
-                    <el-table-column label="操作" align="center">
+                    <el-table-column label="操作" align="center"  width="150">
                         <template slot-scope="scope">
                         <span v-if="changeIndex=='index'+scope.$index">
                             <el-button size="mini" @click="editSave(scope.$index,scope.row)">保存</el-button>

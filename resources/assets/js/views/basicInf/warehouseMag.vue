@@ -1,11 +1,57 @@
 <template>
     <div>
-        <light-table @handleSelect="handleSelectionChange" :listData="getsInfo" :tableHead="tableHead" @editSave="editSave" @handleEdit="handleEdit" @del="del" :loading="loading" @edit="edit" :currentIndex="currentIndex" @editCancel="editCancel" :height="400"></light-table>
+        <el-table :data="getsInfo"  fit
+                  @selection-change="handleSelectionChange"
+                  v-loading="loading"
+                  height="400"
+                  ref="multipleTable">
+            <el-table-column
+                    type="selection"
+                    width="95" align="center"
+                    :checked="checkboxInit">
+            </el-table-column>
+            <el-table-column v-for="(item,index) in tableHead" :label="item.label" align="center" :width="item.width" :key="index" :sortable="item.doSort" :prop="item.prop">
+                <template slot-scope="scope">
+                    <span v-if="currentIndex =='index'+scope.$index">
+                        <span v-if="item.type == 'checkbox'">
+                                <el-checkbox v-model="scope.row[item.prop]" @change="handleEdit"></el-checkbox>
+                        </span>
+                        <span v-else-if="item.type == 'cascader'">
+                            <el-cascader size="middle" :options="options"  v-model="scope.row[item.prop]" @change="handleEdit"></el-cascader>
+                        </span>
+                        <span v-else>
+                               <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit"></el-input>
+                            </span>
+                    </span>
+                    <span v-else>
+                        <span v-if="item.type=='checkbox'">
+                            <el-checkbox v-model="scope.row[item.prop]" disabled></el-checkbox>
+                    </span>
+                        <span v-else>
+                        {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+            </span>
+                     </span>
+                </template>
+            </el-table-column>
+            <el-table-column label="操作" width="160" align="center" fixed="right">
+                <template slot-scope="scope">
+                    <span v-if="currentIndex=='index'+scope.$index">
+                                <el-button size="mini" @click="editSave(scope.row)">保存</el-button>
+                                <el-button size="mini" @click="editCancel">取消
+                                </el-button>
+                            </span>
+                    <span v-else>
+                        <el-button size="mini" @click="edit(scope.$index,scope.row)">编辑</el-button>
+                        <el-button size="mini" type="danger" @click="del(scope.row,$event)">删除</el-button>
+                    </span>
+                </template>
+            </el-table-column>
+        </el-table>
 
         <!--新增-->
         <add-new :visible-add="showMaskArr" :title="title"
                  :rule-form="ruleForm" :rules="rules" :add-arr="addArr"
-                 :url="urls.warehouses" @submitEvent="submitForm" :new-ref="refArr" @CB-dialog="CB_dialog" @handleArea="handleArea"></add-new>
+                 :url="urls.purchasereturntypes" @submitEvent="submitForm" :new-ref="refArr" @CB-dialog="CB_dialog" @handleArea="handleArea"></add-new>
 
         <!--删除-->
         <el-popover
@@ -20,11 +66,11 @@
         </el-popover>
 
         <!--页码-->
-        <Pagination :page-url="urls.warehouses"></Pagination>
+        <Pagination :page-url="urls.purchasereturntypes"></Pagination>
     </div>
 </template>
 <script>
-  import { CodeToText } from 'element-china-area-data'
+  import { regionDataPlus, CodeToText, TextToCode } from 'element-china-area-data'
   export default {
     data() {
       return {
@@ -46,42 +92,50 @@
           }
         ],
         tableHead:[
-            {
-              label: '仓库名称',
-              width: '180',
-              prop: "name",
-              holder: '请输入标记名称',
-              type: 'text'
-            },
-            {
-              label: '仓库地址',
-              width: '260',
-              prop: "address",
-              holder: '请输入仓库地址',
-              type: 'text',
-              lists: 'more_prop'
-            },
-            {
-              label: '是否默认仓库',
-              width: '160',
-              prop: "is_default",
-              type: 'checkbox'
-            },
-            {
-              label: '是否可用',
-              width: '160',
-              prop: "status",
-              type: 'checkbox',
-              doSort: true
-            }
+          {
+            label: '仓库名称',
+            prop: "name",
+            width: '130',
+            holder: '请输入标记名称',
+            type: 'text',
+          },
+          {
+            label: '仓库地(省市区)',
+            prop: "provinces",
+            width: '220',
+            holder: '请输入仓库地(省市区)',
+            type: 'cascader'
+          },
+          {
+            label: '仓库地址',
+            prop: "address",
+            width: '180',
+            holder: '请输入仓库地址',
+            type: 'text'
+          },
+          {
+            label: '默认仓库',
+            width: '100',
+            prop: "is_default",
+            type: 'checkbox'
+          },
+          {
+            label: '是否可用',
+            width: '130',
+            prop: "status",
+            type: 'checkbox',
+            doSort: true
+          }
         ],
         loading: true,
         currentIndex: '',
         showMaskArr: false,
+        checkboxInit: false,
         title: '新建仓库',
         getsInfo: [],
         ruleForm: {
           name: '',
+          provinces: [],
           province: '',
           city: '',
           district: '',
@@ -140,6 +194,7 @@
           page_total: 0
         },
         areaArr: [],
+        options: regionDataPlus,
       }
     },
     computed:{
@@ -183,10 +238,7 @@
               for (let i in arr) {
                 arr1.push(arr[i]);
               }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
+              this.$message.error(arr1.join(','));
             }
           })
       },
@@ -225,10 +277,7 @@
                   for (let i in arr) {
                     arr1.push(arr[i]);
                   }
-                  let str = arr1.join(',');
-                  this.$message.error({
-                    message: str
-                  });
+                  this.$message.error(arr1.join(','));
                 }
               })
           }).catch(() => {
@@ -240,8 +289,9 @@
         }
       },
       /*修改保存*/
-      edit(index) {
+      edit(index,row) {
         this.currentIndex = 'index' + index;
+        this.$set(row,'provinces',[TextToCode[row.province].code, TextToCode[row.province][row.city].code, TextToCode[row.province][row.city][row.district].code])
       },
       editCancel() {
         this.$message({
@@ -254,19 +304,22 @@
         let obj = {
           name: row.name,
           address: row.address,
+          province: CodeToText[row.provinces[0]],
+          city:CodeToText[row.provinces[1]],
+          district:  CodeToText[row.provinces[2]],
           is_default: row.is_default,
           status: row.status
         };
         if (this.inputChange) {
           this.$patch(this.urls.warehouses + '/' + row.id, obj)
             .then(() => {
+              this.refresh();
+              this.currentIndex = '';
+              this.inputChange = false;
               this.$message({
                 message: '修改成功',
                 type: 'success'
               });
-              this.getInfo(this.url);
-              this.currentIndex = '';
-              this.inputChange = false;
             }, err => {
               if (err.response) {
                 let arr = err.response.data.errors;
@@ -291,11 +344,11 @@
         this.inputChange = true;
       },
       getInfo() {
-        this.showPage = true;
         this.$fetch(this.urls.warehouses)
           .then(res => {
+            res.data.map(item=>{
+              this.$set(item,'provinces',([item.province]+''+[item.city]+''+[item.district]))});
             this.getsInfo = res.data;
-            this.$store.dispatch('setFreights', res.data);
             this.loading = false;
             let pg = res.meta.pagination;
             this.$store.dispatch('currentPage', pg.current_page);
@@ -309,9 +362,7 @@
                 arr1.push(arr[i]);
               }
               let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
+              this.$message.error(str);
             }
           })
       },
@@ -344,10 +395,7 @@
               for (let i in arr) {
                 arr1.push(arr[i]);
               }
-              let str = arr1.join(',');
-              this.$message.error({
-                message: str
-              });
+              this.$message.error(arr1.join(','));
             }
           })
       },
@@ -360,12 +408,10 @@
       },
       handleArea(value){
         this.areaArr = value;
-        console.log(value);
       }
     },
     mounted() {
       this.getInfo();
-      this.$store.dispatch('setTabs', false);
       this.$store.dispatch('setOpt', this.newOpt);
       let that = this;
       $(window).resize(() => {
