@@ -51,4 +51,9 @@ class Shop extends Model
     public function orders(){
         return $this->hasMany(Order::class,'shops_id');
     }
+
+    public function refundOrders()
+    {
+        return $this->hasMany(RefundOrder::class, 'payment_methods_id');
+    }
 }

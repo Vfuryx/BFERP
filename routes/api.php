@@ -724,6 +724,26 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('warehousingdepts/{order}/stockouttocs', 'WarehousingDepartmentsController@isStockOutToCS')
             ->name('api.warehousingdepts.isstockouttocs');
 
+        //客服退款申请
+        $api->get('customerservicerefunds', 'CustomerServiceRefundsController@index')
+            ->name('api.customerservicerefunds.index');
+        $api->get('customerservicerefunds/{refundorder}', 'CustomerServiceRefundsController@show')
+            ->name('api.customerservicerefunds.show');
+        $api->post('customerservicerefunds', 'CustomerServiceRefundsController@store')
+            ->name('api.customerservicerefunds.store');
+        $api->patch('customerservicerefunds/{refundorder}', 'CustomerServiceRefundsController@update')
+            ->name('api.customerservicerefunds.update');
+        $api->delete('customerservicerefunds/{refundorder}', 'CustomerServiceRefundsController@destroy')
+            ->name('api.customerservicerefunds.destroy');
+        $api->delete('customerservicerefunds', 'CustomerServiceRefundsController@destroybyids')
+            ->name('api.customerservicerefunds.destroybyids');
+        $api->put('customerservicerefunds/{refundorder}/lockorunlock', 'CustomerServiceRefundsController@isLockOrUnlock')
+            ->name('api.customerservicerefunds.islockorunlock');
+        $api->put('customerservicerefunds/{refundorder}/audit', 'CustomerServiceRefundsController@isAudit')
+            ->name('api.customerservicerefunds.isaudit');
+        $api->put('customerservicerefunds/{refundorder}/unaudit', 'CustomerServiceRefundsController@isUnAudit')
+            ->name('api.customerservicerefunds.isunaudit');
+
         //退款原因
         $api->get('returnreasons', 'ReturnReasonsController@index')
             ->name('api.returnreasons.index');
@@ -739,7 +759,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.returnreasons.destroybyids');
         $api->put('returnreasons/editstatus', 'ReturnReasonsController@editStatusByIds')
             ->name('api.returnreasons.editstatusbyids');
-
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

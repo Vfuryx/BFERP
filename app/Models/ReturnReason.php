@@ -15,4 +15,9 @@ class ReturnReason extends Model
         'status' => 'boolean',
     ];
 
+    public function refundOrders()
+    {
+        return $this->hasMany(RefundOrder::class, 'payment_methods_id');
+    }
+
 }

@@ -15,7 +15,14 @@ class PaymentMethod extends Model
         'status' => 'boolean'
     ];
 
-    public function orders(){
+    public function orders()
+    {
         return $this->hasMany(Order::class,'payment_methods_id');
     }
+
+    public function refundOrders()
+    {
+        return $this->hasMany(RefundOrder::class, 'payment_methods_id');
+    }
+
 }

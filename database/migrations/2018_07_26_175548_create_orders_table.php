@@ -89,8 +89,8 @@ class CreateOrdersTable extends Migration
             $table->string('refund_info')->default('无退款')->comment('退款信息');
 
             //要记录的字段
-            $table->string('business_personnel_id')->default(0)->comment('业务员id (解锁后这里要清除)');
-            $table->string('locker_id')->default(0)->comment('锁定人id (解锁后这里要清除)');
+            $table->unsignedInteger('business_personnel_id')->default(0)->comment('业务员id (解锁后这里要清除)');
+            $table->unsignedInteger('locker_id')->default(0)->comment('锁定人id (解锁后这里要清除)');
             $table->timestamp('audit_at')->nullable()->comment('客服审核时间');
 
             //拼接

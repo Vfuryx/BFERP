@@ -938,7 +938,12 @@ class CustomerServiceDepartmentsController extends Controller
      */
     public function isLockOrUnlock(Order $order)
     {
-        return $this->traitAction($order, !$order->status || $order->getOriginal('order_status') >= $order::ORDER_STATUS_CS_AUDIT, '无法锁定', 'lockOrUnlock');
+        return $this->traitAction(
+            $order,
+            !$order->status || $order->getOriginal('order_status') >= $order::ORDER_STATUS_CS_AUDIT,
+            '无法锁定',
+            'lockOrUnlock'
+        );
     }
 
     /**
@@ -1038,8 +1043,5 @@ class CustomerServiceDepartmentsController extends Controller
             $mergerOrderRequest->validated()
         );
     }
-
-
-
 
 }
