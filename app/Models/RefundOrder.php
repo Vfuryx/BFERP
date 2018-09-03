@@ -10,9 +10,11 @@ class RefundOrder extends Model
     protected $table = 'refund_orders';
 
     const REFUND_STATUS_NEW = 10;
-    const REFUND_STATUS_LOCK = 20;
+    const REFUND_STATUS_LOCK = 15;
     const REFUND_STATUS_CS_AUDIT = 30;
+    const REFUND_STATUS_AS_LOCK = 35;
     const REFUND_STATUS_AS_AUDIT = 40;
+    const REFUND_STATUS_FD_LOCK = 45;
     const REFUND_STATUS_FD_AUDIT = 50;
 
     //订单来源
@@ -24,16 +26,18 @@ class RefundOrder extends Model
         self::REFUND_STATUS_NEW => '未处理',
         self::REFUND_STATUS_LOCK => '订单锁定',
         self::REFUND_STATUS_CS_AUDIT => '已客审',
+        self::REFUND_STATUS_AS_LOCK => '售后锁定',
         self::REFUND_STATUS_AS_AUDIT => '已后审',
+        self::REFUND_STATUS_FD_LOCK => '财务锁定',
         self::REFUND_STATUS_FD_AUDIT => '已财审',
     ];
 
     protected $fillable = [
         'order_sn', 'payment_methods_id', 'time_out_at', 'shops_id', 'account',
         'refund_payment_methods_id', 'bank', 'address', 'refund_amount', 'transaction_sn',
-        'return_reasons_id', 'seller_nick', 'seller_name', 'payment', 'business_remark',
-        'as_remark', 'f_remark', 'refund_description', 'taobao_refund_status',
-        'status',
+        'return_reasons_id', 'seller_nick', 'seller_name', 'payment', 'person_liable',
+        'liable_fee', 'undertaker', 'business_remark', 'as_remark', 'f_remark',
+        'refund_description', 'taobao_refund_status', 'status',
     ];
 
     //设置类型
@@ -122,7 +126,7 @@ class RefundOrder extends Model
         }else{
             $this->business_personnel_id = 0;
             $this->locker_id = 0;
-            $this->refund_order_status = self::REFUND_STATUS_LOCK;
+            $this->refund_order_status = self::REFUND_STATUS_NEW;
         }
 
         $this->save();
@@ -155,6 +159,57 @@ class RefundOrder extends Model
     public function getRefundOrderStatusAttribute($value)
     {
         return self::$refundStatusMap[$value] ?? $value;
+    }
+
+    /**
+     * 售后未锁定
+     * @return bool
+     */
+    public function asUnlock()
+    {
+        return $this->getOriginal('refund_order_status') != self::REFUND_STATUS_AS_LOCK;
+    }
+
+    /**
+     * 售后订单锁定或释放
+     * @return bool
+     */
+    public function asLockOrUnlock()
+    {
+        if($this->asUnlock()){
+            $this->locker_id = Auth::guard('api')->id();
+            $this->refund_order_status = self::REFUND_STATUS_AS_LOCK;
+        }else{
+            $this->locker_id = 0;
+            $this->refund_order_status = self::REFUND_STATUS_CS_AUDIT;
+        }
+
+        $this->save();
+    }
+
+    /**
+     * 售后审核
+     * @return bool
+     */
+    public function asAudit()
+    {
+        $this->locker_id = 0;
+        $this->after_sales_id = Auth::guard('api')->id();
+        $this->refund_order_status = self::REFUND_STATUS_AS_AUDIT;
+        $this->as_audit_at = Carbon::now();
+        $this->save();
+    }
+
+    /**
+     * 售后退审
+     * @return bool
+     */
+    public function asUnAudit()
+    {
+        $this->after_sales_id = 0;
+        $this->refund_order_status = self::REFUND_STATUS_CS_AUDIT;
+        $this->as_audit_at = null;
+        $this->save();
     }
 
     /**

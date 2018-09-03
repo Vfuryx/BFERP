@@ -8,7 +8,7 @@ class CreateRefundOrdersTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * 退款表
      * @return void
      */
     public function up()
@@ -32,7 +32,10 @@ class CreateRefundOrdersTable extends Migration
             $table->string('seller_nick')->default('')->comment('卖家昵称');
             $table->string('seller_name')->default('')->comment('卖家名称');
             $table->decimal('payment', 10, 2)->default(0.00)->comment('支付金额');
-//            $table->string('person_liable')->default('')->comment('负责人');
+            $table->string('person_liable')->default('')->comment('责任人');
+            $table->decimal('liable_fee',10,2)->default(0.00)->comment('责任金额');
+            $table->decimal('freight',10,2)->default(0.00)->comment('运费');
+            $table->string('undertaker')->default('')->comment('承担人');
             $table->string('business_remark')->default('')->comment('业务备注');
             $table->string('as_remark')->default('')->comment('售后备注');
             $table->string('f_remark')->default('')->comment('财务备注');

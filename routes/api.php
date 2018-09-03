@@ -760,6 +760,26 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('returnreasons/editstatus', 'ReturnReasonsController@editStatusByIds')
             ->name('api.returnreasons.editstatusbyids');
 
+
+        //售后退款
+        $api->get('aftersalerefunds', 'AfterSaleRefundsController@index')
+            ->name('api.aftersalerefunds.index');
+        $api->get('aftersalerefunds/{refundorder}', 'AfterSaleRefundsController@show')
+            ->name('api.aftersalerefunds.show');
+        $api->patch('aftersalerefunds/{refundorder}', 'AfterSaleRefundsController@update')
+            ->name('api.aftersalerefunds.update');
+        $api->delete('aftersalerefunds/{refundorder}', 'AfterSaleRefundsController@destroy')
+            ->name('api.aftersalerefunds.destroy');
+        $api->delete('aftersalerefunds', 'AfterSaleRefundsController@destroybyids')
+            ->name('api.aftersalerefunds.destroybyids');
+        $api->put('aftersalerefunds/{refundorder}/lockorunlock', 'AfterSaleRefundsController@isLockOrUnlock')
+            ->name('api.aftersalerefunds.islockorunlock');
+        $api->put('aftersalerefunds/{refundorder}/audit', 'AfterSaleRefundsController@isAudit')
+            ->name('api.aftersalerefunds.isaudit');
+        $api->put('aftersalerefunds/{refundorder}/unaudit', 'AfterSaleRefundsController@isUnAudit')
+            ->name('api.aftersalerefunds.isunaudit');
+
+
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')
             ->name('api.uploadimages.store');

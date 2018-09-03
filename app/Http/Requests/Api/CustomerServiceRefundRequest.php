@@ -55,6 +55,7 @@ class CustomerServiceRefundRequest extends FormRequest
                     'seller_nick' => 'string|max:255',
                     'seller_name' => 'string|max:255',
                     'payment' => 'numeric',
+                    'person_liable' => 'string|max:255',
                     'business_remark' => 'string|max:255',
                     'refund_description' => 'string|max:255',
                     'status' => 'boolean',
@@ -96,6 +97,7 @@ class CustomerServiceRefundRequest extends FormRequest
                     'seller_nick' => 'string|max:255',
                     'seller_name' => 'string|max:255',
                     'payment' => 'numeric',
+                    'person_liable' => 'string|max:255',
                     'business_remark' => 'string|max:255',
                     'refund_description' => 'string|max:255',
                     'status' => 'boolean',
@@ -107,28 +109,63 @@ class CustomerServiceRefundRequest extends FormRequest
     public function messages()
     {
         return [
+            'order_sn.string' => '系统单号必须string类型',
+            'order_sn.max' => '系统单号最大长度为255',
+
+            'payment_methods_id.required' => '支付方式id必填',
+            'payment_methods_id.integer' => '支付方式id必须int类型',
+            'payment_methods_id.exists' => '需要添加的id在数据库中未找到或未启用',
+
+            'time_out_at.date' => '超时时间必须date类型',
+
             'shops_id.required' => '店铺id必填',
             'shops_id.integer' => '店铺id必须int类型',
             'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
-            'member_nick.required' => '会员昵称必填',
-            'member_nick.string' => '会员昵称必须string类型',
-            'member_nick.max' => '会员昵称最大长度为255',
+            'account.string' => '还款账号必须string类型',
+            'account.max' => '还款账号最大长度为255',
 
-            'logistics_id.required' => '物流id必填',
-            'logistics_id.integer' => '物流id必须int类型',
-            'logistics_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'refund_payment_methods_id.required' => '还款支付方式id必填',
+            'refund_payment_methods_id.string' => '还款支付方式id必须string类型',
+            'refund_payment_methods_id.max' => '还款支付方式id最大长度为255',
 
-            'billing_way.required' => '计费方式必填',
-            'billing_way.in' => '计费方式必须是包含在给定的值列表中',
+            'bank.string' => '开户银行必须string类型',
+            'bank.max' => '开户银行最大长度为255',
 
-            'promise_ship_time.date' => '承诺发货时间必须date类型',
+            'address.string' => '开户地址必须string类型',
+            'address.max' => '开户地址最大长度为255',
 
-            'freight_types_id.required' => '运费类型id必填',
-            'freight_types_id.integer' => '运费类型id必须int类型',
-            'freight_types_id.exists' => '需要添加的id在数据库中未找到或未启用',
+            'refund_amount.numeric' => '退款金额必须是数字',
 
-            'expected_freight.numeric' => '预计运费必须是数字',
+            'transaction_sn.string' => '交易单号必须string类型',
+            'transaction_sn.max' => '交易单号最大长度为255',
+
+            'return_reasons_id.required' => '退款原因id必填',
+            'return_reasons_id.string' => '退款原因id必须string类型',
+            'return_reasons_id.max' => '退款原因id最大长度为255',
+
+            'seller_nick.string' => '卖家昵称必须string类型',
+            'seller_nick.max' => '卖家昵称最大长度为255',
+
+            'seller_name.string' => '卖家名称必须string类型',
+            'seller_name.max' => '卖家名称最大长度为255',
+
+            'payment.numeric' => '支付金额必须是数字',
+
+            'person_liable.string' => '责任人必须string类型',
+            'person_liable.max' => '责任人最大长度为255',
+
+            'business_remark.string' => '责任人必须string类型',
+            'business_remark.max' => '责任人最大长度为255',
+
+            'refund_description.string' => '退款说明必须string类型',
+            'refund_description.max' => '退款说明最大长度为255',
+
+            'refund_description.required' => '状态必须string类型',
+            'refund_description.boolean' => '状态必须string类型',
+
+            'status.boolean' => '状态必须布尔类型',
+            'status.required' => '状态必填',
         ];
     }
 
@@ -149,6 +186,7 @@ class CustomerServiceRefundRequest extends FormRequest
             'seller_nick' => '卖家昵称',
             'seller_name' => '卖家名称',
             'payment' => '支付金额',
+            'person_liable' => '责任人',
             'business_remark' => '业务备注',
             'refund_description' => '退款说明',
             'status' => '状态',
