@@ -46,9 +46,9 @@ class CustomerServiceRefundRequest extends FormRequest
                     'address' => 'string|max:255',
                     'refund_amount' => 'numeric',
                     'transaction_sn' => 'string|max:255',
-                    'return_reasons_id' => [
+                    'refund_reasons_id' => [
                         'required', 'integer',
-                        Rule::exists('return_reasons', 'id')->where(function ($query) {
+                        Rule::exists('refund_reasons', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -88,9 +88,9 @@ class CustomerServiceRefundRequest extends FormRequest
                     'address' => 'string|max:255',
                     'refund_amount' => 'numeric',
                     'transaction_sn' => 'string|max:255',
-                    'return_reasons_id' => [
+                    'refund_reasons_id' => [
                         'integer',
-                        Rule::exists('return_reasons', 'id')->where(function ($query) {
+                        Rule::exists('refund_reasons', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
                     ],
@@ -140,9 +140,9 @@ class CustomerServiceRefundRequest extends FormRequest
             'transaction_sn.string' => '交易单号必须string类型',
             'transaction_sn.max' => '交易单号最大长度为255',
 
-            'return_reasons_id.required' => '退款原因id必填',
-            'return_reasons_id.string' => '退款原因id必须string类型',
-            'return_reasons_id.max' => '退款原因id最大长度为255',
+            'refund_reasons_id.required' => '退款原因id必填',
+            'refund_reasons_id.string' => '退款原因id必须string类型',
+            'refund_reasons_id.max' => '退款原因id最大长度为255',
 
             'seller_nick.string' => '卖家昵称必须string类型',
             'seller_nick.max' => '卖家昵称最大长度为255',
@@ -182,7 +182,7 @@ class CustomerServiceRefundRequest extends FormRequest
             'address' => '开户地址',
             'refund_amount' => '退款金额',
             'transaction_sn' => '交易单号',
-            'return_reasons_id' => '退款原因id',
+            'refund_reasons_id' => '退款原因id',
             'seller_nick' => '卖家昵称',
             'seller_name' => '卖家名称',
             'payment' => '支付金额',

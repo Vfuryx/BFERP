@@ -8,7 +8,7 @@ use League\Fractal\TransformerAbstract;
 class RefundOrderTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
-        'paymentMethod', 'shop', 'refundPaymentMethod', 'returnReason', 'businessPersonnel',
+        'paymentMethod', 'shop', 'refundPaymentMethod', 'refundReason', 'businessPersonnel',
         'locker', 'afterSale', 'financial', 'creator'
 
     ];
@@ -30,7 +30,7 @@ class RefundOrderTransformer extends TransformerAbstract
             'address' => $refundOrder->address,
             'refund_amount' => $refundOrder->refund_amount,
             'transaction_sn' => $refundOrder->transaction_sn,
-            'return_reasons_id' => $refundOrder->return_reasons_id,
+            'refund_reasons_id' => $refundOrder->refund_reasons_id,
             'seller_nick' => $refundOrder->seller_nick,
             'seller_name' => $refundOrder->seller_name,
             'payment' => $refundOrder->payment,
@@ -73,9 +73,9 @@ class RefundOrderTransformer extends TransformerAbstract
         return $this->item($refundOrder->refundPaymentMethod, new PaymentMethodTransformer());
     }
 
-    public function includeReturnReason(RefundOrder $refundOrder)
+    public function includeRefundReason(RefundOrder $refundOrder)
     {
-        return $this->item($refundOrder->returnReason, new ReturnReasonTransformer());
+        return $this->item($refundOrder->refundReason, new RefundReasonTransformer());
     }
 
     public function includeCreator(RefundOrder $refundOrder)

@@ -30,7 +30,7 @@ class CustomerServiceRefundsController extends Controller
     /**
      * 获取所有客服退款
      *
-     * @Get("/customerservicerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]")
+     * @Get("/customerservicerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
@@ -52,7 +52,7 @@ class CustomerServiceRefundsController extends Controller
      *              "address": "开户地址",
      *              "refund_amount": "10.00",
      *              "transaction_sn": "12345645",
-     *              "return_reasons_id": 1,
+     *              "refund_reasons_id": 1,
      *              "seller_nick": "卖家昵称",
      *              "seller_name": "卖家昵称",
      *              "payment": "10.00",
@@ -94,7 +94,7 @@ class CustomerServiceRefundsController extends Controller
     /**
      * 新增客服退款(可选参数：include)
      *
-     * @Post("/customerservicerefunds[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
+     * @Post("/customerservicerefunds[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("order_sn", description="系统单号", required=false),
@@ -106,7 +106,7 @@ class CustomerServiceRefundsController extends Controller
      *      @Parameter("address", description="开户地址", required=false),
      *      @Parameter("refund_amount", type="numeric", description="退款金额", required=false),
      *      @Parameter("transaction_sn", description="交易单号", required=false),
-     *      @Parameter("return_reasons_id", type="integer", description="退款原因id", required=true),
+     *      @Parameter("refund_reasons_id", type="integer", description="退款原因id", required=true),
      *      @Parameter("seller_nick", description="卖家昵称", required=false),
      *      @Parameter("seller_name", description="卖家名称", required=false),
      *      @Parameter("payment", type="numeric", description="支付金额", required=false),
@@ -125,7 +125,7 @@ class CustomerServiceRefundsController extends Controller
      *      "address":"开户地址",
      *      "refund_amount":10,
      *      "transaction_sn":"12345645",
-     *      "return_reasons_id":1,
+     *      "refund_reasons_id":1,
      *      "seller_nick":"卖家昵称",
      *      "seller_name":"卖家昵称",
      *      "payment":10,
@@ -158,7 +158,7 @@ class CustomerServiceRefundsController extends Controller
      *          "address": "开户地址",
      *          "refund_amount": "10.00",
      *          "transaction_sn": "12345645",
-     *          "return_reasons_id": 1,
+     *          "refund_reasons_id": 1,
      *          "seller_nick": "卖家昵称",
      *          "seller_name": "卖家昵称",
      *          "payment": "10.00",
@@ -192,7 +192,7 @@ class CustomerServiceRefundsController extends Controller
     /**
      * 显示单条客服退款
      *
-     * @Get("/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
+     * @Get("/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -214,7 +214,7 @@ class CustomerServiceRefundsController extends Controller
      *          "address": "开户地址",
      *          "refund_amount": "10.00",
      *          "transaction_sn": "12345645",
-     *          "return_reasons_id": 1,
+     *          "refund_reasons_id": 1,
      *          "seller_nick": "卖家昵称",
      *          "seller_name": "卖家昵称",
      *          "payment": "10.00",
@@ -245,7 +245,7 @@ class CustomerServiceRefundsController extends Controller
     /**
      * 修改客服退款
      *
-     * @Patch("/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
+     * @Patch("/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("order_sn", description="系统单号", required=false),
@@ -257,7 +257,7 @@ class CustomerServiceRefundsController extends Controller
      *      @Parameter("address", description="开户地址", required=false),
      *      @Parameter("refund_amount", type="numeric", description="退款金额", required=false),
      *      @Parameter("transaction_sn", description="交易单号", required=false),
-     *      @Parameter("return_reasons_id", type="integer", description="退款原因id", required=false),
+     *      @Parameter("refund_reasons_id", type="integer", description="退款原因id", required=false),
      *      @Parameter("seller_nick", description="卖家昵称", required=false),
      *      @Parameter("seller_name", description="卖家名称", required=false),
      *      @Parameter("payment", type="numeric", description="支付金额", required=false),

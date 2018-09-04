@@ -2,31 +2,32 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\ReturnReason;
+use App\Models\RefundOrder;
 
-use App\Http\Requests\Api\ReturnReasonRequest;
+use App\Http\Requests\Api\RefundReasonRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
-use App\Transformers\ReturnReasonTransformer;
+use App\Models\RefundReason;
+use App\Transformers\RefundReasonTransformer;
 
 use App\Http\Controllers\Traits\CURDTrait;
 
 /**
- * 退货原因资源
- * @Resource("returnreasons",uri="/api")
+ * 退款原因资源
+ * @Resource("refundreasons",uri="/api")
  */
-class ReturnReasonsController extends Controller
+class RefundReasonsController extends Controller
 {
     use CURDTrait;
 
-    const TRANSFORMER = ReturnReasonTransformer::class;
-    const MODEL = ReturnReason::class;
+    const TRANSFORMER = RefundReasonTransformer::class;
+    const MODEL = RefundOrder::class;
 
     /**
-     * 获取所有退货原因
+     * 获取所有退款原因
      *
-     * @Get("/returnreasons{?status}")
+     * @Get("/refundreasons{?status}")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
@@ -35,14 +36,14 @@ class ReturnReasonsController extends Controller
      * "data": {
      *         {
      *             "id": 1,
-     *             "name": "退货原因",
+     *             "name": "退款原因",
      *             "status": true,
      *             "created_at": "2018-06-14 16:55:32",
      *             "updated_at": "2018-06-14 16:55:32"
      *         },
      *         {
      *             "id": 2,
-     *             "name": "退货原因2",
+     *             "name": "退款原因2",
      *             "status": true,
      *             "created_at": "2018-06-14 16:55:36",
      *             "updated_at": "2018-06-14 16:55:36"
@@ -57,25 +58,25 @@ class ReturnReasonsController extends Controller
      *             "total_pages": 1,
      *             "links": {
      *                 "previous": null,
-     *                 "next": "{{host}}/api/returnreasons?page=1"
+     *                 "next": "{{host}}/api/refundreasons?page=1"
      *             }
      *         }
      *     }
      * })
      */
-    public function index(ReturnReasonRequest $request)
+    public function index(RefundReasonRequest $request)
     {
         return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
 
     /**
-     * 新增退货原因
+     * 新增退款原因
      *
-     * @Post("/returnreasons")
+     * @Post("/refundreasons")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("name", description="退货原因名称", required=true),
+     *      @Parameter("name", description="退款原因名称", required=true),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
      * })
      * @Transaction({
@@ -83,14 +84,14 @@ class ReturnReasonsController extends Controller
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
      *              "name": {
-     *                  "退货原因名称必填"
+     *                  "退款原因名称必填"
      *              }
      *           },
      *          "status_code": 422,
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "退货原因",
+     *          "name": "退款原因",
      *          "status": true,
      *          "created_at": "2018-06-14 16:55:40",
      *          "updated_at": "2018-06-14 16:55:40",
@@ -100,15 +101,15 @@ class ReturnReasonsController extends Controller
      *      })
      * })
      */
-    public function store(ReturnReasonRequest $request)
+    public function store(RefundReasonRequest $request)
     {
         return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**
-     * 显示单条退货原因
+     * 显示单条退款原因
      *
-     * @Get("/returnreasons/:id")
+     * @Get("/refundreasons/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -117,23 +118,23 @@ class ReturnReasonsController extends Controller
      *      }),
      *      @Response(200, body={
      *          "id": 1,
-     *          "name": "退货原因",
+     *          "name": "退款原因",
      *          "status": true,
      *          "created_at": "2018-06-14 16:55:32",
      *          "updated_at": "2018-06-14 16:55:32"
      *      })
      * })
      */
-    public function show(ReturnReason $returnreason)
+    public function show(RefundReason $refunreason)
     {
-        return $this->traitShow($returnreason, self::TRANSFORMER);
+        return $this->traitShow($refunreason, self::TRANSFORMER);
     }
 
 
     /**
-     * 修改退货原因
+     * 修改退款原因
      *
-     * @Patch("/returnreasons/:id")
+     * @Patch("/refundreasons/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -144,29 +145,29 @@ class ReturnReasonsController extends Controller
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
      *              "name": {
-     *                  "退货原因名称必须string类型"
+     *                  "退款原因名称必须string类型"
      *               }
      *           },
      *          "status_code": 422
      *      }),
      *      @Response(201, body={
      *          "id": 1,
-     *          "name": "退货原因10",
+     *          "name": "退款原因10",
      *          "status": true,
      *          "created_at": "2018-06-14 16:55:32",
      *          "updated_at": "2018-06-14 16:58:55"
      *      })
      * })
      */
-    public function update(ReturnReasonRequest $request, ReturnReason $returnreason)
+    public function update(RefundReasonRequest $request, RefundReason $refunreason)
     {
-        return $this->traitUpdate($request, $returnreason, self::TRANSFORMER);
+        return $this->traitUpdate($request, $refunreason, self::TRANSFORMER);
     }
 
     /**
-     * 删除退货原因
+     * 删除退款原因
      *
-     * @Delete("/returnreasons/:id")
+     * @Delete("/refundreasons/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -176,18 +177,18 @@ class ReturnReasonsController extends Controller
      *      @Response(204, body={})
      * })
      */
-    public function destroy(ReturnReason $returnreason)
+    public function destroy(RefundReason $refunreason)
     {
-        return $this->traitDestroy($returnreason);
+        return $this->traitDestroy($refunreason);
     }
 
     /**
-     * 删除一组退货原因
+     * 删除一组退款原因
      *
-     * @Delete("/returnreasons")
+     * @Delete("/refundreasons")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="退货原因id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="退款原因id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(500, body={
@@ -213,12 +214,12 @@ class ReturnReasonsController extends Controller
     }
 
     /**
-     * 更改一组退货原因状态
+     * 更改一组退款原因状态
      *
-     * @PUT("/returnreasons/editstatus")
+     * @PUT("/refundreasons/editstatus")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("ids", description="退货原因id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("ids", description="退款原因id组 格式: 1,2,3,4 ", required=true),
      *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
      * })
      * @Transaction({

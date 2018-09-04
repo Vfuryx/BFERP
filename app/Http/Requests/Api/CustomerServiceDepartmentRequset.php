@@ -17,6 +17,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
             case 'GET':
                 return [
                     'status' => 'boolean',
+                    'order_status' => 'integer',
                 ];
                 break;
             case 'POST':
@@ -428,6 +429,8 @@ class CustomerServiceDepartmentRequset extends FormRequest
     public function messages()
     {
         return [
+            'order_status.integer' => '订单状态必须为int类型',
+
             'shops_id.required' => '店铺id必填',
             'shops_id.integer' => '店铺id必须int类型',
             'shops_id.exists' => '需要添加的id在数据库中未找到或未启用',
@@ -676,7 +679,6 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'customer_service_remark' => '客服备注',
             'buyer_message' => '买家留言',
             'status' => '订单是否开启',
-
 
             'receiver_name' => '收货人',
             'receiver_phone' => '收货人固定电话',

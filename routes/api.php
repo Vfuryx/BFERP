@@ -747,6 +747,22 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.customerservicerefunds.isunaudit');
 
         //退款原因
+        $api->get('refundreasons', 'RefundReasonsController@index')
+            ->name('api.refundreasons.index');
+        $api->get('refundreasons/{refunreason}', 'RefundReasonsController@show')
+            ->name('api.refundreasons.show');
+        $api->post('refundreasons', 'RefundReasonsController@store')
+            ->name('api.refundreasons.store');
+        $api->patch('refundreasons/{refunreason}', 'RefundReasonsController@update')
+            ->name('api.refundreasons.update');
+        $api->delete('refundreasons/{refunreason}', 'RefundReasonsController@destroy')
+            ->name('api.refundreasons.destroy');
+        $api->delete('refundreasons', 'RefundReasonsController@destroybyids')
+            ->name('api.refundreasons.destroybyids');
+        $api->put('refundreasons/editstatus', 'RefundReasonsController@editStatusByIds')
+            ->name('api.refundreasons.editstatusbyids');
+
+        //退货原因
         $api->get('returnreasons', 'ReturnReasonsController@index')
             ->name('api.returnreasons.index');
         $api->get('returnreasons/{returnreason}', 'ReturnReasonsController@show')

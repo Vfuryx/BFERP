@@ -11655,6 +11655,8 @@ FORMAT: 1A
 + Parameters
     + status: (boolean, optional) - 获取的状态
         + Default: all
+    + order_status: (boolean, optional) - 获取的状态
+        + Default: all
 
 + Response 200 (application/json)
     + Body
@@ -11750,7 +11752,7 @@ FORMAT: 1A
                 }
             }
 
-## 获取创建订单数据 [POST /api/customerservicedepts/create]
+## 获取创建订单数据 [GET /api/customerservicedepts/create]
 
 
 + Response 200 (application/json)
@@ -12030,6 +12032,29 @@ FORMAT: 1A
                             "updated_at": "2018-08-17 17:47:40"
                         }
                     ],
+                    "payment_method": [
+                        {
+                            "id": 1,
+                            "name": "付款方式",
+                            "status": true,
+                            "created_at": "2018-08-20 11:36:46",
+                            "updated_at": "2018-08-20 11:36:46"
+                        },
+                        {
+                            "id": 3,
+                            "name": "付款方式2",
+                            "status": true,
+                            "created_at": "2018-09-04 14:57:22",
+                            "updated_at": "2018-09-04 14:57:22"
+                        },
+                        {
+                            "id": 4,
+                            "name": "付款方式3",
+                            "status": true,
+                            "created_at": "2018-09-04 14:57:30",
+                            "updated_at": "2018-09-04 14:57:30"
+                        }
+                    ],
                     "meta": {
                         "status_code": "200"
                     }
@@ -12096,6 +12121,7 @@ FORMAT: 1A
     + receiver_zip: (string, required) - 收货邮编
     + order_items[0][products_id]: (integer, optional) - 产品id
     + order_items[0][combinations_id]: (integer, optional) - 组合id
+    + order_items[0][quantity]: (integer, optional) - 数量
     + order_items[0][total_volume]: (numeric, optional) - 总体积
     + order_items[0][paint]: (string, optional) - 油漆
     + order_items[0][is_printing]: (boolean, optional) - 是否需要印刷
@@ -12438,6 +12464,7 @@ FORMAT: 1A
     + order_items[0][id]: (integer, optional) - 子订单id
     + order_items[0][products_id]: (integer, optional) - 产品id
     + order_items[0][combinations_id]: (integer, optional) - 组合id
+    + order_items[0][quantity]: (integer, optional) - 数量
     + order_items[0][total_volume]: (numeric, optional) - 总体积
     + order_items[0][paint]: (string, optional) - 油漆
     + order_items[0][is_printing]: (boolean, optional) - 是否需要印刷
@@ -13646,7 +13673,7 @@ FORMAT: 1A
 # customerservicerefunds [/api]
 客服退款资源
 
-## 获取所有客服退款 [GET /api/customerservicerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]]
+## 获取所有客服退款 [GET /api/customerservicerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial]]
 
 
 + Parameters
@@ -13673,7 +13700,7 @@ FORMAT: 1A
                         "address": "开户地址",
                         "refund_amount": "10.00",
                         "transaction_sn": "12345645",
-                        "return_reasons_id": 1,
+                        "refund_reasons_id": 1,
                         "seller_nick": "卖家昵称",
                         "seller_name": "卖家昵称",
                         "payment": "10.00",
@@ -13707,7 +13734,7 @@ FORMAT: 1A
                 }
             }
 
-## 新增客服退款(可选参数：include) [POST /api/customerservicerefunds[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+## 新增客服退款(可选参数：include) [POST /api/customerservicerefunds[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]]
 
 
 + Parameters
@@ -13720,7 +13747,7 @@ FORMAT: 1A
     + address: (string, optional) - 开户地址
     + refund_amount: (numeric, optional) - 退款金额
     + transaction_sn: (string, optional) - 交易单号
-    + return_reasons_id: (integer, required) - 退款原因id
+    + refund_reasons_id: (integer, required) - 退款原因id
     + seller_nick: (string, optional) - 卖家昵称
     + seller_name: (string, optional) - 卖家名称
     + payment: (numeric, optional) - 支付金额
@@ -13742,7 +13769,7 @@ FORMAT: 1A
                 "address": "开户地址",
                 "refund_amount": 10,
                 "transaction_sn": "12345645",
-                "return_reasons_id": 1,
+                "refund_reasons_id": 1,
                 "seller_nick": "卖家昵称",
                 "seller_name": "卖家昵称",
                 "payment": 10,
@@ -13782,7 +13809,7 @@ FORMAT: 1A
                 "address": "开户地址",
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
-                "return_reasons_id": 1,
+                "refund_reasons_id": 1,
                 "seller_nick": "卖家昵称",
                 "seller_name": "卖家昵称",
                 "payment": "10.00",
@@ -13807,7 +13834,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条客服退款 [GET /api/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+## 显示单条客服退款 [GET /api/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]]
 
 
 + Response 404 (application/json)
@@ -13836,7 +13863,7 @@ FORMAT: 1A
                 "address": "开户地址",
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
-                "return_reasons_id": 1,
+                "refund_reasons_id": 1,
                 "seller_nick": "卖家昵称",
                 "seller_name": "卖家昵称",
                 "payment": "10.00",
@@ -13858,7 +13885,7 @@ FORMAT: 1A
                 "updated_at": "2018-09-01 10:41:11"
             }
 
-## 修改客服退款 [PATCH /api/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+## 修改客服退款 [PATCH /api/customerservicerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,refundReason,businessPersonnel,locker,afterSale,financial,creator]]
 
 
 + Parameters
@@ -13871,7 +13898,7 @@ FORMAT: 1A
     + address: (string, optional) - 开户地址
     + refund_amount: (numeric, optional) - 退款金额
     + transaction_sn: (string, optional) - 交易单号
-    + return_reasons_id: (integer, optional) - 退款原因id
+    + refund_reasons_id: (integer, optional) - 退款原因id
     + seller_nick: (string, optional) - 卖家昵称
     + seller_name: (string, optional) - 卖家名称
     + payment: (numeric, optional) - 支付金额
@@ -13998,10 +14025,10 @@ FORMAT: 1A
 
             []
 
-# returnreasons [/api]
+# refundreasons [/api]
 退款原因资源
 
-## 获取所有退款原因 [GET /api/returnreasons{?status}]
+## 获取所有退款原因 [GET /api/refundreasons{?status}]
 
 
 + Parameters
@@ -14037,13 +14064,13 @@ FORMAT: 1A
                         "total_pages": 1,
                         "links": {
                             "previous": null,
-                            "next": "{{host}}/api/returnreasons?page=1"
+                            "next": "{{host}}/api/refundreasons?page=1"
                         }
                     }
                 }
             }
 
-## 新增退款原因 [POST /api/returnreasons]
+## 新增退款原因 [POST /api/refundreasons]
 
 
 + Parameters
@@ -14078,7 +14105,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示单条退款原因 [GET /api/returnreasons/:id]
+## 显示单条退款原因 [GET /api/refundreasons/:id]
 
 
 + Response 404 (application/json)
@@ -14100,7 +14127,7 @@ FORMAT: 1A
                 "updated_at": "2018-06-14 16:55:32"
             }
 
-## 修改退款原因 [PATCH /api/returnreasons/:id]
+## 修改退款原因 [PATCH /api/refundreasons/:id]
 
 
 + Response 404 (application/json)
@@ -14135,7 +14162,7 @@ FORMAT: 1A
                 "updated_at": "2018-06-14 16:58:55"
             }
 
-## 删除退款原因 [DELETE /api/returnreasons/:id]
+## 删除退款原因 [DELETE /api/refundreasons/:id]
 
 
 + Response 404 (application/json)
@@ -14151,7 +14178,7 @@ FORMAT: 1A
 
             []
 
-## 删除一组退款原因 [DELETE /api/returnreasons]
+## 删除一组退款原因 [DELETE /api/refundreasons]
 
 
 + Parameters
@@ -14184,11 +14211,234 @@ FORMAT: 1A
 
             []
 
-## 更改一组退款原因状态 [PUT /api/returnreasons/editstatus]
+## 更改一组退款原因状态 [PUT /api/refundreasons/editstatus]
 
 
 + Parameters
     + ids: (string, required) - 退款原因id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# returnreasons [/api]
+退货原因资源
+
+## 获取所有退货原因 [GET /api/returnreasons{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "退货原因",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "退货原因2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/returnreasons?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增退货原因 [POST /api/returnreasons]
+
+
++ Parameters
+    + name: (string, required) - 退货原因名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "退货原因名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退货原因",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条退货原因 [GET /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退货原因",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改退货原因 [PATCH /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "退货原因名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "退货原因10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除退货原因 [DELETE /api/returnreasons/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组退货原因 [DELETE /api/returnreasons]
+
+
++ Parameters
+    + ids: (string, required) - 退货原因id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组退货原因状态 [PUT /api/returnreasons/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 退货原因id组 格式: 1,2,3,4 
     + status: (boolean, required) - 状态(0:停用，1:启用)
 
 + Response 500 (application/json)

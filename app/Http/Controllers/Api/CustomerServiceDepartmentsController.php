@@ -41,6 +41,7 @@ class CustomerServiceDepartmentsController extends Controller
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
+     *      @Parameter("order_status", type="boolean", description="获取的状态", required=false, default="all"),
      * })
      * @Response(200, body={
      *       "data": {
@@ -519,6 +520,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      @Parameter("receiver_zip", description="收货邮编", required=true),
      *      @Parameter("order_items[0][products_id]", type="integer", description="产品id", required=false),
      *      @Parameter("order_items[0][combinations_id]", type="integer", description="组合id", required=false),
+     *      @Parameter("order_items[0][quantity]", type="integer", description="数量", required=false),
      *      @Parameter("order_items[0][total_volume]", type="numeric", description="总体积", required=false),
      *      @Parameter("order_items[0][paint]", description="油漆", required=false),
      *      @Parameter("order_items[0][is_printing]", type="boolean", description="是否需要印刷", required=false),
@@ -895,6 +897,7 @@ class CustomerServiceDepartmentsController extends Controller
      *      @Parameter("order_items[0][id]", type="integer", description="子订单id", required=false),
      *      @Parameter("order_items[0][products_id]", type="integer", description="产品id", required=false),
      *      @Parameter("order_items[0][combinations_id]", type="integer", description="组合id", required=false),
+     *      @Parameter("order_items[0][quantity]", type="integer", description="数量", required=false),
      *      @Parameter("order_items[0][total_volume]", type="numeric", description="总体积", required=false),
      *      @Parameter("order_items[0][paint]", description="油漆", required=false),
      *      @Parameter("order_items[0][is_printing]", type="boolean", description="是否需要印刷", required=false),

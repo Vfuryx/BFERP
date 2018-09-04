@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class ReturnReasonRequest extends FormRequest
+class RefundReasonRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -37,15 +37,15 @@ class ReturnReasonRequest extends FormRequest
         return [
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
-            'name.required' => '退货原因名称必填',
-            'name.string' => '退货原因名称必须string类型',
+            'name.required' => '退款原因名称必填',
+            'name.string' => '退款原因名称必须string类型',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '退货原因名称',
+            'name' => '退款原因名称',
             'status' => '状态'
         ];
     }

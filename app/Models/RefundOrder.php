@@ -35,7 +35,7 @@ class RefundOrder extends Model
     protected $fillable = [
         'order_sn', 'payment_methods_id', 'time_out_at', 'shops_id', 'account',
         'refund_payment_methods_id', 'bank', 'address', 'refund_amount', 'transaction_sn',
-        'return_reasons_id', 'seller_nick', 'seller_name', 'payment', 'person_liable',
+        'refund_reasons_id', 'seller_nick', 'seller_name', 'payment', 'person_liable',
         'liable_fee', 'undertaker', 'business_remark', 'as_remark', 'f_remark',
         'refund_description', 'taobao_refund_status', 'status',
     ];
@@ -47,7 +47,7 @@ class RefundOrder extends Model
         'shops_id' => 'integer',
         'payment_methods_id' => 'integer',
         'refund_payment_methods_id' => 'integer',
-        'return_reasons_id' => 'integer',
+        'refund_reasons_id' => 'integer',
         'business_personnel_id' => 'integer',
         'after_sales_id' => 'integer',
         'financial_id' => 'integer',
@@ -296,9 +296,9 @@ class RefundOrder extends Model
         return $this->belongsTo(PaymentMethod::class, 'refund_payment_methods_id');
     }
 
-    public function returnReason()
+    public function refundReason()
     {
-        return $this->belongsTo(ReturnReason::class, 'return_reasons_id');
+        return $this->belongsTo(RefundReason::class, 'refund_reasons_id');
     }
 
     public function creator()

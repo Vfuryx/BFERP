@@ -28,7 +28,7 @@ class CreateRefundOrdersTable extends Migration
             $table->string('address')->default('')->comment('开户地址');
             $table->decimal('refund_amount',10, 2)->default(0.00)->comment('退款金额');
             $table->string('transaction_sn')->default('')->comment('交易单号');
-            $table->unsignedInteger('return_reasons_id')->comment('退款原因id');
+            $table->unsignedInteger('refund_reasons_id')->comment('退款原因id');
             $table->string('seller_nick')->default('')->comment('卖家昵称');
             $table->string('seller_name')->default('')->comment('卖家名称');
             $table->decimal('payment', 10, 2)->default(0.00)->comment('支付金额');
