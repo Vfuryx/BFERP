@@ -127,8 +127,7 @@
                           :height="height"
                           @row-click="rowClick"
                           style="width: 100%"
-                          ref="multipleTable"
-                >
+                          ref="multipleTable">
                     <!--:row-class-name="tableRowClassName"-->
                     <el-table-column
                             type="selection"

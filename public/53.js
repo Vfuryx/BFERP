@@ -1,24 +1,20 @@
 webpackJsonp([53],{
 
-/***/ 449:
+/***/ 478:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(511)
-}
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(513)
+var __vue_script__ = __webpack_require__(593)
 /* template */
-var __vue_template__ = __webpack_require__(514)
+var __vue_template__ = __webpack_require__(594)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
-var __vue_scopeId__ = "data-v-37b409a6"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -29,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\dashboard\\index.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\departmentMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -38,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-37b409a6", Component.options)
+    hotAPI.createRecord("data-v-1e12d185", Component.options)
   } else {
-    hotAPI.reload("data-v-37b409a6", Component.options)
+    hotAPI.reload("data-v-1e12d185", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -52,56 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 511:
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(512);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(6)("5dfc1aa3", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37b409a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue", function() {
-     var newContent = require("!!../../../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-37b409a6\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../../../node_modules/_vue-loader@13.7.2@vue-loader/lib/selector.js?type=styles&index=0!./index.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-
-/***/ 512:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(4)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\n.dashboard-container[data-v-37b409a6] {\n  margin: 30px;\n}\n.dashboard-text[data-v-37b409a6] {\n  font-size: 30px;\n  line-height: 46px;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-
-/***/ 513:
+/***/ 593:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(15);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 //
 //
 //
@@ -124,217 +75,441 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'dashboard',
   data: function data() {
     return {
-      newOpt: [],
-      title: '新增',
-      formDialog: {
-        title: '测试',
-        dialogFormVisible: false,
-        form: [{
-          label: '名称',
-          type: 'text',
-          formLabelWidth: '120px',
-          name: 'hh'
-        }, {
-          label: '代码',
-          type: 'text',
-          formLabelWidth: '120px',
-          name: 'vv'
-        }, {
-          label: '状态',
-          type: 'select',
-          formLabelWidth: '120px',
-          ps: {
-            s: '1'
-          },
-          status: [{
-            label: '是',
-            value: 1
-          }, {
-            label: '否',
-            value: 0
-          }]
-        }]
+      newOpt: [{
+        cnt: '新增',
+        icon: 'bf-add',
+        ent: this.addNew
+      }, {
+        cnt: '删除',
+        icon: 'bf-del',
+        ent: this.delMore
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.refresh
+      }],
+      getsInfo: [],
+      tableHead: [{
+        label: '部门代码',
+        width: '',
+        prop: "dept_no",
+        holder: '请输入部门代码',
+        type: 'text',
+        beAble: true
+      }, {
+        label: '部门名称',
+        width: '',
+        prop: "name",
+        holder: '请输入部门名称',
+        type: 'text'
+      }, {
+        label: '所属部门',
+        width: '',
+        prop: "p_dept",
+        holder: '请输入所属部门',
+        type: 'text'
+      }, {
+        label: '是否验证',
+        width: '',
+        prop: "is_verify",
+        holder: '请选择是否验证',
+        type: 'select_def'
+      }, {
+        label: '备注',
+        width: '',
+        prop: "remark",
+        holder: '请输入备注',
+        type: 'textarea'
+      }, {
+        label: '状态',
+        width: '',
+        prop: "status",
+        holder: '状态',
+        type: 'select_stu',
+        doSort: true
+      }],
+      loading: true,
+      currentIndex: '',
+      url: '/departments',
+      showMaskArr: false,
+      title: '新增部门',
+      ruleForm: {
+        dept_no: '',
+        name: '',
+        p_dept: '',
+        is_verify: '0',
+        remark: '',
+        status: '1'
+      },
+      rules: {
+        dept_no: [{ required: true, message: '请输入部门代码', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入部门名称', trigger: 'blur' }],
+        p_dept: [{ required: true, message: '请输入所属部门', trigger: 'blur' }]
+      },
+      addArr: [{
+        label: '部门代码',
+        prop: 'dept_no',
+        holder: '请输入运费类型',
+        type: 'text'
+      }, {
+        label: '部门名称',
+        prop: 'name',
+        holder: '请输入部门名称',
+        type: 'text'
+      }, {
+        label: '所属部门',
+        prop: 'p_dept',
+        holder: '请输入所属部门',
+        type: 'text'
+      }, {
+        label: '是否验证',
+        prop: 'is_verify',
+        holder: '请选择是否验证',
+        type: 'select_def'
+      }, {
+        label: '备注',
+        prop: 'remark',
+        holder: '请输入备注',
+        type: 'textarea'
+      }, {
+        label: '状态',
+        prop: 'status',
+        holder: '请选择状态',
+        type: 'select_stu'
+      }],
+      refArr: 'ruleDepart',
+      showDel: false,
+      delId: '',
+      inputChange: false,
+      multipleSelection: [],
+      delArr: [],
+      pagination: {
+        current_page: 1,
+        per_page: 0,
+        page_total: 0
       }
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])(['name', 'roles']), {
-    getKey: function getKey() {
-      var arr = this.formDialog.form.ps;
-    }
-  }),
-  components: {
-    // addM
-  },
   methods: {
-    toggle: function toggle() {
-      this.formDialog.dialogFormVisible = !this.formDialog.dialogFormVisible;
-    },
-    confirmAdd: function confirmAdd() {
+    test: function test() {
       console.log(1);
     },
-    cancelAdd: function cancelAdd() {
-      console.log(2);
+    addNew: function addNew() {
+      this.ruleForm.name = '';
+      this.showMaskArr = true;
+    },
+    CB_dialog: function CB_dialog(val) {
+      this.showMaskArr = val;
+    },
+    submitForm: function submitForm() {
+      var _this = this;
+
+      this.$post(this.url, this.ruleForm).then(function () {
+        _this.$message({
+          message: '添加成功',
+          type: 'success'
+        });
+        _this.showMaskArr = false;
+        _this.refresh();
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+
+    /*处理批量删除*/
+    handleSelectionChange: function handleSelectionChange(val) {
+      this.multipleSelection = val;
+      var del = [];
+      this.multipleSelection.forEach(function (selectedItem) {
+        del.push(selectedItem.id);
+      });
+      this.delArr = del.join(',');
+    },
+    delMore: function delMore() {
+      var _this2 = this;
+
+      if (this.delArr.length === 0) {
+        this.$message({
+          message: '没有选中数据',
+          type: 'warning'
+        });
+      } else {
+        this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          _this2.$del(_this2.url, { ids: _this2.delArr }).then(function () {
+            _this2.$message({
+              message: '删除成功',
+              type: 'success'
+            });
+            _this2.refresh();
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              var str = arr1.join(',');
+              _this2.$message.error({
+                message: str
+              });
+            }
+          });
+        }).catch(function () {
+          _this2.$message({
+            type: 'info',
+            message: '已取消删除'
+          });
+        });
+      }
+    },
+
+    /*修改保存*/
+    edit: function edit(index) {
+      this.currentIndex = 'index' + index;
+    },
+    editCancel: function editCancel() {
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+      this.currentIndex = '';
+    },
+    editSave: function editSave(row) {
+      var _this3 = this;
+
+      var obj = {
+        id: row.id,
+        name: row.name,
+        is_default: row.is_default,
+        status: row.status
+      };
+      if (this.inputChange) {
+        this.$patch(this.url + '/' + row.id, obj).then(function () {
+          _this3.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this3.getInfo(_this3.url);
+          _this3.currentIndex = '';
+          _this3.inputChange = false;
+        }, function (err) {
+          if (err.response) {
+            var arr = err.response.data.errors;
+            var arr1 = [];
+            for (var i in arr) {
+              arr1.push(arr[i]);
+            }
+            var str = arr1.join(',');
+            _this3.$message.error({
+              message: str
+            });
+          }
+        });
+      } else {
+        this.$message({
+          message: '数据未改动',
+          type: 'info'
+        });
+      }
+    },
+    handleEdit: function handleEdit() {
+      this.inputChange = true;
+    },
+    getInfo: function getInfo(url) {
+      var _this4 = this;
+
+      this.showPage = true;
+      this.$fetch(url).then(function (res) {
+        _this4.getsInfo = res.data;
+        _this4.$store.dispatch('setFreights', res.data);
+        _this4.loading = false;
+        var pg = res.meta.pagination;
+        _this4.$store.dispatch('currentPage', pg.current_page);
+        _this4.$store.commit('PER_PAGE', pg.per_page);
+        _this4.$store.commit('PAGE_TOTAL', pg.total);
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this4.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    del: function del(row, e) {
+      this.showDel = true;
+      $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
+      this.delId = row.id;
+    },
+    cancelD: function cancelD() {
+      this.showDel = false;
+      this.$message({
+        message: '取消删除',
+        type: 'info'
+      });
+    },
+    confirmD: function confirmD(id) {
+      var _this5 = this;
+
+      this.$del(this.url + '/' + id).then(function () {
+        _this5.$message({
+          message: '删除成功',
+          type: 'success'
+        });
+        _this5.showDel = false;
+        _this5.refresh();
+      }, function (err) {
+        if (err.response) {
+          _this5.showDel = false;
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
+          }
+          var str = arr1.join(',');
+          _this5.$message.error({
+            message: str
+          });
+        }
+      });
+    },
+    refresh: function refresh() {
+      var _this6 = this;
+
+      this.loading = true;
+      this.getInfo(this.url);
+      setTimeout(function () {
+        _this6.loading = false;
+      }, 2000);
     }
   },
   mounted: function mounted() {
-    this.$store.state.opt.opts = this.newOpt;
+    this.getInfo(this.url);
+    this.$store.dispatch('setOpt', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      that.$store.dispatch('setOpt', that.newOpt);
+    });
   }
 });
 
 /***/ }),
 
-/***/ 514:
+/***/ 594:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c(
-      "div",
-      { staticClass: "dashboard-container" },
-      [
-        _c("p", { staticClass: "dashboard-text" }, [
-          _vm._v("name:" + _vm._s(_vm.name))
-        ]),
-        _vm._v(" "),
-        _c(
-          "p",
-          { staticClass: "dashboard-text" },
-          [
-            _vm._v("roles:\n            "),
-            _vm._l(_vm.roles, function(role) {
-              return _c("span", { key: role }, [_vm._v(_vm._s(role))])
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c("el-button", { on: { click: _vm.toggle } }, [_vm._v("默认按钮")]),
-        _vm._v(" "),
-        _c(
-          "el-dialog",
-          {
-            attrs: {
-              title: _vm.formDialog.title,
-              visible: _vm.formDialog.dialogFormVisible
+  return _c(
+    "div",
+    [
+      _c("light-table", {
+        attrs: {
+          listData: _vm.getsInfo,
+          tableHead: _vm.tableHead,
+          loading: _vm.loading,
+          currentIndex: _vm.currentIndex
+        },
+        on: {
+          handleSelect: _vm.handleSelectionChange,
+          editSave: _vm.editSave,
+          handleEdit: _vm.handleEdit,
+          del: _vm.del,
+          edit: _vm.edit,
+          editCancel: _vm.editCancel
+        }
+      }),
+      _vm._v(" "),
+      _c("add-new", {
+        attrs: {
+          "visible-add": _vm.showMaskArr,
+          title: _vm.title,
+          "rule-form": _vm.ruleForm,
+          rules: _vm.rules,
+          "add-arr": _vm.addArr,
+          url: _vm.url,
+          "new-ref": _vm.refArr
+        },
+        on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
+      }),
+      _vm._v(" "),
+      _c(
+        "el-popover",
+        {
+          attrs: { slot: "tip", placement: "top", width: "160" },
+          slot: "tip",
+          model: {
+            value: _vm.showDel,
+            callback: function($$v) {
+              _vm.showDel = $$v
             },
-            on: {
-              "update:visible": function($event) {
-                _vm.$set(_vm.formDialog, "dialogFormVisible", $event)
-              }
-            }
-          },
-          [
-            _c(
-              "el-form",
-              _vm._l(_vm.formDialog.form, function(item, index) {
-                return _c(
-                  "el-form-item",
-                  {
-                    key: item.key,
-                    attrs: {
-                      label: item.label,
-                      "label-width": item.formLabelWidth
+            expression: "showDel"
+          }
+        },
+        [
+          _c("p", [_vm._v("确定删除该条数据？")]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticStyle: { "text-align": "right", margin: "0" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { size: "mini", type: "text" },
+                  on: { click: _vm.cancelD }
+                },
+                [_vm._v("取消")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary", size: "mini" },
+                  on: {
+                    click: function($event) {
+                      _vm.confirmD(_vm.delId)
                     }
-                  },
-                  [
-                    item.type == "text"
-                      ? _c(
-                          "span",
-                          [
-                            _c("el-input", {
-                              attrs: { "auto-complete": "off" },
-                              model: {
-                                value: _vm.name,
-                                callback: function($$v) {
-                                  _vm.name = $$v
-                                },
-                                expression: "name"
-                              }
-                            })
-                          ],
-                          1
-                        )
-                      : item.type == "select"
-                        ? _c(
-                            "span",
-                            [
-                              _c(
-                                "el-select",
-                                {
-                                  model: {
-                                    value: item.ps,
-                                    callback: function($$v) {
-                                      _vm.$set(item, "ps", $$v)
-                                    },
-                                    expression: "item.ps"
-                                  }
-                                },
-                                _vm._l(item.status, function(list) {
-                                  return _c("el-option", {
-                                    key: list.key,
-                                    attrs: {
-                                      label: list.label,
-                                      value: list.value
-                                    }
-                                  })
-                                })
-                              )
-                            ],
-                            1
-                          )
-                        : _vm._e()
-                  ]
-                )
-              })
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "dialog-footer",
-                attrs: { slot: "footer" },
-                slot: "footer"
-              },
-              [
-                _c("el-button", { on: { click: _vm.cancelAdd } }, [
-                  _vm._v("取 消")
-                ]),
-                _vm._v(" "),
-                _c(
-                  "el-button",
-                  { attrs: { type: "primary" }, on: { click: _vm.confirmAdd } },
-                  [_vm._v("确 定")]
-                )
-              ],
-              1
-            )
-          ],
-          1
-        )
-      ],
-      1
-    )
-  ])
+                  }
+                },
+                [_vm._v("确定")]
+              )
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c("Pagination", { attrs: { "page-url": _vm.url } })
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -342,7 +517,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-37b409a6", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-1e12d185", module.exports)
   }
 }
 

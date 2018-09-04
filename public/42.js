@@ -1,14 +1,14 @@
 webpackJsonp([42],{
 
-/***/ 489:
+/***/ 474:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(602)
+var __vue_script__ = __webpack_require__(585)
 /* template */
-var __vue_template__ = __webpack_require__(603)
+var __vue_template__ = __webpack_require__(586)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\brushLockConf.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\memberMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-63a62da6", Component.options)
+    hotAPI.createRecord("data-v-ad1ee186", Component.options)
   } else {
-    hotAPI.reload("data-v-63a62da6", Component.options)
+    hotAPI.reload("data-v-ad1ee186", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,12 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 602:
+/***/ 585:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -85,15 +86,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-del',
         ent: this.test
       }, {
+        cnt: '导入',
+        icon: 'bf-in',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.test
       }],
+      currentPage: true,
       searchBox: {
         buyNick: '',
         shopTitle: ''
-      },
-      currentPage: true
+      }
     };
   },
 
@@ -121,7 +130,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 603:
+/***/ 586:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -134,7 +143,7 @@ var render = function() {
           _c(
             "span",
             [
-              _c("label", [_vm._v("执行类型")]),
+              _c("label", [_vm._v("买家昵称")]),
               _vm._v(" "),
               _c("el-input", {
                 staticClass: "half",
@@ -165,7 +174,7 @@ var render = function() {
           _c(
             "span",
             [
-              _c("label", [_vm._v("包含字符")]),
+              _c("label", [_vm._v("会员姓名")]),
               _vm._v(" "),
               _c("el-input", {
                 staticClass: "half",
@@ -195,7 +204,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("h2", [_vm._v("刷单锁单配置")])
+    _c("h2", [_vm._v("会员管理")])
   ])
 }
 var staticRenderFns = []
@@ -204,7 +213,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-63a62da6", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-ad1ee186", module.exports)
   }
 }
 

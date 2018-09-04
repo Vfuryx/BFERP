@@ -1,14 +1,14 @@
 webpackJsonp([24],{
 
-/***/ 483:
+/***/ 491:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(590)
+var __vue_script__ = __webpack_require__(619)
 /* template */
-var __vue_template__ = __webpack_require__(591)
+var __vue_template__ = __webpack_require__(620)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\proBom.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\verificationConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-572fe0c2", Component.options)
+    hotAPI.createRecord("data-v-dcdfd6aa", Component.options)
   } else {
-    hotAPI.reload("data-v-572fe0c2", Component.options)
+    hotAPI.reload("data-v-dcdfd6aa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 590:
+/***/ 619:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -87,6 +91,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         cnt: '删除',
         icon: 'bf-del',
+        ent: this.test
+      }, {
+        cnt: '导入',
+        icon: 'bf-in',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '合并',
+        icon: 'bf-merge',
         ent: this.test
       }, {
         cnt: '刷新',
@@ -125,7 +141,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 591:
+/***/ 620:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -138,38 +154,7 @@ var render = function() {
           _c(
             "span",
             [
-              _c("label", [_vm._v("商品简称")]),
-              _vm._v(" "),
-              _c("el-input", {
-                staticClass: "half",
-                attrs: { clearable: "" },
-                nativeOn: {
-                  keyup: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.getData($event)
-                  }
-                },
-                model: {
-                  value: _vm.searchBox.buyNick,
-                  callback: function($$v) {
-                    _vm.$set(_vm.searchBox, "buyNick", $$v)
-                  },
-                  expression: "searchBox.buyNick"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "span",
-            [
-              _c("label", [_vm._v("规格名称")]),
+              _c("label", [_vm._v("省")]),
               _vm._v(" "),
               _c("el-input", {
                 staticClass: "half",
@@ -200,7 +185,69 @@ var render = function() {
           _c(
             "span",
             [
-              _c("label", [_vm._v("包含材料")]),
+              _c("label", [_vm._v("市")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("区")]),
+              _vm._v(" "),
+              _c("el-input", {
+                staticClass: "half",
+                attrs: { clearable: "" },
+                nativeOn: {
+                  keyup: function($event) {
+                    if (
+                      !("button" in $event) &&
+                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                    ) {
+                      return null
+                    }
+                    return _vm.getData($event)
+                  }
+                },
+                model: {
+                  value: _vm.searchBox.shopTitle,
+                  callback: function($$v) {
+                    _vm.$set(_vm.searchBox, "shopTitle", $$v)
+                  },
+                  expression: "searchBox.shopTitle"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            [
+              _c("label", [_vm._v("适用平台")]),
               _vm._v(" "),
               _c("el-input", {
                 staticClass: "half",
@@ -230,7 +277,7 @@ var render = function() {
         ])
       : _vm._e(),
     _vm._v(" "),
-    _c("h2", [_vm._v("产品Bom")])
+    _c("h2", [_vm._v("核销配置")])
   ])
 }
 var staticRenderFns = []
@@ -239,7 +286,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-572fe0c2", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-dcdfd6aa", module.exports)
   }
 }
 

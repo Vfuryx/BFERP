@@ -35,7 +35,7 @@ const constantRouterMap = [
       }
     ]
   },
- /* {
+  {
     name: 'Order',
     path: '/order',
     component: Layout,
@@ -115,7 +115,7 @@ const constantRouterMap = [
         meta: {title: '订单结算', icon: 'settle',requireAuth: true}
       }
     ]
-  },*/
+  },
   /*{
     name: 'CRMCustomer',
     path: '/CRMCustomer',
@@ -646,7 +646,13 @@ const constantRouterMap = [
         name: 'EvalCategoryMag',
         component: resolve => void(require(['../views/basicInf/evalCategoryMag.vue'], resolve)),
         meta: {title: '评价类别管理', icon: 'evalua',requireAuth: true}
-      }
+      },
+      {
+        path: 'orderManageSubData',
+        name: 'OrderManageSubData',
+        component: resolve => void(require(['../views/basicInf/orderManageSubData.vue'], resolve)),
+        meta: {title: '订单管理子数据', icon: 'delM',requireAuth: true}
+      },
     ]
   },
  /* {

@@ -1,14 +1,14 @@
 webpackJsonp([47],{
 
-/***/ 496:
+/***/ 489:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(618)
+var __vue_script__ = __webpack_require__(615)
 /* template */
-var __vue_template__ = __webpack_require__(619)
+var __vue_template__ = __webpack_require__(616)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\test.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\fabricsMag.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-dc63952e", Component.options)
+    hotAPI.createRecord("data-v-0af2ea5e", Component.options)
   } else {
-    hotAPI.reload("data-v-dc63952e", Component.options)
+    hotAPI.reload("data-v-0af2ea5e", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 618:
+/***/ 615:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58,391 +58,77 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
-    var generateData2 = function generateData2(_) {
-      var data = [];
-      var cities = ['上海', '北京', '广州', '深圳', '南京', '西安', '成都'];
-      var pinyin = ['shanghai', 'beijing', 'guangzhou', 'shenzhen', 'nanjing', 'xian', 'chengdu'];
-      cities.forEach(function (city, index) {
-        data.push({
-          label: city,
-          key: index,
-          pinyin: pinyin[index]
-        });
-      });
-      return data;
-    };
     return {
-      data2: generateData2(),
-      value2: [],
-      filterMethod: function filterMethod(query, item) {
-        return item.pinyin.indexOf(query) > -1;
-      }
+      newOpt: [{
+        cnt: '新增',
+        icon: 'bf-add',
+        ent: this.test
+      }, {
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.test
+      }, {
+        cnt: '删除',
+        icon: 'bf-del',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.test
+      }]
     };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
+    }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
+    });
   }
 });
 
 /***/ }),
 
-/***/ 619:
+/***/ 616:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("el-transfer", {
-    attrs: {
-      filterable: "",
-      "filter-method": _vm.filterMethod,
-      "filter-placeholder": "请输入城市拼音",
-      data: _vm.data2
-    },
-    model: {
-      value: _vm.value2,
-      callback: function($$v) {
-        _vm.value2 = $$v
-      },
-      expression: "value2"
-    }
-  })
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", [_c("h2", [_vm._v("面料管理")])])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-dc63952e", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-0af2ea5e", module.exports)
   }
 }
 

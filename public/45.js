@@ -1,14 +1,14 @@
 webpackJsonp([45],{
 
-/***/ 478:
+/***/ 485:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(580)
+var __vue_script__ = __webpack_require__(607)
 /* template */
-var __vue_template__ = __webpack_require__(581)
+var __vue_template__ = __webpack_require__(608)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\accountType.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\invoiceConf.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-1d4fcfeb", Component.options)
+    hotAPI.createRecord("data-v-303ba3d5", Component.options)
   } else {
-    hotAPI.reload("data-v-1d4fcfeb", Component.options)
+    hotAPI.reload("data-v-303ba3d5", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 580:
+/***/ 607:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -58,550 +58,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      //操作
       newOpt: [{
         cnt: '新增',
         icon: 'bf-add',
@@ -615,34 +75,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         icon: 'bf-refresh',
         ent: this.refresh
       }],
-      //表格
       tableKey: [[{
-        label: '类型',
-        width: '280',
+        label: '报表文件',
+        width: '220',
+        prop: "file",
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
+        width: '220',
         prop: "name",
-        holder: '输入类型',
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        width: '200',
+        prop: "paper_format",
+        holder: '请输入报表格式',
         type: 'text'
       }, {
         label: '状态',
-        width: '280',
+        width: '220',
         prop: "status",
-        holder: '状态',
-        type: 'select_stu',
-        doSort: true
+        holder: '请选择是否启用',
+        type: 'select_stu'
       }]],
-      url: ['/acctypes'],
-      title: ['新增记账类型'],
+      url: ['/printreports'],
+      title: ['添加报表格式'],
       ruleForm: [{
+        file: '',
         name: '',
+        paper_format: '',
         status: '1'
       }],
       rules: [{
-        name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
+        file: [{ required: true, message: '请输入文件', trigger: 'blur' }],
+        name: [{ required: true, message: '请输入报表名', trigger: 'blur' }],
+        paper_format: [{ required: true, message: '请输入报表格式', trigger: 'blur' }]
       }],
       addArr: [[{
-        label: '类型',
+        label: '报表文件',
+        prop: 'file',
+        holder: '请输入报表文件',
+        type: 'text'
+      }, {
+        label: '报表名称',
         prop: 'name',
-        holder: '请输入类型',
+        holder: '请输入报表名称',
+        type: 'text'
+      }, {
+        label: '报表格式',
+        prop: 'paper_format',
+        holder: '请输入报表格式',
         type: 'text'
       }, {
         label: '状态',
@@ -660,8 +144,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     edit: function edit(row) {
       var obj = {
-        id: row.id,
+        file: row.file,
         name: row.name,
+        paper_format: row.paper_format,
         status: row.status
       };
       this.$store.dispatch('setRow', row);
@@ -687,7 +172,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 581:
+/***/ 608:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -719,7 +204,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-1d4fcfeb", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-303ba3d5", module.exports)
   }
 }
 

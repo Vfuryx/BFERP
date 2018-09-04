@@ -39,7 +39,17 @@ const urls= {
     purchasereturns:'/purchasereturns',
     purchasereturntypes:'/purchasereturntypes',
     purchasereturndetails:'/purchasereturndetails',
-    authorizations:'/authorizations',
+
+    takedeliverygoodsways:'/takedeliverygoodsways',
+    paymentmethods: '/paymentmethods',
+    customertypes: '/customertypes',
+    customerservicedepts: '/customerservicedepts',
+    merchandiserdepts: '/merchandiserdepts',
+    financialdepts: '/financialdepts',
+    paymentdetails:'/paymentdetails',
+    warehousingdepts:'/warehousingdepts',
+    returnreasons:'/returnreasons',
+
     me:'/me',
     current:'/current',
     uploadimages:'/uploadimages',

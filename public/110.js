@@ -1,14 +1,14 @@
 webpackJsonp([110],{
 
-/***/ 507:
+/***/ 476:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(725)
+var __vue_script__ = __webpack_require__(590)
 /* template */
-var __vue_template__ = __webpack_require__(726)
+var __vue_template__ = __webpack_require__(591)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,34 +48,11 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 725:
+/***/ 590:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -359,9 +336,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         type: '',
         name: '',
         code: '',
-        default: '0',
+        default: false,
         mark: '',
-        status: '1'
+        status: true
       },
       rules: {
         type: [{ required: true, message: '请输入标记代码', trigger: 'blur' }],
@@ -402,18 +379,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       rules2: {
         name: [{ required: true, message: '请输入标记代码', trigger: 'blur' }]
       },
-      showDel2: false
+      showDel2: false,
+      cateIndex: ''
     };
   },
 
+  computed: {
+    resData: {
+      get: function get() {
+        return this.$store.state.responseData;
+      },
+      set: function set() {}
+    },
+    urls: {
+      get: function get() {
+        return this.$store.state.urls;
+      },
+      set: function set() {}
+    }
+  },
   methods: {
     getExpenseType: function getExpenseType() {
       var _this = this;
 
-      this.$fetch('/feetypes').then(function (res) {
+      this.$fetch(this.urls.feetypes, { include: 'feeCategory' }).then(function (res) {
         _this.expenseType = res.data;
         _this.loading = false;
         var pg = res.meta.pagination;
+        _this.$store.dispatch('feecates', '/feecates');
         _this.pagination.current_page = pg.current_page;
         _this.pagination.total = pg.total;
         _this.pagination.per_page = pg.per_page;
@@ -447,14 +440,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             is_default: _this2.ruleForm.default,
             status: _this2.ruleForm.status
           };
-          _this2.$post('/feetypes', data).then(function () {
+          _this2.$post(_this2.urls.feetypes, data).then(function () {
+            _this2.showAdd = false;
+            _this2.resetForm('ruleForm');
+            _this2.getExpenseType();
             _this2.$message({
               message: '添加成功',
               type: 'success'
             });
-            _this2.showAdd = false;
-            _this2.resetForm('ruleForm');
-            _this2.getExpenseType();
           }, function (err) {
             if (err.response) {
               var arr = err.response.data.errors;
@@ -494,50 +487,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     editType: function editType(row, index) {
       this.changeIndex = 'index' + index;
     },
+    editCate: function editCate(row, index) {
+      this.cateIndex = 'index' + index;
+    },
     editSave: function editSave(index, row) {
       var _this3 = this;
 
       var newData = {
         id: row.id,
-        fee_category_id: row.fee_category.id,
+        fee_category_id: row.fee_category_id,
         name: row.name,
         code: row.code,
         is_default: row.is_default,
         status: row.status,
         remark: row.remark
       };
-      if (this.inputChange) {
-        this.$patch('/feetypes/' + row.id, newData).then(function () {
-          _this3.loading = true;
-          _this3.getExpenseType();
-          setTimeout(function () {
-            _this3.loading = false;
-            _this3.$message({
-              message: '修改成功',
-              type: 'success'
-            });
-            _this3.changeIndex = '';
-            _this3.inputChange = false;
-          }, 2000);
-        }, function (err) {
-          if (err.response) {
-            var arr = err.response.data.errors;
-            var arr1 = [];
-            for (var i in arr) {
-              arr1.push(arr[i]);
-            }
-            var str = arr1.join(',');
-            _this3.$message.error({
-              message: str
-            });
+      this.$patch(this.urls.feetypes + '/' + row.id, newData).then(function () {
+        _this3.loading = true;
+        _this3.getExpenseType();
+        setTimeout(function () {
+          _this3.loading = false;
+          _this3.$message({
+            message: '修改成功',
+            type: 'success'
+          });
+          _this3.changeIndex = '';
+          _this3.inputChange = false;
+        }, 2000);
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
           }
-        });
-      } else {
-        this.$message({
-          message: '数据未改动',
-          type: 'info'
-        });
-      }
+          var str = arr1.join(',');
+          _this3.$message.error({
+            message: str
+          });
+        }
+      });
     },
     delClick: function delClick(row, e) {
       this.showDel = true;
@@ -563,7 +552,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handleCurrentChange: function handleCurrentChange(val) {
       var _this5 = this;
 
-      this.$fetch('/feetypes?page=' + val).then(function (res) {
+      this.$fetch(this.urls.feetypes + '?page=' + val).then(function (res) {
         _this5.expenseType = res.data;
         var pg = res.meta.pagination;
         _this5.pagination.current_page = pg.current_page;
@@ -584,13 +573,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     confirmD: function confirmD(id) {
       var _this6 = this;
 
-      this.$del('/feetypes/' + id).then(function () {
+      this.$del(this.urls.feetypes + id).then(function () {
+        _this6.showDel = false;
+        _this6.getExpenseType();
         _this6.$message({
           message: '删除成功',
           type: 'success'
         });
-        _this6.showDel = false;
-        _this6.getExpenseType();
       }, function (err) {
         if (err.response) {
           _this6.showDel = false;
@@ -620,7 +609,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          _this7.$del("/feetypes", { ids: _this7.delArr }).then(function () {
+          _this7.$del(_this7.urls.feetypes, { ids: _this7.delArr }).then(function () {
             _this7.$message({
               message: '删除成功',
               type: 'success'
@@ -652,7 +641,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     getExpenseCage: function getExpenseCage() {
       var _this8 = this;
 
-      this.$fetch('/feecates').then(function (res) {
+      this.$fetch(this.urls.feecates).then(function (res) {
         _this8.feeCage = res.data;
       }, function (err) {
         if (err.response) {
@@ -696,13 +685,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             name: _this9.ruleForm2.name,
             status: _this9.ruleForm2.status
           };
-          _this9.$post('/feecates', data).then(function () {
+          _this9.$post(_this9.urls.feecates, data).then(function () {
+            _this9.showCage = false;
+            _this9.getExpenseCage();
             _this9.$message({
               message: '添加成功',
               type: 'success'
             });
-            _this9.showCage = false;
-            _this9.getExpenseCage();
           }, function (err) {
             if (err.response) {
               var arr = err.response.data.errors;
@@ -738,12 +727,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          _this10.$del("/feecates", { ids: _this10.delArr }).then(function () {
+          _this10.$del(_this10.urls.feecates, { ids: _this10.delArr }).then(function () {
+            _this10.getExpenseCage();
             _this10.$message({
               message: '删除成功',
               type: 'success'
             });
-            _this10.getExpenseCage();
           }, function (err) {
             if (err.response) {
               var arr = err.response.data.errors;
@@ -782,13 +771,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     confirmD2: function confirmD2(id) {
       var _this12 = this;
 
-      this.$del('/feecates/' + id).then(function () {
+      this.$del(this.urls.feecates + '/' + id).then(function () {
+        _this12.showDel2 = false;
+        _this12.getExpenseCage();
         _this12.$message({
           message: '删除成功',
           type: 'success'
         });
-        _this12.showDel2 = false;
-        _this12.getExpenseCage();
       }, function (err) {
         if (err.response) {
           _this12.showDel2 = false;
@@ -804,6 +793,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     },
+    editCancel2: function editCancel2() {
+      this.cateIndex = '';
+      this.$message({
+        message: '取消修改',
+        type: 'info'
+      });
+    },
     editSave2: function editSave2(index, row) {
       var _this13 = this;
 
@@ -812,45 +808,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         name: row.name,
         status: row.status
       };
-      if (this.inputChange) {
-        this.$patch('/feecates/' + row.id, newData).then(function () {
-          _this13.loading = true;
-          _this13.getExpenseCage();
-          _this13.loading = false;
-          _this13.$message({
-            message: '修改成功',
-            type: 'success'
-          });
-          _this13.changeIndex = '';
-          _this13.inputChange = false;
-          /* setTimeout(()=>{
-             this.loading = false;
-             this.$message({
-               message: '修改成功',
-               type: 'success'
-             });
-             this.changeIndex ='';
-             this.inputChange = false;
-           },2000)*/
-        }, function (err) {
-          if (err.response) {
-            var arr = err.response.data.errors;
-            var arr1 = [];
-            for (var i in arr) {
-              arr1.push(arr[i]);
-            }
-            var str = arr1.join(',');
-            _this13.$message.error({
-              message: str
-            });
+      this.$patch(this.urls.feecates + '/' + row.id, newData).then(function () {
+        _this13.loading = true;
+        _this13.getExpenseCage();
+        _this13.loading = false;
+        _this13.cateIndex = '';
+        _this13.inputChange = false;
+        _this13.$message({
+          message: '修改成功',
+          type: 'success'
+        });
+      }, function (err) {
+        if (err.response) {
+          var arr = err.response.data.errors;
+          var arr1 = [];
+          for (var i in arr) {
+            arr1.push(arr[i]);
           }
-        });
-      } else {
-        this.$message({
-          message: '数据未改动',
-          type: 'info'
-        });
-      }
+          var str = arr1.join(',');
+          _this13.$message.error({
+            message: str
+          });
+        }
+      });
     }
   },
   mounted: function mounted() {
@@ -866,7 +846,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 726:
+/***/ 591:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -904,15 +884,7 @@ var render = function() {
                       expression: "loading"
                     }
                   ],
-                  attrs: {
-                    data: _vm.expenseType,
-                    fit: "",
-                    "highlight-current-row": "",
-                    type: "index",
-                    "element-loading-text": "拼命加载中",
-                    "element-loading-spinner": "el-icon-loading",
-                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
-                  },
+                  attrs: { data: _vm.expenseType, fit: "", height: "400" },
                   on: { "selection-change": _vm.handleSelectionChange }
                 },
                 [
@@ -927,7 +899,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "类别", align: "center", width: "180" },
+                    attrs: { label: "类别", align: "center", width: "160" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -946,19 +918,21 @@ var render = function() {
                                         },
                                         on: { change: _vm.handleEdit },
                                         model: {
-                                          value: scope.row.fee_category.id,
+                                          value: scope.row.fee_category_id,
                                           callback: function($$v) {
                                             _vm.$set(
-                                              scope.row.fee_category,
-                                              "id",
+                                              scope.row,
+                                              "fee_category_id",
                                               $$v
                                             )
                                           },
                                           expression:
-                                            "scope.row.fee_category.id"
+                                            "scope.row.fee_category_id"
                                         }
                                       },
-                                      _vm._l(_vm.feeCage, function(item) {
+                                      _vm._l(_vm.resData["feecates"], function(
+                                        item
+                                      ) {
                                         return _c("el-option", {
                                           key: item.id,
                                           attrs: {
@@ -974,7 +948,7 @@ var render = function() {
                               : _c("span", [
                                   _vm._v(
                                     "\n                            " +
-                                      _vm._s(scope.row.fee_category.name) +
+                                      _vm._s(scope.row["feeCategory"].name) +
                                       "\n                        "
                                   )
                                 ])
@@ -985,7 +959,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "类型名称", align: "center", width: "200" },
+                    attrs: { label: "类型名称", align: "center", width: "160" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -1067,7 +1041,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "默认", align: "center", width: "180" },
+                    attrs: { label: "默认", align: "center", width: "120" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -1077,45 +1051,34 @@ var render = function() {
                               ? _c(
                                   "span",
                                   [
-                                    _c(
-                                      "el-select",
-                                      {
-                                        attrs: { placeholder: "是否默认" },
-                                        on: { change: _vm.handleEdit },
-                                        model: {
-                                          value: scope.row.is_default,
-                                          callback: function($$v) {
-                                            _vm.$set(
-                                              scope.row,
-                                              "is_default",
-                                              $$v
-                                            )
-                                          },
-                                          expression: "scope.row.is_default"
-                                        }
-                                      },
-                                      _vm._l(_vm.defArr, function(item) {
-                                        return _c("el-option", {
-                                          key: item.value,
-                                          attrs: {
-                                            label: item.label,
-                                            value: item.value
-                                          }
-                                        })
-                                      })
-                                    )
+                                    _c("el-checkbox", {
+                                      model: {
+                                        value: scope.row.is_default,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "is_default", $$v)
+                                        },
+                                        expression: "scope.row.is_default"
+                                      }
+                                    })
                                   ],
                                   1
                                 )
-                              : _c("span", [
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(
-                                        scope.row.is_default == 0 ? "否" : "是"
-                                      ) +
-                                      "\n                        "
-                                  )
-                                ])
+                              : _c(
+                                  "span",
+                                  [
+                                    _c("el-checkbox", {
+                                      attrs: { disabled: "" },
+                                      model: {
+                                        value: scope.row.is_default,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "is_default", $$v)
+                                        },
+                                        expression: "scope.row.is_default"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
                           ]
                         }
                       }
@@ -1123,7 +1086,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "状态", align: "center", width: "200" },
+                    attrs: { label: "状态", align: "center", width: "120" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -1133,48 +1096,34 @@ var render = function() {
                               ? _c(
                                   "span",
                                   [
-                                    _c(
-                                      "el-select",
-                                      {
-                                        attrs: { placeholder: "状态" },
-                                        on: { change: _vm.handleEdit },
-                                        model: {
-                                          value: scope.row.status,
-                                          callback: function($$v) {
-                                            _vm.$set(scope.row, "status", $$v)
-                                          },
-                                          expression: "scope.row.status"
-                                        }
-                                      },
-                                      _vm._l(_vm.status, function(item) {
-                                        return _c("el-option", {
-                                          key: item.value,
-                                          attrs: {
-                                            label: item.label,
-                                            value: item.value
-                                          }
-                                        })
-                                      })
-                                    )
+                                    _c("el-checkbox", {
+                                      model: {
+                                        value: scope.row.status,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "status", $$v)
+                                        },
+                                        expression: "scope.row.status"
+                                      }
+                                    })
                                   ],
                                   1
                                 )
-                              : _c("span", [
-                                  _c("i", {
-                                    staticClass: "showStatus",
-                                    class: {
-                                      statusActive:
-                                        scope.row.status == 0 ? false : true
-                                    }
-                                  }),
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(
-                                        scope.row.status == 0 ? "停用" : "启用"
-                                      ) +
-                                      "\n                        "
-                                  )
-                                ])
+                              : _c(
+                                  "span",
+                                  [
+                                    _c("el-checkbox", {
+                                      attrs: { disabled: "" },
+                                      model: {
+                                        value: scope.row.status,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "status", $$v)
+                                        },
+                                        expression: "scope.row.status"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
                           ]
                         }
                       }
@@ -1182,7 +1131,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "备注", align: "center" },
+                    attrs: { label: "备注", width: "160", align: "center" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -1195,7 +1144,8 @@ var render = function() {
                                     _c("el-input", {
                                       attrs: {
                                         size: "small",
-                                        placeholder: "输入备注"
+                                        placeholder: "输入备注",
+                                        type: "textarea"
                                       },
                                       on: { change: _vm.handleEdit },
                                       model: {
@@ -1223,7 +1173,7 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "操作", width: "220", align: "center" },
+                    attrs: { label: "操作", align: "center", width: "150" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
@@ -1325,15 +1275,7 @@ var render = function() {
                       expression: "loading"
                     }
                   ],
-                  attrs: {
-                    data: _vm.feeCage,
-                    fit: "",
-                    "highlight-current-row": "",
-                    type: "index",
-                    "element-loading-text": "拼命加载中",
-                    "element-loading-spinner": "el-icon-loading",
-                    "element-loading-background": "rgba(0, 0, 0, 0.6)"
-                  },
+                  attrs: { data: _vm.feeCage, fit: "", height: "400" },
                   on: { "selection-change": _vm.handleSelectionChange }
                 },
                 [
@@ -1348,13 +1290,13 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "名称", align: "center", width: "260" },
+                    attrs: { label: "名称", align: "center" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
                         fn: function(scope) {
                           return [
-                            _vm.changeIndex == "index" + scope.$index
+                            _vm.cateIndex == "index" + scope.$index
                               ? _c(
                                   "span",
                                   [
@@ -1389,58 +1331,44 @@ var render = function() {
                   }),
                   _vm._v(" "),
                   _c("el-table-column", {
-                    attrs: { label: "状态", align: "center", width: "260" },
+                    attrs: { label: "状态", align: "center" },
                     scopedSlots: _vm._u([
                       {
                         key: "default",
                         fn: function(scope) {
                           return [
-                            _vm.changeIndex == "index" + scope.$index
+                            _vm.cateIndex == "index" + scope.$index
                               ? _c(
                                   "span",
                                   [
-                                    _c(
-                                      "el-select",
-                                      {
-                                        attrs: { placeholder: "状态" },
-                                        on: { change: _vm.handleEdit },
-                                        model: {
-                                          value: scope.row.status,
-                                          callback: function($$v) {
-                                            _vm.$set(scope.row, "status", $$v)
-                                          },
-                                          expression: "scope.row.status"
-                                        }
-                                      },
-                                      _vm._l(_vm.status, function(item) {
-                                        return _c("el-option", {
-                                          key: item.value,
-                                          attrs: {
-                                            label: item.label,
-                                            value: item.value
-                                          }
-                                        })
-                                      })
-                                    )
+                                    _c("el-checkbox", {
+                                      model: {
+                                        value: scope.row.status,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "status", $$v)
+                                        },
+                                        expression: "scope.row.status"
+                                      }
+                                    })
                                   ],
                                   1
                                 )
-                              : _c("span", [
-                                  _c("i", {
-                                    staticClass: "showStatus",
-                                    class: {
-                                      statusActive:
-                                        scope.row.status == 0 ? false : true
-                                    }
-                                  }),
-                                  _vm._v(
-                                    "\n                            " +
-                                      _vm._s(
-                                        scope.row.status == 0 ? "停用" : "启用"
-                                      ) +
-                                      "\n                        "
-                                  )
-                                ])
+                              : _c(
+                                  "span",
+                                  [
+                                    _c("el-checkbox", {
+                                      attrs: { disabled: "" },
+                                      model: {
+                                        value: scope.row.status,
+                                        callback: function($$v) {
+                                          _vm.$set(scope.row, "status", $$v)
+                                        },
+                                        expression: "scope.row.status"
+                                      }
+                                    })
+                                  ],
+                                  1
+                                )
                           ]
                         }
                       }
@@ -1454,7 +1382,7 @@ var render = function() {
                         key: "default",
                         fn: function(scope) {
                           return [
-                            _vm.changeIndex == "index" + scope.$index
+                            _vm.cateIndex == "index" + scope.$index
                               ? _c(
                                   "span",
                                   [
@@ -1478,7 +1406,7 @@ var render = function() {
                                       "el-button",
                                       {
                                         attrs: { size: "mini" },
-                                        on: { click: _vm.editCancel }
+                                        on: { click: _vm.editCancel2 }
                                       },
                                       [
                                         _vm._v(
@@ -1498,7 +1426,7 @@ var render = function() {
                                         attrs: { size: "mini" },
                                         on: {
                                           click: function($event) {
-                                            _vm.editType(
+                                            _vm.editCate(
                                               scope.row,
                                               scope.$index
                                             )
@@ -1577,7 +1505,7 @@ var render = function() {
                         expression: "ruleForm.type"
                       }
                     },
-                    _vm._l(_vm.feeCage, function(item) {
+                    _vm._l(_vm.resData["feecates"], function(item) {
                       return _c("el-option", {
                         key: item.id,
                         attrs: { label: item.name, value: item.id }
@@ -1626,33 +1554,6 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
-                { attrs: { label: "是否默认\n", prop: "default" } },
-                [
-                  _c(
-                    "el-select",
-                    {
-                      attrs: { placeholder: "请选择是或否" },
-                      model: {
-                        value: _vm.ruleForm.default,
-                        callback: function($$v) {
-                          _vm.$set(_vm.ruleForm, "default", $$v)
-                        },
-                        expression: "ruleForm.default"
-                      }
-                    },
-                    [
-                      _c("el-option", { attrs: { label: "否", value: "0" } }),
-                      _vm._v(" "),
-                      _c("el-option", { attrs: { label: "是", value: "1" } })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
                 { attrs: { label: "类别备注\n", prop: "mark" } },
                 [
                   _c("el-input", {
@@ -1671,27 +1572,34 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
+                { attrs: { label: "是否默认\n", prop: "default" } },
+                [
+                  _c("el-checkbox", {
+                    model: {
+                      value: _vm.ruleForm.default,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "default", $$v)
+                      },
+                      expression: "ruleForm.default"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
                 { attrs: { label: "状态", prop: "status" } },
                 [
-                  _c(
-                    "el-select",
-                    {
-                      attrs: { placeholder: "请选择状态" },
-                      model: {
-                        value: _vm.ruleForm.status,
-                        callback: function($$v) {
-                          _vm.$set(_vm.ruleForm, "status", $$v)
-                        },
-                        expression: "ruleForm.status"
-                      }
-                    },
-                    [
-                      _c("el-option", { attrs: { label: "停用", value: "0" } }),
-                      _vm._v(" "),
-                      _c("el-option", { attrs: { label: "启用", value: "1" } })
-                    ],
-                    1
-                  )
+                  _c("el-checkbox", {
+                    model: {
+                      value: _vm.ruleForm.status,
+                      callback: function($$v) {
+                        _vm.$set(_vm.ruleForm, "status", $$v)
+                      },
+                      expression: "ruleForm.status"
+                    }
+                  })
                 ],
                 1
               )

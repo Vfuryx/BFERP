@@ -1,14 +1,14 @@
 webpackJsonp([38],{
 
-/***/ 474:
+/***/ 506:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(572)
+var __vue_script__ = __webpack_require__(649)
 /* template */
-var __vue_template__ = __webpack_require__(573)
+var __vue_template__ = __webpack_require__(650)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\basicInf\\distributeMthMag.vue"
+Component.options.__file = "resources\\assets\\js\\views\\basicInf\\orderManageSubData.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-adecdc02", Component.options)
+    hotAPI.createRecord("data-v-b870bffa", Component.options)
   } else {
-    hotAPI.reload("data-v-adecdc02", Component.options)
+    hotAPI.reload("data-v-b870bffa", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,11 +48,15 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 572:
+/***/ 649:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -97,45 +101,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         cnt: '删除',
         icon: 'bf-del',
-        ent: this.delMore
+        ent: this.delBatch
       }, {
         cnt: '刷新',
         icon: 'bf-refresh',
         ent: this.refresh
       }],
-      disHead: [{
-        label: '配送方式',
+      tabHead: [[{
+        label: '提货方式',
         prop: "name",
-        holder: '配送方式',
+        holder: '请输入提货方式',
         type: 'text'
       }, {
         label: '状态',
         prop: "status",
-        holder: '状态',
-        // type: 'select_stu',
-        type: 'checkbox',
-        doSort: true,
-        chgAble: true,
-        editChgAble: false
-      }],
-      stockHead: [{
-        label: '入库方式方式',
+        type: 'checkbox'
+      }], [{
+        label: '付款方式',
         prop: "name",
-        holder: '配送方式',
+        holder: '请输入付款方式',
         type: 'text'
       }, {
         label: '状态',
         prop: "status",
-        holder: '状态',
-        // type: 'select_stu',
-        type: 'checkbox',
-        doSort: true,
-        chgAble: true,
-        editChgAble: false
-      }],
-      url: ['/distmets', '/stockintypes'],
-      title: ['新增配送方式', '新增入库方式'],
+        type: 'checkbox'
+      }], [{
+        label: '客户类型',
+        prop: "name",
+        holder: '请输入客户类型',
+        type: 'text'
+      }, {
+        label: '状态',
+        prop: "status",
+        type: 'checkbox'
+      }]],
+      title: ['新增提货方式', '新增付款方式', '新增客户类型'],
       ruleForm: [{
+        name: '',
+        status: true
+      }, {
         name: '',
         status: true
       }, {
@@ -143,50 +147,152 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         status: true
       }],
       rules: [{
-        name: [{ required: true, message: '请输入配送方式', trigger: 'blur' }]
+        name: [{ required: true, message: '请输入提货方式', trigger: 'blur' }]
       }, {
-        name: [{ required: true, message: '请输入入库方式', trigger: 'blur' }]
+        name: [{ required: true, message: '请输入付款方式', trigger: 'blur' }]
+      }, {
+        name: [{ required: true, message: '请输入客户类型', trigger: 'blur' }]
       }],
       addArr: [[{
-        label: '配送方式',
+        label: '提货方式',
         prop: 'name',
-        holder: '请输入配送方式',
+        holder: '请输入提货方式',
         type: 'text'
       }, {
         label: '状态',
         prop: 'status',
-        holder: '请选择状态',
-        // type: 'select_stu'
         type: 'checkbox'
       }], [{
-        label: '入库方式',
+        label: '付款方式',
         prop: 'name',
-        holder: '请输入入库方式',
+        holder: '请输入付款方式',
         type: 'text'
       }, {
         label: '状态',
         prop: 'status',
-        holder: '请选择状态',
-        // type: 'select_stu'
+        type: 'checkbox'
+      }], [{
+        label: '客户类型',
+        prop: 'name',
+        holder: '请输入客户类型',
+        type: 'text'
+      }, {
+        label: '状态',
+        prop: 'status',
         type: 'checkbox'
       }]],
       activeName: '0',
       getsData: [],
-      loading: [true, true],
+      loading: true,
       currentIndex: '',
       /*新增*/
       showMask: false,
-      showDel: false,
       editId: '',
       inputChange: false,
       delArr: [],
       multipleSelection: [],
-      refArr: ['distri', 'stock']
+      refArr: ['goodsWays', 'paymentmethods', 'customertypes'],
+      takeDelGoodsData: [],
+      payMethodsData: [],
+      customerTypesData: [],
+      /*删除*/
+      showDel: false,
+      delUrl: '',
+      delId: '',
+      /*批量*/
+      ids: [],
+      checkboxId: ''
+
     };
   },
 
+  computed: {
+    resData: {
+      get: function get() {
+        return this.$store.state.responseData;
+      },
+      set: function set() {}
+    },
+    urls: {
+      get: function get() {
+        return this.$store.state.urls;
+      },
+      set: function set() {}
+    }
+  },
   methods: {
-    //新增
+    /*获取数据*/
+    tabsClick: function tabsClick() {
+      this.loading = true;
+      this.fetchStockData();
+    },
+    fetchStockData: function fetchStockData() {
+      var _this = this;
+
+      var index = this.activeName - 0;
+      switch (index) {
+        case 0:
+          this.$fetch(this.urls.takedeliverygoodsways).then(function (res) {
+            _this.stockDtlData = [];
+            _this.loading = false;
+            _this.takeDelGoodsData = res.data;
+            var pg = res.meta.pagination;
+            _this.$store.dispatch('currentPage', pg.current_page);
+            _this.$store.commit('PER_PAGE', pg.per_page);
+            _this.$store.commit('PAGE_TOTAL', pg.total);
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              _this.$message.error(arr1.join(','));
+            }
+          });
+          break;
+        case 1:
+          this.$fetch(this.urls.paymentmethods).then(function (res) {
+            _this.loading = false;
+            _this.payMethodsData = res.data;
+            var pg = res.meta.pagination;
+            _this.$store.dispatch('currentPage', pg.current_page);
+            _this.$store.commit('PER_PAGE', pg.per_page);
+            _this.$store.commit('PAGE_TOTAL', pg.total);
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              _this.$message.error(arr1.join(','));
+            }
+          });
+          break;
+        case 2:
+          this.$fetch(this.urls.customertypes).then(function (res) {
+            _this.loading = false;
+            _this.customerTypesData = res.data;
+            var pg = res.meta.pagination;
+            _this.$store.dispatch('currentPage', pg.current_page);
+            _this.$store.commit('PER_PAGE', pg.per_page);
+            _this.$store.commit('PAGE_TOTAL', pg.total);
+          }, function (err) {
+            if (err.response) {
+              var arr = err.response.data.errors;
+              var arr1 = [];
+              for (var i in arr) {
+                arr1.push(arr[i]);
+              }
+              _this.$message.error(arr1.join(','));
+            }
+          });
+          break;
+      }
+    },
+
+    /*新增*/
     addNew: function addNew() {
       this.showMask = true;
     },
@@ -194,15 +300,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.showMask = val;
     },
     submitForm: function submitForm() {
-      var _this = this;
+      var _this2 = this;
 
-      this.$post(this.url[this.activeName], this.ruleForm[this.activeName]).then(function () {
-        _this.$message({
+      var url = this.activeName == '0' ? this.urls.takedeliverygoodsways : this.activeName == '1' ? this.urls.paymentmethods : this.urls.customertypes;
+      this.$post(url, this.ruleForm[this.activeName]).then(function () {
+        _this2.$message({
           message: '添加成功',
           type: 'success'
         });
-        _this.showMask = false;
-        _this.refresh();
+        _this2.showMask = false;
+        _this2.refresh();
       }, function (err) {
         if (err.response) {
           var arr = err.response.data.errors;
@@ -210,41 +317,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           for (var i in arr) {
             arr1.push(arr[i]);
           }
-          var str = arr1.join(',');
-          _this.$message.error({
-            message: str
-          });
+          _this2.$message.error(arr1.join(','));
         }
       });
     },
-    tabsClick: function tabsClick() {
-      this.loading = [true, true];
-      this.getData(this.url[this.activeName]);
-    },
-    getData: function getData(url) {
-      var _this2 = this;
 
-      this.$fetch(url).then(function (res) {
-        _this2.loading[_this2.activeName] = false;
-        _this2.getsData = res.data;
-        var pg = res.meta.pagination;
-        _this2.$store.dispatch('currentPage', pg.current_page);
-        _this2.$store.commit('PER_PAGE', pg.per_page);
-        _this2.$store.commit('PAGE_TOTAL', pg.total);
-      }, function (err) {
-        if (err.response) {
-          var arr = err.response.data.errors;
-          var arr1 = [];
-          for (var i in arr) {
-            arr1.push(arr[i]);
-          }
-          var str = arr1.join(',');
-          _this2.$message.error({
-            message: str
-          });
-        }
-      });
-    },
+    /*修改*/
     edit: function edit(index) {
       this.currentIndex = 'index' + index;
     },
@@ -261,7 +339,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     editSave: function editSave(row) {
       var _this3 = this;
 
-      this.$patch(this.url[this.activeName] + '/' + row.id, row).then(function () {
+      var url = this.activeName == '0' ? this.urls.takedeliverygoodsways : this.activeName == '1' ? this.urls.paymentmethods : this.urls.customertypes;
+      this.$patch(url + '/' + row.id, row).then(function () {
         _this3.$message({
           message: '修改成功',
           type: 'success'
@@ -276,17 +355,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           for (var i in arr) {
             arr1.push(arr[i]);
           }
-          var str = arr1.join(',');
-          _this3.$message.error({
-            message: str
-          });
+          _this3.$message.error(arr1.join(','));
         }
       });
     },
-    del: function del(row, e) {
+
+    /*删除单条*/
+    delSingle: function delSingle(row, e) {
       this.showDel = true;
       $('.el-popper').css({ left: e.x - 100 + 'px', top: e.y - 125 + 'px' });
       this.delId = row.id;
+      this.delUrl = this.activeName == '0' ? this.urls.takedeliverygoodsways : this.activeName == '1' ? this.urls.paymentmethods : this.urls.customertypes;
     },
     cancelD: function cancelD() {
       this.showDel = false;
@@ -295,10 +374,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         type: 'info'
       });
     },
-    confirmD: function confirmD(id) {
+    confirmD: function confirmD(url, id) {
       var _this4 = this;
 
-      this.$del(this.url[this.activeName] + '/' + id).then(function () {
+      this.$del(url + '/' + id).then(function () {
         _this4.$message({
           message: '删除成功',
           type: 'success'
@@ -313,19 +392,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           for (var i in arr) {
             arr1.push(arr[i]);
           }
-          var str = arr1.join(',');
-          _this4.$message.error({
-            message: str
-          });
+          _this4.$message.error(arr1.join(','));
         }
       });
     },
 
     /*批量删除*/
-    delMore: function delMore() {
+    handleSelectionChange: function handleSelectionChange(val) {
+      /*拿到id集合*/
+      var delArr = [];
+      val.forEach(function (selectedItem) {
+        delArr.push(selectedItem.id);
+      });
+      this.ids = delArr.join(',');
+      /*拿到当前id*/
+      this.checkboxId = val.length > 0 ? val[val.length - 1].id : '';
+    },
+    delBatch: function delBatch() {
       var _this5 = this;
 
-      if (this.delArr.length === 0) {
+      if (this.ids.length === 0) {
         this.$message({
           message: '没有选中数据',
           type: 'warning'
@@ -336,7 +422,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          _this5.$del(_this5.url[_this5.activeName], { ids: _this5.delArr }).then(function () {
+          _this5.$del(_this5.delUrl, { ids: _this5.ids }).then(function () {
             _this5.$message({
               message: '删除成功',
               type: 'success'
@@ -349,10 +435,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
               for (var i in arr) {
                 arr1.push(arr[i]);
               }
-              var str = arr1.join(',');
-              _this5.$message.error({
-                message: str
-              });
+              _this5.$message.error(arr1.join(','));
             }
           });
         }).catch(function () {
@@ -363,28 +446,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       }
     },
-    handleSelectionChange: function handleSelectionChange(val) {
-      if (val.length != 0) {
-        this.editId = val[0].id;
-      } else {
-        this.editId = '';
-      }
-      this.multipleSelection = val;
-      var del = [];
-      this.multipleSelection.forEach(function (selectedItem) {
-        del.push(selectedItem.id);
-      });
-      this.delArr = del.join(',');
-    },
 
     /*页面刷新*/
     refresh: function refresh() {
-      this.loading = [true, true];
-      this.getData(this.url[this.activeName]);
+      this.loading = true;
+      this.fetchStockData();
+    },
+
+    /*分页*/
+    handlePagChg: function handlePagChg(page) {
+      var _this6 = this;
+
+      var url = this.activeName == '0' ? this.urls.takedeliverygoodsways : this.activeName == '1' ? this.urls.paymentmethods : this.urls.customertypes;
+      this.$fetch(url + '?page=' + page).then(function (res) {
+        if (_this6.activeName == '0') {
+          _this6.takeDelGoodsData = res.data;
+        } else if (_this6.activeName == '1') {
+          _this6.payMethodsData = res.data;
+        } else {
+          _this6.customerTypesData = res.data;
+        }
+      });
     }
   },
   mounted: function mounted() {
-    this.getData(this.url[this.activeName]);
+    this.fetchStockData();
     this.$store.dispatch('setOpt', this.newOpt);
     var that = this;
     $(window).resize(function () {
@@ -395,7 +481,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 573:
+/***/ 650:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -420,19 +506,19 @@ var render = function() {
         [
           _c(
             "el-tab-pane",
-            { attrs: { label: "配送方式管理", name: "0" } },
+            { attrs: { label: "提货方式管理", name: "0" } },
             [
               _c("light-table", {
                 attrs: {
-                  listData: _vm.getsData,
-                  tableHead: _vm.disHead,
-                  loading: _vm.loading[_vm.activeName],
+                  listData: _vm.takeDelGoodsData,
+                  tableHead: _vm.tabHead[_vm.activeName],
+                  loading: _vm.loading,
                   currentIndex: _vm.currentIndex
                 },
                 on: {
                   editSave: _vm.editSave,
                   handleEdit: _vm.handleEdit,
-                  del: _vm.del,
+                  del: _vm.delSingle,
                   edit: _vm.edit,
                   editCancel: _vm.editCancel,
                   handleSelect: _vm.handleSelectionChange
@@ -444,19 +530,43 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-tab-pane",
-            { attrs: { label: "入库方式管理", name: "1" } },
+            { attrs: { label: "付款方式管理", name: "1" } },
             [
               _c("light-table", {
                 attrs: {
-                  listData: _vm.getsData,
-                  tableHead: _vm.stockHead,
-                  loading: _vm.loading[_vm.activeName],
+                  listData: _vm.payMethodsData,
+                  tableHead: _vm.tabHead[_vm.activeName],
+                  loading: _vm.loading,
                   currentIndex: _vm.currentIndex
                 },
                 on: {
                   editSave: _vm.editSave,
                   handleEdit: _vm.handleEdit,
-                  del: _vm.del,
+                  del: _vm.delSingle,
+                  edit: _vm.edit,
+                  editCancel: _vm.editCancel,
+                  handleSelect: _vm.handleSelectionChange
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-tab-pane",
+            { attrs: { label: "客户类型管理", name: "2" } },
+            [
+              _c("light-table", {
+                attrs: {
+                  listData: _vm.customerTypesData,
+                  tableHead: _vm.tabHead[_vm.activeName],
+                  loading: _vm.loading,
+                  currentIndex: _vm.currentIndex
+                },
+                on: {
+                  editSave: _vm.editSave,
+                  handleEdit: _vm.handleEdit,
+                  del: _vm.delSingle,
                   edit: _vm.edit,
                   editCancel: _vm.editCancel,
                   handleSelect: _vm.handleSelectionChange
@@ -476,7 +586,12 @@ var render = function() {
           "rule-form": _vm.ruleForm[_vm.activeName],
           rules: _vm.rules[_vm.activeName],
           "add-arr": _vm.addArr[_vm.activeName],
-          url: _vm.url[_vm.activeName],
+          url:
+            _vm.activeName == "0"
+              ? _vm.urls.takedeliverygoodsways
+              : _vm.activeName == "1"
+                ? _vm.urls.paymentmethods
+                : _vm.urls.customertypes,
           "new-ref": _vm.refArr[_vm.activeName]
         },
         on: { submitEvent: _vm.submitForm, "CB-dialog": _vm.CB_dialog }
@@ -517,7 +632,7 @@ var render = function() {
                   attrs: { type: "primary", size: "mini" },
                   on: {
                     click: function($event) {
-                      _vm.confirmD(_vm.delId)
+                      _vm.confirmD(_vm.delUrl, _vm.delId)
                     }
                   }
                 },
@@ -529,7 +644,17 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _c("Pagination", { attrs: { "page-url": _vm.url[_vm.activeName] } })
+      _c("Pagination", {
+        attrs: {
+          "page-url":
+            _vm.activeName == "0"
+              ? _vm.urls.takedeliverygoodsways
+              : _vm.activeName == "1"
+                ? _vm.urls.paymentmethods
+                : _vm.urls.customertypes
+        },
+        on: { handlePagChg: _vm.handlePagChg }
+      })
     ],
     1
   )
@@ -540,7 +665,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-adecdc02", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-b870bffa", module.exports)
   }
 }
 

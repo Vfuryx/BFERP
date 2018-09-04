@@ -28,59 +28,6 @@
   }
 }
 
-/*.search_box {
-  .box {
-    span {
-      .el-input__inner {
-        height: 32px;
-        line-height: 32px;
-        padding-right: 0;
-      }
-
-      .el-button--medium {
-        padding: 8px 20px !important;
-      }
-
-      .el-range-separator {
-        width: 12%;
-      }
-
-      i.el-range-input {
-        width: 35%;
-      }
-
-      .el-date-editor .el-range__icon {
-        width: 18px;
-      }
-
-      .el-date-editor .el-range-input {
-        width: 42%;
-      }
-
-      .el-date-editor .el-range__close-icon {
-        width: 3px;
-      }
-
-    }
-  }
-
-  input::-webkit-outer-spin-button,
-  input::-webkit-inner-spin-button {
-    -webkit-appearance: none !important;
-    margin: 0;
-  }
-
-  input[type="number"] {
-    -moz-appearance: textfield;
-  }
-
-  .opt {
-    .el-button--medium {
-      padding: 8px 20px !important;
-    }
-  }
-}*/
-
 form.half-form {
   display: flex;
   flex-wrap: wrap;
@@ -118,7 +65,6 @@ form.half-form {
 }
 
 /*表格*/
-/*, .el-table--medium th*/
 .el-table--medium td{
   padding: 3px 0;
 }
@@ -175,6 +121,10 @@ form.half-form {
   background:#218af3 !important;
 }
 
+.el-tabs__item:focus, .el-tabs__item:focus:active{
+  outline-color: transparent!important;
+}
+
 /*表格内部图片*/
 table {
   tbody{
@@ -222,6 +172,21 @@ form.el-form{
       }
     }
   }
+
+  &.half{
+    .el-form-item{
+      width: 49% !important;
+      margin-right: 10px;
+    }
+
+    .el-cascader{
+      width: 100%;
+    }
+
+    .el-form-item--medium.el-form-item__label{
+      min-width: 50px;
+    }
+  }
 }
 
 /*悬停查看图片*/
@@ -242,3 +207,4 @@ form.el-form{
     border: none;
   }
 }
+

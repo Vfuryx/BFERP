@@ -327,10 +327,7 @@
                 for (let i in arr) {
                   arr1.push(arr[i]);
                 }
-                let str = arr1.join(',');
-                this.$message.error({
-                  message: str
-                })
+                this.$message.error(arr1.join(','))
               }
             })
         } else {
@@ -361,8 +358,7 @@
               for (let i in arr) {
                 arr1.push(arr[i]);
               }
-              let str = arr1.join(',');
-              this.$message.error(str);
+              this.$message.error(arr1.join(','));
             }
           })
       },

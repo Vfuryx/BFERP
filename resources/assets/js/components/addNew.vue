@@ -122,6 +122,23 @@
                         <span v-else-if="item.type=='checkbox'">
                             <el-checkbox v-model="ruleForm[item.prop]" :disabled="editSign?item.editChgAble:item.chgAble"></el-checkbox>
                         </span>
+                        <span v-else-if="item.type=='radio'">
+                            <el-radio v-model="ruleForm[item.prop]" label="volume">{{item.choiceName[0]}}</el-radio>
+                            <el-radio v-model="ruleForm[item.prop]" label="weight">{{item.choiceName[1]}}</el-radio>
+                        </span>
+                        <span v-else-if="item.type=='DatePicker'">
+                            <el-date-picker v-model="ruleForm[item.prop]" type="date" format="yyyy-MM-dd" value-format="yyyy-MM-dd" placeholder="选择日期">
+                            </el-date-picker>
+                        </span>
+                        <span v-else-if="item.type=='DateTimePicker'">
+                           <el-date-picker
+                                   v-model="ruleForm[item.prop]"
+                                   type="datetime"
+                                   format="yyyy-MM-dd HH:mm:ss"
+                                   value-format="yyyy-MM-dd HH:mm:ss"
+                                   placeholder="选择日期时间">
+                           </el-date-picker>
+                        </span>
                         <span v-else-if="item.type=='img'">
                            <img :src="ruleForm[item.prop]">
                              <el-upload class="chgDiv" action="" :before-upload="beforeUpload">

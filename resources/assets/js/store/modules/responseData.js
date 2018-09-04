@@ -8,11 +8,21 @@ const responseData= {
     freighttypes:[],
     suppliers:[],
     goodscates:[],
-    distmets:[],
     shops:[],
     stockintypes:[],
     products:[],
-    purchasereturntypes: []
+    purchasereturntypes: [],
+    distributions: [],
+    distmets:[],
+    logistics: [],
+    distributiontypes: [],
+    takedeliverygoodsways: [],
+    customertypes: [],
+    paymentmethods: [],
+    feetypes: [],
+
+
+
   },
   mutations: {
     GET_FEECATES: (state, arr) => {
@@ -50,6 +60,27 @@ const responseData= {
     },
     PURCHASERETURNTYPES:(state, arr)=>{
       state.purchasereturntypes = arr;
+    },
+    DISTRIBUTIONS:(state, arr)=>{
+      state.distributions = arr;
+    },
+    LOGISTICS:(state, arr)=>{
+      state.logistics = arr;
+    },
+    DISTRIBUTIONTYPES:(state, arr)=>{
+      state.distributiontypes = arr;
+    },
+    TAKEDELIVERYGOODSWAYS:(state, arr)=>{
+      state.takedeliverygoodsways = arr;
+    },
+    CUSTOMERTYPES:(state, arr)=>{
+      state.customertypes = arr;
+    },
+    PAYMENTMETHODS:(state, arr)=>{
+      state.paymentmethods = arr;
+    },
+    FEETYPES:(state, arr)=>{
+      state.feetypes = arr;
     },
   },
   actions: {
@@ -102,13 +133,6 @@ const responseData= {
           return res.data.data
         })
     },
-    distmets({commit}, url) {
-      axios.get(url,{params:{ 'status': true}})
-        .then(res=>{
-          commit('DISTMET', res.data.data);
-          return res.data.data
-        })
-    },
     shops({commit}, url) {
       axios.get(url,{params:{ 'status': true}})
         .then(res=>{
@@ -137,6 +161,63 @@ const responseData= {
           return res.data.data
         })
     },
+    distributions({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('DISTRIBUTIONS', res.data.data);
+          return res.data.data
+        })
+    },
+    distmets({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('DISTMET', res.data.data);
+          return res.data.data
+        })
+    },
+    logistics({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('LOGISTICS', res.data.data);
+          return res.data.data
+        })
+    },
+    distributiontypes({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('DISTRIBUTIONTYPES', res.data.data);
+          return res.data.data
+        })
+    },
+    takedeliverygoodsways({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('TAKEDELIVERYGOODSWAYS', res.data.data);
+          return res.data.data
+        })
+    },
+    customertypes({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('CUSTOMERTYPES', res.data.data);
+          return res.data.data
+        })
+    },
+    paymentmethods({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('PAYMENTMETHODS', res.data.data);
+          return res.data.data
+        })
+    },
+    feetypes({commit}, url) {
+      axios.get(url,{params:{ 'status': true}})
+        .then(res=>{
+          commit('FEETYPES', res.data.data);
+          return res.data.data
+        })
+    },
+
   }
 };
 
