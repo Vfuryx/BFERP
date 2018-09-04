@@ -11750,6 +11750,292 @@ FORMAT: 1A
                 }
             }
 
+## 获取创建订单数据 [POST /api/customerservicedepts/create]
+
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": {
+                    "warehouse": [
+                        {
+                            "id": 1,
+                            "name": "仓库名称",
+                            "province": "福建省",
+                            "city": "厦门市",
+                            "district": "海沧区",
+                            "address": "仓库地（地址）",
+                            "is_default": true,
+                            "status": true,
+                            "created_at": "2018-08-06 16:25:28",
+                            "updated_at": "2018-08-31 13:33:00"
+                        },
+                        {
+                            "id": 2,
+                            "name": "仓库名称",
+                            "province": "河南省",
+                            "city": "郑州市",
+                            "district": "中原区",
+                            "address": "仓库地（地址）",
+                            "is_default": true,
+                            "status": true,
+                            "created_at": "2018-08-24 11:26:49",
+                            "updated_at": "2018-08-24 11:26:49"
+                        },
+                        {
+                            "id": 3,
+                            "name": "仓库831",
+                            "province": "天津市",
+                            "city": "市辖区",
+                            "district": "宁河区",
+                            "address": "广东省广州市",
+                            "is_default": false,
+                            "status": true,
+                            "created_at": "2018-08-31 09:51:55",
+                            "updated_at": "2018-08-31 14:04:59"
+                        }
+                    ],
+                    "fee_type": [
+                        {
+                            "id": 1,
+                            "fee_category_id": 3,
+                            "name": "费用类型2",
+                            "code": "费用类型代码2",
+                            "is_default": true,
+                            "status": true,
+                            "remark": "备注1",
+                            "created_at": "2018-08-20 18:40:23",
+                            "updated_at": "2018-08-22 10:00:03"
+                        },
+                        {
+                            "id": 3,
+                            "fee_category_id": 2,
+                            "name": "名称1",
+                            "code": "代码1",
+                            "is_default": false,
+                            "status": true,
+                            "remark": "备注1",
+                            "created_at": "2018-08-22 10:10:00",
+                            "updated_at": "2018-08-22 10:10:00"
+                        },
+                        {
+                            "id": 4,
+                            "fee_category_id": 1,
+                            "name": "名称4",
+                            "code": "代码4",
+                            "is_default": false,
+                            "status": true,
+                            "remark": "备注4",
+                            "created_at": "2018-08-22 10:12:12",
+                            "updated_at": "2018-08-22 10:12:12"
+                        }
+                    ],
+                    "shop": [
+                        {
+                            "id": 1,
+                            "nick": "卖家昵称",
+                            "title": "店铺标题",
+                            "session_key": "SessionKey",
+                            "warehouse_id": 1,
+                            "shop_account": "店铺账号",
+                            "shop_passwd": "店铺密码",
+                            "rebate": "10.00",
+                            "principal": "店铺负责人",
+                            "principal_mobile": "负责人电话",
+                            "province": "发货地（省）",
+                            "city": "发货地（市）",
+                            "district": "发货地（区）",
+                            "address": "发货地（地址）",
+                            "gross_profit_rate": "11.00",
+                            "platform_id": 1,
+                            "is_waybill": true,
+                            "status": true,
+                            "created_at": "2018-08-06 16:25:50",
+                            "updated_at": "2018-08-22 14:22:07"
+                        },
+                        {
+                            "id": 2,
+                            "nick": "卖家2",
+                            "title": "店铺2",
+                            "session_key": "SessionKey",
+                            "warehouse_id": 1,
+                            "shop_account": "店铺账号",
+                            "shop_passwd": "店铺密码",
+                            "rebate": "10.00",
+                            "principal": "店铺负责人",
+                            "principal_mobile": "负责人电话",
+                            "province": "发货地（省）",
+                            "city": "发货地（市）",
+                            "district": "发货地（区）",
+                            "address": "发货地（地址）",
+                            "gross_profit_rate": "10.00",
+                            "platform_id": 1,
+                            "is_waybill": false,
+                            "status": true,
+                            "created_at": "2018-08-06 16:25:50",
+                            "updated_at": "2018-08-22 14:22:21"
+                        },
+                        {
+                            "id": 3,
+                            "nick": "卖家测试",
+                            "title": "店铺标题",
+                            "session_key": "dfdafwef",
+                            "warehouse_id": 1,
+                            "shop_account": "店铺账号",
+                            "shop_passwd": "123456",
+                            "rebate": "13.00",
+                            "principal": "负责人2",
+                            "principal_mobile": "12353524",
+                            "province": "河北省",
+                            "city": "秦皇岛市",
+                            "district": "北戴河区",
+                            "address": "发货地址",
+                            "gross_profit_rate": "23.00",
+                            "platform_id": 1,
+                            "is_waybill": true,
+                            "status": true,
+                            "created_at": "2018-08-22 17:28:44",
+                            "updated_at": "2018-08-22 17:28:44"
+                        },
+                        {
+                            "id": 4,
+                            "nick": "测试1",
+                            "title": "测法标题",
+                            "session_key": "dfa12313",
+                            "warehouse_id": 1,
+                            "shop_account": "1313",
+                            "shop_passwd": "3131",
+                            "rebate": "2.00",
+                            "principal": "31",
+                            "principal_mobile": "313",
+                            "province": "河北省",
+                            "city": "秦皇岛市",
+                            "district": "北戴河区",
+                            "address": "31",
+                            "gross_profit_rate": "31.00",
+                            "platform_id": 4,
+                            "is_waybill": true,
+                            "status": true,
+                            "created_at": "2018-08-22 17:44:56",
+                            "updated_at": "2018-08-23 10:34:30"
+                        }
+                    ],
+                    "logistics": [
+                        {
+                            "id": 4,
+                            "code": "物流代码",
+                            "name": "物流名称",
+                            "report_id": 1,
+                            "expected_days": 1,
+                            "phone": "1",
+                            "address": "物流地址",
+                            "freight_type_id": 1,
+                            "remark": "备注",
+                            "status": true,
+                            "created_at": "2018-08-23 14:22:29",
+                            "updated_at": "2018-08-23 16:39:22"
+                        },
+                        {
+                            "id": 5,
+                            "code": "2",
+                            "name": "2",
+                            "report_id": 1,
+                            "expected_days": 2,
+                            "phone": "2",
+                            "address": "2",
+                            "freight_type_id": 1,
+                            "remark": "22",
+                            "status": true,
+                            "created_at": "2018-08-23 14:25:39",
+                            "updated_at": "2018-08-23 14:25:39"
+                        }
+                    ],
+                    "freight_type": [
+                        {
+                            "id": 1,
+                            "name": "运费名称",
+                            "status": true,
+                            "is_default": true,
+                            "created_at": "2018-08-17 17:40:14",
+                            "updated_at": "2018-08-17 17:40:14"
+                        }
+                    ],
+                    "distribution": [
+                        {
+                            "id": 1,
+                            "name": "配送公司名称3",
+                            "phone": "配送公司电话",
+                            "address": "配送公司地址",
+                            "remark": "备注",
+                            "status": true,
+                            "created_at": "2018-08-08 16:15:57",
+                            "updated_at": "2018-08-08 16:21:59"
+                        }
+                    ],
+                    "distribution_method": [
+                        {
+                            "id": 12,
+                            "name": "配送方式1",
+                            "status": true,
+                            "created_at": "2018-08-06 18:28:10",
+                            "updated_at": "2018-08-06 18:28:10"
+                        },
+                        {
+                            "id": 13,
+                            "name": "配送方式2",
+                            "status": true,
+                            "created_at": "2018-08-06 18:28:20",
+                            "updated_at": "2018-08-06 18:28:20"
+                        },
+                        {
+                            "id": 14,
+                            "name": "配送方式",
+                            "status": true,
+                            "created_at": "2018-08-07 09:58:19",
+                            "updated_at": "2018-08-07 09:58:19"
+                        },
+                        {
+                            "id": 15,
+                            "name": "配送方式",
+                            "status": true,
+                            "created_at": "2018-08-17 17:45:28",
+                            "updated_at": "2018-08-17 17:45:28"
+                        }
+                    ],
+                    "distribution_type": [
+                        {
+                            "id": 1,
+                            "name": "配送类型名称1",
+                            "status": true,
+                            "created_at": "2018-08-08 18:14:22",
+                            "updated_at": "2018-08-08 18:17:07"
+                        }
+                    ],
+                    "take_delivery_goodsWay": [
+                        {
+                            "id": 1,
+                            "name": "提货方式名称1",
+                            "status": true,
+                            "created_at": "2018-08-16 16:02:07",
+                            "updated_at": "2018-08-16 16:03:51"
+                        }
+                    ],
+                    "customer_type": [
+                        {
+                            "id": 1,
+                            "name": "客户类型",
+                            "status": true,
+                            "created_at": "2018-08-17 17:47:40",
+                            "updated_at": "2018-08-17 17:47:40"
+                        }
+                    ],
+                    "meta": {
+                        "status_code": "200"
+                    }
+                }
+            }
+
 ## 新增客服部(可选参数：include) [POST /api/customerservicedepts[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
 
 
@@ -13927,6 +14213,656 @@ FORMAT: 1A
                         "状态必填"
                     ]
                 },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# aftersalerefunds [/api]
+售后退款资源
+
+## 获取所有售后退款 [GET /api/aftersalerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "refund_sn": "RA2018090316285916495",
+                        "order_sn": "12345645",
+                        "refund_order_status": "售后锁定",
+                        "order_source": "system",
+                        "payment_methods_id": 1,
+                        "time_out_at": "2018-08-31 00:00:00",
+                        "shops_id": 1,
+                        "account": "10",
+                        "refund_payment_methods_id": 1,
+                        "bank": "开户银行",
+                        "address": "开户地址",
+                        "refund_amount": "10.00",
+                        "transaction_sn": "12345645",
+                        "return_reasons_id": 1,
+                        "seller_nick": "卖家昵称",
+                        "seller_name": "卖家昵称",
+                        "payment": "10.00",
+                        "person_liable": "责任人",
+                        "liable_fee": "10",
+                        "undertaker": "承担人",
+                        "business_remark": "业务备注",
+                        "as_remark": "售后备注",
+                        "f_remark": "",
+                        "refund_description": "退款说明",
+                        "taobao_refund_status": "",
+                        "creator_id": 1,
+                        "business_personnel_id": 1,
+                        "cs_audit_at": "2018-09-03 16:29:55",
+                        "locker_id": 1,
+                        "after_sales_id": 0,
+                        "as_audit_at": null,
+                        "financial_id": 0,
+                        "f_audit_at": null,
+                        "status": true,
+                        "created_at": "2018-09-03 16:28:59",
+                        "updated_at": "2018-09-03 16:30:38"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 显示单条售后退款 [GET /api/aftersalerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 修改售后退款 [PATCH /api/aftersalerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+
+
++ Parameters
+    + person_liable: (string, optional) - 责任人
+    + liable_fee: (numeric, optional) - 责任金额
+    + freight: (numeric, optional) - 运费
+    + undertaker: (string, optional) - 承担人
+    + as_remark: (string, optional) - 售后备注
+    + status: (boolean, optional) - 状态
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "还未锁定无法修改",
+                "errors": {
+                    "shops_id": [
+                        "店铺id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 删除售后退款 [DELETE /api/aftersalerefunds/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 删除一组售后退款 [DELETE /api/aftersalerefunds]
+
+
++ Parameters
+    + ids: (string, required) - 售后退款id组 格式: 1,2,3,4 
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 锁定或释放 [PUT /api/aftersalerefunds/:id/lockorunlock]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法锁定",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后审核 [PUT /api/aftersalerefunds/:id/audit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "售后审核出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后退审 [PUT /api/aftersalerefunds/:id/unaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "退审出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# financialrefunds [/api]
+财务退款资源
+
+## 获取所有财务退款 [GET /api/financialrefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "refund_sn": "RA2018090316285916495",
+                        "order_sn": "12345645",
+                        "refund_order_status": "财务锁定",
+                        "order_source": "system",
+                        "payment_methods_id": 1,
+                        "time_out_at": "2018-08-31 00:00:00",
+                        "shops_id": 1,
+                        "account": "10",
+                        "refund_payment_methods_id": 1,
+                        "bank": "开户银行",
+                        "address": "开户地址",
+                        "refund_amount": "10.00",
+                        "transaction_sn": "12345645",
+                        "return_reasons_id": 1,
+                        "seller_nick": "卖家昵称",
+                        "seller_name": "卖家昵称",
+                        "payment": "10.00",
+                        "person_liable": "责任人",
+                        "liable_fee": "10",
+                        "undertaker": "承担人",
+                        "business_remark": "业务备注",
+                        "as_remark": "售后备注",
+                        "f_remark": "",
+                        "refund_description": "退款说明",
+                        "taobao_refund_status": "",
+                        "creator_id": 1,
+                        "business_personnel_id": 1,
+                        "cs_audit_at": "2018-09-03 16:29:55",
+                        "locker_id": 1,
+                        "after_sales_id": 0,
+                        "as_audit_at": null,
+                        "financial_id": 0,
+                        "f_audit_at": null,
+                        "status": true,
+                        "created_at": "2018-09-03 16:28:59",
+                        "updated_at": "2018-09-03 16:30:38"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 显示单条财务退款 [GET /api/financialrefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 修改财务退款 [PATCH /api/financialrefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]]
+
+
++ Parameters
+    + payment: (numeric, optional) - 支付金额
+    + f_remark: (string, optional) - 财务备注
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "还未锁定无法修改",
+                "errors": {
+                    "payment": [
+                        "支付金额必须是数字"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 删除财务退款 [DELETE /api/financialrefunds/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090316285916495",
+                "order_sn": "12345645",
+                "refund_order_status": "售后锁定",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "return_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "person_liable": "责任人",
+                "liable_fee": "10",
+                "undertaker": "承担人",
+                "business_remark": "业务备注",
+                "as_remark": "售后备注",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 1,
+                "cs_audit_at": "2018-09-03 16:29:55",
+                "locker_id": 1,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-03 16:28:59",
+                "updated_at": "2018-09-03 16:30:38"
+            }
+
+## 删除一组财务退款 [DELETE /api/financialrefunds]
+
+
++ Parameters
+    + ids: (string, required) - 财务退款id组 格式: 1,2,3,4 
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 锁定或释放 [PUT /api/financialrefunds/:id/lockorunlock]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法锁定",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 财务审核 [PUT /api/financialrefunds/:id/audit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "财务审核出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 财务退审 [PUT /api/financialrefunds/:id/unaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "退审出错",
                 "status_code": 422
             }
 

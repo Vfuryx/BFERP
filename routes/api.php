@@ -655,6 +655,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //客服部
         $api->get('customerservicedepts', 'CustomerServiceDepartmentsController@index')
             ->name('api.customerservicedepts.index');
+        $api->get('customerservicedepts/create', 'CustomerServiceDepartmentsController@create')
+            ->name('api.customerservicedepts.create');
         $api->get('customerservicedepts/{order}', 'CustomerServiceDepartmentsController@show')
             ->name('api.customerservicedepts.show');
         $api->post('customerservicedepts', 'CustomerServiceDepartmentsController@store')
