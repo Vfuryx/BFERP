@@ -760,7 +760,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('returnreasons/editstatus', 'ReturnReasonsController@editStatusByIds')
             ->name('api.returnreasons.editstatusbyids');
 
-
         //售后退款
         $api->get('aftersalerefunds', 'AfterSaleRefundsController@index')
             ->name('api.aftersalerefunds.index');
@@ -779,6 +778,23 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('aftersalerefunds/{refundorder}/unaudit', 'AfterSaleRefundsController@isUnAudit')
             ->name('api.aftersalerefunds.isunaudit');
 
+        //财务退款
+        $api->get('financialrefunds', 'FinancialRefundsController@index')
+            ->name('api.financialrefunds.index');
+        $api->get('financialrefunds/{refundorder}', 'FinancialRefundsController@show')
+            ->name('api.financialrefunds.show');
+        $api->patch('financialrefunds/{refundorder}', 'FinancialRefundsController@update')
+            ->name('api.financialrefunds.update');
+        $api->delete('financialrefunds/{refundorder}', 'FinancialRefundsController@destroy')
+            ->name('api.financialrefunds.destroy');
+        $api->delete('financialrefunds', 'FinancialRefundsController@destroybyids')
+            ->name('api.financialrefunds.destroybyids');
+        $api->put('financialrefunds/{refundorder}/lockorunlock', 'FinancialRefundsController@isLockOrUnlock')
+            ->name('api.financialrefunds.islockorunlock');
+        $api->put('financialrefunds/{refundorder}/audit', 'FinancialRefundsController@isAudit')
+            ->name('api.financialrefunds.isaudit');
+        $api->put('financialrefunds/{refundorder}/unaudit', 'FinancialRefundsController@isUnAudit')
+            ->name('api.financialrefunds.isunaudit');
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

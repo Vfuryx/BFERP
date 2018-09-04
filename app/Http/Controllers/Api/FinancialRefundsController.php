@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\RefundOrder;
 
-use App\Http\Requests\Api\AfterSaleRefundRequest;
+use App\Http\Requests\Api\FinancialRefundRequest;
 use App\Http\Requests\Api\DestroyRequest;
 
 use App\Transformers\RefundOrderTransformer;
@@ -15,10 +15,10 @@ use App\Http\Controllers\Traits\ProcedureTrait;
 use Dingo\Api\Exception\UpdateResourceFailedException;
 
 /**
- * 售后退款资源
- * @Resource("aftersalerefunds",uri="/api")
+ * 财务退款资源
+ * @Resource("financialrefunds",uri="/api")
  */
-class AfterSaleRefundsController extends Controller
+class FinancialRefundsController extends Controller
 {
 
     use CURDTrait;
@@ -29,9 +29,9 @@ class AfterSaleRefundsController extends Controller
     const PerPage = 8;
 
     /**
-     * 获取所有售后退款
+     * 获取所有财务退款
      *
-     * @Get("/aftersalerefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]")
+     * @Get("/financialrefunds{?status}[&include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all"),
@@ -42,7 +42,7 @@ class AfterSaleRefundsController extends Controller
      *              "id": 1,
      *              "refund_sn": "RA2018090316285916495",
      *              "order_sn": "12345645",
-     *              "refund_order_status": "售后锁定",
+     *              "refund_order_status": "财务锁定",
      *              "order_source": "system",
      *              "payment_methods_id": 1,
      *              "time_out_at": "2018-08-31 00:00:00",
@@ -90,15 +90,15 @@ class AfterSaleRefundsController extends Controller
      *      }
      * })
      */
-    public function index(AfterSaleRefundRequest $requset)
+    public function index(FinancialRefundRequest $requset)
     {
         return $this->allOrPage($requset, self::MODEL, self::TRANSFORMER, self::PerPage);
     }
 
     /**
-     * 显示单条售后退款
+     * 显示单条财务退款
      *
-     * @Get("/aftersalerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
+     * @Get("/financialrefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -152,17 +152,13 @@ class AfterSaleRefundsController extends Controller
     }
 
     /**
-     * 修改售后退款
+     * 修改财务退款
      *
-     * @Patch("/aftersalerefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
+     * @Patch("/financialrefunds/:id[?include=paymentMethod,shop,refundPaymentMethod,returnReason,businessPersonnel,locker,afterSale,financial,creator]")
      * @Versions({"v1"})
      * @Parameters({
-     *      @Parameter("person_liable", description="责任人", required=false),
-     *      @Parameter("liable_fee", type="numeric", description="责任金额", required=false),
-     *      @Parameter("freight", type="numeric", description="运费", required=false),
-     *      @Parameter("undertaker", description="承担人", required=false),
-     *      @Parameter("as_remark", description="售后备注", required=false),
-     *      @Parameter("status", type="boolean", description="状态", required=false),
+     *      @Parameter("payment", type="numeric", description="支付金额", required=false),
+     *      @Parameter("f_remark", description="财务备注", required=false),
      * })
      * @Request({
      *})
@@ -174,8 +170,8 @@ class AfterSaleRefundsController extends Controller
      *      @Response(422, body={
      *          "message": "422 Unprocessable Entity",
      *           "errors": {
-     *              "shops_id": {
-     *                  "店铺id必填"
+     *              "payment": {
+     *                  "支付金额必须是数字"
      *              },
      *           },
      *          "message": "还未锁定无法修改",
@@ -222,19 +218,19 @@ class AfterSaleRefundsController extends Controller
      *      })
      * })
      */
-    public function update(AfterSaleRefundRequest $request, RefundOrder $refundorder)
+    public function update(FinancialRefundRequest $request, RefundOrder $refundorder)
     {
         //锁定才能修改
-        if ($refundorder->asUnlock())
+        if ($refundorder->fdUnlock())
             throw new UpdateResourceFailedException('订单未锁定无法修改');
 
         return $this->traitUpdate($request, $refundorder, self::TRANSFORMER);
     }
 
     /**
-     * 删除售后退款
+     * 删除财务退款
      *
-     * @Delete("/aftersalerefunds/:id")
+     * @Delete("/financialrefunds/:id")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(404, body={
@@ -288,12 +284,12 @@ class AfterSaleRefundsController extends Controller
     }
 
     /**
-     * 删除一组售后退款
+     * 删除一组财务退款
      *
-     * @Delete("/aftersalerefunds")
+     * @Delete("/financialrefunds")
      * @Versions({"v1"})
      * @Parameters({
-     * @Parameter("ids", description="售后退款id组 格式: 1,2,3,4 ", required=true)
+     * @Parameter("ids", description="财务退款id组 格式: 1,2,3,4 ", required=true)
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -316,7 +312,7 @@ class AfterSaleRefundsController extends Controller
     /**
      * 锁定或释放
      *
-     * @PUT("/aftersalerefunds/:id/lockorunlock")
+     * @PUT("/financialrefunds/:id/lockorunlock")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
@@ -333,22 +329,22 @@ class AfterSaleRefundsController extends Controller
             !$refundorder->status
             ||
             (
-                $refundorder->getOriginal('refund_order_status') >= $refundorder::REFUND_STATUS_AS_AUDIT
+                $refundorder->getOriginal('refund_order_status') >= $refundorder::REFUND_STATUS_FD_AUDIT
                 ||
-                $refundorder->getOriginal('refund_order_status') < $refundorder::REFUND_STATUS_CS_AUDIT
+                $refundorder->getOriginal('refund_order_status') < $refundorder::REFUND_STATUS_AS_AUDIT
             )
             ,
-            '无法锁定', 'asLockOrUnlock');
+            '无法锁定', 'fdLockOrUnlock');
     }
 
     /**
-     * 售后审核
+     * 财务审核
      *
-     * @PUT("/aftersalerefunds/:id/audit")
+     * @PUT("/financialrefunds/:id/audit")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
-     *          "message": "售后审核出错",
+     *          "message": "财务审核出错",
      *          "status_code": 422,
      *      }),
      *      @Response(204, body={})
@@ -360,16 +356,16 @@ class AfterSaleRefundsController extends Controller
             $refundorder,
             !$refundorder->status
             ||
-            $refundorder->getOriginal('refund_order_status') != $refundorder::REFUND_STATUS_AS_LOCK,
-            '售后审核出错',
-            'asAudit'
+            $refundorder->getOriginal('refund_order_status') != $refundorder::REFUND_STATUS_FD_LOCK,
+            '财务审核出错',
+            'fdAudit'
         );
     }
 
     /**
-     * 售后退审
+     * 财务退审
      *
-     * @PUT("/aftersalerefunds/:id/unaudit")
+     * @PUT("/financialrefunds/:id/unaudit")
      * @Versions({"v1"})
      * @Transaction({
      *      @Response(422, body={
@@ -385,9 +381,9 @@ class AfterSaleRefundsController extends Controller
             $refundorder,
             !$refundorder->status
             ||
-            $refundorder->getOriginal('refund_order_status') != $refundorder::REFUND_STATUS_AS_AUDIT,
-            '售后退审出错',
-            'asUnAudit'
+            $refundorder->getOriginal('refund_order_status') != $refundorder::REFUND_STATUS_FD_AUDIT,
+            '财务退审出错',
+            'fdUnAudit'
         );
     }
 

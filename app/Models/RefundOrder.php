@@ -212,6 +212,58 @@ class RefundOrder extends Model
         $this->save();
     }
 
+
+    /**
+     * 财务未锁定
+     * @return bool
+     */
+    public function fdUnlock()
+    {
+        return $this->getOriginal('refund_order_status') != self::REFUND_STATUS_FD_LOCK;
+    }
+
+    /**
+     * 财务锁定或释放
+     * @return bool
+     */
+    public function fdLockOrUnlock()
+    {
+        if($this->fdUnlock()){
+            $this->locker_id = Auth::guard('api')->id();
+            $this->refund_order_status = self::REFUND_STATUS_FD_LOCK;
+        }else{
+            $this->locker_id = 0;
+            $this->refund_order_status = self::REFUND_STATUS_AS_AUDIT;
+        }
+
+        $this->save();
+    }
+
+    /**
+     * 财务审核
+     * @return bool
+     */
+    public function fdAudit()
+    {
+        $this->financial_id = 0;
+        $this->after_sales_id = Auth::guard('api')->id();
+        $this->refund_order_status = self::REFUND_STATUS_FD_AUDIT;
+        $this->f_audit_at = Carbon::now();
+        $this->save();
+    }
+
+    /**
+     * 财务退审
+     * @return bool
+     */
+    public function fdUnAudit()
+    {
+        $this->financial_id = 0;
+        $this->refund_order_status = self::REFUND_STATUS_AS_AUDIT;
+        $this->f_audit_at = null;
+        $this->save();
+    }
+
     /**
      * 生成订单流水号
      *
