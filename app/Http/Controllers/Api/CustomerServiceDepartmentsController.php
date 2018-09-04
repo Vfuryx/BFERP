@@ -142,7 +142,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 获取创建订单数据
      *
-     * @Post("/customerservicedepts/create")
+     * @GET("/customerservicedepts/create")
      * @Versions({"v1"})
      * 
 * @Response(200, body={
@@ -417,6 +417,29 @@ class CustomerServiceDepartmentsController extends Controller
      *                  "status": true,
      *                  "created_at": "2018-08-17 17:47:40",
      *                  "updated_at": "2018-08-17 17:47:40"
+     *              }
+     *          },
+     *          "payment_method": {
+     *              {
+     *                  "id": 1,
+     *                  "name": "付款方式",
+     *                  "status": true,
+     *                  "created_at": "2018-08-20 11:36:46",
+     *                  "updated_at": "2018-08-20 11:36:46"
+     *              },
+     *              {
+     *                  "id": 3,
+     *                  "name": "付款方式2",
+     *                  "status": true,
+     *                  "created_at": "2018-09-04 14:57:22",
+     *                  "updated_at": "2018-09-04 14:57:22"
+     *              },
+     *              {
+     *                  "id": 4,
+     *                  "name": "付款方式3",
+     *                  "status": true,
+     *                  "created_at": "2018-09-04 14:57:30",
+     *                  "updated_at": "2018-09-04 14:57:30"
      *              }
      *          },
      *          "meta": {

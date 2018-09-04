@@ -12,6 +12,7 @@ use App\Models\DistributionMethod;
 use App\Models\DistributionType;
 use App\Models\TakeDeliveryGoodsWay;
 use App\Models\CustomerType;
+use App\Models\PaymentMethod;
 use League\Fractal\TransformerAbstract;
 
 class CreateOrderDataTransformer extends TransformerAbstract
@@ -29,6 +30,7 @@ class CreateOrderDataTransformer extends TransformerAbstract
             'distribution_type' => DistributionType::all(),
             'take_delivery_goodsWay' => TakeDeliveryGoodsWay::all(),
             'customer_type' => CustomerType::all(),
+            'payment_method' => PaymentMethod::all(),
         ];
     }
 }
