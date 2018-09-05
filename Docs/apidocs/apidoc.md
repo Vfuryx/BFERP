@@ -11649,6 +11649,9 @@ FORMAT: 1A
 # customerservicedepts [/api]
 客服部资源
 
+## 获取所有未处理的订单 [GET /api/customerservicedepts/searchuntreated[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
 ## 获取所有客服部 [GET /api/customerservicedepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
 
 

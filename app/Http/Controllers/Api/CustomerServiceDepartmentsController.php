@@ -35,6 +35,18 @@ class CustomerServiceDepartmentsController extends Controller
     const PerPage = 8;
 
     /**
+     * 获取所有未处理的订单
+     *
+     * @Get("/customerservicedepts/searchuntreated[?include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]")
+     * @Versions({"v1"})
+     * */
+    public function searchUntreated()
+    {
+        $order = Order::query()->whereIn('order_status',[Order::ORDER_STATUS_NEW,Order::ORDER_STATUS_LOCK]);
+        return $this->response->paginator($order->paginate(self::PerPage), self::TRANSFORMER);
+    }
+
+    /**
      * 获取所有客服部
      *
      * @Get("/customerservicedepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]")
