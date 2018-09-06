@@ -12827,6 +12827,25 @@ FORMAT: 1A
 
             []
 
+# orderitems [/api]
+子订单资源
+
+## 删除子订单 [DELETE /api/orderitems/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # merchandiserdepts [/api]
 跟单部资源
 

@@ -682,6 +682,10 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('customerservicedepts/mergerorder', 'CustomerServiceDepartmentsController@isMergerOrder')
             ->name('api.customerservicedepts.ismergerorder');
 
+        //子订单
+        $api->delete('orderitems/{orderitem}', 'OrderItemsController@destroy')
+            ->name('api.orderitems.destroy');
+
         //跟单部
         $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
             ->name('api.merchandiserdepts.show');
