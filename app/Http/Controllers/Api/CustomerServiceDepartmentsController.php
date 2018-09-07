@@ -1356,7 +1356,7 @@ class CustomerServiceDepartmentsController extends Controller
     /**
      * 合并订单
      *
-     * @PUT("/customerservicedepts/:id/mergerorder")
+     * @PUT("/customerservicedepts/mergerorder?order_id_one=1&order_id_two=2")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("order_id_one", type="integer", description="订单一", required=true),

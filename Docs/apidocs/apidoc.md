@@ -12811,7 +12811,7 @@ FORMAT: 1A
 
             []
 
-## 合并订单 [PUT /api/customerservicedepts/:id/mergerorder]
+## 合并订单 [PUT /api/customerservicedepts/mergerorder?order_id_one=1&order_id_two=2]
 
 
 + Parameters
