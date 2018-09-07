@@ -146,7 +146,8 @@ export function patch(url,data = {}){
 
 export function put(url,data = {}){
   return new Promise((resolve,reject) => {
-    axios.put(url,{data: this.$qs.stringify(data)})
+    // axios.put(url,{data: this.$qs.stringify(data)})
+    axios.put(url,this.$qs.stringify(data))
       .then(response => {
         resolve(response.data);
       },err => {
@@ -172,5 +173,29 @@ export function del(url,data = {}){
       })
   })
 }
+
+/**
+ * 封装自定义方法请求
+ * @param url
+ * @param data
+ * @returns {Promise}
+ */
+
+/*
+export function https(methodsName,url,data = {},params = {}){
+  return new Promise((resolve,reject) => {
+    axios({
+      method: methodsName,
+      url: url,
+      data: data,
+      params: params,
+    }).then(response => {
+        resolve(response.data);
+      },err => {
+        reject(err)
+      });
+  })
+}
+*/
 
 

@@ -18,7 +18,6 @@
                           placeholder="请输入密码"></el-input>
                 <span class="show-pwd" @click="showPwd"><svg-icon icon-class="eye"/></span>
             </el-form-item>
-
             <el-form-item prop="code">
         <span class="svg-container">
           <i class="iconfont bf-yzm"></i>
