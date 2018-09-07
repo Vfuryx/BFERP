@@ -408,10 +408,12 @@ class Order extends Model
 
             //新增子单
             collect($orderItemOne)->map(function($item) use ($newOrderOne){
+                if (is_null($item)) return ;
                 $newOrderOne->orderItems()->create($item);
             });
 
             collect($orderItemTwo)->map(function($item) use ($newOrderTwo){
+                if (is_null($item)) return ;
                 $newOrderTwo->orderItems()->create($item);
             });
 

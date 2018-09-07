@@ -1326,10 +1326,14 @@ class CustomerServiceDepartmentsController extends Controller
     }
 
     /**
-     * 拆单
+     * 拆单(要及时修改新订单的价格数据)
      *
      * @PUT("/customerservicedepts/:id/splitorder")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("order_items[0][id]", type="integer", description="子单id", required=true),
+     *      @Parameter("order_items[0][quantity]", type="numeric", description="拆分数量", required=true),
+     * })
      * @Transaction({
      *      @Response(422, body={
      *          "message": "拆单",

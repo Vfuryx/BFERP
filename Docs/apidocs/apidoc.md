@@ -12791,8 +12791,12 @@ FORMAT: 1A
 
             []
 
-## 拆单 [PUT /api/customerservicedepts/:id/splitorder]
+## 拆单(要及时修改新订单的价格数据) [PUT /api/customerservicedepts/:id/splitorder]
 
+
++ Parameters
+    + order_items[0][id]: (integer, required) - 子单id
+    + order_items[0][quantity]: (numeric, required) - 拆分数量
 
 + Response 422 (application/json)
     + Body
@@ -15136,6 +15140,348 @@ FORMAT: 1A
             {
                 "message": "退审出错",
                 "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# customerservicereturns [/api]
+客服退货资源
+
+## 获取所有客服退货 [GET /api/customerservicereturns{?status}[&include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "refund_sn": "RA2018090110411131562",
+                        "order_sn": "12345645",
+                        "refund_order_status": "未处理",
+                        "order_source": "system",
+                        "payment_methods_id": 1,
+                        "time_out_at": "2018-08-31 00:00:00",
+                        "shops_id": 1,
+                        "account": "10",
+                        "refund_payment_methods_id": 1,
+                        "bank": "开户银行",
+                        "address": "开户地址",
+                        "refund_amount": "10.00",
+                        "transaction_sn": "12345645",
+                        "refund_reasons_id": 1,
+                        "seller_nick": "卖家昵称",
+                        "seller_name": "卖家昵称",
+                        "payment": "10.00",
+                        "business_remark": "业务备注",
+                        "as_remark": "",
+                        "f_remark": "",
+                        "refund_description": "退款说明",
+                        "taobao_refund_status": "",
+                        "creator_id": 1,
+                        "business_personnel_id": 0,
+                        "cs_audit_at": null,
+                        "locker_id": 0,
+                        "after_sales_id": 0,
+                        "as_audit_at": null,
+                        "financial_id": 0,
+                        "f_audit_at": null,
+                        "status": true,
+                        "created_at": "2018-09-01 10:41:11",
+                        "updated_at": "2018-09-01 10:41:11"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 新增客服退货(可选参数：include) [POST /api/customerservicereturns[?include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+
+
++ Parameters
+    + order_sn: (string, optional) - 系统单号
+    + payment_methods_id: (integer, required) - 支付方式id
+    + time_out_at: (datetime, required) - 超时时间
+    + shops_id: (integer, optional) - 还款账号
+    + payment_methods_id: (integer, required) - 还款支付方式id
+    + bank: (string, optional) - 开户银行
+    + address: (string, optional) - 开户地址
+    + refund_amount: (numeric, optional) - 退款金额
+    + transaction_sn: (string, optional) - 交易单号
+    + refund_reasons_id: (integer, required) - 退款原因id
+    + seller_nick: (string, optional) - 卖家昵称
+    + seller_name: (string, optional) - 卖家名称
+    + payment: (numeric, optional) - 支付金额
+    + business_remark: (string, optional) - 业务备注
+    + refund_description: (string, optional) - 退款说明
+    + status: (boolean, optional) - 状态
+
++ Request (application/json)
+    + Body
+
+            {
+                "order_sn": "12345645",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-8-31 00:00:00",
+                "shops_id": 1,
+                "account": 10,
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": 10,
+                "transaction_sn": "12345645",
+                "refund_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": 10,
+                "business_remark": "业务备注",
+                "refund_description": "退款说明",
+                "status": true
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "shops_id": [
+                        "店铺id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090110411131562",
+                "order_sn": "12345645",
+                "refund_order_status": "未处理",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "refund_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "business_remark": "业务备注",
+                "as_remark": "",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 0,
+                "cs_audit_at": null,
+                "locker_id": 0,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-01 10:41:11",
+                "updated_at": "2018-09-01 10:41:11",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条客服退货 [GET /api/customerservicereturns/:id[?include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "refund_sn": "RA2018090110411131562",
+                "order_sn": "12345645",
+                "refund_order_status": "未处理",
+                "order_source": "system",
+                "payment_methods_id": 1,
+                "time_out_at": "2018-08-31 00:00:00",
+                "shops_id": 1,
+                "account": "10",
+                "refund_payment_methods_id": 1,
+                "bank": "开户银行",
+                "address": "开户地址",
+                "refund_amount": "10.00",
+                "transaction_sn": "12345645",
+                "refund_reasons_id": 1,
+                "seller_nick": "卖家昵称",
+                "seller_name": "卖家昵称",
+                "payment": "10.00",
+                "business_remark": "业务备注",
+                "as_remark": "",
+                "f_remark": "",
+                "refund_description": "退款说明",
+                "taobao_refund_status": "",
+                "creator_id": 1,
+                "business_personnel_id": 0,
+                "cs_audit_at": null,
+                "locker_id": 0,
+                "after_sales_id": 0,
+                "as_audit_at": null,
+                "financial_id": 0,
+                "f_audit_at": null,
+                "status": true,
+                "created_at": "2018-09-01 10:41:11",
+                "updated_at": "2018-09-01 10:41:11"
+            }
+
+## 修改客服退货 [PATCH /api/customerservicereturns/:id[?include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+
+
++ Parameters
+    + order_sn: (string, optional) - 系统单号
+    + payment_methods_id: (integer, optional) - 支付方式id
+    + time_out_at: (datetime, optional) - 超时时间
+    + shops_id: (integer, optional) - 还款账号
+    + payment_methods_id: (integer, optional) - 还款支付方式id
+    + bank: (string, optional) - 开户银行
+    + address: (string, optional) - 开户地址
+    + refund_amount: (numeric, optional) - 退款金额
+    + transaction_sn: (string, optional) - 交易单号
+    + refund_reasons_id: (integer, optional) - 退款原因id
+    + seller_nick: (string, optional) - 卖家昵称
+    + seller_name: (string, optional) - 卖家名称
+    + payment: (numeric, optional) - 支付金额
+    + business_remark: (string, optional) - 业务备注
+    + refund_description: (string, optional) - 退款说明
+    + status: (boolean, optional) - 状态
+
++ Request (application/json)
+    + Body
+
+            []
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "还未锁定无法修改",
+                "errors": {
+                    "shops_id": [
+                        "店铺id必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            []
+
+## 删除客服退货 [DELETE /api/customerservicereturns/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组客服退货 [DELETE /api/customerservicereturns]
+
+
++ Parameters
+    + ids: (string, required) - 客服退货id组 格式: 1,2,3,4 
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 客服一审 [PUT /api/customerservicereturns/:id/oneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法客服一审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# returnorderitems [/api]
+退货子单资源
+
+## 删除退货子单 [DELETE /api/returnorderitems/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
             }
 
 + Response 204 (application/json)
