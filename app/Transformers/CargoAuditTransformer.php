@@ -10,7 +10,7 @@ class CargoAuditTransformer extends TransformerAbstract
 
     public function transform(Order $order)
     {
-        $order = $order->load('orderItems.combination.productComponents');
+        $order = $order->load('orderItems.combination.productComponents','orderItems.product');
 
         $warehouseId = $order->warehouses_id;
 
