@@ -33,6 +33,8 @@ class FinancialDepartmentRequest extends FormRequest
         return [
             'order_status.in' => '订单状态不是给定的数值',
             'order_status.boolean' => '状态必须为布尔类型',
+
+            'status.boolean' => '状态必须是布尔类型',
         ];
     }
 

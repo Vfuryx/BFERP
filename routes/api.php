@@ -725,6 +725,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.paymentdetails.destroy');
 
         //仓储部
+        $api->get('warehousingdepts', 'WarehousingDepartmentsController@index')
+            ->name('api.warehousingdepts.index');
         $api->get('warehousingdepts/{order}', 'WarehousingDepartmentsController@show')
             ->name('api.warehousingdepts.show');
         $api->patch('warehousingdepts/{order}', 'WarehousingDepartmentsController@update')

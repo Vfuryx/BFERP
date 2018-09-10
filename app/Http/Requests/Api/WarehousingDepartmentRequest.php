@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\Order;
 use Illuminate\Validation\Rule;
 
 class WarehousingDepartmentRequest extends FormRequest
@@ -14,6 +15,16 @@ class WarehousingDepartmentRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'order_status' => [
+                        'nullable', 'in:'.Order::ORDER_STATUS_CARGO_AUDIT.','.Order::ORDER_STATUS_STOCK_OUT
+                    ],
+                    'status' => [
+                        'nullable', 'boolean'
+                    ]
+                ];
+                break;
             case 'PATCH':
                 return [
                     'logistics_id' => [
@@ -62,6 +73,11 @@ class WarehousingDepartmentRequest extends FormRequest
     public function messages()
     {
         return [
+            'order_status.in' => '订单状态不是给定的数值',
+            'order_status.boolean' => '状态必须为布尔类型',
+
+            'status.boolean' => '状态必须是布尔类型',
+
             'logistics_id.required' => '物流id必填',
             'logistics_id.integer' => '物流id必须int类型',
             'logistics_id.exists' => '需要添加的id在数据库中未找到或未启用',
@@ -110,6 +126,9 @@ class WarehousingDepartmentRequest extends FormRequest
 
             'receiver_name' => '收货人',
             'receiver_mobile' => '收货人手机',
+
+            'order_status' => '订单状态',
+            'status' => '状态',
         ];
     }
 
