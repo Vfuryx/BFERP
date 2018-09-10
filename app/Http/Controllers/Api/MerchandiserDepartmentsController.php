@@ -135,7 +135,7 @@ class MerchandiserDepartmentsController extends Controller
      */
     public function index(MerchandiserDepartmentRequest $request)
     {
-        $warehouses_id = $order_status = $status =  '';
+        $warehouses_id = $order_status = $status =  null;
 
         extract($request->validated());
 
