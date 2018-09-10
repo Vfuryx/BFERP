@@ -12859,7 +12859,7 @@ FORMAT: 1A
 + Parameters
     + status: (boolean, optional) - 开启的状态
         + Default: all
-    + warehouses_id: (integer, optional) - 获取的状态
+    + warehouses_id: (integer, optional) - 仓库id
         + Default: all
     + order_status: (integer, optional) - 订单状态
         + Default: all
@@ -13189,97 +13189,6 @@ FORMAT: 1A
                 "updated_at": "2018-08-24 11:38:00"
             }
 
-## 跟单修改 [GET /api/merchandiserdepts/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 200 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "system_order_no": "DD2018082011365716512",
-                "order_status": "已财审",
-                "order_source": "system",
-                "shops_id": 1,
-                "logistics_id": 1,
-                "billing_way": "weight",
-                "promise_ship_time": "2018-08-20",
-                "freight_types_id": 1,
-                "expected_freight": "10.00",
-                "distributions_id": 1,
-                "distribution_methods_id": 15,
-                "deliver_goods_fee": "10.00",
-                "move_upstairs_fee": "10.00",
-                "installation_fee": "10.00",
-                "total_distribution_fee": "30.00",
-                "distribution_phone": "配送电话",
-                "distribution_no": "配送单号",
-                "distribution_types_id": 1,
-                "service_car_info": "服务车信息（配送信息）",
-                "take_delivery_goods_fee": "10.00",
-                "take_delivery_goods_ways_id": 1,
-                "express_fee": "10.00",
-                "service_car_fee": "10.00",
-                "cancel_after_verification_code": "核销码",
-                "wooden_frame_costs": "10.00",
-                "preferential_cashback": "2.00",
-                "favorable_cashback": "2.00",
-                "customer_types_id": 1,
-                "is_invoice": false,
-                "invoice_express_fee": "5.00",
-                "express_invoice_title": "快递发票抬头",
-                "contract_no": "合同单号",
-                "payment_methods_id": 1,
-                "deposit": "10.00",
-                "document_title": "单据头",
-                "warehouses_id": 1,
-                "payment_date": "2018-08-20",
-                "interest_concessions": "10.00",
-                "is_notice": true,
-                "is_cancel_after_verification": false,
-                "accept_order_user": "接单用户",
-                "tax_number": "税号",
-                "receipt": "收据",
-                "logistics_remark": "物流备注",
-                "seller_remark": "卖家备注",
-                "customer_service_remark": "客服备注",
-                "taobao_oid": 0,
-                "taobao_tid": 0,
-                "member_nick": "会员昵称",
-                "shop_name": "",
-                "seller_name": "",
-                "seller_flag": 0,
-                "created": null,
-                "est_con_time": null,
-                "buyer_message": "买家留言",
-                "receiver_name": "",
-                "receiver_phone": "",
-                "receiver_mobile": "",
-                "receiver_state": "",
-                "receiver_city": "",
-                "receiver_district": "",
-                "receiver_address": "",
-                "receiver_zip": "",
-                "refund_info": "无退款",
-                "business_personnel_id": 1,
-                "locker_id": 0,
-                "audit_at": null,
-                "association_taobao_oid": "",
-                "is_merge": false,
-                "is_split": false,
-                "is_association": false,
-                "created_at": "2018-08-20 11:36:57",
-                "updated_at": "2018-08-23 14:12:29"
-            }
-
 ## 根据仓库获取sku库存 [GET /api/merchandiserdepts/:id/stock]
 
 
@@ -13466,6 +13375,34 @@ FORMAT: 1A
 ## 跟单货审 [PUT /api/merchandiserdepts/:id/cargoaudit]
 
 
++ Parameters
+    + logistics_id: (integer, optional) - 物流id
+        + Default: all
+    + freight_types_id: (integer, optional) - 运费类型id
+        + Default: all
+    + expected_freight: (numeric, optional) - 预计运费
+        + Default: all
+    + distributions_id: (integer, optional) - 配送id
+        + Default: all
+    + distribution_methods_id: (integer, optional) - 配送方式id
+        + Default: all
+    + deliver_goods_fee: (numeric, optional) - 送货费用
+        + Default: all
+    + move_upstairs_fee: (numeric, optional) - 搬楼费用
+        + Default: all
+    + installation_fee: (numeric, optional) - 安装费
+        + Default: all
+    + total_distribution_fee: (numeric, optional) - 配送总计
+        + Default: all
+    + distribution_phone: (string, optional) - 配送电话
+        + Default: all
+    + distribution_types_id: (integer, optional) - 配送类型id
+        + Default: all
+    + express_fee: (numeric, optional) - 快递费用
+        + Default: all
+    + warehouses_id: (integer, optional) - 发货仓库id
+        + Default: all
+
 + Response 422 (application/json)
     + Body
 
@@ -13477,10 +13414,191 @@ FORMAT: 1A
 + Response 204 (application/json)
     + Body
 
-            []
+            {
+                "id": 1,
+                "system_order_no": "DD2018082011365716512",
+                "order_status": "已财审",
+                "order_source": "system",
+                "shops_id": 1,
+                "logistics_id": 1,
+                "billing_way": "weight",
+                "promise_ship_time": "2018-08-20",
+                "freight_types_id": 1,
+                "expected_freight": "10.00",
+                "distributions_id": 1,
+                "distribution_methods_id": 15,
+                "deliver_goods_fee": "10.00",
+                "move_upstairs_fee": "10.00",
+                "installation_fee": "10.00",
+                "total_distribution_fee": "30.00",
+                "distribution_phone": "配送电话",
+                "distribution_no": "配送单号",
+                "distribution_types_id": 1,
+                "service_car_info": "服务车信息（配送信息）",
+                "take_delivery_goods_fee": "10.00",
+                "take_delivery_goods_ways_id": 1,
+                "express_fee": "10.00",
+                "service_car_fee": "10.00",
+                "cancel_after_verification_code": "核销码",
+                "wooden_frame_costs": "10.00",
+                "preferential_cashback": "2.00",
+                "favorable_cashback": "2.00",
+                "customer_types_id": 1,
+                "is_invoice": false,
+                "invoice_express_fee": "5.00",
+                "express_invoice_title": "快递发票抬头",
+                "contract_no": "合同单号",
+                "payment_methods_id": 1,
+                "deposit": "10.00",
+                "document_title": "单据头",
+                "warehouses_id": 1,
+                "payment_date": "2018-08-20",
+                "interest_concessions": "10.00",
+                "is_notice": true,
+                "is_cancel_after_verification": false,
+                "accept_order_user": "接单用户",
+                "tax_number": "税号",
+                "receipt": "收据",
+                "logistics_remark": "物流备注",
+                "seller_remark": "卖家备注",
+                "customer_service_remark": "客服备注",
+                "taobao_oid": 0,
+                "taobao_tid": 0,
+                "member_nick": "会员昵称",
+                "shop_name": "",
+                "seller_name": "",
+                "seller_flag": 0,
+                "created": null,
+                "est_con_time": null,
+                "buyer_message": "买家留言",
+                "receiver_name": "",
+                "receiver_phone": "",
+                "receiver_mobile": "",
+                "receiver_state": "",
+                "receiver_city": "",
+                "receiver_district": "",
+                "receiver_address": "",
+                "receiver_zip": "",
+                "refund_info": "无退款",
+                "business_personnel_id": 1,
+                "locker_id": 0,
+                "audit_at": null,
+                "association_taobao_oid": "",
+                "is_merge": false,
+                "is_split": false,
+                "is_association": false,
+                "created_at": "2018-08-20 11:36:57",
+                "updated_at": "2018-08-23 14:12:29"
+            }
 
 # financialdepts [/api]
 财务部资源
+
+## 获取所有财务部订单 [GET /api/financialdepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Parameters
+    + status: (boolean, optional) - 开启的状态
+        + Default: all
+    + order_status: (integer, optional) - 订单状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 22,
+                        "system_order_no": "DD2018090714055056211",
+                        "order_status": "已客审",
+                        "order_source": "system",
+                        "shops_id": 1,
+                        "logistics_id": 4,
+                        "billing_way": "weight",
+                        "promise_ship_time": "2018-09-11",
+                        "freight_types_id": 1,
+                        "expected_freight": "21.00",
+                        "distributions_id": 1,
+                        "distribution_methods_id": 13,
+                        "deliver_goods_fee": "21.00",
+                        "move_upstairs_fee": "21.00",
+                        "installation_fee": "21.00",
+                        "total_distribution_fee": "63.00",
+                        "distribution_phone": "21",
+                        "distribution_no": "21",
+                        "distribution_types_id": 1,
+                        "service_car_info": "21",
+                        "take_delivery_goods_fee": "21.00",
+                        "take_delivery_goods_ways_id": 6,
+                        "express_fee": "21.00",
+                        "service_car_fee": "21.00",
+                        "cancel_after_verification_code": "21",
+                        "wooden_frame_costs": "21.00",
+                        "preferential_cashback": "21.00",
+                        "favorable_cashback": "21.00",
+                        "customer_types_id": 1,
+                        "is_invoice": false,
+                        "invoice_express_fee": "21.00",
+                        "express_invoice_title": "21",
+                        "contract_no": "21",
+                        "payment_methods_id": 3,
+                        "deposit": "21.00",
+                        "document_title": "21",
+                        "warehouses_id": 1,
+                        "payment_date": "2018-09-20",
+                        "interest_concessions": "21.00",
+                        "is_notice": true,
+                        "is_cancel_after_verification": false,
+                        "accept_order_user": "21",
+                        "tax_number": "21",
+                        "receipt": "21",
+                        "logistics_remark": "21",
+                        "seller_remark": "21",
+                        "customer_service_remark": "21",
+                        "taobao_oid": 0,
+                        "taobao_tid": 0,
+                        "member_nick": "会员昵称",
+                        "shop_name": "",
+                        "seller_name": "",
+                        "seller_flag": 0,
+                        "created": null,
+                        "est_con_time": null,
+                        "buyer_message": "21",
+                        "receiver_name": "12",
+                        "receiver_phone": "212",
+                        "receiver_mobile": "21",
+                        "receiver_state": "河南省",
+                        "receiver_city": "南阳市",
+                        "receiver_district": "邓州市",
+                        "receiver_address": "21",
+                        "receiver_zip": "21",
+                        "refund_info": "无退款",
+                        "business_personnel_id": 1,
+                        "locker_id": 0,
+                        "audit_at": null,
+                        "association_taobao_oid": "",
+                        "is_merge": false,
+                        "is_split": false,
+                        "is_association": false,
+                        "created_at": "2018-09-07 14:05:50",
+                        "updated_at": "2018-09-07 17:52:15"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "http://127.0.0.1:8000/api/financialdepts?page=1"
+                        }
+                    }
+                }
+            }
 
 ## 财务驳回 [PUT /api/financialdepts/:id/reject]
 

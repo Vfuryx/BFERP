@@ -693,8 +693,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.merchandiserdepts.show');
         $api->get('merchandiserdepts/{order}/stock', 'MerchandiserDepartmentsController@getStockByWarehouses')
             ->name('api.merchandiserdepts.stock');
-        $api->patch('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@update')
-            ->name('api.merchandiserdepts.update');
         $api->put('merchandiserdepts/{order}/unaudit', 'MerchandiserDepartmentsController@isUnAudit')
             ->name('api.merchandiserdepts.isunaudit');
         $api->put('merchandiserdepts/{order}/oneaudit', 'MerchandiserDepartmentsController@isOneAudit')
@@ -709,6 +707,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //     ->name('api.merchandiserdepts.ismergerorder');
 
         //财务部
+        $api->get('financialdepts', 'FinancialDepartmentsController@index')
+            ->name('api.financialdepts.index');
         $api->put('financialdepts/{order}/reject', 'FinancialDepartmentsController@isReject')
             ->name('api.financialdepts.isreject');
         $api->put('financialdepts/{order}/financialaudit', 'FinancialDepartmentsController@isFinancialAudit')
