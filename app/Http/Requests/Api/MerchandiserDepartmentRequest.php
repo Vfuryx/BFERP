@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Validation\Rule;
+use App\Models\Order;
 
 class MerchandiserDepartmentRequest extends FormRequest
 {
@@ -15,14 +16,32 @@ class MerchandiserDepartmentRequest extends FormRequest
     {
         switch ($this->method()) {
             case 'GET':
-                return [
-                    'warehouses_id' => [
-                        'required','integer',
-                        Rule::exists('warehouses', 'id')->where(function ($query) {
-                            $query->where('status', 1);
-                        }),
-                    ],
-                ];
+                if($this->route()->getActionMethod() == 'index'){
+                    return [
+                        'warehouses_id' => [
+                            'nullable','integer',
+                            Rule::exists('warehouses', 'id')->where(function ($query) {
+                                $query->where('status', 1);
+                            }),
+                        ],
+                        'order_status' => [
+                            'nullable', 'in:'.Order::ORDER_STATUS_CS_AUDIT.','.Order::ORDER_STATUS_CARGO_AUDIT
+                        ],
+                        'status' => [
+                            'nullable', 'boolean'
+                        ]
+                    ];
+                }
+                if($this->route()->getActionMethod() == 'getStockByWarehouses'){
+                    return [
+                        'warehouses_id' => [
+                            'required','integer',
+                            Rule::exists('warehouses', 'id')->where(function ($query) {
+                                $query->where('status', 1);
+                            }),
+                        ],
+                    ];
+                }
                 break;
             case 'PATCH':
                 return [
@@ -95,6 +114,10 @@ class MerchandiserDepartmentRequest extends FormRequest
     public function messages()
     {
         return [
+            'order_status.in' => '订单状态不是给定的数值',
+
+            'status.boolean' => '状态必须是布尔类型',
+
             'logistics_id.required' => '物流id必填',
             'logistics_id.integer' => '物流id必须int类型',
             'logistics_id.exists' => '需要添加的id在数据库中未找到或未启用',

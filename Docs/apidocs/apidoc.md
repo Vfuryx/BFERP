@@ -12853,6 +12853,114 @@ FORMAT: 1A
 # merchandiserdepts [/api]
 跟单部资源
 
+## 获取所有跟单部订单 [GET /api/merchandiserdepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+
+
++ Parameters
+    + status: (boolean, optional) - 开启的状态
+        + Default: all
+    + warehouses_id: (integer, optional) - 获取的状态
+        + Default: all
+    + order_status: (integer, optional) - 订单状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 22,
+                        "system_order_no": "DD2018090714055056211",
+                        "order_status": "已客审",
+                        "order_source": "system",
+                        "shops_id": 1,
+                        "logistics_id": 4,
+                        "billing_way": "weight",
+                        "promise_ship_time": "2018-09-11",
+                        "freight_types_id": 1,
+                        "expected_freight": "21.00",
+                        "distributions_id": 1,
+                        "distribution_methods_id": 13,
+                        "deliver_goods_fee": "21.00",
+                        "move_upstairs_fee": "21.00",
+                        "installation_fee": "21.00",
+                        "total_distribution_fee": "63.00",
+                        "distribution_phone": "21",
+                        "distribution_no": "21",
+                        "distribution_types_id": 1,
+                        "service_car_info": "21",
+                        "take_delivery_goods_fee": "21.00",
+                        "take_delivery_goods_ways_id": 6,
+                        "express_fee": "21.00",
+                        "service_car_fee": "21.00",
+                        "cancel_after_verification_code": "21",
+                        "wooden_frame_costs": "21.00",
+                        "preferential_cashback": "21.00",
+                        "favorable_cashback": "21.00",
+                        "customer_types_id": 1,
+                        "is_invoice": false,
+                        "invoice_express_fee": "21.00",
+                        "express_invoice_title": "21",
+                        "contract_no": "21",
+                        "payment_methods_id": 3,
+                        "deposit": "21.00",
+                        "document_title": "21",
+                        "warehouses_id": 1,
+                        "payment_date": "2018-09-20",
+                        "interest_concessions": "21.00",
+                        "is_notice": true,
+                        "is_cancel_after_verification": false,
+                        "accept_order_user": "21",
+                        "tax_number": "21",
+                        "receipt": "21",
+                        "logistics_remark": "21",
+                        "seller_remark": "21",
+                        "customer_service_remark": "21",
+                        "taobao_oid": 0,
+                        "taobao_tid": 0,
+                        "member_nick": "会员昵称",
+                        "shop_name": "",
+                        "seller_name": "",
+                        "seller_flag": 0,
+                        "created": null,
+                        "est_con_time": null,
+                        "buyer_message": "21",
+                        "receiver_name": "12",
+                        "receiver_phone": "212",
+                        "receiver_mobile": "21",
+                        "receiver_state": "河南省",
+                        "receiver_city": "南阳市",
+                        "receiver_district": "邓州市",
+                        "receiver_address": "21",
+                        "receiver_zip": "21",
+                        "refund_info": "无退款",
+                        "business_personnel_id": 1,
+                        "locker_id": 0,
+                        "audit_at": null,
+                        "association_taobao_oid": "",
+                        "is_merge": false,
+                        "is_split": false,
+                        "is_association": false,
+                        "created_at": "2018-09-07 14:05:50",
+                        "updated_at": "2018-09-07 17:52:15"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "http://127.0.0.1:8000/api/merchandiserdepts?page=1"
+                        }
+                    }
+                }
+            }
+
 ## 跟单驳回 [PUT /api/merchandiserdepts/:id/unaudit]
 
 
@@ -15462,6 +15570,105 @@ FORMAT: 1A
 
             {
                 "message": "无法客服一审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 客服一审退审 [PUT /api/customerservicereturns/:id/unoneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法客服一审退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 客服二审 [PUT /api/customerservicereturns/:id/twoaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法客服二审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 客服二审退审 [PUT /api/customerservicereturns/:id/untwoaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法客服二审退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# aftersalereturns [/api]
+售后退货资源
+
+## 删除售后退货 [DELETE /api/aftersalereturns/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后一审 [PUT /api/aftersalereturns/:id/oneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法售后一审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后一审退审 [PUT /api/aftersalereturns/:id/unoneaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法售后一审退审",
                 "status_code": 422
             }
 

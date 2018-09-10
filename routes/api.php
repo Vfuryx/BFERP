@@ -687,6 +687,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.orderitems.destroy');
 
         //跟单部
+        $api->get('merchandiserdepts', 'MerchandiserDepartmentsController@index')
+            ->name('api.merchandiserdepts.index');
         $api->get('merchandiserdepts/{order}', 'MerchandiserDepartmentsController@show')
             ->name('api.merchandiserdepts.show');
         $api->get('merchandiserdepts/{order}/stock', 'MerchandiserDepartmentsController@getStockByWarehouses')
@@ -805,20 +807,56 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         //财务退款
         $api->get('financialrefunds', 'FinancialRefundsController@index')
             ->name('api.financialrefunds.index');
-        $api->get('financialrefunds/{refundorder}', 'FinancialRefundsController@show')
+        $api->get('financialrefunds/{returnorder}', 'FinancialRefundsController@show')
             ->name('api.financialrefunds.show');
-        $api->patch('financialrefunds/{refundorder}', 'FinancialRefundsController@update')
+        $api->patch('financialrefunds/{returnorder}', 'FinancialRefundsController@update')
             ->name('api.financialrefunds.update');
-        $api->delete('financialrefunds/{refundorder}', 'FinancialRefundsController@destroy')
+        $api->delete('financialrefunds/{returnorder}', 'FinancialRefundsController@destroy')
             ->name('api.financialrefunds.destroy');
         $api->delete('financialrefunds', 'FinancialRefundsController@destroybyids')
             ->name('api.financialrefunds.destroybyids');
-        $api->put('financialrefunds/{refundorder}/lockorunlock', 'FinancialRefundsController@isLockOrUnlock')
+        $api->put('financialrefunds/{returnorder}/lockorunlock', 'FinancialRefundsController@isLockOrUnlock')
             ->name('api.financialrefunds.islockorunlock');
-        $api->put('financialrefunds/{refundorder}/audit', 'FinancialRefundsController@isAudit')
+        $api->put('financialrefunds/{returnorder}/audit', 'FinancialRefundsController@isAudit')
             ->name('api.financialrefunds.isaudit');
-        $api->put('financialrefunds/{refundorder}/unaudit', 'FinancialRefundsController@isUnAudit')
+        $api->put('financialrefunds/{returnorder}/unaudit', 'FinancialRefundsController@isUnAudit')
             ->name('api.financialrefunds.isunaudit');
+
+        //客服退货
+        $api->get('customerservicereturns', 'CustomerServiceReturnsController@index')
+            ->name('api.customerservicereturns.index');
+        $api->get('customerservicereturns/{returnorder}', 'CustomerServiceReturnsController@show')
+            ->name('api.customerservicereturns.show');
+        $api->post('customerservicereturns', 'CustomerServiceReturnsController@store')
+            ->name('api.customerservicereturns.store');
+        $api->patch('customerservicereturns/{returnorder}', 'CustomerServiceReturnsController@update')
+            ->name('api.customerservicereturns.update');
+        $api->delete('customerservicereturns/{returnorder}', 'CustomerServiceReturnsController@destroy')
+            ->name('api.customerservicereturns.destroy');
+        $api->delete('customerservicereturns', 'CustomerServiceReturnsController@destroybyids')
+            ->name('api.customerservicereturns.destroybyids');
+        $api->put('customerservicereturns/{returnorder}/oneaudit', 'CustomerServiceReturnsController@isOneAudit')
+            ->name('api.customerservicereturns.isoneaudit');
+        $api->put('customerservicereturns/{returnorder}/unoneaudit', 'CustomerServiceReturnsController@isUnOneAudit')
+            ->name('api.customerservicereturns.isunoneaudit');
+        $api->put('customerservicereturns/{returnorder}/twoaudit', 'CustomerServiceReturnsController@isTwoAudit')
+            ->name('api.customerservicereturns.istwoaudit');
+        $api->put('customerservicereturns/{returnorder}/untwoaudit', 'CustomerServiceReturnsController@isUnTwoAudit')
+            ->name('api.customerservicereturns.isuntwoaudit');
+
+        //售后退货
+        $api->delete('aftersalereturns/{returnorder}', 'AfterSaleReturnsController@destroy')
+            ->name('api.aftersalereturns.destroy');
+        $api->put('aftersalereturns/{returnorder}/oneaudit', 'AfterSaleReturnsController@isOneAudit')
+            ->name('api.aftersalereturns.isoneaudit');
+        $api->put('aftersalereturns/{returnorder}/unoneaudit', 'AfterSaleReturnsController@isUnOneAudit')
+            ->name('api.aftersalereturns.isunoneaudit');
+
+
+        //退货子单
+        $api->delete('returnorderitems/{returnorderitem}', 'ReturnOrderItemsController@destroy')
+            ->name('api.returnorderitems.destroy');
+
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')
