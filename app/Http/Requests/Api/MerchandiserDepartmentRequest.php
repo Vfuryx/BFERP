@@ -43,7 +43,7 @@ class MerchandiserDepartmentRequest extends FormRequest
                     ];
                 }
                 break;
-            case 'PATCH':
+            case 'PUT':
                 return [
                     'logistics_id' => [
                         'integer',
