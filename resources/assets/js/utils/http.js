@@ -174,28 +174,5 @@ export function del(url,data = {}){
   })
 }
 
-/**
- * 封装自定义方法请求
- * @param url
- * @param data
- * @returns {Promise}
- */
-
-/*
-export function https(methodsName,url,data = {},params = {}){
-  return new Promise((resolve,reject) => {
-    axios({
-      method: methodsName,
-      url: url,
-      data: data,
-      params: params,
-    }).then(response => {
-        resolve(response.data);
-      },err => {
-        reject(err)
-      });
-  })
-}
-*/
 
 

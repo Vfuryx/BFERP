@@ -1,14 +1,14 @@
 webpackJsonp([20],{
 
-/***/ 452:
+/***/ 451:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(531)
+var __vue_script__ = __webpack_require__(530)
 /* template */
-var __vue_template__ = __webpack_require__(532)
+var __vue_template__ = __webpack_require__(531)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 531:
+/***/ 530:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2566,6 +2566,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var index = this.activeName - 0;
       switch (index) {
         case 0:
+          this.loading = true;
           this.fetchData();
           break;
         case 1:
@@ -2643,7 +2644,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           });
           break;
         case 1:
-          this.$fetch(this.urls.customerservicedepts, { 'order_status': 20, 'include': 'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails' }).then(function (res) {
+          this.$fetch(this.urls.customerservicedepts, { 'order_status': 20, 'include': 'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order' }).then(function (res) {
             _this.loading = false;
             _this.alreadyHandle = res.data;
             var pg = res.meta.pagination;
@@ -3200,8 +3201,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     handlePagChg: function handlePagChg(page) {
       var _this9 = this;
 
-      this.$fetch(this.urls.logistics + '?page=' + page, { include: 'cityInfos.logistics,printReport,freightType' }).then(function (res) {
-        _this9.logisticsData = res.data;
+      this.$fetch(this.urls.customerservicedepts + '?page=' + page, { include: 'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order' }).then(function (res) {
+        if (_this9.leftTopActiveName == '0') {
+          _this9.orderListData = res.data;
+        } else {
+          _this9.alreadyHandle = res.data;
+        }
       });
     },
     refresh: function refresh() {
@@ -3789,7 +3794,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /***/ }),
 
-/***/ 532:
+/***/ 531:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {

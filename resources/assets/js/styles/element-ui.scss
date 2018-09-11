@@ -171,6 +171,22 @@ form.el-form{
         padding: 0 10px;
       }
     }
+
+    label{
+      float: left;
+      text-align: right;
+      min-width: 70px;
+    }
+
+    .el-form-item__content{
+      overflow: hidden;
+    }
+
+    &:after,&:before {
+      content: "";
+      display: table;
+      clear: both;
+    }
   }
 
   &.quarter_turn{

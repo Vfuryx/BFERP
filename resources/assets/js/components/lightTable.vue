@@ -193,10 +193,10 @@
                                 v-model="scope.row[item.prop]">
                                     </el-cascader>
                                 </span>
-                        <span v-else>
+                                <span v-else>
                                <el-input size="small" v-model.trim="scope.row[item.prop]" :placeholder="item.holder" @change="handleEdit" :disabled="item.chgAble"></el-input>
                             </span>
-                     </span>
+                            </span>
                             <span v-else>
                                 <span v-if="item.type=='color'">
                              <span class="tableColor" :style="{backgroundColor:scope.row.color}"></span>

@@ -2316,7 +2316,7 @@
             prop: 'status',
             type: 'checkbox'
           }
-          ],
+        ],
         addActiveName: '0',
         proData: [],
         options: regionDataPlus,
@@ -2759,6 +2759,7 @@
         let index = this.activeName-0;
         switch(index){
           case 0:
+            this.loading = true;
            this.fetchData();
             break;
           case 1:
@@ -2836,7 +2837,7 @@
               });
             break;
           case 1:
-            this.$fetch(this.urls.customerservicedepts,{'order_status': 20,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails'})
+            this.$fetch(this.urls.customerservicedepts,{'order_status': 20,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
               .then(res => {
                 this.loading = false;
                 this.alreadyHandle = res.data;
@@ -3366,9 +3367,13 @@
       },
       /*页码*/
       handlePagChg(page){
-        this.$fetch(this.urls.logistics+'?page='+page,{include:'cityInfos.logistics,printReport,freightType'})
+        this.$fetch(this.urls.customerservicedepts+'?page='+page,{include:'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
           .then(res=>{
-            this.logisticsData = res.data;
+            if(this.leftTopActiveName == '0'){
+              this.orderListData = res.data;
+            }else{
+              this.alreadyHandle = res.data;
+            }
           })
       },
       refresh(){

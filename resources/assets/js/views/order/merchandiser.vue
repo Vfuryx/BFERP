@@ -112,7 +112,7 @@
                         <span @click="toggleShow" style="display: inline">
                                 <el-button type="text">收起</el-button>
                                 <i class="el-icon-arrow-up" style="color:#409EFF"></i>
-                            </span>
+                        </span>
                     </div>
                 </div>
                 <el-tabs v-model="leftTopActiveName" @tab-click="leftHandleClick" style="height: 400px;">
@@ -165,11 +165,11 @@
                             </span>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作" width="90" align="center" fixed="right">
+                           <!-- <el-table-column label="操作" width="90" align="center" fixed="right">
                                 <template slot-scope="scope">
                                     <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="已货审" name="1">
@@ -221,11 +221,11 @@
                             </span>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作" width="90" align="center" fixed="right">
+                           <!-- <el-table-column label="操作" width="90" align="center" fixed="right">
                                 <template slot-scope="scope">
                                     <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                     </el-tab-pane>
                 </el-tabs>
@@ -289,11 +289,11 @@
                                     </el-table>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作" width="90" align="center">
+                          <!--  <el-table-column label="操作" width="90" align="center">
                                 <template slot-scope="scope">
                                     <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="支付明细" name="1">
@@ -312,11 +312,11 @@
                                     </span>
                                 </template>
                             </el-table-column>
-                            <el-table-column label="操作" width="90" align="center">
+                           <!-- <el-table-column label="操作" width="90" align="center">
                                 <template slot-scope="scope">
                                     <el-button size="mini" type="danger" @click="delSingle(scope.row,$event)">删除</el-button>
                                 </template>
-                            </el-table-column>
+                            </el-table-column>-->
                         </el-table>
                     </el-tab-pane>
                     <el-tab-pane label="内部便签" name="2">
@@ -341,6 +341,89 @@
             </el-tab-pane>
         </el-tabs>
 
+        <!--修改-->
+        <el-dialog title="仓库/供应商选项" :visible.sync="cargoAuditMask" :class="{'more-forms':moreForms}">
+            <el-form :model="cargoAuditFormVal">
+                <el-form-item v-for="item in cargoAuditFormHead" :key="item.label" :label="item.label" :prop="item.prop">
+                    <span v-if="item.type=='text'">
+                        <span v-if="item.inProp">
+                            <el-input v-model.trim="cargoAuditFormVal[item.prop][item.inProp]" :placeholder="item.holder"></el-input>
+                        </span>
+                        <span v-else>
+                          <el-input v-model.trim="cargoAuditFormVal[item.prop]" :placeholder="item.holder"></el-input>
+                    </span>
+                    </span>
+                    <span v-else-if="item.type=='number'">
+                        <span v-if="item.prop=='deliver_goods_fee' || item.prop=='move_upstairs_fee' || item.prop=='installation_fee'">
+                           <el-input type="number" v-model.trim="cargoAuditFormVal[item.prop]" :placeholder="item.holder" :disabled="item.addChgAble" @input="formChg"></el-input>
+                        </span>
+                        <span v-else>
+                            <el-input type="number" v-model.trim="cargoAuditFormVal[item.prop]" :placeholder="item.holder"></el-input>
+                        </span>
+                    </span>
+                    <span v-else-if="item.type=='select'">
+                             <el-select v-model="cargoAuditFormVal[item.prop]" :placeholder="item.holder" @change="warehouseChg">
+                                      <span v-for="list in apiData[item.stateVal]" :key="list.id">
+                                    <el-option :label="list.name?list.name:list.nick" :value="list.id"></el-option>
+                               </span>
+                           </el-select>
+                    </span>
+                    <span v-else-if="item.type=='textarea'">
+                         <el-input type="textarea" v-model.trim="cargoAuditFormVal[item.prop]" :placehode="item.holder"></el-input>
+                    </span>
+                    <span v-else-if="item.type=='checkbox'">
+                            <el-checkbox v-model="cargoAuditFormVal[item.prop]"></el-checkbox>
+                        </span>
+                </el-form-item>
+            </el-form>
+            <el-table :data="cargoAuditTableVal" fit>
+                <el-table-column v-for="item in cargoAuditTableHead" :label="item.label" align="center" :width="item.width" :key="item.label">
+                    <template slot-scope="scope">
+                        <span v-if="item.prop">
+                            <span v-if="item.type=='checkbox'">
+                                <el-checkbox v-model="scope.row[item.prop][item.inProp]" disabled></el-checkbox>
+                     </span>
+                            <span v-else-if="item.type=='select'">
+                                <span v-if="item.prop == 'warehouses_id'">
+                                      <span v-for="(list,index) in apiData[item.stateVal]" :key="index">
+                                     <span v-if="list.id==cargoAuditFormVal['warehouses_id']">
+                                         {{list.name}}
+                                     </span>
+                                 </span>
+                                </span>
+                                <span v-else>
+                                    <span v-for="(list,index) in resData[item.stateVal]" :key="index">
+                                     <span v-if="list.id==scope.row[item.prop][item.inProp]">
+                                                    {{list.name}}
+                                     </span>
+                                 </span>
+                                </span>
+                             </span>
+                            <span v-else>
+                                <span v-if="item.prop=='quantity'">
+                                    <span v-if="scope.row[item.prop]>scope.row['combination'].quantity">
+                                        <span style="color: #f76b6e">库存不足</span>
+                                    </span>
+                                    <span v-else>
+                                         <span style="color: #5dc34a">可货审</span>
+                                    </span>
+                                </span>
+                                <span v-else>
+                                   {{item.inProp?scope.row[item.prop][item.inProp]:scope.row[item.prop]}}
+                                </span>
+                        </span>
+                        </span>
+                    </template>
+                </el-table-column>
+            </el-table>
+            <div slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="cargoAuditConfirm">确定</el-button>
+                <el-button @click="cargoAuditCancel">取消</el-button>
+            </div>
+        </el-dialog>
+
+        <!--页码-->
+        <Pagination :page-url="this.urls.merchandiserdepts" @handlePagChg="handlePagChg" v-if="activeName=='0'"></Pagination>
     </div>
 </template>
 <script>
@@ -349,25 +432,27 @@
       return {
         newOpt: [
           {
-            cnt: '修改',
-            icon: 'bf-change',
-            ent: this.test,
-            nClick: true
-          },
-          {
             cnt: '驳回',
             icon: 'bf-reject',
-            ent: this.test
+            ent: this.handleUnAudit,
+            nClick: false
           },
           {
             cnt: '审核',
             icon: 'bf-audit',
-            ent: this.test
+            ent: this.handleOneAudit,
+            nClick: false
+          },
+          {
+            cnt: '货审',
+            icon: 'bf-change',
+            ent: this.handleCargoAudit,
+            nClick: true
           },
           {
             cnt: '退审',
             icon: 'bf-auditfaild',
-            ent: this.test
+            ent: this.handleUnOneAudit
           },
           {
             cnt: '发货',
@@ -1067,7 +1152,6 @@
         ],
         loading: true,
         checkboxInit: false,
-        orderListIndex: '',
         alreadyHandle: [],
         orderDtlFormVal: {},
         orderDtlFormHead: [
@@ -1328,7 +1412,238 @@
           [],
           []
         ],
+        proCompHead: [
+          {
+            label: '组合',
+            width: '90',
+            prop: 'is_common',
+            type: 'checkbox',
+          },
+          {
+            label: '子件图片',
+            width: '120',
+            prop: 'img_url',
+            type: 'img',
+          },
+          {
+            label: '子件编码',
+            width: '140',
+            prop: 'component_code',
+            type: 'text',
+          },
+          {
+            label: '子件名称',
+            width: '120',
+            prop: 'spec',
+            type: 'text',
+          },
+          {
+            label: '颜色',
+            width: '120',
+            prop: 'color',
+            type: 'text'
+          },
+          {
+            label: '材质',
+            width: '120',
+            prop: 'materials',
+            type: 'text',
+          },
+          {
+            label: '功能',
+            width: '120',
+            prop: 'function',
+            type: 'text',
+          },
+          {
+            label: '特殊',
+            width: '120',
+            prop: 'special',
+            type: 'text'
+          },
+          {
+            label: '其他',
+            width: '120',
+            prop: 'other',
+            type: 'text',
+          },
+          {
+            label: '淘宝售价',
+            width: '130',
+            prop: 'tb_price',
+            type: 'number',
+          },
+          {
+            label: '标准售价',
+            width: '130',
+            prop: 'price',
+            type: 'number',
+          },
+          {
+            label: '最低销售价格',
+            width: '140',
+            prop: 'lowest_price',
+            type: 'number'
+          },
+          {
+            label: '最高销售价格',
+            width: '140',
+            prop: 'highest_price',
+            type: 'number'
+          },
+          {
+            label: '体积',
+            width: '120',
+            prop: 'volume',
+            type: 'number'
+          },
+          {
+            label: '包件数',
+            width: '130',
+            prop: 'package_quantity',
+            type: 'number',
+          },
+          {
+            label: '停产',
+            width: '90',
+            prop: 'is_stop_pro',
+            type: 'checkbox'
+          }
+        ],
         payDtlData: [],
+        /*货审*/
+        moreForms: true,
+        cargoAuditFormVal:{
+          warehouses_id: '',
+          logistics_id: '',
+          distribution_methods_id: '',
+          freight_types_id:'',
+          distributions_id: '',
+          distribution_phone: '',
+          distribution_types_id: '',
+          deliver_goods_fee: 0,
+          move_upstairs_fee: 0,
+          installation_fee: 0,
+          total_distribution_fee: 0,
+          expected_freight: 0
+        },
+        cargoAuditFormHead:[
+          {
+            label: '发货仓库',
+            prop: 'warehouses_id',
+            width:'120',
+            type: 'select',
+            stateVal: 'warehouse'
+          },
+          {
+            label: '物流公司',
+            prop: 'logistics_id',
+            type: 'select',
+            stateVal: 'logistics'
+          },
+          {
+            label: '配送方式',
+            prop: 'distribution_methods_id',
+            type: 'select',
+            stateVal: 'distribution_method'
+          },
+          {
+            label: '运费类型',
+            prop: 'freight_types_id',
+            type: 'select',
+            stateVal: 'freight_type'
+          },
+          {
+            label: '配送公司',
+            prop: 'distributions_id',
+            type: 'select',
+            stateVal:'distribution'
+          },
+          {
+            label: '配送电话',
+            prop: 'distribution_phone',
+            type: 'text'
+          },
+          {
+            label: '配送类型',
+            prop: 'distribution_types_id',
+            type: 'select',
+            stateVal: 'distribution_type'
+          },
+          {
+            label: '送货费用',
+            prop: 'deliver_goods_fee',
+            type: 'number'
+          },
+          {
+            label: '搬楼费用',
+            prop: 'move_upstairs_fee',
+            type: 'number'
+          },
+          {
+            label: '安装费用',
+            prop: 'installation_fee',
+            type: 'number'
+          },
+          {
+            label: '配送总计',
+            prop: 'total_distribution_fee',
+            type: 'number'
+          },
+          {
+            label: '预计运费',
+            prop: 'expected_freight',
+            type: 'number'
+          }
+        ],
+        cargoAuditMask:false,
+        cargoAuditTableVal: [],
+        cargoAuditTableHead: [
+          {
+            label: '仓库',
+            prop: "warehouses_id",
+            type: 'select',
+            stateVal: 'warehouse'
+          },
+          {
+            label: 'sku名称',
+            prop: "combination",
+            inProp: 'name',
+            type: 'text'
+          },
+          {
+            label: '供应商',
+            prop: 'product',
+            inProp: "supplier_id",
+            type: 'select',
+            stateVal: 'suppliers'
+          },
+          {
+            label: '商品简称',
+            prop: 'product',
+            inProp: "short_name",
+            type: 'text'
+          },
+          {
+            label: '工厂型号',
+            prop: 'product',
+            inProp: "factory_model",
+            type: 'text'
+          },
+          {
+            label: '商品编码',
+            prop: 'product',
+            inProp: "commodity_code",
+            type: 'text'
+          },
+          {
+            label: '库存盈余',
+            // prop: 'combination',
+            prop: "quantity",
+            type: 'number'
+          }
+        ],
+        apiData: {},
       }
     },
     computed: {
@@ -1357,6 +1672,7 @@
         let index = this.activeName-0;
         switch(index){
           case 0:
+            this.loading = true;
             this.fetchData();
             break;
           case 1:
@@ -1408,33 +1724,20 @@
       fetchData(){
         let index = this.leftTopActiveName-0;
         switch(index){
-          /*已财审*/
+          /*已客审*/
           case 0:
-            let notTrial =[];
-            this.$fetch(this.urls.customerservicedepts,{'order_status': 30,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
+            this.$fetch(this.urls.merchandiserdepts,{'order_status': 30,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
               .then(res => {
-                if(res.data.length>0){
-                  res.data.map(item=>{
-                    notTrial.push(item);
-                  })
-                }
+                this.loading = false;
+                this.orderListData = res.data;
+                let pg = res.meta.pagination;
+                this.$store.dispatch('currentPage', pg.current_page);
+                this.$store.commit('PER_PAGE', pg.per_page);
+                this.$store.commit('PAGE_TOTAL', pg.total);
               }, err => {console.log(err);});
-            this.$fetch(this.urls.customerservicedepts,{'order_status': 50,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
-              .then(res => {
-                if(res.data.length>0){
-                  res.data.map(item=>{
-                    notTrial.push(item);
-                  })
-                }
-              }, err => {console.log(err);});
-            setTimeout(()=>{
-              this.loading = false;
-              this.orderListData = notTrial;
-              Object.assign(this.orderListData,notTrial)
-            },2000)
             break;
           case 1:
-            this.$fetch(this.urls.customerservicedepts,{'order_status': 60,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails'})
+            this.$fetch(this.urls.merchandiserdepts,{'order_status': 60,'include':'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
               .then(res => {
                 this.loading = false;
                 this.alreadyHandle = res.data;
@@ -1442,16 +1745,7 @@
                 this.$store.dispatch('currentPage', pg.current_page);
                 this.$store.commit('PER_PAGE', pg.per_page);
                 this.$store.commit('PAGE_TOTAL', pg.total);
-              }, err => {
-                if (err.response) {
-                  let arr = err.response.data.errors;
-                  let arr1 = [];
-                  for (let i in arr) {
-                    arr1.push(arr[i]);
-                  }
-                  this.$message.error(arr1.join(','));
-                }
-              });
+              }, err => {console.log(err);});
             break;
         }
       },
@@ -1461,35 +1755,13 @@
       },
       rightHandleClick(){},
       orderListRClick(row){
-        if(row['locker_id'] == 0){
-          this.newOpt[1].nClick = true;
-          this.newOpt[2].nClick = true;
-          this.newOpt[3].nClick = false;
-          this.newOpt[4].nClick = true;
-          this.newOpt[8].nClick = true;
-          this.newOpt[9].nClick = true;
-          this.newOpt[14].nClick = true;
-          if(row['order_status']=="已客审"){
-            this.newOpt[5].nClick = true;
-            this.newOpt[6].nClick = false;
-          }else{
-            this.newOpt[5].nClick = false;
-            this.newOpt[6].nClick = true;
-          }
-        }else{
-          this.newOpt[1].nClick = false;
-          this.newOpt[2].nClick = false;
-          this.newOpt[3].nClick = true;
-          this.newOpt[4].nClick = false;
-          this.newOpt[5].nClick = false;
-          this.newOpt[6].nClick = true;
-          this.newOpt[8].nClick = false;
-          this.newOpt[9].nClick = false;
-          this.newOpt[14].nClick = false;
-        }
         this.curRowId = row.id;
         this.curRowData = row;
-
+        if(row['order_status']=='已财审'){
+          this.newOpt[2].nClick = false;
+        }else{
+          this.newOpt[2].nClick = true;
+        }
       },
       orderDbClick(row){
         this.activeName = '1';
@@ -1541,7 +1813,6 @@
       },
       /*批量删除*/
       handleSelectionChange(val){
-        console.log(val);
         /*拿到id集合*/
         let delArr = [];
         val.forEach(selectedItem => {
@@ -1602,6 +1873,152 @@
         this.loading = true;
         this.fetchData();
       },
+      /*驳回*/
+      handleUnAudit(){
+        if(this.newOpt[0].nClick){
+          return
+        }else{
+          let id = this.checkboxId?this.checkboxId:this.curRowId;
+          if(this.curRowData['order_status']=="已跟单一审"){
+            this.$put(this.urls.merchandiserdepts+'/'+id+'/unaudit')
+              .then(()=>{
+                this.refresh();
+                this.$message({
+                  message: '驳回成功',
+                  type: 'success'
+                })
+              },err=>{
+                this.$message.error(err.response.data.message);
+              })
+          }else{
+            this.$message.error('跟单一审后才能驳回');
+          }
+        }
+      },
+      /*跟单一审*/
+      handleOneAudit(){
+        if(this.newOpt[1].nClick){
+          return
+        }else{
+          let id = this.checkboxId?this.checkboxId:this.curRowId;
+          this.$put(this.urls.merchandiserdepts+'/'+id+'/oneaudit')
+            .then(()=>{
+              this.refresh();
+              this.$message({
+                message: '跟单一审成功',
+                type: 'success'
+              })
+            },err=>{
+              this.$message.error(err.response.data.message);
+            })
+        }
+      },
+      /*货审*/
+      warehouseChg(val){
+        let id = this.checkboxId?this.checkboxId:this.curRowId;
+        this.$fetch(this.urls.merchandiserdepts+'/'+id+'/stock',{'warehouses_id':val})
+          .then(res=>{
+            this.cargoAuditTableVal = res['order_items'];
+          },err=>{console.log(err);})
+      },
+      handleCargoAudit(){
+        if(this.newOpt[2].nClick){
+          return
+        }else{
+          this.cargoAuditMask = true;
+          this.$fetch(this.urls.customerservicedepts+'/create')
+            .then(res=>{
+              this.apiData =res;
+              this.$store.dispatch('suppliers', '/suppliers');
+              let id = this.checkboxId?this.checkboxId:this.curRowId;
+              this.$fetch(this.urls.merchandiserdepts+'/'+id).then(res=>{
+                this.cargoAuditFormVal = res;
+                this.cargoAuditTableVal = res.order_items;
+              },err=>{
+                if (err.response) {
+                  let arr = err.response.data.errors;
+                  let arr1 = [];
+                  for (let i in arr) {
+                    arr1.push(arr[i]);
+                  }
+                  let str = arr1.join(',');
+                  this.$message.error(str);
+                }
+              })
+            },err=>{console.log(err);});
+        }
+      },
+      cargoAuditConfirm(){
+        let id = this.checkboxId?this.checkboxId:this.curRowId;
+        let formData = this.cargoAuditFormVal;
+        let submitData = {
+          logistics_id: formData.logistics_id,
+          freight_types_id: formData.freight_types_id,
+          expected_freight: formData.expected_freight,
+          distributions_id: formData.distributions_id,
+          distribution_methods_id: formData.distribution_methods_id,
+          deliver_goods_fee: formData.deliver_goods_fee,
+          move_upstairs_fee: formData.move_upstairs_fee,
+          installation_fee: formData.installation_fee,
+          total_distribution_fee: formData.total_distribution_fee,
+          distribution_phone: formData.distribution_phone,
+          distribution_types_id: formData.distribution_types_id,
+          express_fee: formData.express_fee,
+          warehouses_id: formData.warehouses_id
+        };
+        this.$put(this.urls.merchandiserdepts+'/'+id+'/cargoaudit',submitData)
+          .then(()=>{
+            this.refresh();
+            this.$message({
+              message: '货审成功',
+              type: 'success'
+            })
+            this.cargoAuditMask = false;
+          },err=>{
+            this.$message.error(err.response.data.message);
+          })
+      },
+      formChg(){
+        let formVal = this.cargoAuditFormVal;
+        formVal['total_distribution_fee']= (formVal['deliver_goods_fee']-0)+(formVal['move_upstairs_fee']-0)+(formVal['installation_fee']-0);
+      },
+      cargoAuditCancel(){
+        this.cargoAuditMask = false;
+        this.$message({
+          message:'已取消货审',
+          type: 'info'
+        })
+      },
+      /*退审*/
+      handleUnOneAudit(){
+        if(this.newOpt[3].nClick){
+          return
+        }else{
+          let id = this.checkboxId?this.checkboxId:this.curRowId;
+          this.$put(this.urls.merchandiserdepts+'/'+id+'/unoneaudit')
+            .then(()=>{
+              this.refresh();
+              this.$message({
+                message: '跟单一审退审成功',
+                type: 'success'
+              })
+            },err=>{
+              this.$message.error(err.response.data.message);
+            })
+        }
+      },
+      /*页码*/
+      handlePagChg(page){
+        this.$fetch(this.urls.merchandiserdepts+'?page='+page,{include:'shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems.combination.productComponents,orderItems.product,businessPersonnel,locker,paymentDetails.paymentMethod,paymentDetails.order'})
+          .then(res=>{
+            if(this.leftTopActiveName == '0'){
+              this.orderListData = res.data;
+            }else{
+              this.alreadyHandle = res.data;
+            }
+          })
+      },
+
     },
     mounted() {
       this.fetchData();
