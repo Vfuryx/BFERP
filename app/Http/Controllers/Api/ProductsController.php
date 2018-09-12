@@ -170,7 +170,7 @@ class ProductsController extends Controller
      *                          "created_at": "2018-08-13 11:55:43",
      *                          "updated_at": "2018-08-13 11:55:43"
      *                      }
-*    *                  }
+     *                  }
      *              },
      *              "productComponents": {
      *                  "data": {}

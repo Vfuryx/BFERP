@@ -17,7 +17,7 @@ class PaymentDetailRequest extends FormRequest
             case 'POST':
                 return [
                     'payment_details.*.payment_methods_id' => [
-                        'integer',
+                        'required','integer',
                         Rule::exists('payment_methods', 'id')->where(function ($query) {
                             $query->where('status', 1);
                         }),
@@ -57,6 +57,7 @@ class PaymentDetailRequest extends FormRequest
             'payment_details.*.id.integer' => '支付明细id必须为int类型',
             'payment_details.*.id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'payment_details.*.payment_methods_id.required' => '支付方式id必填',
             'payment_details.*.payment_methods_id.integer' => '支付方式id必须为int类型',
             'payment_details.*.payment_methods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 

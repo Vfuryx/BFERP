@@ -13708,7 +13708,7 @@ FORMAT: 1A
                 }
             }
 
-## 更新支付明细 [PATCH /api/paymentdetails[?include=order,paymentMethod]]
+## 更新支付明细 [PATCH /api/paymentdetails/:id[?include=order,paymentMethod]]
 
 
 + Parameters
@@ -13784,7 +13784,7 @@ FORMAT: 1A
 # warehousingdepts [/api]
 仓储部资源
 
-## 获取所有仓储部订单 [GET /api/warehousingdepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
+## 获取仓储部所有订单 [GET /api/warehousingdepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]]
 
 
 + Parameters
@@ -13890,7 +13890,7 @@ FORMAT: 1A
                 }
             }
 
-## 显示仓储修改 [GET /api/warehousingdepts/:id[?include=logistic,distribution]]
+## 显示单条仓储订单 [GET /api/warehousingdepts/:id[?include=logistic,distribution]]
 
 
 + Response 404 (application/json)
@@ -13943,8 +13943,32 @@ FORMAT: 1A
                 }
             }
 
-## 仓储修改 [GET /api/warehousingdepts/:id]
+## 仓储修改 [PATCH /api/warehousingdepts/:id]
 
+
++ Parameters
+    + logistics_id: (integer, optional) - 物流id
+        + Default: all
+    + logistics_sn: (string, optional) - 物流单号
+        + Default: all
+    + actual_freight: (numeric, optional) - 实际运费
+        + Default: all
+    + distributions_id: (integer, optional) - 配送id
+        + Default: all
+    + distribution_phone: (string, optional) - 配送电话
+        + Default: all
+    + deliver_goods_fee: (numeric, optional) - 送货费用
+        + Default: all
+    + move_upstairs_fee: (numeric, optional) - 搬楼费用
+        + Default: all
+    + installation_fee: (numeric, optional) - 安装费
+        + Default: all
+    + total_distribution_fee: (numeric, optional) - 配送总计
+        + Default: all
+    + receiver_name: (string, optional) - 收货人
+        + Default: all
+    + receiver_mobile: (string, optional) - 收货人手机
+        + Default: all
 
 + Response 404 (application/json)
     + Body
@@ -14020,6 +14044,22 @@ FORMAT: 1A
 
             {
                 "message": "仓储发货出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 仓储出库退回 [PUT /api/warehousingdepts/:id/stockoutunaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "仓储出库退回错",
                 "status_code": 422
             }
 
@@ -15893,6 +15933,419 @@ FORMAT: 1A
 
             {
                 "message": "无法售后一审退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后二审 [PUT /api/aftersalereturns/:id/twoaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法售后一审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 售后二审退审 [PUT /api/aftersalereturns/:id/untwoaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法售后一审退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# warehousingreturns [/api]
+仓储退货资源
+
+## 获取所有仓储退货 [GET /api/warehousingreturns{?status}[&include=]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+    + order_status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    []
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 显示单条仓储退货 [GET /api/warehousingreturns/:id[?include=]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            []
+
+## 仓储审核 [PUT /api/warehousingreturns/:id/whaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法仓储审核",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 仓储审核退审 [PUT /api/warehousingreturns/:id/whunaudit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法仓储审核退审",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# receipttypes [/api]
+收货方式资源
+
+## 获取所有收货方式 [GET /api/paymentmethods{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "收货方式",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:32",
+                        "updated_at": "2018-06-14 16:55:32"
+                    },
+                    {
+                        "id": 2,
+                        "name": "收货方式2",
+                        "status": true,
+                        "created_at": "2018-06-14 16:55:36",
+                        "updated_at": "2018-06-14 16:55:36"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 2,
+                        "count": 2,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/paymentmethods?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增收货方式 [POST /api/paymentmethods]
+
+
++ Parameters
+    + name: (string, required) - 收货方式名称
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "收货方式名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "收货方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:40",
+                "updated_at": "2018-06-14 16:55:40",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条收货方式 [GET /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "收货方式",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:55:32"
+            }
+
+## 修改收货方式 [PATCH /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "收货方式名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "收货方式10",
+                "status": true,
+                "created_at": "2018-06-14 16:55:32",
+                "updated_at": "2018-06-14 16:58:55"
+            }
+
+## 删除收货方式 [DELETE /api/paymentmethods/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组收货方式 [DELETE /api/paymentmethods]
+
+
++ Parameters
+    + ids: (string, required) - 收货方式id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组收货方式状态 [PUT /api/paymentmethods/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 收货方式id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# stocksyncreturn [/api]
+库存同步资源
+
+## 获取所有库存同步 [GET /api/stocksyncreturn{?status}[&include=]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+    + order_status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    []
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 8,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": null
+                    }
+                }
+            }
+
+## 显示单条库存同步 [GET /api/stocksyncreturn/:id[?include=]]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            []
+
+## 库存提交 [PUT /api/stocksyncreturn/:id/stocksubmit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法库存提交",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 库存同步 [PUT /api/stocksyncreturn/:id/stocksync]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无法库存同步",
                 "status_code": 422
             }
 

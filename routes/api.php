@@ -733,6 +733,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.warehousingdepts.update');
         $api->put('warehousingdepts/{order}/stockout', 'WarehousingDepartmentsController@isStockOut')
             ->name('api.warehousingdepts.isstockout');
+        $api->put('warehousingdepts/{order}/stockoutunaudit', 'WarehousingDepartmentsController@isStockOutUnAudit')
+            ->name('api.warehousingdepts.isstockoutunaudit');
         $api->put('warehousingdepts/{order}/stockouttocs', 'WarehousingDepartmentsController@isStockOutToCS')
             ->name('api.warehousingdepts.isstockouttocs');
 
@@ -853,12 +855,50 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.aftersalereturns.isoneaudit');
         $api->put('aftersalereturns/{returnorder}/unoneaudit', 'AfterSaleReturnsController@isUnOneAudit')
             ->name('api.aftersalereturns.isunoneaudit');
+        $api->put('aftersalereturns/{returnorder}/twoaudit', 'AfterSaleReturnsController@isTwoAudit')
+            ->name('api.aftersalereturns.istwoaudit');
+        $api->put('aftersalereturns/{returnorder}/untwoaudit', 'AfterSaleReturnsController@isUnTwoAudit')
+            ->name('api.aftersalereturns.isuntwoaudit');
 
+        //仓储退货
+        $api->get('warehousingreturns', 'WarehousingReturnsController@index')
+            ->name('api.warehousingreturns.index');
+        $api->get('warehousingreturns/{returnorder}', 'WarehousingReturnsController@show')
+            ->name('api.warehousingreturns.show');
+        $api->put('warehousingreturns/{returnorder}/whaudit', 'WarehousingReturnsController@isWhAudit')
+            ->name('api.warehousingreturns.iswhaudit');
+        $api->put('warehousingreturns/{returnorder}/whunaudit', 'WarehousingReturnsController@isWhUnAudit')
+            ->name('api.warehousingreturns.iswhunaudit');
+
+        //收货方式
+        $api->get('receipttypes', 'ReceiptTypesController@index')
+            ->name('api.receipttypes.index');
+        $api->get('receipttypes/{receipttype}', 'ReceiptTypesController@show')
+            ->name('api.receipttypes.show');
+        $api->post('receipttypes', 'ReceiptTypesController@store')
+            ->name('api.receipttypes.store');
+        $api->patch('receipttypes/{receipttype}', 'ReceiptTypesController@update')
+            ->name('api.receipttypes.update');
+        $api->delete('receipttypes/{receipttype}', 'ReceiptTypesController@destroy')
+            ->name('api.receipttypes.destroy');
+        $api->delete('receipttypes', 'ReceiptTypesController@destroybyids')
+            ->name('api.receipttypes.destroybyids');
+        $api->put('receipttypes/editstatus', 'ReceiptTypesController@editStatusByIds')
+            ->name('api.receipttypes.editstatusbyids');
+
+        //库存同步
+        $api->get('stocksyncreturn', 'StockSyncReturnsController@index')
+            ->name('api.stocksyncreturn.index');
+        $api->get('stocksyncreturn/{returnorder}', 'StockSyncReturnsController@show')
+            ->name('api.stocksyncreturn.show');
+        $api->put('stocksyncreturn/{returnorder}/stocksubmit', 'StockSyncReturnsController@isStockSubmit')
+            ->name('api.stocksyncreturn.isstocksubmit');
+        $api->put('stocksyncreturn/{returnorder}/stocksync', 'StockSyncReturnsController@isStockSync')
+            ->name('api.stocksyncreturn.isstocksync');
 
         //退货子单
         $api->delete('returnorderitems/{returnorderitem}', 'ReturnOrderItemsController@destroy')
             ->name('api.returnorderitems.destroy');
-
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

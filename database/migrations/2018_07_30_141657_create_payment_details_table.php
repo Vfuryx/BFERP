@@ -18,8 +18,8 @@ class CreatePaymentDetailsTable extends Migration
             $table->unsignedInteger('orders_id')->comment('订单id');
             $table->unsignedInteger('payment_methods_id')->comment('支付方式');
             $table->decimal('payment',10,2)->default(0.00)->comment('支付金额');
-            $table->unsignedBigInteger('taobao_tid')->default(0)->comment('交易号（获取淘宝的交易编号）');
-            $table->unsignedBigInteger('taobao_oid')->default(0)->comment('子订单编号（获取淘宝的子订订单号）');
+            $table->string('taobao_tid')->default('')->comment('交易号（获取淘宝的交易编号）');
+            $table->string('taobao_oid')->default('')->comment('子订单编号（获取淘宝的子订订单号）');
             $table->timestamp('pay_time')->nullable()->comment('付款时间');
             $table->string('remark')->default('')->comment('备注');
             $table->timestamps();

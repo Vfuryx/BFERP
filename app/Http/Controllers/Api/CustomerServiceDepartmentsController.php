@@ -158,7 +158,7 @@ class CustomerServiceDepartmentsController extends Controller
      * @GET("/customerservicedepts/create")
      * @Versions({"v1"})
      * 
-* @Response(200, body={
+     * @Response(200, body={
      *       "data": {
      *          "warehouse": {
      *              {
@@ -721,7 +721,7 @@ class CustomerServiceDepartmentsController extends Controller
     ){
         $data[] = $customerServiceDepartmentRequset->validated();
         $data[] = $customerServiceDepartmentRequset->input('order_items');
-        $data[] = $paymentDetailRequest->validated()['payment_details'];
+        $data[] = $paymentDetailRequest->validated()['payment_details'] ?? null;
 
         $id = DB::transaction(function () use (
             $data,

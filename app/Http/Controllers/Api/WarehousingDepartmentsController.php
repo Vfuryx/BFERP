@@ -24,7 +24,7 @@ class WarehousingDepartmentsController extends Controller
     const PerPage = 8;
 
     /**
-     * 获取所有仓储部订单
+     * 获取仓储部所有订单
      *
      * @Get("/warehousingdepts{?status}[&include=shop,logistic,freightType,distribution,distributionMethod,distributionType,takeDeliveryGoodsWay,customerType,paymentMethod,warehouses,orderItems,businessPersonnel,locker,paymentDetails]")
      * @Versions({"v1"})
@@ -149,7 +149,7 @@ class WarehousingDepartmentsController extends Controller
 
 
     /**
-     * 显示仓储修改
+     * 显示单条仓储订单
      *
      * @Get("/warehousingdepts/:id[?include=logistic,distribution]")
      * @Versions({"v1"})
@@ -210,8 +210,21 @@ class WarehousingDepartmentsController extends Controller
     /**
      * 仓储修改
      *
-     * @Get("/warehousingdepts/:id")
+     * @PATCH("/warehousingdepts/:id")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("logistics_id", type="integer", description="物流id", required=false, default="all"),
+     *      @Parameter("logistics_sn", description="物流单号", required=false, default="all"),
+     *      @Parameter("actual_freight", type="numeric", description="实际运费", required=false, default="all"),
+     *      @Parameter("distributions_id", type="integer", description="配送id", required=false, default="all"),
+     *      @Parameter("distribution_phone", description="配送电话", required=false, default="all"),
+     *      @Parameter("deliver_goods_fee", type="numeric", description="送货费用", required=false, default="all"),
+     *      @Parameter("move_upstairs_fee", type="numeric", description="搬楼费用", required=false, default="all"),
+     *      @Parameter("installation_fee", type="numeric", description="安装费", required=false, default="all"),
+     *      @Parameter("total_distribution_fee", type="numeric", description="配送总计", required=false, default="all"),
+     *      @Parameter("receiver_name", description="收货人", required=false, default="all"),
+     *      @Parameter("receiver_mobile", description="收货人手机", required=false, default="all"),
+     * })
      * @Transaction({
      *      @Response(404, body={
      *          "message": "No query results for model ",
@@ -309,6 +322,30 @@ class WarehousingDepartmentsController extends Controller
             !$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CARGO_AUDIT,
             '仓储退回客审出错',
             'stockOutToCS'
+        );
+    }
+
+
+    /**
+     * 仓储出库退回
+     *
+     * @PUT("/warehousingdepts/:id/stockoutunaudit")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "仓储出库退回错",
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function isStockOutUnAudit(Order $order)
+    {
+        return $this->traitAction(
+            $order,
+            !$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_STOCK_OUT,
+            '仓储出库退回出错',
+            'stockOutUnAudit'
         );
     }
 

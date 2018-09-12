@@ -80,7 +80,7 @@ class PaymentDetailsController extends Controller
 
     /**
      * 更新支付明细
-     * @Patch("/paymentdetails[?include=order,paymentMethod]")
+     * @Patch("/paymentdetails/:id[?include=order,paymentMethod]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("orders_id", type="integer", description="订单id", required=true),

@@ -25,7 +25,8 @@ class Order extends Model
     const ORDER_RETURN_FD_TO_ONE_AUDIT = 51; //财务驳回跟单一审
     const ORDER_RETURN_FD_AUDIT = 52; //退回财审
     const ORDER_RETURN_CARGO_AUDIT = 61;
-    const ORDER_RETURN_STOCK_OUT_TO_CS = 71; //打印退回客审
+    const ORDER_RETURN_STOCK_OUT_AUDIT = 71; //发货退审
+    const ORDER_RETURN_STOCK_OUT_TO_CS = 72; //打印退回客审
 
     //订单来源
     const ORDER_SOURCE_SYSTEM = 'system';
@@ -62,6 +63,7 @@ class Order extends Model
         self::ORDER_RETURN_FD_TO_ONE_AUDIT => '驳回跟单一审',
         self::ORDER_RETURN_FD_AUDIT => '退回财审',
         self::ORDER_RETURN_CARGO_AUDIT => '退回货审',
+        self::ORDER_RETURN_STOCK_OUT_AUDIT => '发货退审',
         self::ORDER_RETURN_STOCK_OUT_TO_CS => '打印退回客审',
     ];
 
@@ -81,6 +83,7 @@ class Order extends Model
         self::ORDER_RETURN_FD_TO_ONE_AUDIT => '财务驳回跟单一审',
         self::ORDER_RETURN_FD_AUDIT => '财务退回财审',
         self::ORDER_RETURN_CARGO_AUDIT => '退回货审',
+        self::ORDER_RETURN_STOCK_OUT_AUDIT => '发货退审',
         self::ORDER_RETURN_STOCK_OUT_TO_CS => '出货打印退回客审',
     ];
 
@@ -312,6 +315,18 @@ class Order extends Model
         $this->order_status = self::ORDER_STATUS_NEW;
         $this->save();
     }
+
+
+    /**
+     * 仓储发货退审
+     * @return bool
+     */
+    public function stockOutUnAudit()
+    {
+        $this->order_status = self::ORDER_STATUS_CARGO_AUDIT;
+        $this->save();
+    }
+
 
     /**
      * 是否缺货
