@@ -14099,8 +14099,8 @@ FORMAT: 1A
                         "refund_amount": "10.00",
                         "transaction_sn": "12345645",
                         "refund_reasons_id": 1,
-                        "seller_nick": "卖家昵称",
-                        "seller_name": "卖家昵称",
+                        "buyer_nick": "买家昵称",
+                        "buyer_name": "买家名称",
                         "payment": "10.00",
                         "business_remark": "业务备注",
                         "as_remark": "",
@@ -14146,8 +14146,8 @@ FORMAT: 1A
     + refund_amount: (numeric, optional) - 退款金额
     + transaction_sn: (string, optional) - 交易单号
     + refund_reasons_id: (integer, required) - 退款原因id
-    + seller_nick: (string, optional) - 卖家昵称
-    + seller_name: (string, optional) - 卖家名称
+    + buyer_nick: (string, optional) - 买家昵称
+    + buyer_name: (string, optional) - 买家名称
     + payment: (numeric, optional) - 支付金额
     + business_remark: (string, optional) - 业务备注
     + refund_description: (string, optional) - 退款说明
@@ -14168,8 +14168,8 @@ FORMAT: 1A
                 "refund_amount": 10,
                 "transaction_sn": "12345645",
                 "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": 10,
                 "business_remark": "业务备注",
                 "refund_description": "退款说明",
@@ -14208,8 +14208,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "business_remark": "业务备注",
                 "as_remark": "",
@@ -14262,8 +14262,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "business_remark": "业务备注",
                 "as_remark": "",
@@ -14297,8 +14297,8 @@ FORMAT: 1A
     + refund_amount: (numeric, optional) - 退款金额
     + transaction_sn: (string, optional) - 交易单号
     + refund_reasons_id: (integer, optional) - 退款原因id
-    + seller_nick: (string, optional) - 卖家昵称
-    + seller_name: (string, optional) - 卖家名称
+    + buyer_nick: (string, optional) - 买家昵称
+    + buyer_name: (string, optional) - 买家名称
     + payment: (numeric, optional) - 支付金额
     + business_remark: (string, optional) - 业务备注
     + refund_description: (string, optional) - 退款说明
@@ -14900,8 +14900,8 @@ FORMAT: 1A
                         "refund_amount": "10.00",
                         "transaction_sn": "12345645",
                         "return_reasons_id": 1,
-                        "seller_nick": "卖家昵称",
-                        "seller_name": "卖家昵称",
+                        "buyer_nick": "买家昵称",
+                        "buyer_name": "买家名称",
                         "payment": "10.00",
                         "person_liable": "责任人",
                         "liable_fee": "10",
@@ -14966,8 +14966,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",
@@ -15046,8 +15046,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",
@@ -15100,8 +15100,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",
@@ -15227,8 +15227,8 @@ FORMAT: 1A
                         "refund_amount": "10.00",
                         "transaction_sn": "12345645",
                         "return_reasons_id": 1,
-                        "seller_nick": "卖家昵称",
-                        "seller_name": "卖家昵称",
+                        "buyer_nick": "买家昵称",
+                        "buyer_name": "买家名称",
                         "payment": "10.00",
                         "person_liable": "责任人",
                         "liable_fee": "10",
@@ -15293,8 +15293,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",
@@ -15369,8 +15369,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",
@@ -15423,8 +15423,8 @@ FORMAT: 1A
                 "refund_amount": "10.00",
                 "transaction_sn": "12345645",
                 "return_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
+                "buyer_nick": "买家昵称",
+                "buyer_name": "买家名称",
                 "payment": "10.00",
                 "person_liable": "责任人",
                 "liable_fee": "10",

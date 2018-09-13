@@ -52,8 +52,8 @@ class CustomerServiceRefundRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'seller_nick' => 'string|max:255',
-                    'seller_name' => 'string|max:255',
+                    'buyer_nick' => 'string|max:255',
+                    'buyer_name' => 'string|max:255',
                     'payment' => 'numeric',
                     'person_liable' => 'string|max:255',
                     'business_remark' => 'string|max:255',
@@ -94,8 +94,8 @@ class CustomerServiceRefundRequest extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'seller_nick' => 'string|max:255',
-                    'seller_name' => 'string|max:255',
+                    'buyer_nick' => 'string|max:255',
+                    'buyer_name' => 'string|max:255',
                     'payment' => 'numeric',
                     'person_liable' => 'string|max:255',
                     'business_remark' => 'string|max:255',
@@ -144,11 +144,11 @@ class CustomerServiceRefundRequest extends FormRequest
             'refund_reasons_id.string' => '退款原因id必须string类型',
             'refund_reasons_id.max' => '退款原因id最大长度为255',
 
-            'seller_nick.string' => '卖家昵称必须string类型',
-            'seller_nick.max' => '卖家昵称最大长度为255',
+            'buyer_nick.string' => '买家昵称必须string类型',
+            'buyer_nick.max' => '买家昵称最大长度为255',
 
-            'seller_name.string' => '卖家名称必须string类型',
-            'seller_name.max' => '卖家名称最大长度为255',
+            'buyer_name.string' => '买家名称必须string类型',
+            'buyer_name.max' => '买家名称最大长度为255',
 
             'payment.numeric' => '支付金额必须是数字',
 
@@ -162,7 +162,7 @@ class CustomerServiceRefundRequest extends FormRequest
             'refund_description.max' => '退款说明最大长度为255',
 
             'refund_description.required' => '状态必须string类型',
-            'refund_description.boolean' => '状态必须string类型',
+            'refund_description.boolean' => '状态必须布尔类型',
 
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
@@ -183,8 +183,8 @@ class CustomerServiceRefundRequest extends FormRequest
             'refund_amount' => '退款金额',
             'transaction_sn' => '交易单号',
             'refund_reasons_id' => '退款原因id',
-            'seller_nick' => '卖家昵称',
-            'seller_name' => '卖家名称',
+            'buyer_nick' => '买家昵称',
+            'buyer_name' => '买家名称',
             'payment' => '支付金额',
             'person_liable' => '责任人',
             'business_remark' => '业务备注',

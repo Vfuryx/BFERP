@@ -35,7 +35,7 @@ class RefundOrder extends Model
     protected $fillable = [
         'order_sn', 'payment_methods_id', 'time_out_at', 'shops_id', 'account',
         'refund_payment_methods_id', 'bank', 'address', 'refund_amount', 'transaction_sn',
-        'refund_reasons_id', 'seller_nick', 'seller_name', 'payment', 'person_liable',
+        'refund_reasons_id', 'buyer_nick', 'buyer_name', 'payment', 'person_liable',
         'liable_fee', 'undertaker', 'business_remark', 'as_remark', 'f_remark',
         'refund_description', 'taobao_refund_status', 'status',
     ];
@@ -154,11 +154,6 @@ class RefundOrder extends Model
         $this->refund_order_status = self::REFUND_STATUS_NEW;
         $this->cs_audit_at = null;
         $this->save();
-    }
-
-    public function getRefundOrderStatusAttribute($value)
-    {
-        return self::$refundStatusMap[$value] ?? $value;
     }
 
     /**
@@ -280,6 +275,13 @@ class RefundOrder extends Model
 
         return $no;
     }
+
+
+    public function getRefundOrderStatusAttribute($value)
+    {
+        return self::$refundStatusMap[$value] ?? $value;
+    }
+
 
     public function paymentMethod()
     {
