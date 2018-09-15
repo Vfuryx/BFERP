@@ -274,7 +274,7 @@ class WarehousingDepartmentsController extends Controller
     {
         //是否已经货审
         if(!$order->status || $order->getOriginal('order_status') != $order::ORDER_STATUS_CARGO_AUDIT)
-            throw new ResourceException('未货审');
+            throw new ResourceException('无法修改订单');
 
         return $this->traitUpdate($warehousingDepartmentRequest, $order, self::TRANSFORMER);
     }

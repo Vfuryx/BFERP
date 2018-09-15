@@ -15990,40 +15990,39 @@ FORMAT: 1A
             {
                 "data": [
                     {
-                        "id": 1,
-                        "refund_sn": "RA2018090110411131562",
-                        "order_sn": "12345645",
-                        "refund_order_status": "未处理",
-                        "order_source": "system",
-                        "payment_methods_id": 1,
-                        "time_out_at": "2018-08-31 00:00:00",
+                        "id": 2,
+                        "return_sn": "RT2018091517045055751",
+                        "return_order_status": "未处理",
                         "shops_id": 1,
-                        "account": "10",
+                        "orders_id": 4,
+                        "member_nick": "会员昵称1",
+                        "customer_name": "客户姓名1",
+                        "customer_phone": "123456",
+                        "customer_service_id": 1,
+                        "deposit": "10.00",
+                        "return_reasons_id": 1,
+                        "customer_address": "客户地址1",
+                        "is_scour": true,
+                        "expected_arrival_time": null,
+                        "payee": "收款人1",
+                        "refund_account": "退款账号",
                         "refund_payment_methods_id": 1,
-                        "bank": "开户银行",
-                        "address": "开户地址",
                         "refund_amount": "10.00",
-                        "transaction_sn": "12345645",
-                        "refund_reasons_id": 1,
-                        "seller_nick": "卖家昵称",
-                        "seller_name": "卖家昵称",
-                        "payment": "10.00",
-                        "business_remark": "业务备注",
+                        "logistics_id": 0,
+                        "freight_types_id": 0,
+                        "freight": "0.00",
+                        "logistics_sn": "",
+                        "take_delivery_goods_address": "",
+                        "logistics_remark": "",
+                        "follow_up": "跟进记录",
+                        "distributions_id": 1,
+                        "pulling_cost": "10.00",
+                        "person_liable_id": 0,
+                        "liable_fee": "0.00",
                         "as_remark": "",
-                        "f_remark": "",
-                        "refund_description": "退款说明",
-                        "taobao_refund_status": "",
-                        "creator_id": 1,
-                        "business_personnel_id": 0,
-                        "cs_audit_at": null,
-                        "locker_id": 0,
-                        "after_sales_id": 0,
-                        "as_audit_at": null,
-                        "financial_id": 0,
-                        "f_audit_at": null,
                         "status": true,
-                        "created_at": "2018-09-01 10:41:11",
-                        "updated_at": "2018-09-01 10:41:11"
+                        "created_at": "2018-09-15 17:04:50",
+                        "updated_at": "2018-09-15 17:04:50"
                     }
                 ],
                 "meta": {
@@ -16042,44 +16041,51 @@ FORMAT: 1A
 
 
 + Parameters
-    + order_sn: (string, optional) - 系统单号
-    + payment_methods_id: (integer, required) - 支付方式id
-    + time_out_at: (datetime, required) - 超时时间
-    + shops_id: (integer, optional) - 还款账号
-    + payment_methods_id: (integer, required) - 还款支付方式id
-    + bank: (string, optional) - 开户银行
-    + address: (string, optional) - 开户地址
+    + orders_id: (integer, required) - 订单id
+    + shops_id: (integer, required) - 店铺id
+    + member_nick: (string, required) - 会员昵称
+    + customer_name: (string, required) - 客户姓名
+    + customer_phone: (string, required) - 客户电话
+    + deposit: (numeric, required) - 押金
+    + return_reasons_id: (integer, required) - 退货原因id
+    + customer_address: (string, required) - 客户地址
+    + is_scour: (boolean, optional) - 是否冲款
+    + payee: (string, optional) - 收款人
+    + refund_account: (string, optional) - 退款账号
+    + refund_payment_methods_id: (integer, required) - 退款支付方式id
     + refund_amount: (numeric, optional) - 退款金额
-    + transaction_sn: (string, optional) - 交易单号
-    + refund_reasons_id: (integer, required) - 退款原因id
-    + seller_nick: (string, optional) - 卖家昵称
-    + seller_name: (string, optional) - 卖家名称
-    + payment: (numeric, optional) - 支付金额
-    + business_remark: (string, optional) - 业务备注
-    + refund_description: (string, optional) - 退款说明
+    + follow_up: (string, optional) - 跟进记录
+    + distributions_id: (integer, required) - 配送公司id
+    + pulling_cost: (numeric, optional) - 拉货费用
     + status: (boolean, optional) - 状态
+    + return_order_items[0][order_items_id]: (integer, optional) - 子订单id
+    + return_order_items[0][suppliers_id]: (integer, optional) - 供应商id
+    + return_order_items[0][is_damage]: (boolean, optional) - 是否损坏
 
 + Request (application/json)
     + Body
 
             {
-                "order_sn": "12345645",
-                "payment_methods_id": 1,
-                "time_out_at": "2018-8-31 00:00:00",
+                "orders_id": 4,
                 "shops_id": 1,
-                "account": 10,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "deposit": 10,
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "payee": "收款人1",
+                "refund_account": "退款账号",
                 "refund_payment_methods_id": 1,
-                "bank": "开户银行",
-                "address": "开户地址",
                 "refund_amount": 10,
-                "transaction_sn": "12345645",
-                "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
-                "payment": 10,
-                "business_remark": "业务备注",
-                "refund_description": "退款说明",
-                "status": true
+                "follow_up": "跟进记录",
+                "distributions_id": 1,
+                "pulling_cost": 10,
+                "status": true,
+                "return_order_items[0][order_items_id]": 1,
+                "return_order_items[0][suppliers_id]": 1,
+                "return_order_items[0][is_damage]": true
             }
 
 + Response 422 (application/json)
@@ -16099,46 +16105,45 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 1,
-                "refund_sn": "RA2018090110411131562",
-                "order_sn": "12345645",
-                "refund_order_status": "未处理",
-                "order_source": "system",
-                "payment_methods_id": 1,
-                "time_out_at": "2018-08-31 00:00:00",
+                "id": 2,
+                "return_sn": "RT2018091517045055751",
+                "return_order_status": "未处理",
                 "shops_id": 1,
-                "account": "10",
+                "orders_id": 4,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "customer_service_id": 1,
+                "deposit": "10.00",
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "expected_arrival_time": null,
+                "payee": "收款人1",
+                "refund_account": "退款账号",
                 "refund_payment_methods_id": 1,
-                "bank": "开户银行",
-                "address": "开户地址",
                 "refund_amount": "10.00",
-                "transaction_sn": "12345645",
-                "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
-                "payment": "10.00",
-                "business_remark": "业务备注",
+                "logistics_id": 0,
+                "freight_types_id": 0,
+                "freight": "0.00",
+                "logistics_sn": "",
+                "take_delivery_goods_address": "",
+                "logistics_remark": "",
+                "follow_up": "跟进记录",
+                "distributions_id": 1,
+                "pulling_cost": "10.00",
+                "person_liable_id": 0,
+                "liable_fee": "0.00",
                 "as_remark": "",
-                "f_remark": "",
-                "refund_description": "退款说明",
-                "taobao_refund_status": "",
-                "creator_id": 1,
-                "business_personnel_id": 0,
-                "cs_audit_at": null,
-                "locker_id": 0,
-                "after_sales_id": 0,
-                "as_audit_at": null,
-                "financial_id": 0,
-                "f_audit_at": null,
                 "status": true,
-                "created_at": "2018-09-01 10:41:11",
-                "updated_at": "2018-09-01 10:41:11",
+                "created_at": "2018-09-15 17:04:50",
+                "updated_at": "2018-09-15 17:04:50",
                 "meta": {
                     "status_code": "201"
                 }
             }
 
-## 显示单条客服退货 [GET /api/customerservicereturns/:id[?include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+## 显示单条客服退货 [GET /api/customerservicereturns/:id[?include=]]
 
 
 + Response 404 (application/json)
@@ -16153,67 +16158,93 @@ FORMAT: 1A
     + Body
 
             {
-                "id": 1,
-                "refund_sn": "RA2018090110411131562",
-                "order_sn": "12345645",
-                "refund_order_status": "未处理",
-                "order_source": "system",
-                "payment_methods_id": 1,
-                "time_out_at": "2018-08-31 00:00:00",
+                "id": 2,
+                "return_sn": "RT2018091517045055751",
+                "return_order_status": "未处理",
                 "shops_id": 1,
-                "account": "10",
+                "orders_id": 4,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "customer_service_id": 1,
+                "deposit": "10.00",
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "expected_arrival_time": null,
+                "payee": "收款人1",
+                "refund_account": "退款账号",
                 "refund_payment_methods_id": 1,
-                "bank": "开户银行",
-                "address": "开户地址",
                 "refund_amount": "10.00",
-                "transaction_sn": "12345645",
-                "refund_reasons_id": 1,
-                "seller_nick": "卖家昵称",
-                "seller_name": "卖家昵称",
-                "payment": "10.00",
-                "business_remark": "业务备注",
+                "logistics_id": 0,
+                "freight_types_id": 0,
+                "freight": "0.00",
+                "logistics_sn": "",
+                "take_delivery_goods_address": "",
+                "logistics_remark": "",
+                "follow_up": "跟进记录",
+                "distributions_id": 1,
+                "pulling_cost": "10.00",
+                "person_liable_id": 0,
+                "liable_fee": "0.00",
                 "as_remark": "",
-                "f_remark": "",
-                "refund_description": "退款说明",
-                "taobao_refund_status": "",
-                "creator_id": 1,
-                "business_personnel_id": 0,
-                "cs_audit_at": null,
-                "locker_id": 0,
-                "after_sales_id": 0,
-                "as_audit_at": null,
-                "financial_id": 0,
-                "f_audit_at": null,
                 "status": true,
-                "created_at": "2018-09-01 10:41:11",
-                "updated_at": "2018-09-01 10:41:11"
+                "created_at": "2018-09-15 17:04:50",
+                "updated_at": "2018-09-15 17:04:50"
             }
 
-## 修改客服退货 [PATCH /api/customerservicereturns/:id[?include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distributions,returnOrderItem]]
+## 修改客服退货 [PATCH /api/customerservicereturns/:id[?include=]]
 
 
 + Parameters
-    + order_sn: (string, optional) - 系统单号
-    + payment_methods_id: (integer, optional) - 支付方式id
-    + time_out_at: (datetime, optional) - 超时时间
-    + shops_id: (integer, optional) - 还款账号
-    + payment_methods_id: (integer, optional) - 还款支付方式id
-    + bank: (string, optional) - 开户银行
-    + address: (string, optional) - 开户地址
+    + orders_id: (integer, required) - 订单id
+    + shops_id: (integer, required) - 店铺id
+    + member_nick: (string, required) - 会员昵称
+    + customer_name: (string, required) - 客户姓名
+    + customer_phone: (string, required) - 客户电话
+    + deposit: (numeric, required) - 押金
+    + return_reasons_id: (integer, required) - 退货原因id
+    + customer_address: (string, required) - 客户地址
+    + is_scour: (boolean, optional) - 是否冲款
+    + payee: (string, optional) - 收款人
+    + refund_account: (string, optional) - 退款账号
+    + refund_payment_methods_id: (integer, required) - 退款支付方式id
     + refund_amount: (numeric, optional) - 退款金额
-    + transaction_sn: (string, optional) - 交易单号
-    + refund_reasons_id: (integer, optional) - 退款原因id
-    + seller_nick: (string, optional) - 卖家昵称
-    + seller_name: (string, optional) - 卖家名称
-    + payment: (numeric, optional) - 支付金额
-    + business_remark: (string, optional) - 业务备注
-    + refund_description: (string, optional) - 退款说明
+    + follow_up: (string, optional) - 跟进记录
+    + distributions_id: (integer, required) - 配送公司id
+    + pulling_cost: (numeric, optional) - 拉货费用
     + status: (boolean, optional) - 状态
+    + return_order_items[0][id]: (integer, optional) - 退货子单id
+    + return_order_items[0][order_items_id]: (integer, optional) - 子订单id
+    + return_order_items[0][suppliers_id]: (integer, optional) - 供应商id
+    + return_order_items[0][is_damage]: (boolean, optional) - 是否损坏
 
 + Request (application/json)
     + Body
 
-            []
+            {
+                "orders_id": 4,
+                "shops_id": 1,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "deposit": 10,
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "payee": "收款人1",
+                "refund_account": "退款账号",
+                "refund_payment_methods_id": 1,
+                "refund_amount": 10,
+                "follow_up": "跟进记录",
+                "distributions_id": 1,
+                "pulling_cost": 10,
+                "status": true,
+                "return_order_items[0][id]": 1,
+                "return_order_items[0][order_items_id]": 1,
+                "return_order_items[0][suppliers_id]": 1,
+                "return_order_items[0][is_damage]": true
+            }
 
 + Response 404 (application/json)
     + Body
@@ -16239,7 +16270,41 @@ FORMAT: 1A
 + Response 201 (application/json)
     + Body
 
-            []
+            {
+                "id": 2,
+                "return_sn": "RT2018091517045055751",
+                "return_order_status": "未处理",
+                "shops_id": 1,
+                "orders_id": 4,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "customer_service_id": 1,
+                "deposit": "10.00",
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "expected_arrival_time": null,
+                "payee": "收款人1",
+                "refund_account": "退款账号",
+                "refund_payment_methods_id": 1,
+                "refund_amount": "10.00",
+                "logistics_id": 0,
+                "freight_types_id": 0,
+                "freight": "0.00",
+                "logistics_sn": "",
+                "take_delivery_goods_address": "",
+                "logistics_remark": "",
+                "follow_up": "跟进记录",
+                "distributions_id": 1,
+                "pulling_cost": "10.00",
+                "person_liable_id": 0,
+                "liable_fee": "0.00",
+                "as_remark": "",
+                "status": true,
+                "created_at": "2018-09-15 17:04:50",
+                "updated_at": "2018-09-15 17:04:50"
+            }
 
 ## 删除客服退货 [DELETE /api/customerservicereturns/:id]
 
@@ -16315,6 +16380,34 @@ FORMAT: 1A
 
 ## 客服二审 [PUT /api/customerservicereturns/:id/twoaudit]
 
+
++ Parameters
+    + expected_arrival_time: (date, required) - 预计到货时间
+    + logistics_id: (integer, required) - 物流id
+    + freight_types_id: (integer, required) - 运费类型id
+    + freight: (numeric, required) - 运费
+    + logistics_sn: (string, required) - 物流单号
+    + take_delivery_goods_address: (string, required) - 提货地址
+    + logistics_remark: (string, optional) - 物流备注
+    + follow_up: (string, optional) - 跟进记录
+    + return_order_items[0][id]: (integer, required) - 退货子单id
+    + return_order_items[0][suppliers_id]: (integer, required) - 供应商id
+
++ Request (application/json)
+    + Body
+
+            {
+                "expected_arrival_time": "2018-9-7",
+                "logistics_id": 1,
+                "freight_types_id": 1,
+                "freight": 10,
+                "logistics_sn": "物流单号",
+                "take_delivery_goods_address": "提货地址",
+                "logistics_remark": "物流备注",
+                "follow_up": "跟进记录",
+                "return_order_items[0][id]": 1,
+                "return_order_items[0][suppliers_id]": 1
+            }
 
 + Response 422 (application/json)
     + Body
@@ -16399,6 +16492,20 @@ FORMAT: 1A
 ## 售后二审 [PUT /api/aftersalereturns/:id/twoaudit]
 
 
++ Parameters
+    + person_liable_id: (integer, required) - 责任人
+    + liable_fee: (numeric, required) - 责任金额
+    + as_remark: (string, required) - 售后备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "person_liable_id": 1,
+                "liable_fee": 10,
+                "as_remark": "售后备注"
+            }
+
 + Response 422 (application/json)
     + Body
 
@@ -16477,6 +16584,38 @@ FORMAT: 1A
 
 ## 仓储审核 [PUT /api/warehousingreturns/:id/whaudit]
 
+
++ Parameters
+    + expected_arrival_time: (date, required) - 预计到货时间
+    + logistics_id: (integer, required) - 物流id
+    + freight_types_id: (integer, required) - 运费类型id
+    + freight: (numeric, required) - 运费
+    + logistics_sn: (string, required) - 物流单号
+    + take_delivery_goods_address: (string, required) - 提货地址
+    + logistics_remark: (string, optional) - 物流备注
+    + follow_up: (string, optional) - 跟进记录
+    + return_order_items[0][id]: (integer, required) - 退货子单id
+    + return_order_items[0][suppliers_id]: (integer, required) - 供应商id
+    + return_order_items[0][receipt_types_id]: (integer, required) - 收货类型id
+    + return_order_items[0][is_damage]: (integer, optional) - 是否损坏
+
++ Request (application/json)
+    + Body
+
+            {
+                "expected_arrival_time": "2018-9-7",
+                "logistics_id": 1,
+                "freight_types_id": 1,
+                "freight": 10,
+                "logistics_sn": "物流单号",
+                "take_delivery_goods_address": "提货地址",
+                "logistics_remark": "物流备注",
+                "follow_up": "跟进记录",
+                "return_order_items[0][id]": 1,
+                "return_order_items[0][suppliers_id]": 1,
+                "return_order_items[0][receipt_types_id]": 1,
+                "return_order_items[0][is_damage]": true
+            }
 
 + Response 422 (application/json)
     + Body
@@ -16733,7 +16872,7 @@ FORMAT: 1A
 # stocksyncreturn [/api]
 库存同步资源
 
-## 获取所有库存同步 [GET /api/stocksyncreturn{?status}[&include=]]
+## 获取所有库存同步 [GET /api/stocksyncreturn{?status}[&include=order,shop,customerService,returnReason,refundPaymentMethod,logistics,freightType,distribution,returnOrderItem,personliable]]
 
 
 + Parameters
@@ -16747,7 +16886,41 @@ FORMAT: 1A
 
             {
                 "data": [
-                    []
+                    {
+                        "id": 1,
+                        "return_sn": "RT2018091515081324812",
+                        "return_order_status": "同步库存",
+                        "shops_id": 1,
+                        "orders_id": 4,
+                        "member_nick": "会员昵称1",
+                        "customer_name": "客户姓名1",
+                        "customer_phone": "123456",
+                        "customer_service_id": 1,
+                        "deposit": "10.00",
+                        "return_reasons_id": 1,
+                        "customer_address": "客户地址1",
+                        "is_scour": true,
+                        "expected_arrival_time": "2018-09-13 00:00:00",
+                        "payee": "收款人1",
+                        "refund_account": "退款账号",
+                        "refund_payment_methods_id": 1,
+                        "refund_amount": "10.00",
+                        "logistics_id": 1,
+                        "freight_types_id": 0,
+                        "freight": "10.00",
+                        "logistics_sn": "物流单号1",
+                        "take_delivery_goods_address": "提货地址1",
+                        "logistics_remark": "物流备注1",
+                        "follow_up": "测试跟进",
+                        "distributions_id": 1,
+                        "pulling_cost": "10.00",
+                        "person_liable_id": 1,
+                        "liable_fee": "10.00",
+                        "as_remark": "售后备注",
+                        "status": true,
+                        "created_at": "2018-09-15 15:08:13",
+                        "updated_at": "2018-09-15 16:36:00"
+                    }
                 ],
                 "meta": {
                     "pagination": {
@@ -16775,10 +16948,74 @@ FORMAT: 1A
 + Response 200 (application/json)
     + Body
 
-            []
+            {
+                "id": 1,
+                "return_sn": "RT2018091515081324812",
+                "return_order_status": "同步库存",
+                "shops_id": 1,
+                "orders_id": 4,
+                "member_nick": "会员昵称1",
+                "customer_name": "客户姓名1",
+                "customer_phone": "123456",
+                "customer_service_id": 1,
+                "deposit": "10.00",
+                "return_reasons_id": 1,
+                "customer_address": "客户地址1",
+                "is_scour": true,
+                "expected_arrival_time": "2018-09-13 00:00:00",
+                "payee": "收款人1",
+                "refund_account": "退款账号",
+                "refund_payment_methods_id": 1,
+                "refund_amount": "10.00",
+                "logistics_id": 1,
+                "freight_types_id": 0,
+                "freight": "10.00",
+                "logistics_sn": "物流单号1",
+                "take_delivery_goods_address": "提货地址1",
+                "logistics_remark": "物流备注1",
+                "follow_up": "测试跟进",
+                "distributions_id": 1,
+                "pulling_cost": "10.00",
+                "person_liable_id": 1,
+                "liable_fee": "10.00",
+                "as_remark": "售后备注",
+                "status": true,
+                "created_at": "2018-09-15 15:08:13",
+                "updated_at": "2018-09-15 16:36:00"
+            }
 
 ## 库存提交 [PUT /api/stocksyncreturn/:id/stocksubmit]
 
+
++ Parameters
+    + expected_arrival_time: (date, required) - 预计到货时间
+    + follow_up: (string, optional) - 跟进记录
+    + return_order_items[0][id]: (integer, required) - 退货子单id
+    + return_order_items[0][suppliers_id]: (integer, required) - 供应商id
+    + return_order_items[0][receipt_types_id]: (integer, required) - 收货类型id
+    + return_order_items[0][is_damage]: (integer, required) - 是否损坏
+    + return_order_items[0][repair_price]: (integer, required) - 返修价格
+    + return_order_items[0][factory_return_time]: (integer, required) - 退厂时间
+    + return_order_items[0][expected_return_time]: (integer, required) - 预计返还时间
+    + return_order_items[0][warehouse_id]: (integer, required) - 收货仓库
+    + return_order_items[0][remark]: (integer, required) - 备注
+
++ Request (application/json)
+    + Body
+
+            {
+                "expected_arrival_time": "2018-9-7",
+                "follow_up": "跟进记录",
+                "return_order_items[0][id]": 1,
+                "return_order_items[0][suppliers_id]": 1,
+                "return_order_items[0][receipt_types_id]": 1,
+                "return_order_items[0][is_damage]": true,
+                "return_order_items[0][repair_price]": 10,
+                "return_order_items[0][factory_return_time]": "2018-9-1",
+                "return_order_items[0][expected_return_time]": "2018-9-13",
+                "return_order_items[0][warehouse_id]": 3,
+                "return_order_items[0][remark]": "测试备注"
+            }
 
 + Response 422 (application/json)
     + Body

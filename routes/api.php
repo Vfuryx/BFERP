@@ -530,6 +530,36 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->delete('stockindetails', 'StockInDetailsController@destroybyids')
             ->name('api.stockindetails.destroybyids');
 
+        //其他入库
+        $api->get('otherotherstockins', 'OtherStockInsController@index')
+            ->name('api.otherotherstockins.index');
+        $api->get('otherotherstockins/{stockin}', 'OtherStockInsController@show')
+            ->name('api.otherotherstockins.show');
+        $api->post('otherotherstockins', 'OtherStockInsController@store')
+            ->name('api.otherotherstockins.store');
+        $api->patch('otherotherstockins/{stockin}', 'OtherStockInsController@update')
+            ->name('api.otherotherstockins.update');
+        $api->delete('otherotherstockins/{stockin}', 'OtherStockInsController@destroy')
+            ->name('api.otherotherstockins.destroy');
+        $api->delete('otherotherstockins', 'OtherStockInsController@destroybyids')
+            ->name('api.otherotherstockins.destroybyids');
+        $api->put('otherotherstockins/editstatus', 'OtherStockInsController@editStatusByIds')
+            ->name('api.otherotherstockins.editstatusbyids');
+        $api->put('otherotherstockins/{stockin}/submit', 'OtherStockInsController@isSubmit')
+            ->name('api.otherotherstockins.issubmit');
+        $api->put('otherotherstockins/{stockin}/print', 'OtherStockInsController@isPrint')
+            ->name('api.otherotherstockins.isprint');
+        $api->put('otherotherstockins/{stockin}/audit', 'OtherStockInsController@isAudit')
+            ->name('api.otherotherstockins.isAudit');
+        $api->put('otherotherstockins/{stockin}/stockin', 'OtherStockInsController@stockIn')
+            ->name('api.otherotherstockins.stockin');
+
+        //其他入库详情
+        $api->delete('otherstockindetails/{stockindetail}', 'OtherStockInDetailsController@destroy')
+            ->name('api.otherstockindetails.destroy');
+        $api->delete('otherstockindetails', 'OtherStockInDetailsController@destroybyids')
+            ->name('api.otherstockindetails.destroybyids');
+
         //取消采购
         $api->get('cancelpurchases', 'CancelPurchasesController@index')
             ->name('api.cancelpurchases.index');
@@ -895,6 +925,8 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.stocksyncreturn.isstocksubmit');
         $api->put('stocksyncreturn/{returnorder}/stocksync', 'StockSyncReturnsController@isStockSync')
             ->name('api.stocksyncreturn.isstocksync');
+
+
 
         //退货子单
         $api->delete('returnorderitems/{returnorderitem}', 'ReturnOrderItemsController@destroy')

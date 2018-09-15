@@ -15,5 +15,4 @@ class ReturnReason extends Model
         'status' => 'boolean',
     ];
 
-
 }
