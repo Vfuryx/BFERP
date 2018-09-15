@@ -5,7 +5,7 @@ namespace App\Transformers;
 use App\Models\StockIn;
 use League\Fractal\TransformerAbstract;
 
-class StockInTransformer extends TransformerAbstract
+class OtherStockInTransformer extends TransformerAbstract
 {
     protected $availableIncludes = [
         'warehouse', 'stockInType', 'stockInDetails', 'supplier', 'submitter', 'auditor', 'warehouer'
@@ -19,6 +19,7 @@ class StockInTransformer extends TransformerAbstract
             'external_sn' => $stockIn->external_sn,
             'warehouse_id' => $stockIn->warehouse_id,
             'stock_in_types_id' => $stockIn->stock_in_types_id,
+            'suppliers_id' => $stockIn->suppliers_id,
             'creator' => $stockIn->creator,
             'is_submit' => $stockIn->is_submit,
             'submitter' => $stockIn->submitter,
@@ -48,7 +49,7 @@ class StockInTransformer extends TransformerAbstract
     {
         return $this->item($stockIn->stockInType, new StockInTypeTransformer());
     }
-
+    
     public function includeStockInDetails(StockIn $stockIn)
     {
         return $this->collection($stockIn->stockInDetails, new StockInDetailTransformer());

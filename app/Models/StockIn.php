@@ -3,16 +3,17 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class StockIn extends Model
 {
     protected $table = 'stock_ins';
 
     protected $fillable = [
-        'stock_in_no', 'warehouse_id', 'stock_in_types_id', 'creator',
-        'submitter', 'submit_at', 'auditor', 'audit_at', 'warehouer',
-        'stock_in_at', 'is_submit', 'is_audit', 'is_stock_in', 'status',
-        'print_at', 'is_print'
+        'stock_in_no', 'external_sn', 'warehouse_id', 'stock_in_types_id', 'suppliers_id',
+        'creator', 'submitter', 'submit_at', 'auditor', 'audit_at', 'warehouer',
+        'stock_in_at', 'is_submit', 'is_audit', 'is_stock_in', 'status', 'print_at',
+        'is_print'
     ];
 
     protected $dates = [
@@ -28,7 +29,14 @@ class StockIn extends Model
         'is_print' => 'boolean',
         'is_audit' => 'boolean',
         'is_stock_in' => 'boolean',
-        'status' => 'boolean'
+        'status' => 'boolean',
+        'warehouse_id' => 'integer',
+        'stock_in_types_id' => 'integer',
+        'suppliers_id' => 'integer',
+        'creator' => 'integer',
+        'submitter' => 'integer',
+        'auditor' => 'integer',
+        'warehouer' => 'integer',
     ];
 
     protected static function boot()
@@ -48,7 +56,7 @@ class StockIn extends Model
             // 如果模型的 creator 字段为空
             if (!$model->creator) {
 
-                $model->creator = 'admin';
+                $model->creator = Auth::guard('api')->id();
                 // 如果生成失败，则终止创建订单
                 if (!$model->creator) {
                     return false;
@@ -72,13 +80,34 @@ class StockIn extends Model
         return $this->hasMany(StockInDetail::class, 'stock_ins_id');
     }
 
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class, 'suppliers_id');
+    }
+
+    public function submitter()
+    {
+        return $this->belongsTo(User::class, 'submitter');
+    }
+
+    public function auditor()
+    {
+        return $this->belongsTo(User::class, 'auditor');
+    }
+
+    public function warehouer()
+    {
+        return $this->belongsTo(User::class, 'warehouer');
+    }
+
+
     /**
      * 提交
      */
     public function input()
     {
         $this->submit_at = Carbon::now();
-        $this->submitter = 'admin';
+        $this->submitter = Auth::guard('api')->id();
         $this->is_submit = 1;
         $this->save();
     }
@@ -89,7 +118,7 @@ class StockIn extends Model
     public function audit()
     {
         $this->audit_at = Carbon::now();
-        $this->auditor = 'admin';
+        $this->auditor = Auth::guard('api')->id();
         $this->is_audit = 1;
         $this->save();
     }
@@ -110,7 +139,7 @@ class StockIn extends Model
     public function stockIn()
     {
         $this->stock_in_at = Carbon::now();
-        $this->warehouer = 'admin';
+        $this->warehouer = Auth::guard('api')->id();
         $this->is_stock_in = 1;
         $this->save();
     }

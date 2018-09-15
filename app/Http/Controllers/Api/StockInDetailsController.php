@@ -8,7 +8,6 @@ use App\Http\Requests\Api\DestroyRequest;
 use App\Transformers\StockInDetailTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
-
 /**
  * 入库单详情资源
  * @Resource("stockindetails",uri="/api")

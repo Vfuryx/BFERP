@@ -8831,17 +8831,17 @@ FORMAT: 1A
                         "stock_in_no": "IS2018081513063587085",
                         "warehouse_id": 1,
                         "stock_in_types_id": 3,
-                        "creator": "admin",
+                        "creator": 1,
                         "is_submit": true,
-                        "submitter": "admin",
+                        "submitter": 1,
                         "submit_at": "2018-08-15 14:14:09",
                         "is_print": true,
                         "print_at": "2018-08-15 14:17:29",
                         "is_audit": true,
-                        "auditor": "admin",
+                        "auditor": 1,
                         "audit_at": "2018-08-15 14:17:03",
                         "is_stock_in": true,
-                        "warehouer": "admin",
+                        "warehouer": 1,
                         "stock_in_at": "2018-08-15 16:25:24",
                         "status": true,
                         "created_at": "2018-08-15 13:06:35",
@@ -8938,7 +8938,7 @@ FORMAT: 1A
                 "stock_in_no": "IS2018081513063587085",
                 "warehouse_id": 1,
                 "stock_in_types_id": 3,
-                "creator": "admin",
+                "creator": 1,
                 "is_submit": true,
                 "submitter": "admin",
                 "submit_at": "2018-08-15 14:14:09",
@@ -8999,7 +8999,7 @@ FORMAT: 1A
                 "stock_in_no": "IS2018081513063587085",
                 "warehouse_id": 1,
                 "stock_in_types_id": 3,
-                "creator": "admin",
+                "creator": 1,
                 "is_submit": true,
                 "submitter": "admin",
                 "submit_at": "2018-08-15 14:14:09",
@@ -9101,7 +9101,7 @@ FORMAT: 1A
                 "stock_in_no": "IS2018081513063587085",
                 "warehouse_id": 1,
                 "stock_in_types_id": 3,
-                "creator": "admin",
+                "creator": 1,
                 "is_submit": true,
                 "submitter": "admin",
                 "submit_at": "2018-08-15 14:14:09",
@@ -9433,6 +9433,461 @@ FORMAT: 1A
 
 + Parameters
     + ids: (string, required) - 入库单详情id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# otherotherstockins [/api]
+其他入库单资源
+
+## 获取所有其他入库单 [GET /api/otherstockins[?status=true&include=warehouse,stockInType,stockInDetails,supplier,submitter,auditor,warehouer]]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+    + is_submit: (boolean, optional) - 是否提交
+    + is_stock_in: (boolean, optional) - 是否入库
+    + include: (string, optional) - 加载关联的数据
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "stock_in_no": "IS2018091417222582919",
+                        "external_sn": "外部单号",
+                        "warehouse_id": 1,
+                        "stock_in_types_id": 1,
+                        "suppliers_id": 0,
+                        "creator": 1,
+                        "is_submit": false,
+                        "submitter": 0,
+                        "submit_at": null,
+                        "is_print": false,
+                        "print_at": null,
+                        "is_audit": false,
+                        "auditor": 0,
+                        "audit_at": null,
+                        "is_stock_in": false,
+                        "warehouer": 0,
+                        "stock_in_at": null,
+                        "status": true,
+                        "created_at": "2018-09-14 17:22:25",
+                        "updated_at": "2018-09-14 17:22:25"
+                    }
+                ],
+                "meta": {
+                    "pagination": {
+                        "total": 1,
+                        "count": 1,
+                        "per_page": 10,
+                        "current_page": 1,
+                        "total_pages": 1,
+                        "links": {
+                            "previous": null,
+                            "next": "{{host}}/api/otherstockins?page=1"
+                        }
+                    }
+                }
+            }
+
+## 新增其他入库单 [POST /api/otherstockins]
+
+
++ Parameters
+    + external_sn: (string, optional) - 外部单号
+    + warehouse_id: (integer, required) - 仓库id
+    + suppliers_id: (integer, required) - 供应商id
+    + stock_in_types_id: (integer, required) - 入库类型id
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+    + other_stock_in_details[0][product_components_id]: (integer, required) - 子件id
+    + other_stock_in_details[0][stock_in_quantity]: (integer, required) - 入库数量
+    + other_stock_in_details[0][total_fee]: (number, required) - 总额
+    + other_stock_in_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "external_sn": "RT2121212121212",
+                    "warehouse_id": 1,
+                    "stock_in_types_id": 1,
+                    "suppliers_id": 1,
+                    "status": true,
+                    "stock_in_details[0][product_components_id]": 1,
+                    "stock_in_details[0][stock_in_quantity]": 1,
+                    "stock_in_details[0][total_fee]": 1,
+                    "stock_in_details[0][remark]": "备注"
+                }
+            ]
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "warehouse_id": [
+                        "仓库id必填"
+                    ],
+                    "stock_in_types_id": [
+                        "需要添加的id在数据库中未找到或未启用"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "stock_in_no": "IS2018091417222582919",
+                "external_sn": "外部单号",
+                "warehouse_id": 1,
+                "stock_in_types_id": 1,
+                "creator": 1,
+                "is_submit": false,
+                "submitter": 0,
+                "submit_at": null,
+                "is_print": false,
+                "print_at": null,
+                "is_audit": false,
+                "auditor": 0,
+                "audit_at": null,
+                "is_stock_in": false,
+                "warehouer": 0,
+                "stock_in_at": null,
+                "status": true,
+                "created_at": "2018-09-14 17:22:25",
+                "updated_at": "2018-09-14 17:22:25",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条其他入库单 [GET /api/otherstockins/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "stock_in_no": "IS2018091417222582919",
+                "external_sn": "外部单号",
+                "warehouse_id": 1,
+                "stock_in_types_id": 1,
+                "creator": 1,
+                "is_submit": false,
+                "submitter": 0,
+                "submit_at": null,
+                "is_print": false,
+                "print_at": null,
+                "is_audit": false,
+                "auditor": 0,
+                "audit_at": null,
+                "is_stock_in": false,
+                "warehouer": 0,
+                "stock_in_at": null,
+                "status": true,
+                "created_at": "2018-09-14 17:22:25",
+                "updated_at": "2018-09-14 17:22:25"
+            }
+
+## 修改其他入库单 [PATCH /api/otherstockins/:id]
+
+
++ Parameters
+    + external_sn: (string, optional) - 外部单号
+    + warehouse_id: (integer, optional) - 仓库id
+    + suppliers_id: (integer, optional) - 供应商id
+    + stock_in_types_id: (integer, optional) - 入库类型id
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 
+    + other_stock_in_details[0][product_components_id]: (integer, optional) - 子件id
+    + other_stock_in_details[0][stock_in_quantity]: (integer, optional) - 入库数量
+    + other_stock_in_details[0][total_fee]: (number, optional) - 总额
+    + other_stock_in_details[0][remark]: (string, optional) - 备注
+
++ Request (application/json)
+    + Body
+
+            [
+                {
+                    "external_sn": "RT2121212121212",
+                    "warehouse_id": 1,
+                    "stock_in_types_id": 1,
+                    "suppliers_id": 1,
+                    "status": true,
+                    "stock_in_details[0][product_components_id]": 1,
+                    "stock_in_details[0][stock_in_quantity]": 1,
+                    "stock_in_details[0][total_fee]": 1,
+                    "stock_in_details[0][remark]": "备注"
+                }
+            ]
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "warehouse_id": [
+                        "仓库id必填"
+                    ],
+                    "stock_in_types_id": [
+                        "需要添加的id在数据库中未找到或未启用"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "stock_in_no": "IS2018091417222582919",
+                "external_sn": "外部单号",
+                "warehouse_id": 1,
+                "stock_in_types_id": 1,
+                "creator": 1,
+                "is_submit": false,
+                "submitter": 0,
+                "submit_at": null,
+                "is_print": false,
+                "print_at": null,
+                "is_audit": false,
+                "auditor": 0,
+                "audit_at": null,
+                "is_stock_in": false,
+                "warehouer": 0,
+                "stock_in_at": null,
+                "status": true,
+                "created_at": "2018-09-14 17:22:25",
+                "updated_at": "2018-09-14 17:22:25"
+            }
+
+## 删除其他入库单 [DELETE /api/otherstockins/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组其他入库单 [DELETE /api/otherstockins]
+
+
++ Parameters
+    + ids: (string, required) - 其他入库单id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组其他入库单状态 [PUT /api/otherstockins/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 其他入库单id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 提交 [PUT /api/otherstockins/:id/submit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "无需重复提交",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 打印 [PUT /api/otherstockins/:id/print]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "打印出错，是否未提交未审核或重复打印",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 审核 [PUT /api/otherstockins/:id/audit]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "审核出错，是否未提交或重复审核",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 入库 [PUT /api/otherstockins/:id/stockin]
+
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "入库出错",
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# otherstockindetails [/api]
+其他入库单详情资源
+
+## 删除其他入库单详情 [DELETE /api/otherstockindetails/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组其他入库单详情 [DELETE /api/otherstockindetails]
+
+
++ Parameters
+    + ids: (string, required) - 其他入库单详情id组 格式: 1,2,3,4 
 
 + Response 500 (application/json)
     + Body
