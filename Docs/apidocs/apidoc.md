@@ -17065,6 +17065,426 @@ FORMAT: 1A
 
             []
 
+# resuppliecategories [/api]
+补件类别资源
+
+## 获取所有补件类别 [GET /api/resuppliecategories{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "补件类别1",
+                        "status": true,
+                        "created_at": "2018-06-25 10:45:30",
+                        "updated_at": "2018-06-25 10:45:30"
+                    },
+                    {
+                        "id": 2,
+                        "name": "补件类别2",
+                        "status": true,
+                        "created_at": "2018-06-25 10:45:32",
+                        "updated_at": "2018-06-25 10:45:32"
+                    }
+                ]
+            }
+
+## 新增补件类别 [POST /api/resuppliecategories]
+
+
++ Parameters
+    + name: (string, required) - 补件类别名称
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "补件类别名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件类别1",
+                "status": true,
+                "created_at": "2018-06-14 15:02:10",
+                "updated_at": "2018-06-14 15:02:10",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条补件类别 [GET /api/resuppliecategories/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件类别1",
+                "status": true,
+                "created_at": "2018-06-14 15:01:51",
+                "updated_at": "2018-06-14 15:01:51"
+            }
+
+## 修改补件类别 [PATCH /api/resuppliecategories/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "补件类别名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件类别10",
+                "status": true,
+                "created_at": "2018-06-14 15:01:51",
+                "updated_at": "2018-06-14 15:07:56"
+            }
+
+## 删除补件类别 [DELETE /api/resuppliecategories/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组补件类别 [DELETE /api/resuppliecategories]
+
+
++ Parameters
+    + ids: (string, required) - 补件类别id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组补件类别状态 [PUT /api/resuppliecategories/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 补件类别id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+# resupplieresponsibles [/api]
+补件责任方资源
+
+## 获取所有补件责任方 [GET /api/resupplieresponsibles{?status}]
+
+
++ Parameters
+    + status: (boolean, optional) - 获取的状态
+        + Default: all
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "data": [
+                    {
+                        "id": 1,
+                        "name": "补件责任方1",
+                        "status": true,
+                        "created_at": "2018-06-25 10:45:30",
+                        "updated_at": "2018-06-25 10:45:30"
+                    },
+                    {
+                        "id": 2,
+                        "name": "补件责任方2",
+                        "status": true,
+                        "created_at": "2018-06-25 10:45:32",
+                        "updated_at": "2018-06-25 10:45:32"
+                    }
+                ]
+            }
+
+## 新增补件责任方 [POST /api/resupplieresponsibles]
+
+
++ Parameters
+    + name: (string, required) - 补件责任方名称
+    + status: (integer, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "补件责任方名称必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件责任方1",
+                "status": true,
+                "created_at": "2018-06-14 15:02:10",
+                "updated_at": "2018-06-14 15:02:10",
+                "meta": {
+                    "status_code": "201"
+                }
+            }
+
+## 显示单条补件责任方 [GET /api/resupplieresponsibles/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 200 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件责任方1",
+                "status": true,
+                "created_at": "2018-06-14 15:01:51",
+                "updated_at": "2018-06-14 15:01:51"
+            }
+
+## 修改补件责任方 [PATCH /api/resupplieresponsibles/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "name": [
+                        "补件责任方名称必须string类型"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 201 (application/json)
+    + Body
+
+            {
+                "id": 1,
+                "name": "补件责任方10",
+                "status": true,
+                "created_at": "2018-06-14 15:01:51",
+                "updated_at": "2018-06-14 15:07:56"
+            }
+
+## 删除补件责任方 [DELETE /api/resupplieresponsibles/:id]
+
+
++ Response 404 (application/json)
+    + Body
+
+            {
+                "message": "No query results for model ",
+                "status_code": 404
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 删除一组补件责任方 [DELETE /api/resupplieresponsibles]
+
+
++ Parameters
+    + ids: (string, required) - 补件责任方id组 格式: 1,2,3,4 
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "删除错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
+## 更改一组补件责任方状态 [PUT /api/resupplieresponsibles/editstatus]
+
+
++ Parameters
+    + ids: (string, required) - 补件责任方id组 格式: 1,2,3,4 
+    + status: (boolean, required) - 状态(0:停用，1:启用)
+
++ Response 500 (application/json)
+    + Body
+
+            {
+                "message": "更改错误",
+                "code": 500,
+                "status_code": 500
+            }
+
++ Response 422 (application/json)
+    + Body
+
+            {
+                "message": "422 Unprocessable Entity",
+                "errors": {
+                    "ids": [
+                        "id组必填"
+                    ],
+                    "status": [
+                        "状态必填"
+                    ]
+                },
+                "status_code": 422
+            }
+
++ Response 204 (application/json)
+    + Body
+
+            []
+
 # uploadimages [/api]
 图片上传
 

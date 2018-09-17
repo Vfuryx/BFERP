@@ -926,11 +926,42 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
         $api->put('stocksyncreturn/{returnorder}/stocksync', 'StockSyncReturnsController@isStockSync')
             ->name('api.stocksyncreturn.isstocksync');
 
-
-
         //退货子单
         $api->delete('returnorderitems/{returnorderitem}', 'ReturnOrderItemsController@destroy')
             ->name('api.returnorderitems.destroy');
+
+
+        //补件类别
+        $api->get('resuppliecategories', 'ReSupplieCategoriesController@index')
+            ->name('api.resuppliecategories.index');
+        $api->get('resuppliecategories/{resuppliecategorie}', 'ReSupplieCategoriesController@show')
+            ->name('api.resuppliecategories.show');
+        $api->post('resuppliecategories', 'ReSupplieCategoriesController@store')
+            ->name('api.resuppliecategories.store');
+        $api->patch('resuppliecategories/{resuppliecategorie}', 'ReSupplieCategoriesController@update')
+            ->name('api.resuppliecategories.update');
+        $api->delete('resuppliecategories/{resuppliecategorie}', 'ReSupplieCategoriesController@destroy')
+            ->name('api.resuppliecategories.destroy');
+        $api->delete('resuppliecategories', 'ReSupplieCategoriesController@destroybyids')
+            ->name('api.resuppliecategories.destroybyids');
+        $api->put('resuppliecategories/editstatus', 'ReSupplieCategoriesController@editStatusByIds')
+            ->name('api.resuppliecategories.editstatusbyids');
+
+        //补件责任方
+        $api->get('resupplieresponsibles', 'ReSupplieResponsiblesController@index')
+            ->name('api.resupplieresponsibles.index');
+        $api->get('resupplieresponsibles/{resupplieresponsible}', 'ReSupplieResponsiblesController@show')
+            ->name('api.resupplieresponsibles.show');
+        $api->post('resupplieresponsibles', 'ReSupplieResponsiblesController@store')
+            ->name('api.resupplieresponsibles.store');
+        $api->patch('resupplieresponsibles/{resupplieresponsible}', 'ReSupplieResponsiblesController@update')
+            ->name('api.resupplieresponsibles.update');
+        $api->delete('resupplieresponsibles/{resupplieresponsible}', 'ReSupplieResponsiblesController@destroy')
+            ->name('api.resupplieresponsibles.destroy');
+        $api->delete('resupplieresponsibles', 'ReSupplieResponsiblesController@destroybyids')
+            ->name('api.resupplieresponsibles.destroybyids');
+        $api->put('resupplieresponsibles/editstatus', 'ReSupplieResponsiblesController@editStatusByIds')
+            ->name('api.resupplieresponsibles.editstatusbyids');
 
         //上传图片
         $api->post('uploadimages', 'UploadImagesController@store')

@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
-class FeeCategoryRequest extends FormRequest
+class ReSupplieCategorieRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -35,8 +35,8 @@ class FeeCategoryRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '费用类别名称必填',
-            'name.string' => '费用类别名称必须string类型',
+            'name.required' => '补件类别名称必填',
+            'name.string' => '补件类别名称必须string类型',
             'status.boolean' => '状态必须布尔类型',
             'status.required' => '状态必填',
         ];
@@ -45,9 +45,8 @@ class FeeCategoryRequest extends FormRequest
     public function attributes()
     {
         return [
-            'name' => '费用类别名称',
-            'status' => '费用类别状态'
+            'name' => '补件类别名称',
+            'status' => '补件类别状态'
         ];
     }
-
 }
