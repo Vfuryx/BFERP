@@ -22,7 +22,7 @@ class Supplier extends Model
 
     public function series()
     {
-        return $this->hasMany(Series::class);
+        return $this->hasMany(Series::class,'suppliers_id');
     }
 
     public function products()

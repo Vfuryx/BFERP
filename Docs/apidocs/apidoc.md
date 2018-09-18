@@ -3466,7 +3466,7 @@ FORMAT: 1A
 # suppliers [/api]
 供应商资源
 
-## 获取所有供应商 [GET /api/suppliers{?status}]
+## 获取所有供应商 [GET /api/suppliers[?status=true&include=series]]
 
 
 + Parameters
@@ -3492,13 +3492,13 @@ FORMAT: 1A
                         "phone": "电话",
                         "mobile": "手机",
                         "fax": "传真",
-                        "email": "邮箱",
+                        "email": "935661686@qq.com",
                         "remark": "备注",
                         "is_scan": true,
                         "status": true,
                         "auto_valuation": true,
-                        "created_at": "2018-07-05 10:55:27",
-                        "updated_at": "2018-07-05 10:55:27"
+                        "created_at": "2018-09-18 14:02:46",
+                        "updated_at": "2018-09-18 14:02:46"
                     }
                 ],
                 "meta": {
@@ -3535,6 +3535,12 @@ FORMAT: 1A
     + auto_valuation: (boolean, optional) - 是否采购自动计价
         + Default: 1
     + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 1
+    + series[0][code]: (string, optional) - 系列代码
+    + series[0][name]: (string, optional) - 系列名称
+    + series[0][description]: (string, optional) - 系列描述
+    + series[0][remark]: (string, optional) - 备注
+    + series[0][status]: (boolean, optional) - 状态
         + Default: 1
 
 + Response 422 (application/json)
@@ -3576,13 +3582,13 @@ FORMAT: 1A
                 "phone": "电话",
                 "mobile": "手机",
                 "fax": "传真",
-                "email": "邮箱",
+                "email": "935661686@qq.com",
                 "remark": "备注",
                 "is_scan": true,
                 "status": true,
                 "auto_valuation": true,
-                "created_at": "2018-07-05 10:55:27",
-                "updated_at": "2018-07-05 10:55:27",
+                "created_at": "2018-09-18 14:02:46",
+                "updated_at": "2018-09-18 14:02:46",
                 "meta": {
                     "status_code": "201"
                 }
@@ -3616,16 +3622,45 @@ FORMAT: 1A
                 "phone": "电话",
                 "mobile": "手机",
                 "fax": "传真",
+                "email": "935661686@qq.com",
                 "remark": "备注",
                 "is_scan": true,
                 "status": true,
                 "auto_valuation": true,
-                "created_at": "2018-07-04 11:11:39",
-                "updated_at": "2018-07-04 11:11:39"
+                "created_at": "2018-09-18 14:02:46",
+                "updated_at": "2018-09-18 14:02:46"
             }
 
 ## 修改供应商 [PATCH /api/suppliers/:id]
 
+
++ Parameters
+    + name: (string, optional) - 供应商名称
+    + company: (string, optional) - 供应商公司
+    + code: (string, optional) - 公司代码
+    + province: (string, optional) - 省
+    + city: (string, optional) - 市
+    + district: (string, optional) - 区
+    + address: (string, optional) - 地址
+    + zipcode: (string, optional) - 邮编
+    + phone: (string, optional) - 电话
+    + mobile: (string, optional) - 手机
+    + fax: (string, optional) - 传真
+    + email: (string, optional) - 邮箱
+    + remark: (string, optional) - 备注
+    + is_scan: (boolean, optional) - 是否启用扫描
+        + Default: 
+    + auto_valuation: (boolean, optional) - 是否采购自动计价
+        + Default: 1
+    + status: (boolean, optional) - 状态(0:停用，1:启用)
+        + Default: 
+    + series[0][id]: (string, optional) - 系列id
+    + series[0][code]: (string, optional) - 系列代码
+    + series[0][name]: (string, optional) - 系列名称
+    + series[0][description]: (string, optional) - 系列描述
+    + series[0][remark]: (string, optional) - 备注
+    + series[0][status]: (boolean, optional) - 状态
+        + Default: 
 
 + Response 404 (application/json)
     + Body
@@ -3671,13 +3706,13 @@ FORMAT: 1A
                 "phone": "电话",
                 "mobile": "手机",
                 "fax": "传真",
-                "email": "邮箱",
+                "email": "935661686@qq.com",
                 "remark": "备注",
                 "is_scan": true,
                 "status": true,
                 "auto_valuation": true,
-                "created_at": "2018-07-05 10:55:27",
-                "updated_at": "2018-07-05 10:55:27"
+                "created_at": "2018-09-18 14:02:46",
+                "updated_at": "2018-09-18 14:02:46"
             }
 
 ## 删除供应商 [DELETE /api/suppliers/:id]
@@ -4220,72 +4255,6 @@ FORMAT: 1A
                 }
             }
 
-## 新增系列 [POST /api/series]
-
-
-+ Parameters
-    + suppliers_id: (integer, required) - 供应商id
-    + code: (string, required) - 系列代码
-    + name: (string, required) - 系列名称
-    + description: (string, optional) - 系列描述
-    + remark: (string, optional) - 备注
-    + status: (boolean, optional) - 状态(0:停用，1:启用)
-        + Default: 1
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "suppliers_id": [
-                        "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "code": [
-                        "系列代码不能重复"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "suppliers": {
-                    "id": 1,
-                    "name": "供应商名称4",
-                    "company": "供应商公司4",
-                    "code": "公司代码4",
-                    "province": "省4",
-                    "city": "市4",
-                    "district": "区4",
-                    "address": "地址4",
-                    "zipcode": "邮编4",
-                    "contacts": "联系人4",
-                    "phone": "电话4",
-                    "mobile": "手机4",
-                    "fax": "传真4",
-                    "remark": "备注4",
-                    "is_scan": true,
-                    "status": true,
-                    "auto_valuation": true,
-                    "created_at": "2018-07-04 11:11:39",
-                    "updated_at": "2018-07-04 11:22:29"
-                },
-                "code": "系列代码",
-                "name": "系列名称",
-                "description": "系列描述",
-                "remark": "备注",
-                "status": true,
-                "created_at": "2018-07-04 14:03:49",
-                "updated_at": "2018-07-04 14:03:49",
-                "meta": {
-                    "status_code": "201"
-                }
-            }
-
 ## 显示单条系列 [GET /api/series/:id]
 
 
@@ -4332,71 +4301,6 @@ FORMAT: 1A
                 "updated_at": "2018-07-04 14:03:49"
             }
 
-## 修改系列 [PATCH /api/series/:id]
-
-
-+ Response 404 (application/json)
-    + Body
-
-            {
-                "message": "No query results for model ",
-                "status_code": 404
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "code": [
-                        "费用代码不能重复"
-                    ],
-                    "logistics_id": [
-                        "需要添加的id在数据库中未找到或未启用"
-                    ],
-                    "price": [
-                        "物流费用必须是数字"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 201 (application/json)
-    + Body
-
-            {
-                "id": 1,
-                "suppliers": {
-                    "id": 1,
-                    "name": "供应商名称4",
-                    "company": "供应商公司4",
-                    "code": "公司代码4",
-                    "province": "省4",
-                    "city": "市4",
-                    "district": "区4",
-                    "address": "地址4",
-                    "zipcode": "邮编4",
-                    "contacts": "联系人4",
-                    "phone": "电话4",
-                    "mobile": "手机4",
-                    "fax": "传真4",
-                    "remark": "备注4",
-                    "is_scan": true,
-                    "status": true,
-                    "auto_valuation": true,
-                    "created_at": "2018-07-04 11:11:39",
-                    "updated_at": "2018-07-04 11:22:29"
-                },
-                "code": "系列代码10",
-                "name": "系列名称10",
-                "description": "系列描述10",
-                "remark": "备注10",
-                "status": true,
-                "created_at": "2018-07-04 14:03:49",
-                "updated_at": "2018-07-04 14:13:21"
-            }
-
 ## 删除系列 [DELETE /api/series/:id]
 
 
@@ -4436,43 +4340,6 @@ FORMAT: 1A
                 "errors": {
                     "ids": [
                         "id组必填"
-                    ]
-                },
-                "status_code": 422
-            }
-
-+ Response 204 (application/json)
-    + Body
-
-            []
-
-## 更改一组系列状态 [PUT /api/series/editstatus]
-
-
-+ Parameters
-    + ids: (string, required) - 系列id组 格式: 1,2,3,4 
-    + status: (boolean, required) - 状态(0:停用，1:启用)
-
-+ Response 500 (application/json)
-    + Body
-
-            {
-                "message": "更改错误",
-                "code": 500,
-                "status_code": 500
-            }
-
-+ Response 422 (application/json)
-    + Body
-
-            {
-                "message": "422 Unprocessable Entity",
-                "errors": {
-                    "ids": [
-                        "id组必填"
-                    ],
-                    "status": [
-                        "状态必填"
                     ]
                 },
                 "status_code": 422

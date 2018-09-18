@@ -7,6 +7,10 @@ use League\Fractal\TransformerAbstract;
 
 class SupplierTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'series'
+    ];
+
     public function transform(Supplier $supplier)
     {
         return [
@@ -34,4 +38,10 @@ class SupplierTransformer extends TransformerAbstract
                                     ->toDateTimeString(),
         ];
     }
+
+    public function includeSeries(Supplier $supplier)
+    {
+        return $this->collection($supplier->series, new SeriesTransformer());
+    }
+
 }

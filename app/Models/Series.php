@@ -18,6 +18,6 @@ class Series extends Model
 
     public function suppliers()
     {
-        return $this->belongsTo(Supplier::class);
+        return $this->belongsTo(Supplier::class,'suppliers_id');
     }
 }

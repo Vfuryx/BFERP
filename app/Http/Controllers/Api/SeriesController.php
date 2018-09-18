@@ -112,73 +112,6 @@ class SeriesController extends Controller
     }
 
     /**
-     * 新增系列
-     *
-     * @Post("/series")
-     * @Versions({"v1"})
-     * @Parameters({
-     *      @Parameter("suppliers_id",type="integer", description="供应商id", required=true),
-     *      @Parameter("code", description="系列代码", required=true),
-     *      @Parameter("name", description="系列名称", required=true),
-     *      @Parameter("description", description="系列描述", required=false),
-     *      @Parameter("remark", description="备注", required=false),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
-     * })
-     * @Transaction({
-     *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "suppliers_id": {
-     *                  "需要添加的id在数据库中未找到或未启用"
-     *              },
-     *              "code": {
-     *                  "系列代码不能重复"
-     *              },
-     *           },
-     *          "status_code": 422,
-     *      }),
-     *      @Response(201, body={
-     *          "id": 1,
-     *          "suppliers": {
-     *              "id": 1,
-     *              "name": "供应商名称4",
-     *              "company": "供应商公司4",
-     *              "code": "公司代码4",
-     *              "province": "省4",
-     *              "city": "市4",
-     *              "district": "区4",
-     *              "address": "地址4",
-     *              "zipcode": "邮编4",
-     *              "contacts": "联系人4",
-     *              "phone": "电话4",
-     *              "mobile": "手机4",
-     *              "fax": "传真4",
-     *              "remark": "备注4",
-     *              "is_scan": true,
-     *              "status": true,
-     *              "auto_valuation": true,
-     *              "created_at": "2018-07-04 11:11:39",
-     *              "updated_at": "2018-07-04 11:22:29"
-     *          },
-     *          "code": "系列代码",
-     *          "name": "系列名称",
-     *          "description": "系列描述",
-     *          "remark": "备注",
-     *          "status": true,
-     *          "created_at": "2018-07-04 14:03:49",
-     *          "updated_at": "2018-07-04 14:03:49",
-     *          "meta": {
-     *              "status_code": "201"
-     *          }
-     *      })
-     * })
-     */
-    public function store(SeriesRequest $request)
-    {
-        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
-    }
-
-    /**
      * 显示单条系列
      *
      * @Get("/series/:id")
@@ -226,68 +159,6 @@ class SeriesController extends Controller
         return $this->traitShow($series, self::TRANSFORMER);
     }
 
-    /**
-     * 修改系列
-     *
-     * @Patch("/series/:id")
-     * @Versions({"v1"})
-     * @Transaction({
-     *      @Response(404, body={
-     *          "message": "No query results for model ",
-     *          "status_code": 404,
-     *      }),
-     *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "code": {
-     *                  "费用代码不能重复"
-     *               },
-     *              "logistics_id": {
-     *                  "需要添加的id在数据库中未找到或未启用"
-     *               },
-     *              "price": {
-     *                  "物流费用必须是数字"
-     *               },
-     *           },
-     *          "status_code": 422
-     *      }),
-     *      @Response(201, body={
-     *          "id": 1,
-     *          "suppliers": {
-     *              "id": 1,
-     *              "name": "供应商名称4",
-     *              "company": "供应商公司4",
-     *              "code": "公司代码4",
-     *              "province": "省4",
-     *              "city": "市4",
-     *              "district": "区4",
-     *              "address": "地址4",
-     *              "zipcode": "邮编4",
-     *              "contacts": "联系人4",
-     *              "phone": "电话4",
-     *              "mobile": "手机4",
-     *              "fax": "传真4",
-     *              "remark": "备注4",
-     *              "is_scan": true,
-     *              "status": true,
-     *              "auto_valuation": true,
-     *              "created_at": "2018-07-04 11:11:39",
-     *              "updated_at": "2018-07-04 11:22:29"
-     *          },
-     *          "code": "系列代码10",
-     *          "name": "系列名称10",
-     *          "description": "系列描述10",
-     *          "remark": "备注10",
-     *          "status": true,
-     *          "created_at": "2018-07-04 14:03:49",
-     *          "updated_at": "2018-07-04 14:13:21"
-     *      })
-     * })
-     */
-    public function update(SeriesRequest $request, Series $series)
-    {
-        return $this->traitUpdate($request, $series, self::TRANSFORMER);
-    }
 
     /**
      * 删除系列
@@ -338,38 +209,4 @@ class SeriesController extends Controller
         return $this->traitDestroybyIds($request, self::MODEL);
     }
 
-    /**
-     * 更改一组系列状态
-     * 
-     * @PUT("/series/editstatus")
-     * @Versions({"v1"})
-     * @Parameters({
-     *      @Parameter("ids", description="系列id组 格式: 1,2,3,4 ", required=true),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
-     * })
-     * @Transaction({
-     *      @Response(500, body={
-     *          "message": "更改错误",
-     *          "code": 500,
-     *          "status_code": 500,
-     *      }),
-     *      @Response(422, body={
-     *          "message": "422 Unprocessable Entity",
-     *           "errors": {
-     *              "ids": {
-     *                  "id组必填"
-     *              },
-     *              "status": {
-     *                  "状态必填"
-     *              }
-     *           },
-     *          "status_code": 422,
-     *      }),
-     *      @Response(204, body={})
-     * })
-     */
-    public function editStatusByIds(EditStatuRequest $request)
-    {
-        return $this->traitEditStatusByIds($request, self::MODEL);
-    }
 }

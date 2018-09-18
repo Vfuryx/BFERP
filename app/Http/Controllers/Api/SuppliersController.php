@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Supplier;
+
+use App\Http\Requests\Api\SeriesRequest;
 use App\Http\Requests\Api\SupplierRequest;
 use App\Http\Requests\Api\EditStatuRequest;
 use App\Http\Requests\Api\DestroyRequest;
+
 use App\Transformers\SupplierTransformer;
 use App\Http\Controllers\Traits\CURDTrait;
 
@@ -23,7 +26,7 @@ class SuppliersController extends Controller
     /**
      * 获取所有供应商
      *
-     * @Get("/suppliers{?status}")
+     * @Get("/suppliers[?status=true&include=series]")
      * @Versions({"v1"})
      * @Parameters({
      *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
@@ -44,13 +47,13 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
-     *          "email": "邮箱",
+     *          "email": "935661686@qq.com",
      *          "remark": "备注",
      *          "is_scan": true,
      *          "status": true,
      *          "auto_valuation": true,
-     *          "created_at": "2018-07-05 10:55:27",
-     *          "updated_at": "2018-07-05 10:55:27"
+     *          "created_at": "2018-09-18 14:02:46",
+     *          "updated_at": "2018-09-18 14:02:46"
      *      }
      *     },
      *     "meta": {
@@ -91,7 +94,12 @@ class SuppliersController extends Controller
      *      @Parameter("remark", description="备注", required=false),
      *      @Parameter("is_scan",type="boolean", description="是否启用扫描", required=false, default=true),
      *      @Parameter("auto_valuation",type="boolean", description="是否采购自动计价", required=false, default=1),
-     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true)
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
+     *      @Parameter("series[0][code]", description="系列代码", required=false),
+     *      @Parameter("series[0][name]", description="系列名称", required=false),
+     *      @Parameter("series[0][description]", description="系列描述", required=false),
+     *      @Parameter("series[0][remark]", description="备注", required=false),
+     *      @Parameter("series[0][status]", type="boolean", description="状态", required=false, default=true),
      * })
      * @Transaction({
      *      @Response(422, body={
@@ -126,22 +134,31 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
-     *          "email": "邮箱",
+     *          "email": "935661686@qq.com",
      *          "remark": "备注",
      *          "is_scan": true,
      *          "status": true,
      *          "auto_valuation": true,
-     *          "created_at": "2018-07-05 10:55:27",
-     *          "updated_at": "2018-07-05 10:55:27",
+     *          "created_at": "2018-09-18 14:02:46",
+     *          "updated_at": "2018-09-18 14:02:46",
      *          "meta": {
      *              "status_code": "201"
      *          }
      *      })
      * })
      */
-    public function store(SupplierRequest $request)
+    public function store(SupplierRequest $supplierRequest,SeriesRequest $seriesRequest)
     {
-        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
+        $data[] = $supplierRequest->validated();
+        $data[] = $seriesRequest->input('series');
+
+        return $this->traitJoint2Store(
+            $data,
+            'series',
+            $seriesRequest->rules(),
+            self::MODEL,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -168,12 +185,13 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
+     *          "email": "935661686@qq.com",
      *          "remark": "备注",
      *          "is_scan": true,
      *          "status": true,
      *          "auto_valuation": true,
-     *          "created_at": "2018-07-04 11:11:39",
-     *          "updated_at": "2018-07-04 11:11:39"
+     *          "created_at": "2018-09-18 14:02:46",
+     *          "updated_at": "2018-09-18 14:02:46",
      *      })
      * })
      */
@@ -187,6 +205,30 @@ class SuppliersController extends Controller
      *
      * @Patch("/suppliers/:id")
      * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("name", description="供应商名称", required=false),
+     *      @Parameter("company", description="供应商公司", required=false),
+     *      @Parameter("code", description="公司代码", required=false),
+     *      @Parameter("province", description="省", required=false),
+     *      @Parameter("city", description="市", required=false),
+     *      @Parameter("district", description="区", required=false),
+     *      @Parameter("address", description="地址", required=false),
+     *      @Parameter("zipcode", description="邮编", required=false),
+     *      @Parameter("phone", description="电话", required=false),
+     *      @Parameter("mobile", description="手机", required=false),
+     *      @Parameter("fax", description="传真", required=false),
+     *      @Parameter("email", description="邮箱", required=false),
+     *      @Parameter("remark", description="备注", required=false),
+     *      @Parameter("is_scan",type="boolean", description="是否启用扫描", required=false, default=false),
+     *      @Parameter("auto_valuation",type="boolean", description="是否采购自动计价", required=false, default=1),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=false),
+     *      @Parameter("series[0][id]", description="系列id", required=false),
+     *      @Parameter("series[0][code]", description="系列代码", required=false),
+     *      @Parameter("series[0][name]", description="系列名称", required=false),
+     *      @Parameter("series[0][description]", description="系列描述", required=false),
+     *      @Parameter("series[0][remark]", description="备注", required=false),
+     *      @Parameter("series[0][status]", type="boolean", description="状态", required=false, default=false),
+     * })
      * @Transaction({
      *      @Response(404, body={
      *          "message": "No query results for model ",
@@ -221,19 +263,28 @@ class SuppliersController extends Controller
      *          "phone": "电话",
      *          "mobile": "手机",
      *          "fax": "传真",
-     *          "email": "邮箱",
+     *          "email": "935661686@qq.com",
      *          "remark": "备注",
      *          "is_scan": true,
      *          "status": true,
      *          "auto_valuation": true,
-     *          "created_at": "2018-07-05 10:55:27",
-     *          "updated_at": "2018-07-05 10:55:27"
+     *          "created_at": "2018-09-18 14:02:46",
+     *          "updated_at": "2018-09-18 14:02:46",
      *      })
      * })
      */
-    public function update(SupplierRequest $request, Supplier $supplier)
+    public function update(SupplierRequest $supplierRequest,SeriesRequest $seriesRequest, Supplier $supplier)
     {
-        return $this->traitUpdate($request, $supplier, self::TRANSFORMER);
+        $data[] = $supplierRequest->validated();
+        $data[] = $seriesRequest->input('series');
+
+        return $this->traitJoint2Update(
+            $data,
+            'series',
+            $seriesRequest->rules(),
+            $supplier,
+            self::TRANSFORMER
+        );
     }
 
     /**
@@ -251,7 +302,7 @@ class SuppliersController extends Controller
      */
     public function destroy(Supplier $supplier)
     {
-        return $this->traitDestroy($supplier);
+        return $this->traitJoint2Destroy($supplier, 'series');
     }
 
     /**
@@ -282,7 +333,7 @@ class SuppliersController extends Controller
      */
     public function destroybyIds(DestroyRequest $request)
     {
-        return $this->traitDestroybyIds($request, self::MODEL);
+        return $this->traitJoint2DestroybyIds($request->input('ids'),'series', self::MODEL);
     }
 
     /**

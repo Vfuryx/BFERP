@@ -303,10 +303,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api', 'middleware' => 
             ->name('api.series.index');
         $api->get('series/{series}', 'SeriesController@show')
             ->name('api.series.show');
-        $api->post('series', 'SeriesController@store')
-            ->name('api.series.store');
-        $api->patch('series/{series}', 'SeriesController@update')
-            ->name('api.series.update');
         $api->delete('series/{series}', 'SeriesController@destroy')
             ->name('api.series.destroy');
         $api->delete('series', 'SeriesController@destroybyids')
