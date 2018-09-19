@@ -49,7 +49,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'expected_freight' => 'numeric',
+                    'expected_freight' => 'required|numeric',
                     'distributions_id' => [
                         'required', 'integer',
                         Rule::exists('distributions', 'id')->where(function ($query) {
@@ -62,11 +62,11 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'deliver_goods_fee' => 'numeric',
-                    'move_upstairs_fee' => 'numeric',
-                    'installation_fee' => 'numeric',
+                    'deliver_goods_fee' => 'required|numeric',
+                    'move_upstairs_fee' => 'required|numeric',
+                    'installation_fee' => 'required|numeric',
                     'total_distribution_fee' => [
-                        'numeric',
+                        'required', 'numeric',
                         function($attribute, $value, $fail) {
                             //设置位数
                             bcscale(2);
@@ -91,7 +91,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'service_car_info' => 'string|max:255',
-                    'take_delivery_goods_fee' => 'numeric',
+                    'take_delivery_goods_fee' => 'required|numeric',
 
                     'take_delivery_goods_ways_id' => [
                         'required', 'integer',
@@ -99,12 +99,12 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'express_fee' => 'numeric',
-                    'service_car_fee' => 'numeric',
+                    'express_fee' => 'required|numeric',
+                    'service_car_fee' => 'required|numeric',
                     'cancel_after_verification_code' => 'string|max:255',
-                    'wooden_frame_costs' => 'numeric',
-                    'preferential_cashback' => 'numeric',
-                    'favorable_cashback' => 'numeric',
+                    'wooden_frame_costs' => 'required|numeric',
+                    'preferential_cashback' => 'required|numeric',
+                    'favorable_cashback' => 'required|numeric',
                     'customer_types_id' => [
                         'required', 'integer',
                         Rule::exists('customer_types', 'id')->where(function ($query) {
@@ -112,7 +112,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'is_invoice' => 'boolean',
-                    'invoice_express_fee' => 'numeric',
+                    'invoice_express_fee' => 'required|numeric',
                     'express_invoice_title' => 'string|max:255',
                     'contract_no' => 'string|max:255',
                     'payment_methods_id' => [
@@ -121,7 +121,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'deposit' => 'numeric',
+                    'deposit' => 'required|numeric',
                     'document_title' => 'string|max:255',
                     'warehouses_id' => [
                         'required', 'integer',
@@ -130,7 +130,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'payment_date' => 'date',
-                    'interest_concessions' => 'numeric',
+                    'interest_concessions' => 'required|numeric',
                     'is_notice' => 'boolean',
                     'is_cancel_after_verification' => 'boolean',
                     'accept_order_user' => 'string|max:255',
@@ -169,15 +169,15 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             return $fail('组合不属于这个产品');
                         },
                     ],
-                    'order_items.*.quantity' => 'numeric',
-                    'order_items.*.total_volume' => 'numeric',
+                    'order_items.*.quantity' => 'required|numeric',
+                    'order_items.*.total_volume' => 'required|numeric',
                     'order_items.*.paint' => 'string|max:255',
                     'order_items.*.is_printing' => 'boolean',
-                    'order_items.*.printing_fee' => 'numeric',
+                    'order_items.*.printing_fee' => 'required|numeric',
                     'order_items.*.is_spot_goods' => 'boolean',
-                    'order_items.*.under_line_univalent' => 'numeric',
+                    'order_items.*.under_line_univalent' => 'required|numeric',
                     'order_items.*.under_line_total_amount' => [
-                        'numeric',
+                        'required|numeric',
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
                             //设置位数
@@ -197,9 +197,9 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             return $fail('配送总计不正确');
                         },
                     ],
-                    'order_items.*.under_line_preferential' => 'numeric',
+                    'order_items.*.under_line_preferential' => 'required|numeric',
                     'order_items.*.under_line_payment' => [
-                        'numeric',
+                        'required', 'numeric',
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
                             //设置位数
@@ -248,7 +248,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'expected_freight' => 'numeric',
+                    'expected_freight' => 'required|numeric',
                     'distributions_id' => [
                         'integer',
                         Rule::exists('distributions', 'id')->where(function ($query) {
@@ -261,11 +261,11 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'deliver_goods_fee' => 'numeric',
-                    'move_upstairs_fee' => 'numeric',
-                    'installation_fee' => 'numeric',
+                    'deliver_goods_fee' => 'required|numeric',
+                    'move_upstairs_fee' => 'required|numeric',
+                    'installation_fee' => 'required|numeric',
                     'total_distribution_fee' => [
-                        'numeric',
+                        'required', 'numeric',
                         function($attribute, $value, $fail) {
                             //设置位数
                             bcscale(2);
@@ -290,7 +290,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'service_car_info' => 'string|max:255',
-                    'take_delivery_goods_fee' => 'numeric',
+                    'take_delivery_goods_fee' => 'required|numeric',
 
                     'take_delivery_goods_ways_id' => [
                         'integer',
@@ -298,12 +298,12 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'express_fee' => 'numeric',
-                    'service_car_fee' => 'numeric',
+                    'express_fee' => 'required|numeric',
+                    'service_car_fee' => 'required|numeric',
                     'cancel_after_verification_code' => 'string|max:255',
-                    'wooden_frame_costs' => 'numeric',
-                    'preferential_cashback' => 'numeric',
-                    'favorable_cashback' => 'numeric',
+                    'wooden_frame_costs' => 'required|numeric',
+                    'preferential_cashback' => 'required|numeric',
+                    'favorable_cashback' => 'required|numeric',
                     'customer_types_id' => [
                         'required', 'integer',
                         Rule::exists('customer_types', 'id')->where(function ($query) {
@@ -311,7 +311,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'is_invoice' => 'boolean',
-                    'invoice_express_fee' => 'numeric',
+                    'invoice_express_fee' => 'required|numeric',
                     'express_invoice_title' => 'string|max:255',
                     'contract_no' => 'string|max:255',
                     'payment_methods_id' => [
@@ -320,7 +320,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             $query->where('status', 1);
                         }),
                     ],
-                    'deposit' => 'numeric',
+                    'deposit' => 'required|numeric',
                     'document_title' => 'string|max:255',
                     'warehouses_id' => [
                         'integer',
@@ -329,7 +329,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
                         }),
                     ],
                     'payment_date' => 'date',
-                    'interest_concessions' => 'numeric',
+                    'interest_concessions' => 'required|numeric',
                     'is_notice' => 'boolean',
                     'is_cancel_after_verification' => 'boolean',
                     'accept_order_user' => 'string|max:255',
@@ -372,15 +372,15 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             return $fail('组合不属于这个产品');
                         },
                     ],
-                    'order_items.*.quantity' => 'numeric',
-                    'order_items.*.total_volume' => 'numeric',
+                    'order_items.*.quantity' => 'required|numeric',
+                    'order_items.*.total_volume' => 'required|numeric',
                     'order_items.*.paint' => 'string|max:255',
                     'order_items.*.is_printing' => 'boolean',
-                    'order_items.*.printing_fee' => 'numeric',
+                    'order_items.*.printing_fee' => 'required|numeric',
                     'order_items.*.is_spot_goods' => 'boolean',
-                    'order_items.*.under_line_univalent' => 'numeric',
+                    'order_items.*.under_line_univalent' => 'required|numeric',
                     'order_items.*.under_line_total_amount' => [
-                        'numeric',
+                        'required', 'numeric',
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
                             //设置位数
@@ -400,9 +400,9 @@ class CustomerServiceDepartmentRequset extends FormRequest
                             return $fail('配送总计不正确');
                         },
                     ],
-                    'order_items.*.under_line_preferential' => 'numeric',
+                    'order_items.*.under_line_preferential' => 'required|numeric',
                     'order_items.*.under_line_payment' => [
-                        'numeric',
+                        'required|numeric',
                         function($attribute, $value, $fail) {
                             $ex = explode('.', $attribute);
                             //设置位数
@@ -452,6 +452,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'freight_types_id.integer' => '运费类型id必须int类型',
             'freight_types_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'expected_freight.required' => '预计运费必填',
             'expected_freight.numeric' => '预计运费必须是数字',
 
             'distributions_id.required' => '配送id必填',
@@ -462,12 +463,16 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'distribution_methods_id.integer' => '配送方式id必须int类型',
             'distribution_methods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'deliver_goods_fee.required' => '送货费用必填',
             'deliver_goods_fee.numeric' => '送货费用必须是数字',
 
+            'move_upstairs_fee.required' => '搬楼费用必填',
             'move_upstairs_fee.numeric' => '搬楼费用必须是数字',
 
+            'installation_fee.required' => '安装费必填',
             'installation_fee.numeric' => '安装费必须是数字',
 
+            'total_distribution_fee.required' => '配送总计必填',
             'total_distribution_fee.numeric' => '配送总计必须是数字',
 
             'distribution_phone.string' => '配送电话必须string类型',
@@ -483,23 +488,29 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'service_car_info.string' => '服务车信息（配送信息）必须string类型',
             'service_car_info.max' => '服务车信息（配送信息）最大长度为255',
 
+            'take_delivery_goods_fee.required' => '提货费用必填',
             'take_delivery_goods_fee.numeric' => '提货费用必须是数字',
 
             'take_delivery_goods_ways_id.required' => '提货方式id必填',
             'take_delivery_goods_ways_id.integer' => '提货方式id必须int类型',
             'take_delivery_goods_ways_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'express_fee.required' => '快递费用必填',
             'express_fee.numeric' => '快递费用必须是数字',
 
+            'service_car_fee.required' => '服务车金额（家装服务）必填',
             'service_car_fee.numeric' => '服务车金额（家装服务）必须是数字',
 
             'cancel_after_verification_code.string' => '核销码必须string类型',
             'cancel_after_verification_code.max' => '核销码最大长度为255',
 
+            'wooden_frame_costs.required' => '木架费必填',
             'wooden_frame_costs.numeric' => '木架费必须是数字',
 
+            'preferential_cashback.required' => '优惠返现必填',
             'preferential_cashback.numeric' => '优惠返现必须是数字',
 
+            'favorable_cashback.required' => '好评返现必填',
             'favorable_cashback.numeric' => '好评返现必须是数字',
 
             'customer_types_id.required' => '客户类型idid必填',
@@ -508,8 +519,10 @@ class CustomerServiceDepartmentRequset extends FormRequest
 
             'is_invoice.boolean' => '是否要发票必须是布尔类型',
 
+            'invoice_express_fee.required' => '发票快递费必填',
             'invoice_express_fee.numeric' => '发票快递费必须是数字',
 
+            'express_invoice_title.required' => '发票快递费必填',
             'express_invoice_title.numeric' => '发票快递费必须是数字',
 
             'express_invoice_title.string' => '快递发票抬头必须string类型',
@@ -522,6 +535,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'payment_methods_id.integer' => '付款方式id必须int类型',
             'payment_methods_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'deposit.required' => '订金必须必填',
             'deposit.numeric' => '订金必须是数字',
 
             'document_title.string' => '单据头必须string类型',
@@ -533,6 +547,7 @@ class CustomerServiceDepartmentRequset extends FormRequest
 
             'payment_date.date' => '支付日期必须date类型',
 
+            'interest_concessions.required' => '让利必填',
             'interest_concessions.numeric' => '让利必须是数字',
 
             'is_notice.boolean' => '等通知发货必须是布尔类型',
@@ -606,8 +621,10 @@ class CustomerServiceDepartmentRequset extends FormRequest
             'order_items.*.combinations_id.integer' => '组合id必须int类型',
             'order_items.*.combinations_id.exists' => '需要添加的id在数据库中未找到或未启用',
 
+            'order_items.*.quantity.required' => '数量必填',
             'order_items.*.quantity.numeric' => '数量必须是数字',
 
+            'order_items.*.total_volume.required' => '总体积必填',
             'order_items.*.total_volume.numeric' => '总体积必须是数字',
 
             'order_items.*.paint.string' => '油漆必须string类型',
@@ -615,16 +632,21 @@ class CustomerServiceDepartmentRequset extends FormRequest
 
             'order_items.*.is_printing.boolean' => '是否需要印刷必须是布尔类型',
 
+            'order_items.*.printing_feee.required' => '印刷费用必填',
             'order_items.*.printing_feee.numeric' => '印刷费用必须是数字',
 
             'order_items.*.is_spot_goods.boolean' => '是否现货必须是布尔类型',
 
+            'order_items.*.under_line_univalent.required' => '线下单价必填',
             'order_items.*.under_line_univalent.numeric' => '线下单价必须是数字',
 
+            'order_items.*.under_line_total_amount.required' => '线下金额必填',
             'order_items.*.under_line_total_amount.numeric' => '线下金额必须是数字',
 
+            'order_items.*.under_line_preferential.required' => '优惠（线下）必填',
             'order_items.*.under_line_preferential.numeric' => '优惠（线下）必须是数字',
 
+            'order_items.*.under_line_payment.required' => '实际支付金额必填',
             'order_items.*.under_line_payment.numeric' => '实际支付金额必须是数字',
 
         ];

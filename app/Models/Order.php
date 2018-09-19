@@ -485,6 +485,28 @@ class Order extends Model
         });
     }
 
+    /**
+     * 设定承诺发货时间。
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPromiseShipTimeAttribute($value)
+    {
+        $this->attributes['promise_ship_time'] = $value === '' ? null : $value;
+    }
+
+    /**
+     * 设定支付日期。
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setPaymentDateAttribute($value)
+    {
+        $this->attributes['payment_date'] = $value === '' ? null : $value;
+    }
+
     public function shop()
     {
         return $this->belongsTo(Shop::class,'shops_id');

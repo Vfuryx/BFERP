@@ -236,14 +236,13 @@ trait CURDTrait
             $model = $model::query()->whereIn('id', $ids)->with($with);
 
             $model->get()->map(function ($item) use ($with) {
-                if (!$item->$with()->delete()) {
+                if ($item->$with()->delete() === false)
                     throw new DeleteResourceFailedException('The given data was invalid.');
-                }
             });
 
-            if (!$model->delete()) {
+            if ($model->delete() === false)
                 throw new DeleteResourceFailedException('The given data was invalid.');
-            }
+
         });
 
         return $this->errorResponse(204);
