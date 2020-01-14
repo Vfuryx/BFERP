@@ -1,5 +1,4 @@
 <template>
-    <!-- :show-timeout="200"-->
         <el-scrollbar wrapClass="scrollbar-wrapper" :style="mTop">
             <el-menu
                     mode="vertical"

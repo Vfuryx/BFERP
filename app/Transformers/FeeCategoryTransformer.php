@@ -12,6 +12,7 @@ class FeeCategoryTransformer extends TransformerAbstract
         return [
             'id' => $feecategory->id,
             'name' => $feecategory->name,
+            'status' => $feecategory->status,
             'created_at' => $feecategory->created_at
                                     ->toDateTimeString(),
             'updated_at' => $feecategory->updated_at

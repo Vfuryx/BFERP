@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-
 class FreightTypeRequest extends FormRequest
 {
 
@@ -15,17 +14,23 @@ class FreightTypeRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'status' => 'boolean',
+                ];
+                break;
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32',
-                    'is_default' => 'required|boolean'
+                    'name' => 'required|string',
+                    'is_default' => 'boolean',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
+                    'name' => 'string',
                     'is_default' => 'boolean',
-                    'id'=>'exists:freight_types'
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -34,12 +39,11 @@ class FreightTypeRequest extends FormRequest
     public function messages()
     {
         return [
+            'status.boolean' => '状态必须布尔类型',
+            'status.required' => '状态必填',
             'name.required' => '运费名称必填',
             'name.string' => '运费名称必须string类型',
-            'name.between' => '运费名称长度[5-32]',
-            'is_default.required' => '是否默认必填',
             'is_default.boolean' => '是否默认必须布尔类型',
-            'id.exists'=>'需要更改的数据id在数据库中未找到'
         ];
     }
 
@@ -47,7 +51,8 @@ class FreightTypeRequest extends FormRequest
     {
         return [
             'name' => '运费名称',
-            'is_default' => '是否默认'
+            'is_default' => '是否默认',
+            'status' => '记账类型状态'
         ];
     }
 }

@@ -1,18 +1,18 @@
 const tagsView = {
   state: {
     visitedViews: [
-        /*{
+        {
           name: '首页',
-          path: '/',
+          path: '/dashboard',
           title: '首页'
-        }*/
+        }
     ],
     cachedViews: [
-        /*{
+        {
           name: '首页',
-          path: '/',
+          path: '/dashboard',
           title: '首页'
-        }*/
+        }
     ]
   },
   mutations: {
@@ -45,21 +45,29 @@ const tagsView = {
     DEL_OTHERS_VIEWS: (state, view) => {
       for (const [i, v] of state.visitedViews.entries()) {
         if (v.path === view.path) {
-          state.visitedViews = state.visitedViews.slice(i, i + 1)
+          state.visitedViews = state.visitedViews.slice(i, i + 1);
           break
         }
       }
       for (const i of state.cachedViews) {
         if (i === view.name) {
           const index = state.cachedViews.indexOf(i)
-          state.cachedViews = state.cachedViews.slice(index, i + 1)
+          state.cachedViews = state.cachedViews.slice(index, i + 1);
           break
         }
       }
     },
     DEL_ALL_VIEWS: (state) => {
-      state.visitedViews = []
-      state.cachedViews = []
+      state.visitedViews = [{
+        name: '首页',
+        path: '/dashboard',
+        title: '首页'
+      }];
+      state.cachedViews = [{
+        name: '首页',
+        path: '/dashboard',
+        title: '首页'
+      }]
     }
   },
   actions: {

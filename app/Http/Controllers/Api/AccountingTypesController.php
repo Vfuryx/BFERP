@@ -2,94 +2,244 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\Api\AccountingTypeRequest;
-use Illuminate\Http\Request;
 use App\Models\AccountingType as AccType;
 use App\Transformers\AccountingTypeTransformer;
+use App\Http\Requests\Api\AccountingTypeRequest;
+use App\Http\Requests\Api\EditStatuRequest;
+use App\Http\Requests\Api\DestroyRequest;
+use App\Http\Controllers\Traits\CURDTrait;
 
-
+/**
+ * 记账类型资源
+ * @Resource("AccountingTypes",uri="/api")
+ */
 class AccountingTypesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return $this->response->collection(AccType::all(),new AccountingTypeTransformer());
-    }
+    use CURDTrait;
+
+    const TRANSFORMER = AccountingTypeTransformer::class;
+    const MODEL = AccType::class;
 
     /**
-     * Show the form for creating a new resource.
+     * 获取所有记账类型
      *
-     * @return \Illuminate\Http\Response
+     * @Get("/acctypes{?status}")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("status", type="boolean", description="获取的状态", required=false, default="all")
+     * })
+     * @Response(200, body={
+     *       "data": {
+     *           {
+     *               "id": 1,
+     *               "name": "记账类型1",
+     *               "status": true,
+     *               "created_at": "2018-06-14 13:59:42",
+     *               "updated_at": "2018-06-14 13:59:42"
+     *           },
+     *           {
+     *               "id": 2,
+     *               "name": "记账类型2",
+     *               "status": false,
+     *               "created_at": "2018-06-14 13:59:46",
+     *               "updated_at": "2018-06-14 13:59:46"
+     *           }
+     *       },
+     *       "meta": {
+     *           "pagination": {
+     *               "total": 2,
+     *               "count": 2,
+     *               "per_page": 10,
+     *               "current_page": 1,
+     *               "total_pages": 1,
+     *               "links": {
+     *                   "previous": null,
+     *                   "next": "http://127.0.0.1:8000/api/acctypes?page=1"
+     *               }
+     *           }
+     *       }
+     * })
      */
-    public function create()
+    public function index(AccountingTypeRequest $request)
     {
-        //
+        return $this->allOrPage($request, self::MODEL, self::TRANSFORMER, 10);
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * 新增记账类型
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @Post("/acctypes")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("name", description="记账类型名称", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=false, default=true),
+     * })
+     * @Transaction({
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "name": {
+     *                  "记账类型名称必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(201, body={
+     *          "id": 1,
+     *          "name": "记账类型1",
+     *          "status": true,
+     *          "created_at": "2018-06-14 13:43:37",
+     *          "updated_at": "2018-06-14 13:43:37",
+     *          "meta": {
+     *              "status_code": "201"
+     *          }
+     *      })
+     * })
      */
     public function store(AccountingTypeRequest $request)
     {
-        $acctype=new AccType();
-        $acctype->fill($request->all());
-        $acctype->save();
-        return $this->response->item($acctype, new AccountingTypeTransformer())
-        ->setStatusCode(201);
+        return $this->traitStore($request->validated(), self::MODEL, self::TRANSFORMER);
     }
 
     /**
-     * Display the specified resource.
+     * 显示单条记账类型
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @Get("/acctypes/:id")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(404, body={
+     *          "message": "No query results for model ",
+     *          "status_code": 404,
+     *      }),
+     *      @Response(200, body={
+     *          "id": 1,
+     *          "name": "记账类型1",
+     *          "status": true,
+     *          "created_at": "2018-06-14 13:59:42",
+     *          "updated_at": "2018-06-14 13:59:42"
+     *      })
+     * })
      */
-    public function show($id)
+    public function show(AccType $acctype)
     {
-        $acctype = AccType::findOrFail($id);
-        return $this->response->item($acctype, new AccountingTypeTransformer());
+        return $this->traitShow($acctype, self::TRANSFORMER);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 修改记账类型
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @Patch("/acctypes/:id")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(404, body={
+     *          "message": "No query results for model ",
+     *          "status_code": 404,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "name": {
+     *                  "记账类型名称必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(201, body={
+     *          "id": 1,
+     *          "name": "记账类型10",
+     *          "status": true,
+     *          "created_at": "2018-06-14 13:59:42",
+     *          "updated_at": "2018-06-14 14:06:30"
+     *      })
+     * })
      */
-    public function edit($id)
+    public function update(AccountingTypeRequest $request, AccType $acctype)
     {
-        //
+        return $this->traitUpdate($request, $acctype, self::TRANSFORMER);
     }
 
     /**
-     * Update the specified resource in storage.
+     * 删除记账类型
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(AccountingTypeRequest $request,AccType $acctype)
-    {
-        $acctype->update($request->all());
-        return $this->response->item($acctype, new AccountingTypeTransformer());
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @Delete("/acctypes/:id")
+     * @Versions({"v1"})
+     * @Transaction({
+     *      @Response(404, body={
+     *          "message": "No query results for model ",
+     *          "status_code": 404,
+     *      }),
+     *      @Response(204, body={})
+     * })
      */
     public function destroy(AccType $acctype)
     {
-        $acctype->delete();
-        return $this->response->item($acctype, new AccountingTypeTransformer());
+        return $this->traitDestroy($acctype);
+    }
+
+    /**
+     * 删除一组记账类型
+     *
+     * @Delete("/acctypes")
+     * @Versions({"v1"})
+     * @Parameters({
+     * @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true)
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "删除错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function destroybyIds(DestroyRequest $request)
+    {
+        return $this->traitDestroybyIds($request, self::MODEL);
+    }
+
+    /**
+     * 更改一组记账类型状态
+     *
+     * @PUT("/acctypes/editstatus")
+     * @Versions({"v1"})
+     * @Parameters({
+     *      @Parameter("ids", description="记账类型id组 格式: 1,2,3,4 ", required=true),
+     *      @Parameter("status",type="boolean", description="状态(0:停用，1:启用)", required=true),
+     * })
+     * @Transaction({
+     *      @Response(500, body={
+     *          "message": "更改错误",
+     *          "code": 500,
+     *          "status_code": 500,
+     *      }),
+     *      @Response(422, body={
+     *          "message": "422 Unprocessable Entity",
+     *           "errors": {
+     *              "ids": {
+     *                  "id组必填"
+     *              },
+     *              "status": {
+     *                  "状态必填"
+     *              }
+     *           },
+     *          "status_code": 422,
+     *      }),
+     *      @Response(204, body={})
+     * })
+     */
+    public function editStatusByIds(EditStatuRequest $request)
+    {
+        return $this->traitEditStatusByIds($request, self::MODEL);
     }
 }

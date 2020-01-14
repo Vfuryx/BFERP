@@ -1,14 +1,14 @@
 webpackJsonp([14],{
 
-/***/ 416:
+/***/ 462:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(582)
+var __vue_script__ = __webpack_require__(552)
 /* template */
-var __vue_template__ = __webpack_require__(583)
+var __vue_template__ = __webpack_require__(553)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -25,7 +25,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\views\\returnVisit\\afterSalesVisit.vue"
+Component.options.__file = "resources\\assets\\js\\views\\order\\orderSettlement.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -34,9 +34,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-4c4bdbdd", Component.options)
+    hotAPI.createRecord("data-v-0c906728", Component.options)
   } else {
-    hotAPI.reload("data-v-4c4bdbdd", Component.options)
+    hotAPI.reload("data-v-0c906728", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -48,7 +48,7 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 582:
+/***/ 552:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -60,40 +60,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            newOpt: [{
-                cnt: '修改',
-                icon: 'bf-change'
-            }, {
-                cnt: '退审',
-                icon: 'bf-auditfaild'
-            }, {
-                cnt: '批量处理',
-                icon: 'bf-more'
-            }, {
-                cnt: '导入',
-                icon: 'bf-in'
-            }, {
-                cnt: '导出',
-                icon: 'bf-out'
-            }, {
-                cnt: '回访',
-                icon: 'bf-revisit'
-            }, {
-                cnt: '刷新',
-                icon: 'bf-refresh'
-            }]
-        };
-    },
-    mounted: function mounted() {
-        this.$store.state.opt.opts = this.newOpt;
+  data: function data() {
+    return {
+      newOpt: [{
+        cnt: '修改',
+        icon: 'bf-change',
+        ent: this.test
+      }, {
+        cnt: '退审',
+        icon: 'bf-audit',
+        ent: this.test
+      }, {
+        cnt: '结算',
+        icon: 'bf-finSettle',
+        ent: this.test
+      }, {
+        cnt: '导出',
+        icon: 'bf-out',
+        ent: this.test
+      }, {
+        cnt: '刷新',
+        icon: 'bf-refresh',
+        ent: this.test
+      }]
+    };
+  },
+
+  methods: {
+    test: function test() {
+      console.log(1);
     }
+  },
+  mounted: function mounted() {
+    this.$store.state.opt.opts = this.newOpt;
+    this.$store.commit('change', this.newOpt);
+    var that = this;
+    $(window).resize(function () {
+      return function () {
+        that.$store.state.opt.opts = that.newOpt;
+        that.$store.commit('change', that.newOpt);
+      }();
+    });
+  }
 });
 
 /***/ }),
 
-/***/ 583:
+/***/ 553:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -107,7 +120,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [_c("h2", [_vm._v("售后回访")])])
+    return _c("div", [_c("h2", [_vm._v("订单结算")])])
   }
 ]
 render._withStripped = true
@@ -115,7 +128,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-4c4bdbdd", module.exports)
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-0c906728", module.exports)
   }
 }
 

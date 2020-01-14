@@ -21,6 +21,7 @@
 * 项目根目录执行命令 `npm install` (windows 及 虚拟机用户请使用`npm install --no-bin-links`)安装前端扩展;
   具体前端工作流参照：http://note.youdao.com/noteshare?id=b1a0bd5e5858a82796ab02285d38e12f
 * 生成密钥 `php artisan key:generate`
+* 生成 JWT 密钥 `php artisan jwt:secret`
 
 
 ###  composer 扩展包说明
@@ -31,7 +32,7 @@
 | tymon/jwt-auth | jwt认证 | 用户登录授权策略 |
 | barryvdh/laravel-debugbar | 页面调试工具栏 (对 phpdebugbar 的封装) | 开发环境中的 DEBUG |
 | viacreative/sudo-su | 用户切换 | 开发环境中快速切换登录账号 |
-| gregwar/captcha | 验证码 | api开发验证码 |
+| gregwar/captcha | 图片验证码 | api开发专用图片验证码 |
 *  `liyu/dingo-serializer-switch`: 单一资源输出去掉data包裹,
    在路由中添加 `'middleware' => ['serializer:array', 'bindings']`中间件：
    api输出结构：
@@ -42,7 +43,7 @@
     "markname": "取消订单",
     "color": "#555555",
     "description": "描述",
-    "status": 0,
+    "status": false,
     "created_at": "2018-06-11 15:04:17",
     "updated_at": "2018-06-11 15:04:17"
 }
@@ -57,7 +58,7 @@
             "markname": "取消订单",
             "color": "#555555",
             "description": "描述",
-            "status": 0,
+            "status": false,
             "created_at": "2018-06-11 15:04:17",
             "updated_at": "2018-06-11 15:04:17"
         }
@@ -70,10 +71,41 @@
 ### API说明
  
 ---
+* 调用说明：除了登录、注册以外，其他所有调用都必须在header中附带Authorization头 `Authorization:bearer eyJ0eXA...`
+* 生成接口文档命令：
 
+`php artisan api:docs --name API文档 --output-file docs/apidocs/apidoc.md`
 
- 
+编写规则：https://laravel-china.org/docs/dingo-api/2.0.0/API-Blueprint-Documentation/1454
 
 ### 前端开发说明 
  
- ---
+ --- 
+ 路由方面，根据router中的路由配置文件index.js，组件不需要注册，在index.js中添加路由即可动态生成父级及子级路由。
+ ```
+  {
+     name: 'CRMCustomer',
+     path: '/CRMCustomer',
+     component: Layout,
+     redirect: '/CRMCustomer/customerManagement',
+     meta: {title: 'CRM客户管理', icon: 'cus',requireAuth: true},
+     children: [
+       {
+         path: 'customerMag',
+         name: 'CustomerMag',
+         component: resolve => void(require(['../views/CRMCustomer/customerMag.vue'], resolve)),
+         meta: {title: '客户管理', icon: 'cusMag',requireAuth: true}
+       },
+       {
+         path: 'SMSTemplate',
+         name: 'SMSTemplate',
+         component: resolve => void(require(['../views/CRMCustomer/SMSTemplate.vue'], resolve)),
+         meta: {title: '短信模板', icon: 'ordMsg',requireAuth: true}
+       }
+     ]
+   }
+ ```
+ * 注：children中至少有两个子路由才会展示子级，否则按一个父级路由处理；
+ 
+ 
+ 

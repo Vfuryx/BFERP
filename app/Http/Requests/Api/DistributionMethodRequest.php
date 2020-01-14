@@ -14,15 +14,21 @@ class DistributionMethodRequest extends FormRequest
     public function rules()
     {
         switch ($this->method()) {
+            case 'GET':
+                return [
+                    'status' => 'boolean',
+                ];
+                break;
             case 'POST':
                 return [
-                    'name' => 'required|string|between:5,32'
+                    'name' => 'required|string',
+                    'status' => 'boolean',
                 ];
                 break;
             case 'PATCH':
                 return [
-                    'name' => 'string|between:5,32',
-                    'id'=>'exists:distribution_methods'
+                    'name' => 'string',
+                    'status' => 'boolean',
                 ];
                 break;
         }
@@ -32,16 +38,17 @@ class DistributionMethodRequest extends FormRequest
     {
         return [
             'name.required' => '配送方式名称必填',
-            'name.between' => '配送方式名称长度[5-32]位',
             'name.string' => '配送方式名称必须string类型',
-            'id.exists'=>'需要更改的数据id在数据库中未找到',
+            'status.boolean' => '状态必须布尔类型',
+            'status.required' => '状态必填',
         ];
     }
 
     public function attributes()
     {
         return [
-            'name' => '配送方式名称'
+            'name' => '配送方式名称',
+            'status' => '配送方式状态'
         ];
     }
 

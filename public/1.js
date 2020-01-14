@@ -1,19 +1,19 @@
 webpackJsonp([1],{
 
-/***/ 393:
+/***/ 448:
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(525)
-  __webpack_require__(527)
+  __webpack_require__(514)
+  __webpack_require__(516)
 }
-var normalizeComponent = __webpack_require__(6)
+var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(529)
+var __vue_script__ = __webpack_require__(518)
 /* template */
-var __vue_template__ = __webpack_require__(531)
+var __vue_template__ = __webpack_require__(519)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -53,17 +53,17 @@ module.exports = Component.exports
 
 /***/ }),
 
-/***/ 525:
+/***/ 514:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(526);
+var content = __webpack_require__(515);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("cb2e752a", content, false, {});
+var update = __webpack_require__(6)("cb2e752a", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -80,10 +80,10 @@ if(false) {
 
 /***/ }),
 
-/***/ 526:
+/***/ 515:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
@@ -95,17 +95,17 @@ exports.push([module.i, "/* reset element-ui css */\n.login-container .el-input 
 
 /***/ }),
 
-/***/ 527:
+/***/ 516:
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(528);
+var content = __webpack_require__(517);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("6ee0f457", content, false, {});
+var update = __webpack_require__(6)("6ee0f457", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -122,27 +122,27 @@ if(false) {
 
 /***/ }),
 
-/***/ 528:
+/***/ 517:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(4)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  background-color: #2d3a4b;\n}\n.login-container .login-form[data-v-094c7742] {\n    position: absolute;\n    left: 0;\n    right: 0;\n    width: 520px;\n    padding: 35px 35px 15px 35px;\n    margin: 120px auto;\n}\n.login-container .tips[data-v-094c7742] {\n    font-size: 14px;\n    color: #fff;\n    margin-bottom: 10px;\n}\n.login-container .tips span[data-v-094c7742]:first-of-type {\n      margin-right: 16px;\n}\n.login-container .svg-container[data-v-094c7742] {\n    padding: 6px 5px 6px 15px;\n    color: #889aa4;\n    vertical-align: middle;\n    width: 30px;\n    display: inline-block;\n}\n.login-container .svg-container_login[data-v-094c7742] {\n      font-size: 20px;\n}\n.login-container .title[data-v-094c7742] {\n    font-size: 26px;\n    font-weight: 400;\n    color: #eee;\n    margin: 0px auto 40px auto;\n    text-align: center;\n    font-weight: bold;\n}\n.login-container .show-pwd[data-v-094c7742] {\n    position: absolute;\n    right: 10px;\n    top: 7px;\n    font-size: 16px;\n    color: #889aa4;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n", ""]);
+exports.push([module.i, "\n.login-container[data-v-094c7742] {\n  position: fixed;\n  height: 100%;\n  width: 100%;\n  background-color: #2d3a4b;\n}\n.login-container .login-form[data-v-094c7742] {\n    position: absolute;\n    left: 0;\n    right: 0;\n    width: 520px;\n    padding: 35px 35px 15px 35px;\n    margin: 120px auto;\n}\n.login-container .tips[data-v-094c7742] {\n    font-size: 14px;\n    color: #fff;\n    margin-bottom: 10px;\n}\n.login-container .tips span[data-v-094c7742]:first-of-type {\n      margin-right: 16px;\n}\n.login-container .svg-container[data-v-094c7742] {\n    padding: 6px 5px 6px 15px;\n    color: #889aa4;\n    vertical-align: middle;\n    width: 30px;\n    display: inline-block;\n}\n.login-container .svg-container_login[data-v-094c7742] {\n      font-size: 20px;\n}\n.login-container .title[data-v-094c7742] {\n    font-size: 26px;\n    font-weight: 400;\n    color: #eee;\n    margin: 0px auto 40px auto;\n    text-align: center;\n    font-weight: bold;\n}\n.login-container .show-pwd[data-v-094c7742] {\n    position: absolute;\n    right: 10px;\n    top: 7px;\n    font-size: 16px;\n    color: #889aa4;\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.login-container .yzc[data-v-094c7742] {\n    right: 0;\n    top: 5px;\n}\n", ""]);
 
 // exports
 
 
 /***/ }),
 
-/***/ 529:
+/***/ 518:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils_validate_js__ = __webpack_require__(530);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__router_index_js__ = __webpack_require__(42);
 //
 //
 //
@@ -174,38 +174,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'login',
   data: function data() {
-    var validateUsername = function validateUsername(rule, value, callback) {
-      //  用户名输入有误
-      if (!Object(__WEBPACK_IMPORTED_MODULE_0__utils_validate_js__["a" /* isvalidUsername */])(value)) {
-        callback(new Error('请输入正确的用户名'));
-      } else {
-        callback();
-      }
-    };
-    var validatePass = function validatePass(rule, value, callback) {
-      if (value.length < 5) {
-        callback(new Error('密码不能小于5位'));
-      } else {
-        callback();
-      }
-    };
     return {
       loginForm: {
-        username: 'admin',
-        password: 'admin'
+        username: '',
+        password: '',
+        code: '',
+        key: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
       },
       loading: false,
-      pwdType: 'password'
+      pwdType: 'password',
+      src: ''
     };
   },
 
@@ -219,19 +214,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }
     },
 
-    //  登录跳转
-    handleLogin: function handleLogin() {
+    getCode: function getCode() {
       var _this = this;
 
-      this.$refs.loginForm.validate(function (valid) {
+      this.$post('/captchas').then(function (res) {
+        _this.src = res.captcha_image_content;
+        _this.loginForm.key = res.captcha_key;
+        _this.loginForm.code = '';
+        $('#yzCode').focus();
+      });
+    },
+    submitForm: function submitForm(formName) {
+      var _this2 = this;
+
+      this.$refs[formName].validate(function (valid) {
         if (valid) {
-          _this.loading = true;
-          _this.$store.dispatch('Login', _this.loginForm).then(function () {
-            _this.loading = false;
-            //  跳转到根路径
-            _this.$router.push({ path: '/' });
-          }).catch(function () {
-            _this.loading = false;
+          var data = {
+            username: _this2.loginForm.username,
+            password: _this2.loginForm.password,
+            captcha_key: _this2.loginForm.key,
+            captcha_code: _this2.loginForm.code
+          };
+          _this2.$store.dispatch('Login', data).then(function () {
+            _this2.$message({
+              message: '登录成功',
+              type: 'success'
+            });
+            _this2.$store.dispatch('Profile');
+            __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].push({
+              path: "/",
+              query: { redirect: __WEBPACK_IMPORTED_MODULE_0__router_index_js__["a" /* default */].currentRoute.fullPath }
+            });
+          }).catch(function (error) {
+            if (error.response) {
+              var msg = error.response.data.message;
+              _this2.$message.error({
+                message: msg
+              });
+              _this2.getCode();
+              _this2.loginForm.code = '';
+            }
           });
         } else {
           console.log('error submit!!');
@@ -239,57 +261,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       });
     }
+  },
+  mounted: function mounted() {
+    this.getCode();
   }
 });
 
 /***/ }),
 
-/***/ 530:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isvalidUsername;
-/* unused harmony export validateURL */
-/* unused harmony export validateLowerCase */
-/* unused harmony export validateUpperCase */
-/* unused harmony export validatAlphabets */
-/**
- * Created by jiachenpan on 16/11/18.
- */
-
-//判断是不是有效的用户名，设定用户名只能是admin,visitor
-function isvalidUsername(str) {
-  var valid_map = ['admin', 'visitor'];
-  return valid_map.indexOf(str.trim()) >= 0;
-}
-
-/* 合法uri*/
-function validateURL(textval) {
-  var urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
-  return urlregex.test(textval);
-}
-
-/* 小写字母*/
-function validateLowerCase(str) {
-  var reg = /^[a-z]+$/;
-  return reg.test(str);
-}
-
-/* 大写字母*/
-function validateUpperCase(str) {
-  var reg = /^[A-Z]+$/;
-  return reg.test(str);
-}
-
-/* 大小写字母*/
-function validatAlphabets(str) {
-  var reg = /^[A-Za-z]+$/;
-  return reg.test(str);
-}
-
-/***/ }),
-
-/***/ 531:
+/***/ 519:
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -313,7 +293,7 @@ var render = function() {
           }
         },
         [
-          _c("h3", { staticClass: "title" }, [_vm._v("vue-element-admin")]),
+          _c("h3", { staticClass: "title" }, [_vm._v("博飞ERP系统")]),
           _vm._v(" "),
           _c(
             "el-form-item",
@@ -331,7 +311,7 @@ var render = function() {
                   name: "username",
                   type: "text",
                   autoComplete: "on",
-                  placeholder: "username"
+                  placeholder: "请输入用户名"
                 },
                 model: {
                   value: _vm.loginForm.username,
@@ -360,19 +340,7 @@ var render = function() {
                 attrs: {
                   name: "password",
                   type: _vm.pwdType,
-                  autoComplete: "on",
-                  placeholder: "password"
-                },
-                nativeOn: {
-                  keyup: function($event) {
-                    if (
-                      !("button" in $event) &&
-                      _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-                    ) {
-                      return null
-                    }
-                    return _vm.handleLogin($event)
-                  }
+                  placeholder: "请输入密码"
                 },
                 model: {
                   value: _vm.loginForm.password,
@@ -395,20 +363,52 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-form-item",
+            { attrs: { prop: "code" } },
+            [
+              _c("span", { staticClass: "svg-container" }, [
+                _c("i", { staticClass: "iconfont bf-yzm" })
+              ]),
+              _vm._v(" "),
+              _c("el-input", {
+                attrs: {
+                  name: "yzCode",
+                  type: "text",
+                  placeholder: "请输入验证码",
+                  id: "yzCode"
+                },
+                model: {
+                  value: _vm.loginForm.code,
+                  callback: function($$v) {
+                    _vm.$set(_vm.loginForm, "code", $$v)
+                  },
+                  expression: "loginForm.code"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "span",
+                { staticClass: "show-pwd yzc", on: { click: this.getCode } },
+                [_c("img", { attrs: { src: _vm.src, alt: "" } })]
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
             [
               _c(
                 "el-button",
                 {
                   staticStyle: { width: "100%" },
                   attrs: { type: "primary", loading: _vm.loading },
-                  nativeOn: {
+                  on: {
                     click: function($event) {
-                      $event.preventDefault()
-                      return _vm.handleLogin($event)
+                      _vm.submitForm("loginForm")
                     }
                   }
                 },
-                [_vm._v("\n        Sign in\n      ")]
+                [_vm._v("\n                登录\n            ")]
               )
             ],
             1

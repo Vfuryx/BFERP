@@ -16,6 +16,7 @@ class CreateDistributionMethodsTable extends Migration
         Schema::create('distribution_methods', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->default('')->comment('配送方式名称');
+            $table->boolean('status')->default(true)->comment('状态：0=停用，1=启用');
             $table->timestamps();
         });
     }

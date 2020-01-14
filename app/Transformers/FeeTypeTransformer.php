@@ -7,6 +7,10 @@ use League\Fractal\TransformerAbstract;
 
 class FeeTypeTransformer extends TransformerAbstract
 {
+    protected $availableIncludes = [
+        'feeCategory'
+    ];
+
     public function transform(FeeType $feetype)
     {
         return [
@@ -20,7 +24,13 @@ class FeeTypeTransformer extends TransformerAbstract
             'created_at' => $feetype->created_at
                                     ->toDateTimeString(),
             'updated_at' => $feetype->updated_at
-                                    ->toDateTimeString(),
+                                    ->toDateTimeString()
         ];
     }
+
+    public function includeFeeCategory(FeeType $feetype)
+    {
+        return $this->item($feetype->feeCategory, new FeeCategoryTransformer());
+    }
+
 }

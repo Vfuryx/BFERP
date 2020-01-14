@@ -8,7 +8,28 @@ const getters = {
   avatar: state => state.user.avatar,
   name: state => state.user.name,
   roles: state => state.user.roles,
-  opts: state => state.opt.opts
-}
+  opts: state => state.opt.opts,
+  show: state => state.opt.show,
+  ok: state => state.opt.ok,
+  delShow: state => state.delMask.delShow,
+  loading: state => state.table.loading,
+  is_tabs: state => state.table.is_tabs,
+  currentIndex: state => state.table.currentIndex,
+  ruleForm: state => state.addMask.addObj,
+  showMask: state => state.addMask.showMask,
+  current_page: state => state.table.current_page,
+  per_page: state => state.table.per_page,
+  page_total: state => state.table.page_total,
+  warehouses: state => state.responseData.warehouses,
+  platForm: state => state.responseData.platForm,
+  printreports: state => state.responseData.printreports,
+  freighttypes: state => state.responseData.freighttypes,
+  suppliers: state => state.responseData.suppliers,
+  goodscates: state => state.responseData.goodscates,
+  distmets: state => state.responseData.distmets,
+  shops: state => state.responseData.shops,
+  stockintypes: state => state.responseData.stockintypes,
+
+};
 
 export default getters

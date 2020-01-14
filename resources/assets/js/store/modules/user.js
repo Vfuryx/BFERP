@@ -1,86 +1,98 @@
-import { login, logout, getInfo } from '../../api/login.js';
-import { getToken, setToken, removeToken } from '../../utils/auth.js';
+import {login, getInfo, logout} from '../../api/login.js';
+import {getToken, setToken, removeToken, getUser, setUser, removeUser} from '../../utils/auth.js';
+import axios from 'axios'
+import router from '../../router/index.js'
 
 const user = {
   state: {
     token: getToken(),
-    name: '',
-    avatar: '',
-    roles: []
+    name: getUser()
   },
 
   mutations: {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
-      state.name = name
+    DEL_TOKEN: (state) => {
+      state.token = null;
+      state.name = null;
     },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
+    REFRESH_TOKEN: (state, token) => {
+      setToken(state.token);
+      state.token = token.substring(token.indexOf(' ') + 1);
+      axios.defaults.headers.common['Authorization'] = state.token;
     },
-    SET_ROLES: (state, roles) => {
-      state.roles = roles
+    PROFILE: (state, data) => {
+      state.name = data.username;
+    },
+    LOGOUT: (state) => {
+      state.token = null;
+      state.name = null;
     }
   },
 
   actions: {
     // 登录
-    Login({ commit }, userInfo) {
-      const username = userInfo.username.trim()
+    Login({commit}, data) {
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
-          // console.log(username,userInfo);
-          const data = response.data;
-          // console.log(data);
-            setToken(data.token);
-          // console.log(setToken(data.token));
-          commit('SET_TOKEN', data.token)
-          resolve()
-        }).catch(error => {
-          reject(error)
+        login(data).then(res => {
+          let msg = res.data;
+          setToken(msg.access_token);
+          commit('SET_TOKEN', msg.access_token);
+          resolve(res)
+        }).catch((err) => {
+          reject(err)
         })
       })
     },
 
-    // 获取用户信息
-    GetInfo({ commit, state }) {
+    //登录成功后拉取用户信息
+    Profile({commit}) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
+        getInfo().then(res => {
+          if (res.status == 200) {
+            setUser(res.data.username)
+            commit('PROFILE', res.data)
+            resolve()
           } else {
-            reject('getInfo: roles must be a non-null array !')
+            reject()
           }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          resolve(response)
-        }).catch(error => {
-          reject(error)
         })
       })
     },
 
-    // 登出
-    LogOut({ commit, state }) {
+    // 退出
+    Logout({commit}) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
-          commit('SET_TOKEN', '')
-          commit('SET_ROLES', [])
-          removeToken()
+        logout().then(() => {
+          removeToken();
+          removeUser();
+          commit('LOGOUT');
+          router.push({
+            path: "/login",
+            query: {redirect: router.currentRoute.fullPath}
+          })
           resolve()
-        }).catch(error => {
-          reject(error)
+        }).catch((err) => {
+          reject(err)
         })
       })
     },
 
-    // 前端 登出
-    FedLogOut({ commit }) {
+    //  删除cookie
+    DelToken({commit}) {
       return new Promise(resolve => {
-        commit('SET_TOKEN', '')
-        removeToken()
+        commit('DEL_TOKEN');
+        removeToken();
+        removeUser();
+        resolve()
+      })
+    },
+
+    //  将刷新的token保存到本地
+    refreshToken({commit}, token) {
+      return new Promise(resolve => {
+        commit('REFRESH_TOKEN', token);
         resolve()
       })
     }

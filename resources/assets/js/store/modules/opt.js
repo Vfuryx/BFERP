@@ -1,37 +1,71 @@
 const opt = {
-    state:{
-        opts:[
-            {
-                cnt:'编辑',
-                icon:'el-icon-edit',
-                // text:''
-            },
-            {
-                cnt:'分享',
-                icon: 'el-icon-share',
-                // text:''
-            },
-            {
-                cnt:'搜索',
-                icon: 'el-icon-search',
-                // text:'搜索'
-            },
-            {
-                cnt:'上传',
-                icon: 'el-icon-upload'
-            }
-        ]
+  state: {
+    opts: [
+      {
+        cnt: '编辑',
+        icon: 'el-icon-edit',
+        ent:'',
+        ref: 'icon',
+        nClick: false
+      }
+    ],
+    show: false,
+    ok: false,
+    lastOpt: []
+  },
+  mutations: {
+   /* SET_OPT: (state, opt) => {
+      state.opts = opt
+    },*/
+    TOGGLE_SHOW: (state) => {
+      state.ok = !state.ok;
     },
-    mutations:{
-        GET_OPT:(state,opt)=>{
-            state.opts=opt
-        }
+    SET_OPT: (state, opts) => {
+      state.opts = opts;
+      //div宽度
+      const leaveW = $(window).width() - $('.logo').width() - parseInt($('.opt').css('marginLeft')) - parseInt($('.opt').css('marginRight')) - parseInt($('.opt').css('paddingLeft')) - 10;
+      //每个opt宽度
+      const eachW = $('.list').width() + parseInt($('.list').css('marginRight'));
+      //显示个数
+      const num = Math.floor(leaveW / eachW);
+      //opt总个数
+      const amount = opts.length;
+      $('.opt').width(eachW * num);
+      if (leaveW < eachW * amount) {
+        state.show = true;
+      } else {
+        state.show = false;
+      }
+      state.lastOpt = opts.slice(num);
     },
-    actions:{
-        getOpt:(commit)=>{
-            commit('GET_OPT');
-        }
-    }
+
+    /*待删*/
+    change: (state, opts) => {
+      //div宽度
+      const leaveW = $(window).width() - $('.logo').width() - parseInt($('.opt').css('marginLeft')) - parseInt($('.opt').css('marginRight')) - parseInt($('.opt').css('paddingLeft')) - 10;
+      //每个opt宽度
+      const eachW = $('.list').width() + parseInt($('.list').css('marginRight'));
+      //显示个数
+      const num = Math.floor(leaveW / eachW);
+      //opt总个数
+      const amount = opts.length;
+      $('.opt').width(eachW * num);
+      if (leaveW < eachW * amount) {
+        state.show = true;
+      } else {
+        state.show = false;
+      }
+      state.lastOpt = opts.slice(num);
+    },
+  },
+  actions: {
+    toggle_show({commit}){
+      commit('TOGGLE_SHOW');
+    },
+    setOpt({commit},opt){
+      commit('SET_OPT',opt);
+    },
+  }
 }
 
 export default opt;

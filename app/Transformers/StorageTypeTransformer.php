@@ -12,6 +12,7 @@ class StorageTypeTransformer extends TransformerAbstract
         return [
             'id' => $storagetype->id,
             'name' => $storagetype->name,
+            'status' => $storagetype->status,
             'created_at' => $storagetype->created_at
                                     ->toDateTimeString(),
             'updated_at' => $storagetype->updated_at

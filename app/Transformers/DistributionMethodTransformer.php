@@ -12,6 +12,7 @@ class DistributionMethodTransformer extends TransformerAbstract
         return [
             'id' => $dismet->id,
             'name' => $dismet->name,
+            'status' => $dismet->status,
             'created_at' => $dismet->created_at
                                     ->toDateTimeString(),
             'updated_at' => $dismet->updated_at
